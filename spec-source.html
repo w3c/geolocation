@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+ <head>
+  <title>Geolocation API Specification</title>
+  <link rel="stylesheet" type="text/css" href="../default.css">
+  <link rel="stylesheet" type="text/css" href="http://www.w3.org/StyleSheets/TR/W3C-ED.css">
+ </head>
+ <body>
+  <div class="head">
+  <!--logo-->
+
+  <h1>Geolocation API Specification</h1>
+
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 30 May 2008]</h2>
+   <dl>
+<!--
+    <dt>This version:</dt>
+      <dd><a href="http://www.w3.org/Style/Group/css3-src/css3-template/%5BVERSION%5D">http://www.w3.org/TR/[YEAR]/MO-[SHORTNAME]-[CDATE]</a></dd>
+    <dt>Latest published version:</dt>
+      <dd><a href="http://www.w3.org/TR/css3-template">http://www.w3.org/TR/css3-template</a></dd>
+-->
+    <dt>Latest editor's draft:</dt>
+      <dd><a href="http://dev.w3.org/geo/api/spec.html">http://dev.w3.org/geo/api/spec.html</a></dd>
+<!--
+    <dt>Previous version:</dt>
+      <dd><a href="http://www.w3.org/Style/Group/css3-src/css3-template/%5Bhttp://www.w3.org/PreviousVersionURI%5D">[http://www.w3.org/PreviousVersionURI]</a></dd>
+-->
+    <dt>Editors:</dt>
+      <dd>Andrei Popescu, Google, Inc</dd>
+   </dl>
+   <hr>
+  </div>
+
+  <h2 class="no-num no-toc" id="abstract">Abstract</h2>
+
+  <p>This specification defines an API that provides scripted access
+  to geolocation information associated with the hosting device.</p>
+
+
+  <h2 class="no-num no-toc" id="status">Status of this document</h2>
+
+  <!-- intro boilerplate (required) -->
+  <p><em>This section describes the status of this document at the
+  time of its publication. Other documents may supersede this
+  document. A list of current W3C publications and the most recently
+  formally published revision of this technical report can be found in
+  the <a href="http://www.w3.org/TR/">W3C technical reports index</a>
+  at http://www.w3.org/TR/.</em></p>
+
+  <!-- where to send feedback (required) -->
+  <p>If you wish to make comments regarding this document, please send
+  them to <a
+  href="mailto:public-geolocation@w3.org">public-geolocation@w3.org</a> (<a
+  href="mailto:public-geolocation-request@w3.org?subject=subscribe">subscribe</a>,
+  <a
+  href="http://lists.w3.org/Archives/Public/public-geolocation/">archives</a>). All
+  feedback is welcome.</p>
+
+  <!-- stability (required) -->
+  <p>Implementors should be aware that this specification is not
+  stable. <strong>Implementors who are not taking part in the
+  discussions are likely to find the specification changing out from
+  under them in incompatible ways.</strong> Vendors interested in
+  implementing this specification before it eventually reaches the
+  Candidate Recommendation stage should join the aforementioned
+  mailing list and take part in the discussions.</p>
+
+  <!-- status of document, group responsible (required) -->
+  <p>No working group is yet responsible for this
+  specification. <strong>This is just an informal proposal at this
+  time.</strong></p>
+
+  <!-- required patent boilerplate -->
+  <!--<p>This document was produced by a group operating under the <a
+  href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+  February 2004 W3C Patent Policy</a>. W3C maintains a <a
+  rel="disclosure"
+  href="http://www.w3.org/2004/01/pp-impl/40318/status">public list of
+  any patent disclosures</a> made in connection with the deliverables
+  of the group; that page also includes instructions for disclosing a
+  patent. An individual who has actual knowledge of a patent which the
+  individual believes contains <a
+  href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+  Claim(s)</a> must disclose the information in accordance with <a
+  href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+  6 of the W3C Patent Policy</a>.</p>-->
+
+
+  <h2 class="no-num no-toc" id="contents">Table of contents</h2>
+
+  <!--begin-toc-->
+  <p>[If you keep the &lt;!--comment--&gt; the table of contents will be
+  included here automatically.]</p>
+  <!--end-toc-->
+
+
+  <h2>Introduction</h2>
+
+  <p><em>This section is non-normative.</em></p>
+
+  <p>The Geolocation API defines a high-level interface to location
+  information associated with the hosting device, such as latitude and
+  longitude.  The API itself is agnostic of the underlying location
+  information sources.  Common sources of location information include
+  Global Positioning System (GPS) and location inferred from network
+  signals such as IP address, RFID, WiFi and Bluetooth MAC addresses,
+  and GSM/CDMA cell ids.</p>
+
+  <p>The API is designed to enable both "one-shot" position requests
+  and repeated position updates in addition to the ability to query
+  the last-known position. Location information is represented by
+  latitude and longitude coordinates and optionally by reverse
+  geocoded address information. The Geolocation API in this
+  specification builds upon earlier work in the industry, including <a
+  href="#ref-azaloc" shape="rect">[AZALOC]</a>, <a href="#ref-gears"
+  shape="rect">[GEARSLOC]</a>, and <a href="#ref-locationaware"
+  shape="rect">[LOCATIONAWARE]</a>.</p>
+
+  <div class="example">
+
+   <p>The following code extract illustrates how to obtain basic
+   location information:</p>
+
+   <pre><code>
+TODO</code></pre>
+
+  </div>
+
+  
+  <h2>Security and privacy considerations</h2>
+
+  <p>...</p>
+
+  
+  <h2>Conformance requirements</h2>
+
+  <p>All diagrams, examples, and notes in this specification are
+  non-normative, as are all sections explicitly marked non-normative.
+  Everything else in this specification is normative.</p>
+
+  <p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
+  NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+  "OPTIONAL" in the normative parts of this document are to be
+  interpreted as described in RFC2119. For readability, these words do
+  not appear in all uppercase letters in this specification. <a
+  href="#refsRFC2119">[RFC2119]</a></p> <!-- XXX but they should be
+  marked up -->
+
+  <p>Requirements phrased in the imperative as part of algorithms
+  (such as "strip any leading space characters" or "return false and
+  abort these steps") are to be interpreted with the meaning of the
+  key word ("must", "should", "may", etc) used in introducing the
+  algorithm.</p>
+
+  <p>Conformance requirements phrased as algorithms or specific steps
+  may be implemented in any manner, so long as the end result is
+  equivalent. (In particular, the algorithms defined in this
+  specification are intended to be easy to follow, and not intended to
+  be performant.)</p>
+  
+  <p id="hardwareLimitations">User agents may impose
+  implementation-specific limits on otherwise unconstrained inputs,
+  e.g. to prevent denial of service attacks, to guard against running
+  out of memory, or to work around platform-specific limitations.</p>
+
+  <p>Implementations that use ECMAScript to implement the APIs defined
+  in this specification must implement them in a manner consistent
+  with the ECMAScript Bindings defined in the Web IDL specification,
+  as this specification uses that specification's terminology. <a
+  href="#ref-WebIDL">[WEBIDL]</a></p>
+
+  
+  <h2>API Description</h2>
+
+  <p>...</p>
+  
+
+  <h2 class="no-num" id="usecases">Requirements and Use-Cases</h2>
+
+  <p><em>Issue note: This section will get moved to a separate document</em></p>
+
+  <h3>API Requirements</h3>
+
+  <ul>
+    <li>Agnostic of the underlying location technology.</li>
+    <li>Latitude/longitude coordinate position and reverse geocoded address information.</li>
+    <li>One-shot and continuous position updates SHALL be supported by the API.</li>
+    <li>Enable the developer and user to choose between different location accuracies.</li>
+  </ul>
+  
+  <h3>Use-Cases</h3>
+
+  <ul>
+    <li>One-shot position requests:
+      <ul>
+        <li>Find points of interest in the user's region (low accuracy).</li>
+        <li>Find the closest point of interest to the user's current location (high accuracy).</li>
+       </ul>
+     </li>
+    <li>Position monitoring:
+      <ul>
+        <li>Navigation applications such as turn-by-turn directions.</li>
+        <li>Alerts when the user is close to points of interest.</li>
+        <li>Social networking applications such as location-tagged status updates and friend finder applications.</li>
+       </ul>
+     </li>    
+  </ul>
+
+
+  <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
+
+  <p>...</p>
+
+
+  <h2 class="no-num" id="references">References</h2>
+
+  <dl>
+   <dt><a id="ref-azaloc">[AZALOC]</a></dt>
+   <dd><em>(Non-normative)</em> <cite><a href="http://azarask.in/blog/post/geolocation-in-firefox-and-beyond/">Geolocation in Firefox and Beyond</a></cite>. See http://azarask.in/blog/post/geolocation-in-firefox-and-beyond</dd>
+   <dt><a id="ref-gears">[GEARSLOC]</a></dt>
+   <dd><em>(Non-normative)</em> <cite><a href="http://code.google.com/p/google-gears/wiki/GeolocationAPI">Gears Geolocation API</a></cite>. See http://code.google.com/p/google-gears/wiki/GeolocationAPI</dd>
+   <dt><a id="ref-locationaware">[LOCATIONAWARE]</a></dt>
+   <dd><em>(Non-normative)</em> <cite><a href="http://locationaware.org/wiki/index.php?title=Working_Draft">LocationAware.org Working Draft</a></cite>. See http://locationaware.org/wiki/index.php?title=Working_Draft</dd>
+   <dt><a id="ref-webidl">[WEBIDL]</a></dt>
+   <dd><cite><a href="http://dev.w3.org/cvsweb/~checkout~/2006/webapi/Binding4DOM/Overview.html?content-type=text/html;%20charset=utf-8">Web IDL</a></cite>. See http://dev.w3.org/cvsweb/~checkout~/2006/webapi/Binding4DOM/Overview.html?content-type=text/html;%20charset=utf-8</dd>
+  </dl>
+
+ </body>
+</html>
