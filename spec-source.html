@@ -175,41 +175,121 @@ TODO</code></pre>
   <p>...</p>
   
 
-  <h2 class="no-num" id="usecases">Requirements and Use-Cases</h2>
+  <h2 class="no-num" id="usecases">Use-Cases and Requirements</h2>
 
   <p><em>Issue note: This section will get moved to a separate document</em></p>
-
-  <h3>API Requirements</h3>
-
-  <ul>
-    <li>Agnostic of the underlying location technology.</li>
-    <li>Latitude/longitude coordinate position and reverse geocoded address information.</li>
-    <li>One-shot and continuous position updates SHALL be supported by the API.</li>
-    <li>Enable the developer and user to choose between different location accuracies.</li>
-  </ul>
   
   <h3>Use-Cases</h3>
+  
+  <h4>1. Find points of interest in the user's area</h4> 
+  <p>Someone visiting a foreign city could access a Web application
+  that allows users to search or browse through a database of tourist
+  attractions. Using the Geolocation API, the Web application has
+  access to the user's approximate position and it is therefore able to
+  rank the search results by proximity to the user's location.</p>
 
-  <ul>
-    <li>One-shot position requests:
-      <ul>
-        <li>Find points of interest in the user's region (low accuracy).</li>
-        <li>Find the closest point of interest to the user's current location (high accuracy).</li>
-       </ul>
-     </li>
-    <li>Position monitoring:
-      <ul>
-        <li>Navigation applications such as turn-by-turn directions.</li>
-        <li>Alerts when the user is close to points of interest.</li>
-        <li>Social networking applications such as location-tagged status updates and friend finder applications.</li>
-       </ul>
-     </li>    
-  </ul>
+  <h4>2. Annotating content with location information</h4>
+  <p> A group of friends is hiking through the Scottish
+  highlands. Some of them write short notes and take pictures at
+  various points throughout the journey and store them using a Web
+  application that can work offline on their hand-held
+  devices. Whenever they add new content, the application
+  automatically tags it with location data from the Geolocation API
+  (which, in turn, uses the on-board GPS device). Every time they
+  reach a town or a village, and they are again withing network
+  coverage, the application automatically uploads their notes and
+  pictures to a popular blogging Web site, which uses the geolocation
+  data to construct links that point to a mapping service. Users who
+  follow the group's trip can click on these links to see a sattelite
+  view of the area where the notes were written and the pictures were
+  taken.
+
+  <h4>3. Automatic form-filling</h4>
+  <p> A user is accessing an online service in order to arrange a
+  parcel delivery and she needs to fill in a long form which includes
+  special fields for her home address. To save the user's time, the
+  application tries to pre-fill the address part of the form by using
+  the Geolocation API to acquire the user's current location as a
+  (latitude, longitude) pair as well as an address object. If an
+  implementing User Agent cannot provide the address object, the
+  application uses a third-party reverse geocoding service to
+  translate the coordinates into a street address.</p>
+
+  <h4>4. Show the user's position on a map</h4>
+  <p>A user finds herself in an unfamiliar city area. She wants to
+  check her position so she uses her hand-held device to navigate to a
+  Web-based mapping application that can pinpoint her exact location
+  on the city map using the Geolocation API.  She then asks the Web
+  application to provide driving directions from her current position
+  to her desired destination.</p>
+
+  <h4>5. Turn-by-turn route navigation</h4>
+  <p>Following from use-case 4, a mapping application can help the
+  user navigate along a route by providing detailed turn-by-turn
+  directions. The application does this by registering with the
+  Geolocation API to receive repeated location updates of the user's
+  position. These updates are delivered as soon as the implementing
+  User Agent determines that the position of the user has changed,
+  which allows the application to anticipate any changes of direction
+  that the user might need to do.</p>
+
+  <h4>6. Alerts when points of interest are in the user's vicinity</h4>
+  <p>A tour-guide Web application can use the Geolocation API to
+  monitor the user's position and trigger visual or audio
+  notifications when interesting places are in the vicinity. An online
+  task management system can trigger reminders when the user is in the
+  proximity of landmarks that are associated with certain tasks.</p>
+
+  <h4>7. Up-to-date local information</h4>
+  <p>A widget-like Web application that shows the weather or news that
+  are relevant to the user's current area can use the Geolocation API
+  to register for location updates. If the user's position changes,
+  the widget can adapt the content accordingly.</p>
+
+  <h4>8. Location-tagged status updates in social networking applications</h4>
+  <p>A social network application allows its users to automatically
+  tag their status updates with location information. It does this by
+  monitoring the user's position with the Geolocation API and using
+  only certain parts from the Address object. Each user can control the
+  granularity of the location information (e.g. city or neighbourhood
+  level) that is shared with the other users. Any user can also track
+  his network of friends and get real-time updates about their current
+  location.</p>
+
+ <h3>Requirements</h3>
+
+ <h4>The Geolocation API must provide location data in terms of a pair
+ of latitude and longitude coordinates</h4>
+
+ <h4>The Geolocation API must provide information about the accuracy
+ of the retrieved location data.</h4>
+
+ <h4>The Geolocation API must support "one-shot" position updates</h4>
+ 
+ <h4>The Geolocation API must allow an application to register to
+ receive repeated position updates<h4>
+
+ <h4>The Geolocation API must allow an application to query the last
+ know position<h4>
+
+ <h4>The Geolocation API must provide a way for the application to
+ receive updates about errors that may have occurred while obtaining a
+ location fix.</h4>
+
+ <h4>The Geolocation API must allow an application to specify a
+ desired accuracy level of the location information</h4>
+
+ <h4>The Geolocation API must be agnostic to the underlying to sources
+ of location information</h4>
+  
+ <h4>The Geolocation API should allow an application to request
+ reverse geocoded address information as part of the location
+ data.</h4>
 
 
   <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-  <p>...</p>
+  <p>Alec Berntson</p>
 
 
   <h2 class="no-num" id="references">References</h2>
