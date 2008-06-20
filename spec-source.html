@@ -2,7 +2,45 @@
 <html lang="en">
  <head>
   <title>Geolocation API Specification</title>
-  <link rel="stylesheet" type="text/css" href="../default.css">
+  <style type="text/css">
+   dt, dfn { font-weight: bold; font-style: normal; }
+   img.extra { float: right; }
+   body ins, body del { display: block; }
+   body * ins, body * del { display: inline; }
+   pre, code { color: black; background: transparent; font-size: inherit; font-family: monospace; }
+   pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
+   pre em { font-weight: bolder; font-style: normal; }
+   pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em; }
+   table { border-collapse: collapse; border-style: hidden hidden none hidden; }
+   table thead { border-bottom: solid; }
+   table tbody th:first-child { border-left: solid; }
+   table td, table th { border-left: solid; border-right: solid; border-bottom: solid thin; vertical-align: top; padding: 0.2em; }
+   ul.toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
+   ul.toc li ul { margin-bottom: 0.75em; }
+   ul.toc li ul li ul { margin-bottom: 0.25em; }
+   var sub { vertical-align: bottom; font-size: smaller; position: relative; top: 0.1em; }
+   @media screen { code { color: rgb(255, 69, 0); background: transparent; } }
+   code :link, code :visited { color: inherit; background: transparent; }
+   .example { display: block; color: #222222; background: #FCFCFC; border-left: double; margin-left: 1em; padding-left: 1em; }
+   .issue, .big-issue { color: #E50000; background: white; border: solid red; padding: 0.5em; margin: 1em 0; }
+   .issue > :first-child, .big-issue > :first-child { margin-top: 0; }
+   p .big-issue { line-height: 3em; }
+   .note { color: green; background: transparent; }
+   .note { font-family: sans-serif; }
+   p.note:before { content: 'Note: '; }
+   .warning { color: red; background: transparent; }
+   .warning:before { font-style: normal; }
+   p.warning:before { content: '\26A0 Warning! '; }
+   .note, .warning { font-weight: bolder; font-style: italic; padding: 0.5em 2em; }
+   .copyright { margin: 0.25em 0; }
+   img { max-width: 100%; }
+   h4 + .element { margin-top: -2.5em; padding-top: 2em; }
+   h4 + p + .element { margin-top: -5em; padding-top: 4em; }
+   .element { background: #EEEEFF; color: black; margin: 0 0 1em -1em; padding: 0 1em 0.25em 0.75em; border-left: solid #9999FF 0.25em; }
+   table.matrix, table.matrix td { border: none; text-align: right; }
+   table.matrix { margin-left: 2em; }
+  </style>
   <link rel="stylesheet" type="text/css" href="http://www.w3.org/StyleSheets/TR/W3C-ED.css">
  </head>
  <body>
@@ -11,7 +49,7 @@
 
   <h1>Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 30 May 2008]</h2>
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 20 June 2008]</h2>
    <dl>
 <!--
     <dt>This version:</dt>
@@ -20,7 +58,7 @@
       <dd><a href="http://www.w3.org/TR/css3-template">http://www.w3.org/TR/css3-template</a></dd>
 -->
     <dt>Latest editor's draft:</dt>
-      <dd><a href="http://dev.w3.org/geo/api/spec.html">http://dev.w3.org/geo/api/spec.html</a></dd>
+      <dd><a href="http://dev.w3.org/geo/api/spec-source.html">http://dev.w3.org/geo/api/spec-source.html</a></dd>
 <!--
     <dt>Previous version:</dt>
       <dd><a href="http://www.w3.org/Style/Group/css3-src/css3-template/%5Bhttp://www.w3.org/PreviousVersionURI%5D">[http://www.w3.org/PreviousVersionURI]</a></dd>
@@ -34,7 +72,7 @@
   <h2 class="no-num no-toc" id="abstract">Abstract</h2>
 
   <p>This specification defines an API that provides scripted access
-  to geolocation information associated with the hosting device.</p>
+  to geographical location information associated with the hosting device.</p>
 
 
   <h2 class="no-num no-toc" id="status">Status of this document</h2>
@@ -104,10 +142,10 @@
   information sources.  Common sources of location information include
   Global Positioning System (GPS) and location inferred from network
   signals such as IP address, RFID, WiFi and Bluetooth MAC addresses,
-  and GSM/CDMA cell ids.</p>
+  and GSM/CDMA cell IDs.</p>
 
   <p>The API is designed to enable both "one-shot" position requests
-  and repeated position updates in addition to the ability to query
+  and repeated position updates, as well as the ability to query
   the last-known position. Location information is represented by
   latitude and longitude coordinates and optionally by reverse
   geocoded address information. The Geolocation API in this
@@ -116,13 +154,56 @@
   shape="rect">[GEARSLOC]</a>, and <a href="#ref-locationaware"
   shape="rect">[LOCATIONAWARE]</a>.</p>
 
+  <p>The following code extract illustrates how to obtain
+  basic location information:</p>
+
   <div class="example">
+    <p> Example of a "one-shot" position request.</p>
+    <pre>
+    function showMap(position) {
+      // Show a map centered at (position.latitude, position.longitude).
+    }
 
-   <p>The following code extract illustrates how to obtain basic
-   location information:</p>
+    // One-shot position request.
+    navigator.geolocation.getCurrentPosition(showMap);
+    </pre>
+  </div>
+  <div class="example">
+    <p>Example of requesting repeated position updates.</p>
+    <pre>
+    function scrollMap(position) {
+      // Scrolls the map so that it is centered at (position.latitude, position.longitude).
+    }
 
-   <pre><code>
-TODO</code></pre>
+    // Request repeated updates.
+    var watchId = navigator.geolocation.watchPosition(scrollMap);
+
+    function buttonClickHandler() {
+      // Cancel the updates when the user clicks a button.
+      navigator.geolocation.clearWatch(watchId);
+    }
+    </pre>
+  </div>
+
+  <div class="example">
+    <p>Example of requesting repeated position updates and handling errors.</p>
+    <pre>
+    function scrollMap(position) {
+      // Scrolls the map so that it is centered at (position.latitude, position.longitude).
+    }
+
+    function handleError(error) {
+      // Update a div element with error.message.
+    }
+
+    // Request repeated updates.
+    var watchId = navigator.geolocation.watchPosition({successCallback: scrollMap,
+                                                       errorCallback: handleError});
+
+    function buttonClickHandler() {
+      // Cancel the updates when the user clicks a button.
+      navigator.geolocation.clearWatch(watchId);
+    }
 
   </div>
 
@@ -172,8 +253,237 @@ TODO</code></pre>
   
   <h2>API Description</h2>
 
-  <p>...</p>
+
+  <h3>Geolocation interface</h3>
+
+  The <code><a href="#geolocation">Geolocation</a></code> object can
+  be used by scripts to programatically determine the location
+  information associated with the hosting device. The location
+  information is acquired by applying a user-agent specific algorithm,
+  creating a <code><a href="#position">Position</a></code> object, and
+  populating that object with appropriate data accordingly.
+
+  <p>Objects implementing the <code>ClientInformation</code> interface
+  (e.g. the <code>window.navigator</code> object) must also implement
+  the <code><a href="#client-geo">ClientInformationGeolocation</a></code>
+  interface. <a href="#ref-clientinfo">[CLIENTINFO]</a></p>
+
+  <span class="issue">Should the geolocation object rather be a
+  property of the Window object? This will save developers from having
+  to type "navigator.geolocation" all the time.</span>
+
+  <pre class="idl">
+  [NoInterfaceObject]
+  interface <dfn id="client-geo">ClientInformationGeolocation</dfn> {
+    readonly attribute <a href="geolocation">Geolocation</a> geolocation;
+  };
+  </pre>
   
+  <br/>
+
+  <pre class="idl"> interface <dfn id="geolocation">Geolocation</dfn> { 
+    readonly attribute <a href="#position">Position</a> <a href="#last-position">lastPosition</a>;
+    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback);
+    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-options">PositionOptions</a> options);
+    int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback);
+    int <a href="watch-position">watchPosition</a>(in <a href="#position-options">PositionOptions</a> options);
+  };
+  </pre>
+  
+  <p>The <dfn id="last-position"><code>lastPosition</code></dfn>
+  attribute must return the last <code><a href="#position">Position</a></code>
+  object that was acquired by the implementation, or null if no such object exists.
+  On getting, this attribute must return a previously cached
+  value and the implementation must not attempt to acquire a new 
+  <code><a href="#position">Position</a></code> object.</p>
+
+  <p>The <dfn id="get-current-position"><code>getCurrentPosition</code></dfn>
+  method must acquire a new <code><a href="#position">Position</a></code> object.
+  If it is successful, this method must invoke its associated <code><a href="#success-attribute">successCallback</a></code> with a
+  <code><a href="#position">Position</a></code> object as an argument. 
+
+  <p>If the attempt fails, and the method was invoked with a <code><a
+  href="#position-options">PositionOptions</a></code> argument which
+  specified an <code><a href="error-attribute">errorCallback</a></code>
+  attribute, this method must invoke the <code><a
+  href="error-attribute">errorCallback</a></code> with a <code><a
+  href="#position-error">PositionError</a></code> object as an
+  argument.</p>
+
+  <p>The <dfn id="watch-position"><code>watchPosition</code></dfn>
+  method must acquire a new <code><a href="#position">Position</a></code> object. 
+  If it is successful, this method must invoke its associated <code><a
+  href="#success-attribute">successCallback</a></code> with a <code><a
+  href="#position">Position</a></code> object as an argument.
+
+  <p>If the attempt fails, and the method was invoked with a <code><a
+  href="#position-options">PositionOptions</a></code> argument which
+  specified an <code><a href="error-attribute">errorCallback</a></code>
+  attribute, this method must invoke the <code><a
+  href="error-attribute">errorCallback</a></code> with a <code><a
+  href="#position-error">PositionError</a></code> object as an
+  argument.</p>
+
+  This method must then acquire a new <code><a href="#position">Position</a></code> object and 
+  continue to invoke the appropriate callback every time the implementation 
+  determines that the position of the hosting device has changed. In case of a fatal error 
+  (e.g. the implementation determines that there is no mechanism that can be used to acquire a position, 
+  this method must invoke the <code><a href="error-attribute">errorCallback</a></code> (if one was specified) 
+  immediately and then cease invoking any callback. In case of a transient error (e.g. 
+  network congestion when using a network-based location provider), this method must invoke the
+  <code><a href="error-attribute">errorCallback</a></code> (if one was specified) and then continue to monitor
+  the position of the hosting device, acquiring new <code><a href="#position">Position</a></code> objects and 
+  invoking the appropriate callback every time it determines that this position has changed.
+
+  <h3>PositionOptions interface</h3>
+
+  <p>The <code><a href="#get-current-position">getCurrentPosition</a></code> and 
+  <code><a href="watch-position">watchPosition</a></code> methods
+  accept <code><a href="#position-options">PositionOptions</a></code> objects as
+  arguments.</p>
+  
+  <p> <code><a href="#position-options">PositionOptions</a></code>
+  objects are regular ECMAScript objects and must be created using the
+  ECMAScript object literal syntax. </p>
+
+  <pre class="idl">
+  typedef sequence&lt;DOMString&gt; StringArray;
+  [NoInterfaceObject]
+  interface <dfn id="position-options">PositionOptions</dfn> {
+    attribute <a href="#position-callback">PositionCallback</a> <a href="#success-attribute">successCallback</a>;
+    attribute <a href="#error-callback">PositionErrorCallback</a> <a href="error-attribute">errorCallback</a>;
+    attribute boolean <a href="#high-accuracy">enableHiqhAccuracy</a>;
+    attribute boolean <a href="#request-address">requestAddress</a>;
+    attribute boolean <a href="#address-language">addressLanguage</a>;
+    attribute StringArray locationResolvers;
+  };
+
+  interface <dfn id="position-callback">PositionCallback</dfn> {
+    void handleEvent(in Position position);
+  };
+
+  interface <dfn id="error-callback">PositionErrorCallback</dfn> {
+    void handleEvent(in PositionError error);
+  };
+  </pre>
+  
+  <p>The <dfn id="success-attribute"><code>successCallback</code></dfn>
+  attribute represents the callback that is invoked by the 
+  <code><a href="#geolocation">Geolocation</a></code> object methods after
+  successfully acquiring a fresh position fix.</p>
+
+  <p>The <dfn id="error-attribute"><code>errorCallback</code></dfn>
+  attribute represents the callback that is invoked by the 
+  <code><a href="#geolocation">Geolocation</a></code> object methods after
+  encountering an error while trying to acquire a fresh position fix.</p>
+
+  <p>The <dfn id="high-accuracy"><code>enableHiqhAccuracy</code></dfn>
+  attribute provides a hint that the application would like to receive
+  the best possible results. This may result in slower response times
+  or increased power consumption. The user might also deny this
+  capability, or the device might not be able to provide more accurate
+  results than if the flag wasn't specified.</p>
+  <span class="issue">Should <code><a href="#high-accuracy">enableHiqhAccuracy</a></code> 
+  be replaced by two attributes, thus separating the power concerns
+  from the privacy concerns? Should the requested accuracy level be
+  specified in meters, possibly using a fixed range of values ?</span>
+  
+
+  <p>The <dfn id="request-address"><code>requestAddress</code></dfn>
+  attribute determines whether the implementation should attempt to
+  return reverse geocoded address information as part of the position
+  data. Reverse geocoding is not performed if this flag is not
+  specified or set to false.</p>
+
+  <p>The <dfn id="address-language"><code>addressLanguage</code></dfn>
+  attribute specifies the language in which the address (if requested)
+  should be returned. The values of this attribute should comply with
+  <a href="#ref-rfc3066">[RFC3066]</a>.</p>
+
+  <p>The <dfn id="location-resolvers"><code>locationResolvers</code></dfn>
+  attribute specifies zero or more URLs that identify services that
+  are capable of converting radio technology signals
+  (e.g. WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs) into
+  geographical information that can be used to construct 
+  <code><a href="#position">Position</a></code> objects. Each URL is queried
+  and the data with the highest accuracy is used to construct the
+  <code><a href="#position">Position</a></code> argument for the
+  <code><a href="#position-callback">PositionCallback</a></code>.
+  If unset, it is left to the User Agent to decide if a default
+  service should be used or not.
+
+  <p>This specification also defines a non-normative protocol that
+  User Agents could use to communicate with location providers. Please
+  see section TBD.</p>
+
+
+  <h3>Position interface</h3>
+
+  <pre class="idl">
+  interface <dfn id="position">Position</dfn> {
+    readonly attribute double <a href="#lat">latitude</a>;
+    readonly attribute double <a href="#lon">longitude</a>;
+    readonly attribute double <a href="#altitude">altitude</a>;
+    readonly attribute double <a href="#accuracy">accuracy</a>;
+    readonly attribute double <a href="#altitude-accuracy">altitudeAccuracy</a>;
+    readonly attribute unsigned long long <a href="#timestamp">timestamp</a>;
+    readonly attribute Address <a href="#address">address</a>;
+  };
+  </pre>
+
+  <p>The <dfn id="lat"><code>latitude</code></dfn> and <dfn id="lon"><code>longitude</code></dfn> 
+  attributes are specifed in degrees.</p>
+
+  <p>The <dfn id="altitude"><code>altitude</code></dfn> attribute
+  denotes the height of the position, specified in meters above the
+  <a href="#ref-wgs">[WGS84]</a> geoid.</p>
+  
+  <p>The <dfn id="accuracy"><code>accuracy</code></dfn> attribute
+  denotes the accuracy level of the latitude and longitude coordinates
+  is specified in meters and must be supported by all implementations.
+
+  <p>The <dfn id="altitude-accuracy"><code>altitudeAccuracy</code></dfn> attribute is
+  specified in meters and can be null if it is not supported.</p>
+
+  <p>The <dfn id="timestamp"><code>timestamp</code></dfn> attribute
+  represents the time when the geographic location was acquired and is
+  specified in milliseconds since midnight on January 1st, 1970.</p>
+
+  <p>The <dfn id="address"><code>address</code></dfn> attribute
+  represents the street address that corresponds to the associated
+  latitude and longitude coordinates. This attribute is null if
+  reverse geocoding is not supported by the implementation or the <code><a
+  href="#request-address">requestAddress</a></code> was not set
+  to <code>true</code>.
+
+  <h3>Address interface</h3>
+
+  <pre class="idl">
+  interface <dfn id="address">Address</dfn> {
+    readonly attribute DOMString streetNumber;
+    readonly attribute DOMString street;
+    readonly attribute DOMString premises;
+    readonly attribute DOMString city;
+    readonly attribute DOMString county;
+    readonly attribute DOMString region;
+    readonly attribute DOMString country;
+    readonly attribute DOMString countryCode;
+    readonly attribute DOMString postalCode;
+  };
+  </pre>
+
+  <span class="issue">TODO: describe the Address interface.</span>
+
+  <h3>PositionError interface</h3>
+
+  <pre class="idl">
+  interface <dfn id="position-options">PositionError</dfn> {
+    readonly int code;
+    readonly DOMString message;
+  };
+  </pre>
+
+  <span class="issue">TODO: describe the PositionError interface.</span>
 
   <h2 class="no-num" id="usecases">Use-Cases and Requirements</h2>
 
@@ -196,7 +506,7 @@ TODO</code></pre>
   devices. Whenever they add new content, the application
   automatically tags it with location data from the Geolocation API
   (which, in turn, uses the on-board GPS device). Every time they
-  reach a town or a village, and they are again withing network
+  reach a town or a village, and they are again within network
   coverage, the application automatically uploads their notes and
   pictures to a popular blogging Web site, which uses the geolocation
   data to construct links that point to a mapping service. Users who
@@ -258,38 +568,37 @@ TODO</code></pre>
 
  <h3>Requirements</h3>
 
- <h4>The Geolocation API must provide location data in terms of a pair
- of latitude and longitude coordinates.</h4>
+ <h5>The Geolocation API must provide location data in terms of a pair
+ of latitude and longitude coordinates.</h5>
 
- <h4>The Geolocation API must provide information about the accuracy
- of the retrieved location data.</h4>
+ <h5>The Geolocation API must provide information about the accuracy
+ of the retrieved location data.</h5>
 
- <h4>The Geolocation API must support "one-shot" position updates.</h4>
+ <h5>The Geolocation API must support "one-shot" position updates.</h5>
  
- <h4>The Geolocation API must allow an application to register to
- receive repeated position updates.<h4>
+ <h5>The Geolocation API must allow an application to register to
+ receive repeated position updates.<h5>
 
- <h4>The Geolocation API must allow an application to query the last
- know position.<h4>
+ <h5>The Geolocation API must allow an application to cheaply query the last
+ know position.<h5>
 
- <h4>The Geolocation API must provide a way for the application to
+ <h5>The Geolocation API must provide a way for the application to
  receive updates about errors that may have occurred while obtaining a
- location fix.</h4>
+ location fix.</h5>
 
- <h4>The Geolocation API must allow an application to specify a
- desired accuracy level of the location information.</h4>
+ <h5>The Geolocation API must allow an application to specify a
+ desired accuracy level of the location information.</h5>
 
- <h4>The Geolocation API must be agnostic to the underlying sources
- of location information.</h4>
+ <h5>The Geolocation API must be agnostic to the underlying sources
+ of location information.</h5>
   
- <h4>The Geolocation API should allow an application to request
- reverse geocoded address information as part of the location
- data.</h4>
+ <h5>The Geolocation API should allow an application to request
+ address information as part of the location data.</h5>
 
 
   <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-  <p>Alec Berntson, Shyam Habarakada</p>
+  <p>Alec Berntson, Steve Block, Aaron Boodman, Dave Burke,  Shyam Habarakada, Brad Lassey, Stuart Parmenter, Chris Prince, Arun Ranganathan, Aza Raskin</p>
 
 
   <h2 class="no-num" id="references">References</h2>
@@ -297,12 +606,18 @@ TODO</code></pre>
   <dl>
    <dt><a id="ref-azaloc">[AZALOC]</a></dt>
    <dd><em>(Non-normative)</em> <cite><a href="http://azarask.in/blog/post/geolocation-in-firefox-and-beyond/">Geolocation in Firefox and Beyond</a></cite>. See http://azarask.in/blog/post/geolocation-in-firefox-and-beyond</dd>
+   <dt><a id="ref-clientinfo">[CLIENTINFO]</a></dt>
+   <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/#clientinformation">ClientInformation interface in HTML5</a></cite>. See http://www.whatwg.org/specs/web-apps/current-work/#clientinformation</dd>
    <dt><a id="ref-gears">[GEARSLOC]</a></dt>
    <dd><em>(Non-normative)</em> <cite><a href="http://code.google.com/p/google-gears/wiki/GeolocationAPI">Gears Geolocation API</a></cite>. See http://code.google.com/p/google-gears/wiki/GeolocationAPI</dd>
    <dt><a id="ref-locationaware">[LOCATIONAWARE]</a></dt>
    <dd><em>(Non-normative)</em> <cite><a href="http://locationaware.org/wiki/index.php?title=Working_Draft">LocationAware.org Working Draft</a></cite>. See http://locationaware.org/wiki/index.php?title=Working_Draft</dd>
+   <dt><a id="ref-rfc3066">[RFC3066]</a></dt>
+   <dd><cite><a href="http://www.ietf.org/rfc/rfc3066.txt">Tags for the Identification of Languages</a></cite>. See http://www.ietf.org/rfc/rfc3066.txt</dd>
    <dt><a id="ref-webidl">[WEBIDL]</a></dt>
    <dd><cite><a href="http://dev.w3.org/cvsweb/~checkout~/2006/webapi/Binding4DOM/Overview.html?content-type=text/html;%20charset=utf-8">Web IDL</a></cite>. See http://dev.w3.org/cvsweb/~checkout~/2006/webapi/Binding4DOM/Overview.html?content-type=text/html;%20charset=utf-8</dd>
+   <dt><a id="ref-wgs">[WGS84]</a></dt>
+   <dd><cite><a href="http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf">National Imagery and Mapping Agency Technical Report 8350.2, Third Edition</a></cite>. See http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf</dd>
   </dl>
 
  </body>
