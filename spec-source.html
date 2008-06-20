@@ -268,9 +268,9 @@
   the <code><a href="#client-geo">ClientInformationGeolocation</a></code>
   interface. <a href="#ref-clientinfo">[CLIENTINFO]</a></p>
 
-  <span class="issue">Should the geolocation object rather be a
+  <div class="issue">Should the geolocation object rather be a
   property of the Window object? This will save developers from having
-  to type "navigator.geolocation" all the time.</span>
+  to type "navigator.geolocation" all the time.</div>
 
   <pre class="idl">
   [NoInterfaceObject]
@@ -383,10 +383,10 @@
   or increased power consumption. The user might also deny this
   capability, or the device might not be able to provide more accurate
   results than if the flag wasn't specified.</p>
-  <span class="issue">Should <code><a href="#high-accuracy">enableHiqhAccuracy</a></code> 
+  <div class="issue">Should <code><a href="#high-accuracy">enableHiqhAccuracy</a></code> 
   be replaced by two attributes, thus separating the power concerns
   from the privacy concerns? Should the requested accuracy level be
-  specified in meters, possibly using a fixed range of values ?</span>
+  specified in meters, possibly using a fixed range of values ?</div>
   
 
   <p>The <dfn id="request-address"><code>requestAddress</code></dfn>
@@ -439,7 +439,7 @@
   <a href="#ref-wgs">[WGS84]</a> geoid.</p>
   
   <p>The <dfn id="accuracy"><code>accuracy</code></dfn> attribute
-  denotes the accuracy level of the latitude and longitude coordinates
+  denotes the accuracy level of the latitude and longitude coordinates. It
   is specified in meters and must be supported by all implementations.
 
   <p>The <dfn id="altitude-accuracy"><code>altitudeAccuracy</code></dfn> attribute is
@@ -472,7 +472,7 @@
   };
   </pre>
 
-  <span class="issue">TODO: describe the Address interface.</span>
+  <div class="issue">TODO: describe the Address interface.</div>
 
   <h3>PositionError interface</h3>
 
@@ -483,7 +483,7 @@
   };
   </pre>
 
-  <span class="issue">TODO: describe the PositionError interface.</span>
+  <div class="issue">TODO: describe the PositionError interface.</div>
 
   <h2 class="no-num" id="usecases">Use-Cases and Requirements</h2>
 
