@@ -360,11 +360,11 @@
   };
 
   interface <dfn id="position-callback">PositionCallback</dfn> {
-    void handleEvent(in Position position);
+    void handleEvent(in <a href="#position">Position</a> position);
   };
 
   interface <dfn id="error-callback">PositionErrorCallback</dfn> {
-    void handleEvent(in PositionError error);
+    void handleEvent(in <a href="position-error">PositionError</a> error);
   };
   </pre>
   
@@ -478,7 +478,7 @@
   <h3>PositionError interface</h3>
 
   <pre class="idl">
-  interface <dfn id="position-options">PositionError</dfn> {
+  interface <dfn id="position-error">PositionError</dfn> {
     readonly int code;
     readonly DOMString message;
   };
