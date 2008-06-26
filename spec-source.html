@@ -268,10 +268,6 @@
   the <code><a href="#client-geo">ClientInformationGeolocation</a></code>
   interface. <a href="#ref-clientinfo">[CLIENTINFO]</a></p>
 
-  <div class="issue">Should the geolocation object rather be a
-  property of the Window object? This will save developers from having
-  to type "navigator.geolocation" all the time.</div>
-
   <pre class="idl">
   [NoInterfaceObject]
   interface <dfn id="client-geo">ClientInformationGeolocation</dfn> {
@@ -287,7 +283,7 @@
     void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-options">PositionOptions</a> options);
     int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback);
     int <a href="watch-position">watchPosition</a>(in <a href="#position-options">PositionOptions</a> options);
-    void clearWatch(in int watchId);
+    void <a href="#clear-watch">clearWatch</a>(in int watchId);
   };
   </pre>
   
@@ -298,12 +294,15 @@
   value and the implementation must not attempt to acquire a new 
   <code><a href="#position">Position</a></code> object.</p>
 
-  <p>The <dfn id="get-current-position"><code>getCurrentPosition</code></dfn>
-  method must acquire a new <code><a href="#position">Position</a></code> object.
-  If it is successful, this method must invoke its associated <code><a href="#success-attribute">successCallback</a></code> with a
+  <p>The <dfn id="get-current-position"><code>getCurrentPosition()</code></dfn>
+  takes either a <code><a href="#position-callback">PositionCallback</a></code> object or a 
+  <code><a href="#position-options">PositionOptions</a></code> object as a parameter. 
+  When called, it must immediately return and then asynchronously acquire a new 
+  <code><a href="#position">Position</a></code> object.
+  If successful, this method must invoke its associated 
+  <code><a href="#success-attribute">successCallback</a></code> with a
   <code><a href="#position">Position</a></code> object as an argument. 
-
-  <p>If the attempt fails, and the method was invoked with a <code><a
+  If the attempt fails, and the method was invoked with a <code><a
   href="#position-options">PositionOptions</a></code> argument which
   specified an <code><a href="error-attribute">errorCallback</a></code>
   attribute, this method must invoke the <code><a
@@ -311,35 +310,42 @@
   href="#position-error">PositionError</a></code> object as an
   argument.</p>
 
-  <p>The <dfn id="watch-position"><code>watchPosition</code></dfn>
-  method must acquire a new <code><a href="#position">Position</a></code> object. 
-  If it is successful, this method must invoke its associated <code><a
-  href="#success-attribute">successCallback</a></code> with a <code><a
-  href="#position">Position</a></code> object as an argument.
+  <p>The <dfn id="watch-position"><code>watchPosition()</code></dfn> 
+  takes either a <code><a href="#position-callback">PositionCallback</a></code> object or a 
+  <code><a href="#position-options">PositionOptions</a></code> object as a parameter. 
+  When called, it must immediately return and then asynchronously start a <i>watch process</i>
+  defined as a the following set of steps:
 
-  <p>If the attempt fails, and the method was invoked with a <code><a
-  href="#position-options">PositionOptions</a></code> argument which
-  specified an <code><a href="error-attribute">errorCallback</a></code>
-  attribute, this method must invoke the <code><a
-  href="error-attribute">errorCallback</a></code> with a <code><a
-  href="#position-error">PositionError</a></code> object as an
-  argument.</p>
-
-  This method must then acquire a new <code><a href="#position">Position</a></code> object and 
-  continue to invoke the appropriate callback every time the implementation 
-  determines that the position of the hosting device has changed. In case of a fatal error 
-  (e.g. the implementation determines that there is no mechanism that can be used to acquire a position, 
-  this method must invoke the <code><a href="error-attribute">errorCallback</a></code> (if one was specified) 
-  immediately and then cease invoking any callback. In case of a transient error (e.g. 
-  network congestion when using a network-based location provider), this method must invoke the
-  <code><a href="error-attribute">errorCallback</a></code> (if one was specified) and then continue to monitor
-  the position of the hosting device, acquiring new <code><a href="#position">Position</a></code> objects and 
-  invoking the appropriate callback every time it determines that this position has changed.
+  <ol>
+    <li>
+    Acquire a new <code><a href="#position">Position</a></code> object.
+    If successful, invoke the associated <code><a
+    href="#success-attribute">successCallback</a></code> with a <code><a
+    href="#position">Position</a></code> object as an argument.
+    If the attempt fails, and the method was invoked with a <code><a
+    href="#position-options">PositionOptions</a></code> argument which
+    specified an <code><a href="error-attribute">errorCallback</a></code>
+    attribute, invoke the <code><a
+    href="error-attribute">errorCallback</a></code> with a <code><a
+    href="#position-error">PositionError</a></code> object as an
+    argument.
+    </li>
+    <li>
+    Acquire a new <code><a href="#position">Position</a></code> object and
+    invoke the appropriate callback every time the implementation 
+    determines that the position of the hosting device has changed.
+    </li>
+  </ol>
+  
+  <p>This method returns an integer value that uniquely identifies the
+  watch process. When the <dfn id="clear-watch"><code>clearWatch()</code></dfn> 
+  method is called with this identifier, the watch process must stop
+  acquiring any new position fixes and must cease invoking any callbacks.</p>
 
   <h3>PositionOptions interface</h3>
 
-  <p>The <code><a href="#get-current-position">getCurrentPosition</a></code> and 
-  <code><a href="watch-position">watchPosition</a></code> methods
+  <p>The <code><a href="#get-current-position">getCurrentPosition()</a></code> and 
+  <code><a href="watch-position">watchPosition()</a></code> methods
   accept <code><a href="#position-options">PositionOptions</a></code> objects as
   arguments.</p>
   
@@ -354,9 +360,6 @@
     attribute <a href="#position-callback">PositionCallback</a> <a href="#success-attribute">successCallback</a>;
     attribute <a href="#error-callback">PositionErrorCallback</a> <a href="error-attribute">errorCallback</a>;
     attribute boolean <a href="#high-accuracy">enableHiqhAccuracy</a>;
-    attribute boolean <a href="#request-address">requestAddress</a>;
-    attribute boolean <a href="#address-language">addressLanguage</a>;
-    attribute StringArray <a href="#location-resolvers">locationResolvers</a>;
   };
 
   interface <dfn id="position-callback">PositionCallback</dfn> {
@@ -384,39 +387,13 @@
   or increased power consumption. The user might also deny this
   capability, or the device might not be able to provide more accurate
   results than if the flag wasn't specified.</p>
-  <div class="issue">Should <code><a href="#high-accuracy">enableHiqhAccuracy</a></code> 
-  be replaced by two attributes, thus separating the power concerns
-  from the privacy concerns? Should the requested accuracy level be
-  specified in meters, possibly using a fixed range of values ?</div>
-  
-
-  <p>The <dfn id="request-address"><code>requestAddress</code></dfn>
-  attribute determines whether the implementation should attempt to
-  return reverse geocoded address information as part of the position
-  data. Reverse geocoding is not performed if this flag is not
-  specified or set to false.</p>
-
-  <p>The <dfn id="address-language"><code>addressLanguage</code></dfn>
-  attribute specifies the language in which the address (if requested)
-  should be returned. The values of this attribute should comply with
-  <a href="#ref-rfc3066">[RFC3066]</a>.</p>
-
-  <p>The <dfn id="location-resolvers"><code>locationResolvers</code></dfn>
-  attribute specifies zero or more URLs that identify services that
-  are capable of converting radio technology signals
-  (e.g. WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs) into
-  geographical information that can be used to construct 
-  <code><a href="#position">Position</a></code> objects. Each URL is queried
-  and the data with the highest accuracy is used to construct the
-  <code><a href="#position">Position</a></code> argument for the
-  <code><a href="#position-callback">PositionCallback</a></code>.
-  If unset, it is left to the User Agent to decide if a default
-  service should be used or not.
-
-  <p>This specification also defines a non-normative protocol that
-  User Agents could use to communicate with location providers. Please
-  see section TBD.</p>
-
+  <div class="issue">See
+  <ul>
+    <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0094.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0094.html</a></li>
+    <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0107.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0107.html</a></li>
+  </ul>
+  for two descriptions of the problem that <code>enableHighAccuracy</code> is trying to solve.
+  </div>
 
   <h3>Position interface</h3>
 
@@ -428,16 +405,20 @@
     readonly attribute double <a href="#accuracy">accuracy</a>;
     readonly attribute double <a href="#altitude-accuracy">altitudeAccuracy</a>;
     readonly attribute unsigned long long <a href="#timestamp">timestamp</a>;
-    readonly attribute Address <a href="#address">address</a>;
   };
   </pre>
+
+  <p>The reference system used for the positioning attributes of this interface is the World Geodetic System [WGS84].</p>
+  <div class="issue">
+  Should we support any other geodetic systems than WGS84 and, if so, should the reference system itself be an attribute of this interface?
+  </div>
 
   <p>The <dfn id="lat"><code>latitude</code></dfn> and <dfn id="lon"><code>longitude</code></dfn> 
   attributes are specifed in degrees.</p>
 
   <p>The <dfn id="altitude"><code>altitude</code></dfn> attribute
   denotes the height of the position, specified in meters above the
-  <a href="#ref-wgs">[WGS84]</a> geoid.</p>
+  <a href="#ref-wgs">[WGS84]</a> ellipsoid.</p>
   
   <p>The <dfn id="accuracy"><code>accuracy</code></dfn> attribute
   denotes the accuracy level of the latitude and longitude coordinates. It
@@ -449,31 +430,6 @@
   <p>The <dfn id="timestamp"><code>timestamp</code></dfn> attribute
   represents the time when the geographic location was acquired and is
   specified in milliseconds since midnight on January 1st, 1970.</p>
-
-  <p>The <dfn id="address"><code>address</code></dfn> attribute
-  represents the street address that corresponds to the associated
-  latitude and longitude coordinates. This attribute is null if
-  reverse geocoding is not supported by the implementation or the <code><a
-  href="#request-address">requestAddress</a></code> was not set
-  to <code>true</code>.
-
-  <h3>Address interface</h3>
-
-  <pre class="idl">
-  interface <dfn id="address">Address</dfn> {
-    readonly attribute DOMString streetNumber;
-    readonly attribute DOMString street;
-    readonly attribute DOMString premises;
-    readonly attribute DOMString city;
-    readonly attribute DOMString county;
-    readonly attribute DOMString region;
-    readonly attribute DOMString country;
-    readonly attribute DOMString countryCode;
-    readonly attribute DOMString postalCode;
-  };
-  </pre>
-
-  <div class="issue">TODO: describe the Address interface.</div>
 
   <h3>PositionError interface</h3>
 
