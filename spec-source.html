@@ -207,7 +207,20 @@
 
   </div>
 
+  <h2>Scope</h2>
+  <p><em>This section is non-normative.</em></p>
   
+  <p>This specification is limited to providing a scripting APIs for
+  retrieving location information associated with a hosting
+  device. The location information is provided in terms of coordinates
+  that apply to a geographic coordinate system.</p>
+
+  <p>The scope of this specification does not include providing a
+  markup language of any kind.</p>
+
+  <p>The scope of this specification does not include defining new URI
+  schemes for building URIs that identify geographic locations.</p>
+
   <h2>Security and privacy considerations</h2>
 
   <p>...</p>
@@ -288,17 +301,19 @@
   </pre>
   
   <p>The <dfn id="last-position"><code>lastPosition</code></dfn>
-  attribute must return the last <code><a href="#position">Position</a></code>
-  object that was acquired by the implementation, or null if no such object exists.
-  On getting, this attribute must return a previously cached
-  value and the implementation must not attempt to acquire a new 
-  <code><a href="#position">Position</a></code> object.</p>
+  attribute must return the last <code><a
+  href="#position">Position</a></code> object that was acquired by the
+  implementation, or null if no such object exists.  On getting, this
+  attribute should return a previously cached value and the
+  implementation should not attempt to initiate any time consuming
+  operations.
 
   <p>The <dfn id="get-current-position"><code>getCurrentPosition()</code></dfn>
   takes either a <code><a href="#position-callback">PositionCallback</a></code> object or a 
-  <code><a href="#position-options">PositionOptions</a></code> object as a parameter. 
+  <code><a href="#position-options">PositionOptions</a></code> object as a parameter.
   When called, it must immediately return and then asynchronously acquire a new 
   <code><a href="#position">Position</a></code> object.
+
   If successful, this method must invoke its associated 
   <code><a href="#success-attribute">successCallback</a></code> with a
   <code><a href="#position">Position</a></code> object as an argument. 
@@ -350,8 +365,7 @@
   arguments.</p>
   
   <p> <code><a href="#position-options">PositionOptions</a></code>
-  objects are regular ECMAScript objects and must be created using the
-  ECMAScript object literal syntax. </p>
+  objects are regular ECMAScript objects that have the following properties:</p>
 
   <pre class="idl">
   typedef sequence&lt;DOMString&gt; StringArray;
@@ -371,15 +385,14 @@
   };
   </pre>
   
-  <p>The <dfn id="success-attribute"><code>successCallback</code></dfn>
-  attribute represents the callback that is invoked by the 
-  <code><a href="#geolocation">Geolocation</a></code> object methods after
-  successfully acquiring a fresh position fix.</p>
+  <p>The <dfn
+  id="success-attribute"><code>successCallback</code></dfn> attribute
+  contains a callback that is invoked when the position acquisition
+  succeeds.</p>
 
   <p>The <dfn id="error-attribute"><code>errorCallback</code></dfn>
-  attribute represents the callback that is invoked by the 
-  <code><a href="#geolocation">Geolocation</a></code> object methods after
-  encountering an error while trying to acquire a fresh position fix.</p>
+  attribute contains callback that is invoked when the position
+  acquisition fails.</p>
 
   <p>The <dfn id="high-accuracy"><code>enableHiqhAccuracy</code></dfn>
   attribute provides a hint that the application would like to receive
@@ -387,6 +400,10 @@
   or increased power consumption. The user might also deny this
   capability, or the device might not be able to provide more accurate
   results than if the flag wasn't specified.</p>
+
+  <p>The <code>errorCallback</code> and <code>enableHiqhAccuracy</code>
+  attributes are optional.</p>
+
   <div class="issue">See
   <ul>
     <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0094.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0094.html</a></li>
@@ -404,6 +421,8 @@
     readonly attribute double <a href="#altitude">altitude</a>;
     readonly attribute double <a href="#accuracy">accuracy</a>;
     readonly attribute double <a href="#altitude-accuracy">altitudeAccuracy</a>;
+    readonly attribute double <a href="#heading">heading</a>
+    readonly attribute double <a href="#velocity">velocity</a>
     readonly attribute unsigned long long <a href="#timestamp">timestamp</a>;
   };
   </pre>
@@ -417,15 +436,30 @@
   attributes are specifed in degrees.</p>
 
   <p>The <dfn id="altitude"><code>altitude</code></dfn> attribute
-  denotes the height of the position, specified in meters above the
-  <a href="#ref-wgs">[WGS84]</a> ellipsoid.</p>
+  denotes the height of the position, specified in meters above the <a
+  href="#ref-wgs">[WGS84]</a> ellipsoid. If the implementation cannot
+  provide altitude information, the value of this attribute must be
+  null.</p>
   
   <p>The <dfn id="accuracy"><code>accuracy</code></dfn> attribute
   denotes the accuracy level of the latitude and longitude coordinates. It
   is specified in meters and must be supported by all implementations.
 
-  <p>The <dfn id="altitude-accuracy"><code>altitudeAccuracy</code></dfn> attribute is
-  specified in meters and can be null if it is not supported.</p>
+  <p>The <dfn id="altitude-accuracy"><code>altitudeAccuracy</code></dfn> attribute
+  is specified in meters. If the implementation cannot provide
+  altitude information, the value of this attribute must be null.</p>
+
+  <p>The <dfn id="heading"><code>heading</code></dfn> attribute
+  denotes the direction of the hosting device and is specified in
+  degrees counting clockwise relative to the true north.  If the
+  implementation cannot provide heading information, the value of this
+  attribute must be null.</p>
+
+  <p>The <dfn id="velocity"><code>velocity</code></dfn> attribute
+  denotes the current ground speed of the hosting device and is
+  specified in meters per second.  If the implementation cannot
+  provide velocity information, the value of this attribute must be
+  null.</p>
 
   <p>The <dfn id="timestamp"><code>timestamp</code></dfn> attribute
   represents the time when the geographic location was acquired and is
@@ -555,7 +589,7 @@
 
   <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-  <p>Alec Berntson, Steve Block, Aaron Boodman, Dave Burke,  Shyam Habarakada, Ian Hickson, Brad Lassey, Stuart Parmenter, Chris Prince, Arun Ranganathan, Aza Raskin</p>
+  <p>Alec Berntson, Steve Block, Aaron Boodman, Dave Burke, Chris Butler, Shyam Habarakada, Ian Hickson, Brad Lassey, Stuart Parmenter, Chris Prince, Arun Ranganathan, Aza Raskin</p>
 
 
   <h2 class="no-num" id="references">References</h2>
