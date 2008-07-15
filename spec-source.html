@@ -329,7 +329,7 @@
   takes either a <code><a href="#position-callback">PositionCallback</a></code> object or a 
   <code><a href="#position-options">PositionOptions</a></code> object as a parameter. 
   When called, it must immediately return and then asynchronously start a <i>watch process</i>
-  defined as a the following set of steps:
+  defined as the following set of steps:
 
   <ol>
     <li>
@@ -423,7 +423,7 @@
     readonly attribute double <a href="#altitude-accuracy">altitudeAccuracy</a>;
     readonly attribute double <a href="#heading">heading</a>
     readonly attribute double <a href="#velocity">velocity</a>
-    readonly attribute unsigned long long <a href="#timestamp">timestamp</a>;
+    readonly attribute DOMTimeStamp <a href="#timestamp">timestamp</a>;
   };
   </pre>
 
@@ -433,7 +433,7 @@
   </div>
 
   <p>The <dfn id="lat"><code>latitude</code></dfn> and <dfn id="lon"><code>longitude</code></dfn> 
-  attributes are specifed in degrees.</p>
+  attributes are specified in degrees.</p>
 
   <p>The <dfn id="altitude"><code>altitude</code></dfn> attribute
   denotes the height of the position, specified in meters above the <a
@@ -463,7 +463,7 @@
 
   <p>The <dfn id="timestamp"><code>timestamp</code></dfn> attribute
   represents the time when the geographic location was acquired and is
-  specified in milliseconds since midnight on January 1st, 1970.</p>
+  represented as a DOMTimeStamp <a href="#ref-domtimestamp">[DOMTIMESTAMP]</a>.</p>
 
   <h3>PositionError interface</h3>
 
@@ -501,7 +501,7 @@
   coverage, the application automatically uploads their notes and
   pictures to a popular blogging Web site, which uses the geolocation
   data to construct links that point to a mapping service. Users who
-  follow the group's trip can click on these links to see a sattelite
+  follow the group's trip can click on these links to see a satellite
   view of the area where the notes were written and the pictures were
   taken.
 
@@ -571,7 +571,7 @@
  receive repeated position updates.<h5>
 
  <h5>The Geolocation API must allow an application to cheaply query the last
- know position.<h5>
+ known position.<h5>
 
  <h5>The Geolocation API must provide a way for the application to
  receive updates about errors that may have occurred while obtaining a
@@ -599,6 +599,8 @@
    <dd><em>(Non-normative)</em> <cite><a href="http://azarask.in/blog/post/geolocation-in-firefox-and-beyond/">Geolocation in Firefox and Beyond</a></cite>. See http://azarask.in/blog/post/geolocation-in-firefox-and-beyond</dd>
    <dt><a id="ref-clientinfo">[CLIENTINFO]</a></dt>
    <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/#clientinformation">ClientInformation interface in HTML5</a></cite>. See http://www.whatwg.org/specs/web-apps/current-work/#clientinformation</dd>
+   <dt><a id="ref-domtimestamp">[DOMTIMESTAMP]</a></dt>
+   <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">The DOMTimeStamp Type</a></cite>. See http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp</dd>
    <dt><a id="ref-gears">[GEARSLOC]</a></dt>
    <dd><em>(Non-normative)</em> <cite><a href="http://code.google.com/p/google-gears/wiki/GeolocationAPI">Gears Geolocation API</a></cite>. See http://code.google.com/p/google-gears/wiki/GeolocationAPI</dd>
    <dt><a id="ref-locationaware">[LOCATIONAWARE]</a></dt>
