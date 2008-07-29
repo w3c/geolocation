@@ -197,8 +197,7 @@
     }
 
     // Request repeated updates.
-    var watchId = navigator.geolocation.watchPosition({successCallback: scrollMap,
-                                                       errorCallback: handleError});
+    var watchId = navigator.geolocation.watchPosition(scrollMap, handleError);
 
     function buttonClickHandler() {
       // Cancel the updates when the user clicks a button.
@@ -292,58 +291,64 @@
 
   <pre class="idl"> interface <dfn id="geolocation">Geolocation</dfn> { 
     readonly attribute <a href="#position">Position</a> <a href="#last-position">lastPosition</a>;
+
     void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback);
-    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-options">PositionOptions</a> options);
+    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback);
+    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback, in <a href="#position-options">PositionOptions</a> options);
+
     int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback);
-    int <a href="watch-position">watchPosition</a>(in <a href="#position-options">PositionOptions</a> options);
+    int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback);
+    int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback, in <a href="#position-options">PositionOptions</a> options);
+
     void <a href="#clear-watch">clearWatch</a>(in int watchId);
+  };
+
+  interface <dfn id="position-callback">PositionCallback</dfn> {
+    void handleEvent(in <a href="#position">Position</a> position);
+  };
+
+  interface <dfn id="error-callback">PositionErrorCallback</dfn> {
+    void handleEvent(in <a href="#position-error">PositionError</a> error);
   };
   </pre>
   
   <p>The <dfn id="last-position"><code>lastPosition</code></dfn>
   attribute must return the last <code><a
   href="#position">Position</a></code> object that was acquired by the
-  implementation, or null if no such object exists.  On getting, this
+  implementation, or null if no such object exists. On getting, this
   attribute should return a previously cached value and the
   implementation should not attempt to initiate any time consuming
   operations.
 
   <p>The <dfn id="get-current-position"><code>getCurrentPosition()</code></dfn>
-  takes either a <code><a href="#position-callback">PositionCallback</a></code> object or a 
-  <code><a href="#position-options">PositionOptions</a></code> object as a parameter.
-  When called, it must immediately return and then asynchronously acquire a new 
-  <code><a href="#position">Position</a></code> object.
+  takes one, two or three arguments. When called, it must immediately
+  return and then asynchronously acquire a new <code><a href="#position">Position</a></code> object.
 
-  If successful, this method must invoke its associated 
-  <code><a href="#success-attribute">successCallback</a></code> with a
-  <code><a href="#position">Position</a></code> object as an argument. 
-  If the attempt fails, and the method was invoked with a <code><a
-  href="#position-options">PositionOptions</a></code> argument which
-  specified an <code><a href="error-attribute">errorCallback</a></code>
-  attribute, this method must invoke the <code><a
-  href="error-attribute">errorCallback</a></code> with a <code><a
+  If successful, this method must invoke its associated
+  <code>successCallback</code> argument with a <code><a
+  href="#position">Position</a></code> object as an argument. If the
+  attempt fails, and the method was invoked with a non-null
+  <code>errorCallback</code> argument, this method must invoke the
+  <code>errorCallback</code> with a <code><a
   href="#position-error">PositionError</a></code> object as an
   argument.</p>
 
-  <p>The <dfn id="watch-position"><code>watchPosition()</code></dfn> 
-  takes either a <code><a href="#position-callback">PositionCallback</a></code> object or a 
-  <code><a href="#position-options">PositionOptions</a></code> object as a parameter. 
-  When called, it must immediately return and then asynchronously start a <i>watch process</i>
-  defined as the following set of steps:
+  <p>The <dfn id="watch-position"><code>watchPosition()</code></dfn>
+  takes one, two or three arguments. When called, it must immediately
+  return and then asynchronously start a <i>watch process</i> defined
+  as the following set of steps:
 
   <ol>
     <li>
     Acquire a new <code><a href="#position">Position</a></code> object.
-    If successful, invoke the associated <code><a
-    href="#success-attribute">successCallback</a></code> with a <code><a
+    If successful, invoke the associated <code>successCallback</code> with a <code><a
     href="#position">Position</a></code> object as an argument.
-    If the attempt fails, and the method was invoked with a <code><a
-    href="#position-options">PositionOptions</a></code> argument which
-    specified an <code><a href="error-attribute">errorCallback</a></code>
-    attribute, invoke the <code><a
-    href="error-attribute">errorCallback</a></code> with a <code><a
+   
+    If the attempt fails, and the method was invoked with a non-null
+    <code>errorCallback</code> argument, this method must invoke the
+    <code>errorCallback</code> with a <code><a
     href="#position-error">PositionError</a></code> object as an
-    argument.
+    argument.</p>
     </li>
     <li>
     Acquire a new <code><a href="#position">Position</a></code> object and
@@ -362,7 +367,7 @@
   <p>The <code><a href="#get-current-position">getCurrentPosition()</a></code> and 
   <code><a href="watch-position">watchPosition()</a></code> methods
   accept <code><a href="#position-options">PositionOptions</a></code> objects as
-  arguments.</p>
+  their third argument.</p>
   
   <p> <code><a href="#position-options">PositionOptions</a></code>
   objects are regular ECMAScript objects that have the following properties:</p>
@@ -371,28 +376,10 @@
   typedef sequence&lt;DOMString&gt; StringArray;
   [NoInterfaceObject]
   interface <dfn id="position-options">PositionOptions</dfn> {
-    attribute <a href="#position-callback">PositionCallback</a> <a href="#success-attribute">successCallback</a>;
-    attribute <a href="#error-callback">PositionErrorCallback</a> <a href="error-attribute">errorCallback</a>;
     attribute boolean <a href="#high-accuracy">enableHiqhAccuracy</a>;
   };
 
-  interface <dfn id="position-callback">PositionCallback</dfn> {
-    void handleEvent(in <a href="#position">Position</a> position);
-  };
-
-  interface <dfn id="error-callback">PositionErrorCallback</dfn> {
-    void handleEvent(in <a href="#position-error">PositionError</a> error);
-  };
   </pre>
-  
-  <p>The <dfn
-  id="success-attribute"><code>successCallback</code></dfn> attribute
-  contains a callback that is invoked when the position acquisition
-  succeeds.</p>
-
-  <p>The <dfn id="error-attribute"><code>errorCallback</code></dfn>
-  attribute contains callback that is invoked when the position
-  acquisition fails.</p>
 
   <p>The <dfn id="high-accuracy"><code>enableHiqhAccuracy</code></dfn>
   attribute provides a hint that the application would like to receive
