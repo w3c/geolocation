@@ -365,7 +365,7 @@
   <h3>PositionOptions interface</h3>
 
   <p>The <code><a href="#get-current-position">getCurrentPosition()</a></code> and 
-  <code><a href="watch-position">watchPosition()</a></code> methods
+  <code><a href="#watch-position">watchPosition()</a></code> methods
   accept <code><a href="#position-options">PositionOptions</a></code> objects as
   their third argument.</p>
   
@@ -456,12 +456,35 @@
 
   <pre class="idl">
   interface <dfn id="position-error">PositionError</dfn> {
-    readonly int code;
-    readonly DOMString message;
+    readonly int <a href="#code1">code</a>;
+    readonly DOMString <a href="#message1">message</a>;
   };
   </pre>
 
-  <div class="issue">TODO: describe the PositionError interface.</div>
+<p>The <dfn id="code1"><code>code</code></dfn> attribute must return
+  the appropriate code from the following list:</p>
+  
+<ul>
+<li> 1 - Permission error: the location acquisition failed because the
+application origin does not have permission to use the Geolocation
+API.</li>
+
+<li> 2 - Location provider error: one or more of the location
+providers used in the acquisition process reported an internal
+error. For example, a GPS provider would report this error if the GPS
+receiver is disabled or out of order. A network-based provider would report
+this error if there was a communication failure (e.g. HTTP errors
+occured).</li>
+
+<li> 3 - Position not found: the position of the device could not be
+determined. The most common occurrence of this error would be when a
+network-based provider does not have a valid position mapping for the
+current network signals (IP address, GSM Cell ID, etc) of the device,
+or when the GPS signal is not strong enough for a GPS provider to get
+a valid position fix.</li> </ul>
+
+<p>The <dfn id="message1"><code>message</code></dfn> attribute must
+return an error message describing the details of the error encountered.</p>
 
   <h2 class="no-num" id="usecases">Use-Cases and Requirements</h2>
 
