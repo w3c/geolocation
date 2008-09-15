@@ -351,10 +351,11 @@
     argument.</p>
     </li>
     <li>
-    Acquire a new <code><a href="#position">Position</a></code> object and
-    invoke the appropriate callback every time the implementation 
-    determines that the position of the hosting device has changed.
+    Invoke the appropriate callback with a new <code>Position</code>
+    object every time the implementation determines that the position
+    of the hosting device has changed.
     </li>
+
   </ol>
   
   <p>This method returns an integer value that uniquely identifies the
@@ -376,6 +377,7 @@
   [NoInterfaceObject]
   interface <dfn id="position-options">PositionOptions</dfn> {
     attribute boolean <a href="#high-accuracy">enableHiqhAccuracy</a>;
+    attribute long <a href="#timeout">timeout</a>;
   };
 
   </pre>
@@ -387,9 +389,6 @@
   capability, or the device might not be able to provide more accurate
   results than if the flag wasn't specified.</p>
 
-  <p>The <code>errorCallback</code> and <code>enableHiqhAccuracy</code>
-  attributes are optional.</p>
-
   <div class="issue">See
   <ul>
     <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0094.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0094.html</a></li>
@@ -397,6 +396,31 @@
   </ul>
   for two descriptions of the problem that <code>enableHighAccuracy</code> is trying to solve.
   </div>
+
+  <p>The <dfn id="timeout"><code>timeout</code></dfn>attribute denotes
+   the maximum length of time (expressed in milliseconds) that is
+   allowed to pass from the the call to
+   <code>getCurrentPosition()</code> or <code>watchPosition()</code>
+   until the corresponding <code>successCallback</code> is invoked. If
+   the implementation is unable to successfully acquire a new <code>Position</code>
+   before the given timeout elapses, and no other errors have occurred
+   in this interval, then the corresponding <code>errorCallback</code>
+   must be invoked with a <code>PositionError</code> object whose code
+   attribute is set to 4.</p>
+   
+  <p>In case of a <code>getCurrentPosition()</code> call, the
+   <code>errorCallback</code> would be invoked exactly once.  
+
+  <p>In case of a <code>watchPosition()</code>, the
+  <code>errorCallback</code> could be invoked repeatedly: the first
+  timeout is relative to the moment <code>watchPosition()</code> was
+  called, while subsequent timeouts are relative to the moment when
+  the implementation determines that the position of the hosting
+  device has changed and a new <code>Position</code> object must be
+  acquired.
+
+  <p>The <code>enableHiqhAccuracy</code> and <code>timeout</code>
+  attributes are optional.</p>
 
   <h3>Position interface</h3>
 
@@ -480,7 +504,11 @@ determined. The most common occurrence of this error would be when a
 network-based provider does not have a valid position mapping for the
 current network signals (IP address, GSM Cell ID, etc) of the device,
 or when the GPS signal is not strong enough for a GPS provider to get
-a valid position fix.</li> </ul>
+a valid position fix.</li> 
+
+<li> 4 - The specified maximum length of time has elapsed before the
+implementation could successfully acquire a new Position object.</li>
+</ul>
 
 <p>The <dfn id="message1"><code>message</code></dfn> attribute must
 return an error message describing the details of the error encountered.</p>
