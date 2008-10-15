@@ -49,7 +49,7 @@
 
   <h1>Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 15 September 2008]</h2>
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 15 October 2008]</h2>
    <dl>
 <!--
     <dt>This version:</dt>
@@ -377,7 +377,7 @@
   [NoInterfaceObject]
   interface <dfn id="position-options">PositionOptions</dfn> {
     attribute boolean <a href="#high-accuracy">enableHiqhAccuracy</a>;
-    attribute long <a href="#timeout">timeout</a>;
+    attribute unsigned long <a href="#timeout">timeout</a>;
   };
 
   </pre>
@@ -511,7 +511,10 @@ implementation could successfully acquire a new Position object.</li>
 </ul>
 
 <p>The <dfn id="message1"><code>message</code></dfn> attribute must
-return an error message describing the details of the error encountered.</p>
+return an error message describing the details of the error
+encountered. This attribute is primarily intended for debugging and
+developers should not use it directly in their application user
+interface.</p>
 
   <h2 class="no-num" id="usecases">Use-Cases and Requirements</h2>
 
