@@ -49,7 +49,7 @@
 
   <h1>Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 15 October 2008]</h2>
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 27 October 2008]</h2>
    <dl>
 <!--
     <dt>This version:</dt>
@@ -275,14 +275,17 @@
   creating a <code><a href="#position">Position</a></code> object, and
   populating that object with appropriate data accordingly.
 
-  <p>Objects implementing the <code>ClientInformation</code> interface
+  <p>Objects implementing the <code>Navigator</code> interface
   (e.g. the <code>window.navigator</code> object) must also implement
-  the <code><a href="#client-geo">ClientInformationGeolocation</a></code>
-  interface. <a href="#ref-clientinfo">[CLIENTINFO]</a></p>
+  the <code><a href="#navi-geo">NavigatorGeolocation</a></code>
+  interface. <a href="#ref-navigator">[NAVIGATOR]</a>. An instance
+  of <code>NavigatorGeolocation</code> would be then obtained by using
+  binding-specific casting methdos on an instance
+  of <code>Navigator</code>.</p>
 
   <pre class="idl">
   [NoInterfaceObject]
-  interface <dfn id="client-geo">ClientInformationGeolocation</dfn> {
+  interface <dfn id="navi-geo">NavigatorGeolocation</dfn> {
     readonly attribute <a href="#geolocation">Geolocation</a> geolocation;
   };
   </pre>
@@ -432,7 +435,7 @@
     readonly attribute double <a href="#accuracy">accuracy</a>;
     readonly attribute double <a href="#altitude-accuracy">altitudeAccuracy</a>;
     readonly attribute double <a href="#heading">heading</a>
-    readonly attribute double <a href="#velocity">velocity</a>
+    readonly attribute double <a href="#speed">speed</a>
     readonly attribute DOMTimeStamp <a href="#timestamp">timestamp</a>;
   };
   </pre>
@@ -459,16 +462,20 @@
   is specified in meters. If the implementation cannot provide
   altitude information, the value of this attribute must be null.</p>
 
+  <p>The <code>accuracy</code> and <code>altitudeAccuracy</code>
+  values returned by an implementation should correspond to a 95%
+  confidence level.
+
   <p>The <dfn id="heading"><code>heading</code></dfn> attribute
   denotes the direction of the hosting device and is specified in
   degrees counting clockwise relative to the true north.  If the
   implementation cannot provide heading information, the value of this
   attribute must be null.</p>
 
-  <p>The <dfn id="velocity"><code>velocity</code></dfn> attribute
+  <p>The <dfn id="speed"><code>speed</code></dfn> attribute
   denotes the current ground speed of the hosting device and is
   specified in meters per second.  If the implementation cannot
-  provide velocity information, the value of this attribute must be
+  provide speed information, the value of this attribute must be
   null.</p>
 
   <p>The <dfn id="timestamp"><code>timestamp</code></dfn> attribute
@@ -629,7 +636,7 @@ interface.</p>
 
   <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-  <p>Alec Berntson, Steve Block, Aaron Boodman, Dave Burke, Chris Butler, Shyam Habarakada, Ian Hickson, Brad Lassey, Stuart Parmenter, Chris Prince, Arun Ranganathan, Aza Raskin, Doug Turner</p>
+  <p>Alec Berntson, Steve Block, Aaron Boodman, Dave Burke, Chris Butler, Shyam Habarakada, Ian Hickson, Brad Lassey, Stuart Parmenter, Chris Prince, Arun Ranganathan, Aza Raskin, Martin Thomson, Doug Turner</p>
 
 
   <h2 class="no-num" id="references">References</h2>
@@ -637,8 +644,8 @@ interface.</p>
   <dl>
    <dt><a id="ref-azaloc">[AZALOC]</a></dt>
    <dd><em>(Non-normative)</em> <cite><a href="http://azarask.in/blog/post/geolocation-in-firefox-and-beyond/">Geolocation in Firefox and Beyond</a></cite>. See http://azarask.in/blog/post/geolocation-in-firefox-and-beyond</dd>
-   <dt><a id="ref-clientinfo">[CLIENTINFO]</a></dt>
-   <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/#clientinformation">ClientInformation interface in HTML5</a></cite>. See http://www.whatwg.org/specs/web-apps/current-work/#clientinformation</dd>
+   <dt><a id="ref-navigator">[NAVIGATOR]</a></dt>
+   <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/#navigator">Navigator interface in HTML5</a></cite>. See http://www.whatwg.org/specs/web-apps/current-work/#navigator</dd>
    <dt><a id="ref-domtimestamp">[DOMTIMESTAMP]</a></dt>
    <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">The DOMTimeStamp Type</a></cite>. See http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp</dd>
    <dt><a id="ref-gears">[GEARSLOC]</a></dt>
