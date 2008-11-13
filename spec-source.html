@@ -268,7 +268,7 @@
   <h3 id="geolocation_interface">Geolocation interface</h3>
 
   <p>The <code><a href="#geolocation">Geolocation</a></code> object can
-  be used by scripts to programatically determine the location
+  be used by scripts to programmatically determine the location
   information associated with the hosting device. The location
   information is acquired by applying a user-agent specific algorithm,
   creating a <code><a href="#position">Position</a></code> object, and
@@ -279,7 +279,7 @@
   the <code><a href="#navi-geo">NavigatorGeolocation</a></code>
   interface. <a href="#ref-navigator">[NAVIGATOR]</a>. An instance
   of <code>NavigatorGeolocation</code> would be then obtained by using
-  binding-specific casting methdos on an instance
+  binding-specific casting methods on an instance
   of <code>Navigator</code>.</p>
 
   <pre class="idl">
@@ -525,20 +525,20 @@
   developers should not use it directly in their application user
   interface.</p>
 
-  <h2 class="no-num" id="usecases">Use-Cases and Requirements</h2>
+  <h2 id="usecases">Use-Cases and Requirements</h2>
 
   <p><em>Issue note: This section will get moved to a separate document</em></p>
   
   <h3 id="usecases_section">Use-Cases</h3>
   
-  <h4>1. Find points of interest in the user's area</h4> 
+  <h4>Find points of interest in the user's area</h4> 
   <p>Someone visiting a foreign city could access a Web application
   that allows users to search or browse through a database of tourist
   attractions. Using the Geolocation API, the Web application has
   access to the user's approximate position and it is therefore able to
   rank the search results by proximity to the user's location.</p>
 
-  <h4>2. Annotating content with location information</h4>
+  <h4>Annotating content with location information</h4>
   <p> A group of friends is hiking through the Scottish
   highlands. Some of them write short notes and take pictures at
   various points throughout the journey and store them using a Web
@@ -554,7 +554,7 @@
   view of the area where the notes were written and the pictures were
   taken.
 
-  <h4>3. Automatic form-filling</h4>
+  <h4>Automatic form-filling</h4>
   <p> A user is accessing an online service in order to arrange a
   parcel delivery and she needs to fill in a long form which includes
   special fields for her home address. To save the user's time, the
@@ -565,7 +565,7 @@
   application uses a third-party reverse geocoding service to
   translate the coordinates into a street address.</p>
 
-  <h4>4. Show the user's position on a map</h4>
+  <h4>Show the user's position on a map</h4>
   <p>A user finds herself in an unfamiliar city area. She wants to
   check her position so she uses her hand-held device to navigate to a
   Web-based mapping application that can pinpoint her exact location
@@ -573,7 +573,7 @@
   application to provide driving directions from her current position
   to her desired destination.</p>
 
-  <h4>5. Turn-by-turn route navigation</h4>
+  <h4>Turn-by-turn route navigation</h4>
   <p>Following from use-case 4, a mapping application can help the
   user navigate along a route by providing detailed turn-by-turn
   directions. The application does this by registering with the
@@ -583,20 +583,20 @@
   which allows the application to anticipate any changes of direction
   that the user might need to do.</p>
 
-  <h4>6. Alerts when points of interest are in the user's vicinity</h4>
+  <h4>Alerts when points of interest are in the user's vicinity</h4>
   <p>A tour-guide Web application can use the Geolocation API to
   monitor the user's position and trigger visual or audio
   notifications when interesting places are in the vicinity. An online
   task management system can trigger reminders when the user is in the
   proximity of landmarks that are associated with certain tasks.</p>
 
-  <h4>7. Up-to-date local information</h4>
+  <h4>Up-to-date local information</h4>
   <p>A widget-like Web application that shows the weather or news that
   are relevant to the user's current area can use the Geolocation API
   to register for location updates. If the user's position changes,
   the widget can adapt the content accordingly.</p>
 
-  <h4>8. Location-tagged status updates in social networking applications</h4>
+  <h4>Location-tagged status updates in social networking applications</h4>
   <p>A social network application allows its users to automatically
   tag their status updates with location information. It does this by
   monitoring the user's position with the Geolocation API and using
@@ -608,29 +608,29 @@
 
  <h3 id="requirements_section">Requirements</h3>
 
- <h5>The Geolocation API must provide location data in terms of a pair
- of latitude and longitude coordinates.</h5>
+ <h4>The Geolocation API must provide location data in terms of a pair
+ of latitude and longitude coordinates.</h4>
 
- <h5>The Geolocation API must provide information about the accuracy
- of the retrieved location data.</h5>
+ <h4>The Geolocation API must provide information about the accuracy
+ of the retrieved location data.</h4>
 
- <h5>The Geolocation API must support "one-shot" position updates.</h5>
+ <h4>The Geolocation API must support "one-shot" position updates.</h4>
  
- <h5>The Geolocation API must allow an application to register to
- receive repeated position updates.</h5>
+ <h4>The Geolocation API must allow an application to register to
+ receive repeated position updates.</h4>
 
- <h5>The Geolocation API must allow an application to cheaply query the last
- known position.</h5>
+ <h4>The Geolocation API must allow an application to cheaply query the last
+ known position.</h4>
 
- <h5>The Geolocation API must provide a way for the application to
+ <h4>The Geolocation API must provide a way for the application to
  receive updates about errors that may have occurred while obtaining a
- location fix.</h5>
+ location fix.</h4>
 
- <h5>The Geolocation API must allow an application to specify a
- desired accuracy level of the location information.</h5>
+ <h4>The Geolocation API must allow an application to specify a
+ desired accuracy level of the location information.</h4>
 
- <h5>The Geolocation API must be agnostic to the underlying sources
- of location information.</h5>
+ <h4>The Geolocation API must be agnostic to the underlying sources
+ of location information.</h4>
 
 
   <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
@@ -654,7 +654,7 @@
    <dt><a id="ref-rfc3066">[RFC3066]</a></dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc3066.txt">Tags for the Identification of Languages</a></cite>. See http://www.ietf.org/rfc/rfc3066.txt</dd>
    <dt><a id="ref-webidl">[WEBIDL]</a></dt>
-   <dd><cite><a href="http://dev.w3.org/cvsweb/~checkout~/2006/webapi/Binding4DOM/Overview.html?content-type=text/html;%20charset=utf-8">Web IDL</a></cite>. See http://dev.w3.org/cvsweb/~checkout~/2006/webapi/Binding4DOM/Overview.html?content-type=text/html;%20charset=utf-8</dd>
+   <dd><cite><a href="http://www.w3.org/TR/WebIDL/">Web IDL</a></cite>. See http://www.w3.org/TR/WebIDL/</dd>
    <dt><a id="ref-wgs">[WGS84]</a></dt>
    <dd><cite><a href="http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf">National Imagery and Mapping Agency Technical Report 8350.2, Third Edition</a></cite>. See http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf</dd>
   </dl>
