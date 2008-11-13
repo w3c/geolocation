@@ -203,7 +203,7 @@
       // Cancel the updates when the user clicks a button.
       navigator.geolocation.clearWatch(watchId);
     }
-
+    </pre>
   </div>
 
   <h2>Scope</h2>
@@ -268,12 +268,12 @@
 
   <h3>Geolocation interface</h3>
 
-  The <code><a href="#geolocation">Geolocation</a></code> object can
+  <p>The <code><a href="#geolocation">Geolocation</a></code> object can
   be used by scripts to programatically determine the location
   information associated with the hosting device. The location
   information is acquired by applying a user-agent specific algorithm,
   creating a <code><a href="#position">Position</a></code> object, and
-  populating that object with appropriate data accordingly.
+  populating that object with appropriate data accordingly.</p>
 
   <p>Objects implementing the <code>Navigator</code> interface
   (e.g. the <code>window.navigator</code> object) must also implement
@@ -290,7 +290,7 @@
   };
   </pre>
   
-  <br/>
+  <p><br></p>
 
   <pre class="idl"> interface <dfn id="geolocation">Geolocation</dfn> { 
     readonly attribute <a href="#position">Position</a> <a href="#last-position">lastPosition</a>;
@@ -351,7 +351,7 @@
     <code>errorCallback</code> argument, this method must invoke the
     <code>errorCallback</code> with a <code><a
     href="#position-error">PositionError</a></code> object as an
-    argument.</p>
+    argument.
     </li>
     <li>
     Invoke the appropriate callback with a new <code>Position</code>
@@ -488,7 +488,7 @@
   interface <dfn id="position-error">PositionError</dfn> {
     const unsigned short <a href="#unknown_error">UNKNOWN_ERROR</a> = 0;
     const unsigned short <a href="#permission_denied_error">PERMISSION_DENIED</a> = 1;
-    const unsigned short <a href="#position_unavailable_error">POSITION_UNAVAILABLE<a> = 2;
+    const unsigned short <a href="#position_unavailable_error">POSITION_UNAVAILABLE</a> = 2;
     const unsigned short <a href="#timeout_error">TIMEOUT</a> = 3;
     readonly unsigned short <a href="#code">code</a>;
     readonly DOMString <a href="#message">message</a>;
@@ -618,10 +618,10 @@
  <h5>The Geolocation API must support "one-shot" position updates.</h5>
  
  <h5>The Geolocation API must allow an application to register to
- receive repeated position updates.<h5>
+ receive repeated position updates.</h5>
 
  <h5>The Geolocation API must allow an application to cheaply query the last
- known position.<h5>
+ known position.</h5>
 
  <h5>The Geolocation API must provide a way for the application to
  receive updates about errors that may have occurred while obtaining a
