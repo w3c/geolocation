@@ -49,7 +49,7 @@
 
   <h1>Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 27 October 2008]</h2>
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 13 November 2008]</h2>
    <dl>
 <!--
     <dt>This version:</dt>
@@ -400,7 +400,7 @@
   for two descriptions of the problem that <code>enableHighAccuracy</code> is trying to solve.
   </div>
 
-  <p>The <dfn id="timeout"><code>timeout</code></dfn>attribute denotes
+  <p>The <dfn id="timeout"><code>timeout</code></dfn> attribute denotes
    the maximum length of time (expressed in milliseconds) that is
    allowed to pass from the the call to
    <code>getCurrentPosition()</code> or <code>watchPosition()</code>
@@ -409,7 +409,7 @@
    before the given timeout elapses, and no other errors have occurred
    in this interval, then the corresponding <code>errorCallback</code>
    must be invoked with a <code>PositionError</code> object whose code
-   attribute is set to 4.</p>
+   attribute is set to <a href="#timeout_error">TIMEOUT</a>.</p>
    
   <p>In case of a <code>getCurrentPosition()</code> call, the
    <code>errorCallback</code> would be invoked exactly once.  
@@ -486,42 +486,45 @@
 
   <pre class="idl">
   interface <dfn id="position-error">PositionError</dfn> {
-    readonly int <a href="#code1">code</a>;
-    readonly DOMString <a href="#message1">message</a>;
+    const unsigned short <a href="#unknown_error">UNKNOWN_ERROR</a> = 0;
+    const unsigned short <a href="#permission_denied_error">PERMISSION_DENIED</a> = 1;
+    const unsigned short <a href="#position_unavailable_error">POSITION_UNAVAILABLE<a> = 2;
+    const unsigned short <a href="#timeout_error">TIMEOUT</a> = 3;
+    readonly unsigned short <a href="#code">code</a>;
+    readonly DOMString <a href="#message">message</a>;
   };
   </pre>
 
-<p>The <dfn id="code1"><code>code</code></dfn> attribute must return
+  <p>The <dfn id="code"><code>code</code></dfn> attribute must return
   the appropriate code from the following list:</p>
   
-<ul>
-<li> 1 - Permission error: the location acquisition failed because the
-application origin does not have permission to use the Geolocation
-API.</li>
+  <dl>
+    <dt><dfn id="unknown_error"><code>UNKNOWN_ERROR</code></dfn> (numeric value 0)</dt>
+    <dd>The location acquisition process failed due to an error not
+    covered by the definition of any other error code in this
+    interface.</dd>
 
-<li> 2 - Location provider error: one or more of the location
-providers used in the acquisition process reported an internal
-error. For example, a GPS provider would report this error if the GPS
-receiver is disabled or out of order. A network-based provider would report
-this error if there was a communication failure (e.g. HTTP errors
-occured).</li>
+    <dt><dfn id="permission_denied_error"><code>PERMISSION_DENIED</code></dfn> (numeric value 1)</dt>
+    <dd>The location acquisition process failed because the application
+    origin does not have permission to use the Geolocation API.</dd>
 
-<li> 3 - Position not found: the position of the device could not be
-determined. The most common occurrence of this error would be when a
-network-based provider does not have a valid position mapping for the
-current network signals (IP address, GSM Cell ID, etc) of the device,
-or when the GPS signal is not strong enough for a GPS provider to get
-a valid position fix.</li> 
+    <dt><dfn id="position_unavailable_error"><code>POSITION_UNAVAILABLE</code></dfn> (numeric value 2)</dt>
+    <dd>The position of the device could not be determined. One or
+    more of the location providers used in the location acquisition
+    process reported an internal error that caused the process to
+    fail entirely.</dd>
 
-<li> 4 - The specified maximum length of time has elapsed before the
-implementation could successfully acquire a new Position object.</li>
-</ul>
+    <dt><dfn id="timeout_error"><code>TIMEOUT</code></dfn> (numeric value 3)</dt>
+    <dd>The specified maximum length of time has elapsed before the
+    implementation could successfully acquire a new Position
+    object.</dd>
+  </dl>
 
-<p>The <dfn id="message1"><code>message</code></dfn> attribute must
-return an error message describing the details of the error
-encountered. This attribute is primarily intended for debugging and
-developers should not use it directly in their application user
-interface.</p>
+  <p>The <dfn id="message"><code>message</code></dfn> attribute must
+  return an error message describing the details of the error
+  encountered. This attribute is primarily intended for debugging and
+  developers should not use it directly in their application user
+  interface.</p>
 
   <h2 class="no-num" id="usecases">Use-Cases and Requirements</h2>
 
@@ -633,7 +636,7 @@ interface.</p>
 
   <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-  <p>Alec Berntson, Steve Block, Aaron Boodman, Dave Burke, Chris Butler, Shyam Habarakada, Ian Hickson, Brad Lassey, Stuart Parmenter, Chris Prince, Arun Ranganathan, Aza Raskin, Martin Thomson, Doug Turner</p>
+  <p>Alec Berntson, Steve Block, Greg Bolsinga, Aaron Boodman, Dave Burke, Chris Butler, Shyam Habarakada, Ian Hickson, Brad Lassey, Stuart Parmenter, Olli Pettay, Chris Prince, Arun Ranganathan, Aza Raskin, Martin Thomson, Doug Turner</p>
 
 
   <h2 class="no-num" id="references">References</h2>
