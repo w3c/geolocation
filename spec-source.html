@@ -48,7 +48,7 @@
   <div class="head">
   <!--logo-->
 
-  <h1>Geolocation API Specification</h1>
+  <h1 id="title_heading">Geolocation API Specification</h1>
 
   <h2 class="no-num no-toc">Editor's Draft [DATE: 13 November 2008]</h2>
    <dl>
@@ -133,7 +133,7 @@
   <!--end-toc-->
 
 
-  <h2>Introduction</h2>
+  <h2 id="introduction">Introduction</h2>
 
   <p><em>This section is non-normative.</em></p>
 
@@ -207,7 +207,7 @@
     </pre>
   </div>
 
-  <h2>Scope</h2>
+  <h2 id="scope">Scope</h2>
   <p><em>This section is non-normative.</em></p>
   
   <p>This specification is limited to providing a scripting APIs for
@@ -221,12 +221,10 @@
   <p>The scope of this specification does not include defining new URI
   schemes for building URIs that identify geographic locations.</p>
 
-  <h2>Security and privacy considerations</h2>
-
-  <p>...</p>
+  <h2 id="security">Security and privacy considerations</h2>
 
   
-  <h2>Conformance requirements</h2>
+  <h2 id="conformance">Conformance requirements</h2>
 
   <p>All diagrams, examples, and notes in this specification are
   non-normative, as are all sections explicitly marked non-normative.
@@ -264,10 +262,10 @@
   href="#ref-WebIDL">[WEBIDL]</a></p>
 
   
-  <h2>API Description</h2>
+  <h2 id="api_description">API Description</h2>
 
 
-  <h3>Geolocation interface</h3>
+  <h3 id="geolocation_interface">Geolocation interface</h3>
 
   <p>The <code><a href="#geolocation">Geolocation</a></code> object can
   be used by scripts to programatically determine the location
@@ -367,7 +365,7 @@
   method is called with this identifier, the watch process must stop
   acquiring any new position fixes and must cease invoking any callbacks.</p>
 
-  <h3>PositionOptions interface</h3>
+  <h3 id="position_options_interface">PositionOptions interface</h3>
 
   <p>The <code><a href="#get-current-position">getCurrentPosition()</a></code> and 
   <code><a href="#watch-position">watchPosition()</a></code> methods
@@ -426,7 +424,7 @@
   <p>The <code>enableHiqhAccuracy</code> and <code>timeout</code>
   attributes are optional.</p>
 
-  <h3>Position interface</h3>
+  <h3 id="position_interface">Position interface</h3>
 
   <pre class="idl">
   interface <dfn id="position">Position</dfn> {
@@ -483,7 +481,7 @@
   represents the time when the geographic location was acquired and is
   represented as a DOMTimeStamp <a href="#ref-domtimestamp">[DOMTIMESTAMP]</a>.</p>
 
-  <h3>PositionError interface</h3>
+  <h3 id="position_error_interface">PositionError interface</h3>
 
   <pre class="idl">
   interface <dfn id="position-error">PositionError</dfn> {
@@ -531,7 +529,7 @@
 
   <p><em>Issue note: This section will get moved to a separate document</em></p>
   
-  <h3>Use-Cases</h3>
+  <h3 id="usecases_section">Use-Cases</h3>
   
   <h4>1. Find points of interest in the user's area</h4> 
   <p>Someone visiting a foreign city could access a Web application
@@ -608,7 +606,7 @@
   his network of friends and get real-time updates about their current
   location.</p>
 
- <h3>Requirements</h3>
+ <h3 id="requirements_section">Requirements</h3>
 
  <h5>The Geolocation API must provide location data in terms of a pair
  of latitude and longitude coordinates.</h5>
