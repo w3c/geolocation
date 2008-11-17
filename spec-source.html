@@ -223,6 +223,45 @@
 
   <h2 id="security">Security and privacy considerations</h2>
 
+  <p>The API defined in this specification can be used to retrieve the
+  geographic location of a hosting device. In almost all cases, this
+  information also discloses the location of the user of the device,
+  thereby potentially compromising the user's privacy. A conforming
+  implementation of this specification MUST provide a mechanism that
+  protects the user's privacy and this mechanism SHOULD ensure that
+  no location information is made available without the user's
+  informed consent.</p>
+
+  
+  <div class="issue">
+    <p>One goal of the API is to provide only asynchronous methods that
+    would enable a User Agent to implement a modeless user interface
+    for acquiring the user's consent to access location. The only
+    exception is
+    the <a href="#last-position"><code>lastPosition</code></a>
+    attribute, which provides a synchronous way to access
+    a <a href="#position"><code>Position</code></a> object.</p>
+
+    <p>We are discussing whether this should be removed:</p>
+
+    <ul>
+      <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0146.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0146.html</a></li>
+    </ul>
+
+    <p>While the above wording reflects the current thinking of the
+    Geolocation WG, there is a significant amount of debate on
+    whether this specification should leave the details of the privacy
+    protection mechanism entirely to the User Agent or whether it
+    should also define a privacy framework that all conforming User
+    Agents must implement. Please see the following threads:</p>
+
+    <ul>
+      <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Oct/0070.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Oct/0070.html</a></li>
+      <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Oct/0121.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Oct/0121.html</a></li>
+    </ul>
+
+  </div>
+
   
   <h2 id="conformance">Conformance requirements</h2>
 
@@ -480,6 +519,18 @@
   <p>The <dfn id="timestamp"><code>timestamp</code></dfn> attribute
   represents the time when the geographic location was acquired and is
   represented as a DOMTimeStamp <a href="#ref-domtimestamp">[DOMTIMESTAMP]</a>.</p>
+
+  <div class="issue">
+    <p>We are also debating whether we should include information
+    about civic addresses in the <code>Position</code> interface and
+    how this information could be acquired (e.g. via
+    reverse-geocoding). So far the agreement is to provide civic
+    address information in the second version of the Geolocation
+    API:</p>
+    <ul>
+      <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Nov/0021.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Nov/0021.html</a></li>
+    </ul>
+  </div>
 
   <h3 id="position_error_interface">PositionError interface</h3>
 
