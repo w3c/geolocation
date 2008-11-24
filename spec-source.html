@@ -50,7 +50,7 @@
 
   <h1 id="title_heading">Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 13 November 2008]</h2>
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 24 November 2008]</h2>
    <dl>
 <!--
     <dt>This version:</dt>
@@ -146,10 +146,9 @@
   and GSM/CDMA cell IDs.</p>
 
   <p>The API is designed to enable both "one-shot" position requests
-  and repeated position updates, as well as the ability to query
-  the last-known position. Location information is represented by
-  latitude and longitude coordinates and optionally by reverse
-  geocoded address information. The Geolocation API in this
+  and repeated position updates, as well as the ability to explicitly query
+  the cached positions. Location information is represented by
+  latitude and longitude coordinates. The Geolocation API in this
   specification builds upon earlier work in the industry, including <a
   href="#ref-azaloc" shape="rect">[AZALOC]</a>, <a href="#ref-gears"
   shape="rect">[GEARSLOC]</a>, and <a href="#ref-locationaware"
@@ -207,6 +206,114 @@
     </pre>
   </div>
 
+  <div class="example">
+    <p>Example of requesting a potentially cached position.</p>
+    <pre>
+    // Request a position. We accept positions whose age is not
+    // greater than 10 minutes. If the User Agent does not have a
+    // fresh enough cached position object, it will automatically
+    // acquire a new one.
+    navigator.geolocation.getCurrentPosition(successCallback,
+                                             errorCallback,
+                                             {maximumAge:60 * 10});
+
+    function successCallback(position) {
+      // By using the 'maximumAge' option above, the position
+      // object is guaranteed to be at most 10 minutes old.
+    }
+
+    function errorCallback(error) {
+      // Update a div element with error.message.
+    }
+
+    </pre>
+  </div>
+
+  <div class="example">
+    <p>Forcing the User Agent to return a fresh cached position.</p>
+    <pre>
+    // Request a position. We only accept cached positions whose age is not
+    // greater than 10 minutes. If the User Agent does not have a fresh
+    // enough cached position object, it will immediately invoke the error
+    // callback.
+    navigator.geolocation.getCurrentPosition(successCallback,
+                                             errorCallback,
+                                             {maximumAge:600, timeout:0});
+
+    function successCallback(position) {
+      // By using the 'maximumAge' option above, the position
+      // object is guaranteed to be at most 10 minutes old.
+      // By using a 'timeout' of 0 milliseconds, if there is
+      // no suitable cached position available, the User Agent 
+      // will immediately invoke the error callback with code
+      // TIMEOUT and will not initiate a new position
+      // acquisition process.
+    }
+
+    function errorCallback(error) {
+      switch(error.code) {
+        case error.TIMEOUT:
+          // Quick fallback when no suitable cached position exists.
+          doFallback();
+          // Acquire a new position object.
+          navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+          break;
+        case ... // treat the other error cases.
+      };
+    }
+
+    function doFallback() {
+      // No fresh enough cached position available.
+      // Fallback to a default position.
+    }
+    </pre>
+  </div>
+
+  <div class="example">
+    <p>Forcing the User Agent to return any available cached position.</p>
+    <pre>
+    // Request a position. We only accept cached positions, no matter what 
+    // their age is. If the User Agent does not have a cached position at
+    // all, it will immediately invoke the error callback.
+    navigator.geolocation.getCurrentPosition(successCallback,
+                                             errorCallback,
+                                             {maximumAge:Infinite, timeout:0});
+
+    function successCallback(position) {
+      // By setting the 'maximumAge' to Infinite, the position
+      // object is guaranteed to be a cached one.
+      // By using a 'timeout' of 0 milliseconds, if there is
+      // no cached position available at all, the User Agent 
+      // will immediately invoke the error callback with code
+      // TIMEOUT and will not initiate a new position
+      // acquisition process.
+      if (position.timestamp < freshness_threshold && 
+          position.accuracy < accuracy_threshold) {
+        // The position is relatively fresh and accurate.
+      } else {
+        // The position is quite old and/or inaccurate.
+      }
+    }
+
+    function errorCallback(error) {
+      switch(error.code) {
+        case error.TIMEOUT:
+          // Quick fallback when no cached position exists at all.
+          doFallback();
+          // Acquire a new position object.
+          navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+          break;
+        case ... // treat the other error cases.
+      };
+    }
+
+    function doFallback() {
+      // No cached position available at all.
+      // Fallback to a default position.
+    }
+    </pre>
+  </
+
   <h2 id="scope">Scope</h2>
   <p><em>This section is non-normative.</em></p>
   
@@ -234,20 +341,6 @@
 
   
   <div class="issue">
-    <p>One goal of the API is to provide only asynchronous methods that
-    would enable a User Agent to implement a modeless user interface
-    for acquiring the user's consent to access location. The only
-    exception is
-    the <a href="#last-position"><code>lastPosition</code></a>
-    attribute, which provides a synchronous way to access
-    a <a href="#position"><code>Position</code></a> object.</p>
-
-    <p>We are discussing whether this should be removed:</p>
-
-    <ul>
-      <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0146.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0146.html</a></li>
-    </ul>
-
     <p>While the above wording reflects the current thinking of the
     Geolocation WG, there is a significant amount of debate on
     whether this specification should leave the details of the privacy
@@ -331,8 +424,6 @@
   <p><br></p>
 
   <pre class="idl"> interface <dfn id="geolocation">Geolocation</dfn> { 
-    readonly attribute <a href="#position">Position</a> <a href="#last-position">lastPosition</a>;
-
     void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback);
     void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback);
     void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback, in <a href="#position-options">PositionOptions</a> options);
@@ -353,14 +444,6 @@
   };
   </pre>
   
-  <p>The <dfn id="last-position"><code>lastPosition</code></dfn>
-  attribute must return the last <code><a
-  href="#position">Position</a></code> object that was acquired by the
-  implementation, or null if no such object exists. On getting, this
-  attribute should return a previously cached value and the
-  implementation should not attempt to initiate any time consuming
-  operations.
-
   <p>The <dfn id="get-current-position"><code>getCurrentPosition()</code></dfn>
   takes one, two or three arguments. When called, it must immediately
   return and then asynchronously acquire a new <code><a href="#position">Position</a></code> object.
@@ -418,10 +501,14 @@
   [NoInterfaceObject]
   interface <dfn id="position-options">PositionOptions</dfn> {
     attribute boolean <a href="#high-accuracy">enableHighAccuracy</a>;
-    attribute unsigned long <a href="#timeout">timeout</a>;
+    attribute long <a href="#timeout">timeout</a>;
+    attribute long <a href="#max-age">maximumAge</a>;
   };
 
   </pre>
+
+  <p>The <code>enableHighAccuracy</code>, <code>timeout</code>
+  and <code>maximumAge</code> attributes are all optional.</p>
 
   <p>The <dfn id="high-accuracy"><code>enableHighAccuracy</code></dfn>
   attribute provides a hint that the application would like to receive
@@ -450,7 +537,7 @@
    attribute is set to <a href="#timeout_error">TIMEOUT</a>.</p>
    
   <p>In case of a <code>getCurrentPosition()</code> call, the
-   <code>errorCallback</code> would be invoked exactly once.  
+  <code>errorCallback</code> would be invoked exactly once.  
 
   <p>In case of a <code>watchPosition()</code>, the
   <code>errorCallback</code> could be invoked repeatedly: the first
@@ -458,10 +545,21 @@
   called, while subsequent timeouts are relative to the moment when
   the implementation determines that the position of the hosting
   device has changed and a new <code>Position</code> object must be
-  acquired.
+  acquired.</p>
 
-  <p>The <code>enableHighAccuracy</code> and <code>timeout</code>
-  attributes are optional.</p>
+  <p>The <dfn id="max-age"><code>maximumAge</code></dfn> attribute
+  indicates that the application is willing to accept a cached
+  position whose age is no greater than the specified time in
+  seconds. If <code>maximumAge</code> is not specified or set to 0,
+  the implementation must immediately attempt to acquire a new
+  position object. Setting the <code>maximumAge</code> to Infinite
+  will force the implementation to return a cached position regardless
+  of its age. If an implementation does not have available a cached
+  position whose age is no greater than the
+  specified <code>maximumAge</code>, then it must acquire a new
+  position object. In case of a <code>watchPosition()</code>,
+  the <code>maximumAge</code> refers to the first position object
+  returned by the implementation.</p>
 
   <h3 id="position_interface">Position interface</h3>
 
@@ -472,8 +570,8 @@
     readonly attribute double <a href="#altitude">altitude</a>;
     readonly attribute double <a href="#accuracy">accuracy</a>;
     readonly attribute double <a href="#altitude-accuracy">altitudeAccuracy</a>;
-    readonly attribute double <a href="#heading">heading</a>
-    readonly attribute double <a href="#speed">speed</a>
+    readonly attribute double <a href="#heading">heading</a>;
+    readonly attribute double <a href="#speed">speed</a>;
     readonly attribute DOMTimeStamp <a href="#timestamp">timestamp</a>;
   };
   </pre>
