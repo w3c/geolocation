@@ -215,7 +215,7 @@
     // acquire a new one.
     navigator.geolocation.getCurrentPosition(successCallback,
                                              errorCallback,
-                                             {maximumAge:60 * 10});
+                                             {maximumAge:600});
 
     function successCallback(position) {
       // By using the 'maximumAge' option above, the position
