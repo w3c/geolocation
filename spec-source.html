@@ -563,8 +563,32 @@
 
   <h3 id="position_interface">Position interface</h3>
 
+  <p>The <code>Position</code> interface is the container for the
+  geolocation information returned by this API. This version of the
+  specification allows one attribute of
+  type <code><a href="#coordinates">Coordinates</a></code> and a <a href="#timestamp"><code>timestamp</code></a>. Future versions of
+  the API may allow additional attributes that provide other information about this position (e.g. street addresses).
+
   <pre class="idl">
   interface <dfn id="position">Position</dfn> {
+    readonly attribute <a href="#coordinates">Coordinates</a> <a href="#coords">coords</a>;
+    readonly attribute DOMTimeStamp <a href="#timestamp">timestamp</a>;
+  };
+  </pre>
+
+  <p>The <dfn id="coords"><code>coords</code></dfn> attribute contains
+  a set of geographic coordinates together with their associated
+  accuracy, as well as a set of other optional attributes such as
+  altitude and speed.
+
+  <p>The <dfn id="timestamp"><code>timestamp</code></dfn> attribute
+  represents the time when the <code>Position</code> object was acquired and is
+  represented as a DOMTimeStamp <a href="#ref-domtimestamp">[DOMTIMESTAMP]</a>.</p>
+
+  <h3 id="position_interface">Coordinates interface</h3>
+
+  <pre class="idl">
+  interface <dfn id="coordinates">Coordinates</dfn> {
     readonly attribute double <a href="#lat">latitude</a>;
     readonly attribute double <a href="#lon">longitude</a>;
     readonly attribute double <a href="#altitude">altitude</a>;
@@ -572,17 +596,13 @@
     readonly attribute double <a href="#altitude-accuracy">altitudeAccuracy</a>;
     readonly attribute double <a href="#heading">heading</a>;
     readonly attribute double <a href="#speed">speed</a>;
-    readonly attribute DOMTimeStamp <a href="#timestamp">timestamp</a>;
   };
   </pre>
 
-  <p>The reference system used for the positioning attributes of this interface is the World Geodetic System <a href="#ref-wgs">[WGS84]</a>.</p>
-  <div class="issue">
-  Should we support any other geodetic systems than WGS84 and, if so, should the reference system itself be an attribute of this interface? Should we the altitude values to be specified in a different reference system than lat/long?
-  </div>
+  <p>The geographic coordinate reference system used by the attributes in this interface is the World Geodetic System (2d) <a href="#ref-wgs">[WGS84]</a>. No other reference system is supported.</p>
 
   <p>The <dfn id="lat"><code>latitude</code></dfn> and <dfn id="lon"><code>longitude</code></dfn> 
-  attributes are specified in degrees.</p>
+  attributes are geographic coordinates specified in decimal degrees.</p>
 
   <p>The <dfn id="altitude"><code>altitude</code></dfn> attribute
   denotes the height of the position, specified in meters above the <a
@@ -613,22 +633,6 @@
   specified in meters per second.  If the implementation cannot
   provide speed information, the value of this attribute must be
   null.</p>
-
-  <p>The <dfn id="timestamp"><code>timestamp</code></dfn> attribute
-  represents the time when the geographic location was acquired and is
-  represented as a DOMTimeStamp <a href="#ref-domtimestamp">[DOMTIMESTAMP]</a>.</p>
-
-  <div class="issue">
-    <p>We are also debating whether we should include information
-    about civic addresses in the <code>Position</code> interface and
-    how this information could be acquired (e.g. via
-    reverse-geocoding). So far the agreement is to provide civic
-    address information in the second version of the Geolocation
-    API:</p>
-    <ul>
-      <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Nov/0021.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Nov/0021.html</a></li>
-    </ul>
-  </div>
 
   <h3 id="position_error_interface">PositionError interface</h3>
 
@@ -706,17 +710,6 @@
   experiences. This content can be automatically annotated with
   information such as time, geographic position or even the user's
   emotional state at the time of the recording.</p>
-
-  <h4>Automatic form-filling</h4>
-  <p> A user is accessing an online service in order to arrange a
-  parcel delivery and she needs to fill in a long form which includes
-  special fields for her home address. To save the user's time, the
-  application tries to pre-fill the address part of the form by using
-  the Geolocation API to acquire the user's current location as a
-  (latitude, longitude) pair as well as an address object. If an
-  implementing User Agent cannot provide the address object, the
-  application uses a third-party reverse geocoding service to
-  translate the coordinates into a street address.</p>
 
   <h4>Show the user's position on a map</h4>
   <p>A user finds herself in an unfamiliar city area. She wants to
