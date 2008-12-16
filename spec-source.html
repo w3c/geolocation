@@ -161,7 +161,7 @@
     <p> Example of a "one-shot" position request.</p>
     <pre>
     function showMap(position) {
-      // Show a map centered at (position.latitude, position.longitude).
+      // Show a map centered at (position.coords.latitude, position.coords.longitude).
     }
 
     // One-shot position request.
@@ -172,7 +172,7 @@
     <p>Example of requesting repeated position updates.</p>
     <pre>
     function scrollMap(position) {
-      // Scrolls the map so that it is centered at (position.latitude, position.longitude).
+      // Scrolls the map so that it is centered at (position.coords.latitude, position.coords.longitude).
     }
 
     // Request repeated updates.
@@ -189,7 +189,7 @@
     <p>Example of requesting repeated position updates and handling errors.</p>
     <pre>
     function scrollMap(position) {
-      // Scrolls the map so that it is centered at (position.latitude, position.longitude).
+      // Scrolls the map so that it is centered at (position.coords.latitude, position.coords.longitude).
     }
 
     function handleError(error) {
@@ -288,7 +288,7 @@
       // TIMEOUT and will not initiate a new position
       // acquisition process.
       if (position.timestamp < freshness_threshold && 
-          position.accuracy < accuracy_threshold) {
+          position.coords.accuracy < accuracy_threshold) {
         // The position is relatively fresh and accurate.
       } else {
         // The position is quite old and/or inaccurate.
