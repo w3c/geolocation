@@ -277,10 +277,10 @@
     // all, it will immediately invoke the error callback.
     navigator.geolocation.getCurrentPosition(successCallback,
                                              errorCallback,
-                                             {maximumAge:Infinite, timeout:0});
+                                             {maximumAge:Infinity, timeout:0});
 
     function successCallback(position) {
-      // By setting the 'maximumAge' to Infinite, the position
+      // By setting the 'maximumAge' to Infinity, the position
       // object is guaranteed to be a cached one.
       // By using a 'timeout' of 0 milliseconds, if there is
       // no cached position available at all, the User Agent 
@@ -566,7 +566,7 @@
   position whose age is no greater than the specified time in
   milliseconds. If <code>maximumAge</code> is not specified or set to 0,
   the implementation must immediately attempt to acquire a new
-  position object. Setting the <code>maximumAge</code> to Infinite
+  position object. Setting the <code>maximumAge</code> to Infinity
   will force the implementation to return a cached position regardless
   of its age. If an implementation does not have available a cached
   position whose age is no greater than the
@@ -759,12 +759,11 @@
   <h4>Location-tagged status updates in social networking applications</h4>
   <p>A social network application allows its users to automatically
   tag their status updates with location information. It does this by
-  monitoring the user's position with the Geolocation API and using
-  only certain parts from the Address object. Each user can control the
-  granularity of the location information (e.g. city or neighbourhood
-  level) that is shared with the other users. Any user can also track
-  his network of friends and get real-time updates about their current
-  location.</p>
+  monitoring the user's position with the Geolocation API. Each user
+  can control the granularity of the location information (e.g. city
+  or neighbourhood level) that is shared with the other users. Any
+  user can also track his network of friends and get real-time updates
+  about their current location.</p>
 
  <h3 id="requirements_section">Requirements</h3>
 
