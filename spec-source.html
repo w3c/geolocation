@@ -50,7 +50,7 @@
 
   <h1 id="title_heading">Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 24 November 2008]</h2>
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 20 March 2009]</h2>
    <dl>
 <!--
     <dt>This version:</dt>
@@ -541,7 +541,7 @@
 
   <p>The <dfn id="timeout"><code>timeout</code></dfn> attribute denotes
    the maximum length of time (expressed in milliseconds) that is
-   allowed to pass from the the call to
+   allowed to pass from the call to
    <code>getCurrentPosition()</code> or <code>watchPosition()</code>
    until the corresponding <code>successCallback</code> is invoked. If
    the implementation is unable to successfully acquire a new <code>Position</code>
@@ -550,6 +550,14 @@
    must be invoked with a <code>PositionError</code> object whose code
    attribute is set to <a href="#timeout_error">TIMEOUT</a>.</p>
    
+  <p class="note">Before executing a call to
+  to <code>getCurrentPosition()</code>
+  or <code>watchPosition()</code>, an implementation may first need to
+  acquire the user's permission to disclose location information to
+  the current application origin. In such a case, the timeout interval
+  starts immediately after the user's permission has been successfully
+  acquired.</p>
+
   <p>In case of a <code>getCurrentPosition()</code> call, the
   <code>errorCallback</code> would be invoked exactly once.  
 
