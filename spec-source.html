@@ -50,14 +50,14 @@
 
   <h1 id="title_heading">Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 20 March 2009]</h2>
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 3 April 2009]</h2>
    <dl>
 <!--
     <dt>This version:</dt>
       <dd><a href="http://www.w3.org/Style/Group/css3-src/css3-template/%5BVERSION%5D">http://www.w3.org/TR/[YEAR]/MO-[SHORTNAME]-[CDATE]</a></dd>
-    <dt>Latest published version:</dt>
-      <dd><a href="http://www.w3.org/TR/css3-template">http://www.w3.org/TR/css3-template</a></dd>
 -->
+    <dt>Latest published version:</dt>
+      <dd><a href="http://www.w3.org/TR/geolocation-API/">http://www.w3.org/TR/geolocation-API/</a></dd>
     <dt>Latest editor's draft:</dt>
       <dd><a href="http://dev.w3.org/geo/api/spec-source.html">http://dev.w3.org/geo/api/spec-source.html</a></dd>
 <!--
@@ -138,12 +138,12 @@
   <p><em>This section is non-normative.</em></p>
 
   <p>The Geolocation API defines a high-level interface to location
-  information associated with the hosting device, such as latitude and
-  longitude.  The API itself is agnostic of the underlying location
-  information sources.  Common sources of location information include
-  Global Positioning System (GPS) and location inferred from network
-  signals such as IP address, RFID, WiFi and Bluetooth MAC addresses,
-  and GSM/CDMA cell IDs.</p>
+  information associated only with the device hosting the
+  implementation, such as latitude and longitude.  The API itself is
+  agnostic of the underlying location information sources.  Common
+  sources of location information include Global Positioning System
+  (GPS) and location inferred from network signals such as IP address,
+  RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs.</p>
 
   <p>The API is designed to enable both "one-shot" position requests
   and repeated position updates, as well as the ability to explicitly query
@@ -340,35 +340,34 @@
   informed consent.</p>
 
   <h3 id="privacy_for_uas">Privacy considerations for implementors of the Geolocation API</h3>
-  <p>This section is a placeholder for a set of recommendations
-  addressed to the implementers of the Geolocation API. These
-  recommendations would provide best practices and general advice on
-  how to implement a mechanism that protects the user's privacy with
-  respect to location information.</p>
+  <p>User Agents must not send location information to websites
+  without express permission of the user. Browsers should acquire
+  permission through a user interface which will include the URI of
+  the document origin. All permissions should be revocable, and User
+  Agents should respect revoked permissions.</p>
+
+  <p>Some User Agents will have prearranged trust relationships that
+  do not require such user interfaces. For example, a Web browser will
+  present a user interface when a Web site performs a geolocation
+  request.  However, a VOIP telephone may not present any user
+  interface when using location information to perform an E911
+  function.</p>
   
   <h3 id="privacy_for_">Privacy considerations for recipients of location information</h3>
-  <p>This section is a placeholder for a set of recommendations
-  addressed to the recipients of location information (e.g. Web sites
-  that use the Geolocation API). These recommendations would provide
-  best practices and general advice on how to deal with location
-  information once it has been acquired from the User Agent by means
-  of the Geolocation API.</p>
-
-  <div class="issue">
-    <p>While the above wording reflects the current thinking of the
-    Geolocation WG, there is a significant amount of debate on
-    whether this specification should leave the details of the privacy
-    protection mechanism entirely to the User Agent or whether it
-    should also define a privacy framework that all conforming User
-    Agents must implement. Please see the following threads:</p>
-
-    <ul>
-      <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Oct/0070.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Oct/0070.html</a></li>
-      <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Oct/0121.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Oct/0121.html</a></li>
-    </ul>
-
-  </div>
-
+  <p>The two primary concerns regarding recipients of location
+  information are retention and retransmission. Recipients must only
+  use the location information for the task for which it was provided
+  to them and must dispose of it once completed, unless expressly
+  permitted to do so. Recipients must also take measures to protect
+  this information against unauthorized access. If location
+  information is stored, users should be allowed to update and delete
+  this information. The recipient of location information should not
+  retransmit the location information without the user’s consent. Care
+  should be taken when retransmitting and use of HTTPS is
+  encouraged. Furthermore, a clear and accessible privacy policy
+  should be made available to all users that details the usage of
+  location data. This should include any exceptions to the guidelines
+  listed above.</p>
   
   <h2 id="conformance">Conformance requirements</h2>
 
@@ -383,7 +382,7 @@
   not appear in all uppercase letters in this specification. <a
   href="#refsRFC2119">[RFC2119]</a></p> <!-- XXX but they should be
   marked up -->
-
+ 
   <p>Requirements phrased in the imperative as part of algorithms
   (such as "strip any leading space characters" or "return false and
   abort these steps") are to be interpreted with the meaning of the
@@ -784,7 +783,8 @@
  <h4>The Geolocation API must support "one-shot" position updates.</h4>
  
  <h4>The Geolocation API must allow an application to register to
- receive repeated position updates.</h4>
+ receive updates when the position of the hosting device
+ changes”.</h4>
 
  <h4>The Geolocation API must allow an application to cheaply query the last
  known position.</h4>
@@ -805,7 +805,7 @@
   <p>Alec Berntson, Steve Block, Greg Bolsinga, Aaron Boodman, Dave
   Burke, Chris Butler, Shyam Habarakada, Ian Hickson, Brad Lassey,
   Daniel Park, Stuart Parmenter, Olli Pettay, Chris Prince, Arun
-  Ranganathan, Aza Raskin, Carl Reed, Martin Thomson, Doug Turner,
+  Ranganathan, Aza Raskin, Carl Reed, Allan Thomson, Martin Thomson, Doug Turner,
   Erik Wilde, Mohamed Zergaoui</p>
 
 
