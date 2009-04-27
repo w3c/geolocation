@@ -353,7 +353,7 @@
   interface when using location information to perform an E911
   function.</p>
   
-  <h3 id="privacy_for_">Privacy considerations for recipients of location information</h3>
+  <h3 id="privacy_for_recipients">Privacy considerations for recipients of location information</h3>
   <p>The two primary concerns regarding recipients of location
   information are retention and retransmission. Recipients must only
   use the location information for the task for which it was provided
@@ -663,8 +663,8 @@
     const unsigned short <a href="#permission_denied_error">PERMISSION_DENIED</a> = 1;
     const unsigned short <a href="#position_unavailable_error">POSITION_UNAVAILABLE</a> = 2;
     const unsigned short <a href="#timeout_error">TIMEOUT</a> = 3;
-    readonly unsigned short <a href="#code">code</a>;
-    readonly DOMString <a href="#message">message</a>;
+    readonly attribute unsigned short <a href="#code">code</a>;
+    readonly attribute DOMString <a href="#message">message</a>;
   };
   </pre>
 
