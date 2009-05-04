@@ -150,9 +150,8 @@
   the cached positions. Location information is represented by
   latitude and longitude coordinates. The Geolocation API in this
   specification builds upon earlier work in the industry, including <a
-  href="#ref-azaloc" shape="rect">[AZALOC]</a>, <a href="#ref-gears"
-  shape="rect">[GEARSLOC]</a>, and <a href="#ref-locationaware"
-  shape="rect">[LOCATIONAWARE]</a>.</p>
+  href="#ref-azaloc" shape="rect">[AZALOC]</a> and <a href="#ref-gears"
+  shape="rect">[GEARSLOC]</a>.</p>
 
   <p>The following code extract illustrates how to obtain
   basic location information:</p>
@@ -317,7 +316,7 @@
   <h2 id="scope">Scope</h2>
   <p><em>This section is non-normative.</em></p>
   
-  <p>This specification is limited to providing a scripting APIs for
+  <p>This specification is limited to providing a scripting API for
   retrieving geographic position information associated with a hosting
   device. The geographic position information is provided in terms of
   World Geodetic System coordinates <a href="#ref-wgs">[WGS84]</a>.</p>
@@ -334,41 +333,53 @@
   geographic location of a hosting device. In almost all cases, this
   information also discloses the location of the user of the device,
   thereby potentially compromising the user's privacy. A conforming
-  implementation of this specification MUST provide a mechanism that
-  protects the user's privacy and this mechanism SHOULD ensure that
+  implementation of this specification must provide a mechanism that
+  protects the user's privacy and this mechanism should ensure that
   no location information is made available without the user's
   informed consent.</p>
 
   <h3 id="privacy_for_uas">Privacy considerations for implementors of the Geolocation API</h3>
-  <p>User Agents must not send location information to websites
-  without express permission of the user. Browsers should acquire
-  permission through a user interface which will include the URI of
-  the document origin. All permissions should be revocable, and User
-  Agents should respect revoked permissions.</p>
+  <p>User Agents must not send location information to Web sites
+  without the express permission of the user. User Agents must acquire
+  permission through a user interface, unless they have prearranged
+  trust relationships with users, as described below. The user interface must
+  include the URI of the document origin <a href="#ref-origin">[DOCUMENTORIGIN]</a>.
+  Those permissions permissions that are acquired through the user
+  interface and that are preserved beyond the current browsing session
+  (i.e. beyond the time when the browsing context <a href="#ref-context">[BROWSINGCONTEXT]</a>
+  is navigated to another URL) must be revocable and User Agents must respect revoked
+  permissions.</p>
 
   <p>Some User Agents will have prearranged trust relationships that
   do not require such user interfaces. For example, a Web browser will
   present a user interface when a Web site performs a geolocation
-  request.  However, a VOIP telephone may not present any user
+  request. However, a VOIP telephone may not present any user
   interface when using location information to perform an E911
   function.</p>
   
   <h3 id="privacy_for_recipients">Privacy considerations for recipients of location information</h3>
-  <p>The two primary concerns regarding recipients of location
-  information are retention and retransmission. Recipients must only
-  use the location information for the task for which it was provided
-  to them and must dispose of it once completed, unless expressly
-  permitted to do so. Recipients must also take measures to protect
-  this information against unauthorized access. If location
+  <p>Recipients must only request location information when necessary.
+  Recipients must only use the location information for the task for
+  which it was provided to them. Recipients must dispose of location
+  information once that task is completed, unless expressly permitted
+  to retain it by the user. Recipients must also take measures to
+  protect this information against unauthorized access. If location
   information is stored, users should be allowed to update and delete
-  this information. The recipient of location information should not
-  retransmit the location information without the user’s consent. Care
-  should be taken when retransmitting and use of HTTPS is
-  encouraged. Furthermore, a clear and accessible privacy policy
-  should be made available to all users that details the usage of
-  location data. This should include any exceptions to the guidelines
-  listed above.</p>
-  
+  this information.</p>
+
+  <p>The recipient of location information must not retransmit the
+  location information without the user’s consent. Care should be
+  taken when retransmitting and use of HTTPS is encouraged.</p>
+
+  <p>Recipients must clearly and conspicuously disclose the fact that
+  they are collecting location data, the purpose for the collection,
+  how long the data is retained, how the data is secured, how the data
+  is shared if it is shared, how users may access, update and delete
+  the data, and any other choices that users have with respect to the
+  data. This disclosure must include an explanation of any exceptions
+  to the guidelines listed above.</p>
+
+
   <h2 id="conformance">Conformance requirements</h2>
 
   <p>All diagrams, examples, and notes in this specification are
@@ -549,7 +560,7 @@
    must be invoked with a <code>PositionError</code> object whose code
    attribute is set to <a href="#timeout_error">TIMEOUT</a>.</p>
    
-  <p class="note">Before executing a call to
+  <p class="note">Before executing a call
   to <code>getCurrentPosition()</code>
   or <code>watchPosition()</code>, an implementation may first need to
   acquire the user's permission to disclose location information to
@@ -575,8 +586,8 @@
   the implementation must immediately attempt to acquire a new
   position object. Setting the <code>maximumAge</code> to Infinity
   will force the implementation to return a cached position regardless
-  of its age. If an implementation does not have available a cached
-  position whose age is no greater than the
+  of its age. If an implementation does not have a cached
+  position available whose age is no greater than the
   specified <code>maximumAge</code>, then it must acquire a new
   position object. In case of a <code>watchPosition()</code>,
   the <code>maximumAge</code> refers to the first position object
@@ -741,14 +752,13 @@
   to her desired destination.</p>
 
   <h4>Turn-by-turn route navigation</h4>
-  <p>Following from use-case 4, a mapping application can help the
-  user navigate along a route by providing detailed turn-by-turn
-  directions. The application does this by registering with the
-  Geolocation API to receive repeated location updates of the user's
-  position. These updates are delivered as soon as the implementing
-  User Agent determines that the position of the user has changed,
-  which allows the application to anticipate any changes of direction
-  that the user might need to do.</p>
+  <p>A mapping application can help the user navigate along a route by
+  providing detailed turn-by-turn directions. The application does
+  this by registering with the Geolocation API to receive repeated
+  location updates of the user's position. These updates are delivered
+  as soon as the implementing User Agent determines that the position
+  of the user has changed, which allows the application to anticipate
+  any changes of direction that the user might need to do.</p>
 
   <h4>Alerts when points of interest are in the user's vicinity</h4>
   <p>A tour-guide Web application can use the Geolocation API to
@@ -802,26 +812,28 @@
 
   <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
 
-  <p>Alec Berntson, Steve Block, Greg Bolsinga, Aaron Boodman, Dave
-  Burke, Chris Butler, Shyam Habarakada, Ian Hickson, Brad Lassey,
-  Daniel Park, Stuart Parmenter, Olli Pettay, Chris Prince, Arun
-  Ranganathan, Aza Raskin, Carl Reed, Allan Thomson, Martin Thomson, Doug Turner,
-  Erik Wilde, Mohamed Zergaoui</p>
-
+  <p>Alec Berntson, Alissa Cooper, Steve Block, Greg Bolsinga, Aaron
+  Boodman, Dave Burke, Chris Butler, Shyam Habarakada, Ian Hickson,
+  Brad Lassey, Angel Machin, Daniel Park, Stuart Parmenter, Olli
+  Pettay, Chris Prince, Arun Ranganathan, Aza Raskin, Carl Reed, Dirk
+  Segers, Allan Thomson, Martin Thomson, Doug Turner, Erik Wilde,
+  Mohamed Zergaoui</p>
 
   <h2 class="no-num" id="references">References</h2>
 
   <dl>
    <dt><a id="ref-azaloc">[AZALOC]</a></dt>
    <dd><em>(Non-normative)</em> <cite><a href="http://azarask.in/blog/post/geolocation-in-firefox-and-beyond/">Geolocation in Firefox and Beyond</a></cite>. See http://azarask.in/blog/post/geolocation-in-firefox-and-beyond</dd>
+   <dt><a id="ref-context">[BROWSINGCONTEXT]</a></dt>
+   <dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#browsing-context">The browsing context in HTML5</a></cite>. See http://dev.w3.org/html5/spec/Overview.html#browsing-context</dd>
+   <dt><a id="ref-origin">[DOCUMENTORIGIN]</a></dt>
+   <dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#origin">The origin of a resource in HTML5</a></cite>. See http://dev.w3.org/html5/spec/Overview.html#origin</dd>
    <dt><a id="ref-navigator">[NAVIGATOR]</a></dt>
    <dd><cite><a href="http://www.whatwg.org/specs/web-apps/current-work/#navigator">Navigator interface in HTML5</a></cite>. See http://www.whatwg.org/specs/web-apps/current-work/#navigator</dd>
    <dt><a id="ref-domtimestamp">[DOMTIMESTAMP]</a></dt>
    <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">The DOMTimeStamp Type</a></cite>. See http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp</dd>
    <dt><a id="ref-gears">[GEARSLOC]</a></dt>
    <dd><em>(Non-normative)</em> <cite><a href="http://code.google.com/p/google-gears/wiki/GeolocationAPI">Gears Geolocation API</a></cite>. See http://code.google.com/p/google-gears/wiki/GeolocationAPI</dd>
-   <dt><a id="ref-locationaware">[LOCATIONAWARE]</a></dt>
-   <dd><em>(Non-normative)</em> <cite><a href="http://locationaware.org/wiki/index.php?title=Working_Draft">LocationAware.org Working Draft</a></cite>. See http://locationaware.org/wiki/index.php?title=Working_Draft</dd>
    <dt><a id="ref-rfc3066">[RFC3066]</a></dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc3066.txt">Tags for the Identification of Languages</a></cite>. See http://www.ietf.org/rfc/rfc3066.txt</dd>
    <dt><a id="ref-webidl">[WEBIDL]</a></dt>
