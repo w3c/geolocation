@@ -132,6 +132,42 @@
   included here automatically.]</p>
   <!--end-toc-->
 
+  <h2 id="conformance">Conformance requirements</h2>
+
+  <p>All diagrams, examples, and notes in this specification are
+  non-normative, as are all sections explicitly marked non-normative.
+  Everything else in this specification is normative.</p>
+
+  <p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
+  NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
+  "OPTIONAL" in the normative parts of this document are to be
+  interpreted as described in RFC2119. For readability, these words do
+  not appear in all uppercase letters in this specification. <a
+  href="#refsRFC2119">[RFC2119]</a></p> <!-- XXX but they should be
+  marked up -->
+ 
+  <p>Requirements phrased in the imperative as part of algorithms
+  (such as "strip any leading space characters" or "return false and
+  abort these steps") are to be interpreted with the meaning of the
+  key word ("must", "should", "may", etc) used in introducing the
+  algorithm.</p>
+
+  <p>Conformance requirements phrased as algorithms or specific steps
+  may be implemented in any manner, so long as the end result is
+  equivalent. (In particular, the algorithms defined in this
+  specification are intended to be easy to follow, and not intended to
+  be performant.)</p>
+  
+  <p id="hardwareLimitations">User agents may impose
+  implementation-specific limits on otherwise unconstrained inputs,
+  e.g. to prevent denial of service attacks, to guard against running
+  out of memory, or to work around platform-specific limitations.</p>
+
+  <p>Implementations that use ECMAScript to implement the APIs defined
+  in this specification must implement them in a manner consistent
+  with the ECMAScript Bindings defined in the Web IDL specification,
+  as this specification uses that specification's terminology. <a
+  href="#ref-WebIDL">[WEBIDL]</a></p>
 
   <h2 id="introduction">Introduction</h2>
 
@@ -143,15 +179,17 @@
   agnostic of the underlying location information sources.  Common
   sources of location information include Global Positioning System
   (GPS) and location inferred from network signals such as IP address,
-  RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs.</p>
+  RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs, as
+  well as user input. No guarantee is given that the API returns the
+  device's actual location.</p>
 
   <p>The API is designed to enable both "one-shot" position requests
   and repeated position updates, as well as the ability to explicitly query
   the cached positions. Location information is represented by
   latitude and longitude coordinates. The Geolocation API in this
   specification builds upon earlier work in the industry, including <a
-  href="#ref-azaloc" shape="rect">[AZALOC]</a> and <a href="#ref-gears"
-  shape="rect">[GEARSLOC]</a>.</p>
+  href="#ref-azaloc" shape="rect">[AZALOC]</a>, <a href="#ref-gears"
+  shape="rect">[GEARSLOC]</a>, and <a href="#ref-locationaware">[LOCATIONAWARE]</a>.</p>
 
   <p>The following code extract illustrates how to obtain
   basic location information:</p>
@@ -369,7 +407,7 @@
 
   <p>The recipient of location information must not retransmit the
   location information without the user’s consent. Care should be
-  taken when retransmitting and use of HTTPS is encouraged.</p>
+  taken when retransmitting and use of encryption is encouraged.</p>
 
   <p>Recipients must clearly and conspicuously disclose the fact that
   they are collecting location data, the purpose for the collection,
@@ -378,44 +416,6 @@
   the data, and any other choices that users have with respect to the
   data. This disclosure must include an explanation of any exceptions
   to the guidelines listed above.</p>
-
-
-  <h2 id="conformance">Conformance requirements</h2>
-
-  <p>All diagrams, examples, and notes in this specification are
-  non-normative, as are all sections explicitly marked non-normative.
-  Everything else in this specification is normative.</p>
-
-  <p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
-  NOT",--> "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and
-  "OPTIONAL" in the normative parts of this document are to be
-  interpreted as described in RFC2119. For readability, these words do
-  not appear in all uppercase letters in this specification. <a
-  href="#refsRFC2119">[RFC2119]</a></p> <!-- XXX but they should be
-  marked up -->
- 
-  <p>Requirements phrased in the imperative as part of algorithms
-  (such as "strip any leading space characters" or "return false and
-  abort these steps") are to be interpreted with the meaning of the
-  key word ("must", "should", "may", etc) used in introducing the
-  algorithm.</p>
-
-  <p>Conformance requirements phrased as algorithms or specific steps
-  may be implemented in any manner, so long as the end result is
-  equivalent. (In particular, the algorithms defined in this
-  specification are intended to be easy to follow, and not intended to
-  be performant.)</p>
-  
-  <p id="hardwareLimitations">User agents may impose
-  implementation-specific limits on otherwise unconstrained inputs,
-  e.g. to prevent denial of service attacks, to guard against running
-  out of memory, or to work around platform-specific limitations.</p>
-
-  <p>Implementations that use ECMAScript to implement the APIs defined
-  in this specification must implement them in a manner consistent
-  with the ECMAScript Bindings defined in the Web IDL specification,
-  as this specification uses that specification's terminology. <a
-  href="#ref-WebIDL">[WEBIDL]</a></p>
 
   
   <h2 id="api_description">API Description</h2>
@@ -815,9 +815,9 @@
   <p>Alec Berntson, Alissa Cooper, Steve Block, Greg Bolsinga, Aaron
   Boodman, Dave Burke, Chris Butler, Shyam Habarakada, Ian Hickson,
   Brad Lassey, Angel Machin, Daniel Park, Stuart Parmenter, Olli
-  Pettay, Chris Prince, Arun Ranganathan, Aza Raskin, Carl Reed, Dirk
-  Segers, Allan Thomson, Martin Thomson, Doug Turner, Erik Wilde,
-  Mohamed Zergaoui</p>
+  Pettay, Chris Prince, Arun Ranganathan, Aza Raskin, Carl Reed,
+  Thomas Roessler, Dirk Segers, Allan Thomson, Martin Thomson, Doug
+  Turner, Erik Wilde, Mohamed Zergaoui</p>
 
   <h2 class="no-num" id="references">References</h2>
 
@@ -834,6 +834,8 @@
    <dd><cite><a href="http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp">The DOMTimeStamp Type</a></cite>. See http://www.w3.org/TR/DOM-Level-3-Core/core.html#Core-DOMTimeStamp</dd>
    <dt><a id="ref-gears">[GEARSLOC]</a></dt>
    <dd><em>(Non-normative)</em> <cite><a href="http://code.google.com/p/google-gears/wiki/GeolocationAPI">Gears Geolocation API</a></cite>. See http://code.google.com/p/google-gears/wiki/GeolocationAPI</dd>
+   <dt><a id="ref-locationaware">[LOCATIONAWARE]</a></dt>
+   <dd><em>(Non-normative)</em><cite> <a href="http://locationaware.org/">LocationAware.org</a></cite>. See http://locationaware.org/</dd>
    <dt><a id="ref-rfc3066">[RFC3066]</a></dt>
    <dd><cite><a href="http://www.ietf.org/rfc/rfc3066.txt">Tags for the Identification of Languages</a></cite>. See http://www.ietf.org/rfc/rfc3066.txt</dd>
    <dt><a id="ref-webidl">[WEBIDL]</a></dt>
