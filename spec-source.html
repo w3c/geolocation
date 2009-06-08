@@ -50,7 +50,7 @@
 
   <h1 id="title_heading">Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 4 June 2009]</h2>
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 8 June 2009]</h2>
    <dl>
 <!--
     <dt>This version:</dt>
@@ -417,6 +417,26 @@
   data. This disclosure must include an explanation of any exceptions
   to the guidelines listed above.</p>
 
+  <h3 id="implementation_considerations">Additional implementation consideration</h3>
+  <p><em>This section is non-normative.</em></p>
+
+  <p>Further to the requirements listed in the previous section,
+    implementors of the Geolocation API are also advised to consider
+    the following aspects that may negatively affect the privacy of
+    their users: in certain cases, users may inadvertently grant
+    permission to the User Agent to disclose their location to Web
+    sites. In other cases, the content hosted at a certain URL changes
+    in such a way that the previously granted location permissions no
+    longer apply as far as a user is concerned. Or the users might
+    simply change their mind.</p>
+
+  <p>Predicting or preventing these situations is inherently
+    difficult. Mitigation and in-depth defensive measures are an
+    implementation responsibility and not prescribed by this
+    specification. However, in designing these measures, implementers
+    are advised to enable user awareness of location sharing, and to
+    provide easy access to interfaces that enable revocation of
+    permissions.</p>
   
   <h2 id="api_description">API Description</h2>
 
