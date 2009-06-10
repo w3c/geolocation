@@ -468,13 +468,9 @@
   <p><br></p>
 
   <pre class="idl"> interface <dfn id="geolocation">Geolocation</dfn> { 
-    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback);
-    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback);
-    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback, in <a href="#position-options">PositionOptions</a> options);
+    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, [Optional] in <a href="#error-callback">PositionErrorCallback</a> errorCallback, [Optional] in <a href="#position-options">PositionOptions</a> options);
 
-    int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback);
-    int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback);
-    int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, in <a href="#error-callback">PositionErrorCallback</a> errorCallback, in <a href="#position-options">PositionOptions</a> options);
+    int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, [Optional] in <a href="#error-callback">PositionErrorCallback</a> errorCallback, [Optional] in <a href="#position-options">PositionOptions</a> options);
 
     void <a href="#clear-watch">clearWatch</a>(in int watchId);
   };
@@ -552,7 +548,9 @@
   </pre>
 
   <p>The <code>enableHighAccuracy</code>, <code>timeout</code>
-  and <code>maximumAge</code> attributes are all optional.</p>
+  and <code>maximumAge</code> attributes are all optional: when
+  creating a PositionOptions object, the developer may specify any of
+  these attributes.</p>
 
   <p>The <dfn id="high-accuracy"><code>enableHighAccuracy</code></dfn>
   attribute provides a hint that the application would like to receive
@@ -834,10 +832,10 @@
 
   <p>Alec Berntson, Alissa Cooper, Steve Block, Greg Bolsinga, Aaron
   Boodman, Dave Burke, Chris Butler, Max Froumentin, Shyam Habarakada,
-  Ian Hickson, Brad Lassey, Angel Machin, Daniel Park, Stuart
-  Parmenter, Olli Pettay, Chris Prince, Arun Ranganathan, Aza Raskin,
-  Carl Reed, Thomas Roessler, Dirk Segers, Allan Thomson, Martin
-  Thomson, Doug Turner, Erik Wilde, Mohamed Zergaoui</p>
+  Marcin Hanclik, Ian Hickson, Brad Lassey, Angel Machin, Daniel Park,
+  Stuart Parmenter, Olli Pettay, Chris Prince, Arun Ranganathan, Aza
+  Raskin, Carl Reed, Thomas Roessler, Dirk Segers, Allan Thomson,
+  Martin Thomson, Doug Turner, Erik Wilde, Mohamed Zergaoui</p>
 
   <h2 class="no-num" id="references">References</h2>
 
