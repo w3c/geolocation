@@ -50,7 +50,7 @@
 
   <h1 id="title_heading">Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 8 June 2009]</h2>
+  <h2 class="no-num no-toc">Editor's Draft [DATE: 26 June 2009]</h2>
    <dl>
 <!--
     <dt>This version:</dt>
@@ -374,7 +374,7 @@
   implementation of this specification must provide a mechanism that
   protects the user's privacy and this mechanism should ensure that
   no location information is made available without the user's
-  informed consent.</p>
+  express permission.</p>
 
   <h3 id="privacy_for_uas">Privacy considerations for implementors of the Geolocation API</h3>
   <p>User Agents must not send location information to Web sites
@@ -406,7 +406,7 @@
   this information.</p>
 
   <p>The recipient of location information must not retransmit the
-  location information without the user’s consent. Care should be
+  location information without the user’s express permission. Care should be
   taken when retransmitting and use of encryption is encouraged.</p>
 
   <p>Recipients must clearly and conspicuously disclose the fact that
@@ -470,15 +470,17 @@
   <pre class="idl"> interface <dfn id="geolocation">Geolocation</dfn> { 
     void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, [Optional] in <a href="#error-callback">PositionErrorCallback</a> errorCallback, [Optional] in <a href="#position-options">PositionOptions</a> options);
 
-    int <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, [Optional] in <a href="#error-callback">PositionErrorCallback</a> errorCallback, [Optional] in <a href="#position-options">PositionOptions</a> options);
+    long <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, [Optional] in <a href="#error-callback">PositionErrorCallback</a> errorCallback, [Optional] in <a href="#position-options">PositionOptions</a> options);
 
     void <a href="#clear-watch">clearWatch</a>(in int watchId);
   };
 
+  [Callback=FunctionOnly, NoInterfaceObject]
   interface <dfn id="position-callback">PositionCallback</dfn> {
     void handleEvent(in <a href="#position">Position</a> position);
   };
 
+  [Callback=FunctionOnly, NoInterfaceObject]
   interface <dfn id="error-callback">PositionErrorCallback</dfn> {
     void handleEvent(in <a href="#position-error">PositionError</a> error);
   };
@@ -538,7 +540,7 @@
   objects are regular ECMAScript objects that have the following properties:</p>
 
   <pre class="idl">
-  [NoInterfaceObject]
+  [Callback, NoInterfaceObject]
   interface <dfn id="position-options">PositionOptions</dfn> {
     attribute boolean <a href="#high-accuracy">enableHighAccuracy</a>;
     attribute long <a href="#timeout">timeout</a>;
@@ -832,7 +834,7 @@
 
   <p>Alec Berntson, Alissa Cooper, Steve Block, Greg Bolsinga, Aaron
   Boodman, Dave Burke, Chris Butler, Max Froumentin, Shyam Habarakada,
-  Marcin Hanclik, Ian Hickson, Brad Lassey, Angel Machin, Daniel Park,
+  Marcin Hanclik, Ian Hickson, Brad Lassey, Angel Machin, Cameron McCormack, Daniel Park,
   Stuart Parmenter, Olli Pettay, Chris Prince, Arun Ranganathan, Aza
   Raskin, Carl Reed, Thomas Roessler, Dirk Segers, Allan Thomson,
   Martin Thomson, Doug Turner, Erik Wilde, Mohamed Zergaoui</p>
