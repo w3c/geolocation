@@ -47,10 +47,10 @@
  <body>
   <div class="head">
   <!--logo-->
-
+  <a href="http://www.w3.org/"><img height="48" width="72" alt="W3C" src="http://www.w3.org/Icons/w3c_home"/></a>
   <h1 id="title_heading">Geolocation API Specification</h1>
 
-  <h2 class="no-num no-toc">Editor's Draft [DATE: 26 June 2009]</h2>
+  <h2 class="no-num no-toc" id="draft_date">Editor's Draft 30 June 2009</h2>
    <dl>
 <!--
     <dt>This version:</dt>
@@ -67,6 +67,9 @@
     <dt>Editors:</dt>
       <dd>Andrei Popescu, Google, Inc</dd>
    </dl>
+
+  <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 0001 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.org/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
+
    <hr>
   </div>
 
@@ -76,7 +79,7 @@
   to geographical location information associated with the hosting device.</p>
 
 
-  <h2 class="no-num no-toc" id="status">Status of this document</h2>
+  <h2 class="no-num no-toc" id="status">Status of This Document</h2>
 
   <!-- intro boilerplate (required) -->
   <p><em>This section describes the status of this document at the
@@ -87,15 +90,20 @@
   at http://www.w3.org/TR/.</em></p>
 
   <!-- where to send feedback (required) -->
-  <p>If you wish to make comments regarding this document, please send
+  <p>This document was published by the <a href="http://www.w3.org/2008/geolocation/">Geolocation Working Group</a>.
+  If you wish to make comments regarding this document, please send
   them to <a
   href="mailto:public-geolocation@w3.org">public-geolocation@w3.org</a> (<a
   href="mailto:public-geolocation-request@w3.org?subject=subscribe">subscribe</a>,
   <a
-  href="http://lists.w3.org/Archives/Public/public-geolocation/">archives</a>). All
-  feedback is welcome.</p>
+  href="http://lists.w3.org/Archives/Public/public-geolocation/">archives</a>).</p>
+  <p>All feedback is welcome.</p>
 
   <!-- stability (required) -->
+  <p>Publication as a Working Draft does not imply endorsement by the W3C Membership. 
+   This is a draft document and may be updated, replaced or obsoleted by other documents at any time. 
+   It is inappropriate to cite this document as other than work in progress.</p>
+
   <p>Implementors should be aware that this specification is not
   stable. <strong>Implementors who are not taking part in the
   discussions are likely to find the specification changing out from
@@ -104,28 +112,10 @@
   Candidate Recommendation stage should join the aforementioned
   mailing list and take part in the discussions.</p>
 
-  <!-- status of document, group responsible (required) -->
-  <p>The <a href="http://www.w3.org/2008/geolocation/">Geolocation Working Group</a> is responsible for this document.  
-	<strong>This is just an informal proposal at this
-  time.</strong></p>
-
   <!-- required patent boilerplate -->
-  <!--<p>This document was produced by a group operating under the <a
-  href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
-  February 2004 W3C Patent Policy</a>. W3C maintains a <a
-  rel="disclosure"
-  href="http://www.w3.org/2004/01/pp-impl/40318/status">public list of
-  any patent disclosures</a> made in connection with the deliverables
-  of the group; that page also includes instructions for disclosing a
-  patent. An individual who has actual knowledge of a patent which the
-  individual believes contains <a
-  href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
-  Claim(s)</a> must disclose the information in accordance with <a
-  href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-  6 of the W3C Patent Policy</a>.</p>-->
+  <p> This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>. W3C maintains a <a rel="disclosure" href="@@URI to IPP status or other page@@">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
 
-
-  <h2 class="no-num no-toc" id="contents">Table of contents</h2>
+  <h2 class="no-num no-toc" id="contents">Table of Contents</h2>
 
   <!--begin-toc-->
   <p>[If you keep the &lt;!--comment--&gt; the table of contents will be
@@ -561,14 +551,6 @@
   capability, or the device might not be able to provide more accurate
   results than if the flag wasn't specified.</p>
 
-  <div class="issue">See
-  <ul>
-    <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0094.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0094.html</a></li>
-    <li><a href="http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0107.html">http://lists.w3.org/Archives/Public/public-geolocation/2008Jun/0107.html</a></li>
-  </ul>
-  for two descriptions of the problem that <code>enableHighAccuracy</code> is trying to solve.
-  </div>
-
   <p>The <dfn id="timeout"><code>timeout</code></dfn> attribute denotes
    the maximum length of time (expressed in milliseconds) that is
    allowed to pass from the call to
@@ -637,7 +619,7 @@
   represents the time when the <code>Position</code> object was acquired and is
   represented as a DOMTimeStamp <a href="#ref-domtimestamp">[DOMTIMESTAMP]</a>.</p>
 
-  <h3 id="position_interface">Coordinates interface</h3>
+  <h3 id="coordinates_interface">Coordinates interface</h3>
 
   <pre class="idl">
   interface <dfn id="coordinates">Coordinates</dfn> {
@@ -736,14 +718,14 @@
   
   <h3 id="usecases_section">Use-Cases</h3>
   
-  <h4>Find points of interest in the user's area</h4> 
+  <h4 id="usecase_find_poi">Find points of interest in the user's area</h4> 
   <p>Someone visiting a foreign city could access a Web application
   that allows users to search or browse through a database of tourist
   attractions. Using the Geolocation API, the Web application has
   access to the user's approximate position and it is therefore able to
   rank the search results by proximity to the user's location.</p>
 
-  <h4>Annotating content with location information</h4>
+  <h4 id="usecase_content_annotation">Annotating content with location information</h4>
   <p> A group of friends is hiking through the Scottish
   highlands. Some of them write short notes and take pictures at
   various points throughout the journey and store them using a Web
@@ -763,7 +745,7 @@
   information such as time, geographic position or even the user's
   emotional state at the time of the recording.</p>
 
-  <h4>Show the user's position on a map</h4>
+  <h4 id="usecase_show_position">Show the user's position on a map</h4>
   <p>A user finds herself in an unfamiliar city area. She wants to
   check her position so she uses her hand-held device to navigate to a
   Web-based mapping application that can pinpoint her exact location
@@ -771,7 +753,7 @@
   application to provide driving directions from her current position
   to her desired destination.</p>
 
-  <h4>Turn-by-turn route navigation</h4>
+  <h4 id="usecase_turn_by_turn">Turn-by-turn route navigation</h4>
   <p>A mapping application can help the user navigate along a route by
   providing detailed turn-by-turn directions. The application does
   this by registering with the Geolocation API to receive repeated
@@ -780,20 +762,20 @@
   of the user has changed, which allows the application to anticipate
   any changes of direction that the user might need to do.</p>
 
-  <h4>Alerts when points of interest are in the user's vicinity</h4>
+  <h4 id="usecase_poi_alert">Alerts when points of interest are in the user's vicinity</h4>
   <p>A tour-guide Web application can use the Geolocation API to
   monitor the user's position and trigger visual or audio
   notifications when interesting places are in the vicinity. An online
   task management system can trigger reminders when the user is in the
   proximity of landmarks that are associated with certain tasks.</p>
 
-  <h4>Up-to-date local information</h4>
+  <h4 id="usecase_local_info">Up-to-date local information</h4>
   <p>A widget-like Web application that shows the weather or news that
   are relevant to the user's current area can use the Geolocation API
   to register for location updates. If the user's position changes,
   the widget can adapt the content accordingly.</p>
 
-  <h4>Location-tagged status updates in social networking applications</h4>
+  <h4 id="usecase_social_networking">Location-tagged status updates in social networking applications</h4>
   <p>A social network application allows its users to automatically
   tag their status updates with location information. It does this by
   monitoring the user's position with the Geolocation API. Each user
@@ -804,29 +786,29 @@
 
  <h3 id="requirements_section">Requirements</h3>
 
- <h4>The Geolocation API must provide location data in terms of a pair
+ <h4 id="req_latlong">The Geolocation API must provide location data in terms of a pair
  of latitude and longitude coordinates.</h4>
 
- <h4>The Geolocation API must provide information about the accuracy
+ <h4 id="req_accuracy">The Geolocation API must provide information about the accuracy
  of the retrieved location data.</h4>
 
- <h4>The Geolocation API must support "one-shot" position updates.</h4>
+ <h4 id="req_oneshot">The Geolocation API must support "one-shot" position updates.</h4>
  
- <h4>The Geolocation API must allow an application to register to
+ <h4 id="req_updates">The Geolocation API must allow an application to register to
  receive updates when the position of the hosting device
  changes.</h4>
 
- <h4>The Geolocation API must allow an application to cheaply query the last
+ <h4 id="req_last_known">The Geolocation API must allow an application to cheaply query the last
  known position.</h4>
 
- <h4>The Geolocation API must provide a way for the application to
+ <h4 id="req_errors">The Geolocation API must provide a way for the application to
  receive updates about errors that may have occurred while obtaining a
  location fix.</h4>
 
- <h4>The Geolocation API must allow an application to specify a
+ <h4 id="req_request_acuracy">The Geolocation API must allow an application to specify a
  desired accuracy level of the location information.</h4>
 
- <h4>The Geolocation API must be agnostic to the underlying sources
+ <h4 id="req_source_agnostic">The Geolocation API must be agnostic to the underlying sources
  of location information.</h4>
 
 
