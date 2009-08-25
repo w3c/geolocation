@@ -90,7 +90,12 @@
 
   <h2 class="no-num no-toc" id=status>Status of This Document</h2>
   <!-- intro boilerplate (required) -->
-<p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current W3C publications and the latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at http://www.w3.org/TR/.</em></p>
+<p><em>This section describes the status of this document at the time
+of its publication. Other documents may supersede this document. A
+list of current W3C publications and the latest revision of this
+technical report can be found in
+the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at
+http://www.w3.org/TR/.</em></p>
 
   <!-- where to send feedback (required) -->
 
@@ -105,7 +110,10 @@
   <p>All feedback is welcome.</p>
   <!-- stability (required) -->
 
-<p>Publication as a Working Draft does not imply endorsement by the W3C Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.</p>
+<p>Publication as a Working Draft does not imply endorsement by the
+W3C Membership. This is a draft document and may be updated, replaced
+or obsoleted by other documents at any time. It is inappropriate to
+cite this document as other than work in progress.</p>
 
   <!-- required patent boilerplate -->
 
@@ -216,7 +224,7 @@
    ECMAScript Bindings defined in the Web IDL specification, as this
    specification uses that specification's terminology. <a
    href="#ref-webidl">[WEBIDL]</a>
-
+                                   
   <h2 id=introduction><span class=secno>2 </span>Introduction</h2>
 
   <p><em>This section is non-normative.</em>
@@ -238,7 +246,7 @@
    shape=rect>[AZALOC]</a>, <a href="#ref-gears" shape=rect>[GEARSLOC]</a>,
    and <a href="#ref-locationaware">[LOCATIONAWARE]</a>.
 
-  <p>The following code extract illustrates how to obtain basic location
+  <p>The following code extracts illustrate how to obtain basic location
    information:
 
   <div class=example>
@@ -299,7 +307,7 @@
 
    <pre>
     // Request a position. We accept positions whose age is not
-    // greater than 10 minutes. If the User Agent does not have a
+    // greater than 10 minutes. If the user agent does not have a
     // fresh enough cached position object, it will automatically
     // acquire a new one.
     navigator.geolocation.getCurrentPosition(successCallback,
@@ -319,11 +327,11 @@
   </div>
 
   <div class=example>
-   <p>Forcing the User Agent to return a fresh cached position.</p>
+   <p>Forcing the user agent to return a fresh cached position.</p>
 
    <pre>
     // Request a position. We only accept cached positions whose age is not
-    // greater than 10 minutes. If the User Agent does not have a fresh
+    // greater than 10 minutes. If the user agent does not have a fresh
     // enough cached position object, it will immediately invoke the error
     // callback.
     navigator.geolocation.getCurrentPosition(successCallback,
@@ -334,8 +342,8 @@
       // By using the 'maximumAge' option above, the position
       // object is guaranteed to be at most 10 minutes old.
       // By using a 'timeout' of 0 milliseconds, if there is
-      // no suitable cached position available, the User Agent 
-      // will immediately invoke the error callback with code
+      // no suitable cached position available, the user agent 
+      // will aynchronously invoke the error callback with code
       // TIMEOUT and will not initiate a new position
       // acquisition process.
     }
@@ -360,11 +368,11 @@
   </div>
 
   <div class=example>
-   <p>Forcing the User Agent to return any available cached position.</p>
+   <p>Forcing the user agent to return any available cached position.</p>
 
    <pre>
     // Request a position. We only accept cached positions, no matter what 
-    // their age is. If the User Agent does not have a cached position at
+    // their age is. If the user agent does not have a cached position at
     // all, it will immediately invoke the error callback.
     navigator.geolocation.getCurrentPosition(successCallback,
                                              errorCallback,
@@ -374,7 +382,7 @@
       // By setting the 'maximumAge' to Infinity, the position
       // object is guaranteed to be a cached one.
       // By using a 'timeout' of 0 milliseconds, if there is
-      // no cached position available at all, the User Agent 
+      // no cached position available at all, the user agent 
       // will immediately invoke the error callback with code
       // TIMEOUT and will not initiate a new position
       // acquisition process.
@@ -434,18 +442,18 @@
   <h3 id="privacy_for_uas"><span class=secno>4.1 </span>Privacy
    considerations for implementors of the Geolocation API</h3>
 
-  <p>User Agents must not send location information to Web sites without the
-   express permission of the user. User Agents must acquire permission
+  <p>User agents must not send location information to Web sites without the
+   express permission of the user. User agents must acquire permission
    through a user interface, unless they have prearranged trust relationships
    with users, as described below. The user interface must include the URI of
    the document origin <a href="#ref-origin">[DOCUMENTORIGIN]</a>. Those
    permissions that are acquired through the user interface and that are
    preserved beyond the current browsing session (i.e. beyond the time when
    the browsing context <a href="#ref-context">[BROWSINGCONTEXT]</a> is
-   navigated to another URL) must be revocable and User Agents must respect
+   navigated to another URL) must be revocable and user agents must respect
    revoked permissions.
 
-  <p>Some User Agents will have prearranged trust relationships that do not
+  <p>Some user agents will have prearranged trust relationships that do not
    require such user interfaces. For example, while a Web browser will
    present a user interface when a Web site performs a geolocation request, a
    VOIP telephone may not present any user interface when using location
@@ -481,7 +489,7 @@
   <p>Further to the requirements listed in the previous section, implementors
    of the Geolocation API are also advised to consider the following aspects
    that may negatively affect the privacy of their users: in certain cases,
-   users may inadvertently grant permission to the User Agent to disclose
+   users may inadvertently grant permission to the user agent to disclose
    their location to Web sites. In other cases, the content hosted at a
    certain URL changes in such a way that the previously granted location
    permissions no longer apply as far as the user is concerned. Or the users
@@ -490,7 +498,7 @@
   <p>Predicting or preventing these situations is inherently difficult.
    Mitigation and in-depth defensive measures are an implementation
    responsibility and not prescribed by this specification. However, in
-   designing these measures, implementers are advised to enable user
+   designing these measures, implementors are advised to enable user
    awareness of location sharing, and to provide easy access to interfaces
    that enable revocation of permissions.
 
@@ -515,67 +523,217 @@
    <code>Navigator</code>.
 
   <pre class=idl>
-  [NoInterfaceObject]
-  interface <dfn id=navi-geo>NavigatorGeolocation</dfn> {
-    readonly attribute <a href="#geolocation">Geolocation</a> geolocation;
-  };
+ [NoInterfaceObject]
+ interface <dfn id=navi-geo>NavigatorGeolocation</dfn> {
+   readonly attribute <a href="#geolocation">Geolocation</a> geolocation;
+ };
+
+ Navigator implements NavigatorGeolocation;
   </pre>
 
   <p><br>
 
-  <pre class=idl> interface <dfn id=geolocation>Geolocation</dfn> { 
-    void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, [Optional] in <a href="#error-callback">PositionErrorCallback</a> errorCallback, [Optional] in <a href="#position-options">PositionOptions</a> options);
+ <pre class=idl> interface <dfn id=geolocation>Geolocation</dfn> { 
+   void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback,
+                           in optional <a href="#error-callback">PositionErrorCallback</a> errorCallback,
+                           in optional <a href="#position-options">PositionOptions</a> options);
 
-    long <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback, [Optional] in <a href="#error-callback">PositionErrorCallback</a> errorCallback, [Optional] in <a href="#position-options">PositionOptions</a> options);
+   long <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback,
+                      in optional <a href="#error-callback">PositionErrorCallback</a> errorCallback,
+                      in optional <a href="#position-options">PositionOptions</a> options);
 
-    void <a href="#clear-watch">clearWatch</a>(in int watchId);
-  };
+   void <a href="#clear-watch">clearWatch</a>(in long watchId);
+ };
 
-  [Callback=FunctionOnly, NoInterfaceObject]
-  interface <dfn id=position-callback>PositionCallback</dfn> {
-    void handleEvent(in <a href="#position">Position</a> position);
-  };
+ [Callback=FunctionOnly, NoInterfaceObject]
+ interface <dfn id=position-callback>PositionCallback</dfn> {
+   void handleEvent(in <a href="#position">Position</a> position);
+ };
 
-  [Callback=FunctionOnly, NoInterfaceObject]
-  interface <dfn id=error-callback>PositionErrorCallback</dfn> {
-    void handleEvent(in <a href="#position-error">PositionError</a> error);
-  };
-  </pre>
+ [Callback=FunctionOnly, NoInterfaceObject]
+ interface <dfn id=error-callback>PositionErrorCallback</dfn> {
+   void handleEvent(in <a href="#position-error">PositionError</a> error);
+ };
+ </pre>
 
   <p>The <dfn id=get-current-position><code>getCurrentPosition()</code></dfn>
-   takes one, two or three arguments. When called, it must immediately return
-   and then asynchronously acquire a new <code><a
-   href="#position">Position</a></code> object. If successful, this method
-   must invoke its associated <code>successCallback</code> argument with a
-   <code><a href="#position">Position</a></code> object as an argument. If
-   the attempt fails, and the method was invoked with a non-null
-   <code>errorCallback</code> argument, this method must invoke the
-   <code>errorCallback</code> with a <code><a
-   href="#position-error">PositionError</a></code> object as an argument.
+   method takes one, two or three arguments. When called, it must immediately
+   return and then asynchronously attempt to obtain the current
+   location of the device. If the attempt is successful,
+   the <code>successCallback</code> is invoked
+   (i.e. the <code>handleEvent</code> operation is called on the
+   callback object) with a new <code>Position</code> object,
+   reflecting the current location of the device. If the attempt
+   fails, the <code>errorCallback</code> is invoked with a
+   new <code>PositionError</code> object, reflecting the reason for the failure.</p>
 
-  <p>The <dfn id=watch-position><code>watchPosition()</code></dfn> takes one,
-   two or three arguments. When called, it must immediately return and then
-   asynchronously start a <i>watch process</i> defined as the following set
-   of steps:
-
+  <p>The implementation of the <code>getCurrentPosition</code> method
+  should execute the following set of steps:</p>
   <ol>
-   <li> Acquire a new <code><a href="#position">Position</a></code> object.
-    If successful, invoke the associated <code>successCallback</code> with a
-    <code><a href="#position">Position</a></code> object as an argument. If
-    the attempt fails, and the method was invoked with a non-null
-    <code>errorCallback</code> argument, this method must invoke the
-    <code>errorCallback</code> with a <code><a
-    href="#position-error">PositionError</a></code> object as an argument.
-
-   <li> Invoke the appropriate callback with a new <code><a
-    href="#position">Position</a></code> object every time the implementation
-    determines that the position of the hosting device has changed.
+    <li>Run the following pre-processing steps:
+      <ol>
+        <li>If a <code>PositionOptions</code> parameter was present,
+        and its <code>maximumAge</code> attribute was defined to a
+        non-negative value, assign this value to an internal
+        maximumAge variable. Otherwise, set the internal maximumAge
+        variable to 0.</li>
+        <li>If a <code>PositionOptions</code> parameter was present,
+        and its <code>timeout</code> attribute was defined to a
+        non-negative value, assign this value to an internal timeout
+        variable. Otherwise, set the internal timeout variable to
+        Infinity.</li>
+        <li>If a <code>PositionOptions</code> parameter was present,
+          and its <code>enableHighAccuracy</code> attribute was
+          defined, assign this value to an internal enableHighAccuracy
+          variable. Otherwise, set the internal enableHighAccuracy
+          variable to false.</li>
+      </ol>
+    </li>
+    <li> If a cached <code>Position</code> object, whose age is no greater
+          than the value of the maximumAge variable, is available,
+          invoke the <code>successCallback</code> with the
+          cached <code>Position</code> object as a parameter and exit
+          this set of steps.</li>
+    <li> If the value of the timeout variable is 0, invoke
+    the <code>errorCallback</code> (if present) with a
+    new <code>PositionError</code> object whose <code>code</code>
+    attribute is set to TIMEOUT and exit this set of steps.</li>
+    <li>Start a location acquisition operation (e.g. by
+          invoking a platform-specific API), possibly taking into
+          account the value of the enableHighAccuracy variable (see
+          the definition
+          of <code><a href="#high-accuracy">enableHighAccuracy</a></code>
+          for details).</li>
+    <li>Start a timer that will fire after the number of milliseconds
+              denoted by the value of the timeout variable. When the
+              timer fires, cancel any ongoing location acquisition
+              operations associated with this instance of the steps,
+              invoke the <code>errorCallback</code> (if present)
+              with a new <code>PositionError</code> object
+              whose <code>code</code> attribute is set to TIMEOUT, and
+              exit this set of steps.</li>
+    <li>If the operation completes successfully before the timeout
+    expires, cancel the pending timer, invoke
+    the <code>successCallback</code> with a new <code>Position</code>
+    object that reflects the result of the acquisition operation and
+    exit this set of steps. </li>
+    <li>If the operation fails before the timeout expires, cancel the
+    pending timer and invoke the <code>errorCallback</code> (if
+    present) with a new <code>PositionError</code> object
+    whose <code>code</code> is set to POSITION_UNAVAILABLE.</li>
   </ol>
 
-  <p>This method returns an integer value that uniquely identifies the watch
-   process. When the <dfn id=clear-watch><code>clearWatch()</code></dfn>
-   method is called with this identifier, the watch process must stop
-   acquiring any new position fixes and must cease invoking any callbacks.
+    <p>The <dfn id=watch-position><code>watchPosition()</code></dfn>
+   takes one, two or three arguments. When called, it must immediately
+   return a long value that uniquely identifies a <i>watch
+   operation</i> and then asynchronously start the watch
+   operation. This
+   operation must first attempt to obtain the current location of the
+   device and invoke the appropriate callback. It then must continue
+   to monitor the position of the device and invoke the appropriate
+   callback every time this position changes. The watch operation
+   continues until
+   the <code><a href="#clear-watch">clearWatch</a></code> method is
+   called with the corresponding identifier.</p>
+
+  <p>The implementation of the watch process should execute the
+  following set of steps:</p>
+  <ol>
+    <li>Run the following pre-processing steps:
+      <ol>
+        <li>If a <code>PositionOptions</code> parameter was present,
+        and its <code>maximumAge</code> attribute was defined to a
+        non-negative value, assign this value to an internal
+        maximumAge variable. Otherwise, set the internal maximumAge
+        variable to 0.</li>
+        <li>If a <code>PositionOptions</code> parameter was present,
+        and its <code>timeout</code> attribute was defined to a
+        non-negatice value, assign this value to an internal timeout
+        variable. Otherwise, set the internal timeout variable to
+        Infinity.</li>
+        <li>If a <code>PositionOptions</code> parameter was present,
+          and its <code>enableHighAccuracy</code> attribute was
+          defined, assign this value to an internal enableHighAccuracy
+          variable. Otherwise, set the internal enableHighAccuracy
+          variable to false.</li>
+      </ol>
+    </li>
+    <li> If a cached <code>Position</code> object, whose age is no greater
+          than the value of the maximumAge variable, is available,
+          invoke the <code>successCallback</code> with the
+          cached <code>Position</code> object as a parameter.</li>
+    <li>Register to receive system events that indicate that the
+    position of the device may have changed (e.g. by listening or
+    polling for changes in WiFi or cellular signals).</li>
+    <li>Start a location acquisition operation (e.g. by
+          invoking a platform-specific API), possibly taking into
+          account the value of the enableHighAccuracy variable (see
+          the definition
+          of <code><a href="#high-accuracy">enableHighAccuracy</a></code>
+          for details). </li>
+    <li> Run the following acquisition steps:
+      <ol>
+        <li>Start a timer that will fire after the number of
+        milliseconds denoted by the value of the timeout
+        variable. When the timer fires, invoke
+        the <code>errorCallback</code> (if present) with a
+        new <code>PositionError</code> object whose <code>code</code>
+        attribute is set to TIMEOUT and jump to step 6.</li>
+        <li>If the location acquisition operation successfully yields
+        a new position before the timeout expires, perform the
+        following two steps:
+          <ol>
+            <li>Cancel the pending timer.</li>
+            <li>If the new position differs significantly from the
+              previous position, invoke
+              the <code>successCallback</code> with a
+              new <code>Position</code> object that reflects the
+              result of the acquisition operation.  This step can be
+              subject to callback rate limitation
+              (<a href="#rate-limit">see below</a>).</li>
+          </ol>
+        </li>
+        <li>Else, if the location acquisition operation reports an
+          error before the timeout expires, cancel the pending timer
+          and invoke the <code>errorCallback</code> (if present)
+          with a new <code>PositionError</code> object
+          whose <code>code</code> is set to POSITION_UNAVAILABLE. This
+          step can be subject to callback rate limitation
+          (<a href="#rate-limit">see below</a>).</li>
+      </ol>
+    </li>
+    <li>Wait for a system event to be received. When such an event is
+    received jump to the acquisition steps above.</li>
+  </ol>
+
+  <p id="rate-limit">In step 5.2.2 of the watch process,
+  the <code>successCallback</code> is only invoked when a new position
+  is obtained and this position differs signifficantly from the
+  previously reported position. The definition of what consitutes a
+  significant difference is left to the implementation. Furthermore,
+  in steps 5.2.2 and 5.2.3, implementations may impose limitations on
+  the frequency of callbacks so as to avoid inadvertently consuming a
+  disproportionate amount of resources.</p>
+
+  <p>For both <code>getCurrentPosition</code>
+  and <code>watchPosition</code>, the implementation must never invoke
+  the <code>successCallback</code> without having first obtained
+  permission from the user to share location. If the user grants permission, the
+  appropriate callback must be invoked as described above. If the user
+  denies permission, the <code>errorCallback</code> (if present)
+  must be invoked with <code>code</code> PERMISSION_DENIED, irrespective of any
+  other errors encoutered in the above steps.
+  The time that is spent obtaining the user permission must not be
+  included in the period covered by the <code>timeout</code> attribute
+  of the <code>PositionOptions</code>
+  parameter. The <code>timeout</code> attribute must only apply to the
+  location acquisition operation.</p>
+
+  <p>The <dfn id=clear-watch><code>clearWatch()</code></dfn> method
+  takes one argument. When called, the watch process identified by
+  the <dfn id="watchId"><code>watchId</code></dfn> argument will be
+  stopped and should not invoke any further callbacks.</p>
+
 
   <h3 id="position_options_interface"><span class=secno>5.2
    </span>PositionOptions interface</h3>
@@ -586,8 +744,10 @@
    href="#position-options">PositionOptions</a></code> objects as their third
    argument.
 
-  <p> <code><a href="#position-options">PositionOptions</a></code> objects
-   are regular ECMAScript objects that have the following properties:
+  <p> In ECMAScript, <code><a href="#position-options">PositionOptions</a></code>
+   objects are represented using regular native objects with optional
+   properties named <code>enableHighAccuracy</code>, <code>timeout</code>
+   and <code>maximumAge</code>.</p>
 
   <pre class=idl>
   [Callback, NoInterfaceObject]
@@ -599,11 +759,11 @@
 
   </pre>
 
-  <p>The <code><a href="#high-accuracy">enableHighAccuracy</a></code>,
+  <p>In ECMAScript, the <code><a href="#high-accuracy">enableHighAccuracy</a></code>,
    <code><a href="#timeout_error">timeout</a></code> and <code><a
-   href="#max-age">maximumAge</a></code> attributes are all optional: when
+   href="#max-age">maximumAge</a></code> properties are all optional: when
    creating a PositionOptions object, the developer may specify any of these
-   attributes.
+   properties.
 
   <p>The <dfn id=high-accuracy><code>enableHighAccuracy</code></dfn>
    attribute provides a hint that the application would like to receive the
@@ -612,43 +772,59 @@
    the device might not be able to provide more accurate results than if the
    flag wasn't specified.
 
-  <p>The <dfn id=timeout><code>timeout</code></dfn> attribute denotes the
-   maximum length of time (expressed in milliseconds) that is allowed to pass
-   from the call to <code><a
-   href="#get-current-position">getCurrentPosition()</a></code> or <code><a
-   href="#watch-position">watchPosition()</a></code> until the corresponding
+  <p>If the <code>PositionOptions</code> parameter
+  to <code>getCurrentPosition</code> or <code>watchPosition</code> is
+  omitted, the default value used for
+  the <code>enableHighAccuracy</code> attribute is false. The same
+  default value is used in ECMAScript when
+  the <code>enableHighAccuracy</code> property is omitted.
+
+  <p>The <dfn id=timeout><code>timeout</code></dfn> attribute denotes
+   the maximum length of time (expressed in milliseconds) that is
+   allowed to pass from the call
+   to <code><a href="#get-current-position">getCurrentPosition()</a></code>
+   or <code><a href="#watch-position">watchPosition()</a></code> until
+   the corresponding
    <code>successCallback</code> is invoked. If the implementation is unable
    to successfully acquire a new <code><a
    href="#position">Position</a></code> before the given timeout elapses, and
    no other errors have occurred in this interval, then the corresponding
-   <code>errorCallback</code> must be invoked with a <code><a
-   href="#position-error">PositionError</a></code> object whose code
-   attribute is set to <a href="#timeout_error">TIMEOUT</a>.
-
-  <p class=note>Before executing a call to <code><a
-   href="#get-current-position">getCurrentPosition()</a></code> or <code><a
-   href="#watch-position">watchPosition()</a></code>, an implementation may
-   first need to acquire the user's permission to disclose location
-   information to the current application origin. In such a case, the timeout
-   interval starts immediately after the user's permission has been
-   successfully acquired.
+   <code>errorCallback</code> must be invoked with
+   a <code><a href="#position-error">PositionError</a></code> object
+   whose <code><a href="#code">code</a></code> attribute is set
+   to <a href="#timeout_error">TIMEOUT</a>. Note that the time that is
+   spent obtaining the user permission is <b>not</b> included in the period
+   covered by the <code>timeout</code>
+   attribute. The <code>timeout</code> attribute only applies to the
+   location acquisition operation.
+  
+  <p>If the <code>PositionOptions</code> parameter
+  to <code>getCurrentPosition</code> or <code>watchPosition</code> is
+  omitted, the default value used for the <code>timeout</code>
+  attribute is Infinity. If a negative value is supplied,
+  the <code>timeout</code> value is considered to be 0. The same
+  default value is used in ECMAScript when the <code>timeout</code>
+  property is omitted.
 
   <p>In case of a <code><a
    href="#get-current-position">getCurrentPosition()</a></code> call, the
-   <code>errorCallback</code> would be invoked exactly once.
+   <code>errorCallback</code> would be invoked at most once.
 
-  <p>In case of a <code><a href="#watch-position">watchPosition()</a></code>,
-   the <code>errorCallback</code> could be invoked repeatedly: the first
-   timeout is relative to the moment <code><a
-   href="#watch-position">watchPosition()</a></code> was called, while
-   subsequent timeouts are relative to the moment when the implementation
-   determines that the position of the hosting device has changed and a new
+   In case of
+   a <code><a href="#watch-position">watchPosition()</a></code>,
+   the <code>errorCallback</code> could be invoked repeatedly: the
+   first timeout is relative to the
+   moment <code><a href="#watch-position">watchPosition()</a></code>
+   was called or the moment the user's permission was obtained, if
+   that was necessary. Subsequent timeouts are relative to the moment
+   when the implementation determines that the position of the hosting
+   device has changed and a new
    <code><a href="#position">Position</a></code> object must be acquired.
 
   <p>The <dfn id=max-age><code>maximumAge</code></dfn> attribute indicates
    that the application is willing to accept a cached position whose age is
    no greater than the specified time in milliseconds. If <code><a
-   href="#max-age">maximumAge</a></code> is not specified or set to 0, the
+   href="#max-age">maximumAge</a></code> is set to 0, the
    implementation must immediately attempt to acquire a new position object.
    Setting the <code><a href="#max-age">maximumAge</a></code> to Infinity
    will force the implementation to return a cached position regardless of
@@ -658,15 +834,23 @@
    object. In case of a <code><a
    href="#watch-position">watchPosition()</a></code>, the <code><a
    href="#max-age">maximumAge</a></code> refers to the first position object
-   returned by the implementation.
+   returned by the implementation.</p>
+
+  <p>If the <code>PositionOptions</code> parameter
+  to <code>getCurrentPosition</code> or <code>watchPosition</code> is
+  omitted, the default value used for the <code>maximumAge</code>
+  attribute is 0. If a negative value is supplied,
+  the <code>maximumAge</code> value is considered to be 0. The same
+  default value is used in ECMAScript when the <code>maximumAge</code>
+  property is omitted.
 
   <h3 id="position_interface"><span class=secno>5.3 </span>Position interface</h3>
 
   <p>The <code><a href="#position">Position</a></code> interface is the
    container for the geolocation information returned by this API. This
    version of the specification allows one attribute of type <code><a
-   href="#coordinates">Coordinates</a></code> and a <a
-   href="#timestamp"><code>timestamp</code></a>. Future versions of the API
+   href="#coordinates">Coordinates</a></code> and a 
+   <code><a href="#timestamp">timestamp</a></code>. Future versions of the API
    may allow additional attributes that provide other information about this
    position (e.g. street addresses).
 
@@ -693,11 +877,11 @@
   interface <dfn id=coordinates>Coordinates</dfn> {
     readonly attribute double <a href="#lat">latitude</a>;
     readonly attribute double <a href="#lon">longitude</a>;
-    readonly attribute double <a href="#altitude">altitude</a>;
+    readonly attribute double? <a href="#altitude">altitude</a>;
     readonly attribute double <a href="#accuracy">accuracy</a>;
-    readonly attribute double <a href="#altitude-accuracy">altitudeAccuracy</a>;
-    readonly attribute double <a href="#heading">heading</a>;
-    readonly attribute double <a href="#speed">speed</a>;
+    readonly attribute double? <a href="#altitude-accuracy">altitudeAccuracy</a>;
+    readonly attribute double? <a href="#heading">heading</a>;
+    readonly attribute double? <a href="#speed">speed</a>;
   };
   </pre>
 
@@ -778,7 +962,8 @@
    <dt><dfn id="timeout_error"><code>TIMEOUT</code></dfn> (numeric value 3)
 
    <dd>The specified maximum length of time has elapsed before the
-    implementation could successfully acquire a new Position object.
+    implementation could successfully acquire a
+    new <code><a href="#position">Position</a></code> object.
   </dl>
 
   <p>The <dfn id=message><code>message</code></dfn> attribute must return an
@@ -835,7 +1020,7 @@
    providing detailed turn-by-turn directions. The application does this by
    registering with the Geolocation API to receive repeated location updates
    of the user's position. These updates are delivered as soon as the
-   implementing User Agent determines that the position of the user has
+   implementing user agent determines that the position of the user has
    changed, which allows the application to anticipate any changes of
    direction that the user might need to do.
 
@@ -969,8 +1154,8 @@
 
    <dt><a id=ref-webidl>[WEBIDL]</a>
 
-   <dd><cite><a href="http://www.w3.org/TR/WebIDL/">Web IDL</a></cite>, Cameron McCormack, Editor.  World Wide Web Consortium, 19 December 2008. See
-    http://www.w3.org/TR/WebIDL/
+   <dd><cite><a href="http://dev.w3.org/2006/webapi/WebIDL/">Web IDL</a></cite>, Cameron McCormack, Editor.  World Wide Web Consortium, 19 December 2008. See
+    http://dev.w3.org/2006/webapi/WebIDL/
 
    <dt><a id=ref-wgs>[WGS84]</a>
 
