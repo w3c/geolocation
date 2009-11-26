@@ -737,10 +737,13 @@ cite this document as other than work in progress.</p>
   location acquisition operation.</p>
 
   <p>The <dfn id=clear-watch><code>clearWatch()</code></dfn> method
-  takes one argument. When called, the watch process identified by
-  the <dfn id="watchId"><code>watchId</code></dfn> argument must be
-  stopped and must not invoke any further callbacks.</p>
-
+  takes one argument. When called, it must first check the value of
+  the given <dfn id="watchId"><code>watchId</code></dfn> argument.
+  If this value does not correspond to any previously started watch
+  process, then the method must return immediately without taking any
+  further action. Otherwise, the watch process identified by the
+  <code>watchId</code> argument must be immediately stopped and no 
+  further callbacks must be invoked.</p>
 
   <h3 id="position_options_interface"><span class=secno>5.2
    </span>PositionOptions interface</h3>
