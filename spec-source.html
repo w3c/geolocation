@@ -575,13 +575,15 @@ cite this document as other than work in progress.</p>
         <li>If a <code>PositionOptions</code> parameter was present,
         and its <code>maximumAge</code> attribute was defined to a
         non-negative value, assign this value to an internal
-        maximumAge variable. Otherwise, set the internal maximumAge
-        variable to 0.</li>
+        maximumAge variable. If <code>maximumAge</code> was defined
+        to a negative value or was not specified, set the internal maximumAge
+        variable to 0.
         <li>If a <code>PositionOptions</code> parameter was present,
         and its <code>timeout</code> attribute was defined to a
         non-negative value, assign this value to an internal timeout
-        variable. Otherwise, set the internal timeout variable to
-        0.</li>
+        variable. If <code>timeout</code> was defined to a negative value,
+        set the internal timeout variable to 0. If <code>timeout</code>
+        was not specified, set the internal timeout variable to Infinity.</li>
         <li>If a <code>PositionOptions</code> parameter was present,
           and its <code>enableHighAccuracy</code> attribute was
           defined, assign this value to an internal enableHighAccuracy
@@ -644,13 +646,15 @@ cite this document as other than work in progress.</p>
         <li>If a <code>PositionOptions</code> parameter was present,
         and its <code>maximumAge</code> attribute was defined to a
         non-negative value, assign this value to an internal
-        maximumAge variable. Otherwise, set the internal maximumAge
-        variable to 0.</li>
+        maximumAge variable. If <code>maximumAge</code> was defined
+        to a negative value or was not specified, set the internal maximumAge
+        variable to 0.
         <li>If a <code>PositionOptions</code> parameter was present,
         and its <code>timeout</code> attribute was defined to a
         non-negative value, assign this value to an internal timeout
-        variable. Otherwise, set the internal timeout variable to
-        0.</li>
+        variable. If <code>timeout</code> was defined to a negative value,
+        set the internal timeout variable to 0. If <code>timeout</code>
+        was not specified, set the internal timeout variable to Infinity.</li>
         <li>If a <code>PositionOptions</code> parameter was present,
           and its <code>enableHighAccuracy</code> attribute was
           defined, assign this value to an internal enableHighAccuracy
