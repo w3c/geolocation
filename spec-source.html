@@ -636,7 +636,7 @@ cite this document as other than work in progress.</p>
    device and invoke the appropriate callback. It then must continue
    to monitor the position of the device and invoke the appropriate
    callback every time this position changes. The watch operation
-   continues until
+   must continue until
    the <code><a href="#clear-watch">clearWatch</a></code> method is
    called with the corresponding identifier.</p>
 
@@ -738,8 +738,8 @@ cite this document as other than work in progress.</p>
 
   <p>The <dfn id=clear-watch><code>clearWatch()</code></dfn> method
   takes one argument. When called, the watch process identified by
-  the <dfn id="watchId"><code>watchId</code></dfn> argument will be
-  stopped and should not invoke any further callbacks.</p>
+  the <dfn id="watchId"><code>watchId</code></dfn> argument must be
+  stopped and must not invoke any further callbacks.</p>
 
 
   <h3 id="position_options_interface"><span class=secno>5.2
