@@ -562,11 +562,11 @@ cite this document as other than work in progress.</p>
    method takes one, two or three arguments. When called, it must immediately
    return and then asynchronously attempt to obtain the current
    location of the device. If the attempt is successful,
-   the <code>successCallback</code> is invoked
-   (i.e. the <code>handleEvent</code> operation is called on the
+   the <code>successCallback</code> must be invoked
+   (i.e. the <code>handleEvent</code> operation must be called on the
    callback object) with a new <code>Position</code> object,
    reflecting the current location of the device. If the attempt
-   fails, the <code>errorCallback</code> is invoked with a
+   fails, the <code>errorCallback</code> must be invoked with a
    new <code>PositionError</code> object, reflecting the reason for the failure.</p>
 
   <p>The implementation of the <code>getCurrentPosition</code> method
@@ -631,9 +631,14 @@ cite this document as other than work in progress.</p>
    takes one, two or three arguments. When called, it must immediately
    return a long value that uniquely identifies a <i>watch
    operation</i> and then asynchronously start the watch
-   operation. This
-   operation must first attempt to obtain the current location of the
-   device and invoke the appropriate callback. It then must continue
+   operation. This operation must first attempt to obtain the current location of the
+   device. If the attempt is successful, the <code>successCallback</code> must be invoked
+   (i.e. the <code>handleEvent</code> operation must be called on the
+   callback object) with a new <code>Position</code> object,
+   reflecting the current location of the device. If the attempt
+   fails, the <code>errorCallback</code> must be invoked with a
+   new <code>PositionError</code> object, reflecting the reason for 
+   the failure.</p> The watch operation then must continue
    to monitor the position of the device and invoke the appropriate
    callback every time this position changes. The watch operation
    must continue until
