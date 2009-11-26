@@ -687,7 +687,9 @@ cite this document as other than work in progress.</p>
         a new position before the timeout expires, perform the
         following two steps:
           <ol>
-            <li>Cancel the pending timer.</li>
+            <li>Cancel the pending timer. Note that the timer must be
+            restarted once this algorithm jumps back to the beginning of the
+            acquisition steps.</li>
             <li>If the new position differs significantly from the
               previous position, invoke
               the <code>successCallback</code> with a
@@ -698,8 +700,7 @@ cite this document as other than work in progress.</p>
           </ol>
         </li>
         <li>Else, if the location acquisition operation reports an
-          error before the timeout expires, cancel the pending timer
-          and invoke the <code>errorCallback</code> (if present)
+          error before the timeout expires, invoke the <code>errorCallback</code> (if present)
           with a new <code>PositionError</code> object
           whose <code>code</code> is set to POSITION_UNAVAILABLE. This
           step can be subject to callback rate limitation
