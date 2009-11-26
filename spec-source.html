@@ -777,7 +777,12 @@ cite this document as other than work in progress.</p>
    best possible results. This may result in slower response times or
    increased power consumption. The user might also deny this capability, or
    the device might not be able to provide more accurate results than if the
-   flag wasn't specified.
+   flag wasn't specified. The intended purpose of this attribute is to allow 
+   applications to inform the implementation that they do not require high
+   accuracy geolocation fixes and, therefore, the implementation can avoid
+   using geolocation providers that consume a significant amount of power (e.g. GPS).
+   This is especially useful for applications running on battery-powered devices,
+   such as mobile phones.
 
   <p>If the <code>PositionOptions</code> parameter
   to <code>getCurrentPosition</code> or <code>watchPosition</code> is
