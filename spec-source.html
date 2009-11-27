@@ -736,7 +736,10 @@ cite this document as other than work in progress.</p>
   <p>For both <code>getCurrentPosition</code>
   and <code>watchPosition</code>, the implementation must never invoke
   the <code>successCallback</code> without having first obtained
-  permission from the user to share location. If the user grants permission, the
+  permission from the user to share location. Furthermore, the 
+  implementation should always obtain the user's permission to share location before
+  executing any of the <code>getCurrentPosition</code> or <code>watchPosition</code> steps
+  described above. If the user grants permission, the
   appropriate callback must be invoked as described above. If the user
   denies permission, the <code>errorCallback</code> (if present)
   must be invoked with <code>code</code> PERMISSION_DENIED, irrespective of any
