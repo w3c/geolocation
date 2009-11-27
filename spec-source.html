@@ -574,6 +574,9 @@ cite this document as other than work in progress.</p>
   <ol>
     <li>Run the following pre-processing steps:
       <ol>
+        <li>If <code>successCallback</code> is the null value,
+          then treat this as if the conversion to <code>PositionCallback</code>
+          had failed, and abort these steps. See section 3.7 in <a href="#ref-webidl">[WEBIDL]</a>.</li>
         <li>If a <code>PositionOptions</code> parameter was present,
         and its <code>maximumAge</code> attribute was defined to a
         non-negative value, assign this value to an internal
@@ -650,6 +653,9 @@ cite this document as other than work in progress.</p>
   <ol>
     <li>Run the following pre-processing steps:
       <ol>
+        <li>If <code>successCallback</code> is the null value,
+          then treat this as if the conversion to <code>PositionCallback</code>
+          had failed, and abort these steps. See section 3.7 in <a href="#ref-webidl">[WEBIDL]</a>.</li>
         <li>If a <code>PositionOptions</code> parameter was present,
         and its <code>maximumAge</code> attribute was defined to a
         non-negative value, assign this value to an internal
