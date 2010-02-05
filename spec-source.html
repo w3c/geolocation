@@ -55,7 +55,7 @@
 
    <h1 id="title_heading">Geolocation API Specification</h1>
 
-   <h2 class="no-num no-toc" id="draft_date">Editor's Draft 27 November 2009</h2>
+   <h2 class="no-num no-toc" id="draft_date">Editor's Draft 05 February 2010</h2>
 
    <dl>
     <!-- <dt>This Version:</dt>
@@ -955,7 +955,6 @@ cite this document as other than work in progress.</p>
 
   <pre class=idl>
   interface <dfn id=position-error>PositionError</dfn> {
-    const unsigned short <a href="#unknown_error">UNKNOWN_ERROR</a> = 0;
     const unsigned short <a href="#permission_denied_error">PERMISSION_DENIED</a> = 1;
     const unsigned short <a href="#position_unavailable_error">POSITION_UNAVAILABLE</a> = 2;
     const unsigned short <a href="#timeout_error">TIMEOUT</a> = 3;
@@ -968,12 +967,6 @@ cite this document as other than work in progress.</p>
    appropriate code from the following list:
 
   <dl>
-   <dt><dfn id="unknown_error"><code>UNKNOWN_ERROR</code></dfn> (numeric
-    value 0)
-
-   <dd>The location acquisition process failed due to an error not covered by
-    the definition of any other error code in this interface.
-
    <dt><dfn id="permission_denied_error"><code>PERMISSION_DENIED</code></dfn>
     (numeric value 1)
 
