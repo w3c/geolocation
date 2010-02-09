@@ -55,7 +55,7 @@
 
    <h1 id="title_heading">Geolocation API Specification</h1>
 
-   <h2 class="no-num no-toc" id="draft_date">Editor's Draft 05 February 2010</h2>
+   <h2 class="no-num no-toc" id="draft_date">Editor's Draft 10 February 2010</h2>
 
    <dl>
     <!-- <dt>This Version:</dt>
@@ -437,7 +437,7 @@ cite this document as other than work in progress.</p>
    potentially compromising the user's privacy. A conforming implementation
    of this specification must provide a mechanism that protects the user's
    privacy and this mechanism should ensure that no location information is
-   made available without the user's express permission.
+   made available through this API without the user's express permission.
 
   <h3 id="privacy_for_uas"><span class=secno>4.1 </span>Privacy
    considerations for implementors of the Geolocation API</h3>
@@ -926,17 +926,16 @@ cite this document as other than work in progress.</p>
    height of the position, specified in meters above the <a
    href="#ref-wgs">[WGS84]</a> ellipsoid. If the implementation cannot
    provide altitude information, the value of this attribute must be null.
-   Otherwise, the value of the altitude attribute must be a positive real number.
 
   <p>The <dfn id=accuracy><code>accuracy</code></dfn> attribute denotes the
    accuracy level of the latitude and longitude coordinates. It is specified
    in meters and must be supported by all implementations. The value of the accuracy
-   attribute must be a positive real number.
+   attribute must be a non-negative real number.
 
   <p>The <dfn id=altitude-accuracy><code>altitudeAccuracy</code></dfn>
    attribute is specified in meters. If the implementation cannot provide
    altitude information, the value of this attribute must be null. Otherwise,
-   the value of the altitudeAccuracy attribute must be a positive real number.
+   the value of the altitudeAccuracy attribute must be a non-negative real number.
 
   <p>The <code><a href="#accuracy">accuracy</a></code> and <code><a
    href="#altitude-accuracy">altitudeAccuracy</a></code> values returned by
@@ -954,7 +953,7 @@ cite this document as other than work in progress.</p>
    ground speed of the hosting device and is specified in meters per second.
    If the implementation cannot provide speed information, the value of this
    attribute must be null. Otherwise, the value of the speed attribute must be
-   a positive real number.
+   a non-negative real number.
 
   <h3 id="position_error_interface"><span class=secno>5.5
    </span>PositionError interface</h3>
