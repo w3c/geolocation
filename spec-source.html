@@ -884,6 +884,7 @@ cite this document as other than work in progress.</p>
    position (e.g. street addresses).
 
   <pre class=idl>
+  [NoInterfaceObject]
   interface <dfn id=position>Position</dfn> {
     readonly attribute <a href="#coordinates">Coordinates</a> <a href="#coords">coords</a>;
     readonly attribute DOMTimeStamp <a href="#timestamp">timestamp</a>;
@@ -903,6 +904,7 @@ cite this document as other than work in progress.</p>
    interface</h3>
 
   <pre class=idl>
+  [NoInterfaceObject]
   interface <dfn id=coordinates>Coordinates</dfn> {
     readonly attribute double <a href="#lat">latitude</a>;
     readonly attribute double <a href="#lon">longitude</a>;
@@ -959,6 +961,7 @@ cite this document as other than work in progress.</p>
    </span>PositionError interface</h3>
 
   <pre class=idl>
+  [NoInterfaceObject]
   interface <dfn id=position-error>PositionError</dfn> {
     const unsigned short <a href="#permission_denied_error">PERMISSION_DENIED</a> = 1;
     const unsigned short <a href="#position_unavailable_error">POSITION_UNAVAILABLE</a> = 2;
