@@ -445,8 +445,8 @@ cite this document as other than work in progress.</p>
   <p>User agents must not send location information to Web sites without the
    express permission of the user. User agents must acquire permission
    through a user interface, unless they have prearranged trust relationships
-   with users, as described below. The user interface must include the URI of
-   the document origin <a href="#ref-origin">[DOCUMENTORIGIN]</a>. Those
+   with users, as described below. The user interface must include the host
+   component of the document's URI <a href="#ref-uri">[URI]</a>. Those
    permissions that are acquired through the user interface and that are
    preserved beyond the current browsing session (i.e. beyond the time when
    the browsing context <a href="#ref-context">[BROWSINGCONTEXT]</a> is
@@ -978,7 +978,7 @@ cite this document as other than work in progress.</p>
    <dt><dfn id="permission_denied_error"><code>PERMISSION_DENIED</code></dfn>
     (numeric value 1)
 
-   <dd>The location acquisition process failed because the application origin
+   <dd>The location acquisition process failed because the document
     does not have permission to use the Geolocation API.
 
    <dt><dfn
@@ -1139,11 +1139,11 @@ cite this document as other than work in progress.</p>
     browsing context in HTML5</a></cite>, Ian Hickson, David Hyatt, Editors.  World Wide Web Consortium.  See
     http://dev.w3.org/html5/spec/Overview.html#browsing-context
 
-   <dt><a id=ref-origin>[DOCUMENTORIGIN]</a>
+   <dt><a id=ref-uri>[URI]</a>
 
-   <dd><cite><a href="http://dev.w3.org/html5/spec/Overview.html#origin">The
-    origin of a resource in HTML5</a></cite>, Ian Hickson, David Hyatt, Editors.  World Wide Web Consortium. See
-    http://dev.w3.org/html5/spec/Overview.html#origin
+   <dd><cite><a href="http://www.ietf.org/rfc/rfc2396.txt">Uniform Resource Identifiers (URI): Generic Syntax
+    </a></cite>.T. Berners-Lee, R. Fielding, L. Masinter, Editors. Internet Engineering Task Force. 
+    See http://www.ietf.org/rfc/rfc2396.txt
 
    <dt><a id=ref-navigator>[NAVIGATOR]</a>
 
