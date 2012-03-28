@@ -152,14 +152,12 @@ See the <a href="http://www.w3.org/2008/geolocation/drafts/API/Implementation-Re
 </p>
 
 
-<p>This document has been produced as part of the <a href=
-"http://www.w3.org/2007/uwa/">W3C Ubiquitous Web Applications
-Activity</a>, following the procedures set out for the
+<p>This document has been produced by
+the <a href="http://www.w3.org/2008/geolocation/">W3C Geolocation
+Working Group</a>, following the procedures set out for the
 <a href="http://www.w3.org/Consortium/Process/">W3C Process</a>,
 with the intention of advancing it along the W3C Recommendation
-track. The authors of this document are members of the <a href=
-"http://www.w3.org/2008/geolocation/">W3C Geolocation Working
-Group</a>.</p>
+track.</p>
 
 <p>This document was produced by a group operating under the
 <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
@@ -198,7 +196,7 @@ progress.</p>
     considerations</a>
     <ul class=toc>
      <li><a href="#privacy_for_uas"><span class=secno>4.1 </span>Privacy
-      considerations for implementors of the Geolocation API</a>
+      considerations for implementers of the Geolocation API</a>
 
      <li><a href="#privacy_for_recipients"><span class=secno>4.2
       </span>Privacy considerations for recipients of location
@@ -494,7 +492,7 @@ progress.</p>
    made available through this API without the user's express permission.
 
   <h3 id="privacy_for_uas"><span class=secno>4.1 </span>Privacy
-   considerations for implementors of the Geolocation API</h3>
+   considerations for implementers of the Geolocation API</h3>
 
   <p>User agents must not send location information to Web sites without the
    express permission of the user. User agents must acquire permission
@@ -540,7 +538,7 @@ progress.</p>
 
   <p><em>This section is non-normative.</em>
 
-  <p>Further to the requirements listed in the previous section, implementors
+  <p>Further to the requirements listed in the previous section, implementers
    of the Geolocation API are also advised to consider the following aspects
    that may negatively affect the privacy of their users: in certain cases,
    users may inadvertently grant permission to the user agent to disclose
@@ -552,7 +550,7 @@ progress.</p>
   <p>Predicting or preventing these situations is inherently difficult.
    Mitigation and in-depth defensive measures are an implementation
    responsibility and not prescribed by this specification. However, in
-   designing these measures, implementors are advised to enable user
+   designing these measures, implementers are advised to enable user
    awareness of location sharing, and to provide easy access to interfaces
    that enable revocation of permissions.
 
@@ -774,8 +772,8 @@ progress.</p>
 
   <p id="rate-limit">In step 5.2.2 of the watch process,
   the <code>successCallback</code> is only invoked when a new position
-  is obtained and this position differs signifficantly from the
-  previously reported position. The definition of what consitutes a
+  is obtained and this position differs significantly from the
+  previously reported position. The definition of what constitutes a
   significant difference is left to the implementation. Furthermore,
   in steps 5.2.2 and 5.2.3, implementations may impose limitations on
   the frequency of callbacks so as to avoid inadvertently consuming a
@@ -1126,7 +1124,7 @@ progress.</p>
   <p>A social network application allows its users to automatically tag their
    status updates with location information. It does this by monitoring the
    user's position with the Geolocation API. Each user can control the
-   granularity of the location information (e.g. city or neighbourhood level)
+   granularity of the location information (e.g. city or neighborhood level)
    that is shared with the other users. Any user can also track his network
    of friends and get real-time updates about their current location.
 
