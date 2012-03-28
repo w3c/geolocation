@@ -45,8 +45,13 @@
    table.matrix, table.matrix td { border: none; text-align: right; }
    table.matrix { margin-left: 2em; }
   </style>
-  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel=stylesheet
-  type="text/css">
+
+  <!-- @@@ -->
+  <!-- Stylesheet for Editor's draft -->
+  <link href="http://www.w3.org/StyleSheets/TR/W3C-ED.css" rel=stylesheet type="text/css">
+  <!-- Stylesheet for publication -->
+  <!--<link href="http://www.w3.org/StyleSheets/TR/W3C-PR.css" rel=stylesheet type="text/css">-->
+  <!-- @@@ -->
 
  <body>
   <div class=head> <!--begin-logo-->
@@ -55,21 +60,17 @@
 
    <h1 id="title_heading">Geolocation API Specification</h1>
 
-   <h2 class="no-num no-toc" id="draft_date">Editor's Draft 28 June 2011</h2>
+   <h2 class="no-num no-toc" id="draft_date">Editor's Draft (@@@for W3C Proposed Recommendation@@@) 29 March 2012</h2>
 
    <dl>
-    <!-- <dt>This Version:</dt>
-      <dd><a href="http://www.w3.org/TR/2009/WD-geolocation-API-20090707/">http://www.w3.org/TR/2009/WD-geolocation-API-20090707/</a></dd> -->
+    <dt>This Version:</dt>
+    <dd><a href="http://www.w3.org/TR/2010/CR-geolocation-API-20100907/">http://www.w3.org/TR/2010/CR-geolocation-API-20100907/</a></dd>
 
     <dt>Latest Published Version:
-
-    <dd><a
-     href="http://www.w3.org/TR/geolocation-API/">http://www.w3.org/TR/geolocation-API/</a>
+    <dd><a href="http://www.w3.org/TR/geolocation-API/">http://www.w3.org/TR/geolocation-API/</a>
 
     <dt>Latest Editor's Draft:
-
-    <dd><a
-     href="http://dev.w3.org/geo/api/spec-source.html">http://dev.w3.org/geo/api/spec-source.html</a></dd>
+    <dd><a href="http://dev.w3.org/geo/api/spec-source.html">http://dev.w3.org/geo/api/spec-source.html</a></dd>
     <dt>Previous version:</dt>
       <dd><a href="http://www.w3.org/TR/2008/WD-geolocation-API-20081222/">http://www.w3.org/TR/2008/WD-geolocation-API-20081222/</a></dd>
 
@@ -97,37 +98,92 @@ technical report can be found in
 the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at
 http://www.w3.org/TR/.</em></p>
 
-  <!-- where to send feedback (required) -->
+###
 
-  <p>This document was published by the <a
-  href="http://www.w3.org/2008/geolocation/">Geolocation Working Group</a> .
-  If you wish to make comments regarding this document, please send
-  them to <a 
-  href="mailto:public-geolocation@w3.org">public-geolocation@w3.org</a> (<a 
-  href="mailto:public-geolocation-request@w3.org?subject=subscribe">subscribe</a>,
-  <a 
-  href="http://lists.w3.org/Archives/Public/public-geolocation/">archives</a>).</p> 
-  <p>All feedback is welcome.</p>
-  <!-- stability (required) -->
+<p>This is the 29 March 2012 W3C Proposed Recommendation of
+"Geolocation API Specification". W3C
+publishes a technical report as a Proposed Recommendation to
+indicate that the document is a mature technical report that has
+received wide review for technical soundness and implementability
+and to request final endorsement from the W3C Advisory Committee.
+Proposed Recommendation status is described in section 7.1.1 of the
+<a href=
+"http://www.w3.org/2004/02/Process-20040205/tr.html#maturity-levels">
+Process Document</a>.</p>
 
-<p>Publication as a Working Draft does not imply endorsement by the
-W3C Membership. This is a draft document and may be updated, replaced
-or obsoleted by other documents at any time. It is inappropriate to
-cite this document as other than work in progress.</p>
+<p>The W3C Membership and other interested parties are invited to
+review the document and send comments to the Working Group's public
+mailing list
+<a href="mailto:public-geolocation@w3.org">public-geolocation@w3.org</a>
+(<a href="mailto:public-geolocation-request@w3.org?subject=subscribe">subscribe</a>, <a href="http://lists.w3.org/Archives/Public/public-geolocation/">archives</a>)
+until <strong>29 April 2012, 23:59 EDT</strong>. See <a href=
+"http://www.w3.org/Mail/">W3C mailing list and archive usage
+guidelines</a>. Advisory Committee Representatives should consult
+<a href="http://www.w3.org/2002/09/wbs/myQuestionnaires">their WBS
+questionnaires</a> .</p>
 
-  <!-- required patent boilerplate -->
+<p>The 
+<a href="http://www.w3.org/2008/geolocation/">W3C Geolocation Working Group</a> 
+believes that this specification addresses its
+requirements and all Last Call and Candidate Recommendation issues.
+
+There are no substantial changes from the 7 September 2010 <a href="http://www.w3.org/TR/2010/CR-geolocation-API-20100907/">Candidate Recommendation</a> .</p>
 
 
-  <p> This document was produced by a group operating under the <a
-   href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February
-   2004 W3C Patent Policy</a>. W3C maintains a <a href="http://www.w3.org/2004/01/pp-impl/42891/status" rel="disclosure">public list of any patent disclosures</a>
-   made in connection with the deliverables of the group; that page also
-   includes instructions for disclosing a patent. An individual who has
-   actual knowledge of a patent which the individual believes contains <a
-   href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
-   Claim(s)</a> must disclose the information in accordance with <a
-   href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
-   6 of the W3C Patent Policy</a>.
+
+The entrance criteria to enter the Proposed Recommendation stage was
+to have (1) a minimum of two independent and interoperable user agents
+that implement each feature of the Geolocation API and pass
+the <a href="http://www.w3.org/2008/geolocation/drafts/API/Implementation-Report.html#ua-tests">User
+Agent Tests</a>
+and (2) a minimum
+of two Websites that pass the 
+<a href="http://www.w3.org/2008/geolocation/drafts/API/Implementation-Report.html#website-tests">Website Tests</a> .
+
+<p>In the Candidate Recommendation phase, the group generated the
+the <a href="http://www.w3.org/2008/geolocation/drafts/API/Implementation-Report.html">Implementation
+Report</a> which includes the information on known implementations.
+
+The group has confirmed there were at least five User Agent
+implementations, and all the features of the Geolocation API
+specification were implemented by two or more User Agents.
+
+Also there were at least two Websites that pass the Website Tests.
+
+See the <a href="http://www.w3.org/2008/geolocation/drafts/API/Implementation-Report.html">Implementation Report</a> for the details of the results.
+</p>
+
+
+<p>This document has been produced as part of the <a href=
+"http://www.w3.org/2007/uwa/">W3C Ubiquitous Web Applications
+Activity</a>, following the procedures set out for the
+<a href="http://www.w3.org/Consortium/Process/">W3C Process</a>,
+with the intention of advancing it along the W3C Recommendation
+track. The authors of this document are members of the <a href=
+"http://www.w3.org/2008/geolocation/">W3C Geolocation Working
+Group</a>.</p>
+
+<p>This document was produced by a group operating under the
+<a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+February 2004 W3C Patent Policy</a>. W3C maintains a <a rel=
+"disclosure" href=
+"http://www.w3.org/2004/01/pp-impl/34607/status">public list of any
+patent disclosures</a> made in connection with the deliverables of
+the group; that page also includes instructions for disclosing a
+patent. An individual who has actual knowledge of a patent which
+the individual believes contains <a href=
+"http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">
+Essential Claim(s)</a> must disclose the information in accordance
+with <a href=
+"http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">
+section 6 of the W3C Patent Policy</a>.</p>
+
+<p>Publication as a Proposed Recommendation does not imply
+endorsement by the W3C Membership. This is a draft document and may
+be updated, replaced or obsoleted by other documents at any time.
+It is inappropriate to cite this document as other than work in
+progress.</p>
+
 
   <h2 class="no-num no-toc" id=contents>Table of Contents</h2>
   <!--begin-toc-->
