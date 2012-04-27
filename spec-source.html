@@ -60,7 +60,7 @@
 
    <h1 id="title_heading">Geolocation API Specification</h1>
 
-   <h2 class="no-num no-toc" id="draft_date">Editor's Draft (@@@for W3C Proposed Recommendation@@@) @@ March 2012</h2>
+   <h2 class="no-num no-toc" id="draft_date">Editor's Draft (@@@for W3C Proposed Recommendation@@@) @@ April 2012</h2>
 
    <dl>
     <dt>This Version:</dt>
@@ -599,15 +599,9 @@ progress.</p>
    void <a href="#clear-watch">clearWatch</a>(in long watchId);
  };
 
- [Callback=FunctionOnly, NoInterfaceObject]
- interface <dfn id=position-callback>PositionCallback</dfn> {
-   void handleEvent(in <a href="#position">Position</a> position);
- };
+ callback <dfn id=position-callback>PositionCallback</dfn> = void (<a href="#position">Position</a> position);
 
- [Callback=FunctionOnly, NoInterfaceObject]
- interface <dfn id=error-callback>PositionErrorCallback</dfn> {
-   void handleEvent(in <a href="#position-error">PositionError</a> error);
- };
+ callback <dfn id=error-callback>PositionErrorCallback</dfn> = void (<a href="#position-error">PositionError</a> positionError);
  </pre>
 
   <p>The <dfn id=get-current-position><code>getCurrentPosition()</code></dfn>
