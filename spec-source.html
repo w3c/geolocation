@@ -588,13 +588,13 @@ progress.</p>
  <pre class=idl>
  [NoInterfaceObject]
  interface <dfn id=geolocation>Geolocation</dfn> { 
-   void <a href="#get-current-position">getCurrentPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback,
-                           in optional <a href="#error-callback">PositionErrorCallback</a> errorCallback,
-                           in optional <a href="#position-options">PositionOptions</a> options);
+   void <a href="#get-current-position">getCurrentPosition</a>(<a href="#position-callback">PositionCallback</a> successCallback,
+                           optional <a href="#error-callback">PositionErrorCallback</a> errorCallback,
+                           optional <a href="#position-options">PositionOptions</a> options);
 
-   long <a href="#watch-position">watchPosition</a>(in <a href="#position-callback">PositionCallback</a> successCallback,
-                      in optional <a href="#error-callback">PositionErrorCallback</a> errorCallback,
-                      in optional <a href="#position-options">PositionOptions</a> options);
+   long <a href="#watch-position">watchPosition</a>(<a href="#position-callback">PositionCallback</a> successCallback,
+                      optional <a href="#error-callback">PositionErrorCallback</a> errorCallback,
+                      optional <a href="#position-options">PositionOptions</a> options);
 
    void <a href="#clear-watch">clearWatch</a>(in long watchId);
  };
