@@ -1,0 +1,47 @@
+partial interface ServiceWorkerGlobalScope {
+  readonly attribute GeofencingController geofencing;
+  attribute EventHandler ongeofenceenter;
+  attribute EventHandler ongeofenceleave;
+};
+ 
+[NoInterfaceObject]
+interface GeofencingEvent {
+  readonly attribute GeofenceRegistration region;
+  readonly attribute Position position;
+}
+ 
+[NoInterfaceObject]
+interface GeofencingController {
+  Promise<GeofenceRegistration> registerRegion(DOMString id, GeofencingRegion region);
+  Promise<sequence<GeofenceRegistration>> getRegisteredRegions();
+  Promise<GeofenceRegistration> getRegisteredRegion(DOMString id);
+};
+
+interface GeofenceRegistration : EventTarget {
+  readonly attribute DOMString id;
+  readonly GeofencingRegion region;
+  
+  Promise<undefined> unregister();
+};
+
+[NoInterfaceObject]
+interface GeofencingRegion {
+};
+ 
+dictionary GeolocationPoint {
+  double latitude;
+  double longitude;
+};
+ 
+[Constructor(dictionary options), exposed=Window&Worker]
+interface CircularRegion : GeofencingRegion {
+  readonly attribute GeolocationPoint center;
+  readonly attribute double radius;
+};
+ 
+// Other potential region types:
+// Polygon of nonintersecting line segments.
+[Constructor(dictionary options), exposed=Window&Worker]
+interface PolygonRegion : GeofencingRegion {
+  readonly attribute sequence<GeolocationPoint> points;
+};
