@@ -3,14 +3,12 @@ partial interface ServiceWorkerGlobalScope {
   attribute EventHandler ongeofenceenter;
   attribute EventHandler ongeofenceleave;
 };
- 
-[NoInterfaceObject]
+
 interface GeofencingEvent {
   readonly attribute GeofenceRegistration region;
   readonly attribute Position position;
 }
- 
-[NoInterfaceObject]
+
 interface GeofencingController {
   Promise<GeofenceRegistration> registerRegion(DOMString id, GeofencingRegion region);
   Promise<sequence<GeofenceRegistration>> getRegisteredRegions();
