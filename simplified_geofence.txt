@@ -24,9 +24,13 @@ interface GeofencingErrorEvent : GeofencingEvent {
 };
 
 interface GeofencingController {
-  Promise<GeofenceRegistration> registerRegion( GeofencingRegion initialRegion );
+  Promise<GeofenceRegistration> registerRegion( GeofencingRegion initialRegion, optional GeofenceRegisterOptions options );
   Promise<sequence<GeofenceRegistration>> getRegisteredRegions(optional GeofencingRegistrationQueryOptions options);
   Promise<GeofenceRegistration> getRegisteredRegion(DOMString id);
+};
+
+dictionary GeofenceRegisterOptions {
+  bool includePosition = false;
 };
 
 // Similar API to ServiceWorkerClients.getAll(), nice to have, but I could
