@@ -9,14 +9,20 @@ interface GeofencingEvent {
   readonly attribute Position position;
 }
 
+dictionary GeofencingRegionInit {
+  DOMString name; // optional user-supplied name
+  GeofencingRegion region;
+};
+
 interface GeofencingController {
-  Promise<GeofenceRegistration> registerRegion(DOMString id, GeofencingRegion region);
+  Promise<GeofenceRegistration> registerRegion( GeofencingRegionInit initialRegion );
   Promise<sequence<GeofenceRegistration>> getRegisteredRegions();
   Promise<GeofenceRegistration> getRegisteredRegion(DOMString id);
 };
 
 interface GeofenceRegistration : EventTarget {
-  readonly attribute DOMString id;
+  readonly attribute DOMString id;     // SWRegistration-unique ID
+  readonly attribute DOMString name;   // optional user-supplied name
   readonly GeofencingRegion region;
   
   Promise<undefined> unregister();
@@ -25,13 +31,19 @@ interface GeofenceRegistration : EventTarget {
 [NoInterfaceObject]
 interface GeofencingRegion {
 };
- 
+
 dictionary GeolocationPoint {
   double latitude;
   double longitude;
 };
- 
-[Constructor(dictionary options), exposed=Window&Worker]
+
+dictionary CircularRegionInit { 
+  double latitude;
+  double longitude;
+  double radius;
+};
+
+[Constructor(CircularRegionInit), exposed=Worker]
 interface CircularRegion : GeofencingRegion {
   readonly attribute GeolocationPoint center;
   readonly attribute double radius;
@@ -39,7 +51,20 @@ interface CircularRegion : GeofencingRegion {
  
 // Other potential region types:
 // Polygon of nonintersecting line segments.
-[Constructor(dictionary options), exposed=Window&Worker]
+[Constructor(dictionary options), exposed=Worker]
 interface PolygonRegion : GeofencingRegion {
   readonly attribute sequence<GeolocationPoint> points;
 };
+
+
+
+Use case test:
+
+Promise<GeofenceRegistration> registerRegion(
+  { 
+    region: new CircularRegion( {
+      latitude: 123,
+      longitude: -1000,
+      radius: 1
+    } ),
+    name: "myfence" });
