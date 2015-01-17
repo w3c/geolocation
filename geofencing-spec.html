@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Geofencing API
+    </title>
+    <meta charset='utf-8'>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' async="" class='remove'>
+</script>
+    <script class="remove">
+// (this is to make tidy happy)
+      // See http://www.w3.org/respec/ for ReSpec documentation.
+      var respecConfig = {
+          specStatus: "ED",
+          shortName: "geofencing-api",
+
+          edDraftURI:   "https://mkruisselbrink.github.io/geolocation-api/geofencing-spec.html",
+
+          editors: [
+            {
+              name: "Marijn Kruisselbrink",
+              company: "Google",
+              companyURL: "https://www.google.com/"
+            },
+          ],
+
+          wg: "Geolocation Working Group",
+          wgURI: "http://www.w3.org/2008/geolocation/",
+          wgPublicList: "public-geolocation",
+          subjectPrefix: "[Geofencing API]",
+
+          localBiblio: {
+            "WGS84": {
+              href: "http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf",
+              title: "National Imagery and Mapping Agency Technical Report 8350.2, Third Edition",
+              publisher: "National Imagery and Mapping Agency",
+              date: "3 January 2000"
+            }
+          },
+
+          noLegacyStyle: true,
+      };
+    </script>
+  </head>
+  <body>
+    <section id="abstract">
+      <p>
+        This specification defines an API that lets <a title="webapp">webapps</a> setup geographic
+        boundaries around specific locations and then receive notifications when the hosting device
+        enters or leaves those areas.
+      </p>
+    </section>
+    <section id="sotd"></section>
+    <section class="informative" id="introduction">
+      <h2>
+        Introduction
+      </h2>
+      <p>
+        The Geofencing API lets <a title="webapp">webapps</a> setup geographic boundaries around
+        specific locations and then receive notifications when the hosting device enters or leaves
+        those areas. While it would be possible to implement something similar using the
+        Geolocation API [[!GEOLOCATION-API]], there are a few differences that could make this API
+        a better choice:
+      </p>
+      <ul>
+        <li>The Geofencing API is built around Service Workers. This makes it possible for a
+        <a>webapp</a> to receive notifications from the Geofencing API even after the user has
+        closed the <a>webapp</a>.
+        </li>
+        <li>Because of the limited API surface of the Geofencing API, <a title="user agent">user
+        agents</a> can implement the API in a more (power) efficient way than could be achieved by
+        regularly checking the current geographic position with the Geolocation API.
+        </li>
+      </ul>
+      <p>
+        TODO: More complete introduction
+      </p>
+      <pre class="example highlight">
+// https://example.com/webapp.js
+navigator.serviceWorker.register('serviceworker.js').then(
+  function(serviceWorkerRegistration) {
+    serviceWorkerRegistration.geofencing.registerRegion(
+        new CircularGeofenceRegion({
+          name: "myfence",
+          latitude: 37.421999,
+          longitude: -122.084015,
+          radius: 1000
+        }), {includePosition: true}).then(
+      function(geofenceRegistration) {
+        console.log(geofenceRegistration.id);
+        // If more than just a name needs to be stored with a geofence
+        // registration, now would be the time to store this in some storage.
+      }, function(error) {
+        // During development it often helps to log errors to the
+        // console. In a production environment it might make sense to
+        // also report information about errors back to the
+        // application server.
+        console.log(error);
+      }
+    );
+  });
+
+// https://example.com/serviceworker.js
+this.ongeofenceenter = function(event) {
+  console.log(event.registration.id);
+  console.log(event.registration.region.name);
+
+  // If this is not a registration of interest anymore, unregister it.
+  if (event.registration.region.name !== "myfence") {
+    event.waitUntil(event.registration.unregister());
+  }
+}
+
+this.ongeofenceerror = function(event) {
+  console.log(event.registration.id);
+  console.log(event.registration.region.name);
+  console.log(event.error);
+
+  // Some error condition occured. The registration will remain, but might not
+  // trigger any more events until the erorr condition has been resolved.
+}
+</pre>
+    </section>
+    <section id="conformance">
+      <p>
+        This specification defines conformance criteria that apply to a single product: the
+        <dfn>user agent</dfn> that implements the interfaces that it contains.
+      </p>
+      <p>
+        Implementations that use ECMAScript to implement the APIs defined in this specification
+        MUST implement them in a manner consistent with the ECMAScript Bindings defined in the Web
+        IDL specification [[!WEBIDL]].
+      </p>
+    </section>
+    <section>
+      <h2>
+        Terminology
+      </h2>
+      <p>
+        The terms <dfn><a href="http://www.w3.org/TR/html5/webappapis.html#event-handlers">event
+        handler</a></dfn>, <dfn><a href=
+        "http://www.w3.org/TR/html5/webappapis.html#event-handler-event-type">event handler event
+        type</a></dfn>, <dfn><a href=
+        "http://www.w3.org/TR/html5/webappapis.html#queue-a-task">queue a task</a></dfn>, and
+        <dfn><a href="http://www.w3.org/TR/html5/webappapis.html#fire-a-simple-event">fire a simple
+        event</a></dfn> are defined in [[!HTML5]].
+      </p>
+      <p>
+        The types <code><a href=
+        'http://people.mozilla.org/~jorendorff/es6-draft.html#sec-promise-objects'><dfn>Promise</dfn></a></code>,
+        and <code><a href=
+        "http://people.mozilla.org/~jorendorff/es6-draft.html#sec-native-error-types-used-in-this-standard-rangeerror">
+        <dfn>RangeError</dfn></a></code> are defined in [[!ECMASCRIPT]].
+      </p>
+      <p>
+        <code><a href="http://www.w3.org/TR/dom/#eventinit"><dfn>EventInit</dfn></a></code>,
+        <code><a href="http://www.w3.org/TR/dom/#domexception"><dfn>DOMException</dfn></a></code>,
+        <code><a href=
+        "http://www.w3.org/TR/dom/#invalidstateerror"><dfn>InvalidStateError</dfn></a></code>,
+        <code><a href=
+        "http://www.w3.org/TR/dom/#notfounderror"><dfn>NotFoundError</dfn></a></code>,
+        <code><a href=
+        "http://www.w3.org/TR/dom/#quoteaexceedederror"><dfn>QuotaExceededError</dfn></a></code>,
+        <code><a href="http://www.w3.org/TR/dom/#syntaxerror"><dfn>SyntaxError</dfn></a></code>,
+        and <a href="http://www.w3.org/TR/dom/#concept-event-constructor"><dfn>steps for
+        constructing events</dfn></a> are defined in [[!DOM]].
+      </p>
+      <p>
+        The terms <a href="http://www.w3.org/TR/service-workers/#dfn-service-worker"><dfn>service
+        worker</dfn></a>, <a href=
+        "http://www.w3.org/TR/service-workers/#dfn-service-worker-registration"><dfn>service worker
+        registration</dfn></a>, <a href=
+        "http://www.w3.org/TR/service-workers/#dfn-installing-worker"><dfn>installing
+        worker</dfn></a>, <a href=
+        "http://www.w3.org/TR/service-workers/#dfn-waiting-worker"><dfn>waiting worker</dfn></a>,
+        and <a href="http://www.w3.org/TR/service-workers/#dfn-active-worker"><dfn>active
+        worker</dfn></a>, and the types <code><a href=
+        "http://www.w3.org/TR/service-workers/#service-worker-registration-interface"><dfn>ServiceWorkerRegistration</dfn></a></code>,
+        <code><a href=
+        "http://www.w3.org/TR/service-workers/#service-worker-global-scope-interface"><dfn>ServiceWorkerGlobalScope</dfn></a></code>,
+        <code><a href=
+        "http://www.w3.org/TR/service-workers/#extendable-event-interface"><dfn>ExtendableEvent</dfn></a></code>,
+        and <code><a href=
+        "http://www.w3.org/TR/service-workers/#extendable-event-init-dictionary"><dfn>ExtendableEventInit</dfn></a></code>
+        are defined in [[!SERVICE-WORKERS]].
+      </p>
+      <p>
+        The type <code><a href=
+        "http://www.w3.org/TR/geolocation-API/#position_interface"><dfn>Position</dfn></a></code>
+        is defined in [[!GEOLOCATION-API]].
+      </p>
+      <p>
+        The term <dfn>webapp</dfn> refers to a Web application, i.e. an application implemented
+        using Web technologies, and executing within the context of a Web <a>user agent</a>, e.g. a
+        Web browser or other Web runtime environment.
+      </p>
+      <p>
+        The term <dfn>geofence registration</dfn> is used to refer to one specific registration of
+        a geographic region as a geofence. A <a>geofence registration</a> is a tuple consisting of
+        a <dfn>geographic region</dfn>, <dfn>registration ID</dfn> and a <dfn>include
+        position</dfn> flag.
+      </p>
+      <p>
+        The term <dfn>active geofences</dfn> is used to refer to the collection of <a title=
+        "geofence registration">geofence registrations</a> associated with a particular <a>service
+        worker registration</a>, that are currently being monitored by the <a>user agent</a> for
+        breach events.
+      </p>
+    </section>
+    <section>
+      <h2>
+        Security and privacy considerations
+      </h2>
+      <p>
+        The same <a href="http://www.w3.org/TR/geolocation-API/#security">security and privacy
+        considerations</a> that apply to the Geolocation API [[!GEOLOCATION-API]] also apply to
+        this API. Furthermore since this API effectively gives access to geographic location
+        information after a user has stopped interacting with a webapp, a few other considerations
+        should be taken into account.
+      </p>
+      <section>
+        <p>
+          Something that user agents are encouraged to show some kind of permission prompt when
+          trying to register for a geofence, which might be negated if permission has been
+          established some other way.
+        </p>
+      </section>
+    </section>
+    <section>
+      <h2>
+        API Description
+      </h2>
+      <section>
+        <h2>
+          Extensions to the <a>ServiceWorkerRegistration</a> interface
+        </h2>
+        <p>
+          The Service Worker specification defines a <code><a href=
+          "#def-serviceworkerregistration">ServiceWorkerRegistration</a></code> interface, which
+          this specification extends.
+        </p>
+        <dl title="partial interface ServiceWorkerRegistration" class="idl">
+          <dt>
+            readonly attribute GeofenceController geofencing
+          </dt>
+        </dl>
+        <p>
+          The <code><dfn id="widl-ServiceWorkerRegistration-geofencing">geofencing</dfn></code>
+          attribute exposes a <code><a>GeofenceController</a></code>, which has an associated
+          <a>service worker registration</a> represented by the
+          <code><a>ServiceWorkerRegistration</a></code> on which the attribute is exposed.
+        </p>
+      </section>
+      <section>
+        <h2>
+          <a>GeofenceController</a> interface
+        </h2>
+        <p>
+          The <code><a>GeofenceController</a></code> interface defines operations that enable
+          <a title="webapp">webapps</a> to establish access to geofencing services.
+        </p>
+        <dl title="[NoInterfaceObject] interface GeofenceController" class="idl" data-merge=
+        "GeofenceRegisterOptions GeofenceRegistrationQueryOptions">
+          <dt>
+            Promise&lt;GeofenceRegistration&gt; registerRegion(GeofenceRegion initialRegion,
+            optional GeofenceRegisterOptions options)
+          </dt>
+          <dt>
+            Promise&lt;sequence&lt;GeofenceRegistration&gt;&gt; getRegisteredRegions(optional
+            GeofenceRegistrationQueryOptions options)
+          </dt>
+          <dt>
+            Promise&lt;GeofenceRegistration&gt; getRegisteredRegion(DOMString id)
+          </dt>
+        </dl>
+        <p>
+          The <code><dfn id=
+          "widl-GeofenceController-registerRegion-Promise-GeofenceRegistration--GeofenceRegion-initialRegion-GeofenceRegisterOptions-options">
+          registerRegion</dfn></code> method when invoked MUST run the following steps:
+        </p>
+        <ol>
+          <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
+          </li>
+          <li>Return <var>promise</var> and continue the following steps asynchronously.
+          </li>
+          <li>If the total number of <a>active geofences</a> for all <a title=
+          "service worker registration">service worker registrations</a> in the current origin is
+          more than a <a>user agent</a> defined limit, reject <var>promise</var> with a
+          <code><a>DOMException</a></code> whose name is "<code><a>QuotaExceededError</a></code>"
+          and terminate these steps. A <a>user agent</a> SHOULD allow at least 20 <a>active
+          geofences</a> for an origin.
+          </li>
+          <li>Ask the user whether they allow the <a>webapp</a> to use geofences, unless a
+          prearranged trust relationship applies or the user has already granted or denied
+          permission explicitly for this <a>webapp</a>.
+          </li>
+          <li>If not granted, reject <var>promise</var> with a <code><a>DOMException</a></code>
+          whose name is "<code><a>PermissionDeniedError</a></code>" and terminate these steps.
+          </li>
+          <li>Let <var>registration</var> be a new <a>geofence registration</a>.
+          </li>
+          <li>Set the <a>registration ID</a> of the <var>registration</var> to a value uniquely
+          identifying this registration. This ID MUST be unique across all registrations for this
+          particular origin.
+          </li>
+          <li>Set the <a>geographic region</a> of the <var>registration</var> to a
+          <a><code>GeofenceRegion</code></a> instance of the same type and with the same attributes
+          as the <var>initialRegion</var> passed to <code>registerRegion</code>.
+          </li>
+          <li>Set the <a>include position</a> flag of the <var>registration</var> to
+          <var>options.includePosition</var>, or <code>false</code> if no options were specified.
+          </li>
+          <li>Add <var>registration</var> to the <a>active geofences</a> of the <a>service worker
+          registration</a> associated with the <a>webapp</a>.
+          </li>
+          <li>If the current geographic position is inside the newly added region, <a title=
+          "fire a geofence event">fire a geofenceenter event</a>.
+          </li>
+          <li>Resolve <var>promise</var> with <var>registration</var>.
+          </li>
+        </ol>
+        <p class="issue">
+          Somehow mention that the region that is saved as part of the registration can be slightly
+          different from the region passed to registerRegion. An implementation may adjust
+          parameters to be in range of what is possible, or otherwise modify the region.
+        </p>
+        <p class="note">
+          The iOS API takes a slightly different approach when permission is denied. It instead
+          always treats registrations as a success, but won't actually track geofences/trigger
+          events unless the user has granted permission.
+        </p>
+        <p>
+          If the <code><dfn id=
+          "widl-GeofenceRegisterOptions-includePosition">includePosition</dfn></code> attribute is
+          set to true, <code><a>GeofenceEvent</a></code>s for this registration will have a
+          <code><a href="#widl-GeofenceEvent-position">position</a></code> attribute. When set to
+          false, the <code>position</code> attribute will always be null.
+        </p>
+        <p>
+          The <code><dfn id=
+          "widl-GeofenceController-getRegisteredRegions-Promise-sequence-GeofenceRegistration---GeofenceRegistrationQueryOptions-options">
+          getRegisteredRegions</dfn></code> method when invoked MUST run the following steps:
+        </p>
+        <ol>
+          <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
+          </li>
+          <li>Return <var>promise</var> and continue the following steps asynchronously.
+          </li>
+          <li>Let <var>registrations</var> be a new sequence.
+          </li>
+          <li>For each <a>geofence registration</a> in the <a>active geofences</a> associated with
+          this <a>service worker registration</a>, run the following substeps:
+            <ol>
+              <li>If <var>options</var> is passed, has a non-null <var>name</var> attribute, and
+              that <var>name</var> is not equal to the name of the <var>registration</var>, skip
+              the rest of these substeps and continue with the next registration.
+              </li>
+              <li>Let <var>registration</var> be a new <a><code>GeofenceRegistration</code></a>
+              instance with attributes equal to those of the <var>geofence registration.</var>
+              </li>
+              <li>Append <var>registration</var> to <var>registrations</var>.
+              </li>
+            </ol>
+          </li>
+          <li>Resolve <var>promise</var> with <var>registrations</var>.
+          </li>
+        </ol>
+        <p>
+          The <code><dfn id=
+          "widl-GeofenceController-getRegisteredRegion-Promise-GeofenceRegistration--DOMString-id">getRegisteredRegion</dfn></code>
+          method when invoked MUST run the following steps:
+        </p>
+        <ol>
+          <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
+          </li>
+          <li>Return <var>promise</var> and continue the following steps asynchronously.
+          </li>
+          <li>For each <a>geofence registration</a> in the <a>active geofences</a> associated with
+          this <a>service worker registration</a>, run the following substeps:
+            <ol>
+              <li>If the <a>registration ID</a> of the current <var>registration</var> is not equal
+              to the passed in <var>id</var>, skip the rest of these substeps and continue with the
+              next registration.
+              </li>
+              <li>Let <var>registration</var> be a new <a><code>GeofenceRegistration</code></a>
+              instance with attributes equal to those of the <var>geofence registration.</var>
+              </li>
+              <li>Resolve <var>promise</var> with <var>registration</var> and abort the remainder
+              of these steps.
+              </li>
+            </ol>
+          </li>
+          <li>Reject <var>promise</var> with a <code><a>DOMException</a></code> whose name is
+          "<code><a>NotFoundError</a></code>".
+          </li>
+        </ol>
+        <p class="issue">
+          Maybe instead of reject with NotFoundError this should resolve with null? Both have pros
+          and cons.
+        </p>
+        <dl title="dictionary GeofenceRegisterOptions" class="idl">
+          <dt>
+            boolean includePosition = false
+          </dt>
+        </dl>
+        <dl title="dictionary GeofenceRegistrationQueryOptions" class="idl">
+          <dt>
+            DOMString? name
+          </dt>
+        </dl>
+      </section>
+      <section>
+        <h2>
+          <a>GeofenceRegistration</a> interface
+        </h2>
+        <p>
+          An instance of the <a><code>GeofenceRegistration</code></a> interface represents a
+          <a>geofence registration</a>.
+        </p>
+        <dl title="interface GeofenceRegistration" class="idl">
+          <dt>
+            readonly attribute DOMString id
+          </dt>
+          <dt>
+            readonly attribute GeofenceRegion region
+          </dt>
+          <dt>
+            Promise&lt;undefined&gt; unregister()
+          </dt>
+        </dl>
+        <p>
+          When getting the <code><dfn id="widl-GeofenceRegistration-id">id</dfn></code> attribute,
+          the <a>user agent</a> MUST return the <a>registration ID</a> of the <a>geofence
+          registration</a>. This ID is generated by the <a>user agent</a> and MUST be unique among
+          all current geofence registrations for the same origin, but can be the same as an ID for
+          a geofence registration at a different origin. This ID MUST NOT change as long as this
+          registration exists.
+        </p>
+        <p>
+          When getting the <code><dfn id="widl-GeofenceRegistration-region">region</dfn></code>
+          attribute, the <a>user agent</a> MUST return the <a>geographic region</a> of this
+          <a>geofence registration</a>.
+        </p>
+        <p>
+          The <code><dfn id=
+          "widl-GeofenceRegistration-unregister-Promise-undefined">unregister</dfn></code> method
+          when invoked MUST run the following steps:
+        </p>
+        <ol>
+          <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
+          </li>
+          <li>Return <var>promise</var> and continue the following steps asynchronously.
+          </li>
+          <li>If this <a>geofence registration</a> is not currently in the <a>active geofences</a>
+          associated with a <a>service worker registration</a>, reject <var>promise</var> with a
+          <code><a>DOMException</a></code> whose name is "<code><a>InvalidStateError</a></code>".
+          </li>
+          <li>Remove this <a>geofence registration</a> from the set of <a>active geofences</a>
+          associated with the current <a>service worker registration</a>. No more events related to
+          this registration will be fired after this.
+          </li>
+          <li>Resolve <var>promise</var> with <code>undefined</code>.
+          </li>
+        </ol>
+      </section>
+      <section>
+        <h2>
+          GeofenceRegion interface
+        </h2>
+        <dl title="[Exposed=(Window,Worker)] interface GeofenceRegion" class="idl" data-merge=
+        "GeofenceRegionInit">
+          <dt>
+            readonly attribute DOMString name
+          </dt>
+        </dl>
+        <dl title="dictionary GeofenceRegionInit" class="idl">
+          <dt>
+            DOMString? name
+          </dt>
+        </dl>
+        <p>
+          The <code><dfn id="widl-GeofenceRegion-name" title=
+          "GeofenceRegion-name">name</dfn></code> attribute MUST return the value it was
+          initialized to. When the object is created, this attribute MUST be set to the value of
+          the <code><dfn id="widl-GeofenceRegionInit-name" title=
+          "GeofenceRegionInit-name">name</dfn></code> property in the
+          <code><a>GeofenceRegionInit</a></code> dictionary, or an empty string if that property
+          wasn't set. A <a>user agent</a> MAY impose limits on the maximum size of the <a title=
+          "GeofenceRegion-name">name</a> attribute. If this limit is exceeded the constructor MUST
+          throw a <a>RangeError</a>. If a <a>user agent</a> imposes a limit on the size of the name
+          attribute, this limit SHOULD allow for at least 100 characters.
+        </p>
+      </section>
+      <section>
+        <h2>
+          CircularGeofenceRegion interface
+        </h2>
+        <dl title=
+        "[Constructor(CircularGeofenceRegionInit), Exposed=(Window,Worker)] interface CircularGeofenceRegion : GeofenceRegion"
+        class="idl" data-merge="CircularGeofenceRegionInit GeolocationPoint">
+          <dt>
+            readonly attribute GeolocationPoint center
+          </dt>
+          <dt>
+            readonly attribute double radius
+          </dt>
+        </dl>
+        <p>
+          The <code><dfn id="widl-CircularGeofenceRegion-center">center</dfn></code> attribute MUST
+          return the value it was initialized to. When the object is created, this attribute MUST
+          be set to a <code><a>GeolocationPoint</a></code> instance with its <code>latitude</code>
+          and <code>longitude</code> properties set to the same values as those properties in the
+          <code><a>CircularGeofenceRegionInit</a></code> dictionary. This represents the center of
+          the circular region. Latitude must be between -90 and 90 inclusive. Longitude must be
+          between -180 and 180 inclusive. If either of these properties is outside these ranges,
+          the constructor will throw a <a>RangeError</a>.
+        </p>
+        <p>
+          The <code><dfn id="widl-CircularGeofenceRegion-radius">radius</dfn></code> attribute MUST
+          return the value it was initialized to. When the object is created, this attribute MUST
+          be set to the value of the <code>radius</code> property in the
+          <code><a>CircularGeofenceRegionInit</a></code> dictionary. This represents the radius of
+          the circular region in meters.
+        </p>
+        <p>
+          The <code><dfn id="widl-GeolocationPoint-latitude">latitude</dfn></code> property of a
+          <code><a>GeolocationPoint</a></code> dictionary represents the latitude in circular
+          degrees of a point.
+        </p>
+        <p>
+          The <code><dfn id="widl-GeolocationPoint-longitude">longitude</dfn></code> property of a
+          <code><a>GeolocationPoint</a></code> dictionary represents the longitude in circular
+          degrees of a point.
+        </p>
+        <p>
+          The geographic coordinate reference system used by the attributes in this API is the
+          World Geodetic System (2d) [[!WGS84]]. No other reference system is supported.
+        </p>
+        <p class="issue">
+          The downside of doing error checks in the CircularGeofenceRegion constructor is that they
+          will be actual exceptions instead of promise rejections when calling register. Would it
+          make sense to move the validity checks to register?
+        </p>
+        <dl title="dictionary CircularGeofenceRegionInit" class="idl">
+          <dt>
+            double latitude
+          </dt>
+          <dt>
+            double longitude
+          </dt>
+          <dt>
+            double radius
+          </dt>
+        </dl>
+        <dl title="dictionary GeolocationPoint" class="idl">
+          <dt>
+            double latitude
+          </dt>
+          <dt>
+            double longitude
+          </dt>
+        </dl>
+      </section>
+      <section>
+        <h2>
+          Events
+        </h2>
+        <p>
+          The Service Worker specification defines a <code><a href=
+          "#def-serviceworkerregistration">ServiceWorkerGlobalScope</a></code> interface, which
+          this specification extends.
+        </p>
+        <dl title="partial interface ServiceWorkerGlobalScope" class="idl">
+          <dt>
+            attribute EventHandler ongeofenceenter
+          </dt>
+          <dt>
+            attribute EventHandler ongeofenceleave
+          </dt>
+          <dt>
+            attribute EventHandler ongeofenceerror
+          </dt>
+        </dl>
+        <p>
+          The <code><dfn id=
+          "widl-ServiceWorkerGlobalScope-ongeofenceenter">ongeofenceenter</dfn></code> attribute is
+          an <a>event handler</a> whose corresponding <a>event handler event type</a> is
+          <code>geofenceenter</code>.
+        </p>
+        <p>
+          The <code><dfn id=
+          "widl-ServiceWorkerGlobalScope-ongeofenceleave">ongeofenceleave</dfn></code> attribute is
+          an <a>event handler</a> whose corresponding <a>event handler event type</a> is
+          <code>geofenceleave</code>.
+        </p>
+        <p>
+          The <code><dfn id=
+          "widl-ServiceWorkerGlobalScope-ongeofenceerror">ongeofenceerror</dfn></code> attribute is
+          an <a>event handler</a> whose corresponding <a>event handler event type</a> is
+          <code>geofenceerror</code>.
+        </p>
+        <section>
+          <h2>
+            The <code>geofenceenter</code> and <code>geofenceleave</code> events
+          </h2>
+          <p>
+            The <code><a>GeofenceEvent</a></code> interface represents a geofence being breached.
+          </p>
+          <dl title="[Exposed=ServiceWorker] interface GeofenceEvent : ExtendableEvent" class=
+          "idl">
+            <dt>
+              readonly attribute GeofenceRegistration registration
+            </dt>
+            <dt>
+              readonly attribute Position? position
+            </dt>
+          </dl>
+          <p>
+            Upon detecting a breach of a registered geofence, the <a>user agent</a> MUST run the
+            following steps to <dfn>fire a geofence event</dfn>:
+          </p>
+          <ol>
+            <li>If the <a>Service Worker</a> associated with the <a>webapp</a> is not running,
+            start it.
+            </li>
+            <li>Let <var>scope</var> be the <code><a>ServiceWorkerGlobalScope</a></code> of the <a>
+              Service Worker</a> associated with the <a>webapp</a>.
+            </li>
+            <li>Let <var>event</var> be a new <code><a>GeofenceEvent</a></code>, whose
+            <code>registration</code> attribute is a new <code><a>GeofenceRegistration</a></code>
+            with id and region equal to those of the geofence that was breached.
+            </li>
+            <li>If the registrations <a>includePosition</a> is true, set <var>event.position</var>
+            to the current geographical position.
+            </li>
+            <li>Let <var>eventName</var> be <code>geofenceenter</code> or
+            <code>geofenceleave</code>, corresponding to the type of breach event being processed.
+            </li>
+            <li>
+              <a>Queue a task</a> to <a title="fire a simple event">fire <var>event</var> as a
+              simple event</a> named <var>eventName</var> at <var>scope</var>.
+            </li>
+          </ol>
+          <p>
+            The <a>user agent</a> MAY wait with <a title="fire a geofence event">firing a geofence
+            event</a> until some time has passed after the breach was detected, or until the for
+            some time or distance after detecting a breach of a registered geofence before firing
+            an event to make sure that the geofence really was breached.
+          </p>
+        </section>
+        <section>
+          <h2>
+            GeofenceErrorEvent
+          </h2>
+          <dl title="[Exposed=ServiceWorker] interface GeofenceErrorEvent : ExtendableEvent" class=
+          "idl">
+            <dt>
+              readonly attribute GeofenceRegistration registration
+            </dt>
+            <dt>
+              readonly attribute unsigned short code
+            </dt>
+            <dt>
+              readonly attribute DOMString message
+            </dt>
+          </dl>
+          <p class="issue">
+            This needs more work. I'm really not sure what attributes make sense to expose here.
+          </p>
+          <ol>
+            <li>If the <a>Service Worker</a> associated with the <a>webapp</a> is not running,
+            start it.
+            </li>
+            <li>Let <var>scope</var> be the <code><a>ServiceWorkerGlobalScope</a></code> of the <a>
+              Service Worker</a> associated with the <a>webapp</a>.
+            </li>
+            <li>Let <var>event</var> be a new <code><a>GeofenceErrorEvent</a></code>, whose <code>
+              registration</code> attribute is a new <code><a>GeofenceRegistration</a></code> with
+              id and region equal to those of the geofence that was breached.
+            </li>
+            <li>Let <var>event.code</var> be an error code.
+            </li>
+            <li>Let <var>event.message</var> be a descriptive message for the error that occured.
+            </li>
+            <li>
+              <a>Queue a task</a> to <a title="fire a simple event">fire <var>event</var> as a
+              simple event</a> named <code>geofenceerror</code> at <var>scope</var>.
+            </li>
+          </ol>
+        </section>
+      </section>
+    </section>
+  </body>
+</html>
