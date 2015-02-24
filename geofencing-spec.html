@@ -659,8 +659,8 @@ this.ongeofenceerror = function(event) {
             </dt>
           </dl>
           <p>
-            Upon detecting a <a title="breached">breach</a> of a registered geofence, the <a>user
-            agent</a> MUST run the following steps to <dfn>fire a geofence event</dfn>:
+            Upon detecting a <a title="breached">breach</a> of a <a>geofence registration</a>, the
+            <a>user agent</a> MUST run the following steps to <dfn>fire a geofence event</dfn>:
           </p>
           <ol>
             <li>If the <a>Service Worker</a> associated with the <a>webapp</a> is not running,
@@ -671,7 +671,7 @@ this.ongeofenceerror = function(event) {
             </li>
             <li>Let <var>event</var> be a new <code><a>GeofenceEvent</a></code>, whose
             <code>registration</code> attribute is a new <code><a>GeofenceRegistration</a></code>
-            with id and region equal to those of the geofence that was <a>breached</a>.
+            instance representing the <a>geofence registration</a> that was <a>breached</a>.
             </li>
             <li>If the registrations <a>includePosition</a> is true, set <var>event.position</var>
             to the current geographical position.
@@ -711,6 +711,13 @@ this.ongeofenceerror = function(event) {
           </dl>
           <p class="issue">
             This needs more work. I'm really not sure what attributes make sense to expose here.
+            Also I'm not sure if is desirable/okay for all errors to be fatal/cause the geofence
+            to be unregistered.
+          </p>
+          <p>
+            Upon detecting some situation in which the <a>user agent</a> won't be able to detect
+            future <a title="breached">breached</a> of a <a>geofence registration</a>, the <a>user
+            agent</a> MUST run the following steps:
           </p>
           <ol>
             <li>If the <a>Service Worker</a> associated with the <a>webapp</a> is not running,
@@ -720,16 +727,20 @@ this.ongeofenceerror = function(event) {
               Service Worker</a> associated with the <a>webapp</a>.
             </li>
             <li>Let <var>event</var> be a new <code><a>GeofenceErrorEvent</a></code>, whose <code>
-              registration</code> attribute is a new <code><a>GeofenceRegistration</a></code> with
-              id and region equal to those of the geofence that was breached.
+            registration</code> attribute is a new <code><a>GeofenceRegistration</a></code>
+            instance representing the <a>geofence registration</a> for which an error was
+            detected.
             </li>
             <li>Let <var>event.code</var> be an error code.
             </li>
             <li>Let <var>event.message</var> be a descriptive message for the error that occured.
             </li>
-            <li>
-              <a>Queue a task</a> to <a title="fire a simple event">fire <var>event</var> as a
-              simple event</a> named <code>geofenceerror</code> at <var>scope</var>.
+            <li>Remove the <a>geofence registration</a> for which an error was detected from the
+            set of <a>active geofences</a> associated with the current <a>service worker
+            registration</a>.
+            </li>
+            <li><a>Queue a task</a> to <a title="fire a simple event">fire <var>event</var> as a
+            simple event</a> named <code>geofenceerror</code> at <var>scope</var>.
             </li>
           </ol>
         </section>
