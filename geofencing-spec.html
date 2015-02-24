@@ -204,7 +204,11 @@ this.ongeofenceerror = function(event) {
         The term <dfn>active geofences</dfn> is used to refer to the collection of <a title=
         "geofence registration">geofence registrations</a> associated with a particular <a>service
         worker registration</a>, that are currently being monitored by the <a>user agent</a> for
-        breach events.
+        <a title="breached">breach</a> events.
+      </p>
+      <p>
+        A <a>geofence registration</a> is said to be <dfn>breached</dfn> if the current geographical
+        location changed from being inside the <a>geographic region</a> to outside (a <dfn>leave event</dfn>), or vice versa (an <dfn>enter event</dfn>).
       </p>
     </section>
     <section>
@@ -637,7 +641,7 @@ this.ongeofenceerror = function(event) {
             The <code>geofenceenter</code> and <code>geofenceleave</code> events
           </h2>
           <p>
-            The <code><a>GeofenceEvent</a></code> interface represents a geofence being breached.
+            The <code><a>GeofenceEvent</a></code> interface represents a geofence being <a>breached</a>.
           </p>
           <dl title="[Exposed=ServiceWorker] interface GeofenceEvent : ExtendableEvent" class=
           "idl">
@@ -649,7 +653,7 @@ this.ongeofenceerror = function(event) {
             </dt>
           </dl>
           <p>
-            Upon detecting a breach of a registered geofence, the <a>user agent</a> MUST run the
+            Upon detecting a <a title="breached">breach</a> of a registered geofence, the <a>user agent</a> MUST run the
             following steps to <dfn>fire a geofence event</dfn>:
           </p>
           <ol>
@@ -661,13 +665,13 @@ this.ongeofenceerror = function(event) {
             </li>
             <li>Let <var>event</var> be a new <code><a>GeofenceEvent</a></code>, whose
             <code>registration</code> attribute is a new <code><a>GeofenceRegistration</a></code>
-            with id and region equal to those of the geofence that was breached.
+            with id and region equal to those of the geofence that was <a>breached</a>.
             </li>
             <li>If the registrations <a>includePosition</a> is true, set <var>event.position</var>
             to the current geographical position.
             </li>
             <li>Let <var>eventName</var> be <code>geofenceenter</code> or
-            <code>geofenceleave</code>, corresponding to the type of breach event being processed.
+            <code>geofenceleave</code>, corresponding to the type of <a title="breached">breach</a> event being processed.
             </li>
             <li>
               <a>Queue a task</a> to <a title="fire a simple event">fire <var>event</var> as a
@@ -676,9 +680,9 @@ this.ongeofenceerror = function(event) {
           </ol>
           <p>
             The <a>user agent</a> MAY wait with <a title="fire a geofence event">firing a geofence
-            event</a> until some time has passed after the breach was detected, or until the for
-            some time or distance after detecting a breach of a registered geofence before firing
-            an event to make sure that the geofence really was breached.
+            event</a> until some time has passed after the <a title="breached">breach</a> was detected, or until the for
+            some time or distance after detecting a <a title="breached">breach</a> of a registered geofence before firing
+            an event to make sure that the geofence really was <a>breached</a>.
           </p>
         </section>
         <section>
