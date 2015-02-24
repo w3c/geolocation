@@ -63,13 +63,13 @@
         a better choice:
       </p>
       <ul>
-        <li>The Geofencing API is built around Service Workers. This makes it possible for a
-        <a>webapp</a> to receive notifications from the Geofencing API even after the user has
-        closed the <a>webapp</a>.
-        </li>
         <li>Because of the limited API surface of the Geofencing API, <a title="user agent">user
         agents</a> can implement the API in a more (power) efficient way than could be achieved by
         regularly checking the current geographic position with the Geolocation API.
+        </li>
+        <li>The Geofencing API is built around Service Workers. This makes it possible for a
+        <a>webapp</a> to receive notifications from the Geofencing API even after the user has
+        closed the <a>webapp</a>.
         </li>
       </ul>
       <p>
@@ -355,7 +355,7 @@ this.ongeofenceerror = function(event) {
           "widl-GeofenceRegisterOptions-includePosition">includePosition</dfn></code> attribute is
           set to true, <code><a>GeofenceEvent</a></code>s for this registration will have a
           <code><a href="#widl-GeofenceEvent-position">position</a></code> attribute. When set to
-          false, the <code>position</code> attribute will always be null.
+          false, the <code>position</code> attribute will always be undefined.
         </p>
         <p>
           The <code><dfn id=
