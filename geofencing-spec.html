@@ -207,8 +207,9 @@ this.ongeofenceerror = function(event) {
         <a title="breached">breach</a> events.
       </p>
       <p>
-        A <a>geofence registration</a> is said to be <dfn>breached</dfn> if the current geographical
-        location changed from being inside the <a>geographic region</a> to outside (a <dfn>leave event</dfn>), or vice versa (an <dfn>enter event</dfn>).
+        A <a>geofence registration</a> is said to be <dfn>breached</dfn> if the current
+        geographical location changed from being inside the <a>geographic region</a> to outside (a
+        <dfn>leave event</dfn>), or vice versa (an <dfn>enter event</dfn>).
       </p>
     </section>
     <section>
@@ -305,11 +306,11 @@ this.ongeofenceerror = function(event) {
           <li>Run the following steps <a>in parallel</a>:
             <ol>
               <li>If the total number of <a>active geofences</a> for all <a title=
-              "service worker registration">service worker registrations</a> in the current origin is
-              more than a <a>user agent</a> defined limit, reject <var>promise</var> with a
-              <code><a>DOMException</a></code> whose name is "<code><a>QuotaExceededError</a></code>"
-              and terminate these steps. A <a>user agent</a> SHOULD allow at least 20 <a>active
-              geofences</a> for an origin.
+              "service worker registration">service worker registrations</a> in the current origin
+              is more than a <a>user agent</a> defined limit, reject <var>promise</var> with a
+              <code><a>DOMException</a></code> whose name is
+              "<code><a>QuotaExceededError</a></code>" and terminate these steps. A <a>user
+              agent</a> SHOULD allow at least 20 <a>active geofences</a> for an origin.
               </li>
               <li>Ask the user whether they allow the <a>webapp</a> to use geofences, unless a
               prearranged trust relationship applies or the user has already granted or denied
@@ -321,18 +322,19 @@ this.ongeofenceerror = function(event) {
               <li>Let <var>registration</var> be a new <a>geofence registration</a>.
               </li>
               <li>Set the <a>registration ID</a> of the <var>registration</var> to a value uniquely
-              identifying this registration. This ID MUST be unique across all registrations for this
-              particular origin.
+              identifying this registration. This ID MUST be unique across all registrations for
+              this particular origin.
               </li>
               <li>Set the <a>geographic region</a> of the <var>registration</var> to a
-              <a><code>GeofenceRegion</code></a> instance of the same type and with the same attributes
-              as the <var>initialRegion</var> passed to <code>registerRegion</code>.
+              <a><code>GeofenceRegion</code></a> instance of the same type and with the same
+              attributes as the <var>initialRegion</var> passed to <code>registerRegion</code>.
               </li>
               <li>Set the <a>include position</a> flag of the <var>registration</var> to
-              <var>options.includePosition</var>, or <code>false</code> if no options were specified.
+              <var>options.includePosition</var>, or <code>false</code> if no options were
+              specified.
               </li>
-              <li>Add <var>registration</var> to the <a>active geofences</a> of the <a>service worker
-              registration</a> associated with the <a>webapp</a>.
+              <li>Add <var>registration</var> to the <a>active geofences</a> of the <a>service
+              worker registration</a> associated with the <a>webapp</a>.
               </li>
               <li>If the current geographic position is inside the newly added region, <a title=
               "fire a geofence event">fire a geofenceenter event</a>.
@@ -373,12 +375,12 @@ this.ongeofenceerror = function(event) {
             <ol>
               <li>Let <var>registrations</var> be a new sequence.
               </li>
-              <li>For each <a>geofence registration</a> in the <a>active geofences</a> associated with
-              this <a>service worker registration</a>, run the following substeps:
+              <li>For each <a>geofence registration</a> in the <a>active geofences</a> associated
+              with this <a>service worker registration</a>, run the following substeps:
                 <ol>
-                  <li>If <var>options</var> is passed, has a non-null <var>name</var> attribute, and
-                  that <var>name</var> is not equal to the name of the <var>registration</var>, skip
-                  the rest of these substeps and continue with the next registration.
+                  <li>If <var>options</var> is passed, has a non-null <var>name</var> attribute,
+                  and that <var>name</var> is not equal to the name of the <var>registration</var>,
+                  skip the rest of these substeps and continue with the next registration.
                   </li>
                   <li>Let <var>registration</var> be a new <a><code>GeofenceRegistration</code></a>
                   instance with attributes equal to those of the <var>geofence registration.</var>
@@ -404,23 +406,23 @@ this.ongeofenceerror = function(event) {
           </li>
           <li>Run the following steps <a>in parallel</a>:
             <ol>
-              <li>For each <a>geofence registration</a> in the <a>active geofences</a> associated with
-              this <a>service worker registration</a>, run the following substeps:
+              <li>For each <a>geofence registration</a> in the <a>active geofences</a> associated
+              with this <a>service worker registration</a>, run the following substeps:
                 <ol>
-                  <li>If the <a>registration ID</a> of the current <var>registration</var> is not equal
-                  to the passed in <var>id</var>, skip the rest of these substeps and continue with the
-                  next registration.
+                  <li>If the <a>registration ID</a> of the current <var>registration</var> is not
+                  equal to the passed in <var>id</var>, skip the rest of these substeps and
+                  continue with the next registration.
                   </li>
                   <li>Let <var>registration</var> be a new <a><code>GeofenceRegistration</code></a>
                   instance with attributes equal to those of the <var>geofence registration.</var>
                   </li>
-                  <li>Resolve <var>promise</var> with <var>registration</var> and abort the remainder
-                  of these substeps.
+                  <li>Resolve <var>promise</var> with <var>registration</var> and abort the
+                  remainder of these substeps.
                   </li>
                 </ol>
               </li>
-              <li>If <var>promise</var> was not resolved, reject <var>promise</var> with a <code><a>DOMException</a></code> whose name is
-              "<code><a>NotFoundError</a></code>".
+              <li>If <var>promise</var> was not resolved, reject <var>promise</var> with a
+              <code><a>DOMException</a></code> whose name is "<code><a>NotFoundError</a></code>".
               </li>
             </ol>
           </li>
@@ -484,13 +486,14 @@ this.ongeofenceerror = function(event) {
           </li>
           <li>Run the following steps <a>in parallel</a>:
             <ol>
-              <li>If this <a>geofence registration</a> is not currently in the <a>active geofences</a>
-              associated with a <a>service worker registration</a>, reject <var>promise</var> with a
-              <code><a>DOMException</a></code> whose name is "<code><a>InvalidStateError</a></code>".
+              <li>If this <a>geofence registration</a> is not currently in the <a>active
+              geofences</a> associated with a <a>service worker registration</a>, reject
+              <var>promise</var> with a <code><a>DOMException</a></code> whose name is
+              "<code><a>InvalidStateError</a></code>".
               </li>
               <li>Remove this <a>geofence registration</a> from the set of <a>active geofences</a>
-              associated with the current <a>service worker registration</a>. No more events related to
-              this registration will be fired after this.
+              associated with the current <a>service worker registration</a>. No more events
+              related to this registration will be fired after this.
               </li>
               <li>Resolve <var>promise</var> with <code>undefined</code>.
               </li>
@@ -641,7 +644,8 @@ this.ongeofenceerror = function(event) {
             The <code>geofenceenter</code> and <code>geofenceleave</code> events
           </h2>
           <p>
-            The <code><a>GeofenceEvent</a></code> interface represents a geofence being <a>breached</a>.
+            The <code><a>GeofenceEvent</a></code> interface represents a geofence being
+            <a>breached</a>.
           </p>
           <dl title="[Exposed=ServiceWorker] interface GeofenceEvent : ExtendableEvent" class=
           "idl">
@@ -653,8 +657,8 @@ this.ongeofenceerror = function(event) {
             </dt>
           </dl>
           <p>
-            Upon detecting a <a title="breached">breach</a> of a registered geofence, the <a>user agent</a> MUST run the
-            following steps to <dfn>fire a geofence event</dfn>:
+            Upon detecting a <a title="breached">breach</a> of a registered geofence, the <a>user
+            agent</a> MUST run the following steps to <dfn>fire a geofence event</dfn>:
           </p>
           <ol>
             <li>If the <a>Service Worker</a> associated with the <a>webapp</a> is not running,
@@ -671,7 +675,8 @@ this.ongeofenceerror = function(event) {
             to the current geographical position.
             </li>
             <li>Let <var>eventName</var> be <code>geofenceenter</code> or
-            <code>geofenceleave</code>, corresponding to the type of <a title="breached">breach</a> event being processed.
+            <code>geofenceleave</code>, corresponding to the type of <a title="breached">breach</a>
+            event being processed.
             </li>
             <li>
               <a>Queue a task</a> to <a title="fire a simple event">fire <var>event</var> as a
@@ -680,9 +685,10 @@ this.ongeofenceerror = function(event) {
           </ol>
           <p>
             The <a>user agent</a> MAY wait with <a title="fire a geofence event">firing a geofence
-            event</a> until some time has passed after the <a title="breached">breach</a> was detected, or until the for
-            some time or distance after detecting a <a title="breached">breach</a> of a registered geofence before firing
-            an event to make sure that the geofence really was <a>breached</a>.
+            event</a> until some time has passed after the <a title="breached">breach</a> was
+            detected, or until the for some time or distance after detecting a <a title=
+            "breached">breach</a> of a registered geofence before firing an event to make sure that
+            the geofence really was <a>breached</a>.
           </p>
         </section>
         <section>
