@@ -79,7 +79,7 @@
 // https://example.com/webapp.js
 navigator.serviceWorker.register('serviceworker.js').then(
   function(serviceWorkerRegistration) {
-    serviceWorkerRegistration.geofencing.registerRegion(
+    serviceWorkerRegistration.geofencing.register(
         new CircularGeofenceRegion({
           name: "myfence",
           latitude: 37.421999,
@@ -284,21 +284,21 @@ this.ongeofenceerror = function(event) {
         <dl title="[NoInterfaceObject] interface GeofenceController" class="idl" data-merge=
         "GeofenceRegisterOptions GeofenceRegistrationQueryOptions">
           <dt>
-            Promise&lt;GeofenceRegistration&gt; registerRegion(GeofenceRegion initialRegion,
+            Promise&lt;GeofenceRegistration&gt; register(GeofenceRegion initialRegion,
             optional GeofenceRegisterOptions options)
           </dt>
           <dt>
-            Promise&lt;sequence&lt;GeofenceRegistration&gt;&gt; getRegisteredRegions(optional
+            Promise&lt;sequence&lt;GeofenceRegistration&gt;&gt; getRegistrations(optional
             GeofenceRegistrationQueryOptions options)
           </dt>
           <dt>
-            Promise&lt;GeofenceRegistration&gt; getRegisteredRegion(DOMString id)
+            Promise&lt;GeofenceRegistration&gt; getRegistration(DOMString id)
           </dt>
         </dl>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-registerRegion-Promise-GeofenceRegistration--GeofenceRegion-initialRegion-GeofenceRegisterOptions-options">
-          registerRegion</dfn></code> method when invoked MUST run the following steps:
+          "widl-GeofenceController-register-Promise-GeofenceRegistration--GeofenceRegion-initialRegion-GeofenceRegisterOptions-options">
+          register</dfn></code> method when invoked MUST run the following steps:
         </p>
         <ol>
           <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
@@ -328,7 +328,7 @@ this.ongeofenceerror = function(event) {
               </li>
               <li>Set the <a>geographic region</a> of the <var>registration</var> to a
               <a><code>GeofenceRegion</code></a> instance of the same type and with the same
-              attributes as the <var>initialRegion</var> passed to <code>registerRegion</code>.
+              attributes as the <var>initialRegion</var> passed to <code>register</code>.
               </li>
               <li>Set the <a>include position</a> flag of the <var>registration</var> to
               <var>options.includePosition</var>, or <code>false</code> if no options were
@@ -349,7 +349,7 @@ this.ongeofenceerror = function(event) {
         </ol>
         <p class="issue">
           Somehow mention that the region that is saved as part of the registration can be slightly
-          different from the region passed to registerRegion. An implementation may adjust
+          different from the region passed to register. An implementation may adjust
           parameters to be in range of what is possible, or otherwise modify the region.
         </p>
         <p class="note">
@@ -366,8 +366,8 @@ this.ongeofenceerror = function(event) {
         </p>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-getRegisteredRegions-Promise-sequence-GeofenceRegistration---GeofenceRegistrationQueryOptions-options">
-          getRegisteredRegions</dfn></code> method when invoked MUST run the following steps:
+          "widl-GeofenceController-getRegistrations-Promise-sequence-GeofenceRegistration---GeofenceRegistrationQueryOptions-options">
+          getRegistrations</dfn></code> method when invoked MUST run the following steps:
         </p>
         <ol>
           <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
@@ -399,7 +399,7 @@ this.ongeofenceerror = function(event) {
         </ol>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-getRegisteredRegion-Promise-GeofenceRegistration--DOMString-id">getRegisteredRegion</dfn></code>
+          "widl-GeofenceController-getRegistration-Promise-GeofenceRegistration--DOMString-id">getRegistration</dfn></code>
           method when invoked MUST run the following steps:
         </p>
         <ol>
