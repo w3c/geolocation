@@ -73,9 +73,10 @@
         </li>
       </ul>
       <p>
-        TODO: More complete introduction
+        The following code extracts illustrate how to use this API to be notified of geographic
+        regions being entered or left.
       </p>
-      <pre class="example highlight">
+      <pre class="example highlight" title="Register a region">
 // https://example.com/webapp.js
 navigator.serviceWorker.register('serviceworker.js').then(
   function(serviceWorkerRegistration) {
@@ -98,10 +99,10 @@ navigator.serviceWorker.register('serviceworker.js').then(
         console.log(error);
       }
     );
-  });
-
+  });</pre>
+      <pre class="example highlight" title="Respond to a region being entered">
 // https://example.com/serviceworker.js
-this.ongeofenceenter = function(event) {
+self.ongeofenceenter = function(event) {
   console.log(event.registration.id);
   console.log(event.registration.region.name);
 
@@ -109,17 +110,26 @@ this.ongeofenceenter = function(event) {
   if (event.registration.region.name !== "myfence") {
     event.waitUntil(event.registration.unregister());
   }
-}
-
-this.ongeofenceerror = function(event) {
+};</pre>
+      <pre class="example highlight" title="Respond to an error condition">
+// https://example.com/serviceworker.js
+self.ongeofenceerror = function(event) {
   console.log(event.registration.id);
   console.log(event.registration.region.name);
   console.log(event.error);
 
-  // Some error condition occured. The registration will remain, but might not
-  // trigger any more events until the erorr condition has been resolved.
-}
-</pre>
+  // Some error condition occured. The region is no longer registered, and won't
+  // trigger any more events.
+
+  // Try to re-register, although depending on the error this might fail.
+  event.waitUntil(self.registration.geofencing.register(event.registration.region).then(
+    function (registration) {
+      // re-registering succeeded, new registration will have a different ID.
+    }, function(error) {
+      // re-registering failed.
+    }
+  ));
+};</pre>
     </section>
     <section id="conformance">
       <p>
