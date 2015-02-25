@@ -130,6 +130,29 @@ self.ongeofenceerror = function(event) {
     }
   ));
 };</pre>
+      <pre class="example highlight" title="Unregister a region in response to some other event">
+// https://example.com/serviceworker.js
+
+// Either look registration up by name:
+self.onsomeevent = function(event) {
+  event.waitUntil(self.registration.geofencing.getRegistrations({name: "myfence"}).then(
+    function(registrations) {
+      for (let i = 0; i &lt; registrations.length; ++i) {
+        registrations[i].unregister();
+      }
+    }
+  ));
+};
+
+// Or look registration up by ID:
+self.onsomeotherevent = function(event) {
+  let registration_id = "" /* somehow get the ID of a registration */;
+  event.waitUntil(self.registration.geofencing.getRegistration(registration_id).then(
+    function(registration) {
+      registration.unregister();
+    }
+  ));
+};</pre>
     </section>
     <section id="conformance">
       <p>
