@@ -99,7 +99,8 @@ navigator.serviceWorker.register('serviceworker.js').then(
         console.log(error);
       }
     );
-  });</pre>
+  });
+</pre>
       <pre class="example highlight" title="Respond to a region being entered">
 // https://example.com/serviceworker.js
 self.ongeofenceenter = function(event) {
@@ -110,7 +111,8 @@ self.ongeofenceenter = function(event) {
   if (event.registration.region.name !== "myfence") {
     event.waitUntil(event.registration.unregister());
   }
-};</pre>
+};
+</pre>
       <pre class="example highlight" title="Respond to an error condition">
 // https://example.com/serviceworker.js
 self.ongeofenceerror = function(event) {
@@ -129,7 +131,8 @@ self.ongeofenceerror = function(event) {
       // re-registering failed.
     }
   ));
-};</pre>
+};
+</pre>
       <pre class="example highlight" title="Unregister a region in response to some other event">
 // https://example.com/serviceworker.js
 
@@ -152,7 +155,8 @@ self.onsomeotherevent = function(event) {
       registration.unregister();
     }
   ));
-};</pre>
+};
+</pre>
     </section>
     <section id="conformance">
       <p>
@@ -317,8 +321,8 @@ self.onsomeotherevent = function(event) {
         <dl title="[NoInterfaceObject] interface GeofenceController" class="idl" data-merge=
         "GeofenceRegisterOptions GeofenceRegistrationQueryOptions">
           <dt>
-            Promise&lt;GeofenceRegistration&gt; register(GeofenceRegion initialRegion,
-            optional GeofenceRegisterOptions options)
+            Promise&lt;GeofenceRegistration&gt; register(GeofenceRegion initialRegion, optional
+            GeofenceRegisterOptions options)
           </dt>
           <dt>
             Promise&lt;sequence&lt;GeofenceRegistration&gt;&gt; getRegistrations(optional
@@ -382,8 +386,8 @@ self.onsomeotherevent = function(event) {
         </ol>
         <p class="issue">
           Somehow mention that the region that is saved as part of the registration can be slightly
-          different from the region passed to register. An implementation may adjust
-          parameters to be in range of what is possible, or otherwise modify the region.
+          different from the region passed to register. An implementation may adjust parameters to
+          be in range of what is possible, or otherwise modify the region.
         </p>
         <p class="note">
           The iOS API takes a slightly different approach when permission is denied. It instead
