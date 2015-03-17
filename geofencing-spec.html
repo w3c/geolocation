@@ -400,8 +400,8 @@ self.onsomeotherevent = function(event) {
         </p>
         <p>
           The <code><dfn id=
-          "widl-GeofenceManager-getAll-Promise-sequence-Geofence---GeofenceQueryOptions-options">
-          getAll</dfn></code> method when invoked MUST run the following steps:
+          "widl-GeofenceManager-getAll-Promise-sequence-Geofence---GeofenceQueryOptions-options">getAll</dfn></code>
+          method when invoked MUST run the following steps:
         </p>
         <ol>
           <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
@@ -433,8 +433,8 @@ self.onsomeotherevent = function(event) {
         </ol>
         <p>
           The <code><dfn id=
-          "widl-GeofenceManager-getById-Promise-Geofence--DOMString-id">getById</dfn></code>
-          method when invoked MUST run the following steps:
+          "widl-GeofenceManager-getById-Promise-Geofence--DOMString-id">getById</dfn></code> method
+          when invoked MUST run the following steps:
         </p>
         <ol>
           <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
@@ -456,18 +456,14 @@ self.onsomeotherevent = function(event) {
                   </li>
                 </ol>
               </li>
-              <li>If <var>promise</var> was not resolved, reject <var>promise</var> with a
-              <code><a>DOMException</a></code> whose name is "<code><a>NotFoundError</a></code>".
+              <li>If <var>promise</var> was not resolved, resolve <var>promise</var> with
+              <code>null</code>.
               </li>
             </ol>
           </li>
           <li>Return <var>promise</var>.
           </li>
         </ol>
-        <p class="issue">
-          Maybe instead of reject with NotFoundError this should resolve with null? Both have pros
-          and cons.
-        </p>
         <dl title="dictionary GeofenceOptions" class="idl">
           <dt>
             boolean includePosition = false
