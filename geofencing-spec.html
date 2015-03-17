@@ -87,10 +87,10 @@ navigator.serviceWorker.register('serviceworker.js').then(
           longitude: -122.084015,
           radius: 1000
         }), {includePosition: true}).then(
-      function(geofenceRegistration) {
-        console.log(geofenceRegistration.id);
-        // If more than just a name needs to be stored with a geofence
-        // registration, now would be the time to store this in some storage.
+      function(geofence) {
+        console.log(geofence.id);
+        // If more than just a name needs to be stored with a geofence, now
+        // would be the time to store this in some storage.
       }, function(error) {
         // During development it often helps to log errors to the
         // console. In a production environment it might make sense to
@@ -104,29 +104,29 @@ navigator.serviceWorker.register('serviceworker.js').then(
       <pre class="example highlight" title="Respond to a region being entered">
 // https://example.com/serviceworker.js
 self.ongeofenceenter = function(event) {
-  console.log(event.registration.id);
-  console.log(event.registration.region.name);
+  console.log(event.geofence.id);
+  console.log(event.geofence.region.name);
 
-  // If this is not a registration of interest anymore, unregister it.
-  if (event.registration.region.name !== "myfence") {
-    event.waitUntil(event.registration.unregister());
+  // If this is not a geofence of interest anymore, unregister it.
+  if (event.geofence.region.name !== "myfence") {
+    event.waitUntil(event.geofence.unregister());
   }
 };
 </pre>
       <pre class="example highlight" title="Respond to an error condition">
 // https://example.com/serviceworker.js
 self.ongeofenceerror = function(event) {
-  console.log(event.registration.id);
-  console.log(event.registration.region.name);
+  console.log(event.geofence.id);
+  console.log(event.geofence.region.name);
   console.log(event.error);
 
   // Some error condition occured. The region is no longer registered, and won't
   // trigger any more events.
 
   // Try to re-register, although depending on the error this might fail.
-  event.waitUntil(self.registration.geofencing.register(event.registration.region).then(
-    function (registration) {
-      // re-registering succeeded, new registration will have a different ID.
+  event.waitUntil(self.registration.geofencing.register(event.geofence.region).then(
+    function(geofence) {
+      // re-registering succeeded, new geofence will have a different ID.
     }, function(error) {
       // re-registering failed.
     }
@@ -136,23 +136,23 @@ self.ongeofenceerror = function(event) {
       <pre class="example highlight" title="Unregister a region in response to some other event">
 // https://example.com/serviceworker.js
 
-// Either look registration up by name:
+// Either look geofence up by name:
 self.onsomeevent = function(event) {
   event.waitUntil(self.registration.geofencing.getRegistrations({name: "myfence"}).then(
-    function(registrations) {
-      for (let i = 0; i &lt; registrations.length; ++i) {
-        registrations[i].unregister();
+    function(geofences) {
+      for (let i = 0; i &lt; geofences.length; ++i) {
+        geofences[i].unregister();
       }
     }
   ));
 };
 
-// Or look registration up by ID:
+// Or look geofence up by ID:
 self.onsomeotherevent = function(event) {
-  let registration_id = "" /* somehow get the ID of a registration */;
-  event.waitUntil(self.registration.geofencing.getRegistration(registration_id).then(
-    function(registration) {
-      registration.unregister();
+  let geofence_id = "" /* somehow get the ID of a geofence */;
+  event.waitUntil(self.registration.geofencing.getRegistration(geofence_id).then(
+    function(geofence) {
+      geofence.unregister();
     }
   ));
 };
@@ -232,19 +232,19 @@ self.onsomeotherevent = function(event) {
         Web browser or other Web runtime environment.
       </p>
       <p>
-        The term <dfn>geofence registration</dfn> is used to refer to one specific registration of
-        a geographic region as a geofence. A <a>geofence registration</a> is a tuple consisting of
-        a <dfn>geographic region</dfn>, <dfn>registration ID</dfn> and a <dfn>include
+        The term <dfn>geofence</dfn> is used to refer to one specific registration of
+        a geographic region as a geofence. A <a>geofence</a> is a tuple consisting of
+        a <dfn>geographic region</dfn>, <dfn>geofence ID</dfn> and a <dfn>include
         position</dfn> flag.
       </p>
       <p>
         The term <dfn>active geofences</dfn> is used to refer to the collection of <a title=
-        "geofence registration">geofence registrations</a> associated with a particular <a>service
+        "geofence">geofences</a> associated with a particular <a>service
         worker registration</a>, that are currently being monitored by the <a>user agent</a> for
         <a title="breached">breach</a> events.
       </p>
       <p>
-        A <a>geofence registration</a> is said to be <dfn>breached</dfn> if the current
+        A <a>geofence</a> is said to be <dfn>breached</dfn> if the current
         geographical location changed from being inside the <a>geographic region</a> to outside (a
         <dfn>leave event</dfn>), or vice versa (an <dfn>enter event</dfn>).
       </p>
@@ -319,22 +319,22 @@ self.onsomeotherevent = function(event) {
           <a title="webapp">webapps</a> to establish access to geofencing services.
         </p>
         <dl title="[NoInterfaceObject] interface GeofenceController" class="idl" data-merge=
-        "GeofenceRegisterOptions GeofenceRegistrationQueryOptions">
+        "GeofenceRegisterOptions GeofenceQueryOptions">
           <dt>
-            Promise&lt;GeofenceRegistration&gt; register(GeofenceRegion initialRegion, optional
+            Promise&lt;Geofence&gt; register(GeofenceRegion initialRegion, optional
             GeofenceRegisterOptions options)
           </dt>
           <dt>
-            Promise&lt;sequence&lt;GeofenceRegistration&gt;&gt; getRegistrations(optional
-            GeofenceRegistrationQueryOptions options)
+            Promise&lt;sequence&lt;Geofence&gt;&gt; getRegistrations(optional
+            GeofenceQueryOptions options)
           </dt>
           <dt>
-            Promise&lt;GeofenceRegistration&gt; getRegistration(DOMString id)
+            Promise&lt;Geofence&gt; getRegistration(DOMString id)
           </dt>
         </dl>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-register-Promise-GeofenceRegistration--GeofenceRegion-initialRegion-GeofenceRegisterOptions-options">
+          "widl-GeofenceController-register-Promise-Geofence--GeofenceRegion-initialRegion-GeofenceRegisterOptions-options">
           register</dfn></code> method when invoked MUST run the following steps:
         </p>
         <ol>
@@ -357,27 +357,27 @@ self.onsomeotherevent = function(event) {
               whose name is "<code><a>PermissionDeniedError</a></code>" and terminate these
               substeps.
               </li>
-              <li>Let <var>registration</var> be a new <a>geofence registration</a>.
+              <li>Let <var>geofence</var> be a new <a>geofence</a>.
               </li>
-              <li>Set the <a>registration ID</a> of the <var>registration</var> to a value uniquely
-              identifying this registration. This ID MUST be unique across all registrations for
+              <li>Set the <a>geofence ID</a> of the <var>geofence</var> to a value uniquely
+              identifying this geofence. This ID MUST be unique across all geofences for
               this particular origin.
               </li>
-              <li>Set the <a>geographic region</a> of the <var>registration</var> to a
+              <li>Set the <a>geographic region</a> of the <var>geofence</var> to a
               <a><code>GeofenceRegion</code></a> instance of the same type and with the same
               attributes as the <var>initialRegion</var> passed to <code>register</code>.
               </li>
-              <li>Set the <a>include position</a> flag of the <var>registration</var> to
+              <li>Set the <a>include position</a> flag of the <var>geofence</var> to
               <var>options.includePosition</var>, or <code>false</code> if no options were
               specified.
               </li>
-              <li>Add <var>registration</var> to the <a>active geofences</a> of the <a>service
+              <li>Add <var>geofence</var> to the <a>active geofences</a> of the <a>service
               worker registration</a> associated with the <a>webapp</a>.
               </li>
               <li>If the current geographic position is inside the newly added region, <a title=
               "fire a geofence event">fire a geofenceenter event</a>.
               </li>
-              <li>Resolve <var>promise</var> with <var>registration</var>.
+              <li>Resolve <var>promise</var> with <var>geofence</var>.
               </li>
             </ol>
           </li>
@@ -403,7 +403,7 @@ self.onsomeotherevent = function(event) {
         </p>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-getRegistrations-Promise-sequence-GeofenceRegistration---GeofenceRegistrationQueryOptions-options">
+          "widl-GeofenceController-getRegistrations-Promise-sequence-Geofence---GeofenceQueryOptions-options">
           getRegistrations</dfn></code> method when invoked MUST run the following steps:
         </p>
         <ol>
@@ -411,23 +411,23 @@ self.onsomeotherevent = function(event) {
           </li>
           <li>Run the following steps <a>in parallel</a>:
             <ol>
-              <li>Let <var>registrations</var> be a new sequence.
+              <li>Let <var>geofences</var> be a new sequence.
               </li>
-              <li>For each <a>geofence registration</a> in the <a>active geofences</a> associated
+              <li>For each <a>geofence</a> in the <a>active geofences</a> associated
               with this <a>service worker registration</a>, run the following substeps:
                 <ol>
                   <li>If <var>options</var> is passed, has a non-null <var>name</var> attribute,
-                  and that <var>name</var> is not equal to the name of the <var>registration</var>,
+                  and that <var>name</var> is not equal to the name of the <var>geofence</var>,
                   skip the rest of these substeps and continue with the next registration.
                   </li>
-                  <li>Let <var>registration</var> be a new <a><code>GeofenceRegistration</code></a>
-                  instance representing the <var>geofence registration.</var>
+                  <li>Let <var>geofence</var> be a new <a><code>Geofence</code></a>
+                  instance representing the <var>geofence</var>.
                   </li>
-                  <li>Append <var>registration</var> to <var>registrations</var>.
+                  <li>Append <var>geofence</var> to <var>geofences</var>.
                   </li>
                 </ol>
               </li>
-              <li>Resolve <var>promise</var> with <var>registrations</var>.
+              <li>Resolve <var>promise</var> with <var>geofences</var>.
               </li>
             </ol>
           </li>
@@ -436,7 +436,7 @@ self.onsomeotherevent = function(event) {
         </ol>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-getRegistration-Promise-GeofenceRegistration--DOMString-id">getRegistration</dfn></code>
+          "widl-GeofenceController-getRegistration-Promise-Geofence--DOMString-id">getRegistration</dfn></code>
           method when invoked MUST run the following steps:
         </p>
         <ol>
@@ -444,17 +444,17 @@ self.onsomeotherevent = function(event) {
           </li>
           <li>Run the following steps <a>in parallel</a>:
             <ol>
-              <li>For each <a>geofence registration</a> in the <a>active geofences</a> associated
+              <li>For each <a>geofence</a> in the <a>active geofences</a> associated
               with this <a>service worker registration</a>, run the following substeps:
                 <ol>
-                  <li>If the <a>registration ID</a> of the current <var>registration</var> is not
+                  <li>If the <a>geofence ID</a> of the current <var>geofence</var> is not
                   equal to the passed in <var>id</var>, skip the rest of these substeps and
-                  continue with the next registration.
+                  continue with the next geofence.
                   </li>
-                  <li>Let <var>registration</var> be a new <a><code>GeofenceRegistration</code></a>
-                  instance with attributes equal to those of the <var>geofence registration.</var>
+                  <li>Let <var>geofence</var> be a new <a><code>Geofence</code></a>
+                  instance with attributes equal to those of the <var>geofence</var>.
                   </li>
-                  <li>Resolve <var>promise</var> with <var>registration</var> and abort the
+                  <li>Resolve <var>promise</var> with <var>geofence</var> and abort the
                   remainder of these substeps.
                   </li>
                 </ol>
@@ -476,7 +476,7 @@ self.onsomeotherevent = function(event) {
             boolean includePosition = false
           </dt>
         </dl>
-        <dl title="dictionary GeofenceRegistrationQueryOptions" class="idl">
+        <dl title="dictionary GeofenceQueryOptions" class="idl">
           <dt>
             DOMString? name
           </dt>
@@ -484,13 +484,13 @@ self.onsomeotherevent = function(event) {
       </section>
       <section>
         <h2>
-          <a>GeofenceRegistration</a> interface
+          <a>Geofence</a> interface
         </h2>
         <p>
-          An instance of the <a><code>GeofenceRegistration</code></a> interface represents a
-          <a>geofence registration</a>.
+          An instance of the <a><code>Geofence</code></a> interface represents a
+          <a>geofence</a>.
         </p>
-        <dl title="interface GeofenceRegistration" class="idl">
+        <dl title="interface Geofence" class="idl">
           <dt>
             readonly attribute DOMString id
           </dt>
@@ -502,22 +502,22 @@ self.onsomeotherevent = function(event) {
           </dt>
         </dl>
         <p>
-          When getting the <code><dfn id="widl-GeofenceRegistration-id">id</dfn></code> attribute,
-          the <a>user agent</a> MUST return the <a>registration ID</a> of the <a>geofence
-          registration</a>. This ID is generated by the <a>user agent</a> and MUST be unique among
-          all current geofence registrations for the same origin, but can be the same as an ID for
-          a geofence registration at a different origin. This ID MUST NOT change as long as this
-          registration exists. The generated ID SHOULD NOT be the same as an ID for any geofence
-          registration that existed before at the same origin.
+          When getting the <code><dfn id="widl-Geofence-id">id</dfn></code> attribute,
+          the <a>user agent</a> MUST return the <a>geofence ID</a> of the <a>geofence</a>.
+          This ID is generated by the <a>user agent</a> and MUST be unique among
+          all current geofences for the same origin, but can be the same as an ID for
+          a geofence at a different origin. This ID MUST NOT change as long as this
+          geofence exists. The generated ID SHOULD NOT be the same as an ID for any geofence
+          that existed before at the same origin.
         </p>
         <p>
-          When getting the <code><dfn id="widl-GeofenceRegistration-region">region</dfn></code>
+          When getting the <code><dfn id="widl-Geofence-region">region</dfn></code>
           attribute, the <a>user agent</a> MUST return the <a>geographic region</a> of this
-          <a>geofence registration</a>.
+          <a>geofence</a>.
         </p>
         <p>
           The <code><dfn id=
-          "widl-GeofenceRegistration-unregister-Promise-boolean">unregister</dfn></code> method
+          "widl-Geofence-unregister-Promise-boolean">unregister</dfn></code> method
           when invoked MUST run the following steps:
         </p>
         <ol>
@@ -525,13 +525,13 @@ self.onsomeotherevent = function(event) {
           </li>
           <li>Run the following steps <a>in parallel</a>:
             <ol>
-              <li>If this <a>geofence registration</a> is not currently in the <a>active
+              <li>If this <a>geofence</a> is not currently in the <a>active
               geofences</a> associated with a <a>service worker registration</a>, resolve
               <var>promise</var> with a <code>false</code> and abort the remainder of these steps.
               </li>
-              <li>Remove this <a>geofence registration</a> from the set of <a>active geofences</a>
+              <li>Remove this <a>geofence</a> from the set of <a>active geofences</a>
               associated with the current <a>service worker registration</a>. No more events
-              related to this registration will be fired after this.
+              related to this geofence will be fired after this.
               </li>
               <li>Resolve <var>promise</var> with <code>true</code>.
               </li>
@@ -688,14 +688,14 @@ self.onsomeotherevent = function(event) {
           <dl title="[Exposed=ServiceWorker] interface GeofenceEvent : ExtendableEvent" class=
           "idl">
             <dt>
-              readonly attribute GeofenceRegistration registration
+              readonly attribute Geofence geofence
             </dt>
             <dt>
               readonly attribute Position? position
             </dt>
           </dl>
           <p>
-            Upon detecting a <a title="breached">breach</a> of a <a>geofence registration</a>, the
+            Upon detecting a <a title="breached">breach</a> of a <a>geofence</a>, the
             <a>user agent</a> MUST run the following steps to <dfn>fire a geofence event</dfn>:
           </p>
           <ol>
@@ -706,10 +706,10 @@ self.onsomeotherevent = function(event) {
               Service Worker</a> associated with the <a>webapp</a>.
             </li>
             <li>Let <var>event</var> be a new <code><a>GeofenceEvent</a></code>, whose
-            <code>registration</code> attribute is a new <code><a>GeofenceRegistration</a></code>
-            instance representing the <a>geofence registration</a> that was <a>breached</a>.
+            <code>geofence</code> attribute is a new <code><a>Geofence</a></code>
+            instance representing the <a>geofence</a> that was <a>breached</a>.
             </li>
-            <li>If the registrations <a>includePosition</a> is true, set <var>event.position</var>
+            <li>If the geofences <a>includePosition</a> attribute is true, set <var>event.position</var>
             to the current geographical position.
             </li>
             <li>Let <var>eventName</var> be <code>geofenceenter</code> or
@@ -736,7 +736,7 @@ self.onsomeotherevent = function(event) {
           <dl title="[Exposed=ServiceWorker] interface GeofenceErrorEvent : ExtendableEvent" class=
           "idl">
             <dt>
-              readonly attribute GeofenceRegistration registration
+              readonly attribute Geofence geofence
             </dt>
             <dt>
               readonly attribute unsigned short code
@@ -752,7 +752,7 @@ self.onsomeotherevent = function(event) {
           </p>
           <p>
             Upon detecting some situation in which the <a>user agent</a> won't be able to detect
-            future <a title="breached">breached</a> of a <a>geofence registration</a>, the <a>user
+            future <a title="breached">breached</a> of a <a>geofence</a>, the <a>user
             agent</a> MUST run the following steps:
           </p>
           <ol>
@@ -763,15 +763,15 @@ self.onsomeotherevent = function(event) {
               Service Worker</a> associated with the <a>webapp</a>.
             </li>
             <li>Let <var>event</var> be a new <code><a>GeofenceErrorEvent</a></code>, whose <code>
-              registration</code> attribute is a new <code><a>GeofenceRegistration</a></code>
-              instance representing the <a>geofence registration</a> for which an error was
+              geofence</code> attribute is a new <code><a>Geofence</a></code>
+              instance representing the <a>geofence</a> for which an error was
               detected.
             </li>
             <li>Let <var>event.code</var> be an error code.
             </li>
             <li>Let <var>event.message</var> be a descriptive message for the error that occured.
             </li>
-            <li>Remove the <a>geofence registration</a> for which an error was detected from the
+            <li>Remove the <a>geofence</a> for which an error was detected from the
             set of <a>active geofences</a> associated with the current <a>service worker
             registration</a>.
             </li>
