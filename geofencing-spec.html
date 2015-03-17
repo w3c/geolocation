@@ -138,7 +138,7 @@ self.ongeofenceerror = function(event) {
 
 // Either look geofence up by name:
 self.onsomeevent = function(event) {
-  event.waitUntil(self.registration.geofencing.getRegistrations({name: "myfence"}).then(
+  event.waitUntil(self.registration.geofencing.getAll({name: "myfence"}).then(
     function(geofences) {
       for (let i = 0; i &lt; geofences.length; ++i) {
         geofences[i].remove();
@@ -150,7 +150,7 @@ self.onsomeevent = function(event) {
 // Or look geofence up by ID:
 self.onsomeotherevent = function(event) {
   let geofence_id = "" /* somehow get the ID of a geofence */;
-  event.waitUntil(self.registration.geofencing.getRegistration(geofence_id).then(
+  event.waitUntil(self.registration.geofencing.getById(geofence_id).then(
     function(geofence) {
       geofence.remove();
     }
@@ -325,11 +325,11 @@ self.onsomeotherevent = function(event) {
             GeofenceOptions options)
           </dt>
           <dt>
-            Promise&lt;sequence&lt;Geofence&gt;&gt; getRegistrations(optional
+            Promise&lt;sequence&lt;Geofence&gt;&gt; getAll(optional
             GeofenceQueryOptions options)
           </dt>
           <dt>
-            Promise&lt;Geofence&gt; getRegistration(DOMString id)
+            Promise&lt;Geofence&gt; getById(DOMString id)
           </dt>
         </dl>
         <p>
@@ -403,8 +403,8 @@ self.onsomeotherevent = function(event) {
         </p>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-getRegistrations-Promise-sequence-Geofence---GeofenceQueryOptions-options">
-          getRegistrations</dfn></code> method when invoked MUST run the following steps:
+          "widl-GeofenceController-getAll-Promise-sequence-Geofence---GeofenceQueryOptions-options">
+          getAll</dfn></code> method when invoked MUST run the following steps:
         </p>
         <ol>
           <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
@@ -436,7 +436,7 @@ self.onsomeotherevent = function(event) {
         </ol>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-getRegistration-Promise-Geofence--DOMString-id">getRegistration</dfn></code>
+          "widl-GeofenceController-getById-Promise-Geofence--DOMString-id">getById</dfn></code>
           method when invoked MUST run the following steps:
         </p>
         <ol>
