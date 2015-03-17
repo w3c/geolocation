@@ -498,7 +498,7 @@ self.onsomeotherevent = function(event) {
             readonly attribute GeofenceRegion region
           </dt>
           <dt>
-            Promise&lt;undefined&gt; unregister()
+            Promise&lt;boolean&gt; unregister()
           </dt>
         </dl>
         <p>
@@ -517,7 +517,7 @@ self.onsomeotherevent = function(event) {
         </p>
         <p>
           The <code><dfn id=
-          "widl-GeofenceRegistration-unregister-Promise-undefined">unregister</dfn></code> method
+          "widl-GeofenceRegistration-unregister-Promise-boolean">unregister</dfn></code> method
           when invoked MUST run the following steps:
         </p>
         <ol>
@@ -526,15 +526,14 @@ self.onsomeotherevent = function(event) {
           <li>Run the following steps <a>in parallel</a>:
             <ol>
               <li>If this <a>geofence registration</a> is not currently in the <a>active
-              geofences</a> associated with a <a>service worker registration</a>, reject
-              <var>promise</var> with a <code><a>DOMException</a></code> whose name is
-              "<code><a>InvalidStateError</a></code>".
+              geofences</a> associated with a <a>service worker registration</a>, resolve
+              <var>promise</var> with a <code>false</code> and abort the remainder of these steps.
               </li>
               <li>Remove this <a>geofence registration</a> from the set of <a>active geofences</a>
               associated with the current <a>service worker registration</a>. No more events
               related to this registration will be fired after this.
               </li>
-              <li>Resolve <var>promise</var> with <code>undefined</code>.
+              <li>Resolve <var>promise</var> with <code>true</code>.
               </li>
             </ol>
           </li>
