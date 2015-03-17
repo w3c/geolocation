@@ -232,21 +232,20 @@ self.onsomeotherevent = function(event) {
         Web browser or other Web runtime environment.
       </p>
       <p>
-        The term <dfn>geofence</dfn> is used to refer to one specific registration of
-        a geographic region as a geofence. A <a>geofence</a> is a tuple consisting of
-        a <dfn>geographic region</dfn>, <dfn>geofence ID</dfn> and a <dfn>include
-        position</dfn> flag.
+        The term <dfn>geofence</dfn> is used to refer to one specific registration of a geographic
+        region as a geofence. A <a>geofence</a> is a tuple consisting of a <dfn>geographic
+        region</dfn>, <dfn>geofence ID</dfn> and a <dfn>include position</dfn> flag.
       </p>
       <p>
         The term <dfn>active geofences</dfn> is used to refer to the collection of <a title=
-        "geofence">geofences</a> associated with a particular <a>service
-        worker registration</a>, that are currently being monitored by the <a>user agent</a> for
-        <a title="breached">breach</a> events.
+        "geofence">geofences</a> associated with a particular <a>service worker registration</a>,
+        that are currently being monitored by the <a>user agent</a> for <a title=
+        "breached">breach</a> events.
       </p>
       <p>
-        A <a>geofence</a> is said to be <dfn>breached</dfn> if the current
-        geographical location changed from being inside the <a>geographic region</a> to outside (a
-        <dfn>leave event</dfn>), or vice versa (an <dfn>enter event</dfn>).
+        A <a>geofence</a> is said to be <dfn>breached</dfn> if the current geographical location
+        changed from being inside the <a>geographic region</a> to outside (a <dfn>leave
+        event</dfn>), or vice versa (an <dfn>enter event</dfn>).
       </p>
     </section>
     <section>
@@ -321,12 +320,11 @@ self.onsomeotherevent = function(event) {
         <dl title="[NoInterfaceObject] interface GeofenceController" class="idl" data-merge=
         "GeofenceOptions GeofenceQueryOptions">
           <dt>
-            Promise&lt;Geofence&gt; add(GeofenceRegion initialRegion, optional
-            GeofenceOptions options)
+            Promise&lt;Geofence&gt; add(GeofenceRegion initialRegion, optional GeofenceOptions
+            options)
           </dt>
           <dt>
-            Promise&lt;sequence&lt;Geofence&gt;&gt; getAll(optional
-            GeofenceQueryOptions options)
+            Promise&lt;sequence&lt;Geofence&gt;&gt; getAll(optional GeofenceQueryOptions options)
           </dt>
           <dt>
             Promise&lt;Geofence&gt; getById(DOMString id)
@@ -360,8 +358,8 @@ self.onsomeotherevent = function(event) {
               <li>Let <var>geofence</var> be a new <a>geofence</a>.
               </li>
               <li>Set the <a>geofence ID</a> of the <var>geofence</var> to a value uniquely
-              identifying this geofence. This ID MUST be unique across all geofences for
-              this particular origin.
+              identifying this geofence. This ID MUST be unique across all geofences for this
+              particular origin.
               </li>
               <li>Set the <a>geographic region</a> of the <var>geofence</var> to a
               <a><code>GeofenceRegion</code></a> instance of the same type and with the same
@@ -371,8 +369,8 @@ self.onsomeotherevent = function(event) {
               <var>options.includePosition</var>, or <code>false</code> if no options were
               specified.
               </li>
-              <li>Add <var>geofence</var> to the <a>active geofences</a> of the <a>service
-              worker registration</a> associated with the <a>webapp</a>.
+              <li>Add <var>geofence</var> to the <a>active geofences</a> of the <a>service worker
+              registration</a> associated with the <a>webapp</a>.
               </li>
               <li>If the current geographic position is inside the newly added region, <a title=
               "fire a geofence event">fire a geofenceenter event</a>.
@@ -395,11 +393,10 @@ self.onsomeotherevent = function(event) {
           events unless the user has granted permission.
         </p>
         <p>
-          If the <code><dfn id=
-          "widl-GeofenceOptions-includePosition">includePosition</dfn></code> attribute is
-          set to true, <code><a>GeofenceEvent</a></code>s for this registration will have a
-          <code><a href="#widl-GeofenceEvent-position">position</a></code> attribute. When set to
-          false, the <code>position</code> attribute will always be undefined.
+          If the <code><dfn id="widl-GeofenceOptions-includePosition">includePosition</dfn></code>
+          attribute is set to true, <code><a>GeofenceEvent</a></code>s for this registration will
+          have a <code><a href="#widl-GeofenceEvent-position">position</a></code> attribute. When
+          set to false, the <code>position</code> attribute will always be undefined.
         </p>
         <p>
           The <code><dfn id=
@@ -413,15 +410,15 @@ self.onsomeotherevent = function(event) {
             <ol>
               <li>Let <var>geofences</var> be a new sequence.
               </li>
-              <li>For each <a>geofence</a> in the <a>active geofences</a> associated
-              with this <a>service worker registration</a>, run the following substeps:
+              <li>For each <a>geofence</a> in the <a>active geofences</a> associated with this <a>
+                service worker registration</a>, run the following substeps:
                 <ol>
                   <li>If <var>options</var> is passed, has a non-null <var>name</var> attribute,
                   and that <var>name</var> is not equal to the name of the <var>geofence</var>,
                   skip the rest of these substeps and continue with the next registration.
                   </li>
-                  <li>Let <var>geofence</var> be a new <a><code>Geofence</code></a>
-                  instance representing the <var>geofence</var>.
+                  <li>Let <var>geofence</var> be a new <a><code>Geofence</code></a> instance
+                  representing the <var>geofence</var>.
                   </li>
                   <li>Append <var>geofence</var> to <var>geofences</var>.
                   </li>
@@ -444,18 +441,18 @@ self.onsomeotherevent = function(event) {
           </li>
           <li>Run the following steps <a>in parallel</a>:
             <ol>
-              <li>For each <a>geofence</a> in the <a>active geofences</a> associated
-              with this <a>service worker registration</a>, run the following substeps:
+              <li>For each <a>geofence</a> in the <a>active geofences</a> associated with this <a>
+                service worker registration</a>, run the following substeps:
                 <ol>
-                  <li>If the <a>geofence ID</a> of the current <var>geofence</var> is not
-                  equal to the passed in <var>id</var>, skip the rest of these substeps and
-                  continue with the next geofence.
+                  <li>If the <a>geofence ID</a> of the current <var>geofence</var> is not equal to
+                  the passed in <var>id</var>, skip the rest of these substeps and continue with
+                  the next geofence.
                   </li>
-                  <li>Let <var>geofence</var> be a new <a><code>Geofence</code></a>
-                  instance with attributes equal to those of the <var>geofence</var>.
+                  <li>Let <var>geofence</var> be a new <a><code>Geofence</code></a> instance with
+                  attributes equal to those of the <var>geofence</var>.
                   </li>
-                  <li>Resolve <var>promise</var> with <var>geofence</var> and abort the
-                  remainder of these substeps.
+                  <li>Resolve <var>promise</var> with <var>geofence</var> and abort the remainder
+                  of these substeps.
                   </li>
                 </ol>
               </li>
@@ -487,8 +484,7 @@ self.onsomeotherevent = function(event) {
           <a>Geofence</a> interface
         </h2>
         <p>
-          An instance of the <a><code>Geofence</code></a> interface represents a
-          <a>geofence</a>.
+          An instance of the <a><code>Geofence</code></a> interface represents a <a>geofence</a>.
         </p>
         <dl title="interface Geofence" class="idl">
           <dt>
@@ -502,36 +498,33 @@ self.onsomeotherevent = function(event) {
           </dt>
         </dl>
         <p>
-          When getting the <code><dfn id="widl-Geofence-id">id</dfn></code> attribute,
-          the <a>user agent</a> MUST return the <a>geofence ID</a> of the <a>geofence</a>.
-          This ID is generated by the <a>user agent</a> and MUST be unique among
-          all current geofences for the same origin, but can be the same as an ID for
-          a geofence at a different origin. This ID MUST NOT change as long as this
-          geofence exists. The generated ID SHOULD NOT be the same as an ID for any geofence
-          that existed before at the same origin.
+          When getting the <code><dfn id="widl-Geofence-id">id</dfn></code> attribute, the <a>user
+          agent</a> MUST return the <a>geofence ID</a> of the <a>geofence</a>. This ID is generated
+          by the <a>user agent</a> and MUST be unique among all current geofences for the same
+          origin, but can be the same as an ID for a geofence at a different origin. This ID MUST
+          NOT change as long as this geofence exists. The generated ID SHOULD NOT be the same as an
+          ID for any geofence that existed before at the same origin.
         </p>
         <p>
-          When getting the <code><dfn id="widl-Geofence-region">region</dfn></code>
-          attribute, the <a>user agent</a> MUST return the <a>geographic region</a> of this
-          <a>geofence</a>.
+          When getting the <code><dfn id="widl-Geofence-region">region</dfn></code> attribute, the
+          <a>user agent</a> MUST return the <a>geographic region</a> of this <a>geofence</a>.
         </p>
         <p>
-          The <code><dfn id=
-          "widl-Geofence-remove-Promise-boolean">remove</dfn></code> method
-          when invoked MUST run the following steps:
+          The <code><dfn id="widl-Geofence-remove-Promise-boolean">remove</dfn></code> method when
+          invoked MUST run the following steps:
         </p>
         <ol>
           <li>Let <var>promise</var> be a new <a><code>Promise</code></a>.
           </li>
           <li>Run the following steps <a>in parallel</a>:
             <ol>
-              <li>If this <a>geofence</a> is not currently in the <a>active
-              geofences</a> associated with a <a>service worker registration</a>, resolve
-              <var>promise</var> with a <code>false</code> and abort the remainder of these steps.
+              <li>If this <a>geofence</a> is not currently in the <a>active geofences</a>
+              associated with a <a>service worker registration</a>, resolve <var>promise</var> with
+              a <code>false</code> and abort the remainder of these steps.
               </li>
-              <li>Remove this <a>geofence</a> from the set of <a>active geofences</a>
-              associated with the current <a>service worker registration</a>. No more events
-              related to this geofence will be fired after this.
+              <li>Remove this <a>geofence</a> from the set of <a>active geofences</a> associated
+              with the current <a>service worker registration</a>. No more events related to this
+              geofence will be fired after this.
               </li>
               <li>Resolve <var>promise</var> with <code>true</code>.
               </li>
@@ -616,8 +609,8 @@ self.onsomeotherevent = function(event) {
         </p>
         <p class="issue">
           The downside of doing error checks in the CircularGeofenceRegion constructor is that they
-          will be actual exceptions instead of promise rejections when calling add. Would it
-          make sense to move the validity checks to add?
+          will be actual exceptions instead of promise rejections when calling add. Would it make
+          sense to move the validity checks to add?
         </p>
         <dl title="dictionary CircularGeofenceRegionInit" class="idl">
           <dt>
@@ -695,8 +688,8 @@ self.onsomeotherevent = function(event) {
             </dt>
           </dl>
           <p>
-            Upon detecting a <a title="breached">breach</a> of a <a>geofence</a>, the
-            <a>user agent</a> MUST run the following steps to <dfn>fire a geofence event</dfn>:
+            Upon detecting a <a title="breached">breach</a> of a <a>geofence</a>, the <a>user
+            agent</a> MUST run the following steps to <dfn>fire a geofence event</dfn>:
           </p>
           <ol>
             <li>If the <a>Service Worker</a> associated with the <a>webapp</a> is not running,
@@ -706,11 +699,11 @@ self.onsomeotherevent = function(event) {
               Service Worker</a> associated with the <a>webapp</a>.
             </li>
             <li>Let <var>event</var> be a new <code><a>GeofenceEvent</a></code>, whose
-            <code>geofence</code> attribute is a new <code><a>Geofence</a></code>
-            instance representing the <a>geofence</a> that was <a>breached</a>.
+            <code>geofence</code> attribute is a new <code><a>Geofence</a></code> instance
+            representing the <a>geofence</a> that was <a>breached</a>.
             </li>
-            <li>If the geofences <a>includePosition</a> attribute is true, set <var>event.position</var>
-            to the current geographical position.
+            <li>If the geofences <a>includePosition</a> attribute is true, set
+            <var>event.position</var> to the current geographical position.
             </li>
             <li>Let <var>eventName</var> be <code>geofenceenter</code> or
             <code>geofenceleave</code>, corresponding to the type of <a title="breached">breach</a>
@@ -752,8 +745,8 @@ self.onsomeotherevent = function(event) {
           </p>
           <p>
             Upon detecting some situation in which the <a>user agent</a> won't be able to detect
-            future <a title="breached">breached</a> of a <a>geofence</a>, the <a>user
-            agent</a> MUST run the following steps:
+            future <a title="breached">breached</a> of a <a>geofence</a>, the <a>user agent</a>
+            MUST run the following steps:
           </p>
           <ol>
             <li>If the <a>Service Worker</a> associated with the <a>webapp</a> is not running,
@@ -763,17 +756,15 @@ self.onsomeotherevent = function(event) {
               Service Worker</a> associated with the <a>webapp</a>.
             </li>
             <li>Let <var>event</var> be a new <code><a>GeofenceErrorEvent</a></code>, whose <code>
-              geofence</code> attribute is a new <code><a>Geofence</a></code>
-              instance representing the <a>geofence</a> for which an error was
-              detected.
+              geofence</code> attribute is a new <code><a>Geofence</a></code> instance representing
+              the <a>geofence</a> for which an error was detected.
             </li>
             <li>Let <var>event.code</var> be an error code.
             </li>
             <li>Let <var>event.message</var> be a descriptive message for the error that occured.
             </li>
-            <li>Remove the <a>geofence</a> for which an error was detected from the
-            set of <a>active geofences</a> associated with the current <a>service worker
-            registration</a>.
+            <li>Remove the <a>geofence</a> for which an error was detected from the set of
+            <a>active geofences</a> associated with the current <a>service worker registration</a>.
             </li>
             <li>
               <a>Queue a task</a> to <a title="fire a simple event">fire <var>event</var> as a
