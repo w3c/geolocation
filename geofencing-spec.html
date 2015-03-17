@@ -299,25 +299,25 @@ self.onsomeotherevent = function(event) {
         </p>
         <dl title="partial interface ServiceWorkerRegistration" class="idl">
           <dt>
-            readonly attribute GeofenceController geofencing
+            readonly attribute GeofenceManager geofencing
           </dt>
         </dl>
         <p>
           The <code><dfn id="widl-ServiceWorkerRegistration-geofencing">geofencing</dfn></code>
-          attribute exposes a <code><a>GeofenceController</a></code>, which has an associated
+          attribute exposes a <code><a>GeofenceManager</a></code>, which has an associated
           <a>service worker registration</a> represented by the
           <code><a>ServiceWorkerRegistration</a></code> on which the attribute is exposed.
         </p>
       </section>
       <section>
         <h2>
-          <a>GeofenceController</a> interface
+          <a>GeofenceManager</a> interface
         </h2>
         <p>
-          The <code><a>GeofenceController</a></code> interface defines operations that enable
+          The <code><a>GeofenceManager</a></code> interface defines operations that enable
           <a title="webapp">webapps</a> to establish access to geofencing services.
         </p>
-        <dl title="[NoInterfaceObject] interface GeofenceController" class="idl" data-merge=
+        <dl title="[NoInterfaceObject] interface GeofenceManager" class="idl" data-merge=
         "GeofenceOptions GeofenceQueryOptions">
           <dt>
             Promise&lt;Geofence&gt; add(GeofenceRegion initialRegion, optional GeofenceOptions
@@ -332,7 +332,7 @@ self.onsomeotherevent = function(event) {
         </dl>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-add-Promise-Geofence--GeofenceRegion-initialRegion-GeofenceOptions-options">
+          "widl-GeofenceManager-add-Promise-Geofence--GeofenceRegion-initialRegion-GeofenceOptions-options">
           add</dfn></code> method when invoked MUST run the following steps:
         </p>
         <ol>
@@ -400,7 +400,7 @@ self.onsomeotherevent = function(event) {
         </p>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-getAll-Promise-sequence-Geofence---GeofenceQueryOptions-options">
+          "widl-GeofenceManager-getAll-Promise-sequence-Geofence---GeofenceQueryOptions-options">
           getAll</dfn></code> method when invoked MUST run the following steps:
         </p>
         <ol>
@@ -433,7 +433,7 @@ self.onsomeotherevent = function(event) {
         </ol>
         <p>
           The <code><dfn id=
-          "widl-GeofenceController-getById-Promise-Geofence--DOMString-id">getById</dfn></code>
+          "widl-GeofenceManager-getById-Promise-Geofence--DOMString-id">getById</dfn></code>
           method when invoked MUST run the following steps:
         </p>
         <ol>
