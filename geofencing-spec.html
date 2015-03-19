@@ -93,32 +93,30 @@
       </p>
       <pre class="example highlight" title="Monitor a region">
 // https://example.com/webapp.js
-navigator.serviceWorker.register('serviceworker.js').then(
-  function(serviceWorkerRegistration) {
-    serviceWorkerRegistration.geofencing.add(
-        new CircularGeofenceRegion({
-          name: "myfence",
-          latitude: 37.421999,
-          longitude: -122.084015,
-          radius: 1000
-        }), {includePosition: true}).then(
-      function(geofence) {
-        console.log(geofence.id);
+navigator.serviceWorker
+  .register('serviceworker.js')
+  .then((swRegistration) => {
+    let region = new CircularGeofenceRegion({
+      name: 'myfence',
+      latitude: 37.421999,
+      longitude: -122.084015,
+      radius: 1000
+    });
+    let options = {
+      includePosition: true
+    };
+    swRegistration.geofencing.add(region, options)
+      .then(
         // If more than just a name needs to be stored with a geofence, now
         // would be the time to store this in some storage.
-      }, function(error) {
-        // During development it often helps to log errors to the
-        // console. In a production environment it might make sense to
-        // also report information about errors back to the
-        // application server.
-        console.log(error);
-      }
-    );
+        (geofence) => console.log(geofence.id),
+        (error) => console.log(error)
+      );
   });
 </pre>
       <pre class="example highlight" title="Respond to a region being entered">
 // https://example.com/serviceworker.js
-self.ongeofenceenter = function(event) {
+self.ongeofenceenter = (event) => {
   console.log(event.geofence.id);
   console.log(event.geofence.region.name);
 
@@ -130,7 +128,7 @@ self.ongeofenceenter = function(event) {
 </pre>
       <pre class="example highlight" title="Respond to an error condition">
 // https://example.com/serviceworker.js
-self.ongeofenceerror = function(event) {
+self.ongeofenceerror = (event) => {
   console.log(event.geofence.id);
   console.log(event.geofence.region.name);
   console.log(event.error);
@@ -139,37 +137,38 @@ self.ongeofenceerror = function(event) {
   // trigger any more events.
 
   // Try to re-monitor, although depending on the error this might fail.
-  event.waitUntil(self.registration.geofencing.add(event.geofence.region).then(
-    function(geofence) {
+  event
+    .waitUntil(self.registration.geofencing.add(event.geofence.region))
+    .then((geofence) => {
       // re-monitoring succeeded, new geofence will have a different ID.
-    }, function(error) {
+    }, (error) => {
       // re-monitoring failed.
-    }
-  ));
+    });
 };
+
 </pre>
       <pre class="example highlight" title="Unmonitor a region in response to some other event">
 // https://example.com/serviceworker.js
 
 // Either look geofence up by name:
-self.onsomeevent = function(event) {
-  event.waitUntil(self.registration.geofencing.getAll({name: "myfence"}).then(
-    function(geofences) {
-      for (let i = 0; i &lt; geofences.length; ++i) {
-        geofences[i].remove();
-      }
-    }
-  ));
+self.onsomeevent = (event) => {
+  event
+    .waitUntil(
+      self.registration.geofencing.getAll({
+        name: 'myfence'
+      })
+    )
+    .then(
+      geofences => geofences.forEach(fence => fence.remove())
+    );
 };
 
 // Or look geofence up by ID:
-self.onsomeotherevent = function(event) {
-  let geofence_id = "" /* somehow get the ID of a geofence */;
-  event.waitUntil(self.registration.geofencing.getById(geofence_id).then(
-    function(geofence) {
-      geofence.remove();
-    }
-  ));
+self.onsomeotherevent = (event) => {
+  let geofence_id = ''; /* somehow get the ID of a geofence */
+  event
+    .waitUntil(self.registration.geofencing.getById(geofence_id))
+    .then(geofence => geofence.remove());
 };
 </pre>
     </section>
