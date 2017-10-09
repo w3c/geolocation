@@ -151,6 +151,9 @@ section 6 of the W3C Patent Policy</a>.</p>
 
      <li><a href="#implementation_considerations"><span class=secno>4.3
       </span>Additional implementation considerations</a>
+
+     <li><a href="#feature_policy_integration"><span class=secno>4.4
+      </span>Feature Policy Integration</a>
     </ul>
 
    <li><a href="#api_description"><span class=secno>5 </span>API
@@ -501,6 +504,19 @@ section 6 of the W3C Patent Policy</a>.</p>
    awareness of location sharing, and to provide easy access to interfaces
    that enable revocation of permissions.
 
+  <h3 id="feature_policy_integration"><span class=secno>4.4
+   </span>Feature Policy Integration</h3>
+
+  <p>The <code>getCurrentPosition</code> and <code>watchPosition</code> methods
+   are <a href="https://wicg.github.io/feature-policy/#policy-controlled-feature">policy-controlled
+   features</a>, as defined by <a href="https://wicg.github.io/feature-policy/">Feature Policy</a>.</p>
+
+  <p>The <a href="https://wicg.github.io/feature-policy/#feature-name">feature
+   name</a> for these methods is <code>geolocation</code></dfn>.</p>
+
+  <p>The <a href="https://wicg.github.io/feature-policy/#default-allowlist">default
+   allowlist</a> for these methods is <code>["self"]</code>.</p>
+
   <h2 id="api_description"><span class=secno>5 </span>API Description</h2>
 
   <h3 id="geolocation_interface"><span class=secno>5.1 </span>Geolocation
@@ -556,6 +572,16 @@ section 6 of the W3C Patent Policy</a>.</p>
   <p>The implementation of the <code>getCurrentPosition</code> method
   must execute the following set of steps:</p>
   <ol>    
+    <li>Let <var>document</var> be the calling context's
+    <a href="https://dom.spec.whatwg.org/#concept-document">Document</a>.</li>
+
+    <li>If <var>document</var> is not
+    <a href="https://html.spec.whatwg.org/multipage/#allowed-to-use">allowed to
+    use</a> the <a href="https://wicg.github.io/feature-policy/#policy-controlled-feature">policy-controlled
+    feature</a> named <code>geolocation</code>, invoke the <code>errorCallback</code>
+    (if present) with a new <code>PositionError</code> object whose <code>code</code>
+    attribute is set to PERMISSION_DENIED and exit this set of steps.</li>
+
     <li> If a cached <code>Position</code> object, whose age is no greater
           than the value of the maximumAge variable, is available,
           invoke the <code>successCallback</code> with the
@@ -611,6 +637,16 @@ section 6 of the W3C Patent Policy</a>.</p>
   <p>The implementation of the watch process must execute the
   following set of steps:</p>
   <ol>    
+    <li>Let <var>document</var> be the calling context's
+    <a href="https://dom.spec.whatwg.org/#concept-document">Document</a>.</li>
+
+    <li>If <var>document</var> is not
+    <a href="https://html.spec.whatwg.org/multipage/#allowed-to-use">allowed to
+    use</a> the <a href="https://wicg.github.io/feature-policy/#policy-controlled-feature">policy-controlled
+    feature</a> named <code>geolocation</code>, invoke the <code>errorCallback</code>
+    (if present) with a new <code>PositionError</code> object whose <code>code</code>
+    attribute is set to PERMISSION_DENIED and exit this set of steps.</li>
+
     <li> If a cached <code>Position</code> object, whose age is no greater
           than the value of the maximumAge variable, is available,
           invoke the <code>successCallback</code> with the
@@ -1080,6 +1116,12 @@ section 6 of the W3C Patent Policy</a>.</p>
     Imagery and Mapping Agency Technical Report 8350.2, Third
     Edition</a></cite>.  National Imagery and Mapping Agency, 3 January 2000.  See
     http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf
+
+  <dt><a id="ref-feature-policy">[FEATURE-POLICY]</a></dt>
+
+  <dd><cite><a href="https://wicg.github.io/feature-policy/">Feature Policy</a></cite>.
+    WICG. Living Standard. URL: <a href="https://wicg.github.io/feature-policy/">https://wicg.github.io/feature-policy/</a>
+
   </dl>
 </body> 
 </html> 
