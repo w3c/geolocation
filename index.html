@@ -1,232 +1,126 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-"http://www.w3.org/TR/html4/strict.dtd">
-
-<html lang=en>
- <head>
-  <title>Geolocation API Specification</title>
-  <meta content="text/html;charset=utf-8" http-equiv=Content-Type>
-
-  <style type="text/css">
-   dt, dfn { font-weight: bold; font-style: normal; }
-   img.extra { float: right; }
-   body ins, body del { display: block; }
-   body * ins, body * del { display: inline; }
-   pre, code { color: black; background: transparent; font-size: inherit; font-family: monospace; }
-   pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
-   pre em { font-weight: bolder; font-style: normal; }
-   pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
-   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em; }
-   table { border-collapse: collapse; border-style: hidden hidden none hidden; }
-   table thead { border-bottom: solid; }
-   table tbody th:first-child { border-left: solid; }
-   table td, table th { border-left: solid; border-right: solid; border-bottom: solid thin; vertical-align: top; padding: 0.2em; }
-   ul.toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
-   ul.toc li ul { margin-bottom: 0.75em; }
-   ul.toc li ul li ul { margin-bottom: 0.25em; }
-   var sub { vertical-align: bottom; font-size: smaller; position: relative; top: 0.1em; }
-   @media screen { code { color: rgb(255, 69, 0); background: transparent; } }
-   code :link, code :visited { color: inherit; background: transparent; }
-   .example { display: block; color: #222222; background: #FCFCFC; border-left: double; margin-left: 1em; padding-left: 1em; }
-   .issue, .big-issue { color: #E50000; background: white; border: solid red; padding: 0.5em; margin: 1em 0; }
-   .issue > :first-child, .big-issue > :first-child { margin-top: 0; }
-   p .big-issue { line-height: 3em; }
-   .note { color: green; background: transparent; }
-   .note { font-family: sans-serif; }
-   p.note:before { content: 'Note: '; }
-   .warning { color: red; background: transparent; }
-   .warning:before { font-style: normal; }
-   p.warning:before { content: '\26A0 Warning! '; }
-   .note, .warning { font-weight: bolder; font-style: italic; padding: 0.5em 2em; }
-   .copyright { margin: 0.25em 0; }
-   img { max-width: 100%; }
-   h4 + .element { margin-top: -2.5em; padding-top: 2em; }
-   h4 + p + .element { margin-top: -5em; padding-top: 4em; }
-   .element { background: #EEEEFF; color: black; margin: 0 0 1em -1em; padding: 0 1em 0.25em 0.75em; border-left: solid #9999FF 0.25em; }
-   table.matrix, table.matrix td { border: none; text-align: right; }
-   table.matrix { margin-left: 2em; }
-  </style>
-<link rel="stylesheet" type="text/css" href="http://www.w3.org/StyleSheets/TR/W3C-ED">
-
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Geolocation API Specification</title>
+<script src='https://www.w3.org/Tools/respec/respec-w3c-common' async class=
+'remove'>
+</script>
+<script class='remove'>
+var respecConfig = {
+  shortName: "hr-time-3",
+  specStatus: "ED",
+  edDraftURI: "https://w3c.github.io/geolocation-api/",
+  editors: [{
+    name: "Andrei Popescu",
+    company: "Google Inc.",
+    companyURL: "https://google.com/",
+    w3cid: "36565"
+  }],
+  wg: "Geolocation Working Group",
+  wgURI: "https://www.w3.org/2008/geolocation/",
+  wgPublicList: "public-geolocation",
+  license: 'w3c-software-doc',
+  noLegacyStyle: true,
+  previousPublishDate: "2016-11-08",
+  previousMaturity: "REC",
+  otherLinks: [{
+    key: 'Repository',
+    data: [{
+      value: 'We are on Github.',
+      href: 'https://github.com/w3c/geolocation-api/'
+    }, {
+      value: 'File a bug.',
+      href: 'https://github.com/w3c/geolocation-api/issues'
+    }, {
+      value: 'Commit history.',
+      href: 'https://github.com/w3c/geolocation-api/commits/gh-pages/index.html'
+    }]
+  },{
+    key: 'Mailing list',
+    data: [{
+      value: 'public-geolocation@w3.org',
+      href: 'https://lists.w3.org/Archives/Public/public-geolocation/'
+    }]
+  },{
+    key: 'Implementation',
+    data: [{
+      value: 'Can I use High Resolution Time?',
+      href: 'http://caniuse.com/#feat=geolocation'
+    }, {
+      value: 'Test Suite',
+      href: 'http://w3c-test.org/geolocation-API/'
+    }, {
+      value: 'Test Suite Results',
+      href: 'https://wpt.fyi/geolocation-API'
+    }, {
+      value: 'Test Suite repository',
+      href: 'https://github.com/w3c/web-platform-tests/tree/master/geolocation-API'
+    }]
+  }],
+  issueBase: "https://www.github.com/w3c/geolocation-api/issues/",
+  githubAPI: "https://api.github.com/repos/w3c/geolocation-api",
+  testSuiteURI: "https://wpt.fyi/geolocation-API/",
+  wgPatentURI:  "https://www.w3.org/2004/01/pp-impl/42891/status",
+  localBiblio:  {
+      'WGS84': {
+        title: 'National Imagery and Mapping Agency Technical Report 8350.2, Third Edition',
+        href: 'http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf',
+        publisher: "National Imagery and Mapping Agency",
+        date: '3 January 2000'
+      },
+      'AZALOC': {
+         href: "http://www.azarask.in/blog/post/geolocation-in-firefox-and-beyond/",
+         title: 'Geolocation in Firefox and Beyond',
+         authors: [ 'Aza Raskin' ]
+      }
+  }
+};
+</script>
+</head>
  <body>
-  <div class=head> <!--begin-logo-->
-   <p><a href="http://www.w3.org/"><img alt=W3C height=48
-    src="http://www.w3.org/Icons/w3c_home" width=72></a> <!--end-logo-->
 
-   <h1 id="title_heading">Geolocation API Specification</h1>
-
-   <h2 class="no-num no-toc" id="draft_date">W3C Editors Draft 5 May 2014</h2>
-
-   <dl>
-<!--    <dt>This Version:</dt>
-    <dd><a href="http://www.w3.org/TR/2013/REC-geolocation-API-20131024/">http://www.w3.org/TR/2013/REC-geolocation-API-20131024/</a></dd>-->
-
-    <dt>Latest Published Version:
-    <dd><a href="http://www.w3.org/TR/geolocation-API/">http://www.w3.org/TR/geolocation-API/</a>
-
-    <dt>Latest Editor's Draft:
-    <dd><a href="http://dev.w3.org/geo/api/spec-source.html">http://dev.w3.org/geo/api/spec-source.html</a></dd>
-
-    <dt>Previous version:</dt>
-      <dd><a href="http://www.w3.org/TR/2012/PR-geolocation-API-20120510/">http://www.w3.org/TR/2012/PR-geolocation-API-20120510/</a></dd>
-
-    <dt>Editor:</dt>
-
-    <dd>Andrei Popescu, Google, Inc</dd>
-   </dl>
-
-<p>Please refer to the <a href="http://www.w3.org/2008/geolocation/geoapi-errata.html"><strong>errata</strong></a> for this document, which may include some normative corrections.</p>
-
-<p>See also <a href="http://www.w3.org/2003/03/Translations/byTechnology?technology=geolocation-API"> <strong>translations</strong></a>.</p>
-
-<p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2008-2013 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.eu/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
-
-   <hr>
-  </div>
-
-  <h2 class="no-num no-toc" id=abstract>Abstract</h2>
+  <section id=abstract>
 
   <p>This specification defines an API that provides scripted access to
-   geographical location information associated with the hosting device.
+   geographical location information associated with the hosting device.</p>
+  </section>
+  <section id="sotd">
+    <div class="warning">
+      <p>
+        Implementors need to be aware that this specification is not stable.
+        However, aspects of this specification are shipping in at least one
+        browser (see links to implementation status at the top of this
+        document). <strong>Implementors who are not taking part in the
+        discussions will find the specification changing out from under them
+        in incompatible ways.</strong> Vendors interested in implementing
+        this specification before it eventually reaches the Candidate
+        Recommendation phase SHOULD <a href=
+        "https://github.com/w3c/geolocation-api/issues">subscribe to the repository
+        on GitHub</a> and take part in the discussions.
+      </p>
+    </div>
+  </section>
 
-  <h2 class="no-num no-toc" id=status>Status of This Document</h2>
-  <!-- intro boilerplate (required) -->
-
-<p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current W3C publications and the latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at http://www.w3.org/TR/.</em></p>
-
-<p>This document was published by the Geolocation Working Group as a Last Call Working Draft on @@ May 2014. it merged errata into the Geolocation API v1 Recommendation, which was published on October 24, 2013.This document is intended to become a W3C Recommendation. 
-</p>
-
-<p>Publication as a Last Call Working Draft does not imply endorsement by the W3C Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress. </P>
-
-<p>Comments on the document should be sent to the Working Group's public
-mailing list
-<a href="mailto:public-geolocation@w3.org">public-geolocation@w3.org</a>
-(<a href="mailto:public-geolocation-request@w3.org?subject=subscribe">subscribe</a>, <a href="http://lists.w3.org/Archives/Public/public-geolocation/">archives</a>). See <a href=
-"http://www.w3.org/Mail/">W3C mailing list and archive usage
-guidelines</a>.</p>
-
-<p>This document has been produced by
-the <a href="http://www.w3.org/2008/geolocation/">W3C Geolocation
-Working Group</a>, following the procedures set out for the
-<a href="http://www.w3.org/Consortium/Process/">W3C Process</a>,
-with the intention of advancing it along the W3C Recommendation
-track.</p>
-
-<p>This document was produced by a group operating under the
-<a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
-February 2004 W3C Patent Policy</a>. W3C maintains a <a rel=
-"disclosure" href=
-"http://www.w3.org/2004/01/pp-impl/42891/status">public list of any
-patent disclosures</a> made in connection with the deliverables of
-the group; that page also includes instructions for disclosing a
-patent. An individual who has actual knowledge of a patent which
-the individual believes contains <a href=
-"http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">
-Essential Claim(s)</a> must disclose the information in accordance
-with <a href=
-"http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">
-section 6 of the W3C Patent Policy</a>.</p>
-
-
-  <h2 class="no-num no-toc" id=contents>Table of Contents</h2>
-  <!--begin-toc-->
-
-  <ul class=toc>
-   <li><a href="#conformance"><span class=secno>1 </span>Conformance
-    requirements</a>
-
-   <li><a href="#introduction"><span class=secno>2 </span>Introduction</a>
-
-   <li><a href="#scope"><span class=secno>3 </span>Scope</a>
-
-   <li><a href="#security"><span class=secno>4 </span>Security and privacy
-    considerations</a>
-    <ul class=toc>
-     <li><a href="#privacy_for_uas"><span class=secno>4.1 </span>Privacy
-      considerations for implementers of the Geolocation API</a>
-
-     <li><a href="#privacy_for_recipients"><span class=secno>4.2
-      </span>Privacy considerations for recipients of location
-      information</a>
-
-     <li><a href="#implementation_considerations"><span class=secno>4.3
-      </span>Additional implementation considerations</a>
-    </ul>
-
-   <li><a href="#api_description"><span class=secno>5 </span>API
-    Description</a>
-    <ul class=toc>
-     <li><a href="#geolocation_interface"><span class=secno>5.1
-      </span>Geolocation interface</a>
-
-     <li><a href="#position_options_interface"><span class=secno>5.2
-      </span>PositionOptions interface</a>
-
-     <li><a href="#position_interface"><span class=secno>5.3 </span>Position
-      interface</a>
-
-     <li><a href="#coordinates_interface"><span class=secno>5.4
-      </span>Coordinates interface</a>
-
-     <li><a href="#position_error_interface"><span class=secno>5.5
-      </span>PositionError interface</a>
-    </ul>
-
-   <li><a href="#usecases"><span class=secno>6 </span>Use-Cases and
-    Requirements</a>
-    <ul class=toc>
-     <li><a href="#usecases_section"><span class=secno>6.1
-      </span>Use-Cases</a>
-
-     <li><a href="#requirements_section"><span class=secno>6.2
-      </span>Requirements</a>
-    </ul>
-
-   <li class=no-num><a href="#acknowledgments">Acknowledgments</a>
-
-   <li class=no-num><a href="#references">References</a>
-  </ul>
-  <!--end-toc-->
-
-  <h2 id=conformance><span class=secno>1 </span>Conformance requirements</h2>
-
-  <p>All diagrams, examples, and notes in this specification are
-   non-normative, as are all sections explicitly marked non-normative.
-   Everything else in this specification is normative.
-
-  <p>The key words "MUST", "MUST NOT", "REQUIRED", <!--"SHALL", "SHALL
-  NOT",-->
-   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in the
-   normative parts of this document are to be interpreted as described in
-   RFC2119. For readability, these words do not appear in all uppercase
-   letters in this specification. <a href="#ref-rfc2119">[RFC2119]</a></p>
-  <!-- XXX but they should be
-  marked up -->
+  <section id=conformance>
 
   <p>Requirements phrased in the imperative as part of algorithms (such as
    "strip any leading space characters" or "return false and abort these
-   steps") are to be interpreted with the meaning of the key word ("must",
-   "should", "may", etc) used in introducing the algorithm.
+   steps") are to be interpreted with the meaning of the key word ("MUST",
+   "SHOULD", "MAY", etc) used in introducing the algorithm.
 
-  <p>Conformance requirements phrased as algorithms or specific steps may be
+  <p>Conformance requirements phrased as algorithms or specific steps MAY be
    implemented in any manner, so long as the end result is equivalent. (In
    particular, the algorithms defined in this specification are intended to
    be easy to follow, and not intended to be performant.)
 
-  <p id=hardwareLimitations>User agents may impose implementation-specific
+  <p id=hardwareLimitations>User agents MAY impose implementation-specific
    limits on otherwise unconstrained inputs, e.g. to prevent denial of
    service attacks, to guard against running out of memory, or to work around
    platform-specific limitations.
+ </section> 
 
- <p>Implementations that use ECMAScript to implement the APIs defined in
-    this specification must implement them in a manner consistent with the
-    ECMAScript Bindings defined in the Web IDL specification, as this
-    specification uses that specification's terminology. <a 	 
-    href="#ref-webidl">[WEBIDL]</a></p>
- 
-  <h2 id=introduction><span class=secno>2 </span>Introduction</h2>
+<section id=introduction class=informative>
 
-  <p><em>This section is non-normative.</em>
+ <h2>Introduction</h2>
 
   <p>The Geolocation API defines a high-level interface to location
    information associated only with the device hosting the implementation,
@@ -241,32 +135,25 @@ section 6 of the W3C Patent Policy</a>.</p>
    repeated position updates, as well as the ability to explicitly query the
    cached positions. Location information is represented by latitude and
    longitude coordinates. The Geolocation API in this specification builds
-   upon earlier work in the industry, including <a href="#ref-azaloc"
-   shape=rect>[AZALOC]</a>, <a href="#ref-gears" shape=rect>[GEARSLOC]</a>,
-   and <a href="#ref-locationaware">[LOCATIONAWARE]</a>.
+   upon earlier work in the industry, including [[AZALOC]], the Gears Geolocation API,
+   and LocationAware.org .
 
   <p>The following code extracts illustrate how to obtain basic location
    information:
 
-  <div class=example>
-   <p> Example of a "one-shot" position request.</p>
-
-   <pre>
+  <pre class=example title='Example of a "one-shot" position request'>
     function showMap(position) {
       // Show a map centered at (position.coords.latitude, position.coords.longitude).
     }
 
     // One-shot position request.
     navigator.geolocation.getCurrentPosition(showMap);
-    </pre>
-  </div>
+  </pre>
 
-  <div class=example>
-   <p>Example of requesting repeated position updates.</p>
-
-   <pre>
+  <pre class=example title='Example of requesting repeated position updates'>
     function scrollMap(position) {
-      // Scrolls the map so that it is centered at (position.coords.latitude, position.coords.longitude).
+      // Scrolls the map so that it is centered at
+      //  (position.coords.latitude, position.coords.longitude).
     }
 
     // Request repeated updates.
@@ -277,14 +164,11 @@ section 6 of the W3C Patent Policy</a>.</p>
       navigator.geolocation.clearWatch(watchId);
     }
     </pre>
-  </div>
 
-  <div class=example>
-   <p>Example of requesting repeated position updates and handling errors.</p>
-
-   <pre>
+  <pre class=example title='Example of requesting repeated position updates and handling errors'>
     function scrollMap(position) {
-      // Scrolls the map so that it is centered at (position.coords.latitude, position.coords.longitude).
+      // Scrolls the map so that it is centered at
+      //  (position.coords.latitude, position.coords.longitude).
     }
 
     function handleError(error) {
@@ -299,12 +183,8 @@ section 6 of the W3C Patent Policy</a>.</p>
       navigator.geolocation.clearWatch(watchId);
     }
     </pre>
-  </div>
 
-  <div class=example>
-   <p>Example of requesting a potentially cached position.</p>
-
-   <pre>
+  <pre class=example title='Example of requesting a potentially cached position'>
     // Request a position. We accept positions whose age is not
     // greater than 10 minutes. If the user agent does not have a
     // fresh enough cached position object, it will automatically
@@ -321,14 +201,9 @@ section 6 of the W3C Patent Policy</a>.</p>
     function errorCallback(error) {
       // Update a div element with error.message.
     }
-
     </pre>
-  </div>
 
-  <div class=example>
-   <p>Forcing the user agent to return a fresh cached position.</p>
-
-   <pre>
+  <pre class=example title='Forcing the user agent to return a fresh cached position'>
     // Request a position. We only accept cached positions whose age is not
     // greater than 10 minutes. If the user agent does not have a fresh
     // enough cached position object, it will immediately invoke the error
@@ -364,12 +239,8 @@ section 6 of the W3C Patent Policy</a>.</p>
       // Fallback to a default position.
     }
     </pre>
-  </div>
 
-  <div class=example>
-   <p>Forcing the user agent to return any available cached position.</p>
-
-   <pre>
+  <pre class=example title='Forcing the user agent to return any available cached position'>
     // Request a position. We only accept cached positions, no matter what 
     // their age is. If the user agent does not have a cached position at
     // all, it will immediately invoke the error callback.
@@ -385,8 +256,8 @@ section 6 of the W3C Patent Policy</a>.</p>
       // will immediately invoke the error callback with code
       // TIMEOUT and will not initiate a new position
       // acquisition process.
-      if (position.timestamp < freshness_threshold && 
-          position.coords.accuracy < accuracy_threshold) {
+      if (position.timestamp &lt; freshness_threshold &amp;&amp;
+          position.coords.accuracy &lt; accuracy_threshold) {
         // The position is relatively fresh and accurate.
       } else {
         // The position is quite old and/or inaccurate.
@@ -410,85 +281,87 @@ section 6 of the W3C Patent Policy</a>.</p>
       // Fallback to a default position.
     }
     </pre>
-  </div>
+  </section>
 
-  <h2 id=scope><span class=secno>3 </span>Scope</h2>
-
-  <p><em>This section is non-normative.</em>
+  <section id='scope' class=informative>
+  <h2>Scope</h2>
 
   <p>This specification is limited to providing a scripting API for
    retrieving geographic position information associated with a hosting
    device. The geographic position information is provided in terms of World
-   Geodetic System coordinates <a href="#ref-wgs">[WGS84]</a>.
+   Geodetic System coordinates [[WGS84]].
 
   <p>The scope of this specification does not include providing a markup
    language of any kind.
 
-  <p>The scope of this specification does not include defining new URI
-   schemes for building URIs that identify geographic locations.
+  <p>The scope of this specification does not include defining new <a data-cite="URL#concept-url-scheme">URL
+   schemes</a> for building URLs that identify geographic locations.
 
-  <h2 id=security><span class=secno>4 </span>Security and privacy
-   considerations</h2>
+  </section>
+
+  <section id=security>
+  <h2>Security and privacy considerations</h2>
 
   <p>The API defined in this specification is used to retrieve the
    geographic location of a hosting device. In almost all cases, this
    information also discloses the location of the user of the device, thereby
    potentially compromising the user's privacy. A conforming implementation
-   of this specification must provide a mechanism that protects the user's
-   privacy and this mechanism should ensure that no location information is
+   of this specification MUST provide a mechanism that protects the user's
+   privacy and this mechanism SHOULD ensure that no location information is
    made available through this API without the user's express permission.
 
-  <h3 id="privacy_for_uas"><span class=secno>4.1 </span>Privacy
-   considerations for implementers of the Geolocation API</h3>
+  <section id="privacy_for_uas">
+    <h3>Privacy considerations for implementers of the Geolocation API</h3>
 
-  <p>User agents must not send location information to Web sites without the
-   express permission of the user. User agents must acquire permission
+  <p>User agents MUST NOT send location information to Web sites without the
+   express permission of the user. User agents MUST acquire permission
    through a user interface, unless they have prearranged trust relationships
-   with users, as described below. The user interface must include the host
-   component of the document's URI <a href="#ref-uri">[URI]</a>. Those
+   with users, as described below. The user interface MUST include the <a data-cite="!URL#concept-url-host">host
+   component</a> of the document's URI. Those
    permissions that are acquired through the user interface and that are
    preserved beyond the current browsing session (i.e. beyond the time when
-   the browsing context <a href="#ref-context">[BROWSINGCONTEXT]</a> is
-   navigated to another URL) must be revocable and user agents must respect
+   the <a data-cite='!HTML#browsing-context'>browsing context</a> is
+   navigated to another URL) MUST be revocable and user agents MUST respect
    revoked permissions.
 
   <p>Some user agents will have prearranged trust relationships that do not
    require such user interfaces. For example, while a Web browser will
    present a user interface when a Web site performs a geolocation request, a
-   VOIP telephone may not present any user interface when using location
+   VOIP telephone MAY NOT present any user interface when using location
    information to perform an E911 function.
+  </section>
 
-  <h3 id="privacy_for_recipients"><span id="privacy_for_" class=secno>4.2 </span>Privacy
-   considerations for recipients of location information</h3>
+  <section id="privacy_for_recipients">
+    <h3>Privacy considerations for recipients of location information</h3>
 
-  <p>Recipients must only request location information when necessary.
-   Recipients must only use the location information for the task for which
-   it was provided to them. Recipients must dispose of location information
+  <p>Recipients MUST only request location information when necessary.
+   Recipients MUST only use the location information for the task for which
+   it was provided to them. Recipients MUST dispose of location information
    once that task is completed, unless expressly permitted to retain it by
-   the user. Recipients must also take measures to protect this information
+   the user. Recipients MUST also take measures to protect this information
    against unauthorized access. If location information is stored, users
-   should be allowed to update and delete this information.
+   SHOULD be allowed to update and delete this information.
 
-  <p>The recipient of location information must not retransmit the location
-   information without the user’s express permission. Care should be taken
+  <p>The recipient of location information MUST NOT retransmit the location
+   information without the user’s express permission. Care SHOULD be taken
    when retransmitting and use of encryption is encouraged.
 
-  <p>Recipients must clearly and conspicuously disclose the fact that they
+  <p>Recipients MUST clearly and conspicuously disclose the fact that they
    are collecting location data, the purpose for the collection, how long the
    data is retained, how the data is secured, how the data is shared if it is
-   shared, how users may access, update and delete the data, and any other
-   choices that users have with respect to the data. This disclosure must
+   shared, how users MAY access, update and delete the data, and any other
+   choices that users have with respect to the data. This disclosure MUST
    include an explanation of any exceptions to the guidelines listed above.
+  </section>
+  
+  <section id="implementation_considerations" class=informative>
+    <h3>Additional implementation considerations</h3>
 
-  <h3 id="implementation_considerations"><span class=secno>4.3
-   </span>Additional implementation considerations</h3>
-
-  <p><em>This section is non-normative.</em>
 
   <p>Further to the requirements listed in the previous section, implementers
    of the Geolocation API are also advised to consider the following aspects
-   that may negatively affect the privacy of their users: in certain cases,
-   users may inadvertently grant permission to the user agent to disclose
+   that MAY negatively affect the privacy of their users: in certain cases,
+   users MAY inadvertently grant permission to the user agent to disclose
    their location to Web sites. In other cases, the content hosted at a
    certain URL changes in such a way that the previously granted location
    permissions no longer apply as far as the user is concerned. Or the users
@@ -501,402 +374,412 @@ section 6 of the W3C Patent Policy</a>.</p>
    awareness of location sharing, and to provide easy access to interfaces
    that enable revocation of permissions.
 
-  <h2 id="api_description"><span class=secno>5 </span>API Description</h2>
+  </section>
+  </section>
+  
+  <section id="api_description">
+    <h2>API Description</h2>
 
-  <h3 id="geolocation_interface"><span class=secno>5.1 </span>Geolocation
-   interface</h3>
+    <section id="navigator_interface"  data-dfn-for="Navigator"  data-link-for=Navigator>
+        <h3><dfn>Navigator</dfn> interface extensions</h3>
+  
+      <pre class=idl>
+        partial interface Navigator {
+          readonly attribute Geolocation geolocation;
+        };
+      </pre>
+      <p>The <dfn>geolocation</dfn> attribute gives access to location information associated
+        with the hosting device.</p>
+    </section>
+       
+    <section id="geolocation_interface" data-dfn-for="Geolocation"  data-link-for=Geolocation>
+      <h3><dfn>Geolocation</dfn> interface</h3>
 
-  <p>The <code><a href="#geolocation">Geolocation</a></code> object is
+  <p>The <a>Geolocation</a> object is
    used by scripts to programmatically determine the location information
    associated with the hosting device. The location information is acquired
-   by applying a user-agent specific algorithm, creating a <code><a
-   href="#position">Position</a></code> object, and populating that object
-   with appropriate data accordingly.  
-
-  <pre class=idl>
- [NoInterfaceObject]
- partial interface <dfn id=navi-geo>Navigator</dfn> {
-   readonly attribute <a href="#geolocation">Geolocation</a> geolocation;
- };
-
-  </pre>
-
-  <p><br>
+   by applying a user-agent specific algorithm, creating a <a>Position</a> object, and populating that object
+   with appropriate data accordingly. 
 
  <pre class=idl>
- [NoInterfaceObject]
- interface <dfn id=geolocation>Geolocation</dfn> { 
-   void <a href="#get-current-position">getCurrentPosition</a>(<a href="#position-callback">PositionCallback</a> successCallback,
-                           optional <a href="#error-callback">PositionErrorCallback</a> errorCallback,
-                           optional <a href="#position-options">PositionOptions</a> options);
+ [NoInterfaceObject]    
+ interface Geolocation { 
+   void getCurrentPosition(PositionCallback successCallback,
+                           optional PositionErrorCallback errorCallback,
+                           optional PositionOptions options);
 
-   long <a href="#watch-position">watchPosition</a>(<a href="#position-callback">PositionCallback</a> successCallback,
-                      optional <a href="#error-callback">PositionErrorCallback</a> errorCallback,
-                      optional <a href="#position-options">PositionOptions</a> options);
+   long watchPosition(PositionCallback successCallback,
+                      optional PositionErrorCallback errorCallback,
+                      optional PositionOptions options);
 
-   void <a href="#clear-watch">clearWatch</a>(long watchId);
+   void clearWatch(long watchId);
  };
 
- callback <dfn id=position-callback>PositionCallback</dfn> = void (<a href="#position">Position</a> position);
+ callback PositionCallback = void (Position position);
 
- callback <dfn id=error-callback>PositionErrorCallback</dfn> = void (<a href="#position-error">PositionError</a> positionError);
+ callback PositionErrorCallback = void (PositionError positionError);
  </pre>
 
-  <p>The <dfn id=get-current-position><code>getCurrentPosition()</code></dfn>
-   method takes one, two or three arguments. When called, it must immediately
+  <p data-tests='getCurrentPosition_IDL.https.html, getCurrentPosition_TypeError.html'>The <dfn>getCurrentPosition()</dfn>
+   method takes one, two or three arguments. When called, it MUST immediately
    return and then asynchronously attempt to obtain the current
    location of the device. If the attempt is successful,
-   the <code>successCallback</code> must be invoked
-   (i.e. the <code>handleEvent</code> operation must be called on the
-   callback object) with a new <code>Position</code> object,
+   the <var>successCallback</var> MUST be invoked
+   (i.e. the <code><a data-cite="DOM#dom-eventlistener-handleevent">handleEvent</a></code> operation MUST be called on the
+   callback object) with a new <a>Position</a> object,
    reflecting the current location of the device. If the attempt
-   fails, the <code>errorCallback</code> must be invoked with a
-   new <code>PositionError</code> object, reflecting the reason for the failure.</p>
+   fails, the <var>errorCallback</var> MUST be invoked with a
+   new <a>PositionError</a> object, reflecting the reason for the failure.</p>
 
-  <p>The implementation of the <code>getCurrentPosition</code> method
-  must execute the following set of steps:</p>
+  <p>The implementation of the <a data-link-for=Geolocation>getCurrentPosition</a> method
+  MUST execute the following set of steps:</p>
   <ol>    
-    <li> If a cached <code>Position</code> object, whose age is no greater
-          than the value of the maximumAge variable, is available,
-          invoke the <code>successCallback</code> with the
-          cached <code>Position</code> object as a parameter and exit
+    <li> If a cached <a>Position</a> object, whose age is no greater
+          than the value of the <a data-link-for=PositionOptions>maximumAge</a> variable, is available,
+          invoke the <var>successCallback</var> with the
+          cached <a>Position</a> object as a parameter and exit
           this set of steps.</li>
     <li> If the value of the timeout variable is 0, invoke
-    the <code>errorCallback</code> (if present) with a
-    new <code>PositionError</code> object whose <code>code</code>
-    attribute is set to TIMEOUT and exit this set of steps.</li>
+    the <var>errorCallback</var> (if present) with a
+    new <a>PositionError</a> object whose <a data-link-for=PositionError>code</a>
+    attribute is set to <a data-link-for=PositionError>TIMEOUT</a> and exit this set of steps.</li>
     <li>Start a location acquisition operation (e.g. by
           invoking a platform-specific API), possibly taking into
-          account the value of the enableHighAccuracy variable (see
-          the definition
-          of <code><a href="#high-accuracy">enableHighAccuracy</a></code>
-          for details).</li>
+          account the value of the <a data-link-for="PositionOptions">enableHighAccuracy</a> variable.</li>
     <li>Start a timer that will fire after the number of milliseconds
               denoted by the value of the timeout variable. When the
               timer fires, cancel any ongoing location acquisition
               operations associated with this instance of the steps,
-              invoke the <code>errorCallback</code> (if present)
-              with a new <code>PositionError</code> object
-              whose <code>code</code> attribute is set to TIMEOUT, and
+              invoke the <var>errorCallback</var> (if present)
+              with a new <a>PositionError</a> object
+              whose <a data-link-for=PositionError>code</a> attribute is set to <a data-link-for=PositionError>TIMEOUT</a>, and
               exit this set of steps.</li>
     <li>If the operation completes successfully before the timeout
     expires, cancel the pending timer, invoke
-    the <code>successCallback</code> with a new <code>Position</code>
+    the <var>successCallback</var> with a new <a>Position</a>
     object that reflects the result of the acquisition operation and
     exit this set of steps. </li>
     <li>If the operation fails before the timeout expires, cancel the
-    pending timer and invoke the <code>errorCallback</code> (if
-    present) with a new <code>PositionError</code> object
-    whose <code>code</code> is set to POSITION_UNAVAILABLE.</li>
+    pending timer and invoke the <var>errorCallback</var> (if
+    present) with a new <a>PositionError</a> object
+    whose <a data-link-for=PositionError>code</a> is set to <a data-link-for=PositionError>POSITION_UNAVAILABLE</a>.</li>
   </ol>
 
-    <p>The <dfn id=watch-position><code>watchPosition()</code></dfn>
-   method takes one, two or three arguments. When called, it must immediately
-   return a long value that uniquely identifies a <em>watch
-   operation</em> and then asynchronously start the watch
-   operation. This operation must first attempt to obtain the current location of the
-   device. If the attempt is successful, the <code>successCallback</code> must be invoked
-   (i.e. the <code>handleEvent</code> operation must be called on the
-   callback object) with a new <code>Position</code> object,
+    <p>The <dfn>watchPosition()</dfn>
+   method takes one, two or three arguments. When called, it MUST immediately
+   return a long value that uniquely identifies a <a>watch
+   process</a> and then asynchronously start the watch
+   operation. This operation MUST first attempt to obtain the current location of the
+   device. If the attempt is successful, the <var>successCallback</var> MUST be invoked
+   (i.e. the <code><a data-cite="DOM#dom-eventlistener-handleevent">handleEvent</a></code> operation MUST be called on the
+   callback object) with a new <a>Position</a> object,
    reflecting the current location of the device. If the attempt
-   fails, the <code>errorCallback</code> must be invoked with a
-   new <code>PositionError</code> object, reflecting the reason for 
-   the failure. The watch operation then must continue
+   fails, the <var>errorCallback</var> MUST be invoked with a
+   new <a>PositionError</a> object, reflecting the reason for 
+   the failure. The <a>watch process</a> then MUST continue
    to monitor the position of the device and invoke the appropriate
-   callback every time this position changes. The watch operation
-   must continue until
-   the <code><a href="#clear-watch">clearWatch</a></code> method is
+   callback every time this position changes. The <a>watch process</a>
+   MUST continue until
+   the <a>clearWatch()</a> method is
    called with the corresponding identifier.</p>
+ 
+  <p>The <dfn>PositionCallBack</dfn> callback is invoked when a <a>Position</a> object is available, resulting
+  from a cached object or the acquisition operation. The <a>PositionCallBack</a> callback gets set using
+  the <dfn>successCallback</dfn> parameter.</p>
 
-  <p>The implementation of the watch process must execute the
+  <p>The <dfn>PositionErrorCallBack</dfn> callback is invoked when a <a>Position</a> object is not available, resulting
+    from a timeout, a permission denied, or an unability to determine the position of the device.  The
+    <a>PositionErrorCallBack</a> callback gets set using the <dfn>errorCallback</dfn> parameter.</p>
+  
+  <p>The implementation of the <dfn>watch process</dfn> MUST execute the
   following set of steps:</p>
   <ol>    
-    <li> If a cached <code>Position</code> object, whose age is no greater
+    <li> If a cached <a>Position</a> object, whose age is no greater
           than the value of the maximumAge variable, is available,
-          invoke the <code>successCallback</code> with the
-          cached <code>Position</code> object as a parameter.</li>
+          invoke the <var>successCallback</var> with the
+          cached <a>Position</a> object as a parameter.</li>
     <li>Register to receive system events that indicate that the
-    position of the device may have changed (e.g. by listening or
+    position of the device MAY have changed (e.g. by listening or
     polling for changes in WiFi or cellular signals).</li>
     <li>Start a location acquisition operation (e.g. by
           invoking a platform-specific API), possibly taking into
-          account the value of the enableHighAccuracy variable (see
+          account the value of the <var>enableHighAccuracy</var> variable (see
           the definition
-          of <code><a href="#high-accuracy">enableHighAccuracy</a></code>
+          of <a data-link-for=PositionOptions>enableHighAccuracy</a>
           for details). </li>
-    <li> Run the following acquisition steps:
+    <li>Run the following <dfn>acquisition steps</dfn>:
       <ol>
         <li>If the timer is not already running, start a timer that will fire after the number of
         milliseconds denoted by the value of the timeout
         variable. When the timer fires, invoke
-        the <code>errorCallback</code> (if present) with a
-        new <code>PositionError</code> object whose <code>code</code>
-        attribute is set to TIMEOUT and jump to step 6.</li>
+        the <var>errorCallback</var> (if present) with a
+        new <a>PositionError</a> object whose <a data-link-for=PositionError>code</a>
+        attribute is set to <a data-link-for=PositionError>TIMEOUT</a> and jump to step 6.</li>
         <li>If the location acquisition operation successfully yields
         a new position before the timeout expires, perform the
         following two steps:
           <ol>
-            <li>Cancel the pending timer. Note that the timer must be
+            <li>Cancel the pending timer. Note that the timer MUST be
             restarted once this algorithm jumps back to the beginning of the
             acquisition steps.</li>
-            <li>If the new position differs significantly from the
-              previous position, invoke
-              the <code>successCallback</code> with a
-              new <code>Position</code> object that reflects the
-              result of the acquisition operation.  This step may be
+            <li>If the <dfn>new position differs significantly from the
+              previous position</dfn>, invoke
+              the <var>successCallback</var> with a
+              new <a>Position</a> object that reflects the
+              result of the acquisition operation.  This step MAY be
               subject to callback rate limitation
               (<a href="#rate-limit">see below</a>).</li>
           </ol>
         </li>
         <li>Else, if the location acquisition operation reports an
-          error before the timeout expires, invoke the <code>errorCallback</code> (if present)
-          with a new <code>PositionError</code> object
-          whose <code>code</code> is set to POSITION_UNAVAILABLE. This
-          step may be subject to callback rate limitation
+          error before the <a data-link-for=PositionOptions>timeout</a> expires, invoke the <var>errorCallback</var> (if present)
+          with a new <a>PositionError</a> object
+          whose <a data-link-for=PositionError>code</a> is set to <a data-link-for=PositionError>POSITION_UNAVAILABLE</a>. This
+          step MAY be subject to callback rate limitation
           (<a href="#rate-limit">see below</a>).</li>
       </ol>
     </li>
     <li>Wait for a system event to be received. When such an event is
-    received jump to the acquisition steps above.</li>
+    received jump to the <dfn>acquisition steps</dfn> above.</li>
   </ol>
 
-  <p id="rate-limit">In step 5.2.2 of the watch process,
-  the <code>successCallback</code> is only invoked when a new position
+  <p class='note' id="rate-limit">If the <a>new position differs significantly from the
+      previous position</a> in the <a>watch process</a>,
+  the <var>successCallback</var> is only invoked when a new position
   is obtained and this position differs significantly from the
   previously reported position. The definition of what constitutes a
   significant difference is left to the implementation. Furthermore,
-  in steps 5.2.2 and 5.2.3, implementations may impose limitations on
+  in steps 4.2.2 and 4.3, implementations MAY impose limitations on
   the frequency of callbacks so as to avoid inadvertently consuming a
   disproportionate amount of resources.</p>
 
-  <p>For both <code>getCurrentPosition</code>
-  and <code>watchPosition</code>, the implementation must never invoke
-  the <code>successCallback</code> without having first obtained
+  <p data-tests='getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html, watchPosition_permission_deny.https.html'>
+  For both <a>getCurrentPosition</a>
+  and <a>watchPosition</a>, the implementation MUST never invoke
+  the <var>successCallback</var> without having first obtained
   permission from the user to share location. Furthermore, the 
-  implementation should always obtain the user's permission to share location before
-  executing any of the <code>getCurrentPosition</code> or <code>watchPosition</code> steps
+  implementation SHOULD always obtain the user's permission to share location before
+  executing any of the <a>getCurrentPosition</a> or <a>watchPosition</a> steps
   described above. If the user grants permission, the
-  appropriate callback must be invoked as described above. If the user
-  denies permission, the <code>errorCallback</code> (if present)
-  must be invoked with <code>code</code> PERMISSION_DENIED, irrespective of any
+  appropriate callback MUST be invoked as described above. If the user
+  denies permission, the <var>errorCallback</var> (if present)
+  MUST be invoked with <a data-link-for=PositionError>code</a> <a data-link-for=PositionError>PERMISSION_DENIED</a>, irrespective of any
   other errors encountered in the above steps.
-  The time that is spent obtaining the user permission must not be
-  included in the period covered by the <code>timeout</code> attribute
-  of the <code>PositionOptions</code>
-  parameter. The <code>timeout</code> attribute must only apply to the
+  The time that is spent obtaining the user permission MUST NOT be
+  included in the period covered by the <a data-link-for=PositionOptions>timeout</a> attribute
+  of the <a>PositionOptions</a>
+  parameter. The <a data-link-for=PositionOptions>timeout</a> attribute MUST only apply to the
   location acquisition operation.</p>
 
-  <p>The <dfn id=clear-watch><code>clearWatch()</code></dfn> method
-  takes one argument. When called, it must first check the value of
-  the given <dfn id="watchId"><code>watchId</code></dfn> argument.
-  If this value does not correspond to any previously started watch
-  process, then the method must return immediately without taking any
-  further action. Otherwise, the watch process identified by the
-  <code>watchId</code> argument must be immediately stopped and no 
-  further callbacks must be invoked.</p>
+  <p data-tests='clearWatch_TypeError.html'>The <dfn>clearWatch()</dfn> method
+  takes one argument. When called, it MUST first check the value of
+  the given <dfn id="watchId">watchId</dfn> argument.
+  If this value does not correspond to any previously started <a>watch
+  process</a>, then the method MUST return immediately without taking any
+  further action. Otherwise, the <a>watch process</a> identified by the
+  <code>watchId</code> argument MUST be immediately stopped and no 
+  further callbacks MUST be invoked.</p>
+  </section>
+  <section id="position_options_interface"  data-dfn-for=PositionOptions  data-link-for=PositionOptions>
+    <h3><dfn>PositionOptions</dfn> interface</h3>
 
-  <h3 id="position_options_interface"><span class=secno>5.2
-   </span>PositionOptions interface</h3>
-
-  <p>The <code><a
-   href="#get-current-position">getCurrentPosition()</a></code> and <code><a
-   href="#watch-position">watchPosition()</a></code> methods accept <code><a
-   href="#position-options">PositionOptions</a></code> objects as their third
+  <p>The <a data-link-for=Geolocation>getCurrentPosition()</a> and <a data-link-for=Geolocation>watchPosition()</a> methods
+    accept <a>PositionOptions</a> objects as their third
    argument.
 
-  <p> In ECMAScript, <code><a href="#position-options">PositionOptions</a></code>
+  <p> In ECMAScript, <a>PositionOptions</a>
    objects are represented using regular native objects with optional
-   properties named <code>enableHighAccuracy</code>, <code>timeout</code>
-   and <code>maximumAge</code>.</p>
+   properties named <a>enableHighAccuracy</a>, <a>timeout</a>
+   and <a>maximumAge</a>.</p>
 
   <pre class=idl>
-  [NoInterfaceObject]
-  dictionary <dfn id=position-options>PositionOptions</dfn> {
-    boolean <a href="#high-accuracy">enableHighAccuracy</a> = false;
-    [Clamp] unsigned long <a href="#timeout">timeout</a> = 0xFFFFFFFF;
-    [Clamp] unsigned long <a href="#max-age">maximumAge</a> = 0;
+  dictionary PositionOptions {
+    boolean enableHighAccuracy = false;
+    [Clamp] unsigned long timeout = 0xFFFFFFFF;
+    [Clamp] unsigned long maximumAge = 0;
   };
 
   </pre>
 
-  <p>In ECMAScript, the <code><a href="#high-accuracy">enableHighAccuracy</a></code>,
-   <code><a href="#timeout_error">timeout</a></code> and <code><a
-   href="#max-age">maximumAge</a></code> properties are all optional: when
-   creating a PositionOptions object, the developer may specify any of these
+  <p>In ECMAScript, the <a>enableHighAccuracy</a>,
+   <a>timeout</a> and <a>maximumAge</a> properties are all OPTIONAL: when
+   creating a PositionOptions object, the developer MAY specify any of these
    properties.  
 
-  <p>If the <code>PositionOptions</code> parameter
-  to <code>getCurrentPosition</code> or <code>watchPosition</code> is
-  omitted, the default value used for
-  the <code>enableHighAccuracy</code> attribute is false. The same
-  default value is used in ECMAScript when
-  the <code>enableHighAccuracy</code> property is omitted.  
-  
-  <p>If the <code>PositionOptions</code> parameter
-  to <code>getCurrentPosition</code> or <code>watchPosition</code> is
-  omitted, the default value used for the <code>timeout</code>
-  attribute is Infinity. If a negative value is supplied,
-  the <code>timeout</code> value is considered to be 0. The same
-  default value is used in ECMAScript when the <code>timeout</code>
-  property is omitted.
+  <p data-tests='PositionOptions.https.html'>The <dfn>enableHighAccuracy</dfn> attribute provides a hint that the application would like to receive the
+    best possible results. This MAY result in slower response times or increased power consumption. The user
+    might also deny this capability, or the device might not be able to provide more accurate results than if
+    the flag wasn't specified. The intended purpose of this attribute is to allow applications to inform the
+    implementation that they do not require high accuracy geolocation fixes and, therefore, the implementation
+    can avoid using geolocation providers that consume a significant amount of power (e.g. GPS). This is
+    especially useful for applications running on battery-powered devices, such as mobile phones. 
+      
+  <p data-tests='PositionOptions.https.html'>The <dfn>timeout</dfn> attribute denotes the maximum length of time (expressed in milliseconds) that is allowed
+    to pass from the call to <a data-link-for=Geolocation>getCurrentPosition</a> or <a data-link-for=Geolocation>watchPosition</a>
+    until the corresponding <var>successCallback</var> is invoked. If the implementation is unable to successfully acquire a
+    new <a>Position</a> before the given timeout elapses, and no other errors have occurred in this interval, then
+    the corresponding <var>errorCallback</var> MUST be invoked with a <a>PositionError</a> object whose code attribute
+    is set to <a data-link-for=PositionError>TIMEOUT</a>. Note that the time that is spent obtaining the user permission is
+    not included in the period covered by the <a>timeout</a> attribute. The <a>timeout</a> attribute only applies to
+    the location acquisition operation. 
 
-  <p>In case of a <code><a
-   href="#get-current-position">getCurrentPosition()</a></code> call, the
-   <code>errorCallback</code> would be invoked at most once.
+  <p>In case of a <a data-link-for=Geolocation>getCurrentPosition()</a> call, the
+   <var>errorCallback</var> would be invoked at most once.
 
-   In case of
-   a <code><a href="#watch-position">watchPosition()</a></code>,
-   the <code>errorCallback</code> could be invoked repeatedly: the
+   <p>In case of
+   a <a data-link-for=Geolocation>watchPosition()</a>,
+   the <var>errorCallback</var> could be invoked repeatedly: the
    first timeout is relative to the
-   moment <code><a href="#watch-position">watchPosition()</a></code>
+   moment <a data-link-for=Geolocation>watchPosition()</a>
    was called or the moment the user's permission was obtained, if
    that was necessary. Subsequent timeouts are relative to the moment
    when the implementation determines that the position of the hosting
    device has changed and a new
-   <code><a href="#position">Position</a></code> object must be acquired.  
+   <a>Position</a> object MUST be acquired.  
 
-  <p>If the <code>PositionOptions</code> parameter
-  to <code>getCurrentPosition</code> or <code>watchPosition</code> is
-  omitted, the default value used for the <code>maximumAge</code>
-  attribute is 0. If a negative value is supplied,
-  the <code>maximumAge</code> value is considered to be 0. The same
-  default value is used in ECMAScript when the <code>maximumAge</code>
-  property is omitted.
+  <p data-tests='PositionOptions.https.html'>The <dfn>maximumAge</dfn> attribute indicates that the application is willing to accept a cached
+    position whose age is no greater than the specified time in milliseconds.
+    If <a>maximumAge</a> is set to 0, the implementation MUST immediately attempt to acquire a new position object. Setting
+    the <a>maximumAge</a> to <code>Infinity</code> MUST determine the implementation to return a cached position regardless of its age. If
+    an implementation does not have a cached position available whose age is no greater than the specified <a>maximumAge</a>,
+    then it MUST acquire a new <a>Position</a> object. In case of a <a data-link-for=Geolocation>watchPosition()</a>,
+    the <a>maximumAge</a> refers to the first <a>Position</a> object returned by the implementation.
+    
+  </section>
 
-  <h3 id="position_interface"><span class=secno>5.3 </span>Position interface</h3>
+  <section id="position_interface" data-dfn-for=Position data-link-for=Position>
+    <h3><dfn>Position</dfn> interface</h3>
 
-  <p>The <code><a href="#position">Position</a></code> interface is the
+  <p>The <a>Position</a> interface is the
    container for the geolocation information returned by this API. This
-   version of the specification allows one attribute of type <code><a
-   href="#coordinates">Coordinates</a></code> and a 
-   <code><a href="#timestamp">timestamp</a></code>. Future versions of the API
-   may allow additional attributes that provide other information about this
+   version of the specification allows one attribute of type <a>Coordinates</a> and a 
+   <a>timestamp</a>. Future versions of the API
+   MAY allow additional attributes that provide other information about this
    position (e.g. street addresses).
 
   <pre class=idl>
   [NoInterfaceObject]
-  interface <dfn id=position>Position</dfn> {
-    readonly attribute <a href="#coordinates">Coordinates</a> <a href="#coords">coords</a>;
-    readonly attribute DOMTimeStamp <a href="#timestamp">timestamp</a>;
+  interface Position {
+    readonly attribute Coordinates coords;
+    readonly attribute DOMTimeStamp timestamp;
   };
   </pre>
 
-  <p>The <dfn id=coords><code>coords</code></dfn> attribute contains a set of
+  <p>The <dfn>coords</dfn> attribute contains a set of
    geographic coordinates together with their associated accuracy, as well as
    a set of other optional attributes such as altitude and speed.
 
-  <p>The <dfn id=timestamp><code>timestamp</code></dfn> attribute represents
-   the time when the <code><a href="#position">Position</a></code> object was
-   acquired and is represented as a DOMTimeStamp <a
-   href="#ref-domtimestamp">[DOMTIMESTAMP]</a>.
-
-  <h3 id="coordinates_interface"><span class=secno>5.4 </span>Coordinates
-   interface</h3>
+  <p>The <dfn>timestamp</dfn> attribute represents
+   the time when the <a>Position</a> object was
+   acquired and is represented as a <code><dfn data-cite='!WEBIDL#DOMTimeStamp'>DOMTimeStamp</dfn></code>.
+  </section>
+  <section id="coordinates_interface" data-dfn-for=Coordinates  data-link-for=Coordinates>
+    <h3><dfn>Coordinates</dfn> interface</h3>
 
   <pre class=idl>
   [NoInterfaceObject]
-  interface <dfn id=coordinates>Coordinates</dfn> {
-    readonly attribute double <a href="#lat">latitude</a>;
-    readonly attribute double <a href="#lon">longitude</a>;
-    readonly attribute double? <a href="#altitude">altitude</a>;
-    readonly attribute double <a href="#accuracy">accuracy</a>;
-    readonly attribute double? <a href="#altitude-accuracy">altitudeAccuracy</a>;
-    readonly attribute double? <a href="#heading">heading</a>;
-    readonly attribute double? <a href="#speed">speed</a>;
+  interface Coordinates {
+    readonly attribute double latitude;
+    readonly attribute double longitude;
+    readonly attribute double? altitude;
+    readonly attribute double accuracy;
+    readonly attribute double? altitudeAccuracy;
+    readonly attribute double? heading;
+    readonly attribute double? speed;
   };
   </pre>
 
   <p>The geographic coordinate reference system used by the attributes in
-   this interface is the World Geodetic System (2d) <a
-   href="#ref-wgs">[WGS84]</a>. No other reference system is supported.
+   this interface is the World Geodetic System (2d) [[!WGS84]]. No other reference system is supported.
 
-  <p>The <dfn id=lat><code>latitude</code></dfn> and <dfn
-   id=lon><code>longitude</code></dfn> attributes are geographic coordinates
+  <p>The <dfn>latitude</dfn> and <dfn>longitude</dfn> attributes are geographic coordinates
    specified in decimal degrees.
 
-  <p>The <dfn id=altitude><code>altitude</code></dfn> attribute denotes the
-   height of the position, specified in meters above the <a
-   href="#ref-wgs">[WGS84]</a> ellipsoid. If the implementation cannot
-   provide altitude information, the value of this attribute must be null.
+  <p>The <dfn>altitude</dfn> attribute denotes the
+   height of the position, specified in meters above the [[WGS84]] ellipsoid. If the implementation cannot
+   provide altitude information, the value of this attribute MUST be null.
 
-  <p>The <dfn id=accuracy><code>accuracy</code></dfn> attribute denotes the
+  <p>The <dfn>accuracy</dfn> attribute denotes the
    accuracy level of the latitude and longitude coordinates. It is specified
-   in meters and must be supported by all implementations. The value of the accuracy
-   attribute must be a non-negative real number.
+   in meters and MUST be supported by all implementations. The value of the accuracy
+   attribute MUST be a non-negative real number.
 
-  <p>The <dfn id=altitude-accuracy><code>altitudeAccuracy</code></dfn>
+  <p>The <dfn>altitudeAccuracy</dfn>
    attribute is specified in meters. If the implementation cannot provide
-   altitude information, the value of this attribute must be null. Otherwise,
-   the value of the altitudeAccuracy attribute must be a non-negative real number.
+   altitude information, the value of this attribute MUST be null. Otherwise,
+   the value of the altitudeAccuracy attribute MUST be a non-negative real number.
 
-  <p>The <code><a href="#accuracy">accuracy</a></code> and <code><a
-   href="#altitude-accuracy">altitudeAccuracy</a></code> values returned by
-   an implementation should correspond to a 95% confidence level.
+  <p>The <a>accuracy</a> and <a>altitudeAccuracy</a> values returned by
+   an implementation SHOULD correspond to a 95% confidence level.
 
-  <p>The <dfn id=heading><code>heading</code></dfn> attribute denotes the
+  <p>The <dfn>heading</dfn> attribute denotes the
    direction of travel of the hosting device and is specified in degrees,
    where 0° &le; heading &lt; 360°, counting clockwise relative to the true north.
    If the implementation cannot provide heading information, the value of this
-   attribute must be null. If the hosting device is stationary (i.e. the value
-   of the <code>speed</code> attribute is 0), then the value of the heading
-   attribute must be NaN.
+   attribute MUST be null. If the hosting device is stationary (i.e. the value
+   of the <a>speed</a> attribute is 0), then the value of the heading
+   attribute MUST be NaN.
 
-  <p>The <dfn id=speed><code>speed</code></dfn> attribute denotes the magnitude
+  <p>The <dfn>speed</dfn> attribute denotes the magnitude
    of the horizontal component of the hosting device's current velocity and is
    specified in meters per second.
    If the implementation cannot provide speed information, the value of this
-   attribute must be null. Otherwise, the value of the speed attribute must be
+   attribute MUST be null. Otherwise, the value of the speed attribute MUST be
    a non-negative real number.
-
-  <h3 id="position_error_interface"><span class=secno>5.5
-   </span>PositionError interface</h3>
+  </section>
+  <section id="position_error_interface" data-dfn-for=PositionError  data-link-for=PositionError>
+    <h3><dfn>PositionError</dfn> interface</h3>
 
   <pre class=idl>
   [NoInterfaceObject]
-  interface <dfn id=position-error>PositionError</dfn> {
-    const unsigned short <a href="#permission_denied_error">PERMISSION_DENIED</a> = 1;
-    const unsigned short <a href="#position_unavailable_error">POSITION_UNAVAILABLE</a> = 2;
-    const unsigned short <a href="#timeout_error">TIMEOUT</a> = 3;
-    readonly attribute unsigned short <a href="#code">code</a>;
-    readonly attribute DOMString <a href="#message">message</a>;
+  interface PositionError {
+    const unsigned short PERMISSION_DENIED = 1;
+    const unsigned short POSITION_UNAVAILABLE = 2;
+    const unsigned short TIMEOUT = 3;
+    readonly attribute unsigned short code;
+    readonly attribute DOMString message;
   };
   </pre>
 
-  <p>The <dfn id=code><code>code</code></dfn> attribute must return the
+  <p>The <dfn>code</dfn> attribute MUST return the
    appropriate code from the following list:
 
   <dl>
-   <dt><dfn id="permission_denied_error"><code>PERMISSION_DENIED</code></dfn>
+   <dt><dfn>PERMISSION_DENIED</dfn>
     (numeric value 1)
 
    <dd>The location acquisition process failed because the document
     does not have permission to use the Geolocation API.
 
-   <dt><dfn
-    id="position_unavailable_error"><code>POSITION_UNAVAILABLE</code></dfn>
+   <dt><dfn>POSITION_UNAVAILABLE</dfn>
     (numeric value 2)
 
    <dd>The position of the device could not be determined. For instance, one or more of the
     location providers used in the location acquisition process reported an
     internal error that caused the process to fail entirely.
 
-   <dt><dfn id="timeout_error"><code>TIMEOUT</code></dfn> (numeric value 3)
+   <dt><dfn>TIMEOUT</dfn> (numeric value 3)
 
-   <dd>The length of time specified by the <code><a href="#timeout">timeout</a></code>
+   <dd>The length of time specified by the <a data-link-for=PositionOptions>timeout</a>
     property has elapsed before the implementation could successfully acquire a
-    new <code><a href="#position">Position</a></code> object.
+    new <a>Position</a> object.
   </dl>
 
-  <p>The <dfn id=message><code>message</code></dfn> attribute must return an
+  <p>The <dfn>message</dfn> attribute MUST return an
    error message describing the details of the error encountered. This
-   attribute is primarily intended for debugging and developers should not
+   attribute is primarily intended for debugging and developers SHOULD NOT
    use it directly in their application user interface.
+  </section>
+</section>
 
-  <h2 id=usecases><span class=secno>6 </span>Use-Cases and Requirements</h2>
+<section id=usecases>
+  <h2>Use-Cases and Requirements</h2>
 
-  <h3 id="usecases_section"><span class=secno>6.1 </span>Use-Cases</h3>
+  <section id="usecases_section">
+    <h3>Use-Cases</h3>
 
-  <h4 id="usecase_find_poi"><span class=secno>6.1.1 </span>Find points of
+    <section id="usecase_find_poi">
+      <h4>Find points of
    interest in the user's area</h4>
 
   <p>Someone visiting a foreign city could access a Web application that
@@ -904,9 +787,9 @@ section 6 of the W3C Patent Policy</a>.</p>
    attractions. Using the Geolocation API, the Web application has access to
    the user's approximate position and it is therefore able to rank the
    search results by proximity to the user's location.
-
-  <h4 id="usecase_content_annotation"><span class=secno>6.1.2
-   </span>Annotating content with location information</h4>
+  </section>
+  <section id="usecase_content_annotation">
+    <h4>Annotating content with location information</h4>
 
   <p> A group of friends is hiking through the Scottish highlands. Some of
    them write short notes and take pictures at various points throughout the
@@ -924,8 +807,9 @@ section 6 of the W3C Patent Policy</a>.</p>
    experiences. This content can be automatically annotated with information
    such as time, geographic position or even the user's emotional state at
    the time of the recording.
-
-  <h4 id="usecase_show_position"><span class=secno>6.1.3 </span>Show the
+  </section>
+  <section id="usecase_show_position">
+    <h4>Show the
    user's position on a map</h4>
 
   <p>A user finds herself in an unfamiliar city area. She wants to check her
@@ -933,8 +817,9 @@ section 6 of the W3C Patent Policy</a>.</p>
    mapping application that can pinpoint her exact location on the city map
    using the Geolocation API. She then asks the Web application to provide
    driving directions from her current position to her desired destination.
-
-  <h4 id="usecase_turn_by_turn"><span class=secno>6.1.4 </span>Turn-by-turn
+  </section>
+  <section id="usecase_turn_by_turn">
+    <h4>Turn-by-turn
    route navigation</h4>
 
   <p>A mapping application can help the user navigate along a route by
@@ -944,8 +829,10 @@ section 6 of the W3C Patent Policy</a>.</p>
    implementing user agent determines that the position of the user has
    changed, which allows the application to anticipate any changes of
    direction that the user might need to do.
-
-  <h4 id="usecase_poi_alert"><span class=secno>6.1.5 </span>Alerts when
+  </section>
+  <section 
+  <h4 id="usecase_poi_alert">
+    <h4>Alerts when
    points of interest are in the user's vicinity</h4>
 
   <p>A tour-guide Web application can use the Geolocation API to monitor the
@@ -953,17 +840,18 @@ section 6 of the W3C Patent Policy</a>.</p>
    places are in the vicinity. An online task management system can trigger
    reminders when the user is in the proximity of landmarks that are
    associated with certain tasks.
-
-  <h4 id="usecase_local_info"><span class=secno>6.1.6 </span>Up-to-date local
+  </section>
+  <section 
+  <h4 id="usecase_local_info"><h4>Up-to-date local
    information</h4>
 
   <p>A widget-like Web application that shows the weather or news that are
    relevant to the user's current area can use the Geolocation API to
    register for location updates. If the user's position changes, the widget
    can adapt the content accordingly.
-
-  <h4 id="usecase_social_networking"><span class=secno>6.1.7
-   </span>Location-tagged status updates in social networking applications</h4>
+  </section>
+  <section 
+  <h4 id="usecase_social_networking"><h4>Location-tagged status updates in social networking applications</h4>
 
   <p>A social network application allows its users to automatically tag their
    status updates with location information. It does this by monitoring the
@@ -971,115 +859,61 @@ section 6 of the W3C Patent Policy</a>.</p>
    granularity of the location information (e.g. city or neighborhood level)
    that is shared with the other users. Any user can also track his network
    of friends and get real-time updates about their current location.
+  </section>
+  </section>
+  <section id="requirements_section"><h3>Requirements</h3>
 
-  <h3 id="requirements_section"><span class=secno>6.2 </span>Requirements</h3>
-
-  <h4 id="req_latlong"><span class=secno>6.2.1 </span>The Geolocation API
-   must provide location data in terms of a pair of latitude and longitude
+  </section>
+  <section id="req_latlong"><h4>The Geolocation API
+   MUST provide location data in terms of a pair of latitude and longitude
    coordinates.</h4>
 
-  <h4 id="req_accuracy"><span class=secno>6.2.2 </span>The Geolocation API
-   must provide information about the accuracy of the retrieved location
+  </section>
+  <section id="req_accuracy"><h4>The Geolocation API
+   MUST provide information about the accuracy of the retrieved location
    data.</h4>
 
-  <h4 id="req_oneshot"><span class=secno>6.2.3 </span>The Geolocation API
-   must support "one-shot" position updates.</h4>
+  </section>
+  <section id="req_oneshot"><h4>The Geolocation API
+   MUST support "one-shot" position updates.</h4>
 
-  <h4 id="req_updates"><span class=secno>6.2.4 </span>The Geolocation API
-   must allow an application to register to receive updates when the position
+  </section>
+  <section id="req_updates"><h4>The Geolocation API
+   MUST allow an application to register to receive updates when the position
    of the hosting device changes.</h4>
 
-  <h4 id="req_last_known"><span class=secno>6.2.5 </span>The Geolocation API
-   must allow an application to request a cached position whose age is no
+  </section>
+  <section id="req_last_known"><h4>The Geolocation API
+   MUST allow an application to request a cached position whose age is no
    greater than a specified value.</h4>
 
-  <h4 id="req_errors"><span class=secno>6.2.6 </span>The Geolocation API must
-   provide a way for the application to receive updates about errors that may
+  </section>
+  <section id="req_errors"><h4>The Geolocation API MUST
+   provide a way for the application to receive updates about errors that MAY
    have occurred while obtaining a location fix.</h4>
 
-  <h4 id="req_request_acuracy"><span class=secno>6.2.7 </span>The Geolocation
-   API must allow an application to specify a desired accuracy level of the
+  </section>
+  <section id="req_request_acuracy"><h4>The Geolocation
+   API MUST allow an application to specify a desired accuracy level of the
    location information.</h4>
 
-  <h4 id="req_source_agnostic"><span class=secno>6.2.8 </span>The Geolocation
-   API must be agnostic to the underlying sources of location information.</h4>
+  </section>
+  <section id="req_source_agnostic"><h4>The Geolocation
+   API MUST be agnostic to the underlying sources of location information.</h4>
 
-  <h2 class=no-num id=acknowledgments>Acknowledgments</h2>
-
+  </section>
+ </section>
+ </section>
+ <section class="appendix">
+   <h2>Acknowledgments</h2>
   <p>Alec Berntson, Alissa Cooper, Steve Block, Greg Bolsinga, Lars Erik Bolstad, Aaron Boodman,
    Dave Burke, Chris Butler, Max Froumentin, Shyam Habarakada, Marcin
    Hanclik, Ian Hickson, Brad Lassey, Angel Machin, Cameron McCormack, Daniel
    Park, Stuart Parmenter, Olli Pettay, Chris Prince, Arun Ranganathan, Aza
    Raskin, Carl Reed, Thomas Roessler, Dirk Segers, Allan Thomson, Martin
    Thomson, Doug Turner, Erik Wilde, Matt Womer, Mohamed Zergaoui
-
-  <h2 class=no-num id=references>References</h2>
-
-  <dl>
-   <dt><a id=ref-azaloc>[AZALOC]</a>
-
-   <dd><em>(Non-normative)</em> <cite><a
-    href="http://www.azarask.in/blog/post/geolocation-in-firefox-and-beyond/">Geolocation
-    in Firefox and Beyond</a></cite>, Aza Raskin. See
-    http://azarask.in/blog/post/geolocation-in-firefox-and-beyond
-
-   <dt><a id=ref-context>[BROWSINGCONTEXT]</a>
-
-   <dd><cite><a
-    href="http://www.w3.org/TR/2013/CR-html5-20130806/browsers.html#windows">The
-    browsing context in HTML5</a></cite>, Robin Berjon, Steve Faulkner, Travis Leithead, Erika Doyle Navara, Edward O'Connor, Silvia Pfeiffer, Ian Hickson, Editors.  World Wide Web Consortium.  See
-    http://www.w3.org/TR/2013/CR-html5-20130806/browsers.html#windows
-
-   <dt><a id=ref-uri>[URI]</a>
-
-   <dd><cite><a href="http://www.ietf.org/rfc/rfc2396.txt">Uniform Resource Identifiers (URI): Generic Syntax
-    </a></cite>, T. Berners-Lee, R. Fielding, L. Masinter, Editors. Internet Engineering Task Force. 
-    See http://www.ietf.org/rfc/rfc2396.txt
-
-   <dt><a id=ref-navigator>[NAVIGATOR]</a>
-
-   <dd><cite><a
-    href="http://www.w3.org/TR/2013/CR-html5-20130806/webappapis.html#navigator">Navigator
-    interface in HTML5</a></cite>, Robin Berjon, Steve Faulkner, Travis Leithead, Erika Doyle Navara, Edward O'Connor, Silvia Pfeiffer, Ian Hickson, Editors.  World Wide Web Consortium.  See
-	http://www.w3.org/TR/2013/CR-html5-20130806/webappapis.html#navigator
-
-   <dt><a id=ref-domtimestamp>[DOMTIMESTAMP]</a>
-
-   <dd><cite><a
-    href="http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp">The
-    DOMTimeStamp Type</a></cite>, 
-	Cameron McCormack, Editors. World Wide Web Consortium, 19 April 2012.  See
-    http://www.w3.org/TR/WebIDL/#common-DOMTimeStamp
-
-   <dt><a id=ref-gears>[GEARSLOC]</a>
-
-   <dd><em>(Non-normative)</em> <cite><a
-    href="http://code.google.com/apis/gears/api_geolocation.html">Gears
-    Geolocation API</a></cite>. See http://code.google.com/apis/gears/api_geolocation.html [historical]
-   <dt><a id=ref-locationaware>[LOCATIONAWARE]</a>
-
-   <dd><em>(Non-normative)</em><cite> <a
-    href="http://locationaware.org/">LocationAware.org</a></cite>. See
-    http://locationaware.org/  [historical]
-
-   <dt><a id=ref-rfc2119>[RFC2119]</a>
-
-   <dd><cite><a href="http://www.ietf.org/rfc/rfc2119.txt">Key words for use
-    in RFCs to Indicate Requirement Levels</a></cite>, Scott Bradner.  Internet Engineering Task Force, March 1997. See
-    http://www.ietf.org/rfc/rfc2119.txt
-   
-   <dt><a id=ref-webidl>[WEBIDL]</a>
-
-   <dd><cite><a href="http://www.w3.org/TR/2012/CR-WebIDL-20120419/">web IDL</a></cite>, Cameron McCormack, Editor.  World Wide Web Consortium, 19 April 2012. See
-    http://www.w3.org/TR/2012/CR-WebIDL-20120419/
-
-   <dt><a id=ref-wgs>[WGS84]</a>
-
-   <dd><cite><a
-    href="http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf">National
-    Imagery and Mapping Agency Technical Report 8350.2, Third
-    Edition</a></cite>.  National Imagery and Mapping Agency, 3 January 2000.  See
-    http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf
-  </dl>
-</body> 
-</html> 
+  </section>
+  
+<section id="idl-index" class="appendix">
+    <!-- All the Web IDL will magically appear here --> 
+</section>
