@@ -1,0 +1,96 @@
+// Assuming https://github.com/slightlyoff/ServiceWorker/issues/421 gets
+// resolved this gives access to the API both from main pages and from within
+// the service worker itself, and seems cleaner than exposing this on the
+// service worker global scope.
+partial interface ServiceWorkerRegistration {
+  readonly attribute GeofencingController geofencing;
+};
+
+partial interface ServiceWorkerGlobalScope {
+  attribute EventHandler ongeofenceenter;
+  attribute EventHandler ongeofenceleave;
+  attribute EventHandler ongeofenceerror;
+};
+
+interface GeofencingEvent : ExtendableEvent {
+  readonly attribute GeofenceRegistration registration;
+  readonly attribute Position? position;
+};
+
+// Not sure about specific error conditions. But some way of telling service
+// workers about error conditions is needed.
+interface GeofencingErrorEvent : GeofencingEvent {
+  readonly attribute GeofencingError error;
+};
+
+interface GeofencingController {
+  Promise<GeofenceRegistration> registerRegion( GeofencingRegion initialRegion, optional GeofenceRegisterOptions options );
+  Promise<sequence<GeofenceRegistration>> getRegisteredRegions(optional GeofencingRegistrationQueryOptions options);
+  Promise<GeofenceRegistration> getRegisteredRegion(DOMString id);
+};
+
+dictionary GeofenceRegisterOptions {
+  bool includePosition = false;
+};
+
+// Similar API to ServiceWorkerClients.getAll(), nice to have, but I could
+// live without it as well.
+dictionary GeofencingRegistrationQueryOptions {
+  DOMString? name; // optionally filter by name
+};
+
+interface GeofenceRegistration {
+  readonly attribute DOMString id;     // SWRegistration-unique ID
+  readonly attribute DOMString name;   // optional user-supplied name
+  readonly GeofencingRegion region;
+  
+  Promise<undefined> unregister();
+};
+
+dictionary GeofencingRegionInit {
+  DOMString name = ""; // optional user-supplied name
+};
+
+[NoInterfaceObject]
+interface GeofencingRegion {
+  readonly attribute DOMString name;
+};
+
+dictionary GeolocationPoint {
+  double latitude;
+  double longitude;
+};
+
+dictionary CircularGeofencingRegionInit : GeofencingRegionInit {
+  double latitude;
+  double longitude;
+  double radius;
+};
+
+[Constructor(CircularGeofencingRegionInit), exposed=Worker]
+interface CircularGeofencingRegion : GeofencingRegion {
+  readonly attribute GeolocationPoint center;
+  readonly attribute double radius;
+};
+ 
+// Other potential region types:
+// Polygon of nonintersecting line segments.
+[Constructor(dictionary options), exposed=Worker]
+interface PolygonRegion : GeofencingRegion {
+  readonly attribute sequence<GeolocationPoint> points;
+};
+
+
+
+Use case test:
+
+Promise<GeofenceRegistration> registerRegion(
+    new CircularRegion( {
+      name: "myfence",
+      latitude: 123,
+      longitude: -1000,
+      radius: 1
+    }));
+
+Promise<sequence<GeofenceRegistration> > getRegisteredRegions(
+    {name: "myfence"});

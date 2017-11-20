@@ -1,0 +1,68 @@
+The first main change is that I've changed where the Geofencing(Controller) object is exposed. In my previous proposal this was on the navigator object, but to be better in line with other Service Worker based APIs here I moved it to the ServiceWorkerRegistration. This makes the API available to both service workers and websites with an active service worker (more on that later):
+
+partial interface ServiceWorkerRegistration {
+  readonly attribute GeofencingController geofencing;
+};
+
+For reasons explained in my reply to Martin, events are still exposed on the ServiceWorkerGlobalScope object, like this (additionally this might need some king of ongeofenceenter event, although I'm not quite sure of the use cases of such an event):
+
+partial interface ServiceWorkerGlobalScope
+{
+  attribute EventHandler ongeofenceenter;
+  attribute EventHandler ongeofenceleave;
+};
+ 
+[NoInterfaceObject]
+interface GeofencingEvent {
+  readonly attribute GeofenceRegistration region;
+  readonly attribute Position position;
+}
+ 
+The biggest changes in my proposal are here. Before registerRegion didn't return anything, now I've changed this to return a GeofenceRegistration object (which is also used in the event above). I moved the id out of the GeofenceRegion object, and instead made this part of the Registration. This is more in line with Martin's proposal, but also allows for a couple of other nice things. For example a user agent could choose to slightly adjust the region that it is asked to register (if the radius is too small, or similar situations), and return the adjusted region as part of the registration object.
+
+[NoInterfaceObject]
+interface GeofencingController {
+  Promise<GeofenceRegistration> registerRegion(DOMString id, GeofencingRegion region);
+  Promise<sequence<GeofenceRegistration>> getRegisteredRegions();
+  Promise<GeofenceRegistration> getRegisteredRegion(DOMString id);
+};
+
+interface GeofenceRegistration : EventTarget {
+  readonly attribute DOMString id;
+  readonly GeofencingRegion region;
+  
+  Promise<undefined> unregister();
+
+  // I'm not sure if there is much value in adding these events. Registering
+  // to them from a service worker would be mostly useless, but they could
+  // provide a nice entrypoint for a website to indicate their interest in
+  // specific fences.
+  attribute EventHandler onenter;
+  attribute EventHandler onleave;
+};
+
+As you see I also added onenter and onleave events to this GeofenceRegistration object. While these events won't be useful at all in service workers, this is what makes it possible to also use this API from regular webpages. For a regular webpage to use geofences it would still need to install an empty service worker, but it can then install event handlers on those geofence registrations it is actually interested in.
+
+And for completeness the GeofenceRegion classes, with no more MIN/MAX_RADIUS, and no more id as part of the region (but maybe something closer to Martin's proposal where you just directly pass a simple dictionary to registerRegion would be a better API, I don't really have a strong opinion on this).
+
+[NoInterfaceObject]
+interface GeofencingRegion {
+};
+ 
+dictionary GeolocationPoint {
+  double latitude;
+  double longitude;
+};
+ 
+[Constructor(dictionary options), exposed=Window&Worker]
+interface CircularRegion : GeofencingRegion {
+  readonly attribute GeolocationPoint center;
+  readonly attribute double radius;
+};
+ 
+// Other potential region types:
+// Polygon of nonintersecting line segments.
+[Constructor(dictionary options), exposed=Window&Worker]
+interface PolygonRegion : GeofencingRegion {
+  readonly attribute sequence<GeolocationPoint> points;
+};

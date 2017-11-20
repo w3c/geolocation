@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang=en>
+ <head>
+  <title>Geolocation Use Cases</title>
+  <meta content="text/html;charset=utf-8" http-equiv=Content-Type>
+
+  <style type="text/css">
+   dt, dfn { font-weight: bold; font-style: normal; }
+   img.extra { float: right; }
+   body ins, body del { display: block; }
+   body * ins, body * del { display: inline; }
+   pre, code { color: black; background: transparent; font-size: inherit; font-family: monospace; }
+   pre strong { color: black; font: inherit; font-weight: bold; background: yellow; }
+   pre em { font-weight: bolder; font-style: normal; }
+   pre.idl :link, pre.idl :visited { color: inherit; background: transparent; }
+   pre.idl { border: solid thin; background: #EEEEEE; color: black; padding: 0.5em; }
+   table { border-collapse: collapse; border-style: hidden hidden none hidden; }
+   table thead { border-bottom: solid; }
+   table tbody th:first-child { border-left: solid; }
+   table td, table th { border-left: solid; border-right: solid; border-bottom: solid thin; vertical-align: top; padding: 0.2em; }
+   ul.toc dfn, h1 dfn, h2 dfn, h3 dfn, h4 dfn, h5 dfn, h6 dfn { font: inherit; }
+   ul.toc li ul { margin-bottom: 0.75em; }
+   ul.toc li ul li ul { margin-bottom: 0.25em; }
+   var sub { vertical-align: bottom; font-size: smaller; position: relative; top: 0.1em; }
+   @media screen { code { color: rgb(255, 69, 0); background: transparent; } }
+   code :link, code :visited { color: inherit; background: transparent; }
+   .example { display: block; color: #222222; background: #FCFCFC; border-left: double; margin-left: 1em; padding-left: 1em; }
+   .issue, .big-issue { color: #E50000; background: white; border: solid red; padding: 0.5em; margin: 1em 0; }
+   .issue > :first-child, .big-issue > :first-child { margin-top: 0; }
+   p .big-issue { line-height: 3em; }
+   .note { color: green; background: transparent; }
+   .note { font-family: sans-serif; }
+   p.note:before { content: 'Note: '; }
+   .warning { color: red; background: transparent; }
+   .warning:before { font-style: normal; }
+   p.warning:before { content: '\26A0 Warning! '; }
+   .note, .warning { font-weight: bolder; font-style: italic; padding: 0.5em 2em; }
+   .copyright { margin: 0.25em 0; }
+   img { max-width: 100%; }
+   h4 + .element { margin-top: -2.5em; padding-top: 2em; }
+   h4 + p + .element { margin-top: -5em; padding-top: 4em; }
+   .element { background: #EEEEFF; color: black; margin: 0 0 1em -1em; padding: 0 1em 0.25em 0.75em; border-left: solid #9999FF 0.25em; }
+   table.matrix, table.matrix td { border: none; text-align: right; }
+   table.matrix { margin-left: 2em; }
+  </style>
+<link rel="stylesheet" type="text/css" href="http://www.w3.org/StyleSheets/TR/W3C-ED">
+
+ <body>
+  <div class=head> <!--begin-logo-->
+   <p><a href="http://www.w3.org/"><img alt="W3C" height=48
+    src="http://www.w3.org/Icons/w3c_home" width="72"></a> <!--end-logo-->
+
+   <h1 id="title_heading">Geolocation Use Cases</h1>
+
+   <h2 class="no-num no-toc" id="draft_date">W3C Editors Draft 25 July 2014</h2>
+
+   <dl>
+<!--    <dt>This Version:</dt>
+    <dd><a href="http://www.w3.org/TR/2013/REC-geolocation-API-20131024/">http://www.w3.org/TR/2013/REC-geolocation-API-20131024/</a></dd>-->
+
+    <dt>Latest Editor's Draft:
+    <dd><a href="http://w3.github.io/gelocation-api/use-cases.html">http://w3.github.io/gelocation-api/use-cases.html</a></dd>
+
+    <dt>Editors:</dt>
+
+    <dd>Chris Wilson, Google, Inc.</dd>
+    <dd>Ravi Dandu, Mozilla</dd>
+    <dd>Stephen Li, Qualcomm Atheros</dd>
+   </dl>
+
+<p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> &copy; 2008-2013 <a href="http://www.w3.org/"><acronym title="World Wide Web Consortium">W3C</acronym></a><sup>&reg;</sup> (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href="http://www.ercim.eu/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
+
+   <hr>
+  </div>
+
+  <h2 class="no-num no-toc" id=abstract>Abstract</h2>
+
+  <p>This specification provides a collection of use cases for geolocation and geofencing in the web platform.
+
+  <h2 class="no-num no-toc" id=status>Status of This Document</h2>
+  <!-- intro boilerplate (required) -->
+
+<p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current W3C publications and the latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at http://www.w3.org/TR/.</em></p>
+
+<p>This document is published by the Geolocation Working Group as an informative note. It is based on use cases from the Geolocation API v1 Recommendation, which was published on October 24, 2013.  This document is intended to become a W3C Recommendation. 
+</p>
+
+<p>Comments on the document should be sent to the Working Group's public
+mailing list
+<a href="mailto:public-geolocation@w3.org">public-geolocation@w3.org</a>
+(<a href="mailto:public-geolocation-request@w3.org?subject=subscribe">subscribe</a>, <a href="http://lists.w3.org/Archives/Public/public-geolocation/">archives</a>). See <a href=
+"http://www.w3.org/Mail/">W3C mailing list and archive usage
+guidelines</a>.</p>
+
+<p>This document has been produced by
+the <a href="http://www.w3.org/2008/geolocation/">W3C Geolocation
+Working Group</a>, following the procedures set out for the
+<a href="http://www.w3.org/Consortium/Process/">W3C Process</a>,
+with the intention of advancing it along the W3C Recommendation
+track.</p>
+
+<p>This document was produced by a group operating under the
+<a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5
+February 2004 W3C Patent Policy</a>. W3C maintains a <a rel=
+"disclosure" href=
+"http://www.w3.org/2004/01/pp-impl/42891/status">public list of any
+patent disclosures</a> made in connection with the deliverables of
+the group; that page also includes instructions for disclosing a
+patent. An individual who has actual knowledge of a patent which
+the individual believes contains <a href=
+"http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">
+Essential Claim(s)</a> must disclose the information in accordance
+with <a href=
+"http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">
+section 6 of the W3C Patent Policy</a>.</p>
+
+
+  <h2 class="no-num no-toc" id="contents">Table of Contents</h2>
+  <!--begin-toc-->
+
+  <ul class=toc>
+   <li><a href="#introduction"><span class="secno">1 </span>Introduction</a>
+
+
+   <li><a href="#usecases"><span class="secno">2 </span>Use-Cases and
+    Requirements</a>
+    <ul class=toc>
+     <li><a href="#usecases_section"><span class="secno">2.1
+      </span>Use-Cases</a>
+
+     <li><a href="#requirements_section"><span class="secno">2.2
+      </span>Requirements</a>
+
+     <li><a href="#privacy_requirements_section"><span class="secno">2.3
+      </span>Privacy Requirements</a>
+    </ul>
+
+   <li class=no-num><a href="#acknowledgments">Acknowledgments</a>
+
+   <li class=no-num><a href="#references">References</a>
+  </ul>
+  <!--end-toc-->
+ 
+  <h2 id="introduction"><span class="secno">2 </span>Introduction</h2>
+
+  <p><em>This section is non-normative.</em>
+
+  <p>The Geolocation API defines a high-level interface to location
+   information associated only with the device hosting the implementation,
+   such as latitude and longitude. This document collects use cases for such
+   an API, as well as detailing specific event-triggered use cases such as 
+   geofencing.
+
+  <h2 id=usecases><span class=secno>2 </span>Use-Cases and Requirements</h2>
+
+  <h3 id="usecases_section"><span class=secno>2.1 </span>Use-Cases</h3>
+
+  <h4 id="usecase_find_poi"><span class=secno>2.1.1 </span>Find points of
+   interest in the user's area</h4>
+
+  <p>Someone visiting a foreign city could access a Web application that
+   allows users to search or browse through a database of tourist
+   attractions. Using the Geolocation API, the Web application has access to
+   the user's approximate position and it is therefore able to rank the
+   search results by proximity to the user's location.
+
+  <h4 id="usecase_content_annotation"><span class=secno>2.1.2
+   </span>Annotating content with location information</h4>
+
+  <p> A group of friends is hiking through the Scottish highlands. Some of
+   them write short notes and take pictures at various points throughout the
+   journey and store them using a Web application that can work offline on
+   their hand-held devices. Whenever they add new content, the application
+   automatically tags it with location data from the Geolocation API (which,
+   in turn, uses the on-board GPS device). Every time they reach a town or a
+   village, and they are again within network coverage, the application
+   automatically uploads their notes and pictures to a popular blogging Web
+   site, which uses the geolocation data to construct links that point to a
+   mapping service. Users who follow the group's trip can click on these
+   links to see a satellite view of the area where the notes were written and
+   the pictures were taken. Another example is a life blog where a user
+   creates content (e.g. images, video, audio) that records her every day
+   experiences. This content can be automatically annotated with information
+   such as time, geographic position or even the user's emotional state at
+   the time of the recording.
+
+  <h4 id="usecase_show_position"><span class=secno>2.1.3 </span>Show the
+   user's position on a map</h4>
+
+  <p>A user finds herself in an unfamiliar city area. She wants to check her
+   position so she uses her hand-held device to navigate to a Web-based
+   mapping application that can pinpoint her exact location on the city map
+   using the Geolocation API. She then asks the Web application to provide
+   driving directions from her current position to her desired destination.
+
+  <h4 id="usecase_turn_by_turn"><span class=secno>2.1.4 </span>Turn-by-turn
+   route navigation</h4>
+
+  <p>A mapping application can help the user navigate along a route by
+   providing detailed turn-by-turn directions. The application does this by
+   registering with the Geolocation API to receive repeated location updates
+   of the user's position. These updates are delivered as soon as the
+   implementing user agent determines that the position of the user has
+   changed, which allows the application to anticipate any changes of
+   direction that the user might need to do.
+
+  <h4 id="usecase_poi_alert"><span class=secno>2.1.5 </span>Alerts when
+   points of interest are in the user's vicinity</h4>
+
+  <p>A tour-guide Web application can use the Geolocation API to monitor the
+   user's position and trigger visual or audio notifications when interesting
+   places are in the vicinity. An online task management system can trigger
+   reminders when the user is in the proximity of landmarks that are
+   associated with certain tasks.
+
+  <h4 id="usecase_local_info"><span class=secno>2.1.6 </span>Up-to-date local
+   information</h4>
+
+  <p>A widget-like Web application that shows the weather or news that are
+   relevant to the user's current area can use the Geolocation API to
+   register for location updates. If the user's position changes, the widget
+   can adapt the content accordingly.
+
+  <h4 id="usecase_social_networking"><span class=secno>2.1.7
+   </span>Location-tagged status updates in social networking applications</h4>
+
+  <p>A social network application allows its users to automatically tag their
+   status updates with location information. It does this by monitoring the
+   user's position with the Geolocation API. Each user can control the
+   granularity of the location information (e.g. city or neighborhood level)
+   that is shared with the other users. Any user can also track his network
+   of friends and get real-time updates about their current location.
+
+  <h4 id="usecase_geofence_enter_area"><span class=secno>2.1.8</span> Action generated when user enters an area</h4>
+
+  <p>A web application enables auto-checkin to a hotel when user enters the hotel. A notification appears to the user when entering a retail store, showing the user's membership card number.
+    Businesses send notifications of advertisements, offers, discounts, when a device gets close to their store.
+    A reminder application notifies the user to buy batteries when within proximity of a retail shop, based on user action to do so.</p>
+
+<h4 id="usecase_geofence_exit_area"><span class=secno>2.1.9</span> Action generated when user exits an area</h4>
+
+  <p>When user exits office, application sends a text to spouse stating user will be home shortly.
+    When user exits home, app makes sure the lights are turned off.</p>
+
+
+
+
+
+
+  <h3 id="requirements_section"><span class=secno>2.2 </span>Requirements</h3>
+
+  <h4 id="req_latlong"><span class=secno>2.2.1 </span>The Geolocation API
+   must provide location data in terms of a pair of latitude and longitude
+   coordinates.</h4>
+
+  <h4 id="req_accuracy"><span class=secno>2.2.2 </span>The Geolocation API
+   must provide information about the accuracy of the retrieved location
+   data.</h4>
+
+  <h4 id="req_oneshot"><span class=secno>2.2.3 </span>The Geolocation API
+   must support "one-shot" position updates.</h4>
+
+  <h4 id="req_updates"><span class=secno>2.2.4 </span>The Geolocation API
+   must allow an application to register to receive updates when the position
+   of the hosting device changes.</h4>
+
+  <h4 id="req_last_known"><span class=secno>2.2.5 </span>The Geolocation API
+   must allow an application to request a cached position whose age is no
+   greater than a specified value.</h4>
+
+  <h4 id="req_errors"><span class=secno>2.2.6 </span>The Geolocation API must
+   provide a way for the application to receive updates about errors that may
+   have occurred while obtaining a location fix.</h4>
+
+  <h4 id="req_request_acuracy"><span class=secno>2.2.7 </span>The Geolocation
+   API must allow an application to specify a desired accuracy level of the
+   location information.</h4>
+
+  <h4 id="req_source_agnostic"><span class=secno>2.2.8 </span>The Geolocation
+   API must be agnostic to the underlying sources of location information.</h4>
+
+  <h3 id="privacy_requirements_section"><span class=secno>2.3 </span>Privacy Requirements</h3>
+
+  <h4 id="prvreq_if"><span class=secno>2.3.1 </span>Users must have control over if, when, and how precisely an
+application learns their location.</h4>
+
+  <h4 id="prvreq_expose"><span class=secno>2.3.2 </span>Users must understand and be able to determine what information an application is given access to and when.</h4>
+
+  <h4 id="prvreq_background"><span class=secno>2.3.3 </span>If a user chooses to give access only to foreground tabs (as opposed to background service workers), that restriction must apply to geofencing as well.</h4>
+
+  <h2 class="no-num" id="acknowledgments">Acknowledgments</h2>
+
+  <p>[A bunch of names go here]
+
+  <h2 class="no-num" id="references">References</h2>
+
+  <dl>
+    <dd><cite><a href="http://dev.w3.org/geo/api/spec-source.html">Geolocation API Specification</a> 
+      Editor's Draft</cite>, Andrei Popescu, Editor.  World Wide Web Consortium, 11 July 2014. See
+    also <a href="http://www.w3.org/TR/geolocation-API/">Geolocation API Specification</a>, W3C Recommendation, 24 October 2013.</dd>
+  </dl>
+</body> 
+</html> 
