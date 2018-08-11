@@ -7,7 +7,7 @@
 <script class='remove'>
 var respecConfig = {
   shortName: "geolocation-API",
-  specStatus: "ED",
+  specStatus: "CG-DRAFT",
   edDraftURI: "https://w3c.github.io/geolocation-api/",
   editors: [{
     name: "Andrei Popescu",
@@ -15,39 +15,26 @@ var respecConfig = {
     companyURL: "https://google.com/",
     w3cid: "36565"
   }],
-  wg: "Geolocation Working Group",
-  wgURI: "https://www.w3.org/2008/geolocation/",
+  wg: "Web Incubator Community Group",
+  wgURI: "https://wicg.io",
   wgPublicList: "public-geolocation",
-  license: 'w3c-software-doc',
   noLegacyStyle: true,
   previousPublishDate: "2016-11-08",
   previousMaturity: "REC",
   otherLinks: [{
-    key: 'Repository',
-    data: [{
-      value: 'We are on Github.',
-      href: 'https://github.com/w3c/geolocation-api/'
-    }, {
-      value: 'File a bug.',
-      href: 'https://github.com/w3c/geolocation-api/issues'
-    }, {
-      value: 'Commit history.',
-      href: 'https://github.com/w3c/geolocation-api/commits/gh-pages/index.html'
-    }]
-  },{
     key: 'Implementation',
     data: [{
-      value: 'Test Suite Results',
-      href: 'https://wpt.fyi/geolocation-API'
-    }, {
       value: 'Test Suite repository',
       href: 'https://github.com/web-platform-tests/wpt/tree/master/geolocation-API'
     }]
   }],
-  issueBase: "https://www.github.com/w3c/geolocation-api/issues/",
-  githubAPI: "https://api.github.com/repos/w3c/geolocation-api",
-  testSuiteURI: "https://wpt.fyi/geolocation-API/",
-  wgPatentURI:  "https://www.w3.org/2004/01/pp-impl/42891/status",
+  github: {
+    repoURL: "https://github.com/w3c/geolocation-api/",
+    branch: "gh-pages"
+  },
+  caniuse: "geolocation",
+  testSuiteURI: "https://web-platform-tests.live/geolocation-API/",
+  // implementationReportURI: "https://wpt.fyi/geolocation-API",
   localBiblio:  {
       'WGS84': {
         title: 'National Imagery and Mapping Agency Technical Report 8350.2, Third Edition',
@@ -97,7 +84,7 @@ var respecConfig = {
    limits on otherwise unconstrained inputs, e.g. to prevent denial of
    service attacks, to guard against running out of memory, or to work around
    platform-specific limitations.
- </section> 
+ </section>
 
 <section id=introduction class=informative>
 
@@ -197,7 +184,7 @@ var respecConfig = {
       // By using the 'maximumAge' option above, the position
       // object is guaranteed to be at most 10 minutes old.
       // By using a 'timeout' of 0 milliseconds, if there is
-      // no suitable cached position available, the user agent 
+      // no suitable cached position available, the user agent
       // will asynchronously invoke the error callback with code
       // TIMEOUT and will not initiate a new position
       // acquisition process.
@@ -222,7 +209,7 @@ var respecConfig = {
     </pre>
 
   <pre class=example title='Forcing the user agent to return any available cached position'>
-    // Request a position. We only accept cached positions, no matter what 
+    // Request a position. We only accept cached positions, no matter what
     // their age is. If the user agent does not have a cached position at
     // all, it will immediately invoke the error callback.
     navigator.geolocation.getCurrentPosition(successCallback,
@@ -233,7 +220,7 @@ var respecConfig = {
       // By setting the 'maximumAge' to Infinity, the position
       // object is guaranteed to be a cached one.
       // By using a 'timeout' of 0 milliseconds, if there is
-      // no cached position available at all, the user agent 
+      // no cached position available at all, the user agent
       // will immediately invoke the error callback with code
       // TIMEOUT and will not initiate a new position
       // acquisition process.
@@ -337,7 +324,7 @@ var respecConfig = {
    choices that users have with respect to the data. This disclosure MUST
    include an explanation of any exceptions to the guidelines listed above.
   </section>
-  
+
   <section id="implementation_considerations" class=informative>
     <h3>Additional implementation considerations</h3>
 
@@ -360,13 +347,13 @@ var respecConfig = {
 
   </section>
   </section>
-  
+
   <section id="api_description">
     <h2>API Description</h2>
 
     <section id="navigator_interface"  data-dfn-for="Navigator"  data-link-for=Navigator>
         <h3><dfn>Navigator</dfn> interface extensions</h3>
-  
+
       <pre class=idl>
         partial interface Navigator {
           readonly attribute Geolocation geolocation;
@@ -378,7 +365,7 @@ var respecConfig = {
       <div class="issue" data-number="13"></div>
 
       </section>
-       
+
     <section id="geolocation_interface" data-dfn-for="Geolocation"  data-link-for=Geolocation>
       <h3><dfn>Geolocation</dfn> interface</h3>
 
@@ -386,11 +373,11 @@ var respecConfig = {
    used by scripts to programmatically determine the location information
    associated with the hosting device. The location information is acquired
    by applying a user-agent specific algorithm, creating a <a>Position</a> object, and populating that object
-   with appropriate data accordingly. 
+   with appropriate data accordingly.
 
  <pre class=idl>
- [NoInterfaceObject]    
- interface Geolocation { 
+ [NoInterfaceObject]
+ interface Geolocation {
    void getCurrentPosition(PositionCallback successCallback,
                            optional PositionErrorCallback errorCallback,
                            optional PositionOptions options);
@@ -420,7 +407,7 @@ var respecConfig = {
 
   <p>The implementation of the <a data-link-for=Geolocation>getCurrentPosition</a> method
   MUST execute the following set of steps:</p>
-  <ol>    
+  <ol>
     <li> If a cached <a>Position</a> object, whose age is no greater
           than the value of the <a data-link-for=PositionOptions>maximumAge</a> variable, is available,
           invoke the <var>successCallback</var> with the
@@ -462,14 +449,14 @@ var respecConfig = {
    callback object) with a new <a>Position</a> object,
    reflecting the current location of the device. If the attempt
    fails, the <var>errorCallback</var> MUST be invoked with a
-   new <a>PositionError</a> object, reflecting the reason for 
+   new <a>PositionError</a> object, reflecting the reason for
    the failure. The <a>watch process</a> then MUST continue
    to monitor the position of the device and invoke the appropriate
    callback every time this position changes. The <a>watch process</a>
    MUST continue until
    the <a>clearWatch()</a> method is
    called with the corresponding identifier.</p>
- 
+
   <p>The <dfn>PositionCallBack</dfn> callback is invoked when a <a>Position</a> object is available, resulting
   from a cached object or the acquisition operation. The <a>PositionCallBack</a> callback gets set using
   the <dfn>successCallback</dfn> parameter.</p>
@@ -477,10 +464,10 @@ var respecConfig = {
   <p>The <dfn>PositionErrorCallBack</dfn> callback is invoked when a <a>Position</a> object is not available, resulting
     from a timeout, a permission denied, or an unability to determine the position of the device.  The
     <a>PositionErrorCallBack</a> callback gets set using the <dfn>errorCallback</dfn> parameter.</p>
-  
+
   <p>The implementation of the <dfn>watch process</dfn> MUST execute the
   following set of steps:</p>
-  <ol>    
+  <ol>
     <li> If a cached <a>Position</a> object, whose age is no greater
           than the value of the maximumAge variable, is available,
           invoke the <var>successCallback</var> with the
@@ -544,7 +531,7 @@ var respecConfig = {
   For both <a>getCurrentPosition</a>
   and <a>watchPosition</a>, the implementation MUST never invoke
   the <var>successCallback</var> without having first obtained
-  permission from the user to share location. Furthermore, the 
+  permission from the user to share location. Furthermore, the
   implementation SHOULD always obtain the user's permission to share location before
   executing any of the <a>getCurrentPosition</a> or <a>watchPosition</a> steps
   described above. If the user grants permission, the
@@ -564,7 +551,7 @@ var respecConfig = {
   If this value does not correspond to any previously started <a>watch
   process</a>, then the method MUST return immediately without taking any
   further action. Otherwise, the <a>watch process</a> identified by the
-  <code>watchId</code> argument MUST be immediately stopped and no 
+  <code>watchId</code> argument MUST be immediately stopped and no
   further callbacks MUST be invoked.</p>
   </section>
   <section id="position_options_interface"  data-dfn-for=PositionOptions  data-link-for=PositionOptions>
@@ -591,7 +578,7 @@ var respecConfig = {
   <p>In ECMAScript, the <a>enableHighAccuracy</a>,
    <a>timeout</a> and <a>maximumAge</a> properties are all OPTIONAL: when
    creating a PositionOptions object, the developer MAY specify any of these
-   properties.  
+   properties.
 
   <p data-tests='PositionOptions.https.html'>The <dfn>enableHighAccuracy</dfn> attribute provides a hint that the application would like to receive the
     best possible results. This MAY result in slower response times or increased power consumption. The user
@@ -599,8 +586,8 @@ var respecConfig = {
     the flag wasn't specified. The intended purpose of this attribute is to allow applications to inform the
     implementation that they do not require high accuracy geolocation fixes and, therefore, the implementation
     can avoid using geolocation providers that consume a significant amount of power (e.g. GPS). This is
-    especially useful for applications running on battery-powered devices, such as mobile phones. 
-      
+    especially useful for applications running on battery-powered devices, such as mobile phones.
+
   <p data-tests='PositionOptions.https.html'>The <dfn>timeout</dfn> attribute denotes the maximum length of time (expressed in milliseconds) that is allowed
     to pass from the call to <a data-link-for=Geolocation>getCurrentPosition</a> or <a data-link-for=Geolocation>watchPosition</a>
     until the corresponding <var>successCallback</var> is invoked. If the implementation is unable to successfully acquire a
@@ -608,7 +595,7 @@ var respecConfig = {
     the corresponding <var>errorCallback</var> MUST be invoked with a <a>PositionError</a> object whose code attribute
     is set to <a data-link-for=PositionError>TIMEOUT</a>. Note that the time that is spent obtaining the user permission is
     not included in the period covered by the <a>timeout</a> attribute. The <a>timeout</a> attribute only applies to
-    the location acquisition operation. 
+    the location acquisition operation.
 
   <p>In case of a <a data-link-for=Geolocation>getCurrentPosition()</a> call, the
    <var>errorCallback</var> would be invoked at most once.
@@ -622,7 +609,7 @@ var respecConfig = {
    that was necessary. Subsequent timeouts are relative to the moment
    when the implementation determines that the position of the hosting
    device has changed and a new
-   <a>Position</a> object MUST be acquired.  
+   <a>Position</a> object MUST be acquired.
 
   <p data-tests='PositionOptions.https.html'>The <dfn>maximumAge</dfn> attribute indicates that the application is willing to accept a cached
     position whose age is no greater than the specified time in milliseconds.
@@ -631,7 +618,7 @@ var respecConfig = {
     an implementation does not have a cached position available whose age is no greater than the specified <a>maximumAge</a>,
     then it MUST acquire a new <a>Position</a> object. In case of a <a data-link-for=Geolocation>watchPosition()</a>,
     the <a>maximumAge</a> refers to the first <a>Position</a> object returned by the implementation.
-    
+
   </section>
 
   <section id="position_interface" data-dfn-for=Position data-link-for=Position>
@@ -639,7 +626,7 @@ var respecConfig = {
 
   <p>The <a>Position</a> interface is the
    container for the geolocation information returned by this API. This
-   version of the specification allows one attribute of type <a>Coordinates</a> and a 
+   version of the specification allows one attribute of type <a>Coordinates</a> and a
    <a>timestamp</a>. Future versions of the API
    MAY allow additional attributes that provide other information about this
    position (e.g. street addresses).
@@ -889,9 +876,9 @@ var respecConfig = {
    Raskin, Carl Reed, Thomas Roessler, Dirk Segers, Allan Thomson, Martin
    Thomson, Doug Turner, Erik Wilde, Matt Womer, Mohamed Zergaoui
   </section>
-  
+
 <section id="idl-index" class="appendix">
-    <!-- All the Web IDL will magically appear here --> 
+    <!-- All the Web IDL will magically appear here -->
 </section>
 
 <section class="appendix" id="issue-summary">
