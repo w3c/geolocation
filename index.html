@@ -349,7 +349,7 @@ var respecConfig = {
 
       <pre class=idl>
         partial interface Navigator {
-          readonly attribute Geolocation geolocation;
+          readonly attribute NavigatorGeolocation geolocation;
         };
       </pre>
       <p>The <dfn>geolocation</dfn> attribute gives access to location information associated
@@ -359,18 +359,17 @@ var respecConfig = {
 
       </section>
 
-    <section id="geolocation_interface" data-dfn-for="Geolocation"  data-link-for=Geolocation>
-      <h3><dfn>Geolocation</dfn> interface</h3>
+    <section id="geolocation_interface" data-dfn-for="NavigatorGeolocation"  data-link-for=NavigatorGeolocation>
+      <h3><dfn>NavigatorGeolocation</dfn> interface</h3>
 
-  <p>The <a>Geolocation</a> object is
+  <p>The <a>NavigatorGeolocation</a> object is
    used by scripts to programmatically determine the location information
    associated with the hosting device. The location information is acquired
-   by applying a user-agent specific algorithm, creating a <a>Position</a> object, and populating that object
+   by applying a user-agent specific algorithm, creating a <a>NavigatorGeolocationPosition</a> object, and populating that object
    with appropriate data accordingly.
 
  <pre class=idl>
- [NoInterfaceObject]
- interface Geolocation {
+ interface NavigatorGeolocation {
    void getCurrentPosition(PositionCallback successCallback,
                            optional PositionErrorCallback errorCallback,
                            optional PositionOptions options);
@@ -382,9 +381,9 @@ var respecConfig = {
    void clearWatch(long watchId);
  };
 
- callback PositionCallback = void (Position position);
+ callback PositionCallback = void (NavigatorGeolocationPosition position);
 
- callback PositionErrorCallback = void (PositionError positionError);
+ callback PositionErrorCallback = void (NavigatorGeolocationPositionError positionError);
  </pre>
 
   <p data-tests='getCurrentPosition_IDL.https.html, getCurrentPosition_TypeError.html'>The <dfn>getCurrentPosition()</dfn>
@@ -393,23 +392,23 @@ var respecConfig = {
    location of the device. If the attempt is successful,
    the <var>successCallback</var> MUST be invoked
    (i.e. the <code><a data-cite="DOM#dom-eventlistener-handleevent">handleEvent</a></code> operation MUST be called on the
-   callback object) with a new <a>Position</a> object,
+   callback object) with a new <a>NavigatorGeolocationPosition</a> object,
    reflecting the current location of the device. If the attempt
    fails, the <var>errorCallback</var> MUST be invoked with a
-   new <a>PositionError</a> object, reflecting the reason for the failure.</p>
+   new <a>NavigatorGeolocationPositionError</a> object, reflecting the reason for the failure.</p>
 
-  <p>The implementation of the <a data-link-for=Geolocation>getCurrentPosition</a> method
+  <p>The implementation of the <a data-link-for=NavigatorGeolocation>getCurrentPosition</a> method
   MUST execute the following set of steps:</p>
   <ol>
-    <li> If a cached <a>Position</a> object, whose age is no greater
+    <li> If a cached <a>NavigatorGeolocationPosition</a> object, whose age is no greater
           than the value of the <a data-link-for=PositionOptions>maximumAge</a> variable, is available,
           invoke the <var>successCallback</var> with the
-          cached <a>Position</a> object as a parameter and exit
+          cached <a>NavigatorGeolocationPosition</a> object as a parameter and exit
           this set of steps.</li>
     <li> If the value of the timeout variable is 0, invoke
     the <var>errorCallback</var> (if present) with a
-    new <a>PositionError</a> object whose <a data-link-for=PositionError>code</a>
-    attribute is set to <a data-link-for=PositionError>TIMEOUT</a> and exit this set of steps.</li>
+    new <a>NavigatorGeolocationPositionError</a> object whose <a data-link-for=NavigatorGeolocationPositionError>code</a>
+    attribute is set to <a data-link-for=NavigatorGeolocationPositionError>TIMEOUT</a> and exit this set of steps.</li>
     <li>Start a location acquisition operation (e.g. by
           invoking a platform-specific API), possibly taking into
           account the value of the <a data-link-for="PositionOptions">enableHighAccuracy</a> variable.</li>
@@ -418,18 +417,18 @@ var respecConfig = {
               timer fires, cancel any ongoing location acquisition
               operations associated with this instance of the steps,
               invoke the <var>errorCallback</var> (if present)
-              with a new <a>PositionError</a> object
-              whose <a data-link-for=PositionError>code</a> attribute is set to <a data-link-for=PositionError>TIMEOUT</a>, and
+              with a new <a>NavigatorGeolocationPositionError</a> object
+              whose <a data-link-for=NavigatorGeolocationPositionError>code</a> attribute is set to <a data-link-for=NavigatorGeolocationPositionError>TIMEOUT</a>, and
               exit this set of steps.</li>
     <li>If the operation completes successfully before the timeout
     expires, cancel the pending timer, invoke
-    the <var>successCallback</var> with a new <a>Position</a>
+    the <var>successCallback</var> with a new <a>NavigatorGeolocationPosition</a>
     object that reflects the result of the acquisition operation and
     exit this set of steps. </li>
     <li>If the operation fails before the timeout expires, cancel the
     pending timer and invoke the <var>errorCallback</var> (if
-    present) with a new <a>PositionError</a> object
-    whose <a data-link-for=PositionError>code</a> is set to <a data-link-for=PositionError>POSITION_UNAVAILABLE</a>.</li>
+    present) with a new <a>NavigatorGeolocationPositionError</a> object
+    whose <a data-link-for=NavigatorGeolocationPositionError>code</a> is set to <a data-link-for=NavigatorGeolocationPositionError>POSITION_UNAVAILABLE</a>.</li>
   </ol>
 
     <p>The <dfn>watchPosition()</dfn>
@@ -439,10 +438,10 @@ var respecConfig = {
    operation. This operation MUST first attempt to obtain the current location of the
    device. If the attempt is successful, the <var>successCallback</var> MUST be invoked
    (i.e. the <code><a data-cite="DOM#dom-eventlistener-handleevent">handleEvent</a></code> operation MUST be called on the
-   callback object) with a new <a>Position</a> object,
+   callback object) with a new <a>NavigatorGeolocationPosition</a> object,
    reflecting the current location of the device. If the attempt
    fails, the <var>errorCallback</var> MUST be invoked with a
-   new <a>PositionError</a> object, reflecting the reason for
+   new <a>NavigatorGeolocationPositionError</a> object, reflecting the reason for
    the failure. The <a>watch process</a> then MUST continue
    to monitor the position of the device and invoke the appropriate
    callback every time this position changes. The <a>watch process</a>
@@ -450,21 +449,21 @@ var respecConfig = {
    the <a>clearWatch()</a> method is
    called with the corresponding identifier.</p>
 
-  <p>The <dfn>PositionCallBack</dfn> callback is invoked when a <a>Position</a> object is available, resulting
+  <p>The <dfn>PositionCallBack</dfn> callback is invoked when a <a>NavigatorGeolocationPosition</a> object is available, resulting
   from a cached object or the acquisition operation. The <a>PositionCallBack</a> callback gets set using
   the <dfn>successCallback</dfn> parameter.</p>
 
-  <p>The <dfn>PositionErrorCallBack</dfn> callback is invoked when a <a>Position</a> object is not available, resulting
+  <p>The <dfn>PositionErrorCallBack</dfn> callback is invoked when a <a>NavigatorGeolocationPosition</a> object is not available, resulting
     from a timeout, a permission denied, or an unability to determine the position of the device.  The
     <a>PositionErrorCallBack</a> callback gets set using the <dfn>errorCallback</dfn> parameter.</p>
 
   <p>The implementation of the <dfn>watch process</dfn> MUST execute the
   following set of steps:</p>
   <ol>
-    <li> If a cached <a>Position</a> object, whose age is no greater
+    <li> If a cached <a>NavigatorGeolocationPosition</a> object, whose age is no greater
           than the value of the maximumAge variable, is available,
           invoke the <var>successCallback</var> with the
-          cached <a>Position</a> object as a parameter.</li>
+          cached <a>NavigatorGeolocationPosition</a> object as a parameter.</li>
     <li>Register to receive system events that indicate that the
     position of the device MAY have changed (e.g. by listening or
     polling for changes in WiFi or cellular signals).</li>
@@ -480,8 +479,8 @@ var respecConfig = {
         milliseconds denoted by the value of the timeout
         variable. When the timer fires, invoke
         the <var>errorCallback</var> (if present) with a
-        new <a>PositionError</a> object whose <a data-link-for=PositionError>code</a>
-        attribute is set to <a data-link-for=PositionError>TIMEOUT</a> and jump to step 6.</li>
+        new <a>NavigatorGeolocationPositionError</a> object whose <a data-link-for=NavigatorGeolocationPositionError>code</a>
+        attribute is set to <a data-link-for=NavigatorGeolocationPositionError>TIMEOUT</a> and jump to step 6.</li>
         <li>If the location acquisition operation successfully yields
         a new position before the timeout expires, perform the
         following two steps:
@@ -492,7 +491,7 @@ var respecConfig = {
             <li>If the <dfn>new position differs significantly from the
               previous position</dfn>, invoke
               the <var>successCallback</var> with a
-              new <a>Position</a> object that reflects the
+              new <a>NavigatorGeolocationPosition</a> object that reflects the
               result of the acquisition operation.  This step MAY be
               subject to callback rate limitation
               (<a href="#rate-limit">see below</a>).</li>
@@ -500,8 +499,8 @@ var respecConfig = {
         </li>
         <li>Else, if the location acquisition operation reports an
           error before the <a data-link-for=PositionOptions>timeout</a> expires, invoke the <var>errorCallback</var> (if present)
-          with a new <a>PositionError</a> object
-          whose <a data-link-for=PositionError>code</a> is set to <a data-link-for=PositionError>POSITION_UNAVAILABLE</a>. This
+          with a new <a>NavigatorGeolocationPositionError</a> object
+          whose <a data-link-for=NavigatorGeolocationPositionError>code</a> is set to <a data-link-for=NavigatorGeolocationPositionError>POSITION_UNAVAILABLE</a>. This
           step MAY be subject to callback rate limitation
           (<a href="#rate-limit">see below</a>).</li>
       </ol>
@@ -530,7 +529,7 @@ var respecConfig = {
   described above. If the user grants permission, the
   appropriate callback MUST be invoked as described above. If the user
   denies permission, the <var>errorCallback</var> (if present)
-  MUST be invoked with <a data-link-for=PositionError>code</a> <a data-link-for=PositionError>PERMISSION_DENIED</a>, irrespective of any
+  MUST be invoked with <a data-link-for=NavigatorGeolocationPositionError>code</a> <a data-link-for=NavigatorGeolocationPositionError>PERMISSION_DENIED</a>, irrespective of any
   other errors encountered in the above steps.
   The time that is spent obtaining the user permission MUST NOT be
   included in the period covered by the <a data-link-for=PositionOptions>timeout</a> attribute
@@ -550,7 +549,7 @@ var respecConfig = {
   <section id="position_options_interface"  data-dfn-for=PositionOptions  data-link-for=PositionOptions>
     <h3><dfn>PositionOptions</dfn> interface</h3>
 
-  <p>The <a data-link-for=Geolocation>getCurrentPosition()</a> and <a data-link-for=Geolocation>watchPosition()</a> methods
+  <p>The <a data-link-for=NavigatorGeolocation>getCurrentPosition()</a> and <a data-link-for=NavigatorGeolocation>watchPosition()</a> methods
     accept <a>PositionOptions</a> objects as their third
    argument.
 
@@ -582,52 +581,51 @@ var respecConfig = {
     especially useful for applications running on battery-powered devices, such as mobile phones.
 
   <p data-tests='PositionOptions.https.html'>The <dfn>timeout</dfn> attribute denotes the maximum length of time (expressed in milliseconds) that is allowed
-    to pass from the call to <a data-link-for=Geolocation>getCurrentPosition</a> or <a data-link-for=Geolocation>watchPosition</a>
+    to pass from the call to <a data-link-for=NavigatorGeolocation>getCurrentPosition</a> or <a data-link-for=NavigatorGeolocation>watchPosition</a>
     until the corresponding <var>successCallback</var> is invoked. If the implementation is unable to successfully acquire a
-    new <a>Position</a> before the given timeout elapses, and no other errors have occurred in this interval, then
-    the corresponding <var>errorCallback</var> MUST be invoked with a <a>PositionError</a> object whose code attribute
-    is set to <a data-link-for=PositionError>TIMEOUT</a>. Note that the time that is spent obtaining the user permission is
+    new <a>NavigatorGeolocationPosition</a> before the given timeout elapses, and no other errors have occurred in this interval, then
+    the corresponding <var>errorCallback</var> MUST be invoked with a <a>NavigatorGeolocationPositionError</a> object whose code attribute
+    is set to <a data-link-for=NavigatorGeolocationPositionError>TIMEOUT</a>. Note that the time that is spent obtaining the user permission is
     not included in the period covered by the <a>timeout</a> attribute. The <a>timeout</a> attribute only applies to
     the location acquisition operation.
 
-  <p>In case of a <a data-link-for=Geolocation>getCurrentPosition()</a> call, the
+  <p>In case of a <a data-link-for=NavigatorGeolocation>getCurrentPosition()</a> call, the
    <var>errorCallback</var> would be invoked at most once.
 
    <p>In case of
-   a <a data-link-for=Geolocation>watchPosition()</a>,
+   a <a data-link-for=NavigatorGeolocation>watchPosition()</a>,
    the <var>errorCallback</var> could be invoked repeatedly: the
    first timeout is relative to the
-   moment <a data-link-for=Geolocation>watchPosition()</a>
+   moment <a data-link-for=NavigatorGeolocation>watchPosition()</a>
    was called or the moment the user's permission was obtained, if
    that was necessary. Subsequent timeouts are relative to the moment
    when the implementation determines that the position of the hosting
    device has changed and a new
-   <a>Position</a> object MUST be acquired.
+   <a>NavigatorGeolocationPosition</a> object MUST be acquired.
 
   <p data-tests='PositionOptions.https.html'>The <dfn>maximumAge</dfn> attribute indicates that the application is willing to accept a cached
     position whose age is no greater than the specified time in milliseconds.
     If <a>maximumAge</a> is set to 0, the implementation MUST immediately attempt to acquire a new position object. Setting
     the <a>maximumAge</a> to <code>Infinity</code> MUST determine the implementation to return a cached position regardless of its age. If
     an implementation does not have a cached position available whose age is no greater than the specified <a>maximumAge</a>,
-    then it MUST acquire a new <a>Position</a> object. In case of a <a data-link-for=Geolocation>watchPosition()</a>,
-    the <a>maximumAge</a> refers to the first <a>Position</a> object returned by the implementation.
+    then it MUST acquire a new <a>NavigatorGeolocationPosition</a> object. In case of a <a data-link-for=NavigatorGeolocation>watchPosition()</a>,
+    the <a>maximumAge</a> refers to the first <a>NavigatorGeolocationPosition</a> object returned by the implementation.
 
   </section>
 
-  <section id="position_interface" data-dfn-for=Position data-link-for=Position>
-    <h3><dfn>Position</dfn> interface</h3>
+  <section id="position_interface" data-dfn-for=NavigatorGeolocationPosition data-link-for=NavigatorGeolocationPosition>
+    <h3><dfn>NavigatorGeolocationPosition</dfn> interface</h3>
 
-  <p>The <a>Position</a> interface is the
+  <p>The <a>NavigatorGeolocationPosition</a> interface is the
    container for the geolocation information returned by this API. This
-   version of the specification allows one attribute of type <a>Coordinates</a> and a
+   version of the specification allows one attribute of type <a>NavigatorGeolocationCoordinates</a> and a
    <a>timestamp</a>. Future versions of the API
    MAY allow additional attributes that provide other information about this
    position (e.g. street addresses).
 
   <pre class=idl>
-  [NoInterfaceObject]
-  interface Position {
-    readonly attribute Coordinates coords;
+  interface NavigatorGeolocationPosition {
+    readonly attribute NavigatorGeolocationCoordinates coords;
     readonly attribute DOMTimeStamp timestamp;
   };
   </pre>
@@ -637,15 +635,14 @@ var respecConfig = {
    a set of other optional attributes such as altitude and speed.
 
   <p>The <dfn>timestamp</dfn> attribute represents
-   the time when the <a>Position</a> object was
+   the time when the <a>NavigatorGeolocationPosition</a> object was
    acquired and is represented as a <code><dfn data-cite='!WEBIDL#DOMTimeStamp'>DOMTimeStamp</dfn></code>.
   </section>
-  <section id="coordinates_interface" data-dfn-for=Coordinates  data-link-for=Coordinates>
-    <h3><dfn>Coordinates</dfn> interface</h3>
+  <section id="coordinates_interface" data-dfn-for=NavigatorGeolocationCoordinates  data-link-for=NavigatorGeolocationCoordinates>
+    <h3><dfn>NavigatorGeolocationCoordinates</dfn> interface</h3>
 
   <pre class=idl>
-  [NoInterfaceObject]
-  interface Coordinates {
+  interface NavigatorGeolocationCoordinates {
     readonly attribute double latitude;
     readonly attribute double longitude;
     readonly attribute double? altitude;
@@ -697,12 +694,11 @@ var respecConfig = {
    <div class="issue" data-number="15"></div>
 
   </section>
-  <section id="position_error_interface" data-dfn-for=PositionError  data-link-for=PositionError>
-    <h3><dfn>PositionError</dfn> interface</h3>
+  <section id="position_error_interface" data-dfn-for=NavigatorGeolocationPositionError  data-link-for=NavigatorGeolocationPositionError>
+    <h3><dfn>NavigatorGeolocationPositionError</dfn> interface</h3>
 
   <pre class=idl>
-  [NoInterfaceObject]
-  interface PositionError {
+  interface NavigatorGeolocationPositionError {
     const unsigned short PERMISSION_DENIED = 1;
     const unsigned short POSITION_UNAVAILABLE = 2;
     const unsigned short TIMEOUT = 3;
@@ -732,7 +728,7 @@ var respecConfig = {
 
    <dd>The length of time specified by the <a data-link-for=PositionOptions>timeout</a>
     property has elapsed before the implementation could successfully acquire a
-    new <a>Position</a> object.
+    new <a>NavigatorGeolocationPosition</a> object.
   </dl>
 
   <div class="issue" data-number="11"></div>
