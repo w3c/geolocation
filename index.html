@@ -366,6 +366,7 @@ var respecConfig = {
    with appropriate data accordingly.
 
  <pre class=idl>
+ [Exposed=Window]
  interface Geolocation {
    void getCurrentPosition(PositionCallback successCallback,
                            optional PositionErrorCallback errorCallback,
@@ -621,6 +622,7 @@ var respecConfig = {
    position (e.g. street addresses).
 
   <pre class=idl>
+  [Exposed=Window]
   interface GeolocationPosition {
     readonly attribute GeolocationCoordinates coords;
     readonly attribute DOMTimeStamp timestamp;
@@ -639,6 +641,7 @@ var respecConfig = {
     <h3><dfn>GeolocationCoordinates</dfn> interface</h3>
 
   <pre class=idl>
+  [Exposed=Window]
   interface GeolocationCoordinates {
     readonly attribute double latitude;
     readonly attribute double longitude;
@@ -693,6 +696,7 @@ var respecConfig = {
     <h3><dfn>GeolocationPositionError</dfn> interface</h3>
 
   <pre class=idl>
+  [Exposed=Window]
   interface GeolocationPositionError {
     const unsigned short PERMISSION_DENIED = 1;
     const unsigned short POSITION_UNAVAILABLE = 2;
