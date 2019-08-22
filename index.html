@@ -41,7 +41,8 @@ var respecConfig = {
          title: 'Geolocation in Firefox and Beyond',
          authors: [ 'Aza Raskin' ]
       }
-  }
+  },
+  xref: "web-platform",
 };
 </script>
 </head>
@@ -256,8 +257,7 @@ var respecConfig = {
   <p>The scope of this specification does not include providing a markup
    language of any kind.
 
-  <p>The scope of this specification does not include defining new <a data-cite="URL#concept-url-scheme">URL
-   schemes</a> for building URLs that identify geographic locations.
+  <p>The scope of this specification does not include defining a new [=url/scheme=] for building URLs that identify geographic locations.
 
   </section>
 
@@ -278,11 +278,11 @@ var respecConfig = {
   <p>User agents MUST NOT send location information to Web sites without the
    express permission of the user. User agents MUST acquire permission
    through a user interface, unless they have prearranged trust relationships
-   with users, as described below. The user interface MUST include the <a data-cite="!URL#concept-url-host">host
-   component</a> of the document's URI. Those
+   with users, as described below. The user interface MUST include the {{URL/host}}
+   component of the document's URL. Those
    permissions that are acquired through the user interface and that are
    preserved beyond the current browsing session (i.e. beyond the time when
-   the <a data-cite='!HTML#browsing-context'>browsing context</a> is
+   the <a>browsing context</a> is
    navigated to another URL) MUST be revocable and user agents MUST respect
    revoked permissions.
 
@@ -389,7 +389,7 @@ var respecConfig = {
    return and then asynchronously attempt to obtain the current
    location of the device. If the attempt is successful,
    the <var>successCallback</var> MUST be invoked
-   (i.e. the <code><a data-cite="DOM#dom-eventlistener-handleevent">handleEvent</a></code> operation MUST be called on the
+   (i.e. the {{EventListener/handleEvent()}} operation MUST be called on the
    callback object) with a new <a>GeolocationPosition</a> object,
    reflecting the current location of the device. If the attempt
    fails, the <var>errorCallback</var> MUST be invoked with a
@@ -435,7 +435,7 @@ var respecConfig = {
    process</a> and then asynchronously start the watch
    operation. This operation MUST first attempt to obtain the current location of the
    device. If the attempt is successful, the <var>successCallback</var> MUST be invoked
-   (i.e. the <code><a data-cite="DOM#dom-eventlistener-handleevent">handleEvent</a></code> operation MUST be called on the
+   (i.e. the {{EventListener/handleEvent()}} operation MUST be called on the
    callback object) with a new <a>GeolocationPosition</a> object,
    reflecting the current location of the device. If the attempt
    fails, the <var>errorCallback</var> MUST be invoked with a
@@ -635,7 +635,7 @@ var respecConfig = {
 
   <p>The <dfn>timestamp</dfn> attribute represents
    the time when the <a>GeolocationPosition</a> object was
-   acquired and is represented as a <code><dfn data-cite='!WEBIDL#DOMTimeStamp'>DOMTimeStamp</dfn></code>.
+   acquired and is represented as a {{DOMTimeStamp}}.
   </section>
   <section id="coordinates_interface" data-dfn-for=GeolocationCoordinates  data-link-for=GeolocationCoordinates>
     <h3><dfn>GeolocationCoordinates</dfn> interface</h3>
@@ -654,7 +654,7 @@ var respecConfig = {
   </pre>
 
   <p>The geographic coordinate reference system used by the attributes in
-   this interface is the World Geodetic System (2d) [[!WGS84]]. No other reference system is supported.
+   this interface is the World Geodetic System (2d) [[WGS84]]. No other reference system is supported.
 
   <p>The <dfn>latitude</dfn> and <dfn>longitude</dfn> attributes are geographic coordinates
    specified in decimal degrees.
