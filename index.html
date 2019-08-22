@@ -46,7 +46,7 @@ var respecConfig = {
 };
 </script>
 </head>
- <body>
+ <body data-cite="secure-contexts">
 
   <section id=abstract>
 
@@ -398,6 +398,9 @@ var respecConfig = {
   <p>The implementation of the <a data-link-for=Geolocation>getCurrentPosition</a> method
   MUST execute the following set of steps:</p>
   <ol>
+    <li>
+      If the <a>environment settings object</a> is a <a>non-secure context</a> return `undefined`. Optionally, inform the developer that the API can only be used from <a>secure contexts</a>.
+    </li>
     <li> If a cached <a>GeolocationPosition</a> object, whose age is no greater
           than the value of the <a data-link-for=PositionOptions>maximumAge</a> variable, is available,
           invoke the <var>successCallback</var> with the
@@ -430,8 +433,8 @@ var respecConfig = {
   </ol>
 
     <p>The <dfn>watchPosition()</dfn>
-   method takes one, two or three arguments. When called, it MUST immediately
-   return a long value that uniquely identifies a <a>watch
+   method takes one, two or three arguments. When called, if the <a>environment settings object</a> is a <a>non-secure context</a> return `undefined`. Optionally, inform the developer that the API can only be used from <a>secure contexts</a>.
+   Otherwise, immediately return a long value that uniquely identifies a <a>watch
    process</a> and then asynchronously start the watch
    operation. This operation MUST first attempt to obtain the current location of the
    device. If the attempt is successful, the <var>successCallback</var> MUST be invoked
@@ -622,7 +625,7 @@ var respecConfig = {
    position (e.g. street addresses).
 
   <pre class=idl>
-  [Exposed=Window]
+  [Exposed=Window, SecureContext]
   interface GeolocationPosition {
     readonly attribute GeolocationCoordinates coords;
     readonly attribute DOMTimeStamp timestamp;
@@ -641,7 +644,7 @@ var respecConfig = {
     <h3><dfn>GeolocationCoordinates</dfn> interface</h3>
 
   <pre class=idl>
-  [Exposed=Window]
+  [Exposed=Window, SecureContext]
   interface GeolocationCoordinates {
     readonly attribute double latitude;
     readonly attribute double longitude;
