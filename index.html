@@ -445,7 +445,7 @@ var respecConfig = {
     present) with a new <a>GeolocationPositionError</a> object
     whose <a data-link-for=GeolocationPositionError>code</a> is set to <a data-link-for=GeolocationPositionError>POSITION_UNAVAILABLE</a>.</li>
   </ol>
-    <p>The <dfn>watchPosition()</dfn> method takes one, two or three arguments. When called, immediately return a long value that uniquely identifies a <a>watch process</a> and continue asynchronously.
+    <p>The <dfn>watchPosition()</dfn> method takes one, two or three arguments. When called, immediately return a long value that uniquely identifies a <a>watch process</a> and continue asynchronously.</p>
     <ol data-link-for=GeolocationPositionError>
       <li>
         If the <a>environment settings object</a> is a <a>non-secure context</a>:
@@ -463,9 +463,7 @@ var respecConfig = {
       </li>
     <li>
    <p>
-   Otherwise, immediately return a long value that uniquely identifies a <a>watch
-   process</a> and then asynchronously start the watch
-   operation. This operation MUST first attempt to obtain the current location of the
+   Otherwise, start the watch operation. This operation MUST first attempt to obtain the current location of the
    device. If the attempt is successful, the <var>successCallback</var> MUST be invoked
    (i.e. the {{EventListener/handleEvent()}} operation MUST be called on the
    callback object) with a new <a>GeolocationPosition</a> object,
