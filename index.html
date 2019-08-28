@@ -399,7 +399,21 @@ var respecConfig = {
   MUST execute the following set of steps:</p>
   <ol>
     <li>
-      If the <a>environment settings object</a> is a <a>non-secure context</a> return `undefined`. Optionally, inform the developer that the API can only be used from <a>secure contexts</a>.
+      Return and continue asynchronously.
+    </li>
+    <li>
+      If the <a>environment settings object</a> is a <a>non-secure context</a>:
+      <ol>
+        <li>
+          If |errorCallback| was passed, invoke the |errorCallback| with a newly created {{GeolocationPositionError}} object whose {{GeolocationPositionError/code}} attribute is initialized to {{GeolocationPositionError/PERMISSION_DENIED}}.
+        </li>
+        <li>
+          Optionally, inform the developer that the API can only be used from <a>secure contexts</a>.
+        </li>
+        <li>
+          Terminate this algorithm.
+        </li>
+      </ol>
     </li>
     <li> If a cached <a>GeolocationPosition</a> object, whose age is no greater
           than the value of the <a data-link-for=PositionOptions>maximumAge</a> variable, is available,
@@ -431,9 +445,24 @@ var respecConfig = {
     present) with a new <a>GeolocationPositionError</a> object
     whose <a data-link-for=GeolocationPositionError>code</a> is set to <a data-link-for=GeolocationPositionError>POSITION_UNAVAILABLE</a>.</li>
   </ol>
-
-    <p>The <dfn>watchPosition()</dfn>
-   method takes one, two or three arguments. When called, if the <a>environment settings object</a> is a <a>non-secure context</a> return `undefined`. Optionally, inform the developer that the API can only be used from <a>secure contexts</a>.
+    <p>The <dfn>watchPosition()</dfn> method takes one, two or three arguments. When called, immediately return a long value that uniquely identifies a <a>watch process</a> and continue asynchronously.
+    <ol data-link-for=GeolocationPositionError>
+      <li>
+        If the <a>environment settings object</a> is a <a>non-secure context</a>:
+        <ol>
+          <li>
+              If |errorCallback| was passed, invoke the |errorCallback| with a newly created {{GeolocationPositionError}} object whose {{code}} attribute is initialized to {{GeolocationPositionError/PERMISSION_DENIED}}.
+          </li>
+          <li>
+            Optionally, inform the developer that the API can only be used from <a>secure contexts</a>.
+          </li>
+          <li>
+            Terminate this algorithm.
+          </li>
+        </ol>
+      </li>
+    <li>
+   <p>
    Otherwise, immediately return a long value that uniquely identifies a <a>watch
    process</a> and then asynchronously start the watch
    operation. This operation MUST first attempt to obtain the current location of the
@@ -447,9 +476,10 @@ var respecConfig = {
    to monitor the position of the device and invoke the appropriate
    callback every time this position changes. The <a>watch process</a>
    MUST continue until
-   the <a>clearWatch()</a> method is
+   the {{Geolocation/clearWatch()}} method is
    called with the corresponding identifier.</p>
-
+    </li>
+   </ol>
   <p>The <dfn>PositionCallBack</dfn> callback is invoked when a <a>GeolocationPosition</a> object is available, resulting
   from a cached object or the acquisition operation. The <a>PositionCallBack</a> callback gets set using
   the <dfn>successCallback</dfn> parameter.</p>
