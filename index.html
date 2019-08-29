@@ -5,47 +5,51 @@
     <title>
       Geolocation API Specification
     </title>
-    <script src='https://www.w3.org/Tools/respec/respec-w3c-common' async
+    <script src='https://www.w3.org/Tools/respec/respec-w3c' async
     class='remove'></script>
     <script class='remove'>
     var respecConfig = {
-    shortName: "geolocation-API",
-    specStatus: "ED",
-    edDraftURI: "https://w3c.github.io/geolocation-api/",
-    editors: [{
-    name: "Devices and Sensors Working Group"
-    }],
-    formerEditors: [{
-    name: "Andrei Popescu",
-    company: "Google Inc.",
-    companyURL: "https://google.com/",
-    w3cid: "36565"
-    }],
-    wg: "Devices and Sensors Group",
-    wgURI: "https://www.w3.org/das",
-    previousPublishDate: "2016-11-08",
-    previousMaturity: "REC",
-    github: {
-    repoURL: "https://github.com/w3c/geolocation-api/",
-    branch: "gh-pages"
-    },
-    caniuse: "geolocation",
-    testSuiteURI: "https://web-platform-tests.live/geolocation-API/",
-    // implementationReportURI: "https://wpt.fyi/geolocation-API",
-    localBiblio:  {
-      'WGS84': {
-        title: 'National Imagery and Mapping Agency Technical Report 8350.2, Third Edition',
-        href: 'http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf',
-        publisher: "National Imagery and Mapping Agency",
-        date: '3 January 2000'
+      shortName: "geolocation-API",
+      specStatus: "ED",
+      edDraftURI: "https://w3c.github.io/geolocation-api/",
+      editors: [
+        {
+          name: "Devices and Sensors Working Group"
+        }
+      ],
+      formerEditors: [
+        {
+          name: "Andrei Popescu",
+          company: "Google Inc.",
+          companyURL: "https://google.com/",
+          w3cid: "36565"
+        }
+      ],
+      wg: "Devices and Sensors Group",
+      wgURI: "https://www.w3.org/das",
+      previousPublishDate: "2016-11-08",
+      previousMaturity: "REC",
+      github: "w3c/geolocation-api",
+      caniuse: "geolocation",
+      testSuiteURI: "https://web-platform-tests.live/geolocation-API/",
+      // implementationReportURI: "https://wpt.fyi/geolocation-API",
+      localBiblio: {
+        WGS84: {
+          title:
+            "National Imagery and Mapping Agency Technical Report 8350.2, Third Edition",
+          href:
+            "http://earth-info.nga.mil/GandG/publications/tr8350.2/wgs84fin.pdf",
+          publisher: "National Imagery and Mapping Agency",
+          date: "3 January 2000"
+        },
+        AZALOC: {
+          href:
+            "http://www.azarask.in/blog/post/geolocation-in-firefox-and-beyond/",
+          title: "Geolocation in Firefox and Beyond",
+          authors: ["Aza Raskin"]
+        }
       },
-      'AZALOC': {
-         href: "http://www.azarask.in/blog/post/geolocation-in-firefox-and-beyond/",
-         title: 'Geolocation in Firefox and Beyond',
-         authors: [ 'Aza Raskin' ]
-      }
-    },
-    xref: "web-platform",
+      xref: "web-platform"
     };
     </script>
   </head>
