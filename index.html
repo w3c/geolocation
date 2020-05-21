@@ -5,8 +5,8 @@
     <title>
       Geolocation API Specification
     </title>
-    <script src='https://www.w3.org/Tools/respec/respec-w3c' async
-    class='remove'></script>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c' async class=
+    'remove'></script>
     <script class='remove'>
     var respecConfig = {
       shortName: "geolocation-API",
@@ -442,9 +442,9 @@
           <li>Return and continue asynchronously.
           </li>
           <li>If the <a>environment settings object</a> is a <a>non-secure
-          context</a> or the <a>current settings object</a>'s [=environment settings
-          object / responsible document=] is not [=allowed to use=] the
-          "geolocation" feature:
+          context</a> or the <a>current settings object</a>'s [=environment
+          settings object / responsible document=] is not [=allowed to use=]
+          the "geolocation" feature:
             <ol>
               <li>If |errorCallback| was passed, invoke the |errorCallback|
               with a newly created {{GeolocationPositionError}} object whose
@@ -895,15 +895,19 @@
       </section>
     </section>
     <section>
-      <h2>Feature policy</h2>
+      <h2>
+        Feature policy
+      </h2>
       <p>
-        The <cite>Geolocation API</cite> defines a [=policy-controlled feature=] identified by the string "geolocation". Its [=default allowlist=] is `["self"]`.
+        The <cite>Geolocation API</cite> defines a [=policy-controlled
+        feature=] identified by the string "geolocation". Its [=default
+        allowlist=] is `["self"]`.
       </p>
       <aside class="note">
         <p>
-          The <a>default allowlist</a> of `["self"]` allows Geolocation usage in
-          same-origin nested frames but prevents third-party content from using
-          the API.
+          The <a>default allowlist</a> of `["self"]` allows Geolocation usage
+          in same-origin nested frames but prevents third-party content from
+          using the API.
         </p>
         <p>
           Third-party usage can be selectively enabled by adding
@@ -914,8 +918,9 @@
           &lt;iframe src="https://third-party.com" allow="geolocation"/&gt;&lt;/iframe&gt;
         </pre>
         <p>
-          Alternatively, the Geolocation API can be disabled completely in a first-party context by
-          specifying the feature policy in a HTTP response header:
+          Alternatively, the Geolocation API can be disabled completely in a
+          first-party context by specifying the feature policy in a HTTP
+          response header:
         </p>
         <pre class="example http" title="Feature Policy over HTTP">
           Feature-Policy: geolocation 'none'
