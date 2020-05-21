@@ -501,15 +501,14 @@
         </p>
         <ol data-link-for="GeolocationPositionError">
           <li>If the <a>environment settings object</a> is a <a>non-secure
-          context</a>:
+          context</a> or the <a>current settings object</a>'s [=environment
+          settings object / responsible document=] is not [=allowed to use=]
+          the "geolocation" feature::
             <ol>
               <li>If |errorCallback| was passed, invoke the |errorCallback|
               with a newly created {{GeolocationPositionError}} object whose
               {{GeolocationPositionError/code}} attribute is initialized to
               {{GeolocationPositionError/PERMISSION_DENIED}}.
-              </li>
-              <li>Optionally, inform the developer that the API can only be
-              used from <a>secure contexts</a>.
               </li>
               <li>Terminate this algorithm.
               </li>
