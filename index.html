@@ -375,10 +375,9 @@
       <h2>
         API Description
       </h2>
-      <section id="navigator_interface" data-dfn-for="Navigator" data-link-for=
-      "Navigator">
+      <section id="navigator_interface" data-dfn-for="Navigator">
         <h3>
-          <dfn>Navigator</dfn> interface extensions
+          `Navigator` interface extensions
         </h3>
         <pre class="idl">
         partial interface Navigator {
@@ -390,16 +389,15 @@
           information associated with the hosting device.
         </p>
       </section>
-      <section id="geolocation_interface" data-dfn-for="Geolocation"
-      data-link-for="Geolocation">
+      <section id="geolocation_interface" data-dfn-for="Geolocation">
         <h3>
           <dfn>Geolocation</dfn> interface
         </h3>
         <p>
-          The <a>Geolocation</a> object is used by scripts to programmatically
+          The {{Geolocation}} object is used by scripts to programmatically
           determine the location information associated with the hosting
           device. The location information is acquired by applying a user-agent
-          specific algorithm, creating a <a>GeolocationPosition</a> object, and
+          specific algorithm, creating a {{GeolocationPosition}} object, and
           populating that object with appropriate data accordingly.
         </p>
         <pre class="idl">
@@ -426,16 +424,15 @@
           arguments. When called, it MUST immediately return and then
           asynchronously attempt to obtain the current location of the device.
           If the attempt is successful, the <var>successCallback</var> MUST be
-          invoked with a new <a>GeolocationPosition</a> object, reflecting the
+          invoked with a new {{GeolocationPosition}} object, reflecting the
           current location of the device. If the attempt fails, the
-          <var>errorCallback</var> MUST be invoked with a new
-          <a>GeolocationPositionError</a> object, reflecting the reason for the
+          |errorCallback| MUST be invoked with a new
+          {{GeolocationPositionError}} object, reflecting the reason for the
           failure.
         </p>
         <p>
-          The implementation of the <a data-link-for=
-          "Geolocation">getCurrentPosition</a> method MUST execute the
-          following set of steps:
+          The implementation of the {{Geolocation/getCurrentPosition()}} method
+          MUST execute the following set of steps:
         </p>
         <ol>
           <li>Return and continue asynchronously.
@@ -455,43 +452,40 @@
               </li>
             </ol>
           </li>
-          <li>If a cached <a>GeolocationPosition</a> object, whose age is no
-          greater than the value of the <a data-link-for=
-          "PositionOptions">maximumAge</a> variable, is available, invoke the
-          <var>successCallback</var> with the cached <a>GeolocationPosition</a>
-          object as a parameter and exit this set of steps.
+          <li>If a cached {{GeolocationPosition}} object, whose age is no
+          greater than the value of the {{PositionOptions/maximumAge}}
+          variable, is available, invoke the <var>successCallback</var> with
+          the cached {{GeolocationPosition}} object as a parameter and exit
+          this set of steps.
           </li>
           <li>If the value of the timeout variable is 0, invoke the
-          <var>errorCallback</var> (if present) with a new
-          <a>GeolocationPositionError</a> object whose <a data-link-for=
-          "GeolocationPositionError">code</a> attribute is set to
-          <a data-link-for="GeolocationPositionError">TIMEOUT</a> and exit this
-          set of steps.
+          |errorCallback| (if present) with a new {{GeolocationPositionError}}
+          object whose {{GeolocationPositionError/code}} attribute is set to
+          {{GeolocationPositionError.TIMEOUT}} and exit this set of steps.
           </li>
           <li>Start a location acquisition operation (e.g. by invoking a
           platform-specific API), possibly taking into account the value of the
-          <a data-link-for="PositionOptions">enableHighAccuracy</a> variable.
+          {{PositionOptions/enableHighAccuracy}} variable.
           </li>
           <li>Start a timer that will fire after the number of milliseconds
           denoted by the value of the timeout variable. When the timer fires,
           cancel any ongoing location acquisition operations associated with
-          this instance of the steps, invoke the <var>errorCallback</var> (if
-          present) with a new <a>GeolocationPositionError</a> object whose
-          <a data-link-for="GeolocationPositionError">code</a> attribute is set
-          to <a data-link-for="GeolocationPositionError">TIMEOUT</a>, and exit
-          this set of steps.
+          this instance of the steps, invoke the |errorCallback| (if present)
+          with a new {{GeolocationPositionError}} object whose
+          {{GeolocationPositionError/code}} attribute is set to
+          {{GeolocationPositionError/TIMEOUT}}, and exit this set of steps.
           </li>
           <li>If the operation completes successfully before the timeout
           expires, cancel the pending timer, invoke the
-          <var>successCallback</var> with a new <a>GeolocationPosition</a>
-          object that reflects the result of the acquisition operation and exit
-          this set of steps.
+          <var>successCallback</var> with a new {{GeolocationPosition}} object
+          that reflects the result of the acquisition operation and exit this
+          set of steps.
           </li>
           <li>If the operation fails before the timeout expires, cancel the
-          pending timer and invoke the <var>errorCallback</var> (if present)
-          with a new <a>GeolocationPositionError</a> object whose
-          <a data-link-for="GeolocationPositionError">code</a> is set to
-          <a data-link-for="GeolocationPositionError">POSITION_UNAVAILABLE</a>.
+          pending timer and invoke the |errorCallback| (if present) with a new
+          {{GeolocationPositionError}} object whose
+          {{GeolocationPositionError/code}} is set to
+          {{GeolocationPositionError.POSITION_UNAVAILABLE}}.
           </li>
         </ol>
         <p>
@@ -499,7 +493,7 @@
           arguments. When called, immediately return a long value that uniquely
           identifies a <a>watch process</a> and continue asynchronously.
         </p>
-        <ol data-link-for="GeolocationPositionError">
+        <ol>
           <li>If the <a>environment settings object</a> is a <a>non-secure
           context</a>:
             <ol>
@@ -520,10 +514,10 @@
               Otherwise, start the watch operation. This operation MUST first
               attempt to obtain the current location of the device. If the
               attempt is successful, the <var>successCallback</var> MUST be
-              invoked with a new <a>GeolocationPosition</a> object, reflecting
-              the current location of the device. If the attempt fails, the
-              <var>errorCallback</var> MUST be invoked with a new
-              <a>GeolocationPositionError</a> object, reflecting the reason for
+              invoked with a new {{GeolocationPosition}} object, reflecting the
+              current location of the device. If the attempt fails, the
+              |errorCallback| MUST be invoked with a new
+              {{GeolocationPositionError}} object, reflecting the reason for
               the failure. The <a>watch process</a> then MUST continue to
               monitor the position of the device and invoke the appropriate
               callback every time this position changes. The <a>watch
@@ -534,14 +528,13 @@
         </ol>
         <p>
           The <dfn>PositionCallBack</dfn> callback is invoked when a
-          <a>GeolocationPosition</a> object is available, resulting from a
-          cached object or the acquisition operation. The
-          <a>PositionCallBack</a> callback gets set using the
-          <dfn>successCallback</dfn> parameter.
+          {{GeolocationPosition}} object is available, resulting from a cached
+          object or the acquisition operation. The <a>PositionCallBack</a>
+          callback gets set using the <dfn>successCallback</dfn> parameter.
         </p>
         <p>
           The <dfn>PositionErrorCallBack</dfn> callback is invoked when a
-          <a>GeolocationPosition</a> object is not available, resulting from a
+          {{GeolocationPosition}} object is not available, resulting from a
           timeout, a permission denied, or an unability to determine the
           position of the device. The <a>PositionErrorCallBack</a> callback
           gets set using the <dfn>errorCallback</dfn> parameter.
@@ -551,10 +544,10 @@
           following set of steps:
         </p>
         <ol>
-          <li>If a cached <a>GeolocationPosition</a> object, whose age is no
+          <li>If a cached {{GeolocationPosition}} object, whose age is no
           greater than the value of the maximumAge variable, is available,
           invoke the <var>successCallback</var> with the cached
-          <a>GeolocationPosition</a> object as a parameter.
+          {{GeolocationPosition}} object as a parameter.
           </li>
           <li>Register to receive system events that indicate that the position
           of the device MAY have changed (e.g. by listening or polling for
@@ -563,19 +556,17 @@
           <li>Start a location acquisition operation (e.g. by invoking a
           platform-specific API), possibly taking into account the value of the
           <var>enableHighAccuracy</var> variable (see the definition of
-          <a data-link-for="PositionOptions">enableHighAccuracy</a> for
-          details).
+          {{PositionOptions/enableHighAccuracy}} for details).
           </li>
           <li>Run the following <dfn>acquisition steps</dfn>:
             <ol>
               <li>If the timer is not already running, start a timer that will
               fire after the number of milliseconds denoted by the value of the
               timeout variable. When the timer fires, invoke the
-              <var>errorCallback</var> (if present) with a new
-              <a>GeolocationPositionError</a> object whose <a data-link-for=
-              "GeolocationPositionError">code</a> attribute is set to
-              <a data-link-for="GeolocationPositionError">TIMEOUT</a> and jump
-              to step 6.
+              |errorCallback| (if present) with a new
+              {{GeolocationPositionError}} object whose
+              {{GeolocationPositionError/code}} attribute is set to
+              {{GeolocationPositionError/TIMEOUT}} and jump to step 6.
               </li>
               <li>If the location acquisition operation successfully yields a
               new position before the timeout expires, perform the following
@@ -587,23 +578,19 @@
                   </li>
                   <li>If the <dfn>new position differs significantly from the
                   previous position</dfn>, invoke the
-                  <var>successCallback</var> with a new
-                  <a>GeolocationPosition</a> object that reflects the result of
-                  the acquisition operation. This step MAY be subject to
-                  callback rate limitation (<a href="#rate-limit">see
-                  below</a>).
+                  <var>successCallback</var> with a new {{GeolocationPosition}}
+                  object that reflects the result of the acquisition operation.
+                  This step MAY be subject to callback [=rate limitation=].
                   </li>
                 </ol>
               </li>
               <li>Else, if the location acquisition operation reports an error
-              before the <a data-link-for="PositionOptions">timeout</a>
-              expires, invoke the <var>errorCallback</var> (if present) with a
-              new <a>GeolocationPositionError</a> object whose
-                <a data-link-for="GeolocationPositionError">code</a> is set to
-                <a data-link-for=
-                "GeolocationPositionError">POSITION_UNAVAILABLE</a>. This step
-                MAY be subject to callback rate limitation (<a href=
-                "#rate-limit">see below</a>).
+              before the {{PositionOptions/timeout}} expires, invoke the <var>
+                errorCallback</var> (if present) with a new
+                {{GeolocationPositionError}} object whose
+                {{GeolocationPositionError/code}} is set to
+                {{GeolocationPositionError.POSITION_UNAVAILABLE}}. This step
+                MAY be subject to callback [=rate limitation=].
               </li>
             </ol>
           </li>
@@ -611,61 +598,62 @@
           received jump to the <a>acquisition steps</a> above.
           </li>
         </ol>
-        <p class='note' id="rate-limit">
+        <p class='note'>
           If the <a>new position differs significantly from the previous
           position</a> in the <a>watch process</a>, the
           <var>successCallback</var> is only invoked when a new position is
           obtained and this position differs significantly from the previously
           reported position. The definition of what constitutes a significant
           difference is left to the implementation. Furthermore, in steps 4.2.2
-          and 4.3, implementations MAY impose limitations on the frequency of
-          callbacks so as to avoid inadvertently consuming a disproportionate
-          amount of resources.
+          and 4.3, implementations MAY impose a <dfn data-lt=
+          "rate limitation">rate limit</dfn> on the frequency of callbacks so
+          as to avoid inadvertently consuming a disproportionate amount of
+          resources.
         </p>
         <p data-tests=
         'getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html, watchPosition_permission_deny.https.html'>
-          For both <a>getCurrentPosition</a> and <a>watchPosition</a>, the
-          implementation MUST never invoke the <var>successCallback</var>
-          without having first obtained permission from the user to share
-          location. Furthermore, the implementation SHOULD always obtain the
-          user's permission to share location before executing any of the
-          <a>getCurrentPosition</a> or <a>watchPosition</a> steps described
-          above. If the user grants permission, the appropriate callback MUST
-          be invoked as described above. If the user denies permission, the
-          <var>errorCallback</var> (if present) MUST be invoked with
-          <a data-link-for="GeolocationPositionError">code</a>
-          <a data-link-for="GeolocationPositionError">PERMISSION_DENIED</a>,
-          irrespective of any other errors encountered in the above steps. The
-          time that is spent obtaining the user permission MUST NOT be included
-          in the period covered by the <a data-link-for=
-          "PositionOptions">timeout</a> attribute of the <a>PositionOptions</a>
-          parameter. The <a data-link-for="PositionOptions">timeout</a>
+          For both {{Geolocation/getCurrentPosition()}} and
+          {{Geolocation/watchPosition()}}, the implementation MUST never invoke
+          the <var>successCallback</var> without having first obtained
+          permission from the user to share location. Furthermore, the
+          implementation SHOULD always obtain the user's permission to share
+          location before executing any of the
+          {{Geolocation/getCurrentPosition()}} or
+          {{Geolocation/watchPosition()}} steps described above. If the user
+          grants permission, the appropriate callback MUST be invoked as
+          described above. If the user denies permission, the |errorCallback|
+          (if present) MUST be invoked with {{GeolocationPositionError/code}}
+          set to {{GeolocationPositionError.PERMISSION_DENIED}}, irrespective
+          of any other errors encountered in the above steps. The time that is
+          spent obtaining the user permission MUST NOT be included in the
+          period covered by the {{PositionOptions/timeout}} attribute of the
+          {{PositionOptions}} parameter. The {{PositionOptions/timeout}}
           attribute MUST only apply to the location acquisition operation.
         </p>
         <p data-tests='clearWatch_TypeError.html'>
           The <dfn>clearWatch()</dfn> method takes one argument. When called,
-          it MUST first check the value of the given <dfn id=
-          "watchId">watchId</dfn> argument. If this value does not correspond
-          to any previously started <a>watch process</a>, then the method MUST
-          return immediately without taking any further action. Otherwise, the
-          <a>watch process</a> identified by the <code>watchId</code> argument
-          MUST be immediately stopped and no further callbacks MUST be invoked.
+          it MUST first check the value of the given <dfn>watchId</dfn>
+          argument. If this value does not correspond to any previously started
+          <a>watch process</a>, then the method MUST return immediately without
+          taking any further action. Otherwise, the <a>watch process</a>
+          identified by the `watchId` argument MUST be immediately stopped and
+          no further callbacks MUST be invoked.
         </p>
       </section>
-      <section id="position_options_interface" data-dfn-for="PositionOptions"
-      data-link-for="PositionOptions">
+      <section id="position_options_interface" data-dfn-for="PositionOptions">
         <h3>
           <dfn>PositionOptions</dfn> dictionary
         </h3>
         <p>
-          The <a data-link-for="Geolocation">getCurrentPosition()</a> and
-          <a data-link-for="Geolocation">watchPosition()</a> methods accept
-          <a>PositionOptions</a> objects as their third argument.
+          The {{Geolocation/getCurrentPosition()}} and
+          {{Geolocation/watchPosition()}} methods accept {{PositionOptions}}
+          objects as their third argument.
         </p>
         <p>
-          In ECMAScript, <a>PositionOptions</a> objects are represented using
+          In ECMAScript, {{PositionOptions}} objects are represented using
           regular native objects with optional properties named
-          <a>enableHighAccuracy</a>, <a>timeout</a> and <a>maximumAge</a>.
+          {{PositionOptions/enableHighAccuracy}}, {{PositionOptions/timeout}}
+          and {{PositionOptions/maximumAge}}.
         </p>
         <pre class="idl">
   dictionary PositionOptions {
@@ -676,10 +664,10 @@
 
   </pre>
         <p>
-          In ECMAScript, the <a>enableHighAccuracy</a>, <a>timeout</a> and
-          <a>maximumAge</a> properties are all OPTIONAL: when creating a
-          PositionOptions object, the developer MAY specify any of these
-          properties.
+          In ECMAScript, the {{PositionOptions/enableHighAccuracy}},
+          {{PositionOptions/timeout}} and {{PositionOptions/maximumAge}}
+          properties are all OPTIONAL: when creating a {{PositionOptions}}
+          object, the developer MAY specify any of these properties.
         </p>
         <p data-tests='PositionOptions.https.html'>
           The <dfn>enableHighAccuracy</dfn> attribute provides a hint that the
@@ -697,62 +685,60 @@
         <p data-tests='PositionOptions.https.html'>
           The <dfn>timeout</dfn> attribute denotes the maximum length of time
           (expressed in milliseconds) that is allowed to pass from the call to
-          <a data-link-for="Geolocation">getCurrentPosition</a> or
-          <a data-link-for="Geolocation">watchPosition</a> until the
-          corresponding <var>successCallback</var> is invoked. If the
-          implementation is unable to successfully acquire a new
-          <a>GeolocationPosition</a> before the given timeout elapses, and no
-          other errors have occurred in this interval, then the corresponding
-          <var>errorCallback</var> MUST be invoked with a
-          <a>GeolocationPositionError</a> object whose code attribute is set to
-          <a data-link-for="GeolocationPositionError">TIMEOUT</a>. Note that
-          the time that is spent obtaining the user permission is not included
-          in the period covered by the <a>timeout</a> attribute. The
-          <a>timeout</a> attribute only applies to the location acquisition
-          operation.
+          {{Geolocation/getCurrentPosition()}} or
+          {{Geolocation/watchPosition()}} until the corresponding
+          <var>successCallback</var> is invoked. If the implementation is
+          unable to successfully acquire a new {{GeolocationPosition}} before
+          the given timeout elapses, and no other errors have occurred in this
+          interval, then the corresponding |errorCallback| MUST be invoked with
+          a {{GeolocationPositionError}} object whose code attribute is set to
+          {{GeolocationPositionError.TIMEOUT}}. Note that the time that is
+          spent obtaining the user permission is not included in the period
+          covered by the {{PositionOptions/timeout}} attribute. The
+          {{PositionOptions/timeout}} attribute only applies to the location
+          acquisition operation.
         </p>
         <p>
-          In case of a <a data-link-for="Geolocation">getCurrentPosition()</a>
-          call, the <var>errorCallback</var> would be invoked at most once.
+          In case of a {{Geolocation/getCurrentPosition()}} call, the
+          |errorCallback| would be invoked at most once.
         </p>
         <p>
-          In case of a <a data-link-for="Geolocation">watchPosition()</a>, the
-          <var>errorCallback</var> could be invoked repeatedly: the first
-          timeout is relative to the moment <a data-link-for=
-          "Geolocation">watchPosition()</a> was called or the moment the user's
-          permission was obtained, if that was necessary. Subsequent timeouts
-          are relative to the moment when the implementation determines that
-          the position of the hosting device has changed and a new
-          <a>GeolocationPosition</a> object MUST be acquired.
+          In case of a {{Geolocation/watchPosition()}}, the |errorCallback|
+          could be invoked repeatedly: the first timeout is relative to the
+          moment {{Geolocation/watchPosition()}} was called or the moment the
+          user's permission was obtained, if that was necessary. Subsequent
+          timeouts are relative to the moment when the implementation
+          determines that the position of the hosting device has changed and a
+          new {{GeolocationPosition}} object MUST be acquired.
         </p>
         <p data-tests='PositionOptions.https.html'>
           The <dfn>maximumAge</dfn> attribute indicates that the application is
           willing to accept a cached position whose age is no greater than the
-          specified time in milliseconds. If <a>maximumAge</a> is set to 0, the
-          implementation MUST immediately attempt to acquire a new position
-          object. Setting the <a>maximumAge</a> to <code>Infinity</code> MUST
-          determine the implementation to return a cached position regardless
-          of its age. If an implementation does not have a cached position
-          available whose age is no greater than the specified
-          <a>maximumAge</a>, then it MUST acquire a new
-          <a>GeolocationPosition</a> object. In case of a <a data-link-for=
-          "Geolocation">watchPosition()</a>, the <a>maximumAge</a> refers to
-          the first <a>GeolocationPosition</a> object returned by the
+          specified time in milliseconds. If {{PositionOptions/maximumAge}} is
+          set to 0, the implementation MUST immediately attempt to acquire a
+          new position object. Setting the {{PositionOptions/maximumAge}} to
+          `Infinity` MUST determine the implementation to return a cached
+          position regardless of its age. If an implementation does not have a
+          cached position available whose age is no greater than the specified
+          {{PositionOptions/maximumAge}}, then it MUST acquire a new
+          {{GeolocationPosition}} object. In case of a
+          {{Geolocation/watchPosition()}}, the {{PositionOptions/maximumAge}}
+          refers to the first {{GeolocationPosition}} object returned by the
           implementation.
         </p>
       </section>
-      <section id="position_interface" data-dfn-for="GeolocationPosition"
-      data-link-for="GeolocationPosition">
+      <section id="position_interface" data-dfn-for="GeolocationPosition">
         <h3>
           <dfn>GeolocationPosition</dfn> interface
         </h3>
         <p>
-          The <a>GeolocationPosition</a> interface is the container for the
+          The {{GeolocationPosition}} interface is the container for the
           geolocation information returned by this API. This version of the
           specification allows one attribute of type
-          <a>GeolocationCoordinates</a> and a <a>timestamp</a>. Future versions
-          of the API MAY allow additional attributes that provide other
-          information about this position (e.g. street addresses).
+          <a>GeolocationCoordinates</a> and a
+          {{GeolocationPosition/timestamp}}. Future versions of the API MAY
+          allow additional attributes that provide other information about this
+          position (e.g. street addresses).
         </p>
         <pre class="idl">
   [Exposed=Window, SecureContext]
@@ -768,12 +754,12 @@
         </p>
         <p>
           The <dfn>timestamp</dfn> attribute represents the time when the
-          <a>GeolocationPosition</a> object was acquired and is represented as
-          a {{DOMTimeStamp}}.
+          {{GeolocationPosition}} object was acquired and is represented as a
+          {{DOMTimeStamp}}.
         </p>
       </section>
-      <section id="coordinates_interface" data-dfn-for="GeolocationCoordinates"
-      data-link-for="GeolocationCoordinates">
+      <section id="coordinates_interface" data-dfn-for=
+      "GeolocationCoordinates">
         <h3>
           <dfn>GeolocationCoordinates</dfn> interface
         </h3>
@@ -817,7 +803,8 @@
           altitudeAccuracy attribute MUST be a non-negative real number.
         </p>
         <p>
-          The <a>accuracy</a> and <a>altitudeAccuracy</a> values returned by an
+          The {{GeolocationCoordinates/accuracy}} and
+          {{GeolocationCoordinates/altitudeAccuracy}} values returned by an
           implementation SHOULD correspond to a 95% confidence level.
         </p>
         <p>
@@ -826,8 +813,8 @@
           &lt; 360°, counting clockwise relative to the true north. If the
           implementation cannot provide heading information, the value of this
           attribute MUST be null. If the hosting device is stationary (i.e. the
-          value of the <a>speed</a> attribute is 0), then the value of the
-          heading attribute MUST be NaN.
+          value of the {{GeolocationCoordinates/speed}} attribute is 0), then
+          the value of the heading attribute MUST be NaN.
         </p>
         <p>
           The <dfn>speed</dfn> attribute denotes the magnitude of the
@@ -839,7 +826,7 @@
         </p>
       </section>
       <section id="position_error_interface" data-dfn-for=
-      "GeolocationPositionError" data-link-for="GeolocationPositionError">
+      "GeolocationPositionError">
         <h3>
           <dfn>GeolocationPositionError</dfn> interface
         </h3>
@@ -878,10 +865,9 @@
             <dfn>TIMEOUT</dfn> (numeric value 3)
           </dt>
           <dd>
-            The length of time specified by the <a data-link-for=
-            "PositionOptions">timeout</a> property has elapsed before the
-            implementation could successfully acquire a new
-            <a>GeolocationPosition</a> object.
+            The length of time specified by the {{PositionOptions/timeout}}
+            property has elapsed before the implementation could successfully
+            acquire a new {{GeolocationPosition}} object.
           </dd>
         </dl>
         <p>
