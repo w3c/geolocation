@@ -423,12 +423,11 @@
           The <dfn>getCurrentPosition()</dfn> method takes one, two or three
           arguments. When called, it MUST immediately return and then
           asynchronously attempt to obtain the current location of the device.
-          If the attempt is successful, the <var>successCallback</var> MUST be
-          invoked with a new {{GeolocationPosition}} object, reflecting the
-          current location of the device. If the attempt fails, the
-          |errorCallback| MUST be invoked with a new
-          {{GeolocationPositionError}} object, reflecting the reason for the
-          failure.
+          If the attempt is successful, the |successCallback| MUST be invoked
+          with a new {{GeolocationPosition}} object, reflecting the current
+          location of the device. If the attempt fails, the |errorCallback|
+          MUST be invoked with a new {{GeolocationPositionError}} object,
+          reflecting the reason for the failure.
         </p>
         <p>
           The implementation of the {{Geolocation/getCurrentPosition()}} method
@@ -454,9 +453,9 @@
           </li>
           <li>If a cached {{GeolocationPosition}} object, whose age is no
           greater than the value of the {{PositionOptions/maximumAge}}
-          variable, is available, invoke the <var>successCallback</var> with
-          the cached {{GeolocationPosition}} object as a parameter and exit
-          this set of steps.
+          variable, is available, invoke the |successCallback| with the cached
+          {{GeolocationPosition}} object as a parameter and exit this set of
+          steps.
           </li>
           <li>If the value of the timeout variable is 0, invoke the
           |errorCallback| (if present) with a new {{GeolocationPositionError}}
@@ -476,10 +475,9 @@
           {{GeolocationPositionError/TIMEOUT}}, and exit this set of steps.
           </li>
           <li>If the operation completes successfully before the timeout
-          expires, cancel the pending timer, invoke the
-          <var>successCallback</var> with a new {{GeolocationPosition}} object
-          that reflects the result of the acquisition operation and exit this
-          set of steps.
+          expires, cancel the pending timer, invoke the |successCallback| with
+          a new {{GeolocationPosition}} object that reflects the result of the
+          acquisition operation and exit this set of steps.
           </li>
           <li>If the operation fails before the timeout expires, cancel the
           pending timer and invoke the |errorCallback| (if present) with a new
@@ -513,16 +511,16 @@
             <p>
               Otherwise, start the watch operation. This operation MUST first
               attempt to obtain the current location of the device. If the
-              attempt is successful, the <var>successCallback</var> MUST be
-              invoked with a new {{GeolocationPosition}} object, reflecting the
-              current location of the device. If the attempt fails, the
-              |errorCallback| MUST be invoked with a new
-              {{GeolocationPositionError}} object, reflecting the reason for
-              the failure. The <a>watch process</a> then MUST continue to
-              monitor the position of the device and invoke the appropriate
-              callback every time this position changes. The <a>watch
-              process</a> MUST continue until the {{Geolocation/clearWatch()}}
-              method is called with the corresponding identifier.
+              attempt is successful, the |successCallback| MUST be invoked with
+              a new {{GeolocationPosition}} object, reflecting the current
+              location of the device. If the attempt fails, the |errorCallback|
+              MUST be invoked with a new {{GeolocationPositionError}} object,
+              reflecting the reason for the failure. The <a>watch process</a>
+              then MUST continue to monitor the position of the device and
+              invoke the appropriate callback every time this position changes.
+              The <a>watch process</a> MUST continue until the
+              {{Geolocation/clearWatch()}} method is called with the
+              corresponding identifier.
             </p>
           </li>
         </ol>
@@ -546,8 +544,8 @@
         <ol>
           <li>If a cached {{GeolocationPosition}} object, whose age is no
           greater than the value of the maximumAge variable, is available,
-          invoke the <var>successCallback</var> with the cached
-          {{GeolocationPosition}} object as a parameter.
+          invoke the |successCallback| with the cached {{GeolocationPosition}}
+          object as a parameter.
           </li>
           <li>Register to receive system events that indicate that the position
           of the device MAY have changed (e.g. by listening or polling for
@@ -555,7 +553,7 @@
           </li>
           <li>Start a location acquisition operation (e.g. by invoking a
           platform-specific API), possibly taking into account the value of the
-          <var>enableHighAccuracy</var> variable (see the definition of
+          |enableHighAccuracy| variable (see the definition of
           {{PositionOptions/enableHighAccuracy}} for details).
           </li>
           <li>Run the following <dfn>acquisition steps</dfn>:
@@ -577,20 +575,20 @@
                   the acquisition steps.
                   </li>
                   <li>If the <dfn>new position differs significantly from the
-                  previous position</dfn>, invoke the
-                  <var>successCallback</var> with a new {{GeolocationPosition}}
-                  object that reflects the result of the acquisition operation.
-                  This step MAY be subject to callback [=rate limitation=].
+                  previous position</dfn>, invoke the |successCallback| with a
+                  new {{GeolocationPosition}} object that reflects the result
+                  of the acquisition operation. This step MAY be subject to
+                  callback [=rate limitation=].
                   </li>
                 </ol>
               </li>
               <li>Else, if the location acquisition operation reports an error
-              before the {{PositionOptions/timeout}} expires, invoke the <var>
-                errorCallback</var> (if present) with a new
-                {{GeolocationPositionError}} object whose
-                {{GeolocationPositionError/code}} is set to
-                {{GeolocationPositionError.POSITION_UNAVAILABLE}}. This step
-                MAY be subject to callback [=rate limitation=].
+              before the {{PositionOptions/timeout}} expires, invoke the
+              |errorCallback| (if present) with a new
+              {{GeolocationPositionError}} object whose
+              {{GeolocationPositionError/code}} is set to
+              {{GeolocationPositionError.POSITION_UNAVAILABLE}}. This step MAY
+              be subject to callback [=rate limitation=].
               </li>
             </ol>
           </li>
@@ -600,25 +598,23 @@
         </ol>
         <p class='note'>
           If the <a>new position differs significantly from the previous
-          position</a> in the <a>watch process</a>, the
-          <var>successCallback</var> is only invoked when a new position is
-          obtained and this position differs significantly from the previously
-          reported position. The definition of what constitutes a significant
-          difference is left to the implementation. Furthermore, in steps 4.2.2
-          and 4.3, implementations MAY impose a <dfn data-lt=
-          "rate limitation">rate limit</dfn> on the frequency of callbacks so
-          as to avoid inadvertently consuming a disproportionate amount of
-          resources.
+          position</a> in the <a>watch process</a>, the |successCallback| is
+          only invoked when a new position is obtained and this position
+          differs significantly from the previously reported position. The
+          definition of what constitutes a significant difference is left to
+          the implementation. Furthermore, in steps 4.2.2 and 4.3,
+          implementations MAY impose a <dfn data-lt="rate limitation">rate
+          limit</dfn> on the frequency of callbacks so as to avoid
+          inadvertently consuming a disproportionate amount of resources.
         </p>
         <p data-tests=
         'getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html, watchPosition_permission_deny.https.html'>
           For both {{Geolocation/getCurrentPosition()}} and
           {{Geolocation/watchPosition()}}, the implementation MUST never invoke
-          the <var>successCallback</var> without having first obtained
-          permission from the user to share location. Furthermore, the
-          implementation SHOULD always obtain the user's permission to share
-          location before executing any of the
-          {{Geolocation/getCurrentPosition()}} or
+          the |successCallback| without having first obtained permission from
+          the user to share location. Furthermore, the implementation SHOULD
+          always obtain the user's permission to share location before
+          executing any of the {{Geolocation/getCurrentPosition()}} or
           {{Geolocation/watchPosition()}} steps described above. If the user
           grants permission, the appropriate callback MUST be invoked as
           described above. If the user denies permission, the |errorCallback|
@@ -687,11 +683,11 @@
           (expressed in milliseconds) that is allowed to pass from the call to
           {{Geolocation/getCurrentPosition()}} or
           {{Geolocation/watchPosition()}} until the corresponding
-          <var>successCallback</var> is invoked. If the implementation is
-          unable to successfully acquire a new {{GeolocationPosition}} before
-          the given timeout elapses, and no other errors have occurred in this
-          interval, then the corresponding |errorCallback| MUST be invoked with
-          a {{GeolocationPositionError}} object whose code attribute is set to
+          |successCallback| is invoked. If the implementation is unable to
+          successfully acquire a new {{GeolocationPosition}} before the given
+          timeout elapses, and no other errors have occurred in this interval,
+          then the corresponding |errorCallback| MUST be invoked with a
+          {{GeolocationPositionError}} object whose code attribute is set to
           {{GeolocationPositionError.TIMEOUT}}. Note that the time that is
           spent obtaining the user permission is not included in the period
           covered by the {{PositionOptions/timeout}} attribute. The
