@@ -472,7 +472,7 @@
           this instance of the steps, invoke the |errorCallback| (if present)
           with a new {{GeolocationPositionError}} object whose
           {{GeolocationPositionError/code}} attribute is set to
-          {{GeolocationPositionError/TIMEOUT}}, and exit this set of steps.
+          {{GeolocationPositionError.TIMEOUT}}, and exit this set of steps.
           </li>
           <li>If the operation completes successfully before the timeout
           expires, cancel the pending timer, invoke the |successCallback| with
@@ -564,7 +564,7 @@
               |errorCallback| (if present) with a new
               {{GeolocationPositionError}} object whose
               {{GeolocationPositionError/code}} attribute is set to
-              {{GeolocationPositionError/TIMEOUT}} and jump to step 6.
+              {{GeolocationPositionError.TIMEOUT}} and jump to step 6.
               </li>
               <li>If the location acquisition operation successfully yields a
               new position before the timeout expires, perform the following
