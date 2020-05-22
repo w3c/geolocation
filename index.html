@@ -5,8 +5,8 @@
     <title>
       Geolocation API Specification
     </title>
-    <script src='https://www.w3.org/Tools/respec/respec-w3c' async
-    class='remove'></script>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c' async class=
+    'remove'></script>
     <script class='remove'>
     var respecConfig = {
       shortName: "geolocation-API",
@@ -426,10 +426,9 @@
           arguments. When called, it MUST immediately return and then
           asynchronously attempt to obtain the current location of the device.
           If the attempt is successful, the <var>successCallback</var> MUST be
-          invoked (i.e. the {{EventListener/handleEvent()}} operation MUST be
-          called on the callback object) with a new <a>GeolocationPosition</a>
-          object, reflecting the current location of the device. If the attempt
-          fails, the <var>errorCallback</var> MUST be invoked with a new
+          invoked with a new <a>GeolocationPosition</a> object, reflecting the
+          current location of the device. If the attempt fails, the
+          <var>errorCallback</var> MUST be invoked with a new
           <a>GeolocationPositionError</a> object, reflecting the reason for the
           failure.
         </p>
@@ -521,10 +520,8 @@
               Otherwise, start the watch operation. This operation MUST first
               attempt to obtain the current location of the device. If the
               attempt is successful, the <var>successCallback</var> MUST be
-              invoked (i.e. the {{EventListener/handleEvent()}} operation MUST
-              be called on the callback object) with a new
-              <a>GeolocationPosition</a> object, reflecting the current
-              location of the device. If the attempt fails, the
+              invoked with a new <a>GeolocationPosition</a> object, reflecting
+              the current location of the device. If the attempt fails, the
               <var>errorCallback</var> MUST be invoked with a new
               <a>GeolocationPositionError</a> object, reflecting the reason for
               the failure. The <a>watch process</a> then MUST continue to
