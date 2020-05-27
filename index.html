@@ -53,7 +53,7 @@
     };
     </script>
   </head>
-  <body data-cite="secure-contexts">
+  <body data-cite="secure-contexts Feature-Policy">
     <section id="abstract">
       <p>
         This specification defines an API that provides scripted access to
@@ -437,15 +437,14 @@
           <li>Return and continue asynchronously.
           </li>
           <li>If the <a>environment settings object</a> is a <a>non-secure
-          context</a>:
+          context</a> or the <a>current settings object</a>'s [=environment
+          settings object / responsible document=] is not [=allowed to use=]
+          the "geolocation" feature:
             <ol>
               <li>If |errorCallback| was passed, invoke the |errorCallback|
               with a newly created {{GeolocationPositionError}} object whose
               {{GeolocationPositionError/code}} attribute is initialized to
               {{GeolocationPositionError/PERMISSION_DENIED}}.
-              </li>
-              <li>Optionally, inform the developer that the API can only be
-              used from <a>secure contexts</a>.
               </li>
               <li>Terminate this algorithm.
               </li>
@@ -493,15 +492,14 @@
         </p>
         <ol>
           <li>If the <a>environment settings object</a> is a <a>non-secure
-          context</a>:
+          context</a> or the <a>current settings object</a>'s [=environment
+          settings object / responsible document=] is not [=allowed to use=]
+          the "geolocation" feature:
             <ol>
               <li>If |errorCallback| was passed, invoke the |errorCallback|
               with a newly created {{GeolocationPositionError}} object whose
               {{GeolocationPositionError/code}} attribute is initialized to
               {{GeolocationPositionError/PERMISSION_DENIED}}.
-              </li>
-              <li>Optionally, inform the developer that the API can only be
-              used from <a>secure contexts</a>.
               </li>
               <li>Terminate this algorithm.
               </li>
@@ -873,6 +871,42 @@
           directly in their application user interface.
         </p>
       </section>
+    </section>
+    <section>
+      <h2>
+        Feature policy
+      </h2>
+      <p>
+        The <cite>Geolocation API</cite> defines a [=policy-controlled
+        feature=] identified by the string "geolocation". Its [=default
+        allowlist=] is `["self"]`.
+      </p>
+      <aside class="note">
+        <p>
+          The <a>default allowlist</a> of `["self"]` allows Geolocation usage
+          in same-origin nested frames but prevents third-party content from
+          using the API.
+        </p>
+        <p>
+          Third-party usage can be selectively enabled by adding
+          `allow="geolocation"` attribute to an [^iframe^] element:
+        </p>
+        <pre class="example html" title=
+        "Enabling Geolocation on third-party content">
+          &lt;iframe src="https://third-party.com" allow="geolocation"/&gt;&lt;/iframe&gt;
+        </pre>
+        <p>
+          Alternatively, the Geolocation API can be disabled completely in a
+          first-party context by specifying the feature policy in a HTTP
+          response header:
+        </p>
+        <pre class="example http" title="Feature Policy over HTTP">
+          Feature-Policy: geolocation 'none'
+        </pre>
+        <p>
+          See [[[FEATURE-POLICY]]] for more details.
+        </p>
+      </aside>
     </section>
     <section id="usecases" class="informative">
       <h2>
