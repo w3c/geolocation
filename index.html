@@ -562,7 +562,8 @@
               |errorCallback| (if present) with a new
               {{GeolocationPositionError}} object whose
               {{GeolocationPositionError/code}} attribute is set to
-              {{GeolocationPositionError.TIMEOUT}} and jump to step 5.
+              {{GeolocationPositionError.TIMEOUT}} and jump to the <a>wait for
+              a system event to be received</a> step.
               </li>
               <li>If the location acquisition operation successfully yields a
               new position before the timeout expires, perform the following
@@ -590,8 +591,9 @@
               </li>
             </ol>
           </li>
-          <li>Wait for a system event to be received. When such an event is
-          received jump to the <a>acquisition steps</a> above.
+          <li>
+            <dfn>Wait for a system event to be received</dfn>. When such an
+            event is received jump to the <a>acquisition steps</a> above.
           </li>
         </ol>
         <p class='note'>
