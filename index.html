@@ -384,11 +384,11 @@
         [Exposed=Window]
         interface Geolocation {
           undefined getCurrentPosition(PositionCallback successCallback,
-                                  optional PositionErrorCallback errorCallback,
+                                  optional PositionErrorCallback? errorCallback = null,
                                   optional PositionOptions options = {});
 
           long watchPosition(PositionCallback successCallback,
-                              optional PositionErrorCallback errorCallback,
+                              optional PositionErrorCallback? errorCallback = null,
                               optional PositionOptions options = {});
 
           undefined clearWatch(long watchId);
@@ -427,7 +427,7 @@
             settings object / responsible document=] is not [=allowed to use=]
             the "geolocation" feature:
               <ol>
-                <li>If |errorCallback| was passed, invoke the |errorCallback|
+                <li>If |errorCallback| is not null, invoke the |errorCallback|
                 with a newly created {{GeolocationPositionError}} object whose
                 {{GeolocationPositionError/code}} attribute is initialized to
                 {{GeolocationPositionError/PERMISSION_DENIED}}.
@@ -489,7 +489,7 @@
             settings object / responsible document=] is not [=allowed to use=]
             the "geolocation" feature:
               <ol>
-                <li>If |errorCallback| was passed, invoke the |errorCallback|
+                <li>If |errorCallback| is not null, invoke the |errorCallback|
                 with a newly created {{GeolocationPositionError}} object whose
                 {{GeolocationPositionError/code}} attribute is initialized to
                 {{GeolocationPositionError/PERMISSION_DENIED}}.
