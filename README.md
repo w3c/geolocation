@@ -14,7 +14,7 @@ This HTTPs-only API exposes the `navigator.geolocation` object with a couple of 
 
 - `.getCurrentPosition(successCallback, [errorCallback, options])` - "one shot" position request
 - `.watchPosition(successCallback, [errorCallback, options])` - Watch a position and get notified of any changes.
-- `.clearWatch()` - allows you to stop watching for location changes.
+- `.clearWatch(someId)` - allows you to stop watching for location changes.
 
 ### .getCurrentPosition() method
 
