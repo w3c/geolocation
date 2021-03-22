@@ -10,7 +10,7 @@ This repository is where the friendly folks of the [Devices and Sensors Working 
 
 ## Examples of usage
 
-This HTTPs-only API exposes a namespace (`geolocation`) with a couple of useful methods:
+This HTTPs-only API exposes the `navigator.geolocation` object with a couple of useful methods:
 
 - `.getCurrentPosition(successCallback, [errorCallback, options])` - "one shot" position request
 - `.watchPosition(successCallback, [errorCallback, options])` - Watch a position and get notified of any changes.
