@@ -1,6 +1,52 @@
-# geolocation-api
-<p>This specification defines an API that provides scripted access to geographical location information associated with the hosting device.</p>
-<p>This document has been produced by the <a href="http://www.w3.org/2008/geolocation/">W3C Geolocation Working Group</a>.</p>
-<p>The latest draft is available at: <a href="http://w3c.github.io/geolocation-api/">http://w3c.github.io/geolocation-api/</a>.</p>
+# Geolocation API
 
-<p>Future on Geolocation is happening in the <a href='https://w3c.github.io/geolocation-sensor/'>https://w3c.github.io/geolocation-sensor/</a> API.</p>
+Welcome to the home of the W3C's Geolocation API!
+
+Once a user grants permission, the Geolocation API provides access to geographical location information from device.
+
+This repository is where the friendly folks of the [Devices and Sensors Working Group](https://www.w3.org/das/) maintain the specification.
+
+- [Editor's draft](http://w3c.github.io/geolocation-api/)
+
+## Examples of usage
+
+This HTTPs-only API exposes the `navigator.geolocation` object with a couple of useful methods:
+
+- `.getCurrentPosition(successCallback, [errorCallback, options])` - "one shot" position request
+- `.watchPosition(successCallback, [errorCallback, options])` - Watch a position and get notified of any changes.
+- `.clearWatch(someId)` - allows you to stop watching for location changes.
+
+No location information is made available through this API without the user's permission.
+### .getCurrentPosition() method
+
+Request the user's current location. If the user allows it, you will get back a position object.
+
+```JS
+navigator.geolocation.getCurrentPosition(position => {
+  const { latitude, longitude } = position.coords;
+  // Do something cool with latitude, longitude
+});
+```
+
+### .watchPosition() method
+
+Request the ability to watch user's current location. If the user allows it, you will get back continuos updates of the user's position.
+
+```JS
+const watchId = navigator.geolocation.watchPosition(position => {
+  const { latitude, longitude } = position.coords;
+  // Do something cool with latitude, longitude
+});
+```
+
+### .clearWatch() method
+
+Finally, stop watching the user's location.
+
+```JS
+navigator.geolocation.clearWatch(watchId);
+```
+
+### More examples
+
+The specification provides a [great range of examples](https://w3c.github.io/geolocation-api/#examples) covering a diverse range of different use case.
