@@ -2,7 +2,7 @@
 
 Welcome to the home of the W3C's Geolocation API!
 
-The API that provides access to geographical location information from device.
+Once a user grants permission, the Geolocation API provides access to geographical location information from device.
 
 This repository is where the friendly folks of the [Devices and Sensors Working Group](https://www.w3.org/das/) maintain the specification.
 
