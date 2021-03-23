@@ -44,7 +44,7 @@
     };
     </script>
   </head>
-  <body data-cite="secure-contexts permissions-policy">
+  <body data-cite="secure-contexts permissions-policy page-visibility">
     <section id="abstract">
       <p>
         This specification defines an API that provides scripted access to
@@ -546,11 +546,16 @@
                     restarted once this algorithm jumps back to the beginning
                     of the acquisition steps.
                     </li>
-                    <li>If the <dfn>new position differs significantly from the
-                    previous position</dfn>, invoke the |successCallback| with
-                    a new {{GeolocationPosition}} object that reflects the
-                    result of the acquisition operation. This step MAY be
-                    subject to callback [=rate limitation=].
+                    <li>Let |document:Document| be <a>current settings
+                    object</a>'s [=environment settings object / responsible
+                    document=].
+                    </li>
+                    <li>If |document| is [=Document/visible=] and the <dfn>new
+                    position differs significantly from the previous
+                    position</dfn>, invoke the |successCallback| with a new
+                    {{GeolocationPosition}} object that reflects the result of
+                    the acquisition operation. This step MAY be subject to
+                    callback [=rate limitation=].
                     </li>
                   </ol>
                 </li>
