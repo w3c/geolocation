@@ -339,34 +339,44 @@
           using location information to perform an E911 function.
         </p>
       </section>
-      <section id="privacy_for_recipients">
+      <section id="privacy_for_recipients" class="informative">
         <h3>
           Privacy considerations for recipients of location information
         </h3>
-        <p>
-          Recipients MUST only request location information when necessary.
-          Recipients MUST only use the location information for the task for
-          which it was provided to them. Recipients MUST dispose of location
-          information once that task is completed, unless expressly permitted
-          to retain it by the user. Recipients MUST also take measures to
-          protect this information against unauthorized access. If location
-          information is stored, users SHOULD be allowed to update and delete
-          this information.
+        <p class="note" title=
+        "Developers' responsibility with this sensitive data">
+          This section applies to "recipients", which generally means
+          developers utilizing the <cite>Geolocation API</cite>. Although it's
+          impossible for user agent or specification to enforce these
+          requirements, developers need to read this section carefully and do
+          their best to adhere to the recommendations below. Developers also
+          need to be aware of any privacy laws in their jurisdictions that
+          govern the usage and access to location data.
         </p>
         <p>
-          The recipient of location information MUST NOT retransmit the
-          location information without the user’s express permission. Care
-          SHOULD be taken when retransmitting and use of encryption is
-          encouraged.
+          Recipients ought to only request location information when necessary,
+          and only use the location information for the task for which it was
+          provided to them. Recipients ought to dispose of location information
+          once that task is completed, unless expressly permitted to retain it
+          by the user. Recipients need to also take measures to protect this
+          information against unauthorized access. If location information is
+          stored, users need to be allowed to update and delete this
+          information.
         </p>
         <p>
-          Recipients MUST clearly and conspicuously disclose the fact that they
-          are collecting location data, the purpose for the collection, how
-          long the data is retained, how the data is secured, how the data is
-          shared if it is shared, how users MAY access, update and delete the
-          data, and any other choices that users have with respect to the data.
-          This disclosure MUST include an explanation of any exceptions to the
-          guidelines listed above.
+          The recipient of location information need to refrain from
+          retransmitting the location information without the user’s express
+          permission. Care needs to be taken when retransmitting and the use of
+          encryption is encouraged.
+        </p>
+        <p>
+          Recipients ought to clearly and conspicuously disclose the fact that
+          they are collecting location data, the purpose for the collection,
+          how long the data is retained, how the data is secured, how the data
+          is shared if it is shared, how users can access, update and delete
+          the data, and any other choices that users have with respect to the
+          data. This disclosure needs to include an explanation of any
+          exceptions to the guidelines listed above.
         </p>
       </section>
       <section id="implementation_considerations" class="informative">
@@ -376,8 +386,8 @@
         <p>
           Further to the requirements listed in the previous section,
           implementers of the Geolocation API are also advised to consider the
-          following aspects that MAY negatively affect the privacy of their
-          users: in certain cases, users MAY inadvertently grant permission to
+          following aspects that can negatively affect the privacy of their
+          users: in certain cases, users can inadvertently grant permission to
           the user agent to disclose their location to Web sites. In other
           cases, the content hosted at a certain URL changes in such a way that
           the previously granted location permissions no longer apply as far as
