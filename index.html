@@ -254,32 +254,8 @@
         The API defined in this specification is used to retrieve the
         geographic location of a hosting device. In almost all cases, this
         information also discloses the location of the user of the device,
-        thereby potentially compromising the user's privacy. User agents MUST
-        NOT send location information to Web sites without the express
-        permission of the user.
+        thereby potentially compromising the user's privacy.
       </p>
-      <section id="privacy_for_uas">
-        <h3>
-          Privacy considerations for geolocation permission UI
-        </h3>
-        <p>
-          User agents MUST acquire permission through a user interface, unless
-          they have prearranged trust relationships with users, as described
-          below. The user interface MUST include the {{URL/host}} component of
-          the document's URL. Those permissions that are acquired through the
-          user interface and that are preserved beyond the current browsing
-          session (i.e. beyond the time when the <a>browsing context</a> is
-          navigated to another URL) MUST be revocable and user agents MUST
-          respect revoked permissions.
-        </p>
-        <p>
-          Some user agents will have prearranged trust relationships that do
-          not require such user interfaces. For example, while a Web browser
-          will present a user interface when a Web site performs a geolocation
-          request, a VOIP telephone MAY NOT present any user interface when
-          using location information to perform an E911 function.
-        </p>
-      </section>
       <section id="privacy_for_recipients">
         <h3>
           Privacy considerations for recipients of location information
@@ -395,24 +371,24 @@
             When {{Geolocation/getCurrentPosition()}} is invoked, the user
             agent MUST:
           </p>
-          <ol>
+          <ol class="algorithm">
             <li>Return and continue [=in parallel=].
             </li>
-            <li>If the <a>environment settings object</a> is a <a>non-secure
-            context</a>, then [=call back with error=] |errorCallback| and
+            <li>If the <a>environment settings object</a> is a <a data-cite=
+            "secure-contexts">non-secure context</a>, then [=call back with
+            error=] |errorCallback| and
             {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
             algorithm.
             </li>
-            <li>[=Request permission to use=] "geolocation" (see
-            [[[#privacy_for_uas]]] for permissions UI requirements).
+            <li>Let |permission:PermissionState| be [=request permission to
+            use=] "geolocation".
             </li>
-            <li data-tests=
+            <li data-cite="permissions" data-tests=
             "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-            If the <a>current settings object</a>'s [=environment settings
-            object / responsible document=] is not [=allowed to use=] the
-            "geolocation" feature, then [=call back with error=]
-            |errorCallback| and {{GeolocationPositionError/PERMISSION_DENIED}}
-            and terminate this algorithm.
+            If |permission| is {{PermissionState/"denied"}}, then [=call back
+            with error=] |errorCallback| and
+            {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
+            algorithm.
             </li>
             <li>If a cached {{GeolocationPosition}} object, whose age is no
             greater than the value of the {{PositionOptions/maximumAge}}
@@ -452,24 +428,25 @@
           <p>
             When <dfn>watchPosition()</dfn> is invoked, the user agent MUST:
           </p>
-          <ol>
+          <ol class="algorithm">
             <li>Let |watchId:long| be {{long}} that uniquely identifies a
             <a>watch process</a>.
             </li>
             <li>Return |watchId| and continue [=in parallel=].
             </li>
-            <li>If the <a>environment settings object</a> is a <a>non-secure
-            context</a>, then [=call back with error=] |errorCallback| and
+            <li>If the <a>environment settings object</a> is a <a data-cite=
+            "secure-contexts">non-secure context</a>, then [=call back with
+            error=] |errorCallback| and
             {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
             algorithm.
             </li>
-            <li>[=Request permission to use=] "geolocation" (see
-            [[[#privacy_for_uas]]] for permissions UI requirements).
+            <li>Let |permission:PermissionState| be [=request permission to
+            use=] "geolocation".
             </li>
-            <li data-tests="watchPosition_permission_deny.https.html">If the
-            <a>current settings object</a>'s [=environment settings object /
-            responsible document=] is not [=allowed to use=] the "geolocation"
-            feature, then [=call back with error=] |errorCallback| and
+            <li data-tests=
+            "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+            If |permission| is {{PermissionState/"denied"}}, then [=call back
+            with error=] |errorCallback| and
             {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
             algorithm.
             </li>
