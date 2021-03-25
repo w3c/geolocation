@@ -44,7 +44,7 @@
     };
     </script>
   </head>
-  <body data-cite="secure-contexts permissions-policy">
+  <body data-cite="secure-contexts permissions-policy permissions">
     <section id="abstract">
       <p>
         This specification defines an API that provides scripted access to
@@ -309,36 +309,8 @@
         The API defined in this specification is used to retrieve the
         geographic location of a hosting device. In almost all cases, this
         information also discloses the location of the user of the device,
-        thereby potentially compromising the user's privacy. A conforming
-        implementation of this specification MUST provide a mechanism that
-        protects the user's privacy and this mechanism SHOULD ensure that no
-        location information is made available through this API without the
-        user's express permission.
+        thereby potentially compromising the user's privacy.
       </p>
-      <section id="privacy_for_uas">
-        <h3>
-          Privacy considerations for implementers of the Geolocation API
-        </h3>
-        <p>
-          User agents MUST NOT send location information to Web sites without
-          the express permission of the user. User agents MUST acquire
-          permission through a user interface, unless they have prearranged
-          trust relationships with users, as described below. The user
-          interface MUST include the {{URL/host}} component of the document's
-          URL. Those permissions that are acquired through the user interface
-          and that are preserved beyond the current browsing session (i.e.
-          beyond the time when the <a>browsing context</a> is navigated to
-          another URL) MUST be revocable and user agents MUST respect revoked
-          permissions.
-        </p>
-        <p>
-          Some user agents will have prearranged trust relationships that do
-          not require such user interfaces. For example, while a Web browser
-          will present a user interface when a Web site performs a geolocation
-          request, a VOIP telephone MAY NOT present any user interface when
-          using location information to perform an E911 function.
-        </p>
-      </section>
       <section id="privacy_for_recipients" class="informative">
         <h3>
           Privacy considerations for recipients of location information
@@ -461,49 +433,37 @@
           </h3>
           <p data-tests=
           "getCurrentPosition_IDL.https.html, getCurrentPosition_TypeError.html">
-            The <dfn>getCurrentPosition()</dfn> method takes one, two or three
-            arguments. When called, it MUST immediately return and then
-            asynchronously attempt to obtain the current location of the
-            device. If the attempt is successful, the
-            |successCallback:PositionCallback| MUST be invoked with a new
-            {{GeolocationPosition}} object, reflecting the current location of
-            the device. If the attempt fails, the
-            |errorCallback:PositionErrorCallback| MUST be invoked with a new
-            {{GeolocationPositionError}} object, reflecting the reason for the
-            failure.
+            When {{Geolocation/getCurrentPosition()}} is invoked, the user
+            agent MUST:
           </p>
-          <p>
-            The implementation of the {{Geolocation/getCurrentPosition()}}
-            method MUST execute the following set of steps:
-          </p>
-          <ol>
-            <li>Return and continue asynchronously.
+          <ol class="algorithm">
+            <li>Return and continue [=in parallel=].
             </li>
-            <li>If the <a>environment settings object</a> is a <a>non-secure
-            context</a> or the <a>current settings object</a>'s [=environment
-            settings object / responsible document=] is not [=allowed to use=]
-            the "geolocation" feature:
-              <ol>
-                <li>If |errorCallback| is not null, invoke the |errorCallback|
-                with a newly created {{GeolocationPositionError}} object whose
-                {{GeolocationPositionError/code}} attribute is initialized to
-                {{GeolocationPositionError/PERMISSION_DENIED}}.
-                </li>
-                <li>Terminate this algorithm.
-                </li>
-              </ol>
+            <li>If the <a>environment settings object</a> is a <a data-cite=
+            "secure-contexts">non-secure context</a>, then [=call back with
+            error=] |errorCallback| and
+            {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
+            algorithm.
+            </li>
+            <li>Let |permission:PermissionState| be [=request permission to
+            use=] "geolocation".
+            </li>
+            <li data-cite="permissions" data-tests=
+            "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+            If |permission| is {{PermissionState/"denied"}}, then [=call back
+            with error=] |errorCallback| and
+            {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
+            algorithm.
             </li>
             <li>If a cached {{GeolocationPosition}} object, whose age is no
             greater than the value of the {{PositionOptions/maximumAge}}
             variable, is available, invoke the |successCallback| with the
-            cached {{GeolocationPosition}} object as a parameter and exit this
-            set of steps.
+            cached {{GeolocationPosition}} object as a parameter and terminate
+            this algorithm.
             </li>
-            <li>If the value of the timeout variable is 0, invoke the
-            |errorCallback| (if present) with a new
-            {{GeolocationPositionError}} object whose
-            {{GeolocationPositionError/code}} attribute is set to
-            {{GeolocationPositionError.TIMEOUT}} and exit this set of steps.
+            <li>If the value of the timeout variable is 0, [=call back with
+            error=] |errorCallback| and {{GeolocationPositionError/TIMEOUT}}
+            and terminate this algorithm.
             </li>
             <li>Start a location acquisition operation (e.g. by invoking a
             platform-specific API), possibly taking into account the value of
@@ -512,21 +472,17 @@
             <li>Start a timer that will fire after the number of milliseconds
             denoted by the value of the timeout variable. When the timer fires,
             cancel any ongoing location acquisition operations associated with
-            this instance of the steps, invoke the |errorCallback| (if present)
-            with a new {{GeolocationPositionError}} object whose
-            {{GeolocationPositionError/code}} attribute is set to
-            {{GeolocationPositionError.TIMEOUT}}, and exit this set of steps.
+            this instance of the steps, [=call back with error=]
+            |errorCallback| and {{GeolocationPositionError/TIMEOUT}}.
             </li>
             <li>If the operation completes successfully before the timeout
             expires, cancel the pending timer, invoke the |successCallback|
             with a new {{GeolocationPosition}} object that reflects the result
-            of the acquisition operation and exit this set of steps.
+            of the acquisition operation and terminate this algorithm.
             </li>
             <li>If the operation fails before the timeout expires, cancel the
-            pending timer and invoke the |errorCallback| (if present) with a
-            new {{GeolocationPositionError}} object whose
-            {{GeolocationPositionError/code}} is set to
-            {{GeolocationPositionError.POSITION_UNAVAILABLE}}.
+            pending timer and [=call back with error=] |errorCallback| and
+            {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
             </li>
           </ol>
         </section>
@@ -535,25 +491,29 @@
             `watchPosition()` method
           </h3>
           <p>
-            The <dfn>watchPosition()</dfn> method takes one, two or three
-            arguments. When called, immediately return a long value that
-            uniquely identifies a <a>watch process</a> and continue
-            asynchronously.
+            When <dfn>watchPosition()</dfn> is invoked, the user agent MUST:
           </p>
-          <ol>
-            <li>If the <a>environment settings object</a> is a <a>non-secure
-            context</a> or the <a>current settings object</a>'s [=environment
-            settings object / responsible document=] is not [=allowed to use=]
-            the "geolocation" feature:
-              <ol>
-                <li>If |errorCallback| is not null, invoke the |errorCallback|
-                with a newly created {{GeolocationPositionError}} object whose
-                {{GeolocationPositionError/code}} attribute is initialized to
-                {{GeolocationPositionError/PERMISSION_DENIED}}.
-                </li>
-                <li>Terminate this algorithm.
-                </li>
-              </ol>
+          <ol class="algorithm">
+            <li>Let |watchId:long| be {{long}} that uniquely identifies a
+            <a>watch process</a>.
+            </li>
+            <li>Return |watchId| and continue [=in parallel=].
+            </li>
+            <li>If the <a>environment settings object</a> is a <a data-cite=
+            "secure-contexts">non-secure context</a>, then [=call back with
+            error=] |errorCallback| and
+            {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
+            algorithm.
+            </li>
+            <li>Let |permission:PermissionState| be [=request permission to
+            use=] "geolocation".
+            </li>
+            <li data-tests=
+            "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+            If |permission| is {{PermissionState/"denied"}}, then [=call back
+            with error=] |errorCallback| and
+            {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
+            algorithm.
             </li>
             <li>
               <p>
@@ -561,14 +521,13 @@
                 attempt to obtain the current location of the device. If the
                 attempt is successful, the |successCallback| MUST be invoked
                 with a new {{GeolocationPosition}} object, reflecting the
-                current location of the device. If the attempt fails, the
-                |errorCallback| MUST be invoked with a new
-                {{GeolocationPositionError}} object, reflecting the reason for
-                the failure. The <a>watch process</a> then MUST continue to
-                monitor the position of the device and invoke the appropriate
-                callback every time this position changes. The <a>watch
-                process</a> MUST continue until the
-                {{Geolocation/clearWatch()}} method is called with the
+                current location of the device. If the attempt fails, [=call
+                back with error=], |errorCallback| and a {{unsigned short}}
+                code that reflects the reason for the failure. The <a>watch
+                process</a> then MUST continue to monitor the position of the
+                device and invoke the appropriate callback every time this
+                position changes. The <a>watch process</a> MUST continue until
+                the {{Geolocation/clearWatch()}} method is called with the
                 corresponding identifier.
               </p>
             </li>
@@ -596,11 +555,9 @@
               <ol>
                 <li>If the timer is not already running, start a timer that
                 will fire after the number of milliseconds denoted by the value
-                of the timeout variable. When the timer fires, invoke the
-                |errorCallback| (if present) with a new
-                {{GeolocationPositionError}} object whose
-                {{GeolocationPositionError/code}} attribute is set to
-                {{GeolocationPositionError.TIMEOUT}} and jump to the <a>wait
+                of the timeout variable. When the timer fires, [=call back with
+                error=] |errorCallback| and
+                {{GeolocationPositionError/TIMEOUT}} and jump to the <a>wait
                 for a system event to be received</a> step.
                 </li>
                 <li>If the location acquisition operation successfully yields a
@@ -620,11 +577,9 @@
                   </ol>
                 </li>
                 <li>Else, if the location acquisition operation reports an
-                error before the {{PositionOptions/timeout}} expires, invoke
-                the |errorCallback| (if present) with a new
-                {{GeolocationPositionError}} object whose
-                {{GeolocationPositionError/code}} is set to
-                {{GeolocationPositionError.POSITION_UNAVAILABLE}}. This step
+                error before the {{PositionOptions/timeout}} expires, [=call
+                back with error=] |errorCallback| and
+                {{GeolocationPositionError/POSITION_UNAVAILABLE}}. This step
                 MAY be subject to callback [=rate limitation=].
                 </li>
               </ol>
@@ -645,25 +600,12 @@
             limit</dfn> on the frequency of callbacks so as to avoid
             inadvertently consuming a disproportionate amount of resources.
           </p>
-          <p data-tests=
-          "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html, watchPosition_permission_deny.https.html">
-            For both {{Geolocation/getCurrentPosition()}} and
-            {{Geolocation/watchPosition()}}, the implementation MUST never
-            invoke the |successCallback| without having first obtained
-            permission from the user to share location. Furthermore, the
-            implementation SHOULD always obtain the user's permission to share
-            location before executing any of the
-            {{Geolocation/getCurrentPosition()}} or
-            {{Geolocation/watchPosition()}} steps described above. If the user
-            grants permission, the appropriate callback MUST be invoked as
-            described above. If the user denies permission, the |errorCallback|
-            (if present) MUST be invoked with {{GeolocationPositionError/code}}
-            set to {{GeolocationPositionError.PERMISSION_DENIED}}, irrespective
-            of any other errors encountered in the above steps. The time that
-            is spent obtaining the user permission MUST NOT be included in the
-            period covered by the {{PositionOptions/timeout}} attribute of the
-            {{PositionOptions}} parameter. The {{PositionOptions/timeout}}
-            attribute MUST only apply to the location acquisition operation.
+          <p>
+            The time that is spent obtaining the user permission MUST NOT be
+            included in the period covered by the {{PositionOptions/timeout}}
+            attribute of the {{PositionOptions}} parameter. The
+            {{PositionOptions/timeout}} attribute MUST only apply to the
+            location acquisition operation.
           </p>
         </section>
         <section>
@@ -679,6 +621,26 @@
             <a>watch process</a> identified by the `watchId` argument MUST be
             immediately stopped and no further callbacks MUST be invoked.
           </p>
+        </section>
+        <section>
+          <h3>
+            Callback with error
+          </h3>
+          <p>
+            When instructed to <dfn>call back with error</dfn>, given an
+            {{PositionErrorCallback}}? |callback:PositionErrorCallback?| and
+            {{unsigned short}} |code:unsigned short|:
+          </p>
+          <ol class="algorithm">
+            <li>If |callback| is null, return.
+            </li>
+            <li>Let |error| be a a newly created {{GeolocationPositionError}}
+            object whose {{GeolocationPositionError/code}} attribute is
+            initialized to |code|.
+            </li>
+            <li>Call |callback| with |error|.
+            </li>
+          </ol>
         </section>
         <section data-dfn-for="PositionCallBack">
           <h3>
@@ -760,7 +722,7 @@
             timeout elapses, and no other errors have occurred in this
             interval, then the corresponding |errorCallback| MUST be invoked
             with a {{GeolocationPositionError}} object whose code attribute is
-            set to {{GeolocationPositionError.TIMEOUT}}. Note that the time
+            set to {{GeolocationPositionError/TIMEOUT}}. Note that the time
             that is spent obtaining the user permission is not included in the
             period covered by the {{PositionOptions/timeout}} attribute. The
             {{PositionOptions/timeout}} attribute only applies to the location
