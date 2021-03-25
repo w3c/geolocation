@@ -62,170 +62,225 @@
         Introduction
       </h2>
       <p>
-        The Geolocation API defines a high-level interface to location
-        information associated only with the device hosting the implementation,
-        such as latitude and longitude. The API itself is agnostic of the
-        underlying location information sources. Common sources of location
-        information include Global Positioning System (GPS) and location
-        inferred from network signals such as IP address, RFID, WiFi and
-        Bluetooth MAC addresses, and GSM/CDMA cell IDs, as well as user input.
-        No guarantee is given that the API returns the device's actual
+        The <cite>Geolocation API</cite> defines a high-level interface to
+        location information associated only with the device hosting the
+        implementation, such as latitude and longitude. The API itself is
+        agnostic of the underlying location information sources. Common sources
+        of location information include Global Positioning System (GPS) and
+        location inferred from network signals such as IP address, RFID, WiFi
+        and Bluetooth MAC addresses, and GSM/CDMA cell IDs, as well as user
+        input. No guarantee is given that the API returns the device's actual
         location.
       </p>
+    </section>
+    <section>
+      <h2>
+        Examples
+      </h2>
       <p>
         The API is designed to enable both "one-shot" position requests and
         repeated position updates, as well as the ability to explicitly query
         the cached positions. Location information is represented by latitude
-        and longitude coordinates. The Geolocation API in this specification
-        builds upon earlier work in the industry, including [[AZALOC]], the
-        Gears Geolocation API, and LocationAware.org .
+        and longitude coordinates.
       </p>
       <p>
-        The following code extracts illustrate how to obtain basic location
-        information:
+        The following examples illustrate how the API can be used in various
+        common scenarios.
       </p>
-      <pre class="example js" title='Example of a "one-shot" position request'>
-        function showMap(position) {
-          // Show a map centered at (position.coords.latitude, position.coords.longitude).
-        }
+      <section>
+        <h3>
+          "One-shot" position request
+        </h3>
+        <pre class="example js" title="A one-shot position request">
+          navigator.geolocation.getCurrentPosition(position =&gt; {
+            const { latitude, longitude } = position.coords;
+            // Show a map centered at latitude / longitude.
+          });
+        </pre>
+      </section>
+      <section>
+        <h3>
+          Watching a position
+        </h3>
+        <aside class="example">
+          <pre class="js" title="Watching a position for repeated updates">
+            const watchId = navigator.geolocation.watchPosition(position =&gt; {
+              const { latitude, longitude } = position.coords;
+              // Show a map centered at latitude / longitude.
+            });
 
-        // One-shot position request.
-        navigator.geolocation.getCurrentPosition(showMap);
-      </pre>
-      <pre class="example js" title=
-      "Example of requesting repeated position updates">
-      function scrollMap(position) {
-        // Scrolls the map so that it is centered at
-        // (position.coords.latitude, position.coords.longitude).
-      }
+            function buttonClickHandler() {
+              // Cancel the updates when the user clicks a button.
+              navigator.geolocation.clearWatch(watchId);
+            }
+          </pre>
+          <p>
+            And a HTML `button` that when pressed stops watching the position.
+          </p>
+          <pre class="html">
+            &lt;button onclick="buttonClickHandler"&gt;
+              Stop watching location
+            &lt;/button&gt;
+          </pre>
+        </aside>
+      </section>
+      <section>
+        <h3>
+          Requesting position and handling errors
+        </h3>
+        <pre class="example js">
+          // Request repeated updates.
+          const watchId = navigator.geolocation.watchPosition(
+            scrollMap, handleError
+          );
 
-      // Request repeated updates.
-      var watchId = navigator.geolocation.watchPosition(scrollMap);
+          function scrollMap(position) {
+            const { latitude, longitude } = position.coords;
+            // Scroll map to latitude / longitude.
+          }
 
-      function buttonClickHandler() {
-        // Cancel the updates when the user clicks a button.
-        navigator.geolocation.clearWatch(watchId);
-      }
-      </pre>
-      <pre class="example js" title=
-      "Example of requesting repeated position updates and handling errors">
-        function scrollMap(position) {
-          // Scrolls the map so that it is centered at
-          //  (position.coords.latitude, position.coords.longitude).
-        }
+          function handleError(error) {
+            // Display error based on the error code.
+            const { code } = error;
+            switch (code) {
+              case GeolocationPositionError.TIMEOUT:
+                // Handle timeout
+                break;
+              case GeolocationPositionError.PERMISSION_DENIED:
+                // User denied the request
+                break;
+              case POSITION_UNAVAILABLE:
+                // Position not available
+                break;
+              default:
+                // Anything else...
+            }
+          }
+        </pre>
+      </section>
+      <section>
+        <h3>
+          Requesting a potentially cached position
+        </h3>
+        <pre class="example js">
+          // Request a position. We accept positions whose age is not
+          // greater than 10 minutes. If the user agent does not have a
+          // fresh enough cached position object, it will automatically
+          // acquire a new one.
+          const options = {
+            maximumAge: 600000,
+          };
+          navigator.geolocation.getCurrentPosition(
+            successCallback, errorCallback, options
+          );
 
-        function handleError(error) {
-          // Update a div element with error.message.
-        }
+          function successCallback(position) {
+            // By using the 'maximumAge' option above, the position
+            // object is guaranteed to be at most 10 minutes old.
+          }
 
-        // Request repeated updates.
-        var watchId = navigator.geolocation.watchPosition(scrollMap, handleError);
+          function errorCallback(error) {
+            // Display error based on the error code.
+          }
+        </pre>
+      </section>
+      <section>
+        <h3>
+          Getting a fresh position
+        </h3>
+        <pre class="example js" title="Using maximumAge option">
+          // Request a position. We only accept cached positions whose age is not
+          // greater than 10 minutes. If the user agent does not have a fresh
+          // enough cached position object, it will immediately invoke the error
+          // callback.
+          const options = {
+            maximumAge: 600000,
+            timeout: 0,
+          };
 
-        function buttonClickHandler() {
-          // Cancel the updates when the user clicks a button.
-          navigator.geolocation.clearWatch(watchId);
-        }
-      </pre>
-      <pre class="example js" title=
-      "Example of requesting a potentially cached position">
-      // Request a position. We accept positions whose age is not
-      // greater than 10 minutes. If the user agent does not have a
-      // fresh enough cached position object, it will automatically
-      // acquire a new one.
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-        maximumAge: 600000,
-      });
+          navigator.geolocation.getCurrentPosition(
+            successCallback, errorCallback, options
+          );
 
-      function successCallback(position) {
-        // By using the 'maximumAge' option above, the position
-        // object is guaranteed to be at most 10 minutes old.
-      }
+          function successCallback(position) {
+            // By using the 'maximumAge' option above, the position
+            // object is guaranteed to be at most 10 minutes old.
+            // By using a 'timeout' of 0 milliseconds, if there is
+            // no suitable cached position available, the user agent
+            // will asynchronously invoke the error callback with code
+            // TIMEOUT and will not initiate a new position
+            // acquisition process.
+          }
 
-      function errorCallback(error) {
-        // Update a div element with error.message.
-      }
-      </pre>
-      <pre class="example js" title=
-      "Forcing the user agent to return a fresh cached position">
-      // Request a position. We only accept cached positions whose age is not
-      // greater than 10 minutes. If the user agent does not have a fresh
-      // enough cached position object, it will immediately invoke the error
-      // callback.
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-        maximumAge: 600000,
-        timeout: 0,
-      });
+          function errorCallback(error) {
+            switch (error.code) {
+              case GeolocationPositionError.TIMEOUT:
+                // Quick fallback when no suitable cached position exists.
+                doFallback();
+                // Acquire a new position object.
+                navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+                break;
+              case ...: // treat the other error cases.
+            }
+          }
 
-      function successCallback(position) {
-        // By using the 'maximumAge' option above, the position
-        // object is guaranteed to be at most 10 minutes old.
-        // By using a 'timeout' of 0 milliseconds, if there is
-        // no suitable cached position available, the user agent
-        // will asynchronously invoke the error callback with code
-        // TIMEOUT and will not initiate a new position
-        // acquisition process.
-      }
+          function doFallback() {
+            // No fresh enough cached position available.
+            // Fallback to a default position.
+          }
+        </pre>
+      </section>
+      <section>
+        <h3>
+          Getting any available cached position
+        </h3>
+        <pre class="example js" title=
+        "Force a cached response with timeout and maximumAge">
+          // Request a position. We only accept cached positions, no matter what
+          // their age is. If the user agent does not have a cached position at
+          // all, it will immediately invoke the error callback.
+          const options = {
+            maximumAge: Infinity,
+            timeout:0
+          };
+          navigator.geolocation.getCurrentPosition(
+            successCallback, errorCallback, options
+          );
 
-      function errorCallback(error) {
-        switch (error.code) {
-          case GeolocationPositionError.TIMEOUT:
-            // Quick fallback when no suitable cached position exists.
-            doFallback();
-            // Acquire a new position object.
-            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-            break;
-          case ...: // treat the other error cases.
-        }
-      }
+          function successCallback(position) {
+            // By setting the 'maximumAge' to Infinity, the position
+            // object is guaranteed to be a cached one.
+            // By using a 'timeout' of 0 milliseconds, if there is
+            // no cached position available at all, the user agent
+            // will immediately invoke the error callback with code
+            // TIMEOUT and will not initiate a new position
+            // acquisition process.
+            if (position.timestamp &lt; freshness_threshold
+                &amp;& position.coords.accuracy &lt; accuracy_threshold) {
+              // The position is relatively fresh and accurate.
+            } else {
+              // The position is quite old and/or inaccurate.
+            }
+          }
 
-      function doFallback() {
-        // No fresh enough cached position available.
-        // Fallback to a default position.
-      }
-    </pre>
-      <pre class="example" title=
-      "Forcing the user agent to return any available cached position">
-      // Request a position. We only accept cached positions, no matter what
-      // their age is. If the user agent does not have a cached position at
-      // all, it will immediately invoke the error callback.
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-          maximumAge: Infinity,
-          timeout:0
-      });
+          function errorCallback(error) {
+            switch(error.code) {
+              case GeolocationPositionError.TIMEOUT:
+                // Quick fallback when no cached position exists at all.
+                doFallback();
+                // Acquire a new position object.
+                navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+                break;
+              case ... // treat the other error cases.
+            };
+          }
 
-      function successCallback(position) {
-        // By setting the 'maximumAge' to Infinity, the position
-        // object is guaranteed to be a cached one.
-        // By using a 'timeout' of 0 milliseconds, if there is
-        // no cached position available at all, the user agent
-        // will immediately invoke the error callback with code
-        // TIMEOUT and will not initiate a new position
-        // acquisition process.
-        if (position.timestamp &lt; freshness_threshold &amp;&
-            position.coords.accuracy &lt; accuracy_threshold) {
-          // The position is relatively fresh and accurate.
-        } else {
-          // The position is quite old and/or inaccurate.
-        }
-      }
-
-      function errorCallback(error) {
-        switch(error.code) {
-          case GeolocationPositionError.TIMEOUT:
-            // Quick fallback when no cached position exists at all.
-            doFallback();
-            // Acquire a new position object.
-            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-            break;
-          case ... // treat the other error cases.
-        };
-      }
-
-      function doFallback() {
-        // No cached position available at all.
-        // Fallback to a default position.
-      }
-    </pre>
+          function doFallback() {
+            // No cached position available at all.
+            // Fallback to a default position.
+          }
+        </pre>
+      </section>
     </section>
     <section id="scope" class="informative">
       <h2>
@@ -256,34 +311,44 @@
         information also discloses the location of the user of the device,
         thereby potentially compromising the user's privacy.
       </p>
-      <section id="privacy_for_recipients">
+      <section id="privacy_for_recipients" class="informative">
         <h3>
           Privacy considerations for recipients of location information
         </h3>
-        <p>
-          Recipients MUST only request location information when necessary.
-          Recipients MUST only use the location information for the task for
-          which it was provided to them. Recipients MUST dispose of location
-          information once that task is completed, unless expressly permitted
-          to retain it by the user. Recipients MUST also take measures to
-          protect this information against unauthorized access. If location
-          information is stored, users SHOULD be allowed to update and delete
-          this information.
+        <p class="note" title=
+        "Developers' responsibility with this sensitive data">
+          This section applies to "recipients", which generally means
+          developers utilizing the <cite>Geolocation API</cite>. Although it's
+          impossible for user agent or specification to enforce these
+          requirements, developers need to read this section carefully and do
+          their best to adhere to the recommendations below. Developers also
+          need to be aware of any privacy laws in their jurisdictions that
+          govern the usage and access to location data.
         </p>
         <p>
-          The recipient of location information MUST NOT retransmit the
-          location information without the user’s express permission. Care
-          SHOULD be taken when retransmitting and use of encryption is
-          encouraged.
+          Recipients ought to only request location information when necessary,
+          and only use the location information for the task for which it was
+          provided to them. Recipients ought to dispose of location information
+          once that task is completed, unless expressly permitted to retain it
+          by the user. Recipients need to also take measures to protect this
+          information against unauthorized access. If location information is
+          stored, users need to be allowed to update and delete this
+          information.
         </p>
         <p>
-          Recipients MUST clearly and conspicuously disclose the fact that they
-          are collecting location data, the purpose for the collection, how
-          long the data is retained, how the data is secured, how the data is
-          shared if it is shared, how users MAY access, update and delete the
-          data, and any other choices that users have with respect to the data.
-          This disclosure MUST include an explanation of any exceptions to the
-          guidelines listed above.
+          The recipient of location information need to refrain from
+          retransmitting the location information without the user’s express
+          permission. Care needs to be taken when retransmitting and the use of
+          encryption is encouraged.
+        </p>
+        <p>
+          Recipients ought to clearly and conspicuously disclose the fact that
+          they are collecting location data, the purpose for the collection,
+          how long the data is retained, how the data is secured, how the data
+          is shared if it is shared, how users can access, update and delete
+          the data, and any other choices that users have with respect to the
+          data. This disclosure needs to include an explanation of any
+          exceptions to the guidelines listed above.
         </p>
       </section>
       <section id="implementation_considerations" class="informative">
@@ -293,8 +358,8 @@
         <p>
           Further to the requirements listed in the previous section,
           implementers of the Geolocation API are also advised to consider the
-          following aspects that MAY negatively affect the privacy of their
-          users: in certain cases, users MAY inadvertently grant permission to
+          following aspects that can negatively affect the privacy of their
+          users: in certain cases, users can inadvertently grant permission to
           the user agent to disclose their location to Web sites. In other
           cases, the content hosted at a certain URL changes in such a way that
           the previously granted location permissions no longer apply as far as
