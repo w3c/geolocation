@@ -132,12 +132,14 @@
         <h3>
           "One-shot" position request
         </h3>
-        <pre class="example js" title="A one-shot position request">
-          navigator.geolocation.getCurrentPosition(position =&gt; {
-            const { latitude, longitude } = position.coords;
-            // Show a map centered at latitude / longitude.
-          });
-        </pre>
+        <aside class="example" title="A one-shot position request">
+          <pre class="js">
+            navigator.geolocation.getCurrentPosition(position =&gt; {
+              const { latitude, longitude } = position.coords;
+              // Show a map centered at latitude / longitude.
+            });
+          </pre>
+        </aside>
       </section>
       <section>
         <h3>
