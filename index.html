@@ -379,28 +379,9 @@
         </p>
       </section>
     </section>
-    <section id="scope" class="informative">
+    <section id="security" class="informative">
       <h2>
-        Scope
-      </h2>
-      <p>
-        This specification is limited to providing a scripting API for
-        retrieving geographic position information associated with a hosting
-        device. The geographic position information is provided in terms of
-        World Geodetic System coordinates [[WGS84]].
-      </p>
-      <p>
-        The scope of this specification does not include providing a markup
-        language of any kind.
-      </p>
-      <p>
-        The scope of this specification does not include defining a new
-        [=url/scheme=] for building URLs that identify geographic locations.
-      </p>
-    </section>
-    <section id="security">
-      <h2>
-        Security and privacy considerations
+        Privacy and security considerations
       </h2>
       <p>
         The API defined in this specification is used to retrieve the
@@ -1073,40 +1054,33 @@
         feature=] identified by the string "geolocation". Its [=default
         allowlist=] is `["self"]`.
       </p>
-      <aside class="note">
-        <p>
-          The <a>default allowlist</a> of `["self"]` allows Geolocation usage
-          in same-origin nested frames but prevents third-party content from
-          using the API.
-        </p>
-        <p>
-          Third-party usage can be selectively enabled by adding
-          `allow="geolocation"` attribute to an [^iframe^] element:
-        </p>
-        <pre class="example html" title=
-        "Enabling Geolocation on third-party content">
-          &lt;iframe src="https://third-party.com" allow="geolocation"/&gt;&lt;/iframe&gt;
-        </pre>
-        <p>
-          Alternatively, the Geolocation API can be disabled completely in a
-          first-party context by specifying the permission policy in a HTTP
-          response header:
-        </p>
-        <pre class="example http" title="Feature Policy over HTTP">
-          Permissions-Policy: geolocation 'none'
-        </pre>
-        <p>
-          See [[[permissions-policy]]] for more details.
-        </p>
-      </aside>
     </section>
-    <section id="usecases" class="informative">
+    <section id="usecases" class="appendix informative">
       <h2>
-        Use-Cases and Requirements
+        Scope, use cases, and requirements
       </h2>
+      <section id="scope" class="informative">
+        <h2>
+          Scope
+        </h2>
+        <p>
+          This specification is limited to providing a scripting API for
+          retrieving geographic position information associated with a hosting
+          device. The geographic position information is provided in terms of
+          World Geodetic System coordinates [[WGS84]].
+        </p>
+        <p>
+          The scope of this specification does not include providing a markup
+          language of any kind.
+        </p>
+        <p>
+          The scope of this specification does not include defining a new
+          [=url/scheme=] for building URLs that identify geographic locations.
+        </p>
+      </section>
       <section id="usecases_section">
         <h3>
-          Use-Cases
+          Use cases
         </h3>
         <section id="usecase_find_poi">
           <h4>
