@@ -77,6 +77,42 @@
         input. No guarantee is given that the API returns the device's actual
         location.
       </p>
+      <section>
+        <h2>
+          Changes since Second Edition
+        </h2>
+        <p>
+          Since publication of the Second Edition in 2016, this specification
+          has undergone the following changes:
+        </p>
+        <ul>
+          <li>Depend on the [[[Permissions]]] specification to handle
+          permission grants.
+          </li>
+          <li>The `errorCallback` can now be set to `null`.
+          </li>
+          <li>The API can be controlled by [[[Permissions-Policy]]], which
+          restricts how/where the API is exposed to web pages.
+          </li>
+          <li>The `callbacks` are no longer treated as "EventHandler" objects
+          (i.e., objects that have a `.handleEvent()` method), but are now
+          always treated as proper callback functions in JavaScript.
+          </li>
+          <li>The API is now only exposed in Secure Contexts (i.e., only
+          available in HTTPS).
+          </li>
+          <li>The interfaces no longer use [[WebIDL]]'s legacy
+          `[NoInterfaceObject]`, so `Geolocation` and other interface of this
+          spec are now in the global scope. Also, the interfaces were renamed
+          from `NavigatorGeolocation*` to just `Geolocation*`.
+          </li>
+        </ul>
+        <p>
+          See the <a href=
+          "https://github.com/w3c/geolocation-api/commits/gh-pages">commit
+          history</a> for a complete list of changes.
+        </p>
+      </section>
     </section>
     <section>
       <h2>
