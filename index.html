@@ -145,8 +145,9 @@
         <h3>
           Watching a position
         </h3>
-        <aside class="example">
-          <pre class="js" title="Watching a position for repeated updates">
+        <aside class="example" title=
+        "Watching a position for repeated updates">
+          <pre class="js">
             const watchId = navigator.geolocation.watchPosition(position =&gt; {
               const { latitude, longitude } = position.coords;
               // Show a map centered at latitude / longitude.
@@ -161,7 +162,7 @@
             And a HTML `button` that when pressed stops watching the position.
           </p>
           <pre class="html">
-            &lt;button onclick="buttonClickHandler"&gt;
+            &lt;button onclick="buttonClickHandler()"&gt;
               Stop watching location
             &lt;/button&gt;
           </pre>
@@ -169,125 +170,138 @@
       </section>
       <section>
         <h3>
-          Requesting position and handling errors
+          Handling errors
         </h3>
-        <pre class="example js">
-          // Request repeated updates.
-          const watchId = navigator.geolocation.watchPosition(
-            scrollMap, handleError
-          );
+        <aside class="example" title="Handling errors">
+          <pre class="js">
+            // Request repeated updates.
+            const watchId = navigator.geolocation.watchPosition(
+              scrollMap, handleError
+            );
 
-          function scrollMap(position) {
-            const { latitude, longitude } = position.coords;
-            // Scroll map to latitude / longitude.
-          }
-
-          function handleError(error) {
-            // Display error based on the error code.
-            const { code } = error;
-            switch (code) {
-              case GeolocationPositionError.TIMEOUT:
-                // Handle timeout
-                break;
-              case GeolocationPositionError.PERMISSION_DENIED:
-                // User denied the request
-                break;
-              case POSITION_UNAVAILABLE:
-                // Position not available
-                break;
-              default:
-                // Anything else...
+            function scrollMap(position) {
+              const { latitude, longitude } = position.coords;
+              // Scroll map to latitude / longitude.
             }
-          }
-        </pre>
+
+            function handleError(error) {
+              // Display error based on the error code.
+              const { code } = error;
+              switch (code) {
+                case GeolocationPositionError.TIMEOUT:
+                  // Handle timeout.
+                  break;
+                case GeolocationPositionError.PERMISSION_DENIED:
+                  // User denied the request.
+                  break;
+                case POSITION_UNAVAILABLE:
+                  // Position not available.
+                  break;
+                default:
+                  // Anything else...
+              }
+            }
+          </pre>
+        </aside>
       </section>
       <section>
         <h3>
           Requesting a potentially cached position
         </h3>
-        <pre class="example js">
-          // Request a position. We accept positions whose age is not
-          // greater than 10 minutes. If the user agent does not have a
-          // fresh enough cached position object, it will automatically
-          // acquire a new one.
-          const options = {
-            maximumAge: 600000,
-          };
-          navigator.geolocation.getCurrentPosition(
-            successCallback, errorCallback, options
-          );
+        <aside class="example" title="Getting cached position">
+          <pre class="js">
+            // Request a position. We accept positions whose age
+            // is not greater than 10 minutes. If the user agent
+            // does not have a fresh enough cached position object,
+            // it will automatically acquire a new position.
+            navigator.geolocation.getCurrentPosition(
+              successCallback,
+              errorCallback,
+              { maximumAge: 600000 }
+            );
 
-          function successCallback(position) {
-            // By using the 'maximumAge' option above, the position
-            // object is guaranteed to be at most 10 minutes old.
-          }
+            function successCallback(position) {
+              // By using the 'maximumAge' member above, the position
+              // object is guaranteed to be at most 10 minutes old.
+            }
 
-          function errorCallback(error) {
-            // Display error based on the error code.
-          }
-        </pre>
+            function errorCallback(error) {
+              // Display error based on the error code.
+            }
+          </pre>
+        </aside>
       </section>
       <section>
         <h3>
           Getting a fresh position
         </h3>
-        <pre class="example js" title="Using maximumAge option">
-          // Request a position. We only accept cached positions whose age is not
-          // greater than 10 minutes. If the user agent does not have a fresh
-          // enough cached position object, it will immediately invoke the error
-          // callback.
-          const options = {
-            maximumAge: 600000,
-            timeout: 0,
-          };
+        <aside class="example" title="Using maximumAge option">
+          <pre class="js">
+            // Request a position. We only accept cached positions whose age
+            // is not greater than 10 minutes. If the user agent does not
+            // have a fresh enough cached position object, it will immediately
+            // invoke the error callback.
+            const options = {
+              maximumAge: 600000,
+              timeout: 0,
+            };
 
-          navigator.geolocation.getCurrentPosition(
-            successCallback, errorCallback, options
-          );
+            navigator.geolocation.getCurrentPosition(
+              successCallback,
+              errorCallback,
+              options
+            );
 
-          function successCallback(position) {
-            // By using the 'maximumAge' option above, the position
-            // object is guaranteed to be at most 10 minutes old.
-            // By using a 'timeout' of 0 milliseconds, if there is
-            // no suitable cached position available, the user agent
-            // will asynchronously invoke the error callback with code
-            // TIMEOUT and will not initiate a new position
-            // acquisition process.
-          }
-
-          function errorCallback(error) {
-            switch (error.code) {
-              case GeolocationPositionError.TIMEOUT:
-                // Quick fallback when no suitable cached position exists.
-                doFallback();
-                // Acquire a new position object.
-                navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-                break;
-              case ...: // treat the other error cases.
+            function successCallback(position) {
+              // By using the 'maximumAge' member above, the position
+              // object is guaranteed to be at most 10 minutes old.
+              // By using a 'timeout' of 0 milliseconds, if there is
+              // no suitable cached position available, the user agent
+              // will asynchronously invoke the error callback with code
+              // TIMEOUT and will not initiate a new position
+              // acquisition process.
             }
-          }
 
-          function doFallback() {
-            // No fresh enough cached position available.
-            // Fallback to a default position.
-          }
-        </pre>
+            function errorCallback(error) {
+              switch (error.code) {
+                case GeolocationPositionError.TIMEOUT:
+                  // Quick fallback when no suitable cached position exists.
+                  doFallback();
+                  // Acquire a new position object.
+                  navigator.geolocation.getCurrentPosition(
+                    successCallback, errorCallback
+                  );
+                  break;
+                case "...": // treat the other error cases.
+              }
+            }
+
+            function doFallback() {
+              // No fresh enough cached position available.
+              // Fallback to a default position.
+            }
+          </pre>
+        </aside>
       </section>
       <section>
         <h3>
           Getting any available cached position
         </h3>
-        <pre class="example js" title=
+        <aside class="example js" title=
         "Force a cached response with timeout and maximumAge">
-          // Request a position. We only accept cached positions, no matter what
-          // their age is. If the user agent does not have a cached position at
-          // all, it will immediately invoke the error callback.
+          <pre class="js">
+          // Request a position. We only accept cached positions,
+          // no matter what their age is. If the user agent does
+          // not have a cached position at all, it will immediately
+          // invoke the error callback.
           const options = {
             maximumAge: Infinity,
-            timeout:0
+            timeout: 0,
           };
           navigator.geolocation.getCurrentPosition(
-            successCallback, errorCallback, options
+            successCallback,
+            errorCallback,
+            options
           );
 
           function successCallback(position) {
@@ -298,8 +312,10 @@
             // will immediately invoke the error callback with code
             // TIMEOUT and will not initiate a new position
             // acquisition process.
-            if (position.timestamp &lt; freshness_threshold
-                &amp;& position.coords.accuracy &lt; accuracy_threshold) {
+            if (
+              position.timestamp &lt; freshness_threshold &amp;&
+              position.coords.accuracy &lt; accuracy_threshold
+            ) {
               // The position is relatively fresh and accurate.
             } else {
               // The position is quite old and/or inaccurate.
@@ -307,22 +323,60 @@
           }
 
           function errorCallback(error) {
-            switch(error.code) {
+            switch (error.code) {
               case GeolocationPositionError.TIMEOUT:
                 // Quick fallback when no cached position exists at all.
                 doFallback();
                 // Acquire a new position object.
-                navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+                navigator.geolocation.getCurrentPosition(
+                  successCallback, errorCallback
+                );
                 break;
-              case ... // treat the other error cases.
-            };
+              case "...": // treat the other error cases.
+            }
           }
 
           function doFallback() {
             // No cached position available at all.
             // Fallback to a default position.
           }
-        </pre>
+          </pre>
+        </aside>
+      </section>
+      <section>
+        <h3>
+          Enabling the API in third-party contexts
+        </h3>
+        <p>
+          The <a>default allowlist</a> of `["self"]` allows Geolocation usage
+          in same-origin nested frames but prevents third-party content from
+          using the API.
+        </p>
+        <p>
+          Third-party usage can be selectively enabled by adding
+          [^iframe/allow^]="geolocation"` attribute to an [^iframe^] element:
+        </p>
+        <aside class="example" title="Enabling Geolocation on an iframe">
+          <pre class="html">
+            &lt;iframe
+              src="https://third-party.com"
+              allow="geolocation"&gt;
+            &lt;/iframe&gt;
+          </pre>
+        </aside>
+        <p>
+          Alternatively, the Geolocation API can be disabled in a first-party
+          context by specifying the a HTTP response header:
+        </p>
+        <aside class="example" title="Permissions Policy over HTTP">
+          <pre class="http">
+            Permissions-Policy: geolocation 'none'
+          </pre>
+        </aside>
+        <p>
+          See [[[permissions-policy]]] for more details about the
+          `Permissions-Policy` HTTP header.
+        </p>
       </section>
     </section>
     <section id="scope" class="informative">
