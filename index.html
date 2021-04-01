@@ -69,23 +69,26 @@
       <p>
         The <cite>Geolocation API</cite> defines a high-level interface to
         location information associated only with the device hosting the
-        implementation, such as latitude and longitude. The API itself is
-        agnostic of the underlying location information sources. Common sources
-        of location information include Global Positioning System (GPS) and
+        implementation, such as latitude and longitude. Common sources of
+        location information include Global Positioning System (GPS) and
         location inferred from network signals such as IP address, RFID, WiFi
         and Bluetooth MAC addresses, and GSM/CDMA cell IDs, as well as user
-        input. No guarantee is given that the API returns the device's actual
-        location.
+        input. The API itself is agnostic of the underlying location
+        information sources, and no guarantee is given that the API returns the
+        device's actual location.
       </p>
       <section>
         <h2>
-          Changes since Second Edition
+          Changes since last publication
         </h2>
         <p>
           Since publication of the Second Edition in 2016, this specification
           has undergone the following changes:
         </p>
         <ul>
+          <li>Geolocation updates only occur when a document is visible, or the
+          document becomes visible.
+          </li>
           <li>Depend on the [[[Permissions]]] specification to handle
           permission grants.
           </li>
@@ -356,7 +359,8 @@
           Third-party usage can be selectively enabled by adding
           [^iframe/allow^]="geolocation"` attribute to an [^iframe^] element:
         </p>
-        <aside class="example" title="Enabling Geolocation on an iframe">
+        <aside class="example" title=
+        "Enabling the Geolocation API in an iframe">
           <pre class="html">
             &lt;iframe
               src="https://third-party.com"
@@ -397,14 +401,14 @@
         "Developers' responsibility with this sensitive data">
           This section applies to "recipients", which generally means
           developers utilizing the <cite>Geolocation API</cite>. Although it's
-          impossible for user agent or specification to enforce these
+          impossible for user agent, or this specification, to enforce these
           requirements, developers need to read this section carefully and do
-          their best to adhere to the recommendations below. Developers also
-          need to be aware of any privacy laws in their jurisdictions that
-          govern the usage and access to location data.
+          their best to adhere to the recommendations below. Developers need to
+          be aware that there might be privacy laws in their jurisdictions that
+          can govern the usage and access to user's location data.
         </p>
         <p>
-          Recipients ought to only request location information when necessary,
+          Recipients ought to only request position information when necessary,
           and only use the location information for the task for which it was
           provided to them. Recipients ought to dispose of location information
           once that task is completed, unless expressly permitted to retain it
@@ -431,17 +435,16 @@
       </section>
       <section id="implementation_considerations" class="informative">
         <h3>
-          Additional implementation considerations
+          Implementation considerations
         </h3>
         <p>
-          Further to the requirements listed in the previous section,
-          implementers of the Geolocation API are also advised to consider the
-          following aspects that can negatively affect the privacy of their
-          users: in certain cases, users can inadvertently grant permission to
-          the user agent to disclose their location to websites. In other
-          cases, the content hosted at a certain URL changes in such a way that
-          the previously granted location permissions no longer apply as far as
-          the user is concerned. Or the users might simply change their minds.
+          Implementers are advised to consider the following aspects that can
+          negatively affect the privacy of their users: in certain cases, users
+          can inadvertently grant permission to the user agent to disclose
+          their location to websites. In other cases, the content hosted at a
+          certain URL changes in such a way that the previously granted
+          location permissions no longer apply as far as the user is concerned.
+          Or the users might simply change their minds.
         </p>
         <p>
           Predicting or preventing these situations is inherently difficult.
@@ -453,538 +456,554 @@
         </p>
       </section>
     </section>
-    <section id="api_description">
+    <section id="navigator_interface" data-dfn-for="Navigator">
       <h2>
-        API Description
+        Extensions to the `Navigator` interface
       </h2>
-      <section id="navigator_interface" data-dfn-for="Navigator">
-        <h3>
-          `Navigator` interface extensions
-        </h3>
-        <pre class="idl">
-          partial interface Navigator {
-            [SameObject] readonly attribute Geolocation geolocation;
-          };
-        </pre>
-        <section>
-          <h3>
-            `geolocation` attribute
-          </h3>
-          <p>
-            The <dfn>geolocation</dfn> attribute gives access to location
-            information associated with the hosting device.
-          </p>
-        </section>
-      </section>
-      <section id="geolocation_interface" data-dfn-for="Geolocation">
-        <h3>
-          `Geolocation` interface
-        </h3>
-        <p>
-          The <dfn>Geolocation</dfn> interface is used by scripts to
-          programmatically determine the location information associated with
-          the hosting device. The location information is acquired by applying
-          a user-agent specific algorithm, creating a {{GeolocationPosition}}
-          object, and populating that object with appropriate data accordingly.
-        </p>
-        <pre class="idl">
+      <pre class="idl">
+        partial interface Navigator {
+          [SameObject] readonly attribute Geolocation geolocation;
+        };
+      </pre>
+    </section>
+    <section id="geolocation_interface" data-dfn-for="Geolocation">
+      <h2>
+        `Geolocation` interface and callbacks
+      </h2>
+      <pre class="idl">
         [Exposed=Window]
         interface Geolocation {
-          undefined getCurrentPosition(PositionCallback successCallback,
-                                  optional PositionErrorCallback? errorCallback = null,
-                                  optional PositionOptions options = {});
+          undefined getCurrentPosition (
+            PositionCallback successCallback,
+            optional PositionErrorCallback? errorCallback = null,
+            optional PositionOptions options = {}
+          );
 
-          long watchPosition(PositionCallback successCallback,
-                              optional PositionErrorCallback? errorCallback = null,
-                              optional PositionOptions options = {});
+          long watchPosition (
+            PositionCallback successCallback,
+            optional PositionErrorCallback? errorCallback = null,
+            optional PositionOptions options = {}
+          );
 
-          undefined clearWatch(long watchId);
+          undefined clearWatch (long watchId);
         };
 
-        callback PositionCallback = undefined (GeolocationPosition position);
+        callback PositionCallback = undefined (
+          GeolocationPosition position
+        );
 
-        callback PositionErrorCallback = undefined (GeolocationPositionError positionError);
-        </pre>
-        <section>
-          <h3>
-            `getCurrentPosition()` method
-          </h3>
-          <p data-tests=
-          "getCurrentPosition_IDL.https.html, getCurrentPosition_TypeError.html">
-            When {{Geolocation/getCurrentPosition()}} is invoked, the user
-            agent MUST:
-          </p>
-          <ol class="algorithm">
-            <li>Return and continue [=in parallel=].
-            </li>
-            <li>If the <a>environment settings object</a> is a <a data-cite=
-            "secure-contexts">non-secure context</a>, then [=call back with
-            error=] |errorCallback| and
-            {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
-            algorithm.
-            </li>
-            <li>Let |permission:PermissionState| be [=request permission to
-            use=] "geolocation".
-            </li>
-            <li data-cite="permissions" data-tests=
-            "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-            If |permission| is {{PermissionState/"denied"}}, then [=call back
-            with error=] |errorCallback| and
-            {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
-            algorithm.
-            </li>
-            <li>If a cached {{GeolocationPosition}} object, whose age is no
-            greater than the value of the {{PositionOptions/maximumAge}}
-            variable, is available, invoke the |successCallback| with the
-            cached {{GeolocationPosition}} object as a parameter and terminate
-            this algorithm.
-            </li>
-            <li>If the value of the timeout variable is 0, [=call back with
-            error=] |errorCallback| and {{GeolocationPositionError/TIMEOUT}}
-            and terminate this algorithm.
-            </li>
-            <li>Start a location acquisition operation (e.g. by invoking a
-            platform-specific API), possibly taking into account the value of
-            the {{PositionOptions/enableHighAccuracy}} variable.
-            </li>
-            <li>Start a timer that will fire after the number of milliseconds
-            denoted by the value of the timeout variable. When the timer fires,
-            cancel any ongoing location acquisition operations associated with
-            this instance of the steps, [=call back with error=]
-            |errorCallback| and {{GeolocationPositionError/TIMEOUT}}.
-            </li>
-            <li>If the operation completes successfully before the timeout
-            expires, cancel the pending timer, invoke the |successCallback|
-            with a new {{GeolocationPosition}} object that reflects the result
-            of the acquisition operation and terminate this algorithm.
-            </li>
-            <li>If the operation fails before the timeout expires, cancel the
-            pending timer and [=call back with error=] |errorCallback| and
-            {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
-            </li>
-          </ol>
-        </section>
-        <section>
-          <h3>
-            `watchPosition()` method
-          </h3>
-          <p>
-            When <dfn>watchPosition()</dfn> is invoked, the user agent MUST:
-          </p>
-          <ol class="algorithm">
-            <li>Let |watchId:long| be {{long}} that uniquely identifies a
-            <a>watch process</a>.
-            </li>
-            <li>Return |watchId| and continue [=in parallel=].
-            </li>
-            <li>If the <a>environment settings object</a> is a <a data-cite=
-            "secure-contexts">non-secure context</a>, then [=call back with
-            error=] |errorCallback| and
-            {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
-            algorithm.
-            </li>
-            <li>Let |permission:PermissionState| be [=request permission to
-            use=] "geolocation".
-            </li>
-            <li data-tests=
-            "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-            If |permission| is {{PermissionState/"denied"}}, then [=call back
-            with error=] |errorCallback| and
-            {{GeolocationPositionError/PERMISSION_DENIED}} and terminate this
-            algorithm.
-            </li>
-            <li>
-              <p>
-                Otherwise, start the watch operation. This operation MUST first
-                attempt to obtain the current location of the device. If the
-                attempt is successful, the |successCallback| MUST be invoked
-                with a new {{GeolocationPosition}} object, reflecting the
-                current location of the device. If the attempt fails, [=call
-                back with error=], |errorCallback| and a {{unsigned short}}
-                code that reflects the reason for the failure. The <a>watch
-                process</a> then MUST continue to monitor the position of the
-                device and invoke the appropriate callback every time this
-                position changes. The <a>watch process</a> MUST continue until
-                the {{Geolocation/clearWatch()}} method is called with the
-                corresponding identifier.
-              </p>
-            </li>
-          </ol>
-          <p>
-            The implementation of the <dfn>watch process</dfn> MUST execute the
-            following set of steps:
-          </p>
-          <ol>
-            <li>If a cached {{GeolocationPosition}} object, whose age is no
-            greater than the value of the maximumAge variable, is available,
-            invoke the |successCallback| with the cached
-            {{GeolocationPosition}} object as a parameter.
-            </li>
-            <li>Register to receive system events that indicate that the
-            position of the device MAY have changed (e.g. by listening or
-            polling for changes in WiFi or cellular signals).
-            </li>
-            <li>Start a location acquisition operation (e.g. by invoking a
-            platform-specific API), possibly taking into account the value of
-            the |enableHighAccuracy| variable (see the definition of
-            {{PositionOptions/enableHighAccuracy}} for details).
-            </li>
-            <li>Run the following <dfn>acquisition steps</dfn>:
-              <ol>
-                <li>If the timer is not already running, start a timer that
-                will fire after the number of milliseconds denoted by the value
-                of the timeout variable. When the timer fires, [=call back with
-                error=] |errorCallback| and
-                {{GeolocationPositionError/TIMEOUT}} and jump to the <a>wait
-                for a system event to be received</a> step.
-                </li>
-                <li>If the location acquisition operation successfully yields a
-                new position before the timeout expires, perform the following
-                two steps:
-                  <ol>
-                    <li>Cancel the pending timer. Note that the timer MUST be
-                    restarted once this algorithm jumps back to the beginning
-                    of the acquisition steps.
-                    </li>
-                    <li>If the <dfn>new position differs significantly from the
-                    previous position</dfn>, invoke the |successCallback| with
-                    a new {{GeolocationPosition}} object that reflects the
-                    result of the acquisition operation. This step MAY be
-                    subject to callback [=rate limitation=].
-                    </li>
-                  </ol>
-                </li>
-                <li>Else, if the location acquisition operation reports an
-                error before the {{PositionOptions/timeout}} expires, [=call
-                back with error=] |errorCallback| and
-                {{GeolocationPositionError/POSITION_UNAVAILABLE}}. This step
-                MAY be subject to callback [=rate limitation=].
-                </li>
-              </ol>
-            </li>
-            <li>
-              <dfn>Wait for a system event to be received</dfn>. When such an
-              event is received jump to the <a>acquisition steps</a> above.
-            </li>
-          </ol>
-          <p class="note">
-            If the <a>new position differs significantly from the previous
-            position</a> in the <a>watch process</a>, the |successCallback| is
-            only invoked when a new position is obtained and this position
-            differs significantly from the previously reported position. The
-            definition of what constitutes a significant difference is left to
-            the implementation. Furthermore, in steps 4.2.2 and 4.3,
-            implementations MAY impose a <dfn data-lt="rate limitation">rate
-            limit</dfn> on the frequency of callbacks so as to avoid
-            inadvertently consuming a disproportionate amount of resources.
-          </p>
-          <p>
-            The time that is spent obtaining the user permission MUST NOT be
-            included in the period covered by the {{PositionOptions/timeout}}
-            attribute of the {{PositionOptions}} parameter. The
-            {{PositionOptions/timeout}} attribute MUST only apply to the
-            location acquisition operation.
-          </p>
-        </section>
-        <section>
-          <h3>
-            `clearWatch()` method
-          </h3>
-          <p data-tests="clearWatch_TypeError.html">
-            The <dfn>clearWatch()</dfn> method takes one argument. When called,
-            it MUST first check the value of the given <dfn>watchId</dfn>
-            argument. If this value does not correspond to any previously
-            started <a>watch process</a>, then the method MUST return
-            immediately without taking any further action. Otherwise, the
-            <a>watch process</a> identified by the `watchId` argument MUST be
-            immediately stopped and no further callbacks MUST be invoked.
-          </p>
-        </section>
-        <section>
-          <h3>
-            Callback with error
-          </h3>
-          <p>
-            When instructed to <dfn>call back with error</dfn>, given an
-            {{PositionErrorCallback}}? |callback:PositionErrorCallback?| and
-            {{unsigned short}} |code:unsigned short|:
-          </p>
-          <ol class="algorithm">
-            <li>If |callback| is null, return.
-            </li>
-            <li>Let |error| be a a newly created {{GeolocationPositionError}}
-            object whose {{GeolocationPositionError/code}} attribute is
-            initialized to |code|.
-            </li>
-            <li>Call |callback| with |error|.
-            </li>
-          </ol>
-        </section>
-        <section data-dfn-for="PositionCallBack">
-          <h3>
-            `PositionCallBack` callback
-          </h3>
-          <p>
-            The <dfn>PositionCallBack</dfn> callback is invoked when a
-            {{GeolocationPosition}} object is available, resulting from a
-            cached object or the acquisition operation. The
-            <a>PositionCallBack</a> callback gets set using the
-            <dfn>successCallback</dfn> parameter.
-          </p>
-        </section>
-        <section data-dfn-for="PositionErrorCallBack">
-          <h3>
-            `PositionErrorCallBack` callback
-          </h3>
-          <p>
-            The <dfn>PositionErrorCallBack</dfn> callback is invoked when a
-            {{GeolocationPosition}} object is not available, resulting from a
-            timeout, a permission denied, or an unability to determine the
-            position of the device. The <a>PositionErrorCallBack</a> callback
-            gets set using the <dfn>errorCallback</dfn> parameter.
-          </p>
-        </section>
+        callback PositionErrorCallback = undefined (
+          GeolocationPositionError positionError
+        );
+      </pre>
+      <section>
+        <h2>
+          Internal Slots
+        </h2>
+        <p>
+          Instances of {{Geolocation}} are created with the internal slots in
+          the following table:
+        </p>
+        <table class="data">
+          <tr>
+            <th>
+              Internal Slot
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <dfn data-dfn-for="Geolocation">[[\cache]]</dfn>
+            </td>
+            <td>
+              Initialized as an [=ordered map=], with {{DOMTimeStamp}} as keys
+              and {{GeolocationPosition}} instances as values. Expiration of
+              cached key/value pairs is left as an implementation detail.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <dfn data-dfn-for="Geolocation">[[\watchTasks]]</dfn>
+            </td>
+            <td>
+              Initialized as an [=set=], with {{unsigned long}} for the keys
+              representing the id of a timed task.
+            </td>
+          </tr>
+        </table>
       </section>
-      <section id="position_options_interface" data-dfn-for="PositionOptions">
-        <h3>
-          <dfn>PositionOptions</dfn> dictionary
-        </h3>
-        <p>
-          The {{Geolocation/getCurrentPosition()}} and
-          {{Geolocation/watchPosition()}} methods accept {{PositionOptions}}
-          objects as their third argument.
+      <section>
+        <h2>
+          `getCurrentPosition()` method
+        </h2>
+        <p data-tests=
+        "getCurrentPosition_IDL.https.html, getCurrentPosition_TypeError.html">
+          When {{Geolocation/getCurrentPosition()}} is invoked, the user agent
+          MUST:
         </p>
-        <p>
-          In ECMAScript, {{PositionOptions}} objects are represented using
-          regular native objects with optional properties named
-          {{PositionOptions/enableHighAccuracy}}, {{PositionOptions/timeout}}
-          and {{PositionOptions/maximumAge}}.
+        <ol class="algorithm">
+          <li>[=Request position=], passing |successCallback|, |errorCallback|,
+          |options|, and (repeats) false.
+          </li>
+          <li>Return `undefined`.
+          </li>
+        </ol>
+      </section>
+      <section>
+        <h2>
+          `watchPosition()` method
+        </h2>
+        <p data-tests=
+        "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+          When <dfn>watchPosition()</dfn> is invoked, the user agent MUST:
         </p>
-        <pre class="idl">
+        <ol class="algorithm">
+          <li>Let |watchId:long| be [=request position=], passing
+          |successCallback|, |errorCallback|, |options|, and (repeats) true.
+          </li>
+          <li>Return |watchId|.
+          </li>
+        </ol>
+      </section>
+      <section>
+        <h2>
+          `clearWatch()` method
+        </h2>
+        <p data-tests="clearWatch_TypeError.html">
+          When <dfn>clearWatch()</dfn> is invoked, the user agent MUST:
+        </p>
+        <ol class="algorithm">
+          <li>If [=this=]'s {{Geolocation/[[watchTasks]]}}[|watchId|]
+          [=map/exists=], [=map/remove=] [=this=]'s
+          {{Geolocation/[[watchTasks]]}}[|watchId|].
+          </li>
+        </ol>
+      </section>
+      <section>
+        <h2>
+          Request position
+        </h2>
+        <p>
+          <dfn>Request position</dfn> by passing a {{PositionCallback}}
+          |successCallback:PositionCallback|, a {{PositionErrorCallback}}
+          |errorCallback:PositionErrorCallback|`?`, {{PositionOptions}}
+          |options:PositionOptions|, a {{boolean}} |repeats:boolean|, and
+          optionally (and only if |repeats| is true) a |previous id:long|.
+        </p>
+        <ol class="algorithm">
+          <li>Let |watchTasks:Set| be [=this=]'s
+          {{Geolocation/[[watchTasks]]}}.
+          </li>
+          <li>Acquire a watch id.
+            <ol>
+              <li>If |previous id| was provided and |repeats| is true, let
+              |watchId| be |previous id|; Otherwise, let |watchId| be an
+              [=implementation-defined=] {{long}} that is greater than or equal
+              to zero.
+              </li>
+              <li>[=Set/Append=] |watchId| to |watchTasks|.
+              </li>
+              <li>Return |watchId| and continue [=in parallel=].
+              </li>
+            </ol>
+          </li>
+          <li data-cite="page-visibility-2">Wait for document to become
+          visible.
+            <ol>
+              <li>Let |document:Document| be the [=current settings object=]'s
+              [=associated Document=].
+              </li>
+              <li>If |document:Document| is [=Document/hidden=], wait for the
+              |document| to become [=Document/visible=].
+              </li>
+            </ol>
+          </li>
+          <li data-tests=
+          "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+          [=Do security and permissions checks=] passing |errorCallback|.
+          </li>
+          <li>If the checks return failure:
+            <ol>
+              <li>[=List/Remove=] |watchId| from |watchTasks|.
+              </li>
+              <li>Terminate this algorithm.
+              </li>
+            </ol>
+          </li>
+          <li>Acquire position.
+            <ol>
+              <li>Let |acquisitionTime| be a new {{DOMTimeStamp}} that
+              represents now.
+              </li>
+              <li>Let |keys| be [=map/get the keys=] from |cache|.
+              </li>
+              <li>For each |key| in |keys| in reverse order (i.e., from
+              freshes):
+                <ol>
+                  <li>If |key| is no greater than the value of the
+                  |options|.{{PositionOptions/maximumAge}} member:
+                    <ol>
+                      <li>[=Queue a microtask=] to invoke |successCallback|
+                      with |cache|[|key|];
+                      </li>
+                      <li>Go to <a href="#check-repeats">determine
+                      repetition</a> steps below.
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+              <li>Let |timeout| be a new timed [=task=] that runs in
+              |options|.{{PositionOptions/timeout}} milliseconds after
+              |acquisitionTime|, which performs the following sub-steps:
+                <aside class="note" title="Immediate cancellation">
+                  <p>
+                    A |options|.{{PositionOptions/timeout}} value 0 effectively
+                    runs the |timeout| task immediately.
+                  </p>
+                </aside>
+                <ol>
+                  <li>If the entry for |timerId| in the [=list of active
+                  timers=] has been cleared, then abort these steps.
+                  </li>
+                  <li>[=Call back with error=] with |errorCallback| and
+                  {{GeolocationPositionError/TIMEOUT}}.
+                  </li>
+                </ol>
+              </li>
+              <li>Let |timerId| be an [=implementation-defined=] identifier
+              that represents |timeout|.
+              </li>
+              <li>Add |timerId| to the [=list of active timers=].
+              </li>
+              <li>Try to acquire the device's position, optionally taking into
+              consideration the value of
+              |options|.{{PositionOptions/enableHighAccuracy}}:
+                <ol>
+                  <li>If acquiring a position succeeds:
+                    <ol>
+                      <li>Let |position| be a [=a new `GeolocationPosition`=].
+                      </li>
+                      <li>[=Map/Set=] |cache|[acquisitionTime] to |position|.
+                      </li>
+                      <li>[=Queue a microtask=] to [=invoke=] |successCallback|
+                      with |position|.
+                      </li>
+                    </ol>
+                  </li>
+                  <li>If acquiring a position fails:
+                    <ol>
+                      <li>[=Call back with error=] passing |errorCallback| and
+                      {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+              <li>Clear |timerId| from the [=list of active timers=].
+              </li>
+            </ol>
+          </li>
+          <li>
+            <span id="check-repeats">Determine repetition</span>.
+            <ol>
+              <li>If |repeats| is false:
+                <ol>
+                  <li>[=List/Remove=] |watchId| from |watchTasks|.
+                  </li>
+                  <li>Terminate this algorithm.
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Wait for a significant change of position. What constitutes a
+          significant change in position is left to the implementation. A user
+          agents MAY impose a rate limit on the frequency position changes.
+            <ol>
+              <li>Let |position:GeolocationPosition| be a [=a new
+              `GeolocationPosition`=].
+              </li>
+              <li>[=Map/Set=] |cache|[acquisitionTime] to |position|.
+              </li>
+            </ol>
+          </li>
+          <li>If |watchTasks| [=list/contains=] |watchId|, [=request position=]
+          passing |successCallback|, |errorCallback|, |options|, |repeats|, and
+          |watchId|.
+          </li>
+        </ol>
+      </section>
+      <section>
+        <h2>
+          Security and permissions checks
+        </h2>
+        <p>
+          When instructed to <dfn>do security and permissions checks</dfn>,
+          given an {{PositionErrorCallback}}`?`
+          |errorCallback:PositionErrorCallback|:
+        </p>
+        <ol>
+          <li>If the <a>environment settings object</a> is a <a data-cite=
+          "secure-contexts">non-secure context</a>, then:
+            <ol>
+              <li>[=Call back with error=] |errorCallback| and
+              {{GeolocationPositionError/PERMISSION_DENIED}}.
+              </li>
+              <li>Return failure.
+              </li>
+            </ol>
+          </li>
+          <li>Let |permission:PermissionState| be [=request permission to use=]
+          "geolocation".
+          </li>
+          <li data-cite="permissions">If |permission| is
+          {{PermissionState/"denied"}}, then:
+            <ol>
+              <li>[=Call back with error=] |errorCallback| and
+              {{GeolocationPositionError/PERMISSION_DENIED}}.
+              </li>
+              <li>Return failure.
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </section>
+      <section>
+        <h2>
+          Call back with error
+        </h2>
+        <p>
+          When instructed to <dfn>call back with error</dfn>, given an
+          {{PositionErrorCallback}}`?` |callback:PositionErrorCallback| and an
+          {{unsigned short}} |code:unsigned short|:
+        </p>
+        <ol class="algorithm">
+          <li>If |callback| is null, return.
+          </li>
+          <li>Let |error| be a a newly created {{GeolocationPositionError}}
+          instance whose {{GeolocationPositionError/code}} attribute is
+          initialized to |code|.
+          </li>
+          <li>[=Invoke=] |callback| with |error|.
+          </li>
+        </ol>
+      </section>
+    </section>
+    <section id="position_options_interface" data-dfn-for="PositionOptions">
+      <h2>
+        <dfn>PositionOptions</dfn> dictionary
+      </h2>
+      <pre class="idl">
         dictionary PositionOptions {
           boolean enableHighAccuracy = false;
           [Clamp] unsigned long timeout = 0xFFFFFFFF;
           [Clamp] unsigned long maximumAge = 0;
         };
         </pre>
-        <section>
-          <h3>
-            `enableHighAccuracy` member
-          </h3>
-          <p data-tests="PositionOptions.https.html">
-            The <dfn>enableHighAccuracy</dfn> attribute provides a hint that
-            the application would like to receive the best possible results.
-            This MAY result in slower response times or increased power
-            consumption. The user might also deny this capability, or the
-            device might not be able to provide more accurate results than if
-            the flag wasn't specified. The intended purpose of this attribute
-            is to allow applications to inform the implementation that they do
-            not require high accuracy geolocation fixes and, therefore, the
-            implementation can avoid using geolocation providers that consume a
-            significant amount of power (e.g. GPS). This is especially useful
-            for applications running on battery-powered devices, such as mobile
-            phones.
-          </p>
-        </section>
-        <section>
-          <h3>
-            `timeout` member
-          </h3>
-          <p data-tests="PositionOptions.https.html">
-            The <dfn>timeout</dfn> attribute denotes the maximum length of time
-            (expressed in milliseconds) that is allowed to pass from the call
-            to {{Geolocation/getCurrentPosition()}} or
-            {{Geolocation/watchPosition()}} until the corresponding
-            |successCallback| is invoked. If the implementation is unable to
-            successfully acquire a new {{GeolocationPosition}} before the given
-            timeout elapses, and no other errors have occurred in this
-            interval, then the corresponding |errorCallback| MUST be invoked
-            with a {{GeolocationPositionError}} object whose code attribute is
-            set to {{GeolocationPositionError/TIMEOUT}}. Note that the time
-            that is spent obtaining the user permission is not included in the
-            period covered by the {{PositionOptions/timeout}} attribute. The
-            {{PositionOptions/timeout}} attribute only applies to the location
-            acquisition operation.
-          </p>
-          <p>
-            In case of a {{Geolocation/getCurrentPosition()}} call, the
-            |errorCallback| would be invoked at most once.
-          </p>
-          <p>
-            In case of a {{Geolocation/watchPosition()}}, the |errorCallback|
-            could be invoked repeatedly: the first timeout is relative to the
-            moment {{Geolocation/watchPosition()}} was called or the moment the
-            user's permission was obtained, if that was necessary. Subsequent
-            timeouts are relative to the moment when the implementation
-            determines that the position of the hosting device has changed and
-            a new {{GeolocationPosition}} object MUST be acquired.
-          </p>
-        </section>
-        <section>
-          <h3>
-            `maximumAge` member
-          </h3>
-          <p data-tests="PositionOptions.https.html">
-            The <dfn>maximumAge</dfn> attribute indicates that the application
-            is willing to accept a cached position whose age is no greater than
-            the specified time in milliseconds. If
-            {{PositionOptions/maximumAge}} is set to 0, the implementation MUST
-            immediately attempt to acquire a new position object. Setting the
-            {{PositionOptions/maximumAge}} to `Infinity` MUST determine the
-            implementation to return a cached position regardless of its age.
-            If an implementation does not have a cached position available
-            whose age is no greater than the specified
-            {{PositionOptions/maximumAge}}, then it MUST acquire a new
-            {{GeolocationPosition}} object. In case of a
-            {{Geolocation/watchPosition()}}, the {{PositionOptions/maximumAge}}
-            refers to the first {{GeolocationPosition}} object returned by the
-            implementation.
-          </p>
-        </section>
-      </section>
-      <section id="position_interface" data-dfn-for="GeolocationPosition">
-        <h3>
-          `GeolocationPosition` interface
-        </h3>
-        <pre class="idl">
-          [Exposed=Window, SecureContext]
-          interface GeolocationPosition {
-            readonly attribute GeolocationCoordinates coords;
-            readonly attribute DOMTimeStamp timestamp;
-          };
-        </pre>
-        <p>
-          The <dfn>GeolocationPosition</dfn> interface is the container for the
-          geolocation information returned by this API. This version of the
-          specification allows one attribute of type {{GeolocationCoordinates}}
-          and a {{GeolocationPosition/timestamp}}. Future versions of the API
-          MAY allow additional attributes that provide other information about
-          this position (e.g. street addresses).
+      <section>
+        <h2>
+          `enableHighAccuracy` member
+        </h2>
+        <p data-tests="PositionOptions.https.html">
+          The <dfn>enableHighAccuracy</dfn> member provides a hint that the
+          application would like to receive the best possible results. This MAY
+          result in slower response times or increased power consumption. The
+          user might also disable this capability, or the device might not be
+          able to provide more accurate results than if the flag wasn't
+          specified. The intended purpose of this member is to allow
+          applications to inform the implementation that they do not require
+          high accuracy geolocation fixes and, therefore, the implementation
+          can avoid using geolocation providers that consume a significant
+          amount of power (e.g. GPS). This is especially useful for
+          applications running on battery-powered devices.
         </p>
-        <section>
-          <h4>
-            `coords` attribute
-          </h4>
-          <p>
-            The <dfn>coords</dfn> attribute contains a set of geographic
-            coordinates together with their associated accuracy, as well as a
-            set of other optional attributes such as altitude and speed.
-          </p>
-        </section>
-        <section>
-          <h4>
-            `timestamp` attribute
-          </h4>
-          <p>
-            The <dfn>timestamp</dfn> attribute represents the time when the
-            {{GeolocationPosition}} object was acquired and is represented as a
-            {{DOMTimeStamp}}.
-          </p>
-        </section>
       </section>
-      <section id="coordinates_interface" data-dfn-for=
-      "GeolocationCoordinates">
-        <h3>
-          <dfn>GeolocationCoordinates</dfn> interface
-        </h3>
-        <pre class="idl">
+      <section>
+        <h2>
+          `timeout` member
+        </h2>
+        <p data-tests="PositionOptions.https.html">
+          The <dfn>timeout</dfn> member denotes the maximum length of time,
+          expressed in milliseconds, before acquiring a position expires. Note
+          that the time spent waiting for the document to become visible and
+          for [=Do security and permissions checks|obtaining the user
+          permission=] is not included in the period covered by the
+          {{PositionOptions/timeout}} member. The {{PositionOptions/timeout}}
+          member only applies to the location acquisition operation.
+        </p>
+      </section>
+      <section>
+        <h2>
+          `maximumAge` member
+        </h2>
+        <p data-tests="PositionOptions.https.html">
+          The <dfn>maximumAge</dfn> member indicates that the web application
+          is willing to accept a cached position whose age is no greater than
+          the specified time in milliseconds.
+        </p>
+      </section>
+    </section>
+    <section id="position_interface" data-dfn-for="GeolocationPosition">
+      <h2>
+        `GeolocationPosition` interface
+      </h2>
+      <pre class="idl">
+        [Exposed=Window, SecureContext]
+        interface GeolocationPosition {
+          readonly attribute GeolocationCoordinates coords;
+          readonly attribute DOMTimeStamp timestamp;
+        };
+      </pre>
+      <section>
+        <h4>
+          `coords` attribute
+        </h4>
+        <p>
+          The <dfn>coords</dfn> attribute contains a set of geographic
+          coordinates.
+        </p>
+      </section>
+      <section>
+        <h4>
+          `timestamp` attribute
+        </h4>
+        <p>
+          The <dfn>timestamp</dfn> attribute represents the time when the
+          geographic position of the device was acquired.
+        </p>
+      </section>
+    </section>
+    <section id="coordinates_interface" data-dfn-for="GeolocationCoordinates">
+      <h2>
+        <dfn>GeolocationCoordinates</dfn> interface
+      </h2>
+      <pre class="idl">
         [Exposed=Window, SecureContext]
         interface GeolocationCoordinates {
+          readonly attribute double accuracy;
           readonly attribute double latitude;
           readonly attribute double longitude;
           readonly attribute double? altitude;
-          readonly attribute double accuracy;
           readonly attribute double? altitudeAccuracy;
           readonly attribute double? heading;
           readonly attribute double? speed;
         };
         </pre>
+      <p>
+        The geographic coordinate reference system used by the attributes in
+        this interface is the World Geodetic System (2d) [[WGS84]]. No other
+        reference system is supported.
+      </p>
+      <section>
+        <h4>
+          `latitude` and `longitude`, and `accuracy` attributes
+        </h4>
         <p>
-          The geographic coordinate reference system used by the attributes in
-          this interface is the World Geodetic System (2d) [[WGS84]]. No other
-          reference system is supported.
+          The <dfn>latitude</dfn> and <dfn>longitude</dfn> attributes are
+          geographic coordinates specified in decimal degrees.
         </p>
-        <section>
-          <h4>
-            `latitude` attribute
-          </h4>
-          <p>
-            The <dfn>latitude</dfn> and <dfn>longitude</dfn> attributes are
-            geographic coordinates specified in decimal degrees.
-          </p>
-        </section>
-        <section>
-          <h4>
-            `altitude` attribute
-          </h4>
-          <p>
-            The <dfn>altitude</dfn> attribute denotes the height of the
-            position, specified in meters above the [[WGS84]] ellipsoid. If the
-            implementation cannot provide altitude information, the value of
-            this attribute MUST be null.
-          </p>
-        </section>
-        <section>
-          <h4>
-            `accuracy` attribute
-          </h4>
-          <p>
-            The <dfn>accuracy</dfn> attribute denotes the accuracy level of the
-            latitude and longitude coordinates. It is specified in meters and
-            MUST be supported by all implementations. The value of the accuracy
-            attribute MUST be a non-negative real number.
-          </p>
-        </section>
-        <section>
-          <h4>
-            `altitudeAccuracy` attribute
-          </h4>
-          <p>
-            The <dfn>altitudeAccuracy</dfn> attribute is specified in meters.
-            If the implementation cannot provide altitude information, the
-            value of this attribute MUST be null. Otherwise, the value of the
-            altitudeAccuracy attribute MUST be a non-negative real number.
-          </p>
-          <p>
-            The {{GeolocationCoordinates/accuracy}} and
-            {{GeolocationCoordinates/altitudeAccuracy}} values returned by an
-            implementation SHOULD correspond to a 95% confidence level.
-          </p>
-        </section>
-        <section>
-          <h4>
-            `heading` attribute
-          </h4>
-          <p>
-            The <dfn>heading</dfn> attribute denotes the direction of travel of
-            the hosting device and is specified in degrees, where 0° ≤ heading
-            &lt; 360°, counting clockwise relative to the true north. If the
-            implementation cannot provide heading information, the value of
-            this attribute MUST be null. If the hosting device is stationary
-            (i.e. the value of the {{GeolocationCoordinates/speed}} attribute
-            is 0), then the value of the heading attribute MUST be NaN.
-          </p>
-        </section>
-        <section>
-          <h4>
-            `speed` attribute
-          </h4>
-          <p>
-            The <dfn>speed</dfn> attribute denotes the magnitude of the
-            horizontal component of the hosting device's current velocity and
-            is specified in meters per second. If the implementation cannot
-            provide speed information, the value of this attribute MUST be
-            null. Otherwise, the value of the speed attribute MUST be a
-            non-negative real number.
-          </p>
-        </section>
+        <p>
+          The <dfn>accuracy</dfn> attribute denotes the accuracy level of the
+          latitude and longitude coordinates in meters.
+        </p>
       </section>
-      <section id="position_error_interface" data-dfn-for=
-      "GeolocationPositionError">
-        <h3>
-          <dfn>GeolocationPositionError</dfn> interface
-        </h3>
-        <pre class="idl">
+      <section>
+        <h4>
+          `altitude` and `altitudeAccuracy` attributes
+        </h4>
+        <p>
+          The <dfn>altitude</dfn> attribute denotes the height of the position,
+          specified in meters above the [[WGS84]] ellipsoid.
+        </p>
+        <p>
+          The <dfn>altitudeAccuracy</dfn> attribute represents the altitude
+          accuracy in meters.
+        </p>
+      </section>
+      <section>
+        <h4>
+          `heading` attribute
+        </h4>
+        <p>
+          The <dfn>heading</dfn> attribute denotes the direction of travel of
+          the hosting device and is specified in degrees, where 0° ≤ heading
+          &lt; 360°, counting clockwise relative to the true north.
+        </p>
+      </section>
+      <section>
+        <h4>
+          `speed` attribute
+        </h4>
+        <p>
+          The <dfn>speed</dfn> attribute denotes the magnitude of the
+          horizontal component of the hosting device's current velocity in
+          meters per second.
+        </p>
+      </section>
+      <section>
+        <h2>
+          Constructing a `GeolocationPosition`
+        </h2>
+        <p>
+          <dfn>A new `GeolocationPosition`</dfn> is constructed with {{unsigned
+          long}} |timestamp:unsigned long| by performing the following steps:
+        </p>
+        <ol class="algorithm">
+          <li>Let |coords| be a newly created {{GeolocationCoordinates}}
+          instance:
+            <ol>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/latitude}}
+              attribute to a geographic coordinate in decimal degrees.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/longitude}}
+              attribute to a geographic coordinate in decimal degrees.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/accuracy}}
+              attribute to a non-negative real number. The value SHOULD
+              correspond to a 95% confidence level with respect to the
+              longitude and latitude values.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/altitude}}
+              attribute in meters above the [[WGS84]] ellipsoid, or `null` if
+              the implementation cannot provide altitude information.
+              </li>
+              <li>Initialize |coord|'s
+              {{GeolocationCoordinates/altitudeAccuracy}} attribute as
+              non-negative real number, or to `null` if the implementation
+              cannot provide altitude information. If the altitude accuracy
+              information is provided, it SHOULD correspond to a 95% confidence
+              level.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/speed}}
+              attribute to a non-negative real number, or as `null` if the
+              implementation cannot provide speed information.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/heading}}
+              attribute in degrees, or `null` implementation cannot provide
+              heading information. If the hosting device is stationary (i.e.
+              the value of the {{GeolocationCoordinates/speed}} attribute is
+              0), then initialize the {{GeolocationCoordinates/heading}} to
+              `NaN`.
+              </li>
+            </ol>
+          </li>
+          <li>Return a newly created {{GeolocationPosition}} instance with its
+          {{GeolocationPosition/coords}} attribute initialized to |coords| and
+          {{GeolocationPosition/timestamp}} attribute initialized to
+          |timestamp|.
+          </li>
+        </ol>
+      </section>
+    </section>
+    <section id="position_error_interface" data-dfn-for=
+    "GeolocationPositionError">
+      <h2>
+        <dfn>GeolocationPositionError</dfn> interface
+      </h2>
+      <pre class="idl">
         [Exposed=Window]
         interface GeolocationPositionError {
           const unsigned short PERMISSION_DENIED = 1;
@@ -994,55 +1013,61 @@
           readonly attribute DOMString message;
         };
         </pre>
-        <section>
-          <h4>
-            `code` attribute
-          </h4>
-          <p>
-            The <dfn>code</dfn> attribute MUST return the appropriate code from
-            the following list:
-          </p>
-          <dl>
-            <dt>
-              <dfn>PERMISSION_DENIED</dfn> (numeric value 1)
-            </dt>
-            <dd>
-              The location acquisition process failed because the document does
-              not have permission to use the Geolocation API.
-            </dd>
-            <dt>
-              <dfn>POSITION_UNAVAILABLE</dfn> (numeric value 2)
-            </dt>
-            <dd>
-              The position of the device could not be determined. For instance,
-              one or more of the location providers used in the location
-              acquisition process reported an internal error that caused the
-              process to fail entirely.
-            </dd>
-            <dt>
-              <dfn>TIMEOUT</dfn> (numeric value 3)
-            </dt>
-            <dd>
-              The length of time specified by the {{PositionOptions/timeout}}
-              property has elapsed before the implementation could successfully
-              acquire a new {{GeolocationPosition}} object.
-            </dd>
-          </dl>
-        </section>
-        <section>
-          <h4>
-            `message` attribute
-          </h4>
-          <p>
-            The <dfn>message</dfn> attribute is a developer-friendly textual
-            description of the {{GeolocationPositionError/code}} attribute.
-          </p>
-          <p class="note">
-            The purpose of the {{GeolocationPositionError/message}} attribute
-            is to assist with debugging and it's not intended to be shown to
-            end users.
-          </p>
-        </section>
+      <section id="constants">
+        <h3>
+          Constants
+        </h3>
+        <dl>
+          <dt>
+            <dfn>PERMISSION_DENIED</dfn> (numeric value 1)
+          </dt>
+          <dd>
+            The location acquisition process failed because the document does
+            not have permission to use the Geolocation API.
+          </dd>
+          <dt>
+            <dfn>POSITION_UNAVAILABLE</dfn> (numeric value 2)
+          </dt>
+          <dd>
+            The position of the device could not be determined. For instance,
+            one or more of the location providers used in the location
+            acquisition process reported an internal error that caused the
+            process to fail entirely.
+          </dd>
+          <dt>
+            <dfn>TIMEOUT</dfn> (numeric value 3)
+          </dt>
+          <dd>
+            The length of time specified by the {{PositionOptions/timeout}}
+            property has elapsed before the implementation could successfully
+            acquire a new {{GeolocationPosition}} object.
+          </dd>
+        </dl>
+      </section>
+      <section>
+        <h4>
+          `code` attribute
+        </h4>
+        <p>
+          The <dfn>code</dfn> attribute returns the value it was initialized to
+          (see [[[#constants]]]).
+        </p>
+      </section>
+      <section>
+        <h4>
+          `message` attribute
+        </h4>
+        <p>
+          The <dfn>message</dfn> attribute is a developer-friendly textual
+          description of the {{GeolocationPositionError/code}} attribute.
+        </p>
+        <p class="note" title="Don't show .message to users!">
+          The purpose of the {{GeolocationPositionError/message}} attribute is
+          to assist with debugging - as such, they probably won't make any
+          sense if shown to an end user. Please use the
+          {{GeolocationPositionError}}'s {{GeolocationPositionError/code}}
+          attribute to create user-friendly localized error messages.
+        </p>
       </section>
     </section>
     <section>
@@ -1067,15 +1092,10 @@
           This specification is limited to providing a scripting API for
           retrieving geographic position information associated with a hosting
           device. The geographic position information is provided in terms of
-          World Geodetic System coordinates [[WGS84]].
-        </p>
-        <p>
-          The scope of this specification does not include providing a markup
-          language of any kind.
-        </p>
-        <p>
-          The scope of this specification does not include defining a new
-          [=url/scheme=] for building URLs that identify geographic locations.
+          World Geodetic System coordinates [[WGS84]]. It does not include
+          providing a markup language of any kind, nor does not include
+          defining a new [=url/scheme=] for building URLs that identify
+          geographic locations.
         </p>
       </section>
       <section id="usecases_section">
@@ -1124,12 +1144,12 @@
             Show the user's position on a map
           </h4>
           <p>
-            A user finds herself in an unfamiliar city area. She wants to check
-            her position so she uses her hand-held device to navigate to a
-            Web-based mapping application that can pinpoint her exact location
-            on the city map using the Geolocation API. She then asks the Web
-            application to provide driving directions from her current position
-            to her desired destination.
+            A user finds themselves in an unfamiliar city area. They want to
+            check their position so they use their device to navigate to a
+            mapping application that can pinpoint their location on the city
+            map using the Geolocation API. The user then asks the Web
+            application to provide driving directions from their current
+            position to a different destination.
           </p>
         </section>
         <section id="usecase_turn_by_turn">
@@ -1189,34 +1209,33 @@
         <h3>
           Requirements
         </h3>
+        <p>
+          The Geolocation API needs to:
+        </p>
         <ol>
-          <li id="req_latlong">The Geolocation API needs to provide location
-          data in terms of a pair of latitude and longitude coordinates.
+          <li id="req_latlong">provide location data in terms of a pair of
+          latitude and longitude coordinates.
           </li>
-          <li id="req_accuracy">The Geolocation API needs to provide
-          information about the accuracy of the retrieved location data.
+          <li id="req_accuracy">Provide information about the accuracy of the
+          retrieved location data.
           </li>
-          <li id="req_oneshot">The Geolocation API needs to support "one-shot"
-          position updates.
+          <li id="req_oneshot">Support "one-shot" position updates.
           </li>
-          <li id="req_updates">The Geolocation API needs to allow an
-          application to register to receive updates when the position of the
-          hosting device changes.
+          <li id="req_updates">Allow an application to register to receive
+          updates when the position of the hosting device changes.
           </li>
-          <li id="req_last_known">The Geolocation API needs to allow an
-          application to request a cached position whose age is no greater than
-          a specified value.
+          <li id="req_last_known">Allow an application to request a cached
+          position whose age is no greater than a specified value.
           </li>
-          <li id="req_errors">The Geolocation API needs to provide a way for
-          the application to receive updates about errors that have occurred
-          while obtaining a location fix.
+          <li id="req_errors">Provide a way for the application to receive
+          updates about errors that have occurred while obtaining a location
+          fix.
           </li>
-          <li id="req_request_acuracy">The Geolocation API needs to allow an
-          application to specify a desired accuracy level of the location
-          information.
+          <li id="req_request_acuracy">Allow an application to specify a
+          desired accuracy level of the location information.
           </li>
-          <li id="req_source_agnostic">The Geolocation API needs to be agnostic
-          to the underlying sources of location information.
+          <li id="req_source_agnostic">Be agnostic to the underlying sources of
+          location information.
           </li>
         </ol>
       </section>
