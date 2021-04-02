@@ -77,6 +77,43 @@
         information sources, and no guarantee is given that the API returns the
         device's actual location.
       </p>
+      <p>
+        For developers, the Geolocation API:
+      </p>
+      <ul>
+        <li>Provides location data in terms of a pair of latitude and longitude
+        coordinates, and given an indication of the accuracy of the retrieved
+        location data.
+        </li>
+        <li>Supports "one-shot" position updates.
+        </li>
+        <li>Allows an application to register to receive updates when the
+        position of the hosting device changes.
+        </li>
+        <li>Allows an application to request a cached position whose age is no
+        greater than a specified value.
+        </li>
+        <li>Provides a way for the application to receive updates about errors
+        that have occurred while obtaining a location fix.
+        </li>
+        <li>Allows an application to specify a desired accuracy level of the
+        location information.
+        </li>
+      </ul>
+      <section id="scope" class="informative">
+        <h3>
+          Scope
+        </h3>
+        <p>
+          This specification is limited to providing a scripting API for
+          retrieving geographic position information associated with a hosting
+          device. The geographic position information is provided in terms of
+          World Geodetic System coordinates [[WGS84]]. It does not include
+          providing a markup language of any kind, nor does not include
+          defining a new URL scheme for building URLs that identify geographic
+          locations.
+        </p>
+      </section>
       <section>
         <h2>
           Changes since last publication
@@ -593,6 +630,8 @@
           optionally (and only if |repeats| is true) a |previous id:long|.
         </p>
         <ol class="algorithm">
+          <li>Let |cache:Ordered map| be [=this=]'s {{Geolocation/[[cache]]}}.
+          </li>
           <li>Let |watchTasks:Set| be [=this=]'s
           {{Geolocation/[[watchTasks]]}}.
           </li>
@@ -684,7 +723,7 @@
                 <ol>
                   <li>If acquiring a position succeeds:
                     <ol>
-                      <li>Let |position| be a [=a new `GeolocationPosition`=].
+                      <li>Let |position| be [=a new `GeolocationPosition`=].
                       </li>
                       <li>[=Map/Set=] |cache|[acquisitionTime] to |position|.
                       </li>
@@ -730,9 +769,9 @@
               </li>
             </ol>
           </li>
-          <li>If |watchTasks| [=list/contain|contains=] |watchId|, [=request position=]
-          passing |successCallback|, |errorCallback|, |options|, |repeats|, and
-          |watchId|.
+          <li>If |watchTasks| [=list/contain|contains=] |watchId|, [=request
+          position=] passing |successCallback|, |errorCallback|, |options|,
+          |repeats|, and |watchId|.
           </li>
         </ol>
       </section>
@@ -1082,162 +1121,95 @@
     </section>
     <section id="usecases" class="appendix informative">
       <h2>
-        Scope, use cases, and requirements
+        Use cases
       </h2>
-      <section id="scope" class="informative">
-        <h2>
-          Scope
-        </h2>
-        <p>
-          This specification is limited to providing a scripting API for
-          retrieving geographic position information associated with a hosting
-          device. The geographic position information is provided in terms of
-          World Geodetic System coordinates [[WGS84]]. It does not include
-          providing a markup language of any kind, nor does not include
-          defining a new [=url/scheme=] for building URLs that identify
-          geographic locations.
-        </p>
-      </section>
-      <section id="usecases_section">
+      <section id="usecase_find_poi">
         <h3>
-          Use cases
-        </h3>
-        <section id="usecase_find_poi">
-          <h4>
-            Find points of interest in the user's area
-          </h4>
-          <p>
-            Someone visiting a foreign city could access a Web application that
-            allows users to search or browse through a database of tourist
-            attractions. Using the Geolocation API, the Web application has
-            access to the user's approximate position and it is therefore able
-            to rank the search results by proximity to the user's location.
-          </p>
-        </section>
-        <section id="usecase_content_annotation">
-          <h4>
-            Annotating content with location information
-          </h4>
-          <p>
-            A group of friends is hiking through the Scottish highlands. Some
-            of them write short notes and take pictures at various points
-            throughout the journey and store them using a Web application that
-            can work offline on their hand-held devices. Whenever they add new
-            content, the application automatically tags it with location data
-            from the Geolocation API (which, in turn, uses the on-board GPS
-            device). Every time they reach a town or a village, and they are
-            again within network coverage, the application automatically
-            uploads their notes and pictures to a popular blogging website,
-            which uses the geolocation data to construct links that point to a
-            mapping service. Users who follow the group's trip can click on
-            these links to see a satellite view of the area where the notes
-            were written and the pictures were taken. Another example is a life
-            blog where a user creates content (e.g. images, video, audio) that
-            records her every day experiences. This content can be
-            automatically annotated with information such as time, geographic
-            position or even the user's emotional state at the time of the
-            recording.
-          </p>
-        </section>
-        <section id="usecase_show_position">
-          <h4>
-            Show the user's position on a map
-          </h4>
-          <p>
-            A user finds themselves in an unfamiliar city area. They want to
-            check their position so they use their device to navigate to a
-            mapping application that can pinpoint their location on the city
-            map using the Geolocation API. The user then asks the Web
-            application to provide driving directions from their current
-            position to a different destination.
-          </p>
-        </section>
-        <section id="usecase_turn_by_turn">
-          <h4>
-            Turn-by-turn route navigation
-          </h4>
-          <p>
-            A mapping application can help the user navigate along a route by
-            providing detailed turn-by-turn directions. The application does
-            this by registering with the Geolocation API to receive repeated
-            location updates of the user's position. These updates are
-            delivered as soon as the implementing user agent determines that
-            the position of the user has changed, which allows the application
-            to anticipate any changes of direction that the user might need to
-            do.
-          </p>
-        </section>
-        <section id="usecase_poi_alert">
-          <h4>
-            Alerts when points of interest are in the user's vicinity
-          </h4>
-          <p>
-            A tour-guide Web application can use the Geolocation API to monitor
-            the user's position and trigger visual or audio notifications when
-            interesting places are in the vicinity. An online task management
-            system can trigger reminders when the user is in the proximity of
-            landmarks that are associated with certain tasks.
-          </p>
-        </section>
-        <section id="usecase_local_info">
-          <h4>
-            Up-to-date local information
-          </h4>
-          <p>
-            A widget-like Web application that shows the weather or news that
-            are relevant to the user's current area can use the Geolocation API
-            to register for location updates. If the user's position changes,
-            the widget can adapt the content accordingly.
-          </p>
-        </section>
-        <section id="usecase_social_networking">
-          <h4>
-            Location-tagged status updates in social networking applications
-          </h4>
-          <p>
-            A social network application allows its users to automatically tag
-            their status updates with location information. It does this by
-            monitoring the user's position with the Geolocation API. Each user
-            can control the granularity of the location information (e.g. city
-            or neighborhood level) that is shared with the other users. Any
-            user can also track his network of friends and get real-time
-            updates about their current location.
-          </p>
-        </section>
-      </section>
-      <section id="requirements_section" class="informative">
-        <h3>
-          Requirements
+          Find points of interest in the user's area
         </h3>
         <p>
-          The Geolocation API needs to:
+          Someone visiting a foreign city could access a Web application that
+          allows users to search or browse through a database of tourist
+          attractions. Using the Geolocation API, the Web application has
+          access to the user's approximate position and it is therefore able to
+          rank the search results by proximity to the user's location.
         </p>
-        <ol>
-          <li id="req_latlong">provide location data in terms of a pair of
-          latitude and longitude coordinates.
-          </li>
-          <li id="req_accuracy">Provide information about the accuracy of the
-          retrieved location data.
-          </li>
-          <li id="req_oneshot">Support "one-shot" position updates.
-          </li>
-          <li id="req_updates">Allow an application to register to receive
-          updates when the position of the hosting device changes.
-          </li>
-          <li id="req_last_known">Allow an application to request a cached
-          position whose age is no greater than a specified value.
-          </li>
-          <li id="req_errors">Provide a way for the application to receive
-          updates about errors that have occurred while obtaining a location
-          fix.
-          </li>
-          <li id="req_request_acuracy">Allow an application to specify a
-          desired accuracy level of the location information.
-          </li>
-          <li id="req_source_agnostic">Be agnostic to the underlying sources of
-          location information.
-          </li>
-        </ol>
+      </section>
+      <section id="usecase_content_annotation">
+        <h3>
+          Annotating content with location information
+        </h3>
+        <p>
+          A group of friends is hiking through the Scottish highlands. Some of
+          them write short notes and take pictures at various points throughout
+          the journey and store them using a Web application that can work
+          offline on their hand-held devices. Whenever they add new content,
+          the application automatically tags it with location data from the
+          Geolocation API (which, in turn, uses the on-board GPS device). Every
+          time they reach a town or a village, and they are again within
+          network coverage, the application automatically uploads their notes
+          and pictures to a popular blogging website, which uses the
+          geolocation data to construct links that point to a mapping service.
+          Users who follow the group's trip can click on these links to see a
+          satellite view of the area where the notes were written and the
+          pictures were taken. Another example is a life blog where a user
+          creates content (e.g. images, video, audio) that records her every
+          day experiences. This content can be automatically annotated with
+          information such as time, geographic position or even the user's
+          emotional state at the time of the recording.
+        </p>
+      </section>
+      <section id="usecase_show_position">
+        <h3>
+          Show the user's position on a map
+        </h3>
+        <p>
+          A user finds themselves in an unfamiliar city area. They want to
+          check their position so they use their device to navigate to a
+          mapping application that can pinpoint their location on the city map
+          using the Geolocation API. The user then asks the Web application to
+          provide driving directions from their current position to a different
+          destination.
+        </p>
+      </section>
+      <section id="usecase_turn_by_turn">
+        <h3>
+          Turn-by-turn route navigation
+        </h3>
+        <p>
+          A mapping application can help the user navigate along a route by
+          providing detailed turn-by-turn directions. The application does this
+          by registering with the Geolocation API to receive repeated location
+          updates of the user's position. These updates are delivered as soon
+          as the implementing user agent determines that the position of the
+          user has changed, which allows the application to anticipate any
+          changes of direction that the user might need to do.
+        </p>
+      </section>
+      <section id="usecase_local_info">
+        <h3>
+          Up-to-date local information
+        </h3>
+        <p>
+          A widget-like Web application that shows the weather or news that are
+          relevant to the user's current area can use the Geolocation API to
+          register for location updates. If the user's position changes, the
+          widget can adapt the content accordingly.
+        </p>
+      </section>
+      <section id="usecase_social_networking">
+        <h3>
+          Location-tagged status updates in social networking applications
+        </h3>
+        <p>
+          A social network application allows its users to automatically tag
+          their status updates with location information. It does this by
+          monitoring the user's position with the Geolocation API. Each user
+          can control the granularity of the location information (e.g. city or
+          neighborhood level) that is shared with the other users. Any user can
+          also track their network of friends and get real-time updates about
+          their current location.
+        </p>
       </section>
     </section>
     <section id="conformance"></section>
@@ -1251,17 +1223,17 @@
       </h2>
       <p>
         The Geolocation API in this specification builds upon earlier work in
-        the industry, including research by Aza Raskin, the Gears Geolocation
-        API, and LocationAware.org.
+        the industry, including research by Aza Raskin, Google Gears
+        Geolocation API, and LocationAware.org.
       </p>
       <p>
-        Alec Berntson, Alissa Cooper, Steve Block, Greg Bolsinga, Lars Erik
-        Bolstad, Aaron Boodman, Dave Burke, Chris Butler, Max Froumentin, Shyam
-        Habarakada, Marcin Hanclik, Ian Hickson, Brad Lassey, Angel Machin,
-        Cameron McCormack, Daniel Park, Stuart Parmenter, Olli Pettay, Chris
-        Prince, Arun Ranganathan, Aza Raskin, Carl Reed, Thomas Roessler, Dirk
-        Segers, Allan Thomson, Martin Thomson, Doug Turner, Erik Wilde, Matt
-        Womer, and Mohamed Zergaoui.
+        Thanks also to Alec Berntson, Alissa Cooper, Steve Block, Greg
+        Bolsinga, Lars Erik Bolstad, Aaron Boodman, Dave Burke, Chris Butler,
+        Max Froumentin, Shyam Habarakada, Marcin Hanclik, Ian Hickson, Brad
+        Lassey, Angel Machin, Cameron McCormack, Daniel Park, Stuart Parmenter,
+        Olli Pettay, Chris Prince, Arun Ranganathan, Carl Reed, Thomas
+        Roessler, Dirk Segers, Allan Thomson, Martin Thomson, Doug Turner, Erik
+        Wilde, Matt Womer, and Mohamed Zergaoui.
       </p>
     </section>
   </body>
