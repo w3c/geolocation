@@ -597,9 +597,10 @@
           </li>
           <li>Acquire a watch id.
             <ol>
-              <li>If |previous id| was provided, let |watchId| be |previous
-              id|; Otherwise, let |watchId| be an [=implementation-defined=]
-              {{long}} that is greater than or equal to zero.
+              <li>If |previous id| was provided, let |watchId:long| be
+              |previous id|; Otherwise, let |watchId| be an
+              [=implementation-defined=] {{long}} that is greater than or equal
+              to zero.
               </li>
               <li>[=Set/Append=] |watchId| to |watchTasks|.
               </li>
@@ -649,18 +650,18 @@
             <dfn data-local-lt=
             "acquiring a position|acquire a position">Acquire position</dfn>.
             <ol>
-              <li>Let |acquisitionTime| be a new {{DOMTimeStamp}} that
-              represents now in milliseconds, using 01 January, 1970 UTC as the
-              epoch.
+              <li>Let |acquisitionTime:DOMTimeStamp| be a new {{DOMTimeStamp}}
+              that represents now in milliseconds, using 01 January, 1970 UTC
+              as the epoch.
               </li>
               <li>If |options|.{{PositionOptions/maximumAge}} is greater than
               0, and |cachedPosition| is not null:
                 <ol>
-                  <li>Let |cachedPosition| be [=this=]'s
+                  <li>Let |cachedPosition:GeolocationPosition| be [=this=]'s
                   {{Geolocation/[[cachedPosition]]}}.
                   </li>
-                  <li>Let |cacheTime| be |acquisitionTime| minus the value of
-                  |options|.{{PositionOptions/maximumAge}} member.
+                  <li>Let |cacheTime:long| be |acquisitionTime| minus the value
+                  of |options|.{{PositionOptions/maximumAge}} member.
                   </li>
                   <li>If |cachedPosition|'s {{GeolocationPosition/timestamp}}'s
                   value is greater than |cacheTime|, and
@@ -677,7 +678,7 @@
                   </li>
                 </ol>
               </li>
-              <li>Let |timeout| be a new timed [=task=] that runs in
+              <li>Let |timeout:Task| be a new timed [=task=] that runs in
               |options|.{{PositionOptions/timeout}} milliseconds after
               |acquisitionTime|, which performs the following sub-steps:
                 <aside class="note" title="Immediate cancellation">
@@ -706,8 +707,8 @@
                 <ol>
                   <li>If acquiring a position succeeds:
                     <ol>
-                      <li>Let |position| be [=a new `GeolocationPosition`=]
-                      passing |acquisitionTime| and
+                      <li>Let |position:GeolocationPosition| be [=a new
+                      `GeolocationPosition`=] passing |acquisitionTime| and
                       |options|.{{PositionOptions/enableHighAccuracy}}.
                       </li>
                       <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
