@@ -590,9 +590,8 @@
           </li>
           <li data-tests=
           "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-          [=Do permissions check=] passing |errorCallback|.
-          </li>
-          <li>If the checks return failure:
+          [=Do permissions check=] passing |errorCallback|. If the check return
+          failure:
             <ol>
               <li>[=List/Remove=] |watchId| from |watchTasks|.
               </li>
@@ -682,8 +681,6 @@
               </li>
               <li>Clear |timerId| from the [=list of active timers=].
               </li>
-            </ol>
-            <ul>
               <li>
                 <span id="check-repeats">Determine repetition</span>.
                 <ol>
@@ -709,7 +706,7 @@
                   </li>
                 </ol>
               </li>
-            </ul>
+            </ol>
           </li>
         </ol>
       </section>
