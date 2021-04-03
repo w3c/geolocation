@@ -681,32 +681,32 @@
               </li>
               <li>Clear |timerId| from the [=list of active timers=].
               </li>
-              <li>
-                <span id="check-repeats">Determine repetition</span>.
-                <ol>
-                  <li>If |repeats| is false:
-                    <ol>
-                      <li>[=List/Remove=] |watchId| from |watchTasks|.
-                      </li>
-                      <li>Terminate this algorithm.
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
-              <li>Wait for a significant change of position. What constitutes a
-              significant change in position is left to the implementation. A
-              user agents MAY impose a rate limit on the frequency position
-              changes.
-              </li>
-              <li>If |watchTasks| [=list/contain|contains=] |watchId|, then:
-                <ol>
-                  <li>[=Request position=] passing |successCallback|,
-                  |errorCallback|, |options|, |repeats|, and |watchId|.
-                  </li>
-                </ol>
-              </li>
             </ol>
+            <li>
+              <span id="check-repeats">Determine repetition</span>.
+              <ol>
+                <li>If |repeats| is false:
+                  <ol>
+                    <li>[=List/Remove=] |watchId| from |watchTasks|.
+                    </li>
+                    <li>Terminate this algorithm.
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+            <li>Wait for a significant change of position. What constitutes a
+            significant change in position is left to the implementation. A
+            user agents MAY impose a rate limit on the frequency position
+            changes.
+            </li>
+            <li>If |watchTasks| [=list/contain|contains=] |watchId|, then:
+              <ol>
+                <li>[=Request position=] passing |successCallback|,
+                |errorCallback|, |options|, |repeats|, and |watchId|.
+                </li>
+              </ol>
+            </li>
           </li>
         </ol>
       </section>
