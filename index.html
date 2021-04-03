@@ -50,8 +50,8 @@
   <body data-cite="secure-contexts permissions-policy permissions">
     <section id="abstract">
       <p>
-        This specification defines an API that provides scripted access to
-        geographical location information associated with the hosting device.
+        The Geolocation API provides access to geographical location
+        information associated with the hosting device.
       </p>
     </section>
     <section id="sotd">
@@ -69,33 +69,39 @@
       <p>
         The <cite>Geolocation API</cite> defines a high-level interface to
         location information associated only with the device hosting the
-        implementation, such as latitude and longitude. Common sources of
-        location information include Global Positioning System (GPS) and
-        location inferred from network signals such as IP address, RFID, WiFi
-        and Bluetooth MAC addresses, and GSM/CDMA cell IDs, as well as user
-        input. The API itself is agnostic of the underlying location
-        information sources, and no guarantee is given that the API returns the
-        device's actual location.
+        implementation. Common sources of location information include Global
+        Positioning System (GPS) and location inferred from network signals
+        such as IP address, RFID, WiFi and Bluetooth MAC addresses, and
+        GSM/CDMA cell IDs, as well as user input. The API itself is agnostic of
+        the underlying location information sources, and no guarantee is given
+        that the API returns the device's actual location.
       </p>
       <p>
-        If an end user grants permission, the Geolocation API:
+        If an end user [=check permission|grants permission=], the
+        <cite>Geolocation API</cite>:
       </p>
       <ul>
         <li>Provides location data as latitude, longitude, altitude, speed, and
         heading, as well as the accuracy of the retrieved location data, and
-        the time when the position was acquired.
+        the approximate time for when the position was acquired via the
+        {{GeolocationPosition} interface.
         </li>
-        <li>Supports "one-shot" position updates and the ability to receive
-        updates when the position of the hosting device significantly changes.
+        <li>Supports "one-shot" position updates via the
+        {{Geolocation/getCurrentPosition()}} method. And the ability to receive
+        updates for when the position of the hosting device significantly
+        changes via the {{Geolocation/watchPosition()}} method.
         </li>
-        <li>Allows an application to request a cached position whose age is no
+        <li>Using the {{PositionOptions}}'s {{PositionOptions/maximumAge}},
+        allows an application to request a cached position whose age is no
         greater than a specified value (only the last position is cached).
         </li>
-        <li>Provides a way for the application to receive updates about errors
-        that have occurred while obtaining a location fix.
+        <li>Provides a way for the application to receive updates about errors,
+        as a {{GeolocationPositionError}}, that have occurred while [=acquiring
+        a position=].
         </li>
-        <li>Supports requesting "high accuracy" position data, though the
-        request can be ignored by the user agent.
+        <li>And through {{PositionOptions/enableHighAccuracy}}, supports
+        requesting "high accuracy" position data, though the request can be
+        ignored by the user agent.
         </li>
       </ul>
       <section id="scope" class="informative">
@@ -118,26 +124,26 @@
         </h2>
         <p>
           Since publication of the Second Edition in 2016, this specification
-          has undergone the following changes:
+          has received the following changes:
         </p>
         <ul>
-          <li>Geolocation updates only occur when a document is visible, or the
-          document becomes visible.
+          <li>[=Request position=] only proceeds when a document is visible, or
+          the document becomes visible.
           </li>
-          <li>Clarified how caching works: only last position is cached, and
-          can be evicted at any time.
+          <li>Clarified how caching works as part of [=acquiring a position=]:
+          only last position is cached, and can be evicted at any time.
           </li>
-          <li>Depend on the [[[Permissions]]] specification to handle
-          permission grants.
+          <li>Now relies on the [[[Permissions]]] specification to handle
+          permission grants, and user interface requirements.
           </li>
-          <li>The `errorCallback` can now be set to `null`.
+          <li>The `errorCallback` is now nullable.
           </li>
           <li>The API can be controlled by [[[Permissions-Policy]]], which
           restricts how/where the API is exposed to web pages.
           </li>
           <li>The `callbacks` are no longer treated as "EventHandler" objects
           (i.e., objects that have a `.handleEvent()` method), but are now
-          always treated as proper callback functions in JavaScript.
+          exclusively treated as IDL callback functions.
           </li>
           <li>The API is now only exposed in Secure Contexts (i.e., only
           available in HTTPS).
@@ -161,23 +167,18 @@
       </h2>
       <p>
         The API is designed to enable both "one-shot" position requests and
-        repeated position updates, as well as the ability to explicitly query
-        the cached positions. Location information is represented by latitude
-        and longitude coordinates.
-      </p>
-      <p>
-        The following examples illustrate how the API can be used in various
-        common scenarios.
+        repeated position updates. The following examples illustrate common use
+        cases.
       </p>
       <section class="informative">
         <h3>
-          "One-shot" position request
+          Get current position
         </h3>
+        <p>
+          Request the user's current location. If the user allows it, you will
+          get back a position object.
+        </p>
         <aside class="example" title="A one-shot position request">
-          <p>
-            Request the user's current location. If the user allows it, you
-            will get back a position object.
-          </p>
           <pre class="js">
             navigator.geolocation.getCurrentPosition(position =&gt; {
               const { latitude, longitude } = position.coords;
@@ -188,7 +189,7 @@
       </section>
       <section class="informative">
         <h3>
-          Watching a position
+          Watch a position
         </h3>
         <p>
           Request the ability to watch user's current location. If the user
@@ -215,6 +216,10 @@
         </p>
         <aside class="example" title="Using clearWatch()">
           <pre class="js">
+            const watchId = navigator.geolocation.watchPosition(
+              position =&gt; console.log(position)
+            );
+
             function buttonClickHandler() {
               // Cancel the updates when the user clicks a button.
               navigator.geolocation.clearWatch(watchId);
@@ -235,7 +240,9 @@
           Handling errors
         </h3>
         <p>
-          When an error occur, the error callbacks get called with a
+          When an error occur, the second argument of the
+          {{Geolocation/watchPosition()}} or
+          {{Geolocation/getCurrentPosition()}} method gets called with a
           {{GeolocationPositionError}} error, which can help you figure out
           what might have gone wrong.
         </p>
@@ -261,11 +268,9 @@
                 case GeolocationPositionError.PERMISSION_DENIED:
                   // User denied the request.
                   break;
-                case POSITION_UNAVAILABLE:
+                case GeolocationPositionError.POSITION_UNAVAILABLE:
                   // Position not available.
                   break;
-                default:
-                  // Anything else...
               }
             }
           </pre>
@@ -297,6 +302,49 @@
           </pre>
         </aside>
       </section>
+      <section>
+        <h2>
+          Using `timeout`
+        </h2>
+        <p>
+          If you require location information in a time sensitive manner, you
+          can use the {{PositionOptions}} {{PositionOptions/timeout}} member to
+          limit the amount of time you are willing to wait to [=acquire a
+          position=].
+        </p>
+        <aside class="example" title="Timing out a position request">
+          <pre class="js">
+            // Request a position. We are only willing to wait 10
+            // seconds for it.
+            navigator.geolocation.getCurrentPosition(
+              successCallback,
+              errorCallback,
+              { timeout: 10000 }
+            );
+
+            function successCallback(position) {
+              // Request finished in under 10 seconds...
+            }
+
+            function errorCallback(error) {
+              switch (error.code) {
+                case GeolocationPositionError.TIMEOUT:
+                  // We didn't get it in a timely fashion.
+                  doFallback();
+                  // Acquire a new position object,
+                  // as long as it takes.
+                  navigator.geolocation.getCurrentPosition(
+                    successCallback, errorCallback
+                  );
+                  break;
+                case "...": // treat the other error cases.
+              }
+            }
+
+            function doFallback() {}
+          </pre>
+        </aside>
+      </section>
       <section class="informative">
         <h3>
           Enabling the API in third-party contexts
@@ -320,8 +368,8 @@
           </pre>
         </aside>
         <p>
-          Alternatively, the Geolocation API can be disabled in a first-party
-          context by specifying the a HTTP response header:
+          Alternatively, the API can be disabled in a first-party context by
+          specifying the a HTTP response header:
         </p>
         <aside class="example" title="Permissions Policy over HTTP">
           <pre class="http">
@@ -354,9 +402,9 @@
           developers utilizing the <cite>Geolocation API</cite>. Although it's
           impossible for user agent, or this specification, to enforce these
           requirements, developers need to read this section carefully and do
-          their best to adhere to the recommendations below. Developers need to
-          be aware that there might be privacy laws in their jurisdictions that
-          can govern the usage and access to user's location data.
+          their best to adhere to the suggestions below. Developers need to be
+          aware that there might be privacy laws in their jurisdictions that
+          can govern the usage and access to users' location data.
         </p>
         <p>
           Recipients ought to only request position information when necessary,
@@ -402,7 +450,7 @@
           Mitigation and in-depth defensive measures are an implementation
           responsibility and not prescribed by this specification. However, in
           designing these measures, implementers are advised to enable user
-          awareness of location sharing, and to provide easy access to
+          awareness of location sharing, and to provide access to user
           interfaces that enable revocation of permissions.
         </p>
       </section>
@@ -480,8 +528,8 @@
               <dfn data-dfn-for="Geolocation">[[\watchTasks]]</dfn>
             </td>
             <td>
-              Initialized as an [=set=], with {{unsigned long}} for the keys
-              representing the id of a timed task.
+              Initialized as an empty [=set=], with {{unsigned long}} for the
+              [=set/item=] representing the identifier of a timed [=task=].
             </td>
           </tr>
         </table>
@@ -550,10 +598,9 @@
           </li>
           <li>Acquire a watch id.
             <ol>
-              <li>If |previous id| was provided and |repeats| is true, let
-              |watchId| be |previous id|; Otherwise, let |watchId| be an
-              [=implementation-defined=] {{long}} that is greater than or equal
-              to zero.
+              <li>If |previous id| was provided, let |watchId| be |previous
+              id|; Otherwise, let |watchId| be an [=implementation-defined=]
+              {{long}} that is greater than or equal to zero.
               </li>
               <li>[=Set/Append=] |watchId| to |watchTasks|.
               </li>
@@ -590,7 +637,7 @@
           </li>
           <li data-tests=
           "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-          [=Do permissions check=] passing |errorCallback|. If the check return
+          [=Check permission=] passing |errorCallback|. If the check return
           failure:
             <ol>
               <li>[=List/Remove=] |watchId| from |watchTasks|.
@@ -599,7 +646,9 @@
               </li>
             </ol>
           </li>
-          <li>Acquire position.
+          <li>
+            <dfn data-local-lt=
+            "acquiring a position|acquire a position">Acquire position</dfn>.
             <ol>
               <li>Let |acquisitionTime| be a new {{DOMTimeStamp}} that
               represents now in milliseconds, using 01 January, 1970 UTC as the
@@ -614,9 +663,9 @@
                   <li>Let |cacheTime| be |acquisitionTime| minus the value of
                   |options|.{{PositionOptions/maximumAge}} member.
                   </li>
-                  <li>if |cachedPosition|'s {{GeolocationPosition/timestamp}}'s
+                  <li>If |cachedPosition|'s {{GeolocationPosition/timestamp}}'s
                   value is greater than |cacheTime|, and
-                  |cachedPosition|{{GeolocationPosition/[[isHighAccuracy]]}}
+                  |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
                   equals |options|.{{PositionOptions/enableHighAccuracy}}:
                     <ol>
                       <li>[=Queue a microtask=] to invoke |successCallback|
@@ -682,40 +731,40 @@
               <li>Clear |timerId| from the [=list of active timers=].
               </li>
             </ol>
-            <li>
-              <span id="check-repeats">Determine repetition</span>.
-              <ol>
-                <li>If |repeats| is false:
-                  <ol>
-                    <li>[=List/Remove=] |watchId| from |watchTasks|.
-                    </li>
-                    <li>Terminate this algorithm.
-                    </li>
-                  </ol>
-                </li>
-              </ol>
-            </li>
-            <li>Wait for a significant change of position. What constitutes a
-            significant change in position is left to the implementation. A
-            user agents MAY impose a rate limit on the frequency position
-            changes.
-            </li>
-            <li>If |watchTasks| [=list/contain|contains=] |watchId|, then:
-              <ol>
-                <li>[=Request position=] passing |successCallback|,
-                |errorCallback|, |options|, |repeats|, and |watchId|.
-                </li>
-              </ol>
-            </li>
+          </li>
+          <li>
+            <span id="check-repeats">Determine repetition</span>.
+            <ol>
+              <li>If |repeats| is false:
+                <ol>
+                  <li>[=List/Remove=] |watchId| from |watchTasks|.
+                  </li>
+                  <li>Terminate this algorithm.
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>Wait for a significant change of geographic position. What
+          constitutes a significant change in geographic position is left to
+          the implementation. A user agents MAY impose a rate limit on the
+          frequency position changes.
+          </li>
+          <li>If |watchTasks| [=list/contain|contains=] |watchId|, then:
+            <ol>
+              <li>[=Request position=] passing |successCallback|,
+              |errorCallback|, |options|, |repeats|, and |watchId|.
+              </li>
+            </ol>
           </li>
         </ol>
       </section>
       <section>
         <h2>
-          Permissions check
+          Check permission
         </h2>
         <p>
-          When instructed to <dfn>do permissions check</dfn>, given an
+          When instructed to <dfn>check permission</dfn>, given an
           {{PositionErrorCallback}}`?` |errorCallback:PositionErrorCallback|:
         </p>
         <ol class="algorithm">
@@ -772,17 +821,21 @@
         </h2>
         <p data-tests="PositionOptions.https.html">
           The <dfn>enableHighAccuracy</dfn> member provides a hint that the
-          application would like to receive the best possible results. This MAY
-          result in slower response times or increased power consumption. The
-          user might also disable this capability, or the device might not be
-          able to provide more accurate results than if the flag wasn't
-          specified. The intended purpose of this member is to allow
-          applications to inform the implementation that they do not require
-          high accuracy geolocation fixes and, therefore, the implementation
-          can avoid using geolocation providers that consume a significant
-          amount of power (e.g. GPS). This is especially useful for
-          applications running on battery-powered devices.
+          application would like to receive the most accurate location data.
+          The intended purpose of this member is to allow applications to
+          inform the implementation that they do not require high accuracy
+          geolocation fixes and, therefore, the implementation MAY avoid using
+          geolocation providers that consume a significant amount of power
+          (e.g. GPS).
         </p>
+        <aside class="note" title="A word of warning about enableHighAccuracy">
+          <p>
+            The `enableHighAccuracy` member can result in slower response times
+            or increased power consumption. The user might also disable this
+            capability, or the device might not be able to provide more
+            accurate results than if the flag wasn't specified.
+          </p>
+        </aside>
       </section>
       <section>
         <h2>
@@ -790,12 +843,14 @@
         </h2>
         <p data-tests="PositionOptions.https.html">
           The <dfn>timeout</dfn> member denotes the maximum length of time,
-          expressed in milliseconds, before acquiring a position expires. Note
-          that the time spent waiting for the document to become visible and
-          for [=do permissions checks|obtaining the user permission=] is not
+          expressed in milliseconds, before [=acquiring a position=] expires.
+        </p>
+        <p class="Note">
+          The time spent waiting for the document to become visible and for
+          [=check permission|obtaining permission to use the API=] is not
           included in the period covered by the {{PositionOptions/timeout}}
-          member. The {{PositionOptions/timeout}} member only applies to the
-          location acquisition operation.
+          member. The {{PositionOptions/timeout}} member only applies when
+          [=acquiring a position=] begins.
         </p>
       </section>
       <section>
@@ -825,8 +880,7 @@
           `coords` attribute
         </h3>
         <p>
-          The <dfn>coords</dfn> attribute contains a set of geographic
-          coordinates.
+          The <dfn>coords</dfn> attribute contains geographic coordinates.
         </p>
       </section>
       <section>
@@ -843,8 +897,8 @@
           Internal Slots
         </h2>
         <p>
-          Instances of {{Geolocation}} are created with the internal slots in
-          the following table:
+          Instances of {{GeolocationPositionError}} are created with the
+          internal slots in the following table:
         </p>
         <table class="data">
           <tr>
@@ -860,9 +914,9 @@
               <dfn data-dfn-for="GeolocationPosition">[[\isHighAccuracy]]</dfn>
             </td>
             <td>
-              A {{boolean}} representing if the this {{GeolocationPosition}}
-              was created using the {{PositionOptions/enableHighAccuracy}}
-              option.
+              A {{boolean}} that records the value of the
+              {{PositionOptions/enableHighAccuracy}} member when this
+              {{GeolocationPosition}} is [=a new GeolocationPosition|created=].
             </td>
           </tr>
         </table>
@@ -894,7 +948,7 @@
         </p>
         <p>
           The <dfn>accuracy</dfn> attribute denotes the accuracy level of the
-          latitude and longitude coordinates in meters.
+          latitude and longitude coordinates in meters (e.g., `65` meters).
         </p>
       </section>
       <section>
@@ -907,7 +961,7 @@
         </p>
         <p>
           The <dfn>altitudeAccuracy</dfn> attribute represents the altitude
-          accuracy in meters.
+          accuracy in meters (e.g., `10` meters).
         </p>
       </section>
       <section>
@@ -1011,25 +1065,22 @@
             <dfn>PERMISSION_DENIED</dfn> (numeric value 1)
           </dt>
           <dd>
-            The location acquisition process failed because the document does
-            not have permission to use the Geolocation API.
+            [=Request position=] failed because the user denied permission to
+            use the API.
           </dd>
           <dt>
             <dfn>POSITION_UNAVAILABLE</dfn> (numeric value 2)
           </dt>
           <dd>
-            The position of the device could not be determined. For instance,
-            one or more of the location providers used in the location
-            acquisition process reported an internal error that caused the
-            process to fail entirely.
+            [=Acquire a position=] failed.
           </dd>
           <dt>
             <dfn>TIMEOUT</dfn> (numeric value 3)
           </dt>
           <dd>
             The length of time specified by the {{PositionOptions/timeout}}
-            property has elapsed before the implementation could successfully
-            acquire a new {{GeolocationPosition}} object.
+            member has elapsed before the user agent could successfully
+            [=acquire a position=].
           </dd>
         </dl>
       </section>
@@ -1039,7 +1090,7 @@
         </h4>
         <p>
           The <dfn>code</dfn> attribute returns the value it was initialized to
-          (see [[[#constants]]]).
+          (see [[[#constants]]] for possible values).
         </p>
       </section>
       <section>
@@ -1055,9 +1106,9 @@
             The purpose of {{GeolocationPositionError}}'s
             {{GeolocationPositionError/message}} attribute is to assist
             developers with debugging. As such, these error messages are not
-            written in a manner that would make sense if presented to an end
-            user. Furthermore, the text of these error messages is not
-            localized.
+            provided by the user agent in a manner that would make sense if
+            presented to an end user. To make matters worse, the text of these
+            error messages is not localized.
           </p>
           <p>
             To create user-friendly localized error messages, please leverage
@@ -1087,9 +1138,9 @@
         Acknowledgments
       </h2>
       <p>
-        The Geolocation API in this specification builds upon earlier work in
-        the industry, including research by Aza Raskin, Google Gears
-        Geolocation API, and LocationAware.org.
+        This specification builds upon earlier work in the industry, including
+        research by Aza Raskin, Google Gears Geolocation API, and
+        LocationAware.org.
       </p>
       <p>
         Thanks also to Alec Berntson, Alissa Cooper, Steve Block, Greg
