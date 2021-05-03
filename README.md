@@ -17,7 +17,8 @@ This HTTPs-only API exposes the `navigator.geolocation` object with a couple of 
 - `.clearWatch(someId)` - allows you to stop watching for location changes.
 
 No location information is made available through this API without the user's permission.
-### .getCurrentPosition() method
+
+### `navigator.geolocation.getCurrentPosition()` method
 
 Request the user's current location. If the user allows it, you will get back a position object.
 
@@ -28,7 +29,7 @@ navigator.geolocation.getCurrentPosition(position => {
 });
 ```
 
-### .watchPosition() method
+### `navigator.geolocation.watchPosition()` method
 
 Request the ability to watch user's current location. If the user allows it, you will get back continuos updates of the user's position.
 
@@ -39,7 +40,7 @@ const watchId = navigator.geolocation.watchPosition(position => {
 });
 ```
 
-### .clearWatch() method
+### `navigator.geolocation.clearWatch()` method
 
 Finally, stop watching the user's location.
 
