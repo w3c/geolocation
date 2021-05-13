@@ -1107,15 +1107,11 @@
           <p>
             The purpose of {{GeolocationPositionError}}'s
             {{GeolocationPositionError/message}} attribute is to assist
-            developers with debugging. As such, these error messages are not
-            provided by the user agent in a manner that would make sense if
-            presented to an end user. To make matters worse, the text of these
-            error messages is not localized.
-          </p>
-          <p>
-            To create user-friendly localized error messages, please leverage
-            the {{GeolocationPositionError}}'s
-            {{GeolocationPositionError/code}} attribute instead.
+            developers with debugging. For legacy reasons, this attribute does
+            not supply language or base direction metadata and is only
+            localized into English. Developers are advised to use
+            {{GeolocationPositionError}}'s {{GeolocationPositionError/code}}
+            attribute to create a localized experience.
           </p>
         </aside>
       </section>
