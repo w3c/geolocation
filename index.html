@@ -599,7 +599,7 @@
           <li>Acquire a watch id.
             <ol>
               <li>If |previous id| was provided, let |watchId:long| be
-              |previous id|; Otherwise, let |watchId| be an
+              |previous id|; Otherwise, let |watchId:long| be an
               [=implementation-defined=] {{long}} that is greater than or equal
               to zero.
               </li>
@@ -697,8 +697,8 @@
                   </li>
                 </ol>
               </li>
-              <li>Let |timerId| be an [=implementation-defined=] identifier
-              that represents |timeout|.
+              <li>Let |timerId:long| be an [=implementation-defined=]
+              identifier that represents |timeout|.
               </li>
               <li>Add |timerId| to the [=list of active timers=].
               </li>
@@ -796,9 +796,9 @@
         <ol class="algorithm">
           <li>If |callback| is null, return.
           </li>
-          <li>Let |error| be a a newly created {{GeolocationPositionError}}
-          instance whose {{GeolocationPositionError/code}} attribute is
-          initialized to |code|.
+          <li>Let |error:GeolocationPositionError| be a a newly created
+          {{GeolocationPositionError}} instance whose
+          {{GeolocationPositionError/code}} attribute is initialized to |code|.
           </li>
           <li>[=Invoke=] |callback| with |error|.
           </li>
@@ -995,8 +995,8 @@
           |isHighAccuracy| by performing the following steps:
         </p>
         <ol class="algorithm">
-          <li>Let |coords| be a newly created {{GeolocationCoordinates}}
-          instance:
+          <li>Let |coords:GeolocationCoordinates| be a newly created
+          {{GeolocationCoordinates}} instance:
             <ol>
               <li>Initialize |coord|'s {{GeolocationCoordinates/latitude}}
               attribute to a geographic coordinate in decimal degrees.
