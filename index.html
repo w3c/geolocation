@@ -87,7 +87,7 @@
         {{GeolocationPosition}} interface.
         </li>
         <li>Supports "one-shot" position updates via the
-        {{Geolocation/getCurrentPosition()}} method. And the ability to receive
+        {{Geolocation/getCurrentPosition()}} method and the ability to receive
         updates for when the position of the hosting device significantly
         changes via the {{Geolocation/watchPosition()}} method.
         </li>
@@ -292,7 +292,7 @@
             navigator.geolocation.getCurrentPosition(
               successCallback,
               console.error,
-              { maximumAge: 600000 }
+              { maximumAge: 600_000 }
             );
 
             function successCallback(position) {
@@ -319,7 +319,7 @@
             navigator.geolocation.getCurrentPosition(
               successCallback,
               errorCallback,
-              { timeout: 10000 }
+              { timeout: 10_000 }
             );
 
             function successCallback(position) {
@@ -355,7 +355,7 @@
           from using the API.
         </p>
         <p>
-          Third-party usage can be selectively enabled by adding
+          Third-party usage can be selectively enabled by adding the
           [^iframe/allow^]`="geolocation"` attribute to an [^iframe^] element:
         </p>
         <aside class="example" title=
@@ -369,7 +369,7 @@
         </aside>
         <p>
           Alternatively, the API can be disabled in a first-party context by
-          specifying the a HTTP response header:
+          specifying an HTTP response header:
         </p>
         <aside class="example" title="Permissions Policy over HTTP">
           <pre class="http">
@@ -400,7 +400,7 @@
         "Developers' responsibility with this sensitive data">
           This section applies to "recipients", which generally means
           developers utilizing the <cite>Geolocation API</cite>. Although it's
-          impossible for user agent, or this specification, to enforce these
+          impossible for the user agent, or this specification, to enforce these
           requirements, developers need to read this section carefully and do
           their best to adhere to the suggestions below. Developers need to be
           aware that there might be privacy laws in their jurisdictions that
@@ -417,7 +417,7 @@
           information.
         </p>
         <p>
-          The recipient of location information need to refrain from
+          The recipients of location information need to refrain from
           retransmitting the location information without the user’s express
           permission. Care needs to be taken when retransmitting and the use of
           encryption is encouraged.
@@ -684,7 +684,7 @@
               |acquisitionTime|, which performs the following sub-steps:
                 <aside class="note" title="Immediate cancellation">
                   <p>
-                    A |options|.{{PositionOptions/timeout}} value 0 effectively
+                    An |options|.{{PositionOptions/timeout}} value 0 effectively
                     runs the |timeout| task immediately.
                   </p>
                 </aside>
@@ -765,7 +765,7 @@
           Check permission
         </h2>
         <p>
-          When instructed to <dfn>check permission</dfn>, given an
+          When instructed to <dfn>check permission</dfn>, given a
           {{PositionErrorCallback}}`?` |errorCallback:PositionErrorCallback|:
         </p>
         <ol class="algorithm">
@@ -796,7 +796,7 @@
         <ol class="algorithm">
           <li>If |callback| is null, return.
           </li>
-          <li>Let |error:GeolocationPositionError| be a a newly created
+          <li>Let |error:GeolocationPositionError| be a newly created
           {{GeolocationPositionError}} instance whose
           {{GeolocationPositionError/code}} attribute is initialized to |code|.
           </li>
@@ -827,7 +827,7 @@
           inform the implementation that they do not require high accuracy
           geolocation fixes and, therefore, the implementation MAY avoid using
           geolocation providers that consume a significant amount of power
-          (e.g. GPS).
+          (e.g., GPS).
         </p>
         <aside class="note" title="A word of warning about enableHighAccuracy">
           <p>
@@ -1025,10 +1025,10 @@
               implementation cannot provide speed information.
               </li>
               <li>Initialize |coord|'s {{GeolocationCoordinates/heading}}
-              attribute in degrees, or `null` implementation cannot provide
-              heading information. If the hosting device is stationary (i.e.
-              the value of the {{GeolocationCoordinates/speed}} attribute is
-              0), then initialize the {{GeolocationCoordinates/heading}} to
+              attribute in degrees, or `null` if the implementation cannot
+              provide heading information. If the hosting device is stationary
+              (i.e., the value of the {{GeolocationCoordinates/speed}} attribute
+              is 0), then initialize the {{GeolocationCoordinates/heading}} to
               `NaN`.
               </li>
             </ol>
