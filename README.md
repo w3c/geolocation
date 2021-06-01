@@ -31,7 +31,7 @@ navigator.geolocation.getCurrentPosition(position => {
 
 ### `navigator.geolocation.watchPosition()` method
 
-Request the ability to watch user's current location. If the user allows it, you will get back continuos updates of the user's position.
+Request the ability to watch user's current location. If the user allows it, you will get back continuous updates of the user's position.
 
 ```JS
 const watchId = navigator.geolocation.watchPosition(position => {
