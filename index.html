@@ -670,8 +670,9 @@
                       |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
                       equals |options|.{{PositionOptions/enableHighAccuracy}}:
                         <ol>
-                          <li>[=Queue a microtask=] with a step that
-                          [=invokes=] |successCallback| with |cachedPosition|.
+                          <li>[=Queue a task=] on the [=geolocation task
+                          source=] with a step that [=invokes=]
+                          |successCallback| with |cachedPosition|.
                           </li>
                           <li>Go to <a href="#check-repeats">determine
                           repetition</a> steps below.
@@ -716,8 +717,9 @@
                           <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}}
                           to |position|.
                           </li>
-                          <li>[=Queue a microtask=] with a step that
-                          [=invokes=] |successCallback| with |position|.
+                          <li>[=Queue a task=] on the [=geolocation task
+                          source=] with a step that [=invokes=]
+                          |successCallback| with |position|.
                           </li>
                         </ol>
                       </li>
@@ -806,8 +808,8 @@
           {{GeolocationPositionError}} instance whose
           {{GeolocationPositionError/code}} attribute is initialized to |code|.
           </li>
-          <li>[=Queue a microtask=] with a step that [=invokes=] |callback| with
-          |error|.
+          <li>[=Queue a task=] on the [=geolocation task source=] with a step
+          that [=invokes=] |callback| with |error|.
           </li>
         </ol>
       </section>
@@ -928,6 +930,24 @@
             </td>
           </tr>
         </table>
+      </section>
+      <section>
+        <h2>
+          Task sources
+        </h2>
+        <p>
+          The following [=task source=] is defined by this specifications.
+        </p>
+        <dl>
+          <dt>
+            The <dfn>geolocation task source</dfn>
+          </dt>
+          <dd>
+            Used by this specification to queue up non-blocking
+            {{PositionCallback}} and {{PositionErrorCallback}} when performing
+            [=position requests=].
+          </dd>
+        </dl>
       </section>
     </section>
     <section id="coordinates_interface" data-dfn-for="GeolocationCoordinates">
