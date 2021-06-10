@@ -590,14 +590,14 @@
           |successCallback:PositionCallback|, a {{PositionErrorCallback}}`?`
           |errorCallback:PositionErrorCallback|, {{PositionOptions}}
           |options:PositionOptions|, a {{boolean}} |repeats:boolean|, and
-          optionally (and only if |repeats| is true) a |previous id:long|.
+          optionally (and only if |repeats| is true) a |previousId:long|.
         </p>
         <ol class="algorithm">
           <li>Let |watchTasks:Set| be [=this=]'s
           {{Geolocation/[[watchTasks]]}}.
           </li>
-          <li>If |previous id| was provided, let |watchId:long| be |previous
-          id|; Otherwise, let |watchId:long| be an [=implementation-defined=]
+          <li>If |previousId| was provided, let |watchId:long| be |previousId|;
+          Otherwise, let |watchId:long| be an [=implementation-defined=]
           {{long}} that is greater than or equal to zero.
           </li>
           <li>[=Set/Append=] |watchId| to |watchTasks|.
