@@ -541,7 +541,9 @@
         </h2>
         <p data-tests=
         "getCurrentPosition_IDL.https.html, getCurrentPosition_TypeError.html">
-          When <dfn>getCurrentPosition()</dfn> is invoked, the user agent MUST:
+          The <dfn>getCurrentPosition</dfn>(|successCallback:PositionCallback|,
+          |errorCallback:PositionErrorCallback|, |options:PositionOptions|)
+          method steps are:
         </p>
         <ol class="algorithm">
           <li>[=Request position=], passing |successCallback|, |errorCallback|,
@@ -557,7 +559,9 @@
         </h2>
         <p data-tests=
         "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-          When <dfn>watchPosition()</dfn> is invoked, the user agent MUST:
+          The <dfn>watchPosition</dfn>(|successCallback:PositionCallback|,
+          |errorCallback:PositionErrorCallback|, |options:PositionOptions|)
+          method steps are:
         </p>
         <ol class="algorithm">
           <li>Let |watchId:long| be [=request position=], passing
