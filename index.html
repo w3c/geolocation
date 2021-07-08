@@ -127,6 +127,9 @@
           has received the following changes:
         </p>
         <ul>
+          <li>Added the [=geolocation task source=], which handles dispatching
+          position updates and errors.
+          </li>
           <li>[=Request position=] only proceeds when a document is visible, or
           the document becomes visible.
           </li>
@@ -606,7 +609,10 @@
           </li>
           <li>[=Set/Append=] |watchId| to |watchTasks|.
           </li>
-          <li>Run these steps [=in parallel=]:
+          <li>Let |global| be [=this=]'s [=relevant global object=].
+          </li>
+          <li>[=Queue a global task=] using the [=geolocation task source=]
+          with |global| to run the following steps [=in parallel=]:
             <ol>
               <li>Do security check.
                 <ol>
