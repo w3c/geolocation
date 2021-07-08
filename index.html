@@ -118,6 +118,9 @@
           has received the following changes:
         </p>
         <ul>
+          <li>Added the [=geolocation task source=], which handles dispatching
+          position updates and errors.
+          </li>
           <li>[=Request position=] only proceeds when a document is visible, or
           the document becomes visible.
           </li>
@@ -585,153 +588,54 @@
           |successCallback:PositionCallback|, a {{PositionErrorCallback}}`?`
           |errorCallback:PositionErrorCallback|, {{PositionOptions}}
           |options:PositionOptions|, a {{boolean}} |repeats:boolean|, and
-          optionally (and only if |repeats| is true) a |previous id:long|.
+          optionally (and only if |repeats| is true) a |previousId:long|.
         </p>
         <ol class="algorithm">
           <li>Let |watchTasks:Set| be [=this=]'s
           {{Geolocation/[[watchTasks]]}}.
           </li>
-          <li>Acquire a watch id.
-            <ol>
-              <li>If |previous id| was provided, let |watchId:long| be
-              |previous id|; Otherwise, let |watchId:long| be an
-              [=implementation-defined=] {{long}} that is greater than or equal
-              to zero.
-              </li>
-              <li>[=Set/Append=] |watchId| to |watchTasks|.
-              </li>
-              <li>Return |watchId| and continue [=in parallel=].
-              </li>
-            </ol>
+          <li>If |previousId| was provided, let |watchId:long| be |previousId|;
+          Otherwise, let |watchId:long| be an [=implementation-defined=]
+          {{long}} that is greater than or equal to zero.
           </li>
-          <li>Do security check.
+          <li>[=Set/Append=] |watchId| to |watchTasks|.
+          </li>
+          <li>Let |global| be [=this=]'s [=relevant global object=].
+          </li>
+          <li>[=Queue a global task=] using the [=geolocation task source=]
+          with |global| to run the following steps [=in parallel=]:
             <ol>
-              <li>If the <a>environment settings object</a> is a
-                <a data-cite="secure-contexts">non-secure context</a>, then:
+              <li>Do security check.
                 <ol>
-                  <li>[=Call back with error=] |errorCallback| and
-                  {{GeolocationPositionError/PERMISSION_DENIED}}.
-                  </li>
-                  <li>[=List/Remove=] |watchId| from |watchTasks|.
-                  </li>
-                  <li>Terminate this algorithm.
-                  </li>
-                </ol>
-              </li>
-            </ol>
-          </li>
-          <li data-cite="page-visibility-2">Wait for document to become
-          visible.
-            <ol>
-              <li>Let |document:Document| be the [=current settings object=]'s
-              [=associated Document=].
-              </li>
-              <li>If |document:Document| is [=Document/hidden=], wait for the
-              |document| to become [=Document/visible=].
-              </li>
-            </ol>
-          </li>
-          <li data-tests=
-          "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-          [=Check permission=] passing |errorCallback|. If the check return
-          failure:
-            <ol>
-              <li>[=List/Remove=] |watchId| from |watchTasks|.
-              </li>
-              <li>Terminate this algorithm.
-              </li>
-            </ol>
-          </li>
-          <li>
-            <dfn data-local-lt=
-            "acquiring a position|acquire a position">Acquire position</dfn>.
-            <ol>
-              <li>Let |acquisitionTime:DOMTimeStamp| be a new {{DOMTimeStamp}}
-              that represents now in milliseconds, using 01 January, 1970 UTC
-              as the epoch.
-              </li>
-              <li>If |options|.{{PositionOptions/maximumAge}} is greater than
-              0, and |cachedPosition| is not null:
-                <ol>
-                  <li>Let |cachedPosition:GeolocationPosition| be [=this=]'s
-                  {{Geolocation/[[cachedPosition]]}}.
-                  </li>
-                  <li>Let |cacheTime:long| be |acquisitionTime| minus the value
-                  of |options|.{{PositionOptions/maximumAge}} member.
-                  </li>
-                  <li>If |cachedPosition|'s {{GeolocationPosition/timestamp}}'s
-                  value is greater than |cacheTime|, and
-                  |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
-                  equals |options|.{{PositionOptions/enableHighAccuracy}}:
+                  <li>If the <a>environment settings object</a> is a
+                  <a data-cite="secure-contexts">non-secure context</a>, then:
                     <ol>
-                      <li>[=Queue a microtask=] to invoke |successCallback|
-                      with |cachedPosition|.
+                      <li>[=Call back with error=] |errorCallback| and
+                      {{GeolocationPositionError/PERMISSION_DENIED}}.
                       </li>
-                      <li>Go to <a href="#check-repeats">determine
-                      repetition</a> steps below.
+                      <li>[=List/Remove=] |watchId| from |watchTasks|.
+                      </li>
+                      <li>Terminate this algorithm.
                       </li>
                     </ol>
                   </li>
                 </ol>
               </li>
-              <li>Let |timeout:Task| be a new timed [=task=] that runs in
-              |options|.{{PositionOptions/timeout}} milliseconds after
-              |acquisitionTime|, which performs the following sub-steps:
-                <aside class="note" title="Immediate cancellation">
-                  <p>
-                    An |options|.{{PositionOptions/timeout}} value 0
-                    effectively runs the |timeout| task immediately.
-                  </p>
-                </aside>
+              <li data-cite="page-visibility-2">Wait for document to become
+              visible.
                 <ol>
-                  <li>If the entry for |timerId| in the [=list of active
-                  timers=] has been cleared, then abort these steps.
+                  <li>Let |document:Document| be the [=current settings
+                  object=]'s [=associated Document=].
                   </li>
-                  <li>[=Call back with error=] with |errorCallback| and
-                  {{GeolocationPositionError/TIMEOUT}}.
+                  <li>If |document:Document| is [=Document/hidden=], wait for
+                  the |document| to become [=Document/visible=].
                   </li>
                 </ol>
               </li>
-              <li>Let |timerId:long| be an [=implementation-defined=]
-              identifier that represents |timeout|.
-              </li>
-              <li>Add |timerId| to the [=list of active timers=].
-              </li>
-              <li>Try to acquire the device's position, optionally taking into
-              consideration the value of
-              |options|.{{PositionOptions/enableHighAccuracy}}:
-                <ol>
-                  <li>If acquiring a position succeeds:
-                    <ol>
-                      <li>Let |position:GeolocationPosition| be [=a new
-                      `GeolocationPosition`=] passing |acquisitionTime| and
-                      |options|.{{PositionOptions/enableHighAccuracy}}.
-                      </li>
-                      <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
-                      |position|.
-                      </li>
-                      <li>[=Queue a microtask=] to [=invoke=] |successCallback|
-                      with |position|.
-                      </li>
-                    </ol>
-                  </li>
-                  <li>If acquiring a position fails:
-                    <ol>
-                      <li>[=Call back with error=] passing |errorCallback| and
-                      {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
-              <li>Clear |timerId| from the [=list of active timers=].
-              </li>
-            </ol>
-          </li>
-          <li>
-            <span id="check-repeats">Determine repetition</span>.
-            <ol>
-              <li>If |repeats| is false:
+              <li data-tests=
+              "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+              [=Check permission=] passing |errorCallback|. If the check
+              returns failure:
                 <ol>
                   <li>[=List/Remove=] |watchId| from |watchTasks|.
                   </li>
@@ -739,19 +643,125 @@
                   </li>
                 </ol>
               </li>
-            </ol>
-          </li>
-          <li>Wait for a significant change of geographic position. What
-          constitutes a significant change of geographic position is
-          [=implementation-defined|left to the implementation=]. A user agent
-          MAY impose a rate limit on the frequency of position changes.
-          </li>
-          <li>If |watchTasks| [=list/contain|contains=] |watchId|, then:
-            <ol>
-              <li>[=Request position=] passing |successCallback|,
-              |errorCallback|, |options|, |repeats|, and |watchId|.
+              <li>
+                <dfn data-local-lt=
+                "acquiring a position|acquire a position">Acquire
+                position</dfn>.
+                <ol>
+                  <li>Let |acquisitionTime:DOMTimeStamp| be a new
+                  {{DOMTimeStamp}} that represents now in milliseconds, using
+                  01 January, 1970 UTC as the epoch.
+                  </li>
+                  <li>If |options|.{{PositionOptions/maximumAge}} is greater
+                  than 0, and |cachedPosition| is not null:
+                    <ol>
+                      <li>Let |cachedPosition:GeolocationPosition| be
+                      [=this=]'s {{Geolocation/[[cachedPosition]]}}.
+                      </li>
+                      <li>Let |cacheTime:long| be |acquisitionTime| minus the
+                      value of |options|.{{PositionOptions/maximumAge}} member.
+                      </li>
+                      <li>If |cachedPosition|'s
+                      {{GeolocationPosition/timestamp}}'s value is greater than
+                      |cacheTime|, and
+                      |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
+                      equals |options|.{{PositionOptions/enableHighAccuracy}}:
+                        <ol>
+                          <li>[=Queue a task=] on the [=geolocation task
+                          source=] with a step that [=invokes=]
+                          |successCallback| with |cachedPosition|.
+                          </li>
+                          <li>Go to <a href="#check-repeats">determine
+                          repetition</a> steps below.
+                          </li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li>Let |timeout:Task| be a new timed [=task=] that runs in
+                  |options|.{{PositionOptions/timeout}} milliseconds after
+                  |acquisitionTime|, which performs the following sub-steps:
+                    <aside class="note" title="Immediate cancellation">
+                      <p>
+                        An |options|.{{PositionOptions/timeout}} value 0
+                        effectively runs the |timeout| task immediately.
+                      </p>
+                    </aside>
+                    <ol>
+                      <li>If the entry for |timerId| in the [=list of active
+                      timers=] has been cleared, then abort these steps.
+                      </li>
+                      <li>[=Call back with error=] with |errorCallback| and
+                      {{GeolocationPositionError/TIMEOUT}}.
+                      </li>
+                    </ol>
+                  </li>
+                  <li>Let |timerId:long| be an [=implementation-defined=]
+                  identifier that represents |timeout|.
+                  </li>
+                  <li>Add |timerId| to the [=list of active timers=].
+                  </li>
+                  <li>Try to acquire the device's position, optionally taking
+                  into consideration the value of
+                  |options|.{{PositionOptions/enableHighAccuracy}}:
+                    <ol>
+                      <li>If acquiring a position succeeds:
+                        <ol>
+                          <li>Let |position:GeolocationPosition| be [=a new
+                          `GeolocationPosition`=] passing |acquisitionTime| and
+                          |options|.{{PositionOptions/enableHighAccuracy}}.
+                          </li>
+                          <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}}
+                          to |position|.
+                          </li>
+                          <li>[=Queue a task=] on the [=geolocation task
+                          source=] with a step that [=invokes=]
+                          |successCallback| with |position|.
+                          </li>
+                        </ol>
+                      </li>
+                      <li>If acquiring a position fails:
+                        <ol>
+                          <li>[=Call back with error=] passing |errorCallback|
+                          and
+                          {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
+                          </li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                  <li>Clear |timerId| from the [=list of active timers=].
+                  </li>
+                </ol>
+              </li>
+              <li>
+                <span id="check-repeats">Determine repetition</span>.
+                <ol>
+                  <li>If |repeats| is false:
+                    <ol>
+                      <li>[=List/Remove=] |watchId| from |watchTasks|.
+                      </li>
+                      <li>Terminate this algorithm.
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+              <li>Wait for a significant change of geographic position. What
+              constitutes a significant change of geographic position is left
+              to the implementation. User agents MAY impose a rate limit on
+              the frequency position changes.
+              </li>
+              <li>If |watchTasks| [=list/contain|contains=] |watchId|, then:
+                <ol>
+                  <li>[=Request position=] passing |successCallback|,
+                  |errorCallback|, |options|, |repeats|, and |watchId|.
+                  </li>
+                </ol>
               </li>
             </ol>
+          </li>
+          <li>Return |watchId|.
           </li>
         </ol>
       </section>
@@ -795,7 +805,8 @@
           {{GeolocationPositionError}} instance whose
           {{GeolocationPositionError/code}} attribute is initialized to |code|.
           </li>
-          <li>[=Invoke=] |callback| with |error|.
+          <li>[=Queue a task=] on the [=geolocation task source=] with a step
+          that [=invokes=] |callback| with |error|.
           </li>
         </ol>
       </section>
@@ -916,6 +927,24 @@
             </td>
           </tr>
         </table>
+      </section>
+      <section>
+        <h2>
+          Task sources
+        </h2>
+        <p>
+          The following [=task source=] is defined by this specifications.
+        </p>
+        <dl>
+          <dt>
+            The <dfn>geolocation task source</dfn>
+          </dt>
+          <dd>
+            Used by this specification to queue up non-blocking
+            {{PositionCallback}} and {{PositionErrorCallback}} when performing
+            [=request position|position requests=].
+          </dd>
+        </dl>
       </section>
     </section>
     <section id="coordinates_interface" data-dfn-for="GeolocationCoordinates">
