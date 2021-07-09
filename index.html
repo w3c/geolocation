@@ -118,6 +118,9 @@
           has received the following changes:
         </p>
         <ul>
+          <li>Added handling for when documents are not [=Document/fully
+          active=].
+          </li>
           <li>Added the [=geolocation task source=], which handles dispatching
           position updates and errors.
           </li>
@@ -591,6 +594,10 @@
           optionally (and only if |repeats| is true) a |previousId:long|.
         </p>
         <ol class="algorithm">
+          <li>If the [=current settings object=]'s [=associated `Document`=] is
+          not [=Document/fully active=], return an [=implementation-defined=]
+          {{long}}.
+          </li>
           <li>Let |watchTasks:Set| be [=this=]'s
             {{Geolocation/[[watchTasks]]}}.
             </li>
@@ -602,15 +609,6 @@
               </li>
               <li>
                 Return [=implementation-defined=] {{long}}.
-              </li>
-            </ol>
-          </li>
-          <li>If the [=current settings object=]'s [=associated `Document`=] is
-          not [=fully active=]:
-            <ol>
-              <li>[=list/Empty=] |watchTasks|.
-              </li>
-              <li>Return an [=implementation-defined=] {{long}}.
               </li>
             </ol>
           </li>
@@ -649,6 +647,9 @@
                   </li>
                   <li>If |document:Document| is [=Document/hidden=], wait for
                   the |document| to become [=Document/visible=].
+                  </li>
+                  <li>Go to <a href="#wait-for-change">wait for significant
+                  change of geographic position</a>.
                   </li>
                 </ol>
               </li>
@@ -767,10 +768,29 @@
                   </li>
                 </ol>
               </li>
-              <li>Wait for a significant change of geographic position. What
-              constitutes a significant change of geographic position is left
-              to the implementation. User agents MAY impose a rate limit on the
-              frequency position changes.
+              <li>
+                <span id="wait-for-change">Wait for a significant change of
+                geographic position</span>. What constitutes a significant
+                change of geographic position is left to the implementation.
+                User agents MAY impose a rate limit on the frequency position
+                changes.
+              </li>
+              <li>If |document| is not [=Document/fully active=] or not
+              [=Document/visible=], go back to the previous step and again
+              <a href="#wait-for-change">wait for significant change of
+              geographic position</a>.
+                <aside class="note" title=
+                "Position updates are exclusively for fully-active visible documents">
+                  <p>
+                    The desired effect here being that position updates are
+                    exclusively delivered to fully active documents that are
+                    visible; Otherwise the updates get silently "dropped on the
+                    floor". Only once a document again becomes fully active and
+                    visible (e.g., an [^iframe^] gets reattached to a parent
+                    document), do the position updates once again start getting
+                    delivered.
+                  </p>
+                </aside>
               </li>
               <li>If |watchTasks| [=list/contain|contains=] |watchId|, then:
                 <ol>
