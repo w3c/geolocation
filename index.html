@@ -38,7 +38,8 @@
     };
     </script>
   </head>
-  <body data-cite="secure-contexts permissions-policy permissions page-visibility-2">
+  <body data-cite=
+  "secure-contexts permissions-policy permissions page-visibility-2">
     <section id="abstract">
       <p>
         The Geolocation API provides access to geographical location
@@ -599,18 +600,7 @@
           {{long}}.
           </li>
           <li>Let |watchTasks:Set| be [=this=]'s
-            {{Geolocation/[[watchTasks]]}}.
-            </li>
-          <li>
-            If the [=current settings object=]'s [=associated `Document`=] is not [=fully active=]:
-            <ol>
-              <li>
-                [=list/Empty=] |watchTasks|.
-              </li>
-              <li>
-                Return [=implementation-defined=] {{long}}.
-              </li>
-            </ol>
+          {{Geolocation/[[watchTasks]]}}.
           </li>
           <li>If |previousId| was provided, let |watchId:long| be |previousId|;
           Otherwise, let |watchId:long| be an [=implementation-defined=]
@@ -639,8 +629,7 @@
                   </li>
                 </ol>
               </li>
-              <li>Wait for document to become
-              visible.
+              <li>Wait for document to become visible.
                 <ol>
                   <li>Let |document:Document| be the [=current settings
                   object=]'s [=associated Document=].
