@@ -50,4 +50,4 @@ navigator.geolocation.clearWatch(watchId);
 
 ### More examples
 
-The specification provides a [examples](https://w3c.github.io/geolocation-api/#examples) covering different use case.
+The specification provides [examples](https://w3c.github.io/geolocation-api/#examples) covering different use case.
