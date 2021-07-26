@@ -546,7 +546,7 @@
         <ol class="algorithm">
           <li>If the [=current settings object=]'s [=associated `Document`=] is
           not [=Document/fully active=], [=call back with error=]
-          |errorCallback|, {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
+          |errorCallback| and {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
           </li>
           <li>Otherwise, [=request position=], passing |successCallback|,
           |errorCallback|, |options|, and (repeats) false.
@@ -569,7 +569,7 @@
           <li>If the [=current settings object=]'s [=associated `Document`=] is
           not [=Document/fully active=]:
             <ol>
-              <li>[=Call back with error=] |errorCallback|,
+              <li>[=Call back with error=] |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
               </li>
               <li>Return an [=implementation-defined=] {{long}}.
