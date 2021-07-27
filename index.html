@@ -544,8 +544,12 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>[=Request position=], passing |successCallback|, |errorCallback|,
-          |options|, and (repeats) false.
+          <li>If the [=current settings object=]'s [=associated `Document`=] is
+          not [=Document/fully active=], [=call back with error=]
+          |errorCallback| and {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
+          </li>
+          <li>Otherwise, [=request position=], passing |successCallback|,
+          |errorCallback|, |options|, and (repeats) false.
           </li>
           <li>Return `undefined`.
           </li>
@@ -562,6 +566,16 @@
           method steps are:
         </p>
         <ol class="algorithm">
+          <li>If the [=current settings object=]'s [=associated `Document`=] is
+          not [=Document/fully active=]:
+            <ol>
+              <li>[=Call back with error=] |errorCallback| and
+              {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
+              </li>
+              <li>Return an [=implementation-defined=] {{long}}.
+              </li>
+            </ol>
+          </li>
           <li>Let |watchId:long| be [=request position=], passing
           |successCallback|, |errorCallback|, |options|, and (repeats) true.
           </li>
@@ -595,10 +609,6 @@
           optionally (and only if |repeats| is true) a |previousId:long|.
         </p>
         <ol class="algorithm">
-          <li>If the [=current settings object=]'s [=associated `Document`=] is
-          not [=Document/fully active=], return an [=implementation-defined=]
-          {{long}}.
-          </li>
           <li>Let |watchTasks:Set| be [=this=]'s
           {{Geolocation/[[watchTasks]]}}.
           </li>
