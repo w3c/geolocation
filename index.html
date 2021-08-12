@@ -112,19 +112,23 @@
       </section>
       <section class="informative">
         <h2>
-          Changes since last publication
+          Change log
         </h2>
+        <p>
+          Since First Public Working Draft in 2021, the <cite>Geolocation
+          API</cite> has received the following normative changes:
+        </p>
+        <script class="removeOnSave">
+          function removeCommits({ message }) {
+            return !/^editorial|^Editiorial|^edtiorial|^chore|^fix|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
+          }
+        </script> <rs-changelog from="FPWD" filter=
+        "removeCommits"></rs-changelog>
         <p>
           Since publication of the Second Edition in 2016, this specification
           has received the following changes:
         </p>
         <ul>
-          <li>Added handling for when documents are not [=Document/fully
-          active=].
-          </li>
-          <li>Added the [=geolocation task source=], which handles dispatching
-          position updates and errors.
-          </li>
           <li>[=Request position=] only proceeds when a document is visible, or
           the document becomes visible.
           </li>
