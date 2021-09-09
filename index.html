@@ -352,7 +352,7 @@
           Enabling the API in third-party contexts
         </h3>
         <p>
-          The <a>default allowlist</a> of `["self"]` allows Geolocation API
+          The <a>default allowlist</a> of 'self' allows Geolocation API
           usage in same-origin nested frames but prevents third-party content
           from using the API.
         </p>
@@ -375,7 +375,7 @@
         </p>
         <aside class="example" title="Permissions Policy over HTTP">
           <pre class="http">
-            Permissions-Policy: geolocation 'none'
+            Permissions-Policy: geolocation=()
           </pre>
         </aside>
         <p>
@@ -814,6 +814,9 @@
           Check permission
         </h2>
         <p>
+          The <cite>Geolocation API</cite> is a [=default powerful feature=].
+        </p>
+        <p>
           When instructed to <dfn>check permission</dfn>, given a
           {{PositionErrorCallback}}`?` |errorCallback:PositionErrorCallback|:
         </p>
@@ -1190,8 +1193,9 @@
       </h2>
       <p>
         The <cite>Geolocation API</cite> defines a [=policy-controlled
-        feature=] identified by the string "geolocation". Its [=default
-        allowlist=] is `["self"]`.
+        feature=] identified by the string <dfn class=
+        "permission">"geolocation"</dfn>. Its [=default allowlist=] is
+        'self'.
       </p>
     </section>
     <section id="conformance"></section>
