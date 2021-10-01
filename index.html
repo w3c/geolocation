@@ -674,7 +674,7 @@
                 position</dfn>.
                 <ol>
                   <li>Let |acquisitionTime:DOMTimeStamp| be a new
-                  {{LegacyTimeStamp}} that represents now.
+                  {{EpochTimeStamp}} that represents now.
                   </li>
                   <li>If |options|.{{PositionOptions/maximumAge}} is greater
                   than 0, and |cachedPosition| is not null:
@@ -922,7 +922,7 @@
         [Exposed=Window, SecureContext]
         interface GeolocationPosition {
           readonly attribute GeolocationCoordinates coords;
-          readonly attribute LegacyTimeStamp timestamp;
+          readonly attribute EpochTimeStamp timestamp;
         };
       </pre>
       <section>
