@@ -39,7 +39,7 @@
     </script>
   </head>
   <body data-cite=
-  "secure-contexts permissions-policy permissions page-visibility-2">
+  "secure-contexts permissions-policy permissions page-visibility-2 hr-time">
     <section id="abstract">
       <p>
         The Geolocation API provides access to geographical location
@@ -674,8 +674,7 @@
                 position</dfn>.
                 <ol>
                   <li>Let |acquisitionTime:DOMTimeStamp| be a new
-                  {{DOMTimeStamp}} that represents now in milliseconds, using
-                  01 January, 1970 UTC as the epoch.
+                  {{EpochTimeStamp}} that represents now.
                   </li>
                   <li>If |options|.{{PositionOptions/maximumAge}} is greater
                   than 0, and |cachedPosition| is not null:
@@ -926,7 +925,7 @@
         [Exposed=Window, SecureContext]
         interface GeolocationPosition {
           readonly attribute GeolocationCoordinates coords;
-          readonly attribute DOMTimeStamp timestamp;
+          readonly attribute EpochTimeStamp timestamp;
         };
       </pre>
       <section>
