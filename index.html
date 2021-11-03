@@ -673,7 +673,7 @@
                 "acquiring a position|acquire a position">Acquire
                 position</dfn>.
                 <ol>
-                  <li>Let |acquisitionTime:DOMTimeStamp| be a new
+                  <li>Let |acquisitionTime:EpochTimeStamp| be a new
                   {{EpochTimeStamp}} that represents now.
                   </li>
                   <li>If |options|.{{PositionOptions/maximumAge}} is greater
@@ -1061,7 +1061,7 @@
         </h2>
         <p>
           <dfn>A new `GeolocationPosition`</dfn> is constructed with
-          {{DOMTimeStamp}} |timestamp:DOMTimeStamp| and boolean
+          {{EpochTimeStamp}} |timestamp:EpochTimeStamp| and boolean
           |isHighAccuracy| by performing the following steps:
         </p>
         <ol class="algorithm">
