@@ -817,6 +817,16 @@
           The <cite>Geolocation API</cite> is a [=default powerful feature=].
         </p>
         <p>
+          It is RECOMMENDED that a user agent prioritize restricting the
+          [=permission=] [=permission/lifetime=] to a single session: This can
+          be, for example, until the [=environment settings object/realm=] is
+          destroyed, the end-user [=navigates=] away from the [=origin=], or
+          the relevant browser tab is closed. The user agent MAY also suggest
+          time-based [=permission=] [=permission/lifetimes=], such as "24
+          hours", "1 week", even opt to remember the permission
+          [permission/grant=] indefinitely.
+        </p>
+        <p>
           When instructed to <dfn>check permission</dfn>, given a
           {{PositionErrorCallback}}`?` |errorCallback:PositionErrorCallback|:
         </p>
