@@ -745,13 +745,39 @@
                           </li>
                         </ol>
                       </li>
-                      <li>If acquiring a position fails:
-                        <ol>
-                          <li>[=Call back with error=] passing |errorCallback|
-                          and
-                          {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
-                          </li>
-                        </ol>
+                      <li>If acquiring a position fails because of one of the
+                      following reasons:
+                        <dl class="switch">
+                          <dt>
+                            Underlying system denies permission:
+                          </dt>
+                          <dd>
+                            <p>
+                              [=Call back with error=] passing |errorCallback|
+                              and
+                              {{GeolocationPositionError/PERMISSION_DENIED}}.
+                            </p>
+                            <aside class="note" title=
+                            "Browser permission VS OS permission">
+                              <p>
+                                On certain platforms, there can be a
+                                circumstance where the user has
+                                [=permission/granted=] the user agent
+                                permission to use Geolocation, but the permission to
+                                access location services has been denied at the
+                                OS level.
+                              </p>
+                            </aside>
+                          </dd>
+                          <dt>
+                            Data acquisition error:
+                          </dt>
+                          <dd>
+                            [=Call back with error=] passing |errorCallback|
+                            and
+                            {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
+                          </dd>
+                        </dl>
                       </li>
                     </ol>
                   </li>
