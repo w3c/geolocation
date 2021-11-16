@@ -676,17 +676,16 @@
                   </li>
                 </ol>
               </li>
-              <li>Wait for document to become visible.
+              <li>Let |document:Document| be the [=current settings object=]'s
+              [=associated Document=].
+              </li>
+              <li>If |document:Document| is [=Document/hidden=], wait for the
+              following [=page visibility change steps=]:
                 <ol>
-                  <li>Let |document:Document| be the [=current settings
-                  object=]'s [=associated Document=].
+                  <li>Assert: |document|'s [=document/visibility state=] is
+                  "visible".
                   </li>
-                  <li>If |document:Document|'s [=Document/visibility state=] is
-                  "hidden", wait for the |document|'s [=Document/visibility
-                  state=] to become "visible".
-                  </li>
-                  <li>Go to <a href="#wait-for-change">wait for significant
-                  change of geographic position</a>.
+                  <li>Continue to the next step below.
                   </li>
                 </ol>
               </li>
