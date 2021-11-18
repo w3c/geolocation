@@ -400,8 +400,8 @@
         </h3>
         <p>
           The <cite>Geolocation API</cite> is a [=powerful feature=] that
-          requires [=express permission=] from an end-user before any
-          location data is shared with a web application. This requirement is
+          requires [=express permission=] from an end-user before any location
+          data is shared with a web application. This requirement is
           normatively enforced by the [=check permission=] steps on which the
           {{Geolocation/getCurrentPosition()}} and
           {{Geolocation/watchPosition()}} methods rely.
@@ -413,11 +413,11 @@
           choice of [=permission/lifetimes=] vary across user agents, but they
           are typically time-based (e.g., "a day"), or until browser is closed,
           or the user might even be given the choice for the permission to be
-          granted indefinitely. The permission [=permission/lifetimes=]
-          dictate how long a user agent [=permission/grants=] a permission
-          before that permission is automatically reverted back to its default
-          [=permission state=], prompting the end-user to make a new choice
-          upon subsequent use.
+          granted indefinitely. The permission [=permission/lifetimes=] dictate
+          how long a user agent [=permission/grants=] a permission before that
+          permission is automatically reverted back to its default [=permission
+          state=], prompting the end-user to make a new choice upon subsequent
+          use.
         </p>
         <p>
           Although the granularity of the permission [=permission/lifetime=]
@@ -849,10 +849,10 @@
           The <cite>Geolocation API</cite> is a [=default powerful feature=].
         </p>
         <p>
-          The user agent MAY suggest
-          time-based [=permission=] [=permission/lifetimes=], such as "24
-          hours", "1 week", or choose to remember the permission
-          [permission/grant=] indefinitely. However, it is RECOMMENDED that a user agent prioritize restricting the
+          The user agent MAY suggest time-based [=permission=]
+          [=permission/lifetimes=], such as "24 hours", "1 week", or choose to
+          remember the permission [permission/grant=] indefinitely. However, it
+          is RECOMMENDED that a user agent prioritize restricting the
           [=permission=] [=permission/lifetime=] to a single session: This can
           be, for example, until the [=environment settings object/realm=] is
           destroyed, the end-user [=navigates=] away from the [=origin=], or
