@@ -12,9 +12,12 @@ jobs:
     runs-on: ubuntu-latest # only linux supported at present
     steps:
       - uses: actions/checkout@v2
-      - uses: sidvishnoi/spec-prod@v2
+      - uses: w3c/spec-prod@pubrules
         with:
           TOOLCHAIN: respec
+          VALIDATE_LINKS: false
+          VALIDATE_PUBRULES: true
+          W3C_API_KEY: ${{ secrets.W3C_API_KEY }}
           W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
           W3C_WG_DECISION_URL: "https://lists.w3.org/Archives/Public/public-device-apis/2021May/0008.html"
           W3C_NOTIFICATIONS_CC: "${{ secrets.CC }}"
