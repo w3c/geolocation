@@ -649,8 +649,9 @@
                   <li>Let |document:Document| be the [=current settings
                   object=]'s [=associated Document=].
                   </li>
-                  <li>If |document:Document| is [=Document/hidden=], wait for
-                  the |document| to become [=Document/visible=].
+                  <li>If |document:Document|'s [=Document/visibility state=] is
+                  "hidden", wait for the |document|'s [=Document/visibility
+                  state=] to become "visible".
                   </li>
                   <li>Go to <a href="#wait-for-change">wait for significant
                   change of geographic position</a>.
@@ -779,9 +780,9 @@
                 changes.
               </li>
               <li>If |document| is not [=Document/fully active=] or not
-              [=Document/visible=], go back to the previous step and again
-              <a href="#wait-for-change">wait for significant change of
-              geographic position</a>.
+              [=Document/visibility state=] is "visible", go back to the
+              previous step and again <a href="#wait-for-change">wait for
+              significant change of geographic position</a>.
                 <aside class="note" title=
                 "Position updates are exclusively for fully-active visible documents">
                   <p>
