@@ -679,8 +679,9 @@
               <li>Let |document:Document| be the [=current settings object=]'s
               [=associated Document=].
               </li>
-              <li>If |document:Document| is [=Document/hidden=], wait for the
-              following [=page visibility change steps=] steps to run:
+              <li>If |document:Document|'s [=Document/visibility state=] is
+              "hidden", wait for the following [=page visibility change steps=]
+              steps to run:
                 <ol>
                   <li>Assert: |document|'s [=Document/visibility state=] is
                   "visible".
