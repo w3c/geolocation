@@ -394,6 +394,38 @@
         information also discloses the location of the user of the device,
         thereby potentially compromising the user's privacy.
       </p>
+      <section class="informative">
+        <h3>
+          User consent
+        </h3>
+        <p>
+          The <cite>Geolocation API</cite> is a [=powerful feature=] that
+          requires [=express permission=] from an end-user before any location
+          data is shared with a web application. This requirement is
+          normatively enforced by the [=check permission=] steps on which the
+          {{Geolocation/getCurrentPosition()}} and
+          {{Geolocation/watchPosition()}} methods rely.
+        </p>
+        <p>
+          An end-user will generally give [=express permission=] through a user
+          interface, which usually present a range of permission
+          [=permission/lifetimes=] that the end-user can choose from. The
+          choice of [=permission/lifetimes=] vary across user agents, but they
+          are typically time-based (e.g., "a day"), or until browser is closed,
+          or the user might even be given the choice for the permission to be
+          granted indefinitely. The permission [=permission/lifetimes=] dictate
+          how long a user agent [=permission/grants=] a permission before that
+          permission is automatically reverted back to its default [=permission
+          state=], prompting the end-user to make a new choice upon subsequent
+          use.
+        </p>
+        <p>
+          Although the granularity of the permission [=permission/lifetime=]
+          varies across user-agents, this specification urges user agents to
+          limit the lifetime to a single browsing session by default (see
+          [[[#check-permission]]] for normative requirements).
+        </p>
+      </section>
       <section id="privacy_for_recipients" class="informative">
         <h3>
           Privacy considerations for recipients of location information
@@ -835,12 +867,22 @@
           </li>
         </ol>
       </section>
-      <section>
+      <section id="check-permission">
         <h2>
           Check permission
         </h2>
         <p>
           The <cite>Geolocation API</cite> is a [=default powerful feature=].
+        </p>
+        <p>
+          The user agent MAY suggest time-based [=permission=]
+          [=permission/lifetimes=], such as "24 hours", "1 week", or choose to
+          remember the permission [permission/grant=] indefinitely. However, it
+          is RECOMMENDED that a user agent prioritize restricting the
+          [=permission=] [=permission/lifetime=] to a single session: This can
+          be, for example, until the [=environment settings object/realm=] is
+          destroyed, the end-user [=navigates=] away from the [=origin=], or
+          the relevant browser tab is closed.
         </p>
         <p>
           When instructed to <dfn>check permission</dfn>, given a
