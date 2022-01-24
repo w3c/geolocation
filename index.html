@@ -639,7 +639,7 @@
         </p>
         <ol class="algorithm">
           <li>If [=this=]'s {{Geolocation/[[watchTasks]]}}[|watchId|]
-          [=map/exists=], [=map/remove=] [=this=]'s
+          [=list/exists=], [=list/remove=] [=this=]'s
           {{Geolocation/[[watchTasks]]}}[|watchId|].
           </li>
         </ol>
@@ -665,10 +665,7 @@
           </li>
           <li>[=Set/Append=] |watchId| to |watchTasks|.
           </li>
-          <li>Let |global| be [=this=]'s [=relevant global object=].
-          </li>
-          <li>[=Queue a global task=] using the [=geolocation task source=]
-          with |global| to run the following steps [=in parallel=]:
+          <li>Return |watchId| and [=in parallel=]:
             <ol>
               <li>Do security check.
                 <ol>
@@ -678,7 +675,8 @@
                       <li>[=Call back with error=] |errorCallback| and
                       {{GeolocationPositionError/PERMISSION_DENIED}}.
                       </li>
-                      <li>[=List/Remove=] |watchId| from |watchTasks|.
+                      <li>[=Queue a task=] on the [=geolocation task source=]
+                      to [=List/remove=] |watchId| from |watchTasks|.
                       </li>
                       <li>Terminate this algorithm.
                       </li>
@@ -705,7 +703,8 @@
               [=Check permission=] passing |errorCallback|. If the check
               returns failure:
                 <ol>
-                  <li>[=List/Remove=] |watchId| from |watchTasks|.
+                  <li>[=Queue a task=] on the [=geolocation task source=] to
+                  [=List/remove=] |watchId| from |watchTasks|.
                   </li>
                   <li>Terminate this algorithm.
                   </li>
@@ -832,7 +831,8 @@
                 <ol>
                   <li>If |repeats| is false:
                     <ol>
-                      <li>[=List/Remove=] |watchId| from |watchTasks|.
+                      <li>[=Queue a task=] on the [=geolocation task source=]
+                      to [=List/remove=] |watchId| from |watchTasks|.
                       </li>
                       <li>Terminate this algorithm.
                       </li>
@@ -872,8 +872,6 @@
                 </ol>
               </li>
             </ol>
-          </li>
-          <li>Return |watchId|.
           </li>
         </ol>
       </section>
