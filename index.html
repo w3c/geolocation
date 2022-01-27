@@ -689,7 +689,8 @@
           <li data-tests="">If |document| is not [=allowed to use=] the
           "geolocation" feature:
             <ol>
-              <li>If passed, [=List/remove=] |watchId| from |watchIDs|.
+              <li>If |watchId| was passed, [=List/remove=] |watchId| from
+              |watchIDs|.
               </li>
               <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/PERMISSION_DENIED}}.
@@ -718,7 +719,8 @@
           "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
           If |permission| is "denied", then:
             <ol>
-              <li>If passed, [=list/remove=] |watchId| from |watchIDs|.
+              <li>If |watchId| was passed, [=list/remove=] |watchId| from
+              |watchIDs|.
               </li>
               <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/PERMISSION_DENIED}}.
