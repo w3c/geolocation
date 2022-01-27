@@ -129,8 +129,8 @@
           has received the following changes:
         </p>
         <ul>
-          <li>[=Request position=] only proceeds when a document is visible, or
-          the document becomes visible.
+          <li>[=Request a position=] only proceeds when a document is visible,
+          or the document becomes visible.
           </li>
           <li>Clarified how caching works as part of [=acquiring a position=]:
           only last position is cached, and can be evicted at any time.
@@ -441,14 +441,14 @@
           that can govern the usage and access to users' location data.
         </p>
         <p>
-          Recipients ought to only request position information when necessary,
-          and only use the location information for the task for which it was
-          provided to them. Recipients ought to dispose of location information
-          once that task is completed, unless expressly permitted to retain it
-          by the user. Recipients need to also take measures to protect this
-          information against unauthorized access. If location information is
-          stored, users need to be allowed to update and delete this
-          information.
+          Recipients ought to only request a position information when
+          necessary, and only use the location information for the task for
+          which it was provided to them. Recipients ought to dispose of
+          location information once that task is completed, unless expressly
+          permitted to retain it by the user. Recipients need to also take
+          measures to protect this information against unauthorized access. If
+          location information is stored, users need to be allowed to update
+          and delete this information.
         </p>
         <p>
           The recipients of location information need to refrain from
@@ -486,6 +486,25 @@
           designing these measures, implementers are advised to enable user
           awareness of location sharing, and to provide access to user
           interfaces that enable revocation of permissions.
+        </p>
+      </section>
+      <section id="check-permission">
+        <h2>
+          Checking permission to use the API
+        </h2>
+        <p>
+          The <cite>Geolocation API</cite> is a [=default powerful feature=].
+        </p>
+        <p>
+          When <dfn data-local-lt="checking permission">check permission</dfn>
+          to use the API, a user agent MAY suggest time-based [=permission=]
+          [=permission/lifetimes=], such as "24 hours", "1 week", or choose to
+          remember the permission [permission/grant=] indefinitely. However, it
+          is RECOMMENDED that a user agent prioritize restricting the
+          [=permission=] [=permission/lifetime=] to a single session: This can
+          be, for example, until the [=environment settings object/realm=] is
+          destroyed, the end-user [=navigates=] away from the [=origin=], or
+          the relevant browser tab is closed.
         </p>
       </section>
     </section>
@@ -569,12 +588,11 @@
           </tr>
           <tr>
             <td>
-              <dfn data-dfn-for="Geolocation">[[\watchTasks]]</dfn>
+              <dfn data-dfn-for="Geolocation">[[\watchIDs]]</dfn>
             </td>
             <td>
-              Initialized as an empty [=set=] of {{unsigned long}}
-              [=set/item|items=], which represent the identifier for timed
-              [=task=].
+              Initialized as an empty [=list=] of {{unsigned long}}
+              [=list/item|items=].
             </td>
           </tr>
         </table>
@@ -591,14 +609,17 @@
         </p>
         <ol class="algorithm">
           <li>If the [=current settings object=]'s [=associated `Document`=] is
-          not [=Document/fully active=], [=call back with error=]
-          |errorCallback| and
-          {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
+          not [=Document/fully active=]:
+            <ol>
+              <li>[=Call back with error=] |errorCallback| and
+              {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
+              </li>
+              <li>Terminate this algorithm.
+              </li>
+            </ol>
           </li>
-          <li>Otherwise, [=request position=], passing |successCallback|,
-          |errorCallback|, |options|, and (repeats) false.
-          </li>
-          <li>Return `undefined`.
+          <li>[=In parallel=], [=request a position=] passing
+          |successCallback|, |errorCallback|, and |options|.
           </li>
         </ol>
       </section>
@@ -616,15 +637,21 @@
           <li>If the [=current settings object=]'s [=associated `Document`=] is
           not [=Document/fully active=]:
             <ol>
-              <li>[=Call back with error=] |errorCallback| and
+              <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
               </li>
               <li>Return 0.
               </li>
             </ol>
           </li>
-          <li>Let |watchId:long| be [=request position=], passing
-          |successCallback|, |errorCallback|, |options|, and (repeats) true.
+          <li>Let |watchId:unsigned long| be an [=implementation-defined=]
+          {{unsigned long}} that is greater than zero.
+          </li>
+          <li>[=List/Append=] |watchId| to [=this=]'s
+          {{Geolocation/[[watchIDs]]}}.
+          </li>
+          <li>[=In parallel=], [=request a position=] passing
+          |successCallback|, |errorCallback|, |options|, and |watchId|.
           </li>
           <li>Return |watchId|.
           </li>
@@ -638,218 +665,73 @@
           When <dfn>clearWatch()</dfn> is invoked, the user agent MUST:
         </p>
         <ol class="algorithm">
-          <li>If [=this=]'s {{Geolocation/[[watchTasks]]}}[|watchId|]
-          [=list/exists=], [=list/remove=] [=this=]'s
-          {{Geolocation/[[watchTasks]]}}[|watchId|].
+          <li>[=List/Remove=] |watchId| from [=this=]'s
+          {{Geolocation/[[watchIDs]]}}.
           </li>
         </ol>
       </section>
       <section>
         <h2>
-          Request position
+          Request a position
         </h2>
         <p>
-          <dfn>Request position</dfn> by passing a {{PositionCallback}}
-          |successCallback:PositionCallback|, a {{PositionErrorCallback}}`?`
-          |errorCallback:PositionErrorCallback|, {{PositionOptions}}
-          |options:PositionOptions|, a {{boolean}} |repeats:boolean|, and
-          optionally (and only if |repeats| is true) a |previousId:long|.
+          To <dfn>request a position</dfn>, pass a {{PositionCallback}}
+          |successCallback:PositionCallback|, a {{PositionErrorCallback?}}
+          |errorCallback:PositionErrorCallback?|, {{PositionOptions}}
+          |options:PositionOptions|, and an optional |watchId:long|:
         </p>
         <ol class="algorithm">
-          <li>Let |watchTasks:Set| be [=this=]'s
-          {{Geolocation/[[watchTasks]]}}.
+          <li>Let |watchIDs:List| be [=this=]'s {{Geolocation/[[watchIDs]]}}.
           </li>
-          <li>If |previousId| was provided, let |watchId:long| be |previousId|;
-          Otherwise, let |watchId:long| be an [=implementation-defined=]
-          {{long}} that is greater than or equal to zero.
+          <li>Let |document:Document| be the [=current settings object=]'s
+          [=associated Document=].
           </li>
-          <li>[=Set/Append=] |watchId| to |watchTasks|.
-          </li>
-          <li>Return |watchId| and [=in parallel=]:
+          <li>If |document:Document|'s [=Document/visibility state=] is
+          "hidden", wait for the following [=page visibility change steps=] to
+          run:
             <ol>
-              <li>Do security check.
-                <ol>
-                  <li>If the <a>environment settings object</a> is a
-                  [=non-secure context=], then:
-                    <ol>
-                      <li>[=Call back with error=] |errorCallback| and
-                      {{GeolocationPositionError/PERMISSION_DENIED}}.
-                      </li>
-                      <li>[=Queue a task=] on the [=geolocation task source=]
-                      to [=List/remove=] |watchId| from |watchTasks|.
-                      </li>
-                      <li>Terminate this algorithm.
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
+              <li>Assert: |document|'s [=Document/visibility state=] is
+              "visible".
               </li>
-              <li>Let |document:Document| be the [=current settings object=]'s
-              [=associated Document=].
+              <li>Continue to the next steps below.
               </li>
-              <li>If |document:Document|'s [=Document/visibility state=] is
-              "hidden", wait for the following [=page visibility change steps=]
-              steps to run:
-                <ol>
-                  <li>Assert: |document|'s [=Document/visibility state=] is
-                  "visible".
-                  </li>
-                  <li>Continue to the next step below.
-                  </li>
-                </ol>
+            </ol>
+          </li>
+          <li>Let |descriptor| be a new {{PermissionDescriptor}} whose
+          {{PermissionDescriptor/name}} is <a>"geolocation"</a>.
+          </li>
+          <li>Set |permission| to [=request permission to use=] |descriptor|.
+          </li>
+          <li data-tests=
+          "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+          If |permission| is "denied", then:
+            <ol>
+              <li>[=List/Remove=] |watchId| from |watchIDs|.
               </li>
-              <li data-tests=
-              "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-              [=Check permission=] passing |errorCallback|. If the check
-              returns failure:
-                <ol>
-                  <li>[=Queue a task=] on the [=geolocation task source=] to
-                  [=List/remove=] |watchId| from |watchTasks|.
-                  </li>
-                  <li>Terminate this algorithm.
-                  </li>
-                </ol>
+              <li>[=Call back with error=] passing |errorCallback| and
+              {{GeolocationPositionError/PERMISSION_DENIED}}.
               </li>
-              <li>
-                <dfn data-local-lt=
-                "acquiring a position|acquire a position">Acquire
-                position</dfn>.
-                <ol>
-                  <li>Let |acquisitionTime:EpochTimeStamp| be a new
-                  {{EpochTimeStamp}} that represents now.
-                  </li>
-                  <li>If |options|.{{PositionOptions/maximumAge}} is greater
-                  than 0, and |cachedPosition| is not null:
-                    <ol>
-                      <li>Let |cachedPosition:GeolocationPosition| be
-                      [=this=]'s {{Geolocation/[[cachedPosition]]}}.
-                      </li>
-                      <li>Let |cacheTime:long| be |acquisitionTime| minus the
-                      value of |options|.{{PositionOptions/maximumAge}} member.
-                      </li>
-                      <li>If |cachedPosition|'s
-                      {{GeolocationPosition/timestamp}}'s value is greater than
-                      |cacheTime|, and
-                      |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
-                      equals |options|.{{PositionOptions/enableHighAccuracy}}:
-                        <ol>
-                          <li>[=Queue a task=] on the [=geolocation task
-                          source=] with a step that [=invokes=]
-                          |successCallback| with |cachedPosition|.
-                          </li>
-                          <li>Go to <a href="#check-repeats">determine
-                          repetition</a> steps below.
-                          </li>
-                        </ol>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>Let |timeout:Task| be a new timed [=task=] that runs in
-                  |options|.{{PositionOptions/timeout}} milliseconds after
-                  |acquisitionTime|, which performs the following sub-steps:
-                    <aside class="note" title="Immediate cancellation">
-                      <p>
-                        An |options|.{{PositionOptions/timeout}} value 0
-                        effectively runs the |timeout| task immediately.
-                      </p>
-                    </aside>
-                    <ol>
-                      <li>If the entry for |timerId| in the [=list of active
-                      timers=] has been cleared, then abort these steps.
-                      </li>
-                      <li>[=Call back with error=] with |errorCallback| and
-                      {{GeolocationPositionError/TIMEOUT}}.
-                      </li>
-                    </ol>
-                  </li>
-                  <li>Let |timerId:long| be an [=implementation-defined=]
-                  identifier that represents |timeout|.
-                  </li>
-                  <li>Add |timerId| to the [=list of active timers=].
-                  </li>
-                  <li>Try to acquire the device's position, optionally taking
-                  into consideration the value of
-                  |options|.{{PositionOptions/enableHighAccuracy}}:
-                    <ol>
-                      <li>If acquiring a position succeeds:
-                        <ol>
-                          <li>Let |position:GeolocationPosition| be [=a new
-                          `GeolocationPosition`=] passing |acquisitionTime| and
-                          |options|.{{PositionOptions/enableHighAccuracy}}.
-                          </li>
-                          <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}}
-                          to |position|.
-                          </li>
-                          <li>[=Queue a task=] on the [=geolocation task
-                          source=] with a step that [=invokes=]
-                          |successCallback| with |position|.
-                          </li>
-                        </ol>
-                      </li>
-                      <li>If acquiring a position fails because of one of the
-                      following reasons:
-                        <dl class="switch">
-                          <dt>
-                            Underlying system denies permission:
-                          </dt>
-                          <dd>
-                            <p>
-                              [=Call back with error=] passing |errorCallback|
-                              and
-                              {{GeolocationPositionError/PERMISSION_DENIED}}.
-                            </p>
-                            <aside class="note" title=
-                            "Browser permission VS OS permission">
-                              <p>
-                                On certain platforms, there can be a
-                                circumstance where the user has
-                                [=permission/granted=] the user agent
-                                permission to use Geolocation, but the
-                                permission to access location services has been
-                                denied at the OS level.
-                              </p>
-                            </aside>
-                          </dd>
-                          <dt>
-                            Data acquisition error:
-                          </dt>
-                          <dd>
-                            [=Call back with error=] passing |errorCallback|
-                            and
-                            {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
-                          </dd>
-                        </dl>
-                      </li>
-                    </ol>
-                  </li>
-                  <li>Clear |timerId| from the [=list of active timers=].
-                  </li>
-                </ol>
+              <li>Terminate this algorithm.
               </li>
-              <li>
-                <span id="check-repeats">Determine repetition</span>.
-                <ol>
-                  <li>If |repeats| is false:
-                    <ol>
-                      <li>[=Queue a task=] on the [=geolocation task source=]
-                      to [=List/remove=] |watchId| from |watchTasks|.
-                      </li>
-                      <li>Terminate this algorithm.
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </li>
+            </ol>
+          </li>
+          <li>Wait to [=acquire a position=] passing |successCallback|,
+          |errorCallback|, |options|, and |watchId|.
+          </li>
+          <li>If |watchId| was not passed, terminate this algorithm.
+          </li>
+          <li>While |watchIDs| [=list/contains=] |watchId|:
+            <ol>
               <li>
                 <span id="wait-for-change">Wait for a significant change of
                 geographic position</span>. What constitutes a significant
                 change of geographic position is left to the implementation.
-                User agents MAY impose a rate limit on the frequency position
-                changes.
+                User agents MAY impose a rate limit on how frequently position
+                changes are reported.
               </li>
-              <li>If |document| is not [=Document/fully active=] or not
-              [=Document/visibility state=] is "visible", go back to the
-              previous step and again <a href="#wait-for-change">wait for
+              <li>If |document| is not [=Document/fully active=] or
+              [=Document/visibility state=] is not "visible", go back to the
+              previous step and again <a href="#wait-for-change">wait for a
               significant change of geographic position</a>.
                 <aside class="note" title=
                 "Position updates are exclusively for fully-active visible documents">
@@ -864,51 +746,159 @@
                   </p>
                 </aside>
               </li>
-              <li>If |watchTasks| [=list/contain|contains=] |watchId|, then:
-                <ol>
-                  <li>[=Request position=] passing |successCallback|,
-                  |errorCallback|, |options|, |repeats|, and |watchId|.
-                  </li>
-                </ol>
+              <li>Attempt to [=acquire a position=] passing |successCallback|,
+              |errorCallback|, |options|, and |watchId|.
               </li>
             </ol>
           </li>
         </ol>
       </section>
-      <section id="check-permission">
+      <section>
         <h2>
-          Check permission
+          Acquire a position
         </h2>
         <p>
-          The <cite>Geolocation API</cite> is a [=default powerful feature=].
-        </p>
-        <p>
-          The user agent MAY suggest time-based [=permission=]
-          [=permission/lifetimes=], such as "24 hours", "1 week", or choose to
-          remember the permission [permission/grant=] indefinitely. However, it
-          is RECOMMENDED that a user agent prioritize restricting the
-          [=permission=] [=permission/lifetime=] to a single session: This can
-          be, for example, until the [=environment settings object/realm=] is
-          destroyed, the end-user [=navigates=] away from the [=origin=], or
-          the relevant browser tab is closed.
-        </p>
-        <p>
-          When instructed to <dfn>check permission</dfn>, given a
-          {{PositionErrorCallback}}`?` |errorCallback:PositionErrorCallback|:
+          To <dfn data-local-lt=
+          "acquiring a position|acquire a position">acquire a position</dfn>,
+          passing {{PositionCallback}} |successCallback:PositionCallback|, a
+          {{PositionErrorCallback?}} |errorCallback:PositionErrorCallback?|,
+          {{PositionOptions}} |options:PositionOptions|, and an optional
+          |watchId:long|.
         </p>
         <ol class="algorithm">
-          <li>Let |permission:PermissionState| be [=request permission to use=]
-          "geolocation".
+          <li>If |watchId| was passed and [=this=]'s
+          {{Geolocation/[[watchIDs]]}} does not [=list/contain=] |watchId|,
+          terminate this algorithm.
           </li>
-          <li data-cite="permissions">If |permission| is
-          {{PermissionState/"denied"}}, then:
+          <li>Let |acquisitionTime:EpochTimeStamp| be a new {{EpochTimeStamp}}
+          that represents now.
+          </li>
+          <li>Let |timeoutTime| be the sum of |acquisitionTime| and
+          |options|.{{PositionOptions/timeout}}.
+          </li>
+          <li>Let |cachedPosition:GeolocationPosition| be [=this=]'s
+          {{Geolocation/[[cachedPosition]]}}.
+          </li>
+          <li>Create an implementation-specific |timeout| task that elapses at
+          |timeoutTime|, during which it tries to acquire the device's position
+          by running the following steps:
             <ol>
-              <li>[=Call back with error=] |errorCallback| and
-              {{GeolocationPositionError/PERMISSION_DENIED}}.
+              <li>Let |permission| be [=get the current permission state=] of
+              <a>"geolocation"</a>.
               </li>
-              <li>Return failure.
+              <li>If |permission| is "denied":
+                <ol>
+                  <li>Stop |timeout|.
+                  </li>
+                  <li>Do the <a href="#permission-deined">user or system denied
+                  permission</a> failure case step.
+                  </li>
+                </ol>
+              </li>
+              <li>If |permission| is "granted":
+                <ol>
+                  <li>Let |position| be null.
+                  </li>
+                  <li>If |cachedPosition| is not null, and
+                  |options|.{{PositionOptions/maximumAge}} is greater than 0:
+                    <ol>
+                      <li>Let |cacheTime:long| be |acquisitionTime| minus the
+                      value of the |options|.{{PositionOptions/maximumAge}}
+                      member.
+                      </li>
+                      <li>If |cachedPosition|'s
+                      {{GeolocationPosition/timestamp}}'s value is greater than
+                      |cacheTime|, and
+                      |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
+                      equals |options|.{{PositionOptions/enableHighAccuracy}},
+                      set |position| to |cachedPosition|.
+                      </li>
+                    </ol>
+                  </li>
+                  <li>Otherwise, if |position| is not |cachedPosition|, try to
+                  acquire position data from the underlying system, optionally
+                  taking into consideration the value of
+                  |options|.{{PositionOptions/enableHighAccuracy}} during
+                  acquisition.
+                  </li>
+                  <li>If the |timeout| elapses during acquisition, or acquiring
+                  the device's position results in failure:
+                    <ol>
+                      <li>Stop the |timeout|.
+                      </li>
+                      <li>Go to <a href="#errors-reasons">dealing with
+                      failures</a>.
+                      </li>
+                      <li>Terminate this algorithm.
+                      </li>
+                    </ol>
+                  </li>
+                  <li>If acquiring the position data form the system succeeds:
+                    <ol>
+                      <li>Set |position| be [=a new `GeolocationPosition`=]
+                      passing |acquisitionTime| and
+                      |options|.{{PositionOptions/enableHighAccuracy}}.
+                      </li>
+                      <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
+                      |position|.
+                      </li>
+                    </ol>
+                  </li>
+                  <li>Stop the |timeout|.
+                  </li>
+                  <li>[=Queue a task=] on the [=geolocation task source=] with
+                  a step that [=invokes=] |successCallback| with |position|.
+                  </li>
+                </ol>
               </li>
             </ol>
+            <dl class="switch">
+              <dt id="errors-reasons">
+                Dealing with failures:
+              </dt>
+              <dd>
+                <ul>
+                  <li>If acquiring a position fails, do one of the following
+                  based on the condition that matches the failure:
+                    <dl class="switch">
+                      <dt id="permission-deined">
+                        User or system denied permission:
+                      </dt>
+                      <dd>
+                        <p>
+                          [=Call back with error=] passing |errorCallback| and
+                          {{GeolocationPositionError/PERMISSION_DENIED}}.
+                        </p>
+                        <aside class="note" title=
+                        "Browser permission VS OS permission">
+                          <p>
+                            On certain platforms, there can be a circumstance
+                            where the user has [=permission/granted=] the user
+                            agent permission to use Geolocation at the
+                            browser-level, but the permission to access
+                            location services has been denied at the OS level.
+                          </p>
+                        </aside>
+                      </dd>
+                      <dt>
+                        Timeout elapsed:
+                      </dt>
+                      <dd>
+                        [=Call back with error=] with |errorCallback| and
+                        {{GeolocationPositionError/TIMEOUT}}.
+                      </dd>
+                      <dt>
+                        Data acquisition error or any other reason:
+                      </dt>
+                      <dd>
+                        [=Call back with error=] passing |errorCallback| and
+                        {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
+                      </dd>
+                    </dl>
+                  </li>
+                </ul>
+              </dd>
+            </dl>
           </li>
         </ol>
       </section>
@@ -975,13 +965,19 @@
           The <dfn>timeout</dfn> member denotes the maximum length of time,
           expressed in milliseconds, before [=acquiring a position=] expires.
         </p>
-        <p class="Note">
+        <p class="note" title="When is the timeout calculated?">
           The time spent waiting for the document to become visible and for
           [=check permission|obtaining permission to use the API=] is not
           included in the period covered by the {{PositionOptions/timeout}}
           member. The {{PositionOptions/timeout}} member only applies when
           [=acquiring a position=] begins.
         </p>
+        <aside class="note" title="Immediate cancellation">
+          <p>
+            An |options|.{{PositionOptions/timeout}} value 0 can cause
+            immediate failures.
+          </p>
+        </aside>
       </section>
       <section>
         <h2>
@@ -1065,7 +1061,7 @@
           <dd>
             Used by this specification to queue up non-blocking
             {{PositionCallback}} and {{PositionErrorCallback}} when performing
-            [=request position|position requests=].
+            [=request a position|position requests=].
           </dd>
         </dl>
       </section>
@@ -1213,7 +1209,7 @@
             <dfn>PERMISSION_DENIED</dfn> (numeric value 1)
           </dt>
           <dd>
-            [=Request position=] failed because the user denied permission to
+            [=Request a position=] failed because the user denied permission to
             use the API.
           </dd>
           <dt>
