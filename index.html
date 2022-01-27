@@ -678,7 +678,7 @@
           To <dfn>request a position</dfn>, pass a {{PositionCallback}}
           |successCallback:PositionCallback|, a {{PositionErrorCallback?}}
           |errorCallback:PositionErrorCallback?|, {{PositionOptions}}
-          |options:PositionOptions|, and an optional |watchId:long|:
+          |options:PositionOptions|, and an optional |watchId:unsigned long|:
         </p>
         <ol class="algorithm">
           <li>Let |watchIDs:List| be [=this=]'s {{Geolocation/[[watchIDs]]}}.
@@ -689,7 +689,7 @@
           <li data-tests="">If |document| is not [=allowed to use=] the
           "geolocation" feature:
             <ol>
-              <li>[=List/Remove=] |watchId| from |watchIDs|.
+              <li>If passed, [=List/remove=] |watchId| from |watchIDs|.
               </li>
               <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/PERMISSION_DENIED}}.
@@ -718,7 +718,7 @@
           "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
           If |permission| is "denied", then:
             <ol>
-              <li>[=List/Remove=] |watchId| from |watchIDs|.
+              <li>If passed, [=list/remove=] |watchId| from |watchIDs|.
               </li>
               <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/PERMISSION_DENIED}}.
@@ -775,7 +775,7 @@
           passing {{PositionCallback}} |successCallback:PositionCallback|, a
           {{PositionErrorCallback?}} |errorCallback:PositionErrorCallback?|,
           {{PositionOptions}} |options:PositionOptions|, and an optional
-          |watchId:long|.
+          |watchId:unsigned long|.
         </p>
         <ol class="algorithm">
           <li>If |watchId| was passed and [=this=]'s
