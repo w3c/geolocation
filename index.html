@@ -441,14 +441,14 @@
           that can govern the usage and access to users' location data.
         </p>
         <p>
-          Recipients ought to only request position information when
-          necessary, and only use the location information for the task for
-          which it was provided to them. Recipients ought to dispose of
-          location information once that task is completed, unless expressly
-          permitted to retain it by the user. Recipients need to also take
-          measures to protect this information against unauthorized access. If
-          location information is stored, users need to be allowed to update
-          and delete this information.
+          Recipients ought to only request position information when necessary,
+          and only use the location information for the task for which it was
+          provided to them. Recipients ought to dispose of location information
+          once that task is completed, unless expressly permitted to retain it
+          by the user. Recipients need to also take measures to protect this
+          information against unauthorized access. If location information is
+          stored, users need to be allowed to update and delete this
+          information.
         </p>
         <p>
           The recipients of location information need to refrain from
@@ -608,7 +608,7 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the [=current settings object=]'s [=associated `Document`=] is
+          <li>If the [=current settings object=]'s [=responsible document=] is
           not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] |errorCallback| and
@@ -634,7 +634,7 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the [=current settings object=]'s [=associated `Document`=] is
+          <li>If the [=current settings object=]'s [=responsible document=] is
           not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] passing |errorCallback| and
@@ -684,7 +684,19 @@
           <li>Let |watchIDs:List| be [=this=]'s {{Geolocation/[[watchIDs]]}}.
           </li>
           <li>Let |document:Document| be the [=current settings object=]'s
-          [=associated Document=].
+          [=responsible document=].
+          </li>
+          <li data-tests="">If |document| is not [=allowed to use=] the
+          "geolocation" feature:
+            <ol>
+              <li>[=List/Remove=] |watchId| from |watchIDs|.
+              </li>
+              <li>[=Call back with error=] passing |errorCallback| and
+              {{GeolocationPositionError/PERMISSION_DENIED}}.
+              </li>
+              <li>Terminate this algorithm.
+              </li>
+            </ol>
           </li>
           <li>If |document:Document|'s [=Document/visibility state=] is
           "hidden", wait for the following [=page visibility change steps=] to
