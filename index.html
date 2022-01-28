@@ -496,10 +496,10 @@
           The <cite>Geolocation API</cite> is a [=default powerful feature=].
         </p>
         <p>
-          When <dfn data-local-lt="checking permission">check permission</dfn>
+          When <dfn>checking permission</dfn>
           to use the API, a user agent MAY suggest time-based [=permission=]
           [=permission/lifetimes=], such as "24 hours", "1 week", or choose to
-          remember the permission [permission/grant=] indefinitely. However, it
+          remember the permission [=permission/grant=] indefinitely. However, it
           is RECOMMENDED that a user agent prioritize restricting the
           [=permission=] [=permission/lifetime=] to a single session: This can
           be, for example, until the [=environment settings object/realm=] is
@@ -804,7 +804,7 @@
                 <ol>
                   <li>Stop |timeout|.
                   </li>
-                  <li>Do the <a href="#permission-deined">user or system denied
+                  <li>Do the <a href="#permission-denied">user or system denied
                   permission</a> failure case step.
                   </li>
                 </ol>
@@ -847,7 +847,7 @@
                       </li>
                     </ol>
                   </li>
-                  <li>If acquiring the position data form the system succeeds:
+                  <li>If acquiring the position data from the system succeeds:
                     <ol>
                       <li>Set |position| be [=a new `GeolocationPosition`=]
                       passing |acquisitionTime| and
@@ -875,7 +875,7 @@
                   <li>If acquiring a position fails, do one of the following
                   based on the condition that matches the failure:
                     <dl class="switch">
-                      <dt id="permission-deined">
+                      <dt id="permission-denied">
                         User or system denied permission:
                       </dt>
                       <dd>
