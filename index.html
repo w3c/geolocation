@@ -120,7 +120,7 @@
         </p>
         <script class="removeOnSave">
           function removeCommits({ message }) {
-            return !/^Clarify which FPWD|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^fix|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
+            return !/^Clarify which FPWD|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
           }
         </script> <rs-changelog from="FPWD" filter=
         "removeCommits"></rs-changelog>
