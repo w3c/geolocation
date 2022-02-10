@@ -917,7 +917,8 @@ navigator.geolocation.getCurrentPosition(
         </h3><a class="self-link" href="#check-permission" aria-label="Permalink for Section 3.4"></a></div>
         
         <p>
-          The <cite>Geolocation API</cite> is a <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-default-powerful-feature" id="ref-for-index-term-default-powerful-feature-1">default powerful feature</a>.
+          The <cite>Geolocation API</cite> is a <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-default-powerful-feature" id="ref-for-index-term-default-powerful-feature-1">default powerful feature</a>
+          identified by the <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-name" id="ref-for-index-term-name-for-powerful-feature-1">name</a> <dfn id="dfn-geolocation" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">"geolocation"</dfn>.
         </p>
         <p>
           When <dfn data-local-lt="check permission" data-lt="checking permission|check permission" id="dfn-checking-permission" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">checking permission</dfn>
@@ -2556,8 +2557,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </h2><a class="self-link" href="#permissions-policy" aria-label="Permalink for Section 11."></a></div>
       
       <p>
-        The <cite>Geolocation API</cite> defines a <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature" id="ref-for-index-term-policy-controlled-feature-1">policy-controlled feature</a> identified by the string <dfn class="permission" data-dfn-type="permission" id="dfn-geolocation" tabindex="0" aria-haspopup="dialog" data-export="">"geolocation"</dfn>. Its <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#default-allowlist" id="ref-for-index-term-default-allowlist-2">default allowlist</a> is
-        <code>'self'</code>.
+        The <cite>Geolocation API</cite> defines a <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature" id="ref-for-index-term-policy-controlled-feature-1">policy-controlled feature</a> identified by the token string <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-3">"geolocation"</a>. Its
+        <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#default-allowlist" id="ref-for-index-term-default-allowlist-2">default allowlist</a> is <code>'self'</code>.
       </p>
     </section>
     <section id="conformance"><div class="header-wrapper"><h2 id="x12-conformance"><bdi class="secno">12. </bdi>Conformance</h2><a class="self-link" href="#conformance" aria-label="Permalink for Section 12."></a></div><p>As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.</p><p>
@@ -2664,7 +2665,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a class="index-term" href="#dfn-geolocation-task-source">geolocation task source</a> 
     <span class="print-only">§8.4</span></li><li>
       <a class="index-term" href="#dfn-geolocation">"geolocation"</a> 
-    <span class="print-only">§11.</span></li><li>
+    <span class="print-only">§3.4</span></li><li>
       <a class="index-term" href="#dom-geolocationcoordinates"><code>GeolocationCoordinates</code></a> interface
     <span class="print-only">§9.</span></li><li>
       <a class="index-term" href="#dom-geolocationposition"><code>GeolocationPosition</code></a> interface
@@ -2788,6 +2789,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   </li><li>
     <span class="index-term" data-href="https://www.w3.org/TR/permissions/#dfn-lifetime" id="index-term-lifetimes-for-permission" tabindex="0" aria-haspopup="dialog">lifetimes (for <code>permission</code>)</span>
   </li><li>
+    <span class="index-term" data-href="https://www.w3.org/TR/permissions/#dfn-name" id="index-term-name-for-powerful-feature" tabindex="0" aria-haspopup="dialog">name (for powerful feature)</span>
+  </li><li>
     <span class="index-term" data-href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor-name" id="index-term-name-for-permissiondescriptor" tabindex="0" aria-haspopup="dialog"><code>name</code> (for <code>PermissionDescriptor</code>)</span>
   </li><li>
     <span class="index-term" data-href="https://www.w3.org/TR/permissions/#dfn-permission" id="index-term-permission" tabindex="0" aria-haspopup="dialog">permission</span>
@@ -2892,7 +2895,23 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </dd></dl>
   </section></section><p role="navigation" id="back-to-top">
     <a href="#title"><abbr title="Back to Top">↑</abbr></a>
-  </p><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-checking-permission" aria-label="Links in this document to definition: checking permission">
+  </p><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-geolocation" aria-label="Links in this document to definition: &quot;geolocation&quot;">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-geolocation" aria-label="Permalink for definition: &quot;geolocation&quot;. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+    <a href="#ref-for-dfn-geolocation-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
+  </li><li>
+    <a href="#ref-for-dfn-geolocation-2" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
+  </li><li>
+    <a href="#ref-for-dfn-geolocation-3" title="§ 11. Permissions policy">§ 11. Permissions policy</a> 
+  </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-checking-permission" aria-label="Links in this document to definition: checking permission">
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dfn-checking-permission" aria-label="Permalink for definition: checking permission. Activate to close this dialog.">Permalink</a>
@@ -3552,20 +3571,6 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <a href="#ref-for-dom-geolocationpositionerror-message-3" title="§ A. IDL Index">§ A. IDL Index</a> 
   </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-geolocation" aria-label="Links in this document to definition: &quot;geolocation&quot;">
-      <span class="caret"></span>
-      <div>
-        <a class="self-link" href="#dfn-geolocation" aria-label="Permalink for definition: &quot;geolocation&quot;. Activate to close this dialog.">Permalink</a>
-         
-      </div>
-      <p><b>Referenced in:</b></p>
-      <ul>
-    <li>
-    <a href="#ref-for-dfn-geolocation-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
-  </li><li>
-    <a href="#ref-for-dfn-geolocation-2" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
-  </li>
-  </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-epochtimestamp" aria-label="Links in this document to definition: EpochTimeStamp">
       <span class="caret"></span>
       <div>
@@ -3944,6 +3949,18 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <a href="#ref-for-index-term-lifetimes-for-permission-1" title="§ 3.1 User consent">§ 3.1 User consent</a> <a href="#ref-for-index-term-lifetimes-for-permission-2" title="Reference 2">(2)</a> <a href="#ref-for-index-term-lifetimes-for-permission-3" title="Reference 3">(3)</a> <a href="#ref-for-index-term-lifetimes-for-permission-4" title="Reference 4">(4)</a> 
   </li><li>
     <a href="#ref-for-index-term-lifetimes-for-permission-5" title="§ 3.4 Checking permission to use the API">§ 3.4 Checking permission to use the API</a> <a href="#ref-for-index-term-lifetimes-for-permission-6" title="Reference 2">(2)</a> 
+  </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-name-for-powerful-feature" aria-label="Links in this document to definition: name (for powerful feature)">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-name" aria-label="Permalink for definition: name (for powerful feature). Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+    <a href="#ref-for-index-term-name-for-powerful-feature-1" title="§ 3.4 Checking permission to use the API">§ 3.4 Checking permission to use the API</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-name-for-permissiondescriptor" aria-label="Links in this document to definition: name (for PermissionDescriptor)">
