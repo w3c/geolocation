@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 30.0.4">
+<meta name="generator" content="ReSpec 31.0.4">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -247,36 +247,38 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     }
   ],
   "group": "das",
-  "previousPublishDate": "2021-06-07",
-  "previousMaturity": "FPWD",
+  "previousPublishDate": "2022-02-17",
+  "crEnd": "2022-03-18",
+  "previousMaturity": "CR",
   "github": "w3c/geolocation-api",
   "caniuse": "geolocation",
   "testSuiteURI": "https://wpt.live/geolocation-API/",
   "implementationReportURI": "https://wpt.fyi/geolocation-API",
   "xref": "web-platform",
-  "publishISODate": "2022-02-10T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 10 February 2022"
+  "publishISODate": "2022-02-21T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 21 February 2022"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED"></head>
   <body data-cite="WEBIDL secure-contexts permissions-policy permissions hr-time html HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
-    <a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
-  </a> <h1 id="title" class="title">Geolocation API</h1>
-    
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-02-10">10 February 2022</time></p>
+    <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
+  </a></p>
+    <h1 id="title" class="title">Geolocation API</h1> 
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-02-21">21 February 2022</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
                 <a class="u-url" href="https://w3c.github.io/geolocation-api/">https://w3c.github.io/geolocation-api/</a>
-              </dd><dt>Latest published version:</dt><dd>
+              </dd>
+        <dt>Latest published version:</dt><dd>
                 <a href="https://www.w3.org/TR/geolocation/">https://www.w3.org/TR/geolocation/</a>
               </dd>
         <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/geolocation-api/">https://w3c.github.io/geolocation-api/</a></dd>
         <dt>History:</dt><dd>
-      <a href="https://www.w3.org/standards/history/geolocation">https://www.w3.org/standards/history/geolocation</a>
-    </dd><dd>
-        <a href="https://github.com/w3c/geolocation-api/commits/">Commit history</a>
-      </dd>
+                    <a href="https://www.w3.org/standards/history/geolocation">https://www.w3.org/standards/history/geolocation</a>
+                  </dd><dd>
+                    <a href="https://github.com/w3c/geolocation-api/commits/">Commit history</a>
+                  </dd>
         <dt>Test suite:</dt><dd><a href="https://wpt.live/geolocation-API/">https://wpt.live/geolocation-API/</a></dd>
         <dt>Implementation report:</dt><dd>
                 <a href="https://wpt.fyi/geolocation-API">https://wpt.fyi/geolocation-API</a>
@@ -284,8 +286,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         
         
         
-        <dt>Editors:</dt>
-        <dd class="editor p-author h-card vcard" data-editor-id="39125">
+        <dt>Editors:</dt><dd class="editor p-author h-card vcard" data-editor-id="39125">
     <span class="p-name fn">Marcos Cáceres</span> (<a class="p-org org h-org" href="https://w3.org">W3C</a>)
   </dd><dd class="editor p-author h-card vcard" data-editor-id="83788">
     <span class="p-name fn">Reilly Grant</span> (<a class="p-org org h-org" href="https://google.com">Google</a>)
@@ -313,9 +314,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           <li class="caniuse-cell y" title="Supported.">5–100</li><li class="caniuse-cell a" title="Almost supported (aka Partial support).">4</li>
         </ul>
       </div><div class="caniuse-browser">
-        <button class="caniuse-cell y" title="Supported.">Firefox 98</button>
+        <button class="caniuse-cell y" title="Supported.">Firefox 99</button>
         <ul>
-          <li class="caniuse-cell y" title="Supported.">3.5–97</li><li class="caniuse-cell p" title="No support, but has Polyfill.">2–3</li>
+          <li class="caniuse-cell y" title="Supported.">3.5–98</li><li class="caniuse-cell p" title="No support, but has Polyfill.">2–3</li>
         </ul>
       </div><div class="caniuse-browser">
         <button class="caniuse-cell y" title="Supported.">Safari TP</button>
@@ -912,7 +913,53 @@ navigator.geolocation.getCurrentPosition(
           interfaces that enable revocation of permissions.
         </p>
       </section>
-      <section id="check-permission"><div class="header-wrapper"><h3 id="x3-4-checking-permission-to-use-the-api"><bdi class="secno">3.4 </bdi>
+      <aside class="mdn"><details>
+    <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span> </span></summary>
+    <a title="The HTTP Feature-Policy header geolocation directive controls whether the current document is allowed to use the Geolocation Interface. When this policy is enabled, calls to getCurrentPosition() and watchPosition() will cause those functions' callbacks to be invoked with a GeolocationPositionError code of PERMISSION_DENIED." href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy/geolocation">Headers/Feature-Policy/geolocation</a>
+    
+    <table>
+    <tr class="chrome yes">
+      <td>Chrome</td>
+      <td>60+</td>
+    </tr><tr class="chrome_android yes">
+      <td>Chrome Android</td>
+      <td>60+</td>
+    </tr><tr class="edge no">
+      <td>Edge</td>
+      <td>No</td>
+    </tr><tr class="edge_mobile unknown">
+      <td>Edge Mobile</td>
+      <td>?</td>
+    </tr><tr class="firefox unknown">
+      <td>Firefox</td>
+      <td>?</td>
+    </tr><tr class="firefox_android unknown">
+      <td>Firefox Android</td>
+      <td>?</td>
+    </tr><tr class="ie no">
+      <td>Internet Explorer</td>
+      <td>No</td>
+    </tr><tr class="opera yes">
+      <td>Opera</td>
+      <td>47+</td>
+    </tr><tr class="opera_android yes">
+      <td>Opera Android</td>
+      <td>44+</td>
+    </tr><tr class="safari no">
+      <td>Safari</td>
+      <td>No</td>
+    </tr><tr class="safari_ios no">
+      <td>Safari iOS</td>
+      <td>No</td>
+    </tr><tr class="samsunginternet_android yes">
+      <td>Samsung Internet</td>
+      <td>8.0+</td>
+    </tr><tr class="webview_android yes">
+      <td>WebView Android</td>
+      <td>60+</td>
+    </tr>
+  </table>
+  </details></aside><section id="check-permission"><div class="header-wrapper"><h3 id="x3-4-checking-permission-to-use-the-api"><bdi class="secno">3.4 </bdi>
           Checking permission to use the API
         </h3><a class="self-link" href="#check-permission" aria-label="Permalink for Section 3.4"></a></div>
         
@@ -1048,7 +1095,7 @@ navigator.geolocation.getCurrentPosition(
         <code>Geolocation</code> interface and callbacks
       </h2><a class="self-link" href="#geolocation_interface" aria-label="Permalink for Section 6."></a></div>
       
-      <pre class="idl def" id="webidl-212590439"><span class="idlHeader"><a class="self-link" href="#webidl-212590439">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocation" data-title="Geolocation">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-1">Exposed</a>=<a data-type="interface" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-index-term-window-interface-1">Window</a></span>]
+      <pre class="idl def" id="webidl-212590439"><span class="idlHeader"><a class="self-link" href="#webidl-212590439">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocation" data-title="Geolocation">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-1">Exposed</a>=Window</span>]
 interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocation" data-idl="interface" data-title="Geolocation" data-dfn-for="" class="idlID" tabindex="0" aria-haspopup="dialog"><code>Geolocation</code></dfn> {<span data-idl="" class="idlMethod" id="idl-def-geolocation-getcurrentposition-successcallback-errorcallback-options" data-title="getCurrentPosition" data-dfn-for="Geolocation"><span class="idlType">
   <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-index-term-undefined-type-1">undefined</a></span> <a class="internalDFN idlName" data-link-type="method" href="#dom-geolocation-getcurrentposition" id="ref-for-dom-geolocation-getcurrentposition-4"><code>getCurrentPosition</code></a> (<span class="idlType">
     <a href="#dom-positioncallback" class="internalDFN" data-link-type="idl" id="ref-for-dom-positioncallback-1"><code>PositionCallback</code></a></span> <span class="idlParamName">successCallback</span>,
@@ -1696,7 +1743,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
         <code>GeolocationPosition</code> interface
       </h2><a class="self-link" href="#position_interface" aria-label="Permalink for Section 8."></a></div>
       
-      <pre class="idl def" id="webidl-2027020800"><span class="idlHeader"><a class="self-link" href="#webidl-2027020800">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocationposition" data-title="GeolocationPosition">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-2">Exposed</a>=<a data-type="interface" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-index-term-window-interface-2">Window</a></span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-1">SecureContext</a></span>]
+      <pre class="idl def" id="webidl-2027020800"><span class="idlHeader"><a class="self-link" href="#webidl-2027020800">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocationposition" data-title="GeolocationPosition">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-2">Exposed</a>=Window</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-1">SecureContext</a></span>]
 interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposition" data-idl="interface" data-title="GeolocationPosition" data-dfn-for="" class="idlID" tabindex="0" aria-haspopup="dialog"><code>GeolocationPosition</code></dfn> {<span data-idl="" class="idlAttribute" id="idl-def-geolocationposition-coords" data-title="coords" data-dfn-for="GeolocationPosition">
   readonly attribute<span class="idlType"> <a href="#dom-geolocationcoordinates" class="internalDFN" data-link-type="idl" id="ref-for-dom-geolocationcoordinates-1"><code>GeolocationCoordinates</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationposition-coords" id="ref-for-dom-geolocationposition-coords-1"><code>coords</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationposition-timestamp" data-title="timestamp" data-dfn-for="GeolocationPosition">
   readonly attribute<span class="idlType"> <a data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-epochtimestamp" id="ref-for-index-term-epochtimestamp-2">EpochTimeStamp</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationposition-timestamp" id="ref-for-dom-geolocationposition-timestamp-2"><code>timestamp</code></a>;</span>
@@ -1757,7 +1804,7 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
       </section>
       <aside class="mdn"><details>
     <summary aria-label="Expand MDN details for timestamp"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
-    <a title="The GeolocationPosition.timestamp read-only property returns a DOMTimeStamp object, represents the date and the time of the creation of the GeolocationPosition object it belongs to. The precision is to the millisecond." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition/timestamp">GeolocationPosition/timestamp</a>
+    <a title="The GeolocationPosition.timestamp read-only property returns a EpochTimeStamp object that represents the date and time that the position was acquired by the device." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition/timestamp">GeolocationPosition/timestamp</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
     <tr class="chrome yes">
@@ -1908,7 +1955,7 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
         <dfn data-export="" data-dfn-type="interface" id="dom-geolocationcoordinates" data-idl="interface" data-title="GeolocationCoordinates" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>GeolocationCoordinates</code></dfn> interface
       </h2><a class="self-link" href="#coordinates_interface" aria-label="Permalink for Section 9."></a></div>
       
-      <pre class="idl def" id="webidl-1124918410"><span class="idlHeader"><a class="self-link" href="#webidl-1124918410">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocationcoordinates" data-title="GeolocationCoordinates">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-3">Exposed</a>=<a data-type="interface" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-index-term-window-interface-3">Window</a></span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-2">SecureContext</a></span>]
+      <pre class="idl def" id="webidl-1124918410"><span class="idlHeader"><a class="self-link" href="#webidl-1124918410">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocationcoordinates" data-title="GeolocationCoordinates">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-3">Exposed</a>=Window</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-2">SecureContext</a></span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geolocationcoordinates" id="ref-for-dom-geolocationcoordinates-2"><code>GeolocationCoordinates</code></a> {<span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-accuracy" data-title="accuracy" data-dfn-for="GeolocationCoordinates">
   readonly attribute<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-1">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-accuracy" id="ref-for-dom-geolocationcoordinates-accuracy-1"><code>accuracy</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-latitude" data-title="latitude" data-dfn-for="GeolocationCoordinates">
   readonly attribute<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-2">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-latitude" id="ref-for-dom-geolocationcoordinates-latitude-1"><code>latitude</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-longitude" data-title="longitude" data-dfn-for="GeolocationCoordinates">
@@ -2176,7 +2223,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </section>
       <aside class="mdn"><details>
     <summary aria-label="Expand MDN details for heading"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
-    <a title="The GeolocationCoordinates.heading read-only property is a double representing the direction in which the device is traveling. This value, specified in degrees, indicates how far off from heading due north the device is. Zero degrees represents true north, and the direction is determined clockwise (which means that east is 90 degrees and west is 270 degrees). If GeolocationCoordinates.speed is 0, heading is NaN. If the device is not able to provide heading information, this value is null." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates/heading">GeolocationCoordinates/heading</a>
+    <a title="The GeolocationCoordinates.heading read-only property is a double representing the direction in which the device is traveling. This value, specified in degrees, indicates how far off from heading due north the device is. 0 degrees represents true north, and the direction is determined clockwise (which means that east is 90 degrees and west is 270 degrees). If GeolocationCoordinates.speed is 0, heading is NaN. If the device is not able to provide heading information, this value is null." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates/heading">GeolocationCoordinates/heading</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
     <tr class="chrome yes">
@@ -2393,7 +2440,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         <dfn data-export="" data-dfn-type="interface" id="dom-geolocationpositionerror" data-idl="interface" data-title="GeolocationPositionError" data-dfn-for="" tabindex="0" aria-haspopup="dialog"><code>GeolocationPositionError</code></dfn> interface
       </h2><a class="self-link" href="#position_error_interface" aria-label="Permalink for Section 10."></a></div>
       
-      <pre class="idl def" id="webidl-1281871320"><span class="idlHeader"><a class="self-link" href="#webidl-1281871320">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocationpositionerror" data-title="GeolocationPositionError">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-4">Exposed</a>=<a data-type="interface" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-index-term-window-interface-4">Window</a></span>]
+      <pre class="idl def" id="webidl-1281871320"><span class="idlHeader"><a class="self-link" href="#webidl-1281871320">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocationpositionerror" data-title="GeolocationPositionError">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-4">Exposed</a>=Window</span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geolocationpositionerror" id="ref-for-dom-geolocationpositionerror-6"><code>GeolocationPositionError</code></a> {<span data-idl="" class="idlConst" id="idl-def-geolocationpositionerror-permission_denied" data-title="PERMISSION_DENIED" data-dfn-for="GeolocationPositionError">
   const<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-2">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-permission_denied" id="ref-for-dom-geolocationpositionerror-permission_denied-4"><code>PERMISSION_DENIED</code></a> = 1;</span><span data-idl="" class="idlConst" id="idl-def-geolocationpositionerror-position_unavailable" data-title="POSITION_UNAVAILABLE" data-dfn-for="GeolocationPositionError">
   const<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-3">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-position_unavailable" id="ref-for-dom-geolocationpositionerror-position_unavailable-4"><code>POSITION_UNAVAILABLE</code></a> = 2;</span><span data-idl="" class="idlConst" id="idl-def-geolocationpositionerror-timeout" data-title="TIMEOUT" data-dfn-for="GeolocationPositionError">
@@ -2574,7 +2621,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-2">SameObject</a></span>] readonly attribute<span class="idlType"> <a href="#dom-geolocation" class="internalDFN" data-link-type="idl" id="ref-for-dom-geolocation-3"><code>Geolocation</code></a></span> <dfn data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="geolocation" data-dfn-for="Navigator" data-type="Geolocation" data-lt="geolocation" data-local-lt="Navigator.geolocation" class="idlName"><code>geolocation</code></dfn>;</span>
 };</span>
 
-<span data-idl="" class="idlInterface" data-title="Geolocation">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-5">Exposed</a>=<a data-type="interface" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-index-term-window-interface-5">Window</a></span>]
+<span data-idl="" class="idlInterface" data-title="Geolocation">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-5">Exposed</a>=Window</span>]
 interface <dfn data-export="" data-dfn-type="interface" data-idl="interface" data-title="Geolocation" data-dfn-for="" class="idlID"><code>Geolocation</code></dfn> {<span data-idl="" class="idlMethod" data-title="getCurrentPosition" data-dfn-for="Geolocation"><span class="idlType">
   <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-index-term-undefined-type-5">undefined</a></span> <a class="internalDFN idlName" data-link-type="method" href="#dom-geolocation-getcurrentposition" id="ref-for-dom-geolocation-getcurrentposition-5"><code>getCurrentPosition</code></a> (<span class="idlType">
     <a href="#dom-positioncallback" class="internalDFN" data-link-type="idl" id="ref-for-dom-positioncallback-6"><code>PositionCallback</code></a></span> <span class="idlParamName">successCallback</span>,
@@ -2605,13 +2652,13 @@ callback <dfn data-export="" data-dfn-type="callback" data-idl="callback" data-t
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Clamp" id="ref-for-index-term-clamp-extended-attribute-4">Clamp</a></span>]<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-index-term-unsigned-long-type-6">unsigned long</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-positionoptions-maximumage" id="ref-for-dom-positionoptions-maximumage-5"><code>maximumAge</code></a> = 0;</span>
 };</span>
 
-<span data-idl="" class="idlInterface" data-title="GeolocationPosition">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-6">Exposed</a>=<a data-type="interface" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-index-term-window-interface-6">Window</a></span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-3">SecureContext</a></span>]
+<span data-idl="" class="idlInterface" data-title="GeolocationPosition">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-6">Exposed</a>=Window</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-3">SecureContext</a></span>]
 interface <dfn data-export="" data-dfn-type="interface" data-idl="interface" data-title="GeolocationPosition" data-dfn-for="" class="idlID"><code>GeolocationPosition</code></dfn> {<span data-idl="" class="idlAttribute" data-title="coords" data-dfn-for="GeolocationPosition">
   readonly attribute<span class="idlType"> <a href="#dom-geolocationcoordinates" class="internalDFN" data-link-type="idl" id="ref-for-dom-geolocationcoordinates-4"><code>GeolocationCoordinates</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationposition-coords" id="ref-for-dom-geolocationposition-coords-3"><code>coords</code></a>;</span><span data-idl="" class="idlAttribute" data-title="timestamp" data-dfn-for="GeolocationPosition">
   readonly attribute<span class="idlType"> <a data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-epochtimestamp" id="ref-for-index-term-epochtimestamp-4">EpochTimeStamp</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationposition-timestamp" id="ref-for-dom-geolocationposition-timestamp-4"><code>timestamp</code></a>;</span>
 };</span>
 
-<span data-idl="" class="idlInterface" data-title="GeolocationCoordinates">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-7">Exposed</a>=<a data-type="interface" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-index-term-window-interface-7">Window</a></span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-4">SecureContext</a></span>]
+<span data-idl="" class="idlInterface" data-title="GeolocationCoordinates">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-7">Exposed</a>=Window</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-4">SecureContext</a></span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geolocationcoordinates" id="ref-for-dom-geolocationcoordinates-5"><code>GeolocationCoordinates</code></a> {<span data-idl="" class="idlAttribute" data-title="accuracy" data-dfn-for="GeolocationCoordinates">
   readonly attribute<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-8">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-accuracy" id="ref-for-dom-geolocationcoordinates-accuracy-3"><code>accuracy</code></a>;</span><span data-idl="" class="idlAttribute" data-title="latitude" data-dfn-for="GeolocationCoordinates">
   readonly attribute<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-9">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-latitude" id="ref-for-dom-geolocationcoordinates-latitude-3"><code>latitude</code></a>;</span><span data-idl="" class="idlAttribute" data-title="longitude" data-dfn-for="GeolocationCoordinates">
@@ -2622,7 +2669,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   readonly attribute<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-14">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-speed" id="ref-for-dom-geolocationcoordinates-speed-4"><code>speed</code></a>;</span>
 };</span>
 
-<span data-idl="" class="idlInterface" data-title="GeolocationPositionError">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-8">Exposed</a>=<a data-type="interface" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-index-term-window-interface-8">Window</a></span>]
+<span data-idl="" class="idlInterface" data-title="GeolocationPositionError">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-8">Exposed</a>=Window</span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geolocationpositionerror" id="ref-for-dom-geolocationpositionerror-10"><code>GeolocationPositionError</code></a> {<span data-idl="" class="idlConst" data-title="PERMISSION_DENIED" data-dfn-for="GeolocationPositionError">
   const<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-6">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-permission_denied" id="ref-for-dom-geolocationpositionerror-permission_denied-5"><code>PERMISSION_DENIED</code></a> = 1;</span><span data-idl="" class="idlConst" data-title="POSITION_UNAVAILABLE" data-dfn-for="GeolocationPositionError">
   const<span class="idlType"> <a data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-7">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-position_unavailable" id="ref-for-dom-geolocationpositionerror-position_unavailable-5"><code>POSITION_UNAVAILABLE</code></a> = 2;</span><span data-idl="" class="idlConst" data-title="TIMEOUT" data-dfn-for="GeolocationPositionError">
@@ -2754,8 +2801,6 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#task-source" id="index-term-task-source" tabindex="0" aria-haspopup="dialog">task source</span>
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="index-term-visibility-state-for-document" tabindex="0" aria-haspopup="dialog">visibility state (for <code>Document</code>)</span>
-  </li><li>
-    <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="index-term-window-interface" tabindex="0" aria-haspopup="dialog"><code>Window</code> interface</span>
   </li>
         </ul>
       </li><li>
@@ -2876,12 +2921,12 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     
     <dl class="bibliography"><dt id="bib-hr-time">[hr-time]</dt><dd>
       <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 28 January 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
-    </dd><dt id="bib-html">[HTML]</dt><dd>
+    </dd><dt id="bib-html">[html]</dt><dd>
       <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
     </dd><dt id="bib-infra">[infra]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-permissions">[Permissions]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-2"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 9 February 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-3">https://www.w3.org/TR/permissions/</a>
+      <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-2"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 15 February 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-3">https://www.w3.org/TR/permissions/</a>
     </dd><dt id="bib-permissions-policy">[Permissions-Policy]</dt><dd>
       <a href="https://www.w3.org/TR/permissions-policy-1/" id="ref-for-index-term-permissions-policy-3"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 16 July 2020. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/" id="ref-for-index-term-permissions-policy-4">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
@@ -3787,26 +3832,6 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <ul>
     <li>
     <a href="#ref-for-index-term-visibility-state-for-document-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-index-term-visibility-state-for-document-2" title="Reference 2">(2)</a> <a href="#ref-for-index-term-visibility-state-for-document-3" title="Reference 3">(3)</a> 
-  </li>
-  </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-window-interface" aria-label="Links in this document to definition: Window interface">
-      <span class="caret"></span>
-      <div>
-        <a class="self-link" href="https://html.spec.whatwg.org/multipage/window-object.html#window" aria-label="Permalink for definition: Window interface. Activate to close this dialog.">Permalink</a>
-         
-      </div>
-      <p><b>Referenced in:</b></p>
-      <ul>
-    <li>
-    <a href="#ref-for-index-term-window-interface-1" title="§ 6. Geolocation interface and callbacks">§ 6. Geolocation interface and callbacks</a> 
-  </li><li>
-    <a href="#ref-for-index-term-window-interface-2" title="§ 8. GeolocationPosition interface">§ 8. GeolocationPosition interface</a> 
-  </li><li>
-    <a href="#ref-for-index-term-window-interface-3" title="§ 9. GeolocationCoordinates interface">§ 9. GeolocationCoordinates interface</a> 
-  </li><li>
-    <a href="#ref-for-index-term-window-interface-4" title="§ 10. GeolocationPositionError interface">§ 10. GeolocationPositionError interface</a> 
-  </li><li>
-    <a href="#ref-for-index-term-window-interface-5" title="§ A. IDL Index">§ A. IDL Index</a> <a href="#ref-for-index-term-window-interface-6" title="Reference 2">(2)</a> <a href="#ref-for-index-term-window-interface-7" title="Reference 3">(3)</a> <a href="#ref-for-index-term-window-interface-8" title="Reference 4">(4)</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-append-for-list" aria-label="Links in this document to definition: Append (for list)">
