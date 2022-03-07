@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 31.0.4">
+<meta name="generator" content="ReSpec 31.0.11">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -124,12 +124,12 @@ details.respec-tests-details>ul{width:100%;margin-top:-.3em}
 details.respec-tests-details>li{padding-left:1em}
 .self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
 aside.example .marker>a.self-link{color:inherit}
-.header-wrapper{display:flex;align-items:center}
+.header-wrapper{display:flex;align-items:baseline}
 :is(h2,h3,h4,h5,h6):not(#toc>h2,#abstract>h2,#sotd>h2,.head>h2){position:relative;left:-.5em}
-:is(h2,h3,h4,h5,h6):not(#toch2)+a.self-link{color:inherit;order:-1;position:relative;left:-1.1em;top:.8rem;font-size:1rem;opacity:.5}
+:is(h2,h3,h4,h5,h6):not(#toch2)+a.self-link{color:inherit;order:-1;position:relative;left:-1.1em;font-size:1rem;opacity:.5}
 :is(h2,h3,h4,h5,h6)+a.self-link::before{content:"§";text-decoration:none;color:var(--heading-text)}
+:is(h2,h3)+a.self-link{top:-.2em}
 :is(h4,h5,h6)+a.self-link::before{color:#000}
-:is(h4,h5,h6)+a.self-link{top:.6rem}
 @media (max-width:767px){
 dd{margin-left:0}
 }
@@ -255,15 +255,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "testSuiteURI": "https://wpt.live/geolocation-API/",
   "implementationReportURI": "https://wpt.fyi/geolocation-API",
   "xref": "web-platform",
-  "publishISODate": "2022-02-21T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 21 February 2022"
+  "publishISODate": "2022-03-07T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 07 March 2022"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED"></head>
   <body data-cite="WEBIDL secure-contexts permissions-policy permissions hr-time html HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-02-21">21 February 2022</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-03-07">07 March 2022</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -309,9 +309,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       Browser support (caniuse.com):
     </dt><dd class="caniuse-stats">
       <div class="caniuse-browser">
-        <button class="caniuse-cell y" title="Supported.">Chrome 101</button>
+        <button class="caniuse-cell y" title="Supported.">Chrome 102</button>
         <ul>
-          <li class="caniuse-cell y" title="Supported.">5–100</li><li class="caniuse-cell a" title="Almost supported (aka Partial support).">4</li>
+          <li class="caniuse-cell y" title="Supported.">5–101</li><li class="caniuse-cell a" title="Almost supported (aka Partial support).">4</li>
         </ul>
       </div><div class="caniuse-browser">
         <button class="caniuse-cell y" title="Supported.">Firefox 99</button>
@@ -965,7 +965,7 @@ navigator.geolocation.getCurrentPosition(
         
         <p>
           The <cite>Geolocation API</cite> is a <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-default-powerful-feature" id="ref-for-index-term-default-powerful-feature-1">default powerful feature</a>
-          identified by the <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-name" id="ref-for-index-term-name-for-powerful-feature-1">name</a> <dfn id="dfn-geolocation" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">"geolocation"</dfn>.
+          identified by the <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-name" id="ref-for-index-term-name-for-powerful-feature-1">name</a> <code><dfn class="permission" data-dfn-type="permission" id="dfn-geolocation" tabindex="0" aria-haspopup="dialog" data-export="">"geolocation"</dfn></code>.
         </p>
         <p>
           When <dfn data-local-lt="check permission" data-lt="checking permission|check permission" id="dfn-checking-permission" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">checking permission</dfn>
@@ -1406,7 +1406,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
             </ol>
           </li>
           <li>Let <var>descriptor</var> be a new <a data-link-type="idl" data-lt="PermissionDescriptor" data-type="dictionary" href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor" id="ref-for-index-term-permissiondescriptor-1"><code>PermissionDescriptor</code></a> whose
-          <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor-name" id="ref-for-index-term-name-for-permissiondescriptor-1"><code>name</code></a> is <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-1">"geolocation"</a>.
+          <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor-name" id="ref-for-index-term-name-for-permissiondescriptor-1"><code>name</code></a> is <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-1"><code>"geolocation"</code></a>.
           </li>
           <li>Set <var>permission</var> to <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-request-permission-to-use" id="ref-for-index-term-request-permission-to-use-1">request permission to use</a> <var>descriptor</var>.
           </li>
@@ -1490,7 +1490,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           by running the following steps:
             <ol>
               <li>Let <var>permission</var> be <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-getting-the-current-permission-state" id="ref-for-index-term-get-the-current-permission-state-1">get the current permission state</a> of
-              <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-2">"geolocation"</a>.
+              <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-2"><code>"geolocation"</code></a>.
               </li>
               <li>If <var>permission</var> is "denied":
                 <ol>
@@ -2604,7 +2604,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </h2><a class="self-link" href="#permissions-policy" aria-label="Permalink for Section 11."></a></div>
       
       <p>
-        The <cite>Geolocation API</cite> defines a <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature" id="ref-for-index-term-policy-controlled-feature-1">policy-controlled feature</a> identified by the token string <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-3">"geolocation"</a>. Its
+        The <cite>Geolocation API</cite> defines a <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature" id="ref-for-index-term-policy-controlled-feature-1">policy-controlled feature</a> identified by the token string <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-3"><code>"geolocation"</code></a>. Its
         <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#default-allowlist" id="ref-for-index-term-default-allowlist-2">default allowlist</a> is <code>'self'</code>.
       </p>
     </section>
@@ -2711,7 +2711,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <span class="print-only">§6.</span></li><li>
       <a class="index-term" href="#dfn-geolocation-task-source">geolocation task source</a> 
     <span class="print-only">§8.4</span></li><li>
-      <a class="index-term" href="#dfn-geolocation">"geolocation"</a> 
+      <a class="index-term" href="#dfn-geolocation"><code>"geolocation"</code></a> 
     <span class="print-only">§3.4</span></li><li>
       <a class="index-term" href="#dom-geolocationcoordinates"><code>GeolocationCoordinates</code></a> interface
     <span class="print-only">§9.</span></li><li>
@@ -2926,7 +2926,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </dd><dt id="bib-infra">[infra]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-permissions">[Permissions]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-2"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 15 February 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-3">https://www.w3.org/TR/permissions/</a>
+      <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-2"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 3 March 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-3">https://www.w3.org/TR/permissions/</a>
     </dd><dt id="bib-permissions-policy">[Permissions-Policy]</dt><dd>
       <a href="https://www.w3.org/TR/permissions-policy-1/" id="ref-for-index-term-permissions-policy-3"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 16 July 2020. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/" id="ref-for-index-term-permissions-policy-4">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
