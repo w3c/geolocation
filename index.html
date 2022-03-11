@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 31.0.11">
+<meta name="generator" content="ReSpec 32.0.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -138,24 +138,21 @@ dd{margin-left:0}
 }
 </style>
 <style id="caniuse-stylesheet" class="">
-.caniuse-stats{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:baseline}
-button.caniuse-cell{margin:1px 1px 0 0;border:none}
-.caniuse-browser{position:relative}
+.caniuse-stats{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:flex-start}
+.caniuse-cell{align-items:center;border-radius:1cm;color:#fff;display:flex;font-size:90%;justify-content:space-evenly;min-width:1.7cm;padding:.3rem .3rem;margin:.25cm .5cm 0 0;--supported:#2a8436dd;--no-support:#c44230dd;--no-support-alt:#b43b2bdd;--partial:#807301dd;--partial-alt:#746c00dd;--unknown:#757575;background:repeating-linear-gradient(var(--caniuse-angle,45deg),var(--caniuse-bg) 0,var(--caniuse-bg-alt) 1px,var(--caniuse-bg-alt) .4em,var(--caniuse-bg) calc(.25em + 1px),var(--caniuse-bg) .75em)}
+img.caniuse-browser{filter:drop-shadow(0 0 .1cm #666)}
+.caniuse-cell span.browser-version{margin-left:.4em;text-shadow:0 0 .1em #fff}
+.caniuse-stats a[href]{white-space:nowrap;align-self:center}
+.caniuse-cell.y{background:var(--supported)}
+.caniuse-cell:is(.n,.d){--caniuse-angle:45deg;--caniuse-bg:var(--no-support);--caniuse-bg-alt:var(--no-support-alt)}
+.caniuse-cell.u{background:var(--unknown)}
+.caniuse-cell.d{--caniuse-angle:180deg}
+.caniuse-cell:is(.a,.x,.p){--caniuse-angle:90deg;--caniuse-bg:var(--partial);--caniuse-bg-alt:var(--partial-alt)}
 @media print{
 .caniuse-cell.y::before{content:"✔️";padding:.5em}
 .caniuse-cell.n::before{content:"❌";padding:.5em}
-.caniuse-cell:is(.a,.d,.p,.x)::before{content:"⚠️";padding:.5em}
+.caniuse-cell:is(.a,.d,.p,.x,.u)::before{content:"⚠️";padding:.5em}
 }
-.caniuse-browser ul{display:none;margin:0;padding:0;list-style:none;position:absolute;left:0;z-index:2;background:#fff;margin-top:1px}
-.caniuse-stats a[href]{white-space:nowrap;align-self:center;margin-left:.5em}
-.caniuse-cell{display:flex;font-size:90%;height:.8cm;margin-right:1px;margin-top:0;min-width:3cm;overflow:visible;justify-content:center;align-items:center;--supported:#2a8436;--no-support:#c44230;--no-support-alt:#b43b2b;--partial:#807301;--partial-alt:#746c00;color:#fff;background:repeating-linear-gradient(var(--caniuse-angle,45deg),var(--caniuse-bg) 0,var(--caniuse-bg-alt) 1px,var(--caniuse-bg-alt) .4em,var(--caniuse-bg) calc(.25em + 1px),var(--caniuse-bg) .75em)}
-li.caniuse-cell{margin-bottom:1px}
-.caniuse-cell:focus{outline:0}
-.caniuse-cell.y{background:var(--supported)}
-.caniuse-cell:is(.n,.d){--caniuse-angle:45deg;--caniuse-bg:var(--no-support);--caniuse-bg-alt:var(--no-support-alt)}
-.caniuse-cell.d{--caniuse-angle:180deg}
-.caniuse-cell:is(.a,.x,.p){--caniuse-angle:90deg;--caniuse-bg:var(--partial);--caniuse-bg-alt:var(--partial-alt)}
-.caniuse-stats .caniuse-browser:hover>ul,.caniuse-stats button:focus+ul{display:block}
 </style>
 <style>
 ul.index{columns:30ch;column-gap:1.5em}
@@ -255,15 +252,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "testSuiteURI": "https://wpt.live/geolocation-API/",
   "implementationReportURI": "https://wpt.fyi/geolocation-API",
   "xref": "web-platform",
-  "publishISODate": "2022-03-07T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 07 March 2022"
+  "publishISODate": "2022-03-11T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 11 March 2022"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED"></head>
   <body data-cite="WEBIDL secure-contexts permissions-policy permissions hr-time html HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-03-07">07 March 2022</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-03-11">11 March 2022</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -305,30 +302,16 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       </dd>
         
         
-      <dt class="caniuse-title">
-      Browser support (caniuse.com):
-    </dt><dd class="caniuse-stats">
-      <div class="caniuse-browser">
-        <button class="caniuse-cell y" title="Supported.">Chrome 102</button>
-        <ul>
-          <li class="caniuse-cell y" title="Supported.">5–101</li><li class="caniuse-cell a" title="Almost supported (aka Partial support).">4</li>
-        </ul>
-      </div><div class="caniuse-browser">
-        <button class="caniuse-cell y" title="Supported.">Firefox 99</button>
-        <ul>
-          <li class="caniuse-cell y" title="Supported.">3.5–98</li><li class="caniuse-cell p" title="No support, but has Polyfill.">2–3</li>
-        </ul>
-      </div><div class="caniuse-browser">
-        <button class="caniuse-cell y" title="Supported.">Safari TP</button>
-        <ul>
-          <li class="caniuse-cell y" title="Supported.">5–15.4</li><li class="caniuse-cell p" title="No support, but has Polyfill.">3.1–4</li>
-        </ul>
-      </div><div class="caniuse-browser">
-        <button class="caniuse-cell y" title="Supported.">Edge 98</button>
-        <ul>
-          <li class="caniuse-cell y" title="Supported.">12–97</li>
-        </ul>
-      </div> <a href="https://caniuse.com/geolocation">More info</a>
+      <dt class="caniuse-title">Browser support:</dt><dd class="caniuse-stats">
+      <div class="caniuse-cell y" title="Supported by default in Chrome version 5." aria-label="geolocation is supported by default in Chrome version 5.">
+        <img class="caniuse-browser" width="20" height="20" src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/71.0.0/chrome/chrome.svg" alt="Chrome logo"><span class="browser-version">5</span>
+      </div><div class="caniuse-cell y" title="Supported by default in Firefox version 3.5." aria-label="geolocation is supported by default in Firefox version 3.5.">
+        <img class="caniuse-browser" width="20" height="20" src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/71.0.0/firefox/firefox.svg" alt="Firefox logo"><span class="browser-version">3.5</span>
+      </div><div class="caniuse-cell y" title="Supported by default in Safari version 5." aria-label="geolocation is supported by default in Safari version 5.">
+        <img class="caniuse-browser" width="20" height="20" src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/71.0.0/safari/safari.svg" alt="Safari logo"><span class="browser-version">5</span>
+      </div><div class="caniuse-cell y" title="Supported by default in Edge version 12." aria-label="geolocation is supported by default in Edge version 12.">
+        <img class="caniuse-browser" width="20" height="20" src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/71.0.0/edge/edge.svg" alt="Edge logo"><span class="browser-version">12</span>
+      </div><a class="caniuse-cell" href="https://caniuse.com/geolocation">More info</a>
     </dd></dl>
     </details>
     
