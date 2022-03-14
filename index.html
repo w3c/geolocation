@@ -617,8 +617,8 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the [=current settings object=]'s [=environment settings
-          object/responsible document=] is not [=Document/fully active=]:
+          <li>If the [=current settings object=]'s [=relevant global object=]'s
+            [=associated `Document`=] is not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
@@ -643,8 +643,8 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the [=current settings object=]'s [=environment settings
-          object/responsible document=] is not [=Document/fully active=]:
+          <li>If the [=current settings object=]'s [=relevant global object=]'s
+            [=associated `Document`=] is not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
@@ -693,7 +693,7 @@
           <li>Let |watchIDs:List| be [=this=]'s {{Geolocation/[[watchIDs]]}}.
           </li>
           <li>Let |document:Document| be the [=current settings object=]'s
-          [=environment settings object/responsible document=].
+          [=relevant global object=]'s [=associated `Document`=].
           </li>
           <li data-tests="">If |document| is not [=allowed to use=] the
           "geolocation" feature:
