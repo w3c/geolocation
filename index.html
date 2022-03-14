@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 32.0.0">
+<meta name="generator" content="ReSpec 32.0.2">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -137,23 +137,6 @@ dd{margin-left:0}
 .removeOnSave{display:none}
 }
 </style>
-<style id="caniuse-stylesheet" class="">
-.caniuse-stats{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:flex-start}
-.caniuse-cell{align-items:center;border-radius:1cm;color:#fff;display:flex;font-size:90%;justify-content:space-evenly;min-width:1.7cm;padding:.3rem .3rem;margin:.25cm .5cm 0 0;--supported:#2a8436dd;--no-support:#c44230dd;--no-support-alt:#b43b2bdd;--partial:#807301dd;--partial-alt:#746c00dd;--unknown:#757575;background:repeating-linear-gradient(var(--caniuse-angle,45deg),var(--caniuse-bg) 0,var(--caniuse-bg-alt) 1px,var(--caniuse-bg-alt) .4em,var(--caniuse-bg) calc(.25em + 1px),var(--caniuse-bg) .75em)}
-img.caniuse-browser{filter:drop-shadow(0 0 .1cm #666)}
-.caniuse-cell span.browser-version{margin-left:.4em;text-shadow:0 0 .1em #fff}
-.caniuse-stats a[href]{white-space:nowrap;align-self:center}
-.caniuse-cell.y{background:var(--supported)}
-.caniuse-cell:is(.n,.d){--caniuse-angle:45deg;--caniuse-bg:var(--no-support);--caniuse-bg-alt:var(--no-support-alt)}
-.caniuse-cell.u{background:var(--unknown)}
-.caniuse-cell.d{--caniuse-angle:180deg}
-.caniuse-cell:is(.a,.x,.p){--caniuse-angle:90deg;--caniuse-bg:var(--partial);--caniuse-bg-alt:var(--partial-alt)}
-@media print{
-.caniuse-cell.y::before{content:"✔️";padding:.5em}
-.caniuse-cell.n::before{content:"❌";padding:.5em}
-.caniuse-cell:is(.a,.d,.p,.x,.u)::before{content:"⚠️";padding:.5em}
-}
-</style>
 <style>
 ul.index{columns:30ch;column-gap:1.5em}
 ul.index li{list-style:inherit}
@@ -252,15 +235,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "testSuiteURI": "https://wpt.live/geolocation-API/",
   "implementationReportURI": "https://wpt.fyi/geolocation-API",
   "xref": "web-platform",
-  "publishISODate": "2022-03-11T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 11 March 2022"
+  "publishISODate": "2022-03-14T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 14 March 2022"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED"></head>
   <body data-cite="WEBIDL secure-contexts permissions-policy permissions hr-time html HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-03-11">11 March 2022</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-03-14">14 March 2022</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -302,17 +285,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       </dd>
         
         
-      <dt class="caniuse-title">Browser support:</dt><dd class="caniuse-stats">
-      <div class="caniuse-cell y" title="Supported by default in Chrome version 5." aria-label="geolocation is supported by default in Chrome version 5.">
-        <img class="caniuse-browser" width="20" height="20" src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/71.0.0/chrome/chrome.svg" alt="Chrome logo"><span class="browser-version">5</span>
-      </div><div class="caniuse-cell y" title="Supported by default in Firefox version 3.5." aria-label="geolocation is supported by default in Firefox version 3.5.">
-        <img class="caniuse-browser" width="20" height="20" src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/71.0.0/firefox/firefox.svg" alt="Firefox logo"><span class="browser-version">3.5</span>
-      </div><div class="caniuse-cell y" title="Supported by default in Safari version 5." aria-label="geolocation is supported by default in Safari version 5.">
-        <img class="caniuse-browser" width="20" height="20" src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/71.0.0/safari/safari.svg" alt="Safari logo"><span class="browser-version">5</span>
-      </div><div class="caniuse-cell y" title="Supported by default in Edge version 12." aria-label="geolocation is supported by default in Edge version 12.">
-        <img class="caniuse-browser" width="20" height="20" src="https://cdnjs.cloudflare.com/ajax/libs/browser-logos/71.0.0/edge/edge.svg" alt="Edge logo"><span class="browser-version">12</span>
-      </div><a class="caniuse-cell" href="https://caniuse.com/geolocation">More info</a>
-    </dd></dl>
+      <dt class="caniuse-title">Browser support:</dt><dd class="caniuse-stats"><a href="https://caniuse.com/geolocation">caniuse.com</a></dd></dl>
     </details>
     
     
@@ -1197,7 +1170,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-1">current settings object</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document" id="ref-for-index-term-responsible-document-for-environment-settings-object-1">responsible document</a> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-index-term-fully-active-for-document-1">fully active</a>:
+          <li>If the <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-1">current settings object</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-1">relevant global object</a>'s
+            <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" id="ref-for-index-term-associated-document-1">associated <code>Document</code></a> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-index-term-fully-active-for-document-1">fully active</a>:
             <ol>
               <li><a data-link-type="dfn" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-1">Call back with error</a> <var data-type="PositionErrorCallback?">errorCallback</var> and
               <a data-link-type="idl" href="#dom-geolocationpositionerror-position_unavailable" class="internalDFN" id="ref-for-dom-geolocationpositionerror-position_unavailable-1"><code>POSITION_UNAVAILABLE</code></a>.
@@ -1267,7 +1241,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-2">current settings object</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document" id="ref-for-index-term-responsible-document-for-environment-settings-object-2">responsible document</a> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-index-term-fully-active-for-document-2">fully active</a>:
+          <li>If the <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-2">current settings object</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-2">relevant global object</a>'s
+            <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" id="ref-for-index-term-associated-document-2">associated <code>Document</code></a> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-index-term-fully-active-for-document-2">fully active</a>:
             <ol>
               <li><a data-link-type="dfn" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-2">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
               <a data-link-type="idl" href="#dom-geolocationpositionerror-position_unavailable" class="internalDFN" id="ref-for-dom-geolocationpositionerror-position_unavailable-2"><code>POSITION_UNAVAILABLE</code></a>.
@@ -1362,7 +1337,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           <li>Let <var data-type="List">watchIDs</var> be <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-3">this</a>'s <a data-lt="[[watchIDs]]" href="#dfn-watchids" class="internalDFN" data-link-type="idl" id="ref-for-dfn-watchids-3"><code>[[watchIDs]]</code></a>.
           </li>
           <li>Let <var data-type="Document">document</var> be the <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-3">current settings object</a>'s
-          <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document" id="ref-for-index-term-responsible-document-for-environment-settings-object-3">responsible document</a>.
+          <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-3">relevant global object</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" id="ref-for-index-term-associated-document-3">associated <code>Document</code></a>.
           </li>
           <li data-tests="">If <var data-type="Document">document</var> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#allowed-to-use" id="ref-for-index-term-allowed-to-use-1">allowed to use</a> the
           "geolocation" feature:
@@ -2759,6 +2734,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#allowed-to-use" id="index-term-allowed-to-use" tabindex="0" aria-haspopup="dialog">allowed to use</span>
   </li><li>
+    <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" id="index-term-associated-document" tabindex="0" aria-haspopup="dialog">associated Document</span>
+  </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="index-term-current-settings-object" tabindex="0" aria-haspopup="dialog">current settings object</span>
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="index-term-fully-active-for-document" tabindex="0" aria-haspopup="dialog">fully active (for <code>Document</code>)</span>
@@ -2779,7 +2756,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object's-realm" id="index-term-realm-for-environment-settings-object" tabindex="0" aria-haspopup="dialog">realm (for environment settings object)</span>
   </li><li>
-    <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document" id="index-term-responsible-document-for-environment-settings-object" tabindex="0" aria-haspopup="dialog">responsible document (for environment settings object)</span>
+    <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="index-term-relevant-global-object" tabindex="0" aria-haspopup="dialog">relevant global object</span>
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#task-source" id="index-term-task-source" tabindex="0" aria-haspopup="dialog">task source</span>
   </li><li>
@@ -2909,7 +2886,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </dd><dt id="bib-infra">[infra]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-permissions">[Permissions]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-2"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 3 March 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-3">https://www.w3.org/TR/permissions/</a>
+      <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-2"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 11 March 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-3">https://www.w3.org/TR/permissions/</a>
     </dd><dt id="bib-permissions-policy">[Permissions-Policy]</dt><dd>
       <a href="https://www.w3.org/TR/permissions-policy-1/" id="ref-for-index-term-permissions-policy-3"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 16 July 2020. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/" id="ref-for-index-term-permissions-policy-4">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
@@ -3641,6 +3618,22 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <a href="#ref-for-index-term-allowed-to-use-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
   </li>
   </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-associated-document" aria-label="Links in this document to definition: associated Document">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" aria-label="Permalink for definition: associated Document. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+    <a href="#ref-for-index-term-associated-document-1" title="§ 6.2 getCurrentPosition() method">§ 6.2 getCurrentPosition() method</a> 
+  </li><li>
+    <a href="#ref-for-index-term-associated-document-2" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> 
+  </li><li>
+    <a href="#ref-for-index-term-associated-document-3" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
+  </li>
+  </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-current-settings-object" aria-label="Links in this document to definition: current settings object">
       <span class="caret"></span>
       <div>
@@ -3777,20 +3770,20 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <a href="#ref-for-index-term-realm-for-environment-settings-object-1" title="§ 3.4 Checking permission to use the API">§ 3.4 Checking permission to use the API</a> 
   </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-responsible-document-for-environment-settings-object" aria-label="Links in this document to definition: responsible document (for environment settings object)">
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-relevant-global-object" aria-label="Links in this document to definition: relevant global object">
       <span class="caret"></span>
       <div>
-        <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document" aria-label="Permalink for definition: responsible document (for environment settings object). Activate to close this dialog.">Permalink</a>
+        <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" aria-label="Permalink for definition: relevant global object. Activate to close this dialog.">Permalink</a>
          
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-    <a href="#ref-for-index-term-responsible-document-for-environment-settings-object-1" title="§ 6.2 getCurrentPosition() method">§ 6.2 getCurrentPosition() method</a> 
+    <a href="#ref-for-index-term-relevant-global-object-1" title="§ 6.2 getCurrentPosition() method">§ 6.2 getCurrentPosition() method</a> 
   </li><li>
-    <a href="#ref-for-index-term-responsible-document-for-environment-settings-object-2" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> 
+    <a href="#ref-for-index-term-relevant-global-object-2" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> 
   </li><li>
-    <a href="#ref-for-index-term-responsible-document-for-environment-settings-object-3" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
+    <a href="#ref-for-index-term-relevant-global-object-3" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-task-source" aria-label="Links in this document to definition: task source">
