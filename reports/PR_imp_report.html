@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c' async class=
+    'remove'></script>
+    <script class='remove'>
+      // All config options at https://respec.org/docs/
+      var respecConfig = {
+        // Working Groups ids at https://respec.org/w3c/groups/
+        specStatus: "base",
+        editors: [{
+          name: "Marcos Cáceres",
+        }],
+        latestVersion: null,
+        // See https://respec.org/docs/#xref for usage.
+        xref: "web-platform",
+      };
+    </script>
+    <style>
+      .pass {
+        background-color: green;
+        color: white;
+      }
+      .fail {
+        background-color: red;
+        color: white;
+      }
+    </style>
+    <title>
+      Geolocation API - implementation report 2016-2022
+    </title>
+  </head>
+  <body>
+    <h1 id="title">
+      Geolocation API - implementation report 2016-2022
+    </h1>
+    <section id='abstract'>
+      <p>
+        This is an implementation report for the Geolocation API, covering the
+        testable normative changes that were made since maintenance resumed on
+        the specification in 2016 until 2022.
+      </p>
+    </section>
+    <h2>
+      Tested assertions
+    </h2>
+    <p data-cite="permissions">
+      As the Geolocation API requires explicit permission grant to be used (via
+      a browser UI), the following assertions were tested manually to assure
+      interoperability across user agents.
+    </p>
+    <p class="note" title="Why we are not using wpt.fyi">
+      As some of the tests rely on the [[Permissions]] specifications
+      automation API, which is only partially supported in Chrome, some the
+      test were modified locally to get them to pass across user agents.
+      However, the working group expects that eventually all user agents will
+      support the [[Permissions]]'s automation API and wpt.fyi will reflect
+      <a href=
+      "https://wpt.fyi/results/geolocation-API?label=experimental&amp;label=master&amp;aligned">
+      accurate results</a> for [[Geolocation]].
+    </p>
+    <table class="simple data">
+      <tr>
+        <th>
+          Change
+        </th>
+        <th>
+          Test
+        </th>
+        <th>
+          Chrome
+        </th>
+        <th>
+          Firefox
+        </th>
+        <th>
+          Safari TP
+        </th>
+      </tr>
+      <tr>
+        <td>
+          Switch `DOMTimeStamp` to `EpochTimeStamp`
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/idlharness.https.window.js">idlharness.https.window.js</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Return 0 when `watchPosition()` errors
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/non-fully-active.https.html">non-fully-active.https.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Callback with error if doc is not fully active
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/non-fully-active.https.html">non-fully-active.https.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Gracefully handle documents that are not fully active
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/non-fully-active.https.html">non-fully-active.https.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Now relies on the Permissions specification to handle permission
+          grants, and user interface requirements.
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/permission.https.html">permission.https.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          The `errorCallback` is now nullable.
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/getCurrentPosition_permission_allow.https.html">
+          getCurrentPosition_permission_allow.https.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          The API can be controlled by Permissions Policy, which restricts
+          how/where the API is exposed to web pages.
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/enabled-by-feature-policy.https.sub.html">
+          enabled-by-feature-policy.https.sub.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          The callbacks are no longer treated as "EventHandler" objects (i.e.,
+          objects that have a .handleEvent() method), but are now exclusively
+          treated as IDL callback functions.
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/getCurrentPosition_TypeError.https.html">
+          getCurrentPosition_TypeError.https.html</a>, <a href=
+          "https://wpt.live/geolocation-API/watchPosition_TypeError.https.html">
+          watchPosition_TypeError.https.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          The API is now only exposed in Secure Contexts (i.e., only available
+          in HTTPS).
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/non-secure-contexts.http.html">non-secure-contexts.http.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          The interfaces no longer use [WebIDL]'s legacy [NoInterfaceObject],
+          so Geolocation and other interface of this spec are now in the global
+          scope. Also, the interfaces were renamed from NavigatorGeolocation*
+          to just Geolocation*.
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation-API/idlharness.https.window.js">idlharness.https.window.js</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Assertions that are not testable
+    </h2>
+    <table class="simple data">
+      <tr>
+        <th>
+          Change
+        </th>
+        <th>
+          Why not tested
+        </th>
+      </tr>
+      <tr>
+        <td>
+          Suggest permission lifetime
+        </td>
+        <td>
+          Not testable because this is a UI requirement on user agents.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Handle OS-level permission change
+        </td>
+        <td>
+          It's not possible to change OS-level permissions via WTP
+          infrastructure (only browser permissions).
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Add "geolocation task queue"
+        </td>
+        <td>
+          This change is not observable/testable. At the same time, the async
+          nature of the API is tested in almost every other test.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          fix "Queue a task" / "in parallel" usage
+        </td>
+        <td>
+          Although normative, this change was mostly editorial and not
+          observable/testable.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Request a position only proceeds when a document is visible, or the
+          document becomes visible.
+        </td>
+        <td>
+          This can be tested because of limitations of WTP: It would require
+          opening multiple browser tabs, which WPT can't do. However, this is
+          implemented in all browsers and was manually verified.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Clarified how caching works as part of acquiring a position: only
+          last position is cached, and can be evicted at any time.
+        </td>
+        <td>
+          Caching behavior is designed not to be observable and is thus not
+          possible to test.
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
