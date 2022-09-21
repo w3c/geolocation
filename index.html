@@ -618,7 +618,7 @@
         </p>
         <ol class="algorithm">
           <li>If the [=current settings object=]'s [=relevant global object=]'s
-            [=associated `Document`=] is not [=Document/fully active=]:
+          [=associated `Document`=] is not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
@@ -627,8 +627,8 @@
               </li>
             </ol>
           </li>
-          <li>[=In parallel=], [=request a position=] passing
-          |successCallback|, |errorCallback|, and |options|.
+          <li>[=Request a position=] passing [=this=], |successCallback|,
+          |errorCallback|, and |options|.
           </li>
         </ol>
       </section>
@@ -644,7 +644,7 @@
         </p>
         <ol class="algorithm">
           <li>If the [=current settings object=]'s [=relevant global object=]'s
-            [=associated `Document`=] is not [=Document/fully active=]:
+          [=associated `Document`=] is not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
@@ -659,8 +659,8 @@
           <li>[=List/Append=] |watchId| to [=this=]'s
           {{Geolocation/[[watchIDs]]}}.
           </li>
-          <li>[=In parallel=], [=request a position=] passing
-          |successCallback|, |errorCallback|, |options|, and |watchId|.
+          <li>[=Request a position=] passing [=this=], |successCallback|,
+          |errorCallback|, |options|, and |watchId|.
           </li>
           <li>Return |watchId|.
           </li>
@@ -684,16 +684,18 @@
           Request a position
         </h2>
         <p>
-          To <dfn>request a position</dfn>, pass a {{PositionCallback}}
+          To <dfn>request a position</dfn>, pass {{Geolocation}}
+          |geolocation:Geolocation|, {{PositionCallback}}
           |successCallback:PositionCallback|, a {{PositionErrorCallback?}}
           |errorCallback:PositionErrorCallback?|, {{PositionOptions}}
           |options:PositionOptions|, and an optional |watchId:unsigned long|:
         </p>
         <ol class="algorithm">
-          <li>Let |watchIDs:List| be [=this=]'s {{Geolocation/[[watchIDs]]}}.
+          <li>Let |watchIDs:List| be |geolocation|'s
+          {{Geolocation/[[watchIDs]]}}.
           </li>
-          <li>Let |document:Document| be the [=current settings object=]'s
-          [=relevant global object=]'s [=associated `Document`=].
+          <li>Let |document:Document| be the |geolocation|'s [=relevant global
+          object=]'s [=associated `Document`=].
           </li>
           <li data-tests="">If |document| is not [=allowed to use=] the
           "geolocation" feature:
@@ -722,55 +724,60 @@
           <li>Let |descriptor| be a new {{PermissionDescriptor}} whose
           {{PermissionDescriptor/name}} is <a>"geolocation"</a>.
           </li>
-          <li>Set |permission| to [=request permission to use=] |descriptor|.
-          </li>
-          <li data-tests=
-          "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-          If |permission| is "denied", then:
+          <li>[=In parallel=]:
             <ol>
-              <li>If |watchId| was passed, [=list/remove=] |watchId| from
-              |watchIDs|.
+              <li>Set |permission| to [=request permission to use=]
+              |descriptor|.
               </li>
-              <li>[=Call back with error=] passing |errorCallback| and
-              {{GeolocationPositionError/PERMISSION_DENIED}}.
-              </li>
-              <li>Terminate this algorithm.
-              </li>
-            </ol>
-          </li>
-          <li>Wait to [=acquire a position=] passing |successCallback|,
-          |errorCallback|, |options|, and |watchId|.
-          </li>
-          <li>If |watchId| was not passed, terminate this algorithm.
-          </li>
-          <li>While |watchIDs| [=list/contains=] |watchId|:
-            <ol>
-              <li>
-                <span id="wait-for-change">Wait for a significant change of
-                geographic position</span>. What constitutes a significant
-                change of geographic position is left to the implementation.
-                User agents MAY impose a rate limit on how frequently position
-                changes are reported.
-              </li>
-              <li>If |document| is not [=Document/fully active=] or
-              [=Document/visibility state=] is not "visible", go back to the
-              previous step and again <a href="#wait-for-change">wait for a
-              significant change of geographic position</a>.
-                <aside class="note" title=
-                "Position updates are exclusively for fully-active visible documents">
-                  <p>
-                    The desired effect here being that position updates are
-                    exclusively delivered to fully active documents that are
-                    visible; Otherwise the updates get silently "dropped on the
-                    floor". Only once a document again becomes fully active and
-                    visible (e.g., an [^iframe^] gets reattached to a parent
-                    document), do the position updates once again start getting
-                    delivered.
-                  </p>
-                </aside>
+              <li data-tests=
+              "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+              If |permission| is "denied", then:
+                <ol>
+                  <li>If |watchId| was passed, [=list/remove=] |watchId| from
+                  |watchIDs|.
+                  </li>
+                  <li>[=Call back with error=] passing |errorCallback| and
+                  {{GeolocationPositionError/PERMISSION_DENIED}}.
+                  </li>
+                  <li>Terminate this algorithm.
+                  </li>
+                </ol>
               </li>
               <li>Wait to [=acquire a position=] passing |successCallback|,
               |errorCallback|, |options|, and |watchId|.
+              </li>
+              <li>If |watchId| was not passed, terminate this algorithm.
+              </li>
+              <li>While |watchIDs| [=list/contains=] |watchId|:
+                <ol>
+                  <li>
+                    <span id="wait-for-change">Wait for a significant change of
+                    geographic position</span>. What constitutes a significant
+                    change of geographic position is left to the
+                    implementation. User agents MAY impose a rate limit on how
+                    frequently position changes are reported.
+                  </li>
+                  <li>If |document| is not [=Document/fully active=] or
+                  [=Document/visibility state=] is not "visible", go back to
+                  the previous step and again <a href="#wait-for-change">wait
+                  for a significant change of geographic position</a>.
+                    <aside class="note" title=
+                    "Position updates are exclusively for fully-active visible documents">
+                      <p>
+                        The desired effect here being that position updates are
+                        exclusively delivered to fully active documents that
+                        are visible; Otherwise the updates get silently
+                        "dropped on the floor". Only once a document again
+                        becomes fully active and visible (e.g., an [^iframe^]
+                        gets reattached to a parent document), do the position
+                        updates once again start getting delivered.
+                      </p>
+                    </aside>
+                  </li>
+                  <li>Wait to [=acquire a position=] passing |successCallback|,
+                  |errorCallback|, |options|, and |watchId|.
+                  </li>
+                </ol>
               </li>
             </ol>
           </li>
