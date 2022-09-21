@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 32.1.0">
+<meta name="generator" content="ReSpec 32.2.4">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -17,6 +17,7 @@ aside.example div.example{border-left-width:.1em;border-color:#999;background:#f
 .warning{padding:.5em;border-left-width:.5em;border-left-style:solid}
 span.warning{padding:.1em .5em .15em}
 .issue.closed span.issue-number{text-decoration:line-through}
+.issue.closed span.issue-number::after{content:" (Closed)";font-size:smaller}
 .warning{border-color:#f11;border-width:.2em;border-style:solid;background:#fbe9e9}
 .warning-title:before{content:"⚠";font-size:1.3em;float:left;padding-right:.3em;margin-top:-.3em}
 li.task-list-item{list-style:none}
@@ -53,7 +54,7 @@ a.idlEnumItem{color:#000;border-bottom:1px dotted #ccc;text-decoration:none}
 </style>
 <style>
 dfn{cursor:pointer}
-.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font:small Helvetica Neue,sans-serif,Droid Sans Fallback;background:#fff;color:#000;box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);border-radius:2px}
+.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font-family:"Helvetica Neue",sans-serif;font-size:small;background:#fff;color:#000;box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);border-radius:2px}
 .dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
 .dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;top:0}
 .dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1}
@@ -96,8 +97,6 @@ a.bibref{text-decoration:none}
 }
 #references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
 cite .bibref{font-style:normal}
-code{color:#c63501}
-th code{color:inherit}
 a[href].orcid{padding-left:4px;padding-right:4px}
 a[href].orcid>svg{margin-bottom:-2px}
 .toc a,.tof a{text-decoration:none}
@@ -165,15 +164,14 @@ ul.index code{color:inherit}
 .mdn tr::before{content:"";display:table-cell;width:1.5em;height:1.5em;background:no-repeat center center/contain;font-size:.75em}
 .mdn .no,.mdn .unknown{color:#ccc;filter:grayscale(100%)}
 .mdn .no::before,.mdn .unknown::before{opacity:.5}
-.mdn .chrome::before,.mdn .chrome_android::before{background-image:url(https://resources.whatwg.org/browser-logos/chrome.svg)}
-.mdn .edge::before,.mdn .edge_mobile::before{background-image:url(https://resources.whatwg.org/browser-logos/edge.svg)}
-.mdn .firefox::before,.mdn .firefox_android::before{background-image:url(https://resources.whatwg.org/browser-logos/firefox.png)}
-.mdn .ie::before{background-image:url(https://resources.whatwg.org/browser-logos/ie.png)}
-.mdn .opera::before,.mdn .opera_android::before{background-image:url(https://resources.whatwg.org/browser-logos/opera.svg)}
-.mdn .safari::before{background-image:url(https://resources.whatwg.org/browser-logos/safari.png)}
-.mdn .safari_ios::before{background-image:url(https://resources.whatwg.org/browser-logos/safari-ios.svg)}
-.mdn .samsunginternet_android::before{background-image:url(https://resources.whatwg.org/browser-logos/samsung.svg)}
-.mdn .webview_android::before{background-image:url(https://resources.whatwg.org/browser-logos/android-webview.png)}
+.mdn .chrome::before,.mdn .chrome_android::before{background-image:url(https://cdn.w3.org/assets/logos/browser-logos/chrome/chrome.svg)}
+.mdn .edge::before,.mdn .edge_mobile::before{background-image:url(https://cdn.w3.org/assets/logos/browser-logos/edge/edge.svg)}
+.mdn .firefox::before,.mdn .firefox_android::before{background-image:url(https://cdn.w3.org/assets/logos/browser-logos/firefox/firefox.svg)}
+.mdn .opera::before,.mdn .opera_android::before{background-image:url(https://cdn.w3.org/assets/logos/browser-logos/opera/opera.svg)}
+.mdn .safari::before{background-image:url(https://cdn.w3.org/assets/logos/browser-logos/safari/safari.svg)}
+.mdn .safari_ios::before{background-image:url(https://cdn.w3.org/assets/logos/browser-logos/safari-ios/safari-ios.svg)}
+.mdn .samsunginternet_android::before{background-image:url(https://cdn.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
+.mdn .webview_android::before{background-image:url(https://cdn.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
 <meta name="description" content="The Geolocation API provides access to geographical location
         information associated with the hosting device.">
@@ -207,12 +205,6 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "specStatus": "ED",
   "editors": [
     {
-      "name": "Marcos Cáceres",
-      "company": "W3C",
-      "companyURL": "https://w3.org",
-      "w3cid": "39125"
-    },
-    {
       "name": "Reilly Grant",
       "company": "Google",
       "companyURL": "https://google.com",
@@ -224,6 +216,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "name": "Andrei Popescu",
       "company": "Google Inc.",
       "companyURL": "https://google.com/"
+    },
+    {
+      "name": "Marcos Cáceres",
+      "company": "W3C",
+      "companyURL": "https://w3.org",
+      "w3cid": "39125",
+      "retiredDate": "2022-09-01"
     }
   ],
   "group": "das",
@@ -235,15 +234,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "testSuiteURI": "https://wpt.live/geolocation-API/",
   "implementationReportURI": "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
   "xref": "web-platform",
-  "publishISODate": "2022-03-18T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 18 March 2022"
+  "publishISODate": "2022-09-21T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 21 September 2022"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED"></head>
   <body data-cite="WEBIDL secure-contexts permissions-policy permissions hr-time html HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-03-18">18 March 2022</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-09-21">21 September 2022</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -266,15 +265,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         
         
         
-        <dt>Editors:</dt><dd class="editor p-author h-card vcard" data-editor-id="39125">
-    <span class="p-name fn">Marcos Cáceres</span> (<a class="p-org org h-org" href="https://w3.org">W3C</a>)
-  </dd><dd class="editor p-author h-card vcard" data-editor-id="83788">
+        <dt>Editor:</dt><dd class="editor p-author h-card vcard" data-editor-id="83788">
     <span class="p-name fn">Reilly Grant</span> (<a class="p-org org h-org" href="https://google.com">Google</a>)
   </dd>
         <dt>
-                Former editor:
+                Former editors:
               </dt><dd class="editor p-author h-card vcard">
     <span class="p-name fn">Andrei Popescu</span> (<a class="p-org org h-org" href="https://google.com/">Google Inc.</a>)
+  </dd><dd class="editor p-author h-card vcard" data-editor-id="39125">
+    <span class="p-name fn">Marcos Cáceres</span> (<a class="p-org org h-org" href="https://w3.org">W3C</a>) -  Until <time datetime="2022-09-01">01 September 2022</time>
   </dd>
         
         <dt>Feedback:</dt><dd>
@@ -510,7 +509,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           API</cite> has received the following normative changes:
         </p>
          <rs-changelog from="FPWD" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation-api/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation-api/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation-api/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation-api/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation-api/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation-api/pull/87">#87</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation-api/pull/118">#118</a>)</li>
+      <li><a href="https://github.com/w3c/geolocation-api/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation-api/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation-api/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation-api/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation-api/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation-api/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation-api/pull/87">#87</a>)</li>
       </ul></rs-changelog>
         <p>
           Since publication of the Second Edition in 2016, this specification
@@ -870,49 +869,46 @@ navigator.geolocation.getCurrentPosition(
         </p>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span> </span></summary>
+    <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span title="This feature has limited support.">🚫</span></summary>
     <a title="The HTTP Feature-Policy header geolocation directive controls whether the current document is allowed to use the Geolocation Interface. When this policy is enabled, calls to getCurrentPosition() and watchPosition() will cause those functions' callbacks to be invoked with a GeolocationPositionError code of PERMISSION_DENIED." href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy/geolocation">Headers/Feature-Policy/geolocation</a>
-    
+    <p class="engines-some">This feature has limited support.</p>
     <table>
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>60+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>60+</td>
-    </tr><tr class="edge no">
+      <td>?</td>
+    </tr><tr class="edge unknown">
       <td>Edge</td>
-      <td>No</td>
+      <td>?</td>
     </tr><tr class="edge_mobile unknown">
       <td>Edge Mobile</td>
       <td>?</td>
-    </tr><tr class="firefox unknown">
+    </tr><tr class="firefox yes">
       <td>Firefox</td>
-      <td>?</td>
+      <td>74+</td>
     </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
       <td>?</td>
-    </tr><tr class="ie no">
-      <td>Internet Explorer</td>
-      <td>No</td>
-    </tr><tr class="opera yes">
+    </tr><tr class="opera unknown">
       <td>Opera</td>
-      <td>47+</td>
-    </tr><tr class="opera_android yes">
+      <td>?</td>
+    </tr><tr class="opera_android unknown">
       <td>Opera Android</td>
-      <td>44+</td>
+      <td>?</td>
     </tr><tr class="safari no">
       <td>Safari</td>
       <td>No</td>
-    </tr><tr class="safari_ios no">
+    </tr><tr class="safari_ios unknown">
       <td>Safari iOS</td>
-      <td>No</td>
-    </tr><tr class="samsunginternet_android yes">
+      <td>?</td>
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>8.0+</td>
-    </tr><tr class="webview_android yes">
+      <td>?</td>
+    </tr><tr class="webview_android unknown">
       <td>WebView Android</td>
-      <td>60+</td>
+      <td>?</td>
     </tr>
   </table>
   </details></aside><section id="check-permission"><div class="header-wrapper"><h3 id="x3-4-checking-permission-to-use-the-api"><bdi class="secno">3.4 </bdi>
@@ -955,9 +951,9 @@ navigator.geolocation.getCurrentPosition(
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -967,12 +963,9 @@ navigator.geolocation.getCurrentPosition(
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>10.6+</td>
@@ -985,9 +978,9 @@ navigator.geolocation.getCurrentPosition(
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -1003,15 +996,15 @@ navigator.geolocation.getCurrentPosition(
     </section>
     <aside class="mdn"><details>
     <summary aria-label="Expand MDN details for Geolocation"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
-    <a title="The Geolocation interface represents an object able to programmatically obtain the position of the device. It gives Web content access to the location of the device. This allows a Web site or app to offer customized results based on the user's location." href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation">Geolocation</a>
+    <a title="The Geolocation interface represents an object able to obtain the position of the device programmatically. It gives Web content access to the location of the device. This allows a website or app to offer customized results based on the user's location." href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation">Geolocation</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -1024,9 +1017,6 @@ navigator.geolocation.getCurrentPosition(
     </tr><tr class="firefox_android yes">
       <td>Firefox Android</td>
       <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>10.6+</td>
@@ -1039,9 +1029,9 @@ navigator.geolocation.getCurrentPosition(
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -1122,9 +1112,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -1134,12 +1124,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>10.6+</td>
@@ -1152,9 +1139,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -1193,9 +1180,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -1205,12 +1192,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>10.6+</td>
@@ -1223,9 +1207,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -1272,9 +1256,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -1284,12 +1268,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>10.6+</td>
@@ -1302,9 +1283,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -1671,12 +1652,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
     </tr><tr class="firefox unknown">
       <td>Firefox</td>
       <td>?</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>16+</td>
@@ -1714,9 +1692,9 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -1726,12 +1704,9 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>16+</td>
@@ -1744,9 +1719,9 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -1768,9 +1743,9 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -1780,12 +1755,9 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>16+</td>
@@ -1798,9 +1770,9 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -1883,12 +1855,9 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
     </tr><tr class="firefox unknown">
       <td>Firefox</td>
       <td>?</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera unknown">
       <td>Opera</td>
       <td>?</td>
@@ -1931,9 +1900,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -1943,12 +1912,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera unknown">
       <td>Opera</td>
       <td>?</td>
@@ -1961,9 +1927,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -1977,9 +1943,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -1989,12 +1955,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera unknown">
       <td>Opera</td>
       <td>?</td>
@@ -2007,9 +1970,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -2023,9 +1986,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -2035,12 +1998,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera unknown">
       <td>Opera</td>
       <td>?</td>
@@ -2053,9 +2013,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -2082,9 +2042,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -2094,12 +2054,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera unknown">
       <td>Opera</td>
       <td>?</td>
@@ -2112,9 +2069,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -2128,9 +2085,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -2140,12 +2097,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera unknown">
       <td>Opera</td>
       <td>?</td>
@@ -2158,9 +2112,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -2187,9 +2141,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -2199,12 +2153,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera unknown">
       <td>Opera</td>
       <td>?</td>
@@ -2217,9 +2168,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -2243,9 +2194,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -2255,12 +2206,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera unknown">
       <td>Opera</td>
       <td>?</td>
@@ -2273,9 +2221,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari_ios yes">
       <td>Safari iOS</td>
       <td>3+</td>
-    </tr><tr class="samsunginternet_android yes">
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -2368,12 +2316,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox unknown">
       <td>Firefox</td>
       <td>?</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>16+</td>
@@ -2383,9 +2328,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari yes">
       <td>Safari</td>
       <td>5+</td>
-    </tr><tr class="safari_ios yes">
+    </tr><tr class="safari_ios unknown">
       <td>Safari iOS</td>
-      <td>4.2+</td>
+      <td>?</td>
     </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
       <td>?</td>
@@ -2442,9 +2387,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -2454,12 +2399,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>16+</td>
@@ -2469,12 +2411,12 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari yes">
       <td>Safari</td>
       <td>5+</td>
-    </tr><tr class="safari_ios yes">
+    </tr><tr class="safari_ios unknown">
       <td>Safari iOS</td>
-      <td>4.2+</td>
-    </tr><tr class="samsunginternet_android yes">
+      <td>?</td>
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -2492,15 +2434,15 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </section>
       <aside class="mdn"><details>
     <summary aria-label="Expand MDN details for message"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
-    <a title="The GeolocationPositionError.message read-only property returns a human-readable DOMString describing the details of the error." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError/message">GeolocationPositionError/message</a>
+    <a title="The GeolocationPositionError.message read-only property returns a human-readable string describing the details of the error." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError/message">GeolocationPositionError/message</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
     <tr class="chrome yes">
       <td>Chrome</td>
       <td>5+</td>
-    </tr><tr class="chrome_android yes">
+    </tr><tr class="chrome_android unknown">
       <td>Chrome Android</td>
-      <td>18+</td>
+      <td>?</td>
     </tr><tr class="edge yes">
       <td>Edge</td>
       <td>12+</td>
@@ -2510,12 +2452,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="firefox yes">
       <td>Firefox</td>
       <td>3.5+</td>
-    </tr><tr class="firefox_android yes">
+    </tr><tr class="firefox_android unknown">
       <td>Firefox Android</td>
-      <td>4+</td>
-    </tr><tr class="ie yes">
-      <td>Internet Explorer</td>
-      <td>9+</td>
+      <td>?</td>
     </tr><tr class="opera yes">
       <td>Opera</td>
       <td>16+</td>
@@ -2525,12 +2464,12 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr><tr class="safari yes">
       <td>Safari</td>
       <td>5+</td>
-    </tr><tr class="safari_ios yes">
+    </tr><tr class="safari_ios unknown">
       <td>Safari iOS</td>
-      <td>4.2+</td>
-    </tr><tr class="samsunginternet_android yes">
+      <td>?</td>
+    </tr><tr class="samsunginternet_android unknown">
       <td>Samsung Internet</td>
-      <td>1.0+</td>
+      <td>?</td>
     </tr><tr class="webview_android yes">
       <td>WebView Android</td>
       <td>37+</td>
@@ -2880,20 +2819,20 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
 <section id="references" class="appendix"><div class="header-wrapper"><h2 id="d-references"><bdi class="secno">D. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix D."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="d-1-normative-references"><bdi class="secno">D.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix D.1"></a></div>
     
     <dl class="bibliography"><dt id="bib-hr-time">[hr-time]</dt><dd>
-      <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 28 January 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
+      <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 20 September 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
     </dd><dt id="bib-html">[html]</dt><dd>
       <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
     </dd><dt id="bib-infra">[infra]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-permissions">[Permissions]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-2"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 11 March 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-3">https://www.w3.org/TR/permissions/</a>
+      <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-2"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 7 September 2022. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/" id="ref-for-index-term-permissions-3">https://www.w3.org/TR/permissions/</a>
     </dd><dt id="bib-permissions-policy">[Permissions-Policy]</dt><dd>
       <a href="https://www.w3.org/TR/permissions-policy-1/" id="ref-for-index-term-permissions-policy-3"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 16 July 2020. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/" id="ref-for-index-term-permissions-policy-4">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
     </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>
-    </dd><dt id="bib-webidl">[WebIDL]</dt><dd>
+    </dd><dt id="bib-webidl">[webidl]</dt><dd>
       <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Edgar Chen; Timothy Gu.  WHATWG. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
     </dd><dt id="bib-wgs84">[WGS84]</dt><dd>
       <cite>National Imagery and Mapping Agency Technical Report 8350.2, Third Edition</cite>.  National Imagery and Mapping Agency. 3 January 2000. 
