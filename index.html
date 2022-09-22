@@ -18,6 +18,7 @@
           company: "W3C",
           companyURL: "https://w3.org",
           w3cid: "39125",
+          retiredDate: "2022-09-01",
         },
         {
           name: "Reilly Grant",
@@ -617,8 +618,8 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the [=current settings object=]'s [=relevant global object=]'s
-          [=associated `Document`=] is not [=Document/fully active=]:
+          <li>If the [=this=]'s [=relevant global object=]'s [=associated
+          `Document`=] is not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
@@ -643,8 +644,8 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the [=current settings object=]'s [=relevant global object=]'s
-          [=associated `Document`=] is not [=Document/fully active=]:
+          <li>If the [=this=]'s [=relevant global object=]'s [=associated
+          `Document`=] is not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
