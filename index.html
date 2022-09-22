@@ -628,6 +628,19 @@
               </li>
             </ol>
           </li>
+          <li>If [=this=]'s [=relevant global object=] does not have
+          [=transient activation=]:
+            <ol>
+              <li>[=Call back with error=] |errorCallback| and
+              {{GeolocationPositionError/PERMISSION_DENIED}}.
+              </li>
+              <li>Terminate this algorithm.
+              </li>
+            </ol>
+          </li>
+          <li>[=Consume user activation=] of [=this=]'s [=relevant global
+          object=].
+          </li>
           <li>[=In parallel=], [=request a position=] passing
           |successCallback|, |errorCallback|, and |options|.
           </li>
@@ -653,6 +666,19 @@
               <li>Return 0.
               </li>
             </ol>
+          </li>
+          <li>If [=this=]'s [=relevant global object=] does not have
+          [=transient activation=]:
+            <ol>
+              <li>[=Call back with error=] |errorCallback| and
+              {{GeolocationPositionError/PERMISSION_DENIED}}.
+              </li>
+              <li>Return 0.
+              </li>
+            </ol>
+          </li>
+          <li>[=Consume user activation=] of [=this=]'s [=relevant global
+          object=].
           </li>
           <li>Let |watchId:unsigned long| be an [=implementation-defined=]
           {{unsigned long}} that is greater than zero.
