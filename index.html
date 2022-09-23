@@ -234,15 +234,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "testSuiteURI": "https://wpt.live/geolocation-API/",
   "implementationReportURI": "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
   "xref": "web-platform",
-  "publishISODate": "2022-09-21T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 21 September 2022"
+  "publishISODate": "2022-09-23T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 23 September 2022"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED"></head>
   <body data-cite="WEBIDL secure-contexts permissions-policy permissions hr-time html HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-09-21">21 September 2022</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2022-09-23">23 September 2022</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -1166,8 +1166,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
               </li>
             </ol>
           </li>
-          <li><a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-index-term-in-parallel-1">In parallel</a>, <a data-link-type="dfn" href="#dfn-request-a-position" class="internalDFN" id="ref-for-dfn-request-a-position-2">request a position</a> passing
-          <var data-type="PositionCallback">successCallback</var>, <var data-type="PositionErrorCallback?">errorCallback</var>, and <var data-type="PositionOptions">options</var>.
+          <li><a data-link-type="dfn" href="#dfn-request-a-position" class="internalDFN" id="ref-for-dfn-request-a-position-2">Request a position</a> passing <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-2">this</a>, <var data-type="PositionCallback">successCallback</var>,
+          <var data-type="PositionErrorCallback?">errorCallback</var>, and <var data-type="PositionOptions">options</var>.
           </li>
         </ol>
       </section>
@@ -1224,7 +1224,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-2">this</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-2">relevant global object</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" id="ref-for-index-term-associated-document-2">associated <code>Document</code></a> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-index-term-fully-active-for-document-2">fully active</a>:
+          <li>If the <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-3">this</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-2">relevant global object</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" id="ref-for-index-term-associated-document-2">associated <code>Document</code></a> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-index-term-fully-active-for-document-2">fully active</a>:
             <ol>
               <li><a data-link-type="dfn" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-2">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
               <a data-link-type="idl" href="#dom-geolocationpositionerror-position_unavailable" class="internalDFN" id="ref-for-dom-geolocationpositionerror-position_unavailable-2"><code>POSITION_UNAVAILABLE</code></a>.
@@ -1236,11 +1236,11 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           <li>Let <var data-type="unsigned long">watchId</var> be an <a data-link-type="dfn" data-type="dfn" href="https://infra.spec.whatwg.org/#implementation-defined" id="ref-for-index-term-implementation-defined-1">implementation-defined</a>
           <a data-link-type="idl" data-lt="unsigned long" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-index-term-unsigned-long-type-2"><code>unsigned long</code></a> that is greater than zero.
           </li>
-          <li><a data-link-type="dfn" data-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-index-term-append-for-list-1">Append</a> <var data-type="unsigned long">watchId</var> to <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-3">this</a>'s
+          <li><a data-link-type="dfn" data-type="dfn" href="https://infra.spec.whatwg.org/#list-append" id="ref-for-index-term-append-for-list-1">Append</a> <var data-type="unsigned long">watchId</var> to <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-4">this</a>'s
           <a data-lt="[[watchIDs]]" href="#dfn-watchids" class="internalDFN" data-link-type="idl" id="ref-for-dfn-watchids-1"><code>[[watchIDs]]</code></a>.
           </li>
-          <li><a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-index-term-in-parallel-2">In parallel</a>, <a data-link-type="dfn" href="#dfn-request-a-position" class="internalDFN" id="ref-for-dfn-request-a-position-3">request a position</a> passing
-          <var data-type="PositionCallback">successCallback</var>, <var data-type="PositionErrorCallback?">errorCallback</var>, <var data-type="PositionOptions">options</var>, and <var data-type="unsigned long">watchId</var>.
+          <li><a data-link-type="dfn" href="#dfn-request-a-position" class="internalDFN" id="ref-for-dfn-request-a-position-3">Request a position</a> passing <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-5">this</a>, <var data-type="PositionCallback">successCallback</var>,
+          <var data-type="PositionErrorCallback?">errorCallback</var>, <var data-type="PositionOptions">options</var>, and <var data-type="unsigned long">watchId</var>.
           </li>
           <li>Return <var data-type="unsigned long">watchId</var>.
           </li>
@@ -1297,7 +1297,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           When <dfn data-export="" data-dfn-type="method" id="dom-geolocation-clearwatch" data-idl="operation" data-title="clearWatch()" data-dfn-for="Geolocation" data-type="undefined" data-lt="clearWatch()|clearWatch(watchId)" data-local-lt="Geolocation.clearWatch|Geolocation.clearWatch()|clearWatch" tabindex="0" aria-haspopup="dialog"><code>clearWatch()</code></dfn> is invoked, the user agent <em class="rfc2119">MUST</em>:
         </p>
         <ol class="algorithm">
-          <li><a data-link-type="dfn" data-type="dfn" href="https://infra.spec.whatwg.org/#list-remove" id="ref-for-index-term-remove-for-list-1">Remove</a> <var>watchId</var> from <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-4">this</a>'s
+          <li><a data-link-type="dfn" data-type="dfn" href="https://infra.spec.whatwg.org/#list-remove" id="ref-for-index-term-remove-for-list-1">Remove</a> <var>watchId</var> from <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-6">this</a>'s
           <a data-lt="[[watchIDs]]" href="#dfn-watchids" class="internalDFN" data-link-type="idl" id="ref-for-dfn-watchids-2"><code>[[watchIDs]]</code></a>.
           </li>
         </ol>
@@ -1307,15 +1307,17 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
         </h3><a class="self-link" href="#request-a-position" aria-label="Permalink for Section 6.5"></a></div>
         
         <p>
-          To <dfn id="dfn-request-a-position" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">request a position</dfn>, pass a <a data-link-type="idl" data-lt="PositionCallback" href="#dom-positioncallback" class="internalDFN" id="ref-for-dom-positioncallback-3"><code>PositionCallback</code></a>
+          To <dfn id="dfn-request-a-position" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">request a position</dfn>, pass a <a data-link-type="idl" data-lt="Geolocation" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-3"><code>Geolocation</code></a>
+          <var data-type="Geolocation">geolocation</var>, a <a data-link-type="idl" data-lt="PositionCallback" href="#dom-positioncallback" class="internalDFN" id="ref-for-dom-positioncallback-3"><code>PositionCallback</code></a>
           <var data-type="PositionCallback">successCallback</var>, a <a data-link-type="idl" data-lt="PositionErrorCallback" href="#dom-positionerrorcallback" class="internalDFN" id="ref-for-dom-positionerrorcallback-3"><code>PositionErrorCallback?</code></a>
-          <var data-type="PositionErrorCallback?">errorCallback</var>, <a data-link-type="idl" data-lt="PositionOptions" href="#dom-positionoptions" class="internalDFN" id="ref-for-dom-positionoptions-5"><code>PositionOptions</code></a>
+          <var data-type="PositionErrorCallback?">errorCallback</var>, a <a data-link-type="idl" data-lt="PositionOptions" href="#dom-positionoptions" class="internalDFN" id="ref-for-dom-positionoptions-5"><code>PositionOptions</code></a>
           <var data-type="PositionOptions">options</var>, and an optional <var data-type="unsigned long">watchId</var>:
         </p>
         <ol class="algorithm">
-          <li>Let <var data-type="List">watchIDs</var> be <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-5">this</a>'s <a data-lt="[[watchIDs]]" href="#dfn-watchids" class="internalDFN" data-link-type="idl" id="ref-for-dfn-watchids-3"><code>[[watchIDs]]</code></a>.
+          <li>Let <var data-type="List">watchIDs</var> be <var data-type="Geolocation">geolocation</var>'s
+          <a data-lt="[[watchIDs]]" href="#dfn-watchids" class="internalDFN" data-link-type="idl" id="ref-for-dfn-watchids-3"><code>[[watchIDs]]</code></a>.
           </li>
-          <li>Let <var data-type="Document">document</var> be the <a data-link-type="dfn" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-6">this</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-3">relevant global object</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" id="ref-for-index-term-associated-document-3">associated <code>Document</code></a>.
+          <li>Let <var data-type="Document">document</var> be the <var data-type="Geolocation">geolocation</var>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-3">relevant global object</a>'s <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" id="ref-for-index-term-associated-document-3">associated <code>Document</code></a>.
           </li>
           <li data-tests="">If <var data-type="Document">document</var> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#allowed-to-use" id="ref-for-index-term-allowed-to-use-1">allowed to use</a> the
           "geolocation" feature:
@@ -1344,53 +1346,58 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           <li>Let <var>descriptor</var> be a new <a data-link-type="idl" data-lt="PermissionDescriptor" data-type="dictionary" href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor" id="ref-for-index-term-permissiondescriptor-1"><code>PermissionDescriptor</code></a> whose
           <a data-link-type="idl" data-type="dict-member" href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor-name" id="ref-for-index-term-name-for-permissiondescriptor-1"><code>name</code></a> is <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-1"><code>"geolocation"</code></a>.
           </li>
-          <li>Set <var>permission</var> to <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-request-permission-to-use" id="ref-for-index-term-request-permission-to-use-1">request permission to use</a> <var>descriptor</var>.
-          </li>
-          <li data-tests="getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-          If <var>permission</var> is "denied", then:
+          <li><a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-index-term-in-parallel-1">In parallel</a>:
             <ol>
-              <li>If <var data-type="unsigned long">watchId</var> was passed, <a data-link-type="dfn" data-type="dfn" href="https://infra.spec.whatwg.org/#list-remove" id="ref-for-index-term-remove-for-list-3">remove</a> <var data-type="unsigned long">watchId</var> from
-              <var data-type="List">watchIDs</var>.
+              <li>Set <var>permission</var> to <a data-link-type="dfn" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-request-permission-to-use" id="ref-for-index-term-request-permission-to-use-1">request permission to use</a>
+              <var>descriptor</var>.
               </li>
-              <li><a data-link-type="dfn" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-4">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
-              <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-2"><code>PERMISSION_DENIED</code></a>.
+              <li data-tests="getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+              If <var>permission</var> is "denied", then:
+                <ol>
+                  <li>If <var data-type="unsigned long">watchId</var> was passed, <a data-link-type="dfn" data-type="dfn" href="https://infra.spec.whatwg.org/#list-remove" id="ref-for-index-term-remove-for-list-3">remove</a> <var data-type="unsigned long">watchId</var> from
+                  <var data-type="List">watchIDs</var>.
+                  </li>
+                  <li><a data-link-type="dfn" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-4">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
+                  <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-2"><code>PERMISSION_DENIED</code></a>.
+                  </li>
+                  <li>Terminate this algorithm.
+                  </li>
+                </ol>
               </li>
-              <li>Terminate this algorithm.
-              </li>
-            </ol>
-          </li>
-          <li>Wait to <a data-link-type="dfn" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-4">acquire a position</a> passing <var data-type="PositionCallback">successCallback</var>,
-          <var data-type="PositionErrorCallback?">errorCallback</var>, <var data-type="PositionOptions">options</var>, and <var data-type="unsigned long">watchId</var>.
-          </li>
-          <li>If <var data-type="unsigned long">watchId</var> was not passed, terminate this algorithm.
-          </li>
-          <li>While <var data-type="List">watchIDs</var> <a data-link-type="dfn" data-type="dfn" href="https://infra.spec.whatwg.org/#list-contain" id="ref-for-index-term-contains-for-list-1">contains</a> <var data-type="unsigned long">watchId</var>:
-            <ol>
-              <li>
-                <span id="wait-for-change">Wait for a significant change of
-                geographic position</span>. What constitutes a significant
-                change of geographic position is left to the implementation.
-                User agents <em class="rfc2119">MAY</em> impose a rate limit on how frequently position
-                changes are reported.
-              </li>
-              <li>If <var data-type="Document">document</var> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-index-term-fully-active-for-document-3">fully active</a> or
-              <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="ref-for-index-term-visibility-state-for-document-3">visibility state</a> is not "visible", go back to the
-              previous step and again <a href="#wait-for-change">wait for a
-              significant change of geographic position</a>.
-                <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span><span class="issue-label">: Position updates are exclusively for fully-active visible documents</span></div><aside class="">
-                  <p>
-                    The desired effect here being that position updates are
-                    exclusively delivered to fully active documents that are
-                    visible; Otherwise the updates get silently "dropped on the
-                    floor". Only once a document again becomes fully active and
-                    visible (e.g., an <code><a data-type="element" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element" id="ref-for-index-term-iframe-element-2">iframe</a></code> gets reattached to a parent
-                    document), do the position updates once again start getting
-                    delivered.
-                  </p>
-                </aside></div>
-              </li>
-              <li>Wait to <a data-link-type="dfn" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-5">acquire a position</a> passing <var data-type="PositionCallback">successCallback</var>,
+              <li>Wait to <a data-link-type="dfn" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-4">acquire a position</a> passing <var data-type="PositionCallback">successCallback</var>,
               <var data-type="PositionErrorCallback?">errorCallback</var>, <var data-type="PositionOptions">options</var>, and <var data-type="unsigned long">watchId</var>.
+              </li>
+              <li>If <var data-type="unsigned long">watchId</var> was not passed, terminate this algorithm.
+              </li>
+              <li>While <var data-type="List">watchIDs</var> <a data-link-type="dfn" data-type="dfn" href="https://infra.spec.whatwg.org/#list-contain" id="ref-for-index-term-contains-for-list-1">contains</a> <var data-type="unsigned long">watchId</var>:
+                <ol>
+                  <li>
+                    <span id="wait-for-change">Wait for a significant change of
+                    geographic position</span>. What constitutes a significant
+                    change of geographic position is left to the
+                    implementation. User agents <em class="rfc2119">MAY</em> impose a rate limit on how
+                    frequently position changes are reported.
+                  </li>
+                  <li>If <var data-type="Document">document</var> is not <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-index-term-fully-active-for-document-3">fully active</a> or
+                  <a data-link-type="dfn" data-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="ref-for-index-term-visibility-state-for-document-3">visibility state</a> is not "visible", go back to
+                  the previous step and again <a href="#wait-for-change">wait
+                  for a significant change of geographic position</a>.
+                    <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span><span class="issue-label">: Position updates are exclusively for fully-active visible documents</span></div><aside class="">
+                      <p>
+                        The desired effect here being that position updates are
+                        exclusively delivered to fully active documents that
+                        are visible; Otherwise the updates get silently
+                        "dropped on the floor". Only once a document again
+                        becomes fully active and visible (e.g., an <code><a data-type="element" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element" id="ref-for-index-term-iframe-element-2">iframe</a></code>
+                        gets reattached to a parent document), do the position
+                        updates once again start getting delivered.
+                      </p>
+                    </aside></div>
+                  </li>
+                  <li>Wait to <a data-link-type="dfn" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-5">acquire a position</a> passing <var data-type="PositionCallback">successCallback</var>,
+                  <var data-type="PositionErrorCallback?">errorCallback</var>, <var data-type="PositionOptions">options</var>, and <var data-type="unsigned long">watchId</var>.
+                  </li>
+                </ol>
               </li>
             </ol>
           </li>
@@ -2512,7 +2519,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <section id="idl-index" class="appendix"><div class="header-wrapper"><h2 id="a-idl-index"><bdi class="secno">A. </bdi>IDL Index</h2><a class="self-link" href="#idl-index" aria-label="Permalink for Appendix A."></a></div>
       
     <pre class="idl def" id="actual-idl-index"><span class="idlHeader"><a class="self-link" href="#actual-idl-index">WebIDL</a></span><code><span data-idl="" class="idlInterface" data-title="Navigator">partial interface <a data-idl="partial" data-link-type="interface" data-title="Navigator" class="idlID" data-dfn-for="Navigator" data-type="interface" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator" id="ref-for-index-term-navigator-interface-2">Navigator</a> {<span data-idl="" class="idlAttribute" data-title="geolocation" data-dfn-for="Navigator">
-  [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-2">SameObject</a></span>] readonly attribute<span class="idlType"> <a href="#dom-geolocation" class="internalDFN" data-link-type="idl" id="ref-for-dom-geolocation-3"><code>Geolocation</code></a></span> <dfn data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="geolocation" data-dfn-for="Navigator" data-type="Geolocation" data-lt="geolocation" data-local-lt="Navigator.geolocation" class="idlName"><code>geolocation</code></dfn>;</span>
+  [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-2">SameObject</a></span>] readonly attribute<span class="idlType"> <a href="#dom-geolocation" class="internalDFN" data-link-type="idl" id="ref-for-dom-geolocation-4"><code>Geolocation</code></a></span> <dfn data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="geolocation" data-dfn-for="Navigator" data-type="Geolocation" data-lt="geolocation" data-local-lt="Navigator.geolocation" class="idlName"><code>geolocation</code></dfn>;</span>
 };</span>
 
 <span data-idl="" class="idlInterface" data-title="Geolocation">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-5">Exposed</a>=Window</span>]
@@ -2889,7 +2896,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   </li><li>
     <a href="#ref-for-dom-geolocation-2" title="§ 6.1 Internal slots">§ 6.1 Internal slots</a> 
   </li><li>
-    <a href="#ref-for-dom-geolocation-3" title="§ A. IDL Index">§ A. IDL Index</a> 
+    <a href="#ref-for-dom-geolocation-3" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
+  </li><li>
+    <a href="#ref-for-dom-geolocation-4" title="§ A. IDL Index">§ A. IDL Index</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-positioncallback" aria-label="Links in this document to definition: PositionCallback">
@@ -3607,9 +3616,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-    <a href="#ref-for-index-term-in-parallel-1" title="§ 6.2 getCurrentPosition() method">§ 6.2 getCurrentPosition() method</a> 
-  </li><li>
-    <a href="#ref-for-index-term-in-parallel-2" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> 
+    <a href="#ref-for-index-term-in-parallel-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
   </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-navigates" aria-label="Links in this document to definition: navigates">
@@ -4155,13 +4162,11 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-    <a href="#ref-for-index-term-this-1" title="§ 6.2 getCurrentPosition() method">§ 6.2 getCurrentPosition() method</a> 
+    <a href="#ref-for-index-term-this-1" title="§ 6.2 getCurrentPosition() method">§ 6.2 getCurrentPosition() method</a> <a href="#ref-for-index-term-this-2" title="Reference 2">(2)</a> 
   </li><li>
-    <a href="#ref-for-index-term-this-2" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> <a href="#ref-for-index-term-this-3" title="Reference 2">(2)</a> 
+    <a href="#ref-for-index-term-this-3" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> <a href="#ref-for-index-term-this-4" title="Reference 2">(2)</a> <a href="#ref-for-index-term-this-5" title="Reference 3">(3)</a> 
   </li><li>
-    <a href="#ref-for-index-term-this-4" title="§ 6.4 clearWatch() method">§ 6.4 clearWatch() method</a> 
-  </li><li>
-    <a href="#ref-for-index-term-this-5" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-index-term-this-6" title="Reference 2">(2)</a> 
+    <a href="#ref-for-index-term-this-6" title="§ 6.4 clearWatch() method">§ 6.4 clearWatch() method</a> 
   </li><li>
     <a href="#ref-for-index-term-this-7" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-index-term-this-8" title="Reference 2">(2)</a> <a href="#ref-for-index-term-this-9" title="Reference 3">(3)</a> 
   </li>
