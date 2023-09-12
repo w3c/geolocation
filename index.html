@@ -1119,8 +1119,8 @@
         </h4>
         <p>
           The <dfn>latitude</dfn> and <dfn>longitude</dfn> attributes denote
-          the position, specified in degrees, in the [[WGS84]] coordinate
-          system.
+          the position, specified as a real number of degrees, in the [[WGS84]]
+          coordinate system.
         </p>
         <p>
           The <dfn>accuracy</dfn> attribute denotes the accuracy level of the
@@ -1174,10 +1174,12 @@
           {{GeolocationCoordinates}} instance:
             <ol>
               <li>Initialize |coord|'s {{GeolocationCoordinates/latitude}}
-              attribute to a geographic coordinate in decimal degrees.
+              attribute to a latitude, specified as a real number of degrees, in
+              the [[WGS84]] coordinate system.
               </li>
               <li>Initialize |coord|'s {{GeolocationCoordinates/longitude}}
-              attribute to a geographic coordinate in decimal degrees.
+              attribute to a longitude, specified as a real number of degrees,
+              in the [[WGS84]] coordinate system.
               </li>
               <li>Initialize |coord|'s {{GeolocationCoordinates/accuracy}}
               attribute to a non-negative real number. The value SHOULD
@@ -1185,8 +1187,9 @@
               longitude and latitude values.
               </li>
               <li>Initialize |coord|'s {{GeolocationCoordinates/altitude}}
-              attribute in meters above the [[WGS84]] ellipsoid, or `null` if
-              the implementation cannot provide altitude information.
+              attribute to a height, in meters, above the [[WGS84]] ellipsoid,
+              or `null` if the implementation cannot provide altitude
+              information.
               </li>
               <li>Initialize |coord|'s
               {{GeolocationCoordinates/altitudeAccuracy}} attribute as
@@ -1196,15 +1199,16 @@
               level.
               </li>
               <li>Initialize |coord|'s {{GeolocationCoordinates/speed}}
-              attribute to a non-negative real number, or as `null` if the
-              implementation cannot provide speed information.
+              attribute to a speed, as a non-negative real number of meters per
+              second, or as `null` if the implementation cannot provide speed
+              information.
               </li>
               <li>Initialize |coord|'s {{GeolocationCoordinates/heading}}
-              attribute in degrees, or `null` if the implementation cannot
-              provide heading information. If the hosting device is stationary
-              (i.e., the value of the {{GeolocationCoordinates/speed}}
-              attribute is 0), then initialize the
-              {{GeolocationCoordinates/heading}} to `NaN`.
+              attribute to a heading, in degrees, or `null` if the
+              implementation cannot provide heading information. If the hosting
+              device is stationary (i.e., the value of the
+              {{GeolocationCoordinates/speed}} attribute is 0), then initialize
+              the {{GeolocationCoordinates/heading}} to `NaN`.
               </li>
             </ol>
           </li>
