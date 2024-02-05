@@ -543,7 +543,7 @@
         `Geolocation` interface and callbacks
       </h2>
       <pre class="idl">
-        [Exposed=Window]
+        [Exposed=Window, SecureContext]
         interface Geolocation {
           undefined getCurrentPosition (
             PositionCallback successCallback,
@@ -1222,7 +1222,7 @@
         <dfn>GeolocationPositionError</dfn> interface
       </h2>
       <pre class="idl">
-        [Exposed=Window]
+        [Exposed=Window, SecureContext]
         interface GeolocationPositionError {
           const unsigned short PERMISSION_DENIED = 1;
           const unsigned short POSITION_UNAVAILABLE = 2;
