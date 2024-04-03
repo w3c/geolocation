@@ -1,15 +1,13 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 34.3.0">
+<meta name="generator" content="ReSpec 34.5.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
 :is(aside,div).example,div.illegal-example{padding:.5em;margin:1em 0;position:relative;clear:both}
 div.illegal-example{color:red}
 div.illegal-example p{color:#000}
-:is(aside,div).example{border-left-width:.5em;border-left-style:solid;border-color:#e0cb52;background:#fcfaee}
 aside.example div.example{border-left-width:.1em;border-color:#999;background:#fff}
-.example pre{background-color:rgba(0,0,0,.03)}
 </style>
 <style>
 .issue-label{text-transform:initial}
@@ -18,7 +16,7 @@ aside.example div.example{border-left-width:.1em;border-color:#999;background:#f
 span.warning{padding:.1em .5em .15em}
 .issue.closed span.issue-number{text-decoration:line-through}
 .issue.closed span.issue-number::after{content:" (Closed)";font-size:smaller}
-.warning{border-color:#f11;border-width:.2em;border-style:solid;background:#fbe9e9}
+.warning{border-color:#f11;border-color:var(--warning-border,#f11);border-width:.2em;border-style:solid;background:#fbe9e9;background:var(--warning-bg,#fbe9e9);color:#000;color:var(--text,#000)}
 .warning-title:before{content:"⚠";font-size:1.3em;float:left;padding-right:.3em;margin-top:-.3em}
 li.task-list-item{list-style:none}
 input.task-list-item-checkbox{margin:0 .35em .25em -1.6em;vertical-align:middle}
@@ -26,12 +24,12 @@ input.task-list-item-checkbox{margin:0 .35em .25em -1.6em;vertical-align:middle}
 </style>
 <style>
 pre.idl{padding:1em;position:relative}
-pre.idl>code{color:#000}
+pre.idl>code{color:#000;color:var(--text,#000)}
 @media print{
 pre.idl{white-space:pre-wrap}
 }
-.idlHeader{display:block;width:150px;background:#8ccbf2;color:#fff;font-family:sans-serif;font-weight:700;margin:-1em 0 1em -1em;height:28px;line-height:28px}
-.idlHeader a.self-link{margin-left:.3cm;text-decoration:none;border-bottom:none}
+.idlHeader{display:block;width:150px;background:#8ccbf2;background:var(--def-border,#8ccbf2);color:#fff;color:var(--defrow-border,#fff);font-family:sans-serif;font-weight:700;margin:-1em 0 1em -1em;height:28px;line-height:28px}
+.idlHeader a.self-link{margin-left:.3cm;text-decoration:none;border-bottom:none;color:inherit}
 .idlID{font-weight:700;color:#005a9c}
 .idlType{color:#005a9c}
 .idlName{color:#ff4500}
@@ -54,13 +52,13 @@ a.idlEnumItem{color:#000;border-bottom:1px dotted #ccc;text-decoration:none}
 </style>
 <style>
 dfn{cursor:pointer}
-.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font-family:"Helvetica Neue",sans-serif;font-size:small;background:#fff;color:#000;box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);border-radius:2px}
+.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font-family:"Helvetica Neue",sans-serif;font-size:small;background:#fff;background:var(--indextable-hover-bg,#fff);color:#000;color:var(--text,#000);box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);box-shadow:0 1em 3em -.4em var(--tocsidebar-shadow,rgba(0,0,0,.3)),0 0 1px 1px var(--tocsidebar-shadow,rgba(0,0,0,.05));border-radius:2px}
 .dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
-.dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;top:0}
-.dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1}
+.dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;border-bottom-color:var(--indextable-hover-bg,#fff);top:0}
+.dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1;border-bottom-color:var(--indextable-hover-bg,#a2a9b1)}
 .dfn-panel *{margin:0}
-.dfn-panel b{display:block;color:#000;margin-top:.25em}
-.dfn-panel ul a[href]{color:#333}
+.dfn-panel b{display:block;color:#000;color:var(--text,#000);margin-top:.25em}
+.dfn-panel ul a[href]{color:#333;color:var(--text,#333)}
 .dfn-panel>div{display:flex}
 .dfn-panel a.self-link{font-weight:700;margin-right:auto}
 .dfn-panel .marker{padding:.1em;margin-left:.5em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;color:#040b1c}
@@ -100,7 +98,6 @@ cite .bibref{font-style:normal}
 a[href].orcid{padding-left:4px;padding-right:4px}
 a[href].orcid>svg{margin-bottom:-2px}
 .toc a,.tof a{text-decoration:none}
-a .figno,a .secno{color:#000}
 ol.tof,ul.tof{list-style:none outside none}
 .caption{margin-top:.5em;font-style:italic}
 table.simple{border-spacing:0;border-collapse:collapse;border-bottom:3px solid #005a9c}
@@ -150,9 +147,9 @@ ul.index code{color:inherit}
 <style>
 .mdn{font-size:.75em;position:absolute;right:.3em;min-width:0;margin-top:3rem}
 .mdn details{width:100%;margin:1px 0;position:relative;z-index:10;box-sizing:border-box;padding:.4em;padding-top:0}
-.mdn details[open]{min-width:25ch;max-width:32ch;background:#fff;box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);border-radius:2px;z-index:11;margin-bottom:.4em}
+.mdn details[open]{min-width:25ch;max-width:32ch;background:#fff;background:var(--indextable-hover-bg,#fff);color:#000;color:var(--indextable-hover-text,#000);box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);box-shadow:0 1em 3em -.4em var(--tocsidebar-shadow,rgba(0,0,0,.3)),0 0 1px 1px var(--tocsidebar-shadow,rgba(0,0,0,.05));border-radius:2px;z-index:11;margin-bottom:.4em}
 .mdn summary{text-align:right;cursor:default;margin-right:-.4em}
-.mdn summary span{font-family:zillaslab,Palatino,"Palatino Linotype",serif;color:#fff;background-color:#000;display:inline-block;padding:3px}
+.mdn summary span{font-family:zillaslab,Palatino,"Palatino Linotype",serif;color:#fff;color:var(--bg,#fff);background-color:#000;background-color:var(--text,#000);display:inline-block;padding:3px}
 .mdn a{display:inline-block;word-break:break-all}
 .mdn p{margin:0}
 .mdn .engines-all{color:#058b00}
@@ -173,19 +170,23 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="ef098b13d69e42a5d9aa0f2799b7577be7054804">
+<meta name="revision" content="f8b930f1c6b56190a841753cfe34fc4c83daa8d2">
 <meta name="description" content="The Geolocation API provides access to geographical location
         information associated with the hosting device.">
 <style>
-.hljs{display:block;overflow-x:auto;padding:.5em;color:#383a42;background:#fafafa}
-.hljs-comment,.hljs-quote{color:#717277;font-style:italic}
-.hljs-doctag,.hljs-formula,.hljs-keyword{color:#a626a4}
-.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#ca4706;font-weight:700}
-.hljs-literal{color:#0b76c5}
-.hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string{color:#42803c}
-.hljs-built_in,.hljs-class .hljs-title{color:#9a6a01}
-.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#986801}
-.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#336ae3}
+.hljs{--base:#fafafa;--mono-1:#383a42;--mono-2:#686b77;--mono-3:#717277;--hue-1:#0b76c5;--hue-2:#336ae3;--hue-3:#a626a4;--hue-4:#42803c;--hue-5:#ca4706;--hue-5-2:#c91243;--hue-6:#986801;--hue-6-2:#9a6a01}
+@media (prefers-color-scheme:dark){
+.hljs{--base:#282c34;--mono-1:#abb2bf;--mono-2:#818896;--mono-3:#5c6370;--hue-1:#56b6c2;--hue-2:#61aeee;--hue-3:#c678dd;--hue-4:#98c379;--hue-5:#e06c75;--hue-5-2:#be5046;--hue-6:#d19a66;--hue-6-2:#e6c07b}
+}
+.hljs{display:block;overflow-x:auto;padding:.5em;color:#383a42;color:var(--mono-1,#383a42);background:#fafafa;background:var(--base,#fafafa)}
+.hljs-comment,.hljs-quote{color:#717277;color:var(--mono-3,#717277);font-style:italic}
+.hljs-doctag,.hljs-formula,.hljs-keyword{color:#a626a4;color:var(--hue-3,#a626a4)}
+.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#ca4706;color:var(--hue-5,#ca4706);font-weight:700}
+.hljs-literal{color:#0b76c5;color:var(--hue-1,#0b76c5)}
+.hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string{color:#42803c;color:var(--hue-4,#42803c)}
+.hljs-built_in,.hljs-class .hljs-title{color:#9a6a01;color:var(--hue-6-2,#9a6a01)}
+.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#986801;color:var(--hue-6,#986801)}
+.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#336ae3;color:var(--hue-2,#336ae3)}
 .hljs-emphasis{font-style:italic}
 .hljs-strong{font-weight:700}
 .hljs-link{text-decoration:underline}
@@ -193,12 +194,16 @@ ul.index code{color:inherit}
 <style>
 var{position:relative;cursor:pointer}
 var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}
-var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#000}
-var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#000;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}
+var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#222}
+var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#222;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}
 var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
 </style>
 <style>
-.assert{background:#eee;border-left:.5em solid #aaa;padding:.3em}
+:root{--assertion-border:#aaa;--assertion-bg:#eee;--assertion-text:black}
+.assert{border-left:.5em solid #aaa;padding:.3em;border-color:#aaa;border-color:var(--assertion-border);background:#eee;background:var(--assertion-bg);color:#000;color:var(--assertion-text)}
+@media (prefers-color-scheme:dark){
+:root{--assertion-border:#444;--assertion-bg:var(--borderedblock-bg);--assertion-text:var(--text)}
+}
 </style>
 <script id="initialUserConfig" type="application/json">{
   "shortName": "geolocation",
@@ -226,7 +231,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       "retiredDate": "2022-09-01"
     }
   ],
-  "group": "das",
+  "group": [
+    "das",
+    "webapps"
+  ],
   "previousPublishDate": "2022-02-17",
   "crEnd": "2022-03-18",
   "previousMaturity": "CR",
@@ -235,16 +243,16 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "testSuiteURI": "https://wpt.live/geolocation-API/",
   "implementationReportURI": "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
   "xref": "web-platform",
-  "gitRevision": "ef098b13d69e42a5d9aa0f2799b7577be7054804",
-  "publishISODate": "2024-01-08T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 08 January 2024"
+  "gitRevision": "f8b930f1c6b56190a841753cfe34fc4c83daa8d2",
+  "publishISODate": "2024-04-03T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 03 April 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED"></head>
   <body data-cite="WEBIDL secure-contexts permissions-policy permissions hr-time html HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-01-08">08 January 2024</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-04-03">03 April 2024</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -252,7 +260,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
                 <a class="u-url" href="https://w3c.github.io/geolocation-api/">https://w3c.github.io/geolocation-api/</a>
               </dd>
         <dt>Latest published version:</dt><dd>
-                <a href="https://www.w3.org/TR/geolocation/">https://www.w3.org/TR/geolocation/</a>
+                <a href="https://www.w3.org/geolocation/">https://www.w3.org/geolocation/</a>
               </dd>
         <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/geolocation-api/">https://w3c.github.io/geolocation-api/</a></dd>
         <dt>History:</dt><dd>
@@ -321,7 +329,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         of this specification as we add new features or fix bugs.
       </p>
     <p>
-    This document was published by the <a href="https://www.w3.org/groups/wg/das">Devices and Sensors Working Group</a> as
+    This document was published by the <a href="https://www.w3.org/groups/wg/das">Devices and Sensors Working Group</a> and the <a href="https://www.w3.org/groups/wg/webapps">Web Applications Working Group</a> as
     an Editor's Draft. 
   </p><p>Publication as an Editor's Draft does not
   imply endorsement by <abbr title="World Wide Web Consortium">W3C</abbr> and its Members. </p><p>
@@ -332,16 +340,16 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           <a href="https://www.w3.org/2023/Process-20231103/#allow-new-features">new features</a>.
   </p><p>
     
-        This document was produced by a group
+        This document was produced by groups
         operating under the
         <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent
           Policy</a>.
       
-    
-                <abbr title="World Wide Web Consortium">W3C</abbr> maintains a
-                <a rel="disclosure" href="https://www.w3.org/groups/wg/das/ipr">public list of any patent disclosures</a>
+     <abbr title="World Wide Web Consortium">W3C</abbr> maintains a
+        <a rel="disclosure" href="https://www.w3.org/groups/wg/das/ipr">public list of any patent disclosures (Devices and Sensors Working Group)</a> and a
+        <a rel="disclosure" href="https://www.w3.org/groups/wg/webapps/ipr">public list of any patent disclosures (Web Applications Working Group)</a>
           made in connection with the deliverables of
-          the group; that page also includes
+          each group; these pages also include
           instructions for disclosing a patent. An individual who has actual
           knowledge of a patent which the individual believes contains
           <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a>
@@ -510,7 +518,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           API</cite> has received the following normative changes:
         </p>
          <rs-changelog from="FPWD" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation-api/commit/7082b4e">Fix references to "default allowlist"</a> (<a href="https://github.com/w3c/geolocation-api/pull/133">#133</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation-api/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation-api/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation-api/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation-api/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation-api/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation-api/pull/87">#87</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/ef098b1">Update w3c.json</a> (<a href="https://github.com/w3c/geolocation-api/pull/141">#141</a>)</li>
+      <li><a href="https://github.com/w3c/geolocation-api/commit/ef098b1">Update w3c.json</a> (<a href="https://github.com/w3c/geolocation-api/pull/141">#141</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/7082b4e">Fix references to "default allowlist"</a> (<a href="https://github.com/w3c/geolocation-api/pull/133">#133</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation-api/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation-api/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation-api/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation-api/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation-api/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation-api/pull/87">#87</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f8b930f">Added webapps as group</a> (<a href="https://github.com/w3c/geolocation-api/pull/144">#144</a>)</li>
       </ul></rs-changelog>
         <p>
           Since publication of the Second Edition in 2016, this specification
@@ -2867,7 +2875,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </dd><dt id="bib-infra">[infra]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-permissions">[Permissions]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 1 December 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
+      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 19 March 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
     </dd><dt id="bib-permissions-policy">[Permissions-Policy]</dt><dd>
       <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 18 December 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
