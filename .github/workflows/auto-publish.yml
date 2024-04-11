@@ -22,4 +22,4 @@ jobs:
           W3C_WG_DECISION_URL: "https://lists.w3.org/Archives/Public/public-device-apis/2021May/0008.html"
           W3C_NOTIFICATIONS_CC: "${{ secrets.CC }}"
           W3C_BUILD_OVERRIDE: |
-            specStatus: CRD
+            specStatus: PER
