@@ -170,7 +170,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="74b1dd0d0bf1d0bae614e006f2dafdb66c5cfb8b">
+<meta name="revision" content="5391d57fd3bd460725daee1f6140b9cb70770091">
 <meta name="description" content="The Geolocation API provides access to geographical location
         information associated with the hosting device.">
 <style>
@@ -242,7 +242,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "testSuiteURI": "https://wpt.live/geolocation-API/",
   "implementationReportURI": "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
   "xref": "web-platform",
-  "gitRevision": "74b1dd0d0bf1d0bae614e006f2dafdb66c5cfb8b",
+  "gitRevision": "5391d57fd3bd460725daee1f6140b9cb70770091",
   "publishISODate": "2024-04-11T00:00:00.000Z",
   "generatedSubtitle": "W3C Editor's Draft 11 April 2024"
 }</script>
@@ -742,9 +742,9 @@ navigator.geolocation.getCurrentPosition(
         </h3><a class="self-link" href="#enabling-the-api-in-third-party-contexts" aria-label="Permalink for Section 2.7"></a></div><p><em>This section is non-normative.</em></p>
         
         <p>
-          The <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature-default-allowlist" id="ref-for-index-term-default-allowlist-for-policy-controlled-feature-1">default allowlist</a> of <code>'self'</code> allows
-          Geolocation API usage in same-origin nested frames but prevents
-          third-party content from using the API.
+          The <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature-default-allowlist" id="ref-for-index-term-default-allowlist-for-policy-controlled-feature-1">default allowlist</a> of <code>'self'</code>
+          allows Geolocation API usage in same-origin nested frames but
+          prevents third-party content from using the API.
         </p>
         <p>
           Third-party usage can be selectively enabled by adding the
@@ -2266,8 +2266,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-3"><code>GeolocationCoordinates</code></a> instance:
             <ol>
               <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-latitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-latitude-2"><code>latitude</code></a>
-              attribute to a latitude, specified as a real number of degrees, in
-              the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="National Imagery and Mapping Agency Technical Report 8350.2, Third Edition">WGS84</a></cite>] coordinate system.
+              attribute to a latitude, specified as a real number of degrees,
+              in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="National Imagery and Mapping Agency Technical Report 8350.2, Third Edition">WGS84</a></cite>] coordinate system.
               </li>
               <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-longitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-longitude-2"><code>longitude</code></a>
               attribute to a longitude, specified as a real number of degrees,
