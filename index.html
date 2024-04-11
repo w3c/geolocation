@@ -54,11 +54,21 @@
       </p>
     </section>
     <section id="sotd" class="updateable-rec">
+      <script class="removeOnSave">
+        function updateableRecFilter(commit) {
+          const { message } = commit;
+          // only show commits that start with Addition: or Correction:
+          return /^Addition:|^Correction:/.test(message);
+        }
+      </script>
       <p>
-        The Devices and Sensors Working Group is updating this specification in
-        the hope of making it a "living standard". As such, we've dropped the
-        "Editions" and aim to continue publishing updated W3C Recommendations
-        of this specification as we add new features or fix bugs.
+        Since this specification become a W3C Recommendation on 01 September 2022,
+        the following substantive additions and/or corrections have been proposed:
+      </p>
+      <rs-changelog from="REC-2022" filter="updateableRecFilter">
+      </rs-changelog>
+      <p>
+        A more detailed list of changes can be found in the section [[[#changelog]]].
       </p>
     </section>
     <section id="introduction" class="informative">
@@ -115,58 +125,6 @@
           providing a markup language of any kind, nor does not include
           defining a new URL scheme for building URLs that identify geographic
           locations.
-        </p>
-      </section>
-      <section class="informative">
-        <h2>
-          Change log
-        </h2>
-        <p>
-          Since First Public Working Draft in 2021, the <cite>Geolocation
-          API</cite> has received the following normative changes:
-        </p>
-        <script class="removeOnSave">
-          function removeCommits({ message }) {
-            return !/^Clarify which FPWD|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
-          }
-        </script> <rs-changelog from="FPWD" filter=
-        "removeCommits"></rs-changelog>
-        <p>
-          Since publication of the Second Edition in 2016, this specification
-          has received the following changes:
-        </p>
-        <ul>
-          <li>[=Request a position=] only proceeds when a document is visible,
-          or the document becomes visible.
-          </li>
-          <li>Clarified how caching works as part of [=acquiring a position=]:
-          only last position is cached, and can be evicted at any time.
-          </li>
-          <li>Now relies on the [[[Permissions]]] specification to handle
-          permission grants, and user interface requirements.
-          </li>
-          <li>The `errorCallback` is now nullable.
-          </li>
-          <li>The API can be controlled by [[[Permissions-Policy]]], which
-          restricts how/where the API is exposed to web pages.
-          </li>
-          <li>The `callbacks` are no longer treated as "EventHandler" objects
-          (i.e., objects that have a `.handleEvent()` method), but are now
-          exclusively treated as IDL callback functions.
-          </li>
-          <li>The API is now only exposed in Secure Contexts (i.e., only
-          available in HTTPS).
-          </li>
-          <li>The interfaces no longer use [[WebIDL]]'s legacy
-          `[NoInterfaceObject]`, so `Geolocation` and other interface of this
-          spec are now in the global scope. Also, the interfaces were renamed
-          from `NavigatorGeolocation*` to just `Geolocation*`.
-          </li>
-        </ul>
-        <p>
-          See the <a href=
-          "https://github.com/w3c/geolocation-api/commits/gh-pages">commit
-          history</a> for a complete list of changes.
         </p>
       </section>
     </section>
@@ -1326,6 +1284,62 @@
         Olli Pettay, Chris Prince, Arun Ranganathan, Carl Reed, Thomas
         Roessler, Dirk Segers, Allan Thomson, Martin Thomson, Doug Turner, Erik
         Wilde, Matt Womer, and Mohamed Zergaoui.
+      </p>
+    </section>
+    <section class="appendix" class="informative" id="changelog">
+      <h2>
+        Change log
+      </h2>
+      <p>
+        Since First Public Working Draft in 2021, the <cite>Geolocation
+        API</cite> has received the following normative changes:
+      </p>
+      <script class="removeOnSave">
+        function removeCommits(commit) {
+          const { message, hash } = commit;
+          if (["ef098b1"].includes(hash)) {
+            return false;
+          }
+          return !/^Clarify which FPWD|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
+        }
+      </script> <rs-changelog from="FPWD" filter=
+      "removeCommits"></rs-changelog>
+      <p>
+        Since publication of the Second Edition in 2016, this specification
+        received the following substantive changes:
+      </p>
+      <ul>
+        <li>[=Request a position=] only proceeds when a document is visible,
+        or the document becomes visible.
+        </li>
+        <li>Clarified how caching works as part of [=acquiring a position=]:
+        only last position is cached, and can be evicted at any time.
+        </li>
+        <li>Now relies on the [[[Permissions]]] specification to handle
+        permission grants, and user interface requirements.
+        </li>
+        <li>The `errorCallback` is now nullable.
+        </li>
+        <li>The API can be controlled by [[[Permissions-Policy]]], which
+        restricts how/where the API is exposed to web pages.
+        </li>
+        <li>The `callbacks` are no longer treated as "EventHandler" objects
+        (i.e., objects that have a `.handleEvent()` method), but are now
+        exclusively treated as IDL callback functions.
+        </li>
+        <li>The API is now only exposed in Secure Contexts (i.e., only
+        available in HTTPS).
+        </li>
+        <li>The interfaces no longer use [[WebIDL]]'s legacy
+        `[NoInterfaceObject]`, so `Geolocation` and other interface of this
+        spec are now in the global scope. Also, the interfaces were renamed
+        from `NavigatorGeolocation*` to just `Geolocation*`.
+        </li>
+      </ul>
+      <p>
+        See the <a href=
+        "https://github.com/w3c/geolocation-api/commits/gh-pages">commit
+        history</a> for a complete list of changes.
       </p>
     </section>
   </body>
