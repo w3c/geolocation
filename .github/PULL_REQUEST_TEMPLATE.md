@@ -12,5 +12,5 @@ Implementation commitment:
 
 Documentation (new feature):
 
- * [] Pinged MDN
- * [] Added example to README or spec
+ * [ ] Pinged MDN
+ * [ ] Added example to README or spec
