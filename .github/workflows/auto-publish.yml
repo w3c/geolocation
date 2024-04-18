@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - index.html
   pull_request: {}
 
 jobs:
