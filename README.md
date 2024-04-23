@@ -60,7 +60,7 @@ async function sendPosition() {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
 
-    // Convert to JSON text
+    // .stringify() calls .toJSON() automatically
     const body = JSON.stringify(position, null, 2);
 
     // Prepare the fetch request options
@@ -69,7 +69,6 @@ async function sendPosition() {
       headers: {
         'Content-Type': 'application/json'
       },
-      // .stringify() calls .toJSON() automatically
       body
     };
 
