@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - index.html
+      - errata.html
   pull_request: {}
 
 jobs:
