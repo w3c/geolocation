@@ -35,7 +35,7 @@
   <body>
     <section id="abstract">
     ## Abstract
-    This document catalogues errata for the [[[Geolocation-API]]] W3C Recommendation. 
+    This document catalogues errata for the [[[Geolocation-API]]] W3C Recommendation.
     </section>
 
     ## Process for submitting errata
@@ -52,7 +52,7 @@
         if (["ef098b1"].includes(hash)) {
           return false;
         }
-        return !/^Clarify which FPWD|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
+        return !|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
       }
     </script>
     <rs-changelog from="REC-2022" filter="removeCommits">
