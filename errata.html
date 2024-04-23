@@ -9,6 +9,7 @@
     ></script>
     <script>
       var respecConfig = {
+        github: "w3c/geolocation-API",
         specStatus: "base",
         latestVersion: null,
         editors: [
@@ -34,17 +35,27 @@
   <body>
     <section id="abstract">
     ## Abstract
-    This document catalogues errata for the [<cite>Geolocation API</cite>](https://w3.org/TR/geolocation-API/) W3C Recommendation. 
+    This document catalogues errata for the [[[Geolocation-API]]] W3C Recommendation. 
     </section>
 
     ## Process for submitting errata
 
-    Please [file an issue](https://github.com/w3c/payment-request/issues) on Github.  
+    Please [file an issue](https://github.com/w3c/payment-request/issues) on Github.
 
     ## Unaddressed errata
-    None.
+    [See issues on Github](https://github.com/w3c/payment-request/issues)
 
     ## Errata approved by the Working Group
-    None.
+    <script class="removeOnSave">
+      function removeCommits(commit) {
+        const { message, hash } = commit;
+        if (["ef098b1"].includes(hash)) {
+          return false;
+        }
+        return !/^Clarify which FPWD|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
+      }
+    </script>
+    <rs-changelog from="REC-2022" filter="removeCommits">
+    </rs-changelog>
   </body>
 </html>
