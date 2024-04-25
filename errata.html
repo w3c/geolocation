@@ -49,10 +49,10 @@
     <script class="removeOnSave">
       function removeCommits(commit) {
         const { message, hash } = commit;
-        if (["ef098b1"].includes(hash)) {
+        if (["ef098b1", "f8b930f"].includes(hash)) {
           return false;
         }
-        return !|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
+        return !/^chore|^tidy|^editorial|^Editiorial|^edtiorial|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
       }
     </script>
     <rs-changelog from="REC-2022" filter="removeCommits">
