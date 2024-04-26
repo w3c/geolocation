@@ -28,8 +28,13 @@
                 width: "72", 
                 height:"48"
             }
-        ]
+        ],
+        postProcess: [removeRedudantParts]
       };
+      function removeRedudantParts() {
+        const details = document.querySelector("body > div.head > details");
+        details.classList.add("removeOnSave");
+      }
     </script>
   </head>
   <body>
