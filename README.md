@@ -75,7 +75,7 @@ async function sendPosition() {
     // Send request
     await fetch('https://example.com/api/positions', options);
   } catch (error) {
-    console.error('Error sending position data:', error);
+    console.error('Error getting or sending position data:', error);
   }
 }
 
