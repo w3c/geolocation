@@ -46,6 +46,19 @@
       errata: "https://w3c.github.io/geolocation-api/errata.html",
     };
     </script>
+    <style>
+      * {
+        counter-reset: addition correction;
+      }
+      .addition::before {
+        content: "Candidate Addition:";
+        counter-increment: addition;
+      }
+      .correction::before {
+        content: "Candidate Correction:";
+        counter-increment: correction;
+      }
+    </style>
   </head>
   <body data-cite=
   "secure-contexts permissions-policy permissions hr-time html">
@@ -71,7 +84,15 @@
       "updateableRecFilter"></rs-changelog>
       <p>
         A more detailed list of changes can be found in section
-        [[[#changelog]]].
+        [[[#changelog]]]. Reviewers of the document can identify candidate
+        additions and/or corrections by their distinctive styling in the
+        document:
+      </p>
+      <p class="correction">
+        Candidate corrections are marked like this.
+      </p>
+      <p class="addition">
+        Candidate additions are marked like this.
       </p>
     </section>
     <section id="introduction" class="informative">
@@ -1010,6 +1031,15 @@
           geographic position of the device was acquired.
         </p>
       </section>
+      <section class="addition">
+        <h3>
+          `toJSON()` method
+        </h3>
+        <p>
+          The <dfn>toJSON()</dfn> method returns a JSON representation of the
+          {{GeolocationPosition}} object.
+        </p>
+      </section>
       <section>
         <h2>
           Internal slots
@@ -1079,7 +1109,7 @@
         <h4>
           `latitude`, `longitude`, and `accuracy` attributes
         </h4>
-        <p>
+        <p class="correction">
           The <dfn>latitude</dfn> and <dfn>longitude</dfn> attributes denote
           the position, specified as a real number of degrees, in the [[WGS84]]
           coordinate system.
@@ -1122,6 +1152,15 @@
           meters per second.
         </p>
       </section>
+      <section class="addition">
+        <h4>
+          `toJSON()` method
+        </h4>
+        <p>
+          The <dfn>toJSON()</dfn> method returns a JSON representation of the
+          {{GeolocationCoordinates}} object.
+        </p>
+      </section>
       <section>
         <h2>
           Constructing a `GeolocationPosition`
@@ -1135,23 +1174,25 @@
           <li>Let |coords:GeolocationCoordinates| be a newly created
           {{GeolocationCoordinates}} instance:
             <ol>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/latitude}}
-              attribute to a latitude, specified as a real number of degrees,
-              in the [[WGS84]] coordinate system.
+              <li class="correction">Initialize |coord|'s
+              {{GeolocationCoordinates/latitude}} attribute to a latitude,
+              specified as a real number of degrees, in the [[WGS84]]
+              coordinate system.
               </li>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/longitude}}
-              attribute to a longitude, specified as a real number of degrees,
-              in the [[WGS84]] coordinate system.
+              <li class="correction">Initialize |coord|'s
+              {{GeolocationCoordinates/longitude}} attribute to a longitude,
+              specified as a real number of degrees, in the [[WGS84]]
+              coordinate system.
               </li>
               <li>Initialize |coord|'s {{GeolocationCoordinates/accuracy}}
               attribute to a non-negative real number. The value SHOULD
               correspond to a 95% confidence level with respect to the
               longitude and latitude values.
               </li>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/altitude}}
-              attribute to a height, in meters, above the [[WGS84]] ellipsoid,
-              or `null` if the implementation cannot provide altitude
-              information.
+              <li class="correction">Initialize |coord|'s
+              {{GeolocationCoordinates/altitude}} attribute to a height, in
+              meters, above the [[WGS84]] ellipsoid, or `null` if the
+              implementation cannot provide altitude information.
               </li>
               <li>Initialize |coord|'s
               {{GeolocationCoordinates/altitudeAccuracy}} attribute as
@@ -1160,17 +1201,17 @@
               information is provided, it SHOULD correspond to a 95% confidence
               level.
               </li>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/speed}}
-              attribute to a speed, as a non-negative real number of meters per
-              second, or as `null` if the implementation cannot provide speed
-              information.
+              <li class="correction">Initialize |coord|'s
+              {{GeolocationCoordinates/speed}} attribute to a speed, as a
+              non-negative real number of meters per second, or as `null` if
+              the implementation cannot provide speed information.
               </li>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/heading}}
-              attribute to a heading, in degrees, or `null` if the
-              implementation cannot provide heading information. If the hosting
-              device is stationary (i.e., the value of the
-              {{GeolocationCoordinates/speed}} attribute is 0), then initialize
-              the {{GeolocationCoordinates/heading}} to `NaN`.
+              <li class="correction">Initialize |coord|'s
+              {{GeolocationCoordinates/heading}} attribute to a heading, in
+              degrees, or `null` if the implementation cannot provide heading
+              information. If the hosting device is stationary (i.e., the value
+              of the {{GeolocationCoordinates/speed}} attribute is 0), then
+              initialize the {{GeolocationCoordinates/heading}} to `NaN`.
               </li>
             </ol>
           </li>
