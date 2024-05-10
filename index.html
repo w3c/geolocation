@@ -159,7 +159,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="933f9e5da311c5f429d7b089cfa61589b13c21aa">
+<meta name="revision" content="828969fdc175e5e60fcd11d460e396f828a17698">
 <meta name="description" content="The Geolocation API provides access to geographical location
         information associated with the hosting device.">
 <style>
@@ -232,9 +232,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "implementationReportURI": "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation-api/errata.html",
-  "gitRevision": "933f9e5da311c5f429d7b089cfa61589b13c21aa",
-  "publishISODate": "2024-05-07T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 07 May 2024"
+  "gitRevision": "828969fdc175e5e60fcd11d460e396f828a17698",
+  "publishISODate": "2024-05-10T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 10 May 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
 <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://www.w3.org/StyleSheets/TR/2021/dark.css"></head>
@@ -242,7 +242,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-05-07">07 May 2024</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-05-10">10 May 2024</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -314,14 +314,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       https://www.w3.org/TR/.</em></p>
       
       <p>
-        Since this specification become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation on 01 September 2022,
-        the following substantive additions and/or corrections have been proposed:
-      </p>
-      <rs-changelog from="REC-2022" filter="updateableRecFilter"><ul>
+        Since this specification become a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation on 01 September
+        2022, the following substantive additions and/or corrections have been
+        proposed:
+      </p><rs-changelog from="REC-2022" filter="updateableRecFilter"><ul>
       <li><a href="https://github.com/w3c/geolocation-api/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li>
       </ul></rs-changelog>
       <p>
-        A more detailed list of changes can be found in section <a href="#changelog" data-matched-text="[[[#changelog]]]" class="sec-ref"><bdi class="secno">D. </bdi>
+        A more detailed list of changes can be found in section
+        <a href="#changelog" data-matched-text="[[[#changelog]]]" class="sec-ref"><bdi class="secno">D. </bdi>
         Change log</a>.
       </p>
     <p>
@@ -2827,9 +2828,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         Wilde, Matt Womer, and Mohamed Zergaoui.
       </p>
     </section>
-    <section class="appendix" id="changelog"><div class="header-wrapper"><h2 id="d-change-log"><bdi class="secno">D. </bdi>
+    <section class="informative" id="changelog"><div class="header-wrapper"><h2 id="d-change-log"><bdi class="secno">D. </bdi>
         Change log
-      </h2><a class="self-link" href="#changelog" aria-label="Permalink for Appendix D."></a></div>
+      </h2><a class="self-link" href="#changelog" aria-label="Permalink for Section D."></a></div><p><em>This section is non-normative.</em></p>
       
       <p>
         Since First Public Working Draft in 2021, the <cite>Geolocation
@@ -2843,8 +2844,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         received the following substantive changes:
       </p>
       <ul>
-        <li><a data-link-type="dfn|abstract-op" href="#dfn-request-a-position" class="internalDFN" id="ref-for-dfn-request-a-position-5">Request a position</a> only proceeds when a document is visible,
-        or the document becomes visible.
+        <li><a data-link-type="dfn|abstract-op" href="#dfn-request-a-position" class="internalDFN" id="ref-for-dfn-request-a-position-5">Request a position</a> only proceeds when a document is visible, or
+        the document becomes visible.
         </li>
         <li>Clarified how caching works as part of <a data-link-type="dfn|abstract-op" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-9">acquiring a position</a>:
         only last position is cached, and can be evicted at any time.
@@ -2887,13 +2888,13 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-permissions">[Permissions]</dt><dd>
       <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 19 March 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
-    </dd><dt id="bib-permissions-policy">[Permissions-Policy]</dt><dd>
+    </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
       <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 18 December 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
     </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>
-    </dd><dt id="bib-webidl">[WebIDL]</dt><dd>
+    </dd><dt id="bib-webidl">[webidl]</dt><dd>
       <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Edgar Chen; Timothy Gu.  WHATWG. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
     </dd><dt id="bib-wgs84">[WGS84]</dt><dd>
       <a href="https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84"><cite>World Geodetic System 1984 (WGS 84)</cite></a>.  Office of Geomatics, National Geospatial Intelligence Agency. 2008. URL: <a href="https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84">https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84</a>
