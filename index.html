@@ -46,19 +46,6 @@
       errata: "https://w3c.github.io/geolocation-api/errata.html",
     };
     </script>
-    <style>
-      * {
-        counter-reset: addition correction;
-      }
-      .addition::before {
-        content: "Candidate Addition:";
-        counter-increment: addition;
-      }
-      .correction::before {
-        content: "Candidate Correction:";
-        counter-increment: correction;
-      }
-    </style>
   </head>
   <body data-cite=
   "secure-contexts permissions-policy permissions hr-time html">
@@ -599,8 +586,26 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the [=this=]'s [=relevant global object=]'s [=associated
-          `Document`=] is not [=Document/fully active=]:
+          <li>
+            <div class="correction">
+              <span class="marker">Candidate Correction:</span> Explanation of
+              the change: Updated reference to the global object to use
+              [=this=] for consistency in error handling within geolocation
+              retrieval.
+              <blockquote>
+                <ol>
+                  <li>
+                    <del>If the [=current settings object=]'s [=relevant global
+                    object=]'s [=associated `Document`=] is not
+                    [=Document/fully active=]:</del> <ins>If the [=this=]'s
+                    [=relevant global object=]'s [=associated `Document`=] is
+                    not [=Document/fully active=]:</ins>
+                  </li>
+                </ol>
+              </blockquote>
+            </div>
+            <!--If the [=this=]'s [=relevant global object=]'s [=associated
+          `Document`=] is not [=Document/fully active=]:-->
             <ol>
               <li>[=Call back with error=] |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
@@ -625,8 +630,25 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>If the [=this=]'s [=relevant global object=]'s [=associated
-          `Document`=] is not [=Document/fully active=]:
+          <li>
+            <div class="correction">
+              <span class="marker">Candidate Correction:</span> Explanation of
+              the change: Simplified reference to the global object in the
+              method steps for checking document's activity status.
+              <blockquote>
+                <ol>
+                  <li>
+                    <del>If the [=current settings object=]'s [=relevant global
+                    object=]'s [=associated `Document`=] is not
+                    [=Document/fully active=]:</del> <ins>If the [=this=]'s
+                    [=relevant global object=]'s [=associated `Document`=] is
+                    not [=Document/fully active=]:</ins>
+                  </li>
+                </ol>
+              </blockquote>
+            </div>
+            <!-- If the [=this=]'s [=relevant global object=]'s [=associated
+          `Document`=] is not [=Document/fully active=]:-->
             <ol>
               <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
@@ -1011,7 +1033,7 @@
         interface GeolocationPosition {
           readonly attribute GeolocationCoordinates coords;
           readonly attribute EpochTimeStamp timestamp;
-          [Default] object toJSON(); 
+          [Default] object toJSON();
         };
       </pre>
       <section>
@@ -1031,14 +1053,21 @@
           geographic position of the device was acquired.
         </p>
       </section>
-      <section class="addition">
+      <section>
         <h3>
           `toJSON()` method
         </h3>
-        <p>
-          The <dfn>toJSON()</dfn> method returns a JSON representation of the
-          {{GeolocationPosition}} object.
-        </p>
+        <div class="addition">
+          <span class="marker">Candidate Addition:</span> Explanation of the
+          addition: Introduce a `toJSON()` method to allow the
+          {{GeolocationPosition}} object to be easily converted into a JSON
+          representation, facilitating interoperability and ease of use in web
+          applications.
+          <p>
+            The <dfn>toJSON()</dfn> method returns a JSON representation of the
+            {{GeolocationPosition}} object.
+          </p>
+        </div>
       </section>
       <section>
         <h2>
@@ -1109,15 +1138,20 @@
         <h4>
           `latitude`, `longitude`, and `accuracy` attributes
         </h4>
-        <p class="correction">
-          The <dfn>latitude</dfn> and <dfn>longitude</dfn> attributes denote
-          the position, specified as a real number of degrees, in the [[WGS84]]
-          coordinate system.
-        </p>
-        <p>
-          The <dfn>accuracy</dfn> attribute denotes the accuracy level of the
-          latitude and longitude coordinates in meters (e.g., `65` meters).
-        </p>
+        <div class="correction">
+          <span class="marker">Candidate Correction:</span> To improve clarity
+          and precision, the description of latitude and longitude attributes
+          has been updated to specify that these are real numbers in degrees
+          according to the [[WGS84]] geodetic system, instead of just stating
+          "decimal degrees."
+          <p>
+            <del>The <strong>latitude</strong> and <strong>longitude</strong>
+            attributes are geographic coordinates specified in decimal
+            degrees.</del> <ins>The <dfn>latitude</dfn> and
+            <dfn>longitude</dfn> attributes denote the position, specified as a
+            real number of degrees, in the [[WGS84]] coordinate system.</ins>
+          </p>
+        </div>
       </section>
       <section>
         <h4>
@@ -1152,14 +1186,21 @@
           meters per second.
         </p>
       </section>
-      <section class="addition">
+      <section>
         <h4>
           `toJSON()` method
         </h4>
-        <p>
-          The <dfn>toJSON()</dfn> method returns a JSON representation of the
-          {{GeolocationCoordinates}} object.
-        </p>
+        <div class="addition">
+          <span class="marker">Candidate Addition:</span> Explanation of the
+          addition: Extend the `toJSON()` method functionality to the
+          {{GeolocationCoordinates}} object, allowing it to be serialized into
+          a JSON format which enhances data handling and integration
+          capabilities in web applications.
+          <p>
+            The <dfn>toJSON()</dfn> method returns a JSON representation of the
+            {{GeolocationCoordinates}} object.
+          </p>
+        </div>
       </section>
       <section>
         <h2>
@@ -1174,45 +1215,137 @@
           <li>Let |coords:GeolocationCoordinates| be a newly created
           {{GeolocationCoordinates}} instance:
             <ol>
-              <li class="correction">Initialize |coord|'s
+              <li>
+                <div class="correction">
+                  <span class="marker">Candidate Correction:</span> Enhanced
+                  the constructor steps for {{GeolocationCoordinates}} to
+                  clarify the units and reference systems for latitude,
+                  longitude, and altitude, ensuring consistency with the
+                  updated attribute definitions.
+                  <p>
+                    Initialize |coord|'s {{GeolocationCoordinates/latitude}}
+                    <del>attribute to a geographic coordinate in decimal
+                    degrees.</del> <ins>attribute to a latitude, specified as a
+                    real number of degrees, in the [[WGS84]] coordinate
+                    system.</ins>
+                  </p>
+                  <p>
+                    Initialize |coord|'s {{GeolocationCoordinates/longitude}}
+                    <del>attribute to a geographic coordinate in decimal
+                    degrees.</del> <ins>attribute to a longitude, specified as
+                    a real number of degrees, in the [[WGS84]] coordinate
+                    system.</ins>
+                  </p>
+                  <p>
+                    Initialize |coord|'s {{GeolocationCoordinates/altitude}}
+                    <del>attribute in meters above the [[WGS84]] ellipsoid, or
+                    `null` if the implementation cannot provide altitude
+                    information.</del> <ins>attribute to a height, in meters,
+                    above the [[WGS84]] ellipsoid, or `null` if the
+                    implementation cannot provide altitude information.</ins>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div class="correction">
+                  <span class="marker">Candidate Correction:</span> Updates to
+                  the descriptions of the speed and heading attributes to
+                  specify measurement units and conditions for null values,
+                  aligning with the overall enhancements to attribute accuracy
+                  and clarity.
+                  <p>
+                    Initialize |coord|'s {{GeolocationCoordinates/speed}}
+                    <del>attribute to a non-negative real number, or as `null`
+                    if the implementation cannot provide speed
+                    information.</del> <ins>attribute to a speed, as a
+                    non-negative real number of meters per second, or as `null`
+                    if the implementation cannot provide speed
+                    information.</ins>
+                  </p>
+                  <p>
+                    Initialize |coord|'s {{GeolocationCoordinates/heading}}
+                    <del>attribute in degrees, or `null` if the implementation
+                    cannot provide heading information. If the hosting device
+                    is stationary (i.e., the value of the
+                    {{GeolocationCoordinates/speed}} attribute is 0), then
+                    initialize the {{GeolocationCoordinates/heading}} to
+                    `NaN`.</del> <ins>attribute to a heading, in degrees, or
+                    `null` if the implementation cannot provide heading
+                    information. If the hosting device is stationary (i.e., the
+                    value of the {{GeolocationCoordinates/speed}} attribute is
+                    0), then initialize the {{GeolocationCoordinates/heading}}
+                    to `NaN`.</ins>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <div class="correction">
+                  <span class="marker">Candidate Correction:</span> Updates to
+                  the descriptions of the speed and heading attributes to
+                  specify measurement units and conditions for null values,
+                  aligning with the overall enhancements to attribute accuracy
+                  and clarity.
+                  <p>
+                    Initialize |coord|'s {{GeolocationCoordinates/speed}}
+                    <del>attribute to a non-negative real number, or as `null`
+                    if the implementation cannot provide speed
+                    information.</del> <ins>attribute to a speed, as a
+                    non-negative real number of meters per second, or as `null`
+                    if the implementation cannot provide speed
+                    information.</ins>
+                  </p>
+                  <p>
+                    Initialize |coord|'s {{GeolocationCoordinates/heading}}
+                    <del>attribute in degrees, or `null` if the implementation
+                    cannot provide heading information. If the hosting device
+                    is stationary (i.e., the value of the
+                    {{GeolocationCoordinates/speed}} attribute is 0), then
+                    initialize the {{GeolocationCoordinates/heading}} to
+                    `NaN`.</del> <ins>attribute to a heading, in degrees, or
+                    `null` if the implementation cannot provide heading
+                    information. If the hosting device is stationary (i.e., the
+                    value of the {{GeolocationCoordinates/speed}} attribute is
+                    0), then initialize the {{GeolocationCoordinates/heading}}
+                    to `NaN`.</ins>
+                  </p>
+                </div>
+              </li><!--li>Initialize |coord|'s
               {{GeolocationCoordinates/latitude}} attribute to a latitude,
               specified as a real number of degrees, in the [[WGS84]]
               coordinate system.
-              </li>
-              <li class="correction">Initialize |coord|'s
+              </li-->
+              <!--li>Initialize |coord|'s
               {{GeolocationCoordinates/longitude}} attribute to a longitude,
               specified as a real number of degrees, in the [[WGS84]]
               coordinate system.
-              </li>
+              </li-->
               <li>Initialize |coord|'s {{GeolocationCoordinates/accuracy}}
               attribute to a non-negative real number. The value SHOULD
               correspond to a 95% confidence level with respect to the
               longitude and latitude values.
-              </li>
-              <li class="correction">Initialize |coord|'s
+              </li><!--li>Initialize |coord|'s
               {{GeolocationCoordinates/altitude}} attribute to a height, in
               meters, above the [[WGS84]] ellipsoid, or `null` if the
               implementation cannot provide altitude information.
-              </li>
+              </li-->
               <li>Initialize |coord|'s
               {{GeolocationCoordinates/altitudeAccuracy}} attribute as
               non-negative real number, or to `null` if the implementation
               cannot provide altitude information. If the altitude accuracy
               information is provided, it SHOULD correspond to a 95% confidence
               level.
-              </li>
-              <li class="correction">Initialize |coord|'s
+              </li><!--li>Initialize |coord|'s
               {{GeolocationCoordinates/speed}} attribute to a speed, as a
               non-negative real number of meters per second, or as `null` if
               the implementation cannot provide speed information.
-              </li>
-              <li class="correction">Initialize |coord|'s
+              </li-->
+              <!--li>Initialize |coord|'s
               {{GeolocationCoordinates/heading}} attribute to a heading, in
               degrees, or `null` if the implementation cannot provide heading
               information. If the hosting device is stationary (i.e., the value
               of the {{GeolocationCoordinates/speed}} attribute is 0), then
               initialize the {{GeolocationCoordinates/heading}} to `NaN`.
-              </li>
+              </li-->
             </ol>
           </li>
           <li>Return a newly created {{GeolocationPosition}} instance with its
