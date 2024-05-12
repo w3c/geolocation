@@ -587,7 +587,7 @@
         </p>
         <ol class="algorithm">
           <li>
-            <div class="correction">
+            <div class="correction" id="c1">
               <span class="marker">Candidate Correction:</span> Explanation of
               the change: Updated reference to the global object to use
               [=this=] for consistency in error handling within geolocation
@@ -631,7 +631,7 @@
         </p>
         <ol class="algorithm">
           <li>
-            <div class="correction">
+            <div class="correction" id="c2">
               <span class="marker">Candidate Correction:</span> Explanation of
               the change: Simplified reference to the global object in the
               method steps for checking document's activity status.
@@ -1057,7 +1057,7 @@
         <h3>
           `toJSON()` method
         </h3>
-        <div class="addition">
+        <div class="addition" id="a1">
           <span class="marker">Candidate Addition:</span> Explanation of the
           addition: Introduce a `toJSON()` method to allow the
           {{GeolocationPosition}} object to be easily converted into a JSON
@@ -1138,7 +1138,7 @@
         <h4>
           `latitude`, `longitude`, and `accuracy` attributes
         </h4>
-        <div class="correction">
+        <div class="correction" id="c3">
           <span class="marker">Candidate Correction:</span> To improve clarity
           and precision, the description of latitude and longitude attributes
           has been updated to specify that these are real numbers in degrees
@@ -1190,7 +1190,7 @@
         <h4>
           `toJSON()` method
         </h4>
-        <div class="addition">
+        <div class="addition" id="a2">
           <span class="marker">Candidate Addition:</span> Explanation of the
           addition: Extend the `toJSON()` method functionality to the
           {{GeolocationCoordinates}} object, allowing it to be serialized into
@@ -1216,7 +1216,7 @@
           {{GeolocationCoordinates}} instance:
             <ol>
               <li>
-                <div class="correction">
+                <div class="correction" id="c4">
                   <span class="marker">Candidate Correction:</span> Enhanced
                   the constructor steps for {{GeolocationCoordinates}} to
                   clarify the units and reference systems for latitude,
@@ -1247,7 +1247,7 @@
                 </div>
               </li>
               <li>
-                <div class="correction">
+                <div class="correction" id="c5">
                   <span class="marker">Candidate Correction:</span> Updates to
                   the descriptions of the speed and heading attributes to
                   specify measurement units and conditions for null values,
@@ -1279,7 +1279,7 @@
                 </div>
               </li>
               <li>
-                <div class="correction">
+                <div class="correction" id="c6">
                   <span class="marker">Candidate Correction:</span> Updates to
                   the descriptions of the speed and heading attributes to
                   specify measurement units and conditions for null values,
