@@ -1278,38 +1278,7 @@
                   </p>
                 </div>
               </li>
-              <li>
-                <div class="correction" id="c6">
-                  <span class="marker">Candidate Correction:</span> Updates to
-                  the descriptions of the speed and heading attributes to
-                  specify measurement units and conditions for null values,
-                  aligning with the overall enhancements to attribute accuracy
-                  and clarity.
-                  <p>
-                    Initialize |coord|'s {{GeolocationCoordinates/speed}}
-                    <del>attribute to a non-negative real number, or as `null`
-                    if the implementation cannot provide speed
-                    information.</del> <ins>attribute to a speed, as a
-                    non-negative real number of meters per second, or as `null`
-                    if the implementation cannot provide speed
-                    information.</ins>
-                  </p>
-                  <p>
-                    Initialize |coord|'s {{GeolocationCoordinates/heading}}
-                    <del>attribute in degrees, or `null` if the implementation
-                    cannot provide heading information. If the hosting device
-                    is stationary (i.e., the value of the
-                    {{GeolocationCoordinates/speed}} attribute is 0), then
-                    initialize the {{GeolocationCoordinates/heading}} to
-                    `NaN`.</del> <ins>attribute to a heading, in degrees, or
-                    `null` if the implementation cannot provide heading
-                    information. If the hosting device is stationary (i.e., the
-                    value of the {{GeolocationCoordinates/speed}} attribute is
-                    0), then initialize the {{GeolocationCoordinates/heading}}
-                    to `NaN`.</ins>
-                  </p>
-                </div>
-              </li><!--li>Initialize |coord|'s
+              <!--li>Initialize |coord|'s
               {{GeolocationCoordinates/latitude}} attribute to a latitude,
               specified as a real number of degrees, in the [[WGS84]]
               coordinate system.
