@@ -159,7 +159,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="27fce83f381f614fac4586668d36ae601908c4a6">
+<meta name="revision" content="ea16b037fc6aba1f9aa8720d5decf1b9d88ad829">
 <meta name="description" content="The Geolocation API provides access to geographical location
         information associated with the hosting device.">
 <style>
@@ -232,9 +232,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "implementationReportURI": "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation-api/errata.html",
-  "gitRevision": "27fce83f381f614fac4586668d36ae601908c4a6",
-  "publishISODate": "2024-05-12T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 12 May 2024"
+  "gitRevision": "ea16b037fc6aba1f9aa8720d5decf1b9d88ad829",
+  "publishISODate": "2024-05-13T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 13 May 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
 <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://www.w3.org/StyleSheets/TR/2021/dark.css"></head>
@@ -242,7 +242,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-05-12">12 May 2024</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-05-13">13 May 2024</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -2362,38 +2362,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
                   </p>
                 </div>
               </li>
-              <li>
-                <div class="correction" id="c6">
-                  <span class="marker">Candidate Correction:</span> Updates to
-                  the descriptions of the speed and heading attributes to
-                  specify measurement units and conditions for null values,
-                  aligning with the overall enhancements to attribute accuracy
-                  and clarity.
-                  <p>
-                    Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-5"><code>speed</code></a>
-                    <del>attribute to a non-negative real number, or as <code>null</code>
-                    if the implementation cannot provide speed
-                    information.</del> <ins>attribute to a speed, as a
-                    non-negative real number of meters per second, or as <code>null</code>
-                    if the implementation cannot provide speed
-                    information.</ins>
-                  </p>
-                  <p>
-                    Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-5"><code>heading</code></a>
-                    <del>attribute in degrees, or <code>null</code> if the implementation
-                    cannot provide heading information. If the hosting device
-                    is stationary (i.e., the value of the
-                    <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-6"><code>speed</code></a> attribute is 0), then
-                    initialize the <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-6"><code>heading</code></a> to
-                    <code>NaN</code>.</del> <ins>attribute to a heading, in degrees, or
-                    <code>null</code> if the implementation cannot provide heading
-                    information. If the hosting device is stationary (i.e., the
-                    value of the <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-7"><code>speed</code></a> attribute is
-                    0), then initialize the <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-7"><code>heading</code></a>
-                    to <code>NaN</code>.</ins>
-                  </p>
-                </div>
-              </li>
+              
               
               <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-accuracy" class="internalDFN" id="ref-for-dom-geolocationcoordinates-accuracy-1"><code>accuracy</code></a>
               attribute to a non-negative real number. The value <em class="rfc2119">SHOULD</em>
@@ -2729,8 +2698,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-10">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-longitude" id="ref-for-dom-geolocationcoordinates-longitude-3"><code>longitude</code></a>;</span><span data-idl="" class="idlAttribute" data-title="altitude" data-dfn-for="GeolocationCoordinates">
   readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-11">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitude" id="ref-for-dom-geolocationcoordinates-altitude-3"><code>altitude</code></a>;</span><span data-idl="" class="idlAttribute" data-title="altitudeAccuracy" data-dfn-for="GeolocationCoordinates">
   readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-12">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitudeaccuracy" id="ref-for-dom-geolocationcoordinates-altitudeaccuracy-3"><code>altitudeAccuracy</code></a>;</span><span data-idl="" class="idlAttribute" data-title="heading" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-13">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-heading" id="ref-for-dom-geolocationcoordinates-heading-8"><code>heading</code></a>;</span><span data-idl="" class="idlAttribute" data-title="speed" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-14">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-speed" id="ref-for-dom-geolocationcoordinates-speed-8"><code>speed</code></a>;</span><span data-idl="" class="idlMethod" data-title="toJSON" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-13">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-heading" id="ref-for-dom-geolocationcoordinates-heading-5"><code>heading</code></a>;</span><span data-idl="" class="idlAttribute" data-title="speed" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-14">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-speed" id="ref-for-dom-geolocationcoordinates-speed-5"><code>speed</code></a>;</span><span data-idl="" class="idlMethod" data-title="toJSON" data-dfn-for="GeolocationCoordinates">
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Default" id="ref-for-index-term-default-extended-attribute-4">Default</a></span>]<span class="idlType"> <a data-link-type="interface" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-object" id="ref-for-index-term-object-type-4">object</a></span> <a class="internalDFN idlName" data-link-type="method" href="#dom-geolocationcoordinates-tojson" id="ref-for-dom-geolocationcoordinates-tojson-2"><code>toJSON</code></a>();</span>
 };</span>
 
@@ -3607,9 +3576,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <li>
       <a href="#ref-for-dom-geolocationcoordinates-heading-1" title="§ 9. GeolocationCoordinates interface">§ 9. GeolocationCoordinates interface</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-heading-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-heading-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-geolocationcoordinates-heading-4" title="Reference 3">(3)</a> <a href="#ref-for-dom-geolocationcoordinates-heading-5" title="Reference 4">(4)</a> <a href="#ref-for-dom-geolocationcoordinates-heading-6" title="Reference 5">(5)</a> <a href="#ref-for-dom-geolocationcoordinates-heading-7" title="Reference 6">(6)</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-heading-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-heading-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-geolocationcoordinates-heading-4" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-heading-8" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-heading-5" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationcoordinates-speed" aria-label="Links in this document to definition: speed">
@@ -3623,9 +3592,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <li>
       <a href="#ref-for-dom-geolocationcoordinates-speed-1" title="§ 9. GeolocationCoordinates interface">§ 9. GeolocationCoordinates interface</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-speed-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-speed-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-geolocationcoordinates-speed-4" title="Reference 3">(3)</a> <a href="#ref-for-dom-geolocationcoordinates-speed-5" title="Reference 4">(4)</a> <a href="#ref-for-dom-geolocationcoordinates-speed-6" title="Reference 5">(5)</a> <a href="#ref-for-dom-geolocationcoordinates-speed-7" title="Reference 6">(6)</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-speed-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-speed-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-geolocationcoordinates-speed-4" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-speed-8" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-speed-5" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationcoordinates-tojson" aria-label="Links in this document to definition: toJSON()">
