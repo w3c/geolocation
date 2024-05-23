@@ -159,7 +159,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="b6bfdb23249272316866e95234db29b4bfc6318c">
+<meta name="revision" content="a74c23e114c8e8c4def4dcacd013f9a3d1ead568">
 <meta name="description" content="The Geolocation API provides access to geographical location
         information associated with the hosting device.">
 <style>
@@ -232,9 +232,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "implementationReportURI": "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation-api/errata.html",
-  "gitRevision": "b6bfdb23249272316866e95234db29b4bfc6318c",
-  "publishISODate": "2024-05-13T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 13 May 2024"
+  "gitRevision": "a74c23e114c8e8c4def4dcacd013f9a3d1ead568",
+  "publishISODate": "2024-05-23T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 23 May 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
 <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://www.w3.org/StyleSheets/TR/2021/dark.css"></head>
@@ -242,7 +242,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-05-13">13 May 2024</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-05-23">23 May 2024</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -1128,23 +1128,15 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
         </p>
         <ol class="algorithm">
           <li>
-            <div class="correction" id="c1">
-              <span class="marker">Candidate Correction:</span> Explanation of
-              the change: Updated reference to the global object to use
-              <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-1">this</a> for consistency in error handling within geolocation
-              retrieval.
-              <blockquote>
-                <ol>
-                  <li>
-                    <del>If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-1">current settings object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-1">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-1">associated <code>Document</code></a> is not
-                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-1">fully active</a>:</del> <ins>If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-2">this</a>'s
-                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-2">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-2">associated <code>Document</code></a> is
-                    not <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-2">fully active</a>:</ins>
-                  </li>
-                </ol>
-              </blockquote>
-            </div>
-            
+            <aside class="correction" id="c1">
+              <span class="marker">Candidate Correction:</span> Updated
+              reference to the global object to use <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-1">this</a> for consistency in
+              error handling within geolocation retrieval.
+            </aside><del cite="#c1">If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-1">current settings object</a>'s
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-1">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-1">associated <code>Document</code></a> is not
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-1">fully active</a>:</del> <ins cite="#c1">If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-2">this</a>'s
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-2">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-2">associated <code>Document</code></a> is not
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-2">fully active</a>:</ins>
             <ol>
               <li><a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-1">Call back with error</a> <var data-type="PositionErrorCallback?">errorCallback</var> and
               <a data-link-type="idl" href="#dom-geolocationpositionerror-position_unavailable" class="internalDFN" id="ref-for-dom-geolocationpositionerror-position_unavailable-1"><code>POSITION_UNAVAILABLE</code></a>.
@@ -1212,22 +1204,15 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
         </p>
         <ol class="algorithm">
           <li>
-            <div class="correction" id="c2">
-              <span class="marker">Candidate Correction:</span> Explanation of
-              the change: Simplified reference to the global object in the
-              method steps for checking document's activity status.
-              <blockquote>
-                <ol>
-                  <li>
-                    <del>If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-2">current settings object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-3">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-3">associated <code>Document</code></a> is not
-                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-3">fully active</a>:</del> <ins>If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-4">this</a>'s
-                    <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-4">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-4">associated <code>Document</code></a> is
-                    not <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-4">fully active</a>:</ins>
-                  </li>
-                </ol>
-              </blockquote>
-            </div>
-            
+            <aside class="correction" id="c2">
+              <span class="marker">Candidate Correction:</span> Simplified
+              reference to the global object in the method steps for checking
+              document's activity status.
+            </aside><del cite="#c2">If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-2">current settings object</a>'s
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-3">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-3">associated <code>Document</code></a> is not
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-3">fully active</a>:</del> <ins cite="#c2">If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-4">this</a>'s
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-4">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-4">associated <code>Document</code></a> is not
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-4">fully active</a>:</ins>
             <ol>
               <li><a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-2">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
               <a data-link-type="idl" href="#dom-geolocationpositionerror-position_unavailable" class="internalDFN" id="ref-for-dom-geolocationpositionerror-position_unavailable-2"><code>POSITION_UNAVAILABLE</code></a>.
@@ -1799,17 +1784,16 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
           <code>toJSON()</code> method
         </h3><a class="self-link" href="#tojson-method" aria-label="Permalink for Section 8.3"></a></div>
         
-        <div class="addition" id="a1">
-          <span class="marker">Candidate Addition:</span> Explanation of the
-          addition: Introduce a <code>toJSON()</code> method to allow the
-          <a data-link-type="idl" data-lt="GeolocationPosition" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-4"><code>GeolocationPosition</code></a> object to be easily converted into a JSON
-          representation, facilitating interoperability and ease of use in web
-          applications.
-          <p>
-            The <dfn data-export="" data-dfn-type="method" id="dom-geolocationposition-tojson" data-idl="operation" data-title="toJSON()" data-dfn-for="GeolocationPosition" data-type="object" data-lt="toJSON()" data-local-lt="GeolocationPosition.toJSON|GeolocationPosition.toJSON()|toJSON" tabindex="0" aria-haspopup="dialog"><code>toJSON()</code></dfn> method returns a JSON representation of the
-            <a data-link-type="idl" data-lt="GeolocationPosition" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-5"><code>GeolocationPosition</code></a> object.
-          </p>
-        </div>
+        <aside class="addition" id="a1">
+          <span class="marker">Candidate Addition:</span> Introduce a
+          <code>toJSON()</code> method to allow the <a data-link-type="idl" data-lt="GeolocationPosition" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-4"><code>GeolocationPosition</code></a> object to be
+          easily converted into a JSON representation, facilitating
+          interoperability and ease of use in web applications.
+        </aside>
+        <p>
+          <ins cite="#a1">The <dfn data-export="" data-dfn-type="method" id="dom-geolocationposition-tojson" data-idl="operation" data-title="toJSON()" data-dfn-for="GeolocationPosition" data-type="object" data-lt="toJSON()" data-local-lt="GeolocationPosition.toJSON|GeolocationPosition.toJSON()|toJSON" tabindex="0" aria-haspopup="dialog"><code>toJSON()</code></dfn> method returns a JSON
+          representation of the <a data-link-type="idl" data-lt="GeolocationPosition" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-5"><code>GeolocationPosition</code></a> object.</ins>
+        </p>
       </section>
       <section id="internal-slots-0"><div class="header-wrapper"><h3 id="x8-4-internal-slots"><bdi class="secno">8.4 </bdi>
           Internal slots
@@ -2050,20 +2034,21 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           <code>latitude</code>, <code>longitude</code>, and <code>accuracy</code> attributes
         </h3><a class="self-link" href="#latitude-longitude-and-accuracy-attributes" aria-label="Permalink for Section 9.1"></a></div>
         
-        <div class="correction" id="c3">
+        <aside class="correction" id="c3">
           <span class="marker">Candidate Correction:</span> To improve clarity
           and precision, the description of latitude and longitude attributes
           has been updated to specify that these are real numbers in degrees
           according to the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] geodetic system, instead of just stating
           "decimal degrees."
-          <p>
-            <del>The <strong>latitude</strong> and <strong>longitude</strong>
-            attributes are geographic coordinates specified in decimal
-            degrees.</del> <ins>The <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationcoordinates-latitude" data-idl="attribute" data-title="latitude" data-dfn-for="GeolocationCoordinates" data-type="double" data-lt="latitude" data-local-lt="GeolocationCoordinates.latitude" tabindex="0" aria-haspopup="dialog"><code>latitude</code></dfn> and
-            <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationcoordinates-longitude" data-idl="attribute" data-title="longitude" data-dfn-for="GeolocationCoordinates" data-type="double" data-lt="longitude" data-local-lt="GeolocationCoordinates.longitude" tabindex="0" aria-haspopup="dialog"><code>longitude</code></dfn> attributes denote the position, specified as a
-            real number of degrees, in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] coordinate system.</ins>
-          </p>
-        </div>
+        </aside>
+        <p>
+          <del cite="#c3">The <strong>latitude</strong> and
+          <strong>longitude</strong> attributes are geographic coordinates
+          specified in decimal degrees.</del> <ins cite="#c3">The
+          <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationcoordinates-latitude" data-idl="attribute" data-title="latitude" data-dfn-for="GeolocationCoordinates" data-type="double" data-lt="latitude" data-local-lt="GeolocationCoordinates.latitude" tabindex="0" aria-haspopup="dialog"><code>latitude</code></dfn> and <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationcoordinates-longitude" data-idl="attribute" data-title="longitude" data-dfn-for="GeolocationCoordinates" data-type="double" data-lt="longitude" data-local-lt="GeolocationCoordinates.longitude" tabindex="0" aria-haspopup="dialog"><code>longitude</code></dfn> attributes denote the
+          position, specified as a real number of degrees, in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>]
+          coordinate system.</ins>
+        </p>
       </section>
       <aside class="mdn"><details>
     <summary aria-label="Expand MDN details for altitude"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
@@ -2274,17 +2259,16 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           <code>toJSON()</code> method
         </h3><a class="self-link" href="#tojson-method-0" aria-label="Permalink for Section 9.5"></a></div>
         
-        <div class="addition" id="a2">
-          <span class="marker">Candidate Addition:</span> Explanation of the
-          addition: Extend the <code>toJSON()</code> method functionality to the
-          <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-3"><code>GeolocationCoordinates</code></a> object, allowing it to be serialized into
-          a JSON format which enhances data handling and integration
-          capabilities in web applications.
-          <p>
-            The <dfn data-export="" data-dfn-type="method" id="dom-geolocationcoordinates-tojson" data-idl="operation" data-title="toJSON()" data-dfn-for="GeolocationCoordinates" data-type="object" data-lt="toJSON()" data-local-lt="GeolocationCoordinates.toJSON|GeolocationCoordinates.toJSON()|toJSON" tabindex="0" aria-haspopup="dialog"><code>toJSON()</code></dfn> method returns a JSON representation of the
-            <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-4"><code>GeolocationCoordinates</code></a> object.
-          </p>
-        </div>
+        <aside class="addition" id="a2">
+          <span class="marker">Candidate Addition:</span> Extend the <code>toJSON()</code>
+          method functionality to the <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-3"><code>GeolocationCoordinates</code></a> object,
+          allowing it to be serialized into a JSON format which enhances data
+          handling and integration capabilities in web applications.
+        </aside>
+        <p>
+          <ins cite="#a2">The <dfn data-export="" data-dfn-type="method" id="dom-geolocationcoordinates-tojson" data-idl="operation" data-title="toJSON()" data-dfn-for="GeolocationCoordinates" data-type="object" data-lt="toJSON()" data-local-lt="GeolocationCoordinates.toJSON|GeolocationCoordinates.toJSON()|toJSON" tabindex="0" aria-haspopup="dialog"><code>toJSON()</code></dfn> method returns a JSON
+          representation of the <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-4"><code>GeolocationCoordinates</code></a> object.</ins>
+        </p>
       </section>
       <section id="constructing-a-geolocationposition"><div class="header-wrapper"><h3 id="x9-6-constructing-a-geolocationposition"><bdi class="secno">9.6 </bdi>
           Constructing a <code>GeolocationPosition</code>
@@ -2295,74 +2279,61 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           <a data-link-type="idl" data-lt="EpochTimeStamp" data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-epochtimestamp" id="ref-for-index-term-epochtimestamp-3"><code>EpochTimeStamp</code></a> <var data-type="EpochTimeStamp">timestamp</var> and boolean
           <var>isHighAccuracy</var> by performing the following steps:
         </p>
+        <aside class="correction" id="c4">
+          <span class="marker">Candidate Correction:</span> Enhanced the
+          constructor steps for <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-5"><code>GeolocationCoordinates</code></a> to clarify the units
+          and reference systems for latitude, longitude, and altitude, ensuring
+          consistency with the updated attribute definitions.
+        </aside>
+        <aside class="correction" id="c5">
+          <span class="marker">Candidate Correction:</span> Updates to the
+          descriptions of the speed and heading attributes to specify
+          measurement units and conditions for null values, aligning with the
+          overall enhancements to attribute accuracy and clarity.
+        </aside>
         <ol class="algorithm">
           <li>Let <var data-type="GeolocationCoordinates">coords</var> be a newly created
-          <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-5"><code>GeolocationCoordinates</code></a> instance:
+          <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-6"><code>GeolocationCoordinates</code></a> instance:
             <ol>
-              <li>
-                <div class="correction" id="c4">
-                  <span class="marker">Candidate Correction:</span> Enhanced
-                  the constructor steps for <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-6"><code>GeolocationCoordinates</code></a> to
-                  clarify the units and reference systems for latitude,
-                  longitude, and altitude, ensuring consistency with the
-                  updated attribute definitions.
-                  <p>
-                    Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-latitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-latitude-2"><code>latitude</code></a>
-                    <del>attribute to a geographic coordinate in decimal
-                    degrees.</del> <ins>attribute to a latitude, specified as a
-                    real number of degrees, in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] coordinate
-                    system.</ins>
-                  </p>
-                  <p>
-                    Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-longitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-longitude-2"><code>longitude</code></a>
-                    <del>attribute to a geographic coordinate in decimal
-                    degrees.</del> <ins>attribute to a longitude, specified as
-                    a real number of degrees, in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] coordinate
-                    system.</ins>
-                  </p>
-                  <p>
-                    Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-altitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-altitude-2"><code>altitude</code></a>
-                    <del>attribute in meters above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] ellipsoid, or
-                    <code>null</code> if the implementation cannot provide altitude
-                    information.</del> <ins>attribute to a height, in meters,
-                    above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] ellipsoid, or <code>null</code> if the
-                    implementation cannot provide altitude information.</ins>
-                  </p>
-                </div>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-latitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-latitude-2"><code>latitude</code></a>
+              <del cite="#c4">attribute to a geographic coordinate in decimal
+              degrees.</del> <ins cite="#c4">attribute to a latitude, specified
+              as a real number of degrees, in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] coordinate
+              system.</ins>
               </li>
-              <li>
-                <div class="correction" id="c5">
-                  <span class="marker">Candidate Correction:</span> Updates to
-                  the descriptions of the speed and heading attributes to
-                  specify measurement units and conditions for null values,
-                  aligning with the overall enhancements to attribute accuracy
-                  and clarity.
-                  <p>
-                    Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-2"><code>speed</code></a>
-                    <del>attribute to a non-negative real number, or as <code>null</code>
-                    if the implementation cannot provide speed
-                    information.</del> <ins>attribute to a speed, as a
-                    non-negative real number of meters per second, or as <code>null</code>
-                    if the implementation cannot provide speed
-                    information.</ins>
-                  </p>
-                  <p>
-                    Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-2"><code>heading</code></a>
-                    <del>attribute in degrees, or <code>null</code> if the implementation
-                    cannot provide heading information. If the hosting device
-                    is stationary (i.e., the value of the
-                    <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-3"><code>speed</code></a> attribute is 0), then
-                    initialize the <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-3"><code>heading</code></a> to
-                    <code>NaN</code>.</del> <ins>attribute to a heading, in degrees, or
-                    <code>null</code> if the implementation cannot provide heading
-                    information. If the hosting device is stationary (i.e., the
-                    value of the <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-4"><code>speed</code></a> attribute is
-                    0), then initialize the <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-4"><code>heading</code></a>
-                    to <code>NaN</code>.</ins>
-                  </p>
-                </div>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-longitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-longitude-2"><code>longitude</code></a>
+              <del cite="#c4">attribute to a geographic coordinate in decimal
+              degrees.</del> <ins cite="#c4">attribute to a longitude,
+              specified as a real number of degrees, in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>]
+              coordinate system.</ins>
               </li>
-              
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-altitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-altitude-2"><code>altitude</code></a>
+              <del cite="#c4">attribute in meters above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>]
+              ellipsoid, or <code>null</code> if the implementation cannot provide
+              altitude information.</del> <ins cite="#c4">attribute to a
+              height, in meters, above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] ellipsoid, or <code>null</code> if
+              the implementation cannot provide altitude information.</ins>
+              </li>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-2"><code>speed</code></a>
+              <del cite="#c5">attribute to a non-negative real number, or as
+              <code>null</code> if the implementation cannot provide speed
+              information.</del> <ins cite="#c5">attribute to a speed, as a
+              non-negative real number of meters per second, or as <code>null</code> if
+              the implementation cannot provide speed information.</ins>
+              </li>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-2"><code>heading</code></a>
+              <del cite="#c5">attribute in degrees, or <code>null</code> if the
+              implementation cannot provide heading information. If the hosting
+              device is stationary (i.e., the value of the
+              <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-3"><code>speed</code></a> attribute is 0), then initialize
+              the <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-3"><code>heading</code></a> to <code>NaN</code>.</del>
+                <ins cite="#c5">attribute to a heading, in degrees, or <code>null</code>
+                if the implementation cannot provide heading information. If
+                the hosting device is stationary (i.e., the value of the
+                <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-4"><code>speed</code></a> attribute is 0), then
+                initialize the <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-4"><code>heading</code></a> to
+                <code>NaN</code>.</ins>
+              </li>
               <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-accuracy" class="internalDFN" id="ref-for-dom-geolocationcoordinates-accuracy-1"><code>accuracy</code></a>
               attribute to a non-negative real number. The value <em class="rfc2119">SHOULD</em>
               correspond to a 95% confidence level with respect to the
@@ -2375,7 +2346,6 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
               information is provided, it <em class="rfc2119">SHOULD</em> correspond to a 95% confidence
               level.
               </li>
-              
             </ol>
           </li>
           <li>Return a newly created <a data-link-type="idl" data-lt="GeolocationPosition" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-7"><code>GeolocationPosition</code></a> instance with its
