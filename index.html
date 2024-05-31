@@ -695,6 +695,23 @@
               </li>
             </ol>
           </li>
+          <li>
+            <aside class="correction" id="c7">
+              <span class="marker">Candidate Correction:</span> Added missing
+              step to handle [=non-secure contexts=].
+            </aside><ins cite="#c7">If |geolocation|'s [=environment settings
+            object=] is a [=non-secure context=]:
+            <ol>
+              <li>If |watchId| was passed, [=List/remove=] |watchId| from
+              |watchIDs|.
+              </li>
+              <li>[=Call back with error=] passing |errorCallback| and
+              {{GeolocationPositionError/PERMISSION_DENIED}}.
+              </li>
+              <li>Terminate this algorithm.
+              </li>
+            </ol></ins>
+          </li>
           <li>If |document:Document|'s [=Document/visibility state=] is
           "hidden", wait for the following [=page visibility change steps=] to
           run:
@@ -1293,8 +1310,14 @@
             <dfn>PERMISSION_DENIED</dfn> (numeric value 1)
           </dt>
           <dd>
-            [=Request a position=] failed because the user denied permission to
-            use the API.
+            <aside class="correction" id="c6">
+              <span class="marker">Candidate Correction:</span> Updated the
+              description of the `PERMISSION_DENIED` constant to clarify the
+              reasons for permission denial, including [=non-secure context=]
+              and user denials.
+            </aside>[=Request a position=] failed because the user denied
+            permission to use the API <ins cite="#c6">or the request was made
+            from an [=non-secure context=]</ins>.
           </dd>
           <dt>
             <dfn>POSITION_UNAVAILABLE</dfn> (numeric value 2)
