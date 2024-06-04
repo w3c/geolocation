@@ -838,27 +838,29 @@
                       value of the |options|.{{PositionOptions/maximumAge}}
                       member.
                       </li>
-                      <li>If
-                      |cachedPosition|.{{GeolocationPosition/timestamp}}'s
-                      value is greater than |cacheTime|, and
-                      |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
-                      equals |options|.{{PositionOptions/enableHighAccuracy}}:
-                        <div class="correction" id="c8">
+                      <li>
+                        <aside class="correction" id="c8">
                           <span class="marker">Candidate Correction:</span>
                           Updated to ensure that the algorithm terminates
                           immediately if a valid cached position is used,
                           avoiding unnecessary steps.
-                          <ol>
-                            <li>
-                              <ins>[=Queue a task=] on the [=geolocation task
-                              source=] with a step that [=invokes=]
-                              |successCallback| with |cachedPosition|.</ins>
-                            </li>
-                            <li>
-                              <ins>Terminate this algorithm.</ins>
-                            </li>
-                          </ol>
-                        </div>
+                        </aside>If |cachedPosition|'s
+                        {{GeolocationPosition/timestamp}}'s value is greater
+                        than |cacheTime|, and
+                        |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
+                        <del cite="#c8">equals
+                        |options|.{{PositionOptions/enableHighAccuracy}}, set
+                        |position| to |cachedPosition|.</del> <ins cite=
+                        "#c8">equals
+                        |options|.{{PositionOptions/enableHighAccuracy}}:
+                        <ol>
+                          <li>[=Queue a task=] on the [=geolocation task
+                          source=] with a step that [=invokes=]
+                          |successCallback| with |cachedPosition|.
+                          </li>
+                          <li>Terminate this algorithm.
+                          </li>
+                        </ol></ins>
                       </li>
                     </ol>
                   </li>
@@ -881,69 +883,70 @@
                     </ol>
                   </li>
                   <li>If acquiring the position data from the system succeeds:
-                    <ol>
-                      <li>
-                        <div class="correction" id="c5">
-                          <span class="marker">Candidate Correction:</span>
-                          Each acquired data type is now explicitly defined
-                          with units and standards.
-                          <ol>
-                            <li>
-                              <ins>Let |latitude:double| be a real number of
-                              degrees, in the [[WGS84]] coordinate
-                              system.</ins>
-                            </li>
-                            <li>
-                              <ins>Let |longitude:double| be a real number of
-                              degrees, in the [[WGS84]] coordinate
-                              system.</ins>
-                            </li>
-                            <li>
-                              <ins>Let |altitude:double?| be a height, in
-                              meters, above the [[WGS84]] ellipsoid or `null`
-                              if not available.</ins>
-                            </li>
-                            <li>
-                              <ins>Let |accuracy:double| be a non-negative real
-                              number representing a 95% confidence level.</ins>
-                            </li>
-                            <li>
-                              <ins>Let |altitudeAccuracy:double?| be a
-                              non-negative real number or `null` if not
-                              available, representing a 95% confidence
-                              level.</ins>
-                            </li>
-                            <li>
-                              <ins>Let |speed:double?| be a non-negative real
-                              number of meters per second or `null` if not
-                              available.</ins>
-                            </li>
-                            <li>
-                              <ins>Let |heading:double?| be a real number of
-                              degrees or `null` if not available. If the device
-                              is stationary, set to NaN.</ins>
-                            </li>
-                          </ol>
-                        </div>
+                    <aside class="correction" id="c9">
+                      <span class="marker">Candidate Correction:</span> We now
+                      use a [=map=] to represent the position data. Clarified
+                      the units and reference systems for latitude, longitude,
+                      and altitude, ensuring consistency with the updated
+                      attribute definitions. Updated to the descriptions of the
+                      speed and heading to specify measurement units and
+                      conditions for null values, aligning with the overall
+                      enhancements to attribute accuracy and clarity.
+                    </aside><ins cite="#c9">
+                    <ol data-cite="infra">
+                      <li>Let |positionData| be a [=map=] that will hold the
+                      acquired position data.
                       </li>
-                      <li>
-                        <div class="correction" id="c6">
-                          <span class="marker">Candidate Correction:</span>
-                          Updated the parameters passed to the
-                          `GeolocationPosition` constructor to align with the
-                          new data specifications.
-                          Set |position| to be [=a new
-                          `GeolocationPosition`=] passing <ins>|latitude|,
-                          |longitude|, |altitude|, |accuracy|,
-                          |altitudeAccuracy|, |speed|, |heading|, </ins>
-                          |acquisitionTime|, and
-                          |options|.{{PositionOptions/enableHighAccuracy}}.
-                        </div>
+                      <li>Set |positionData|["longitude"] to represent the
+                      longitude coordinates on the Earth's surface as a
+                      {{double}} in degrees, using the [[WGS84]] coordinate
+                      system. Longitude measures how far east or west a point
+                      is from the Prime Meridian.
+                      </li>
+                      <li>Set |positionData|["altitude"] to represent the
+                      altitude as a {{double?}} in meters above the [[WGS84]]
+                      ellipsoid or `null` if not available. Altitude measures
+                      the height above sea level.
+                      </li>
+                      <li>Set |positionData|["accuracy"] to represent the
+                      accuracy as a non-negative {{double}} indicating the 95%
+                      confidence level in meters. Accuracy measures how close
+                      the measured coordinates are to the true position.
+                      </li>
+                      <li>Set |positionData|["altitudeAccuracy"] to represent
+                      the altitude accuracy as a non-negative {{double?}} or
+                      `null` if not available, indicating the 95% confidence
+                      level in meters. Altitude accuracy measures how close the
+                      measured altitude is to the true altitude.
+                      </li>
+                      <li>Set |positionData|["speed"] to represent the speed as
+                      a non-negative {{double?}} in meters per second or `null`
+                      if not available. Speed measures how fast the device is
+                      moving.
+                      </li>
+                      <li>Set |positionData|["heading"] to represent the
+                      heading as a {{double?}} in degrees or `null` if not
+                      available. If the device is stationary, set to NaN.
+                      Heading measures the direction in which the device is
+                      moving relative to true north.
+                      </li>
+                      <li>Set |position| be [=a new `GeolocationPosition`=]
+                      passing |positionData|, |acquisitionTime| and
+                      |options|.{{PositionOptions/enableHighAccuracy}}.
                       </li>
                       <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
                       |position|.
                       </li>
-                    </ol>
+                    </ol></ins> <del>
+                    <ol>
+                      <li>Set |position| be [=a new `GeolocationPosition`=]
+                      passing |acquisitionTime| and
+                      |options|.{{PositionOptions/enableHighAccuracy}}.
+                      </li>
+                      <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
+                      |position|.
+                      </li>
+                    </ol></del>
                   </li>
                   <li>Stop the |timeout|.
                   </li>
@@ -1272,69 +1275,26 @@
         <h2>
           Constructing a `GeolocationPosition`
         </h2>
-        <aside class="correction" id="c7">
-          <span class="marker">Candidate Correction:</span> Updated the
-          constructor parameters to include explicit data types and conditions
-          as defined in the IDL, enhancing the clarity and precision of the
-          specification.
+        <aside class="correction" id="c4">
+          <span class="marker">Candidate Correction:</span> Constructor now
+          takes a [=map=] of position data, a timestamp, and a boolean
+          indicating high accuracy as arguments. We itereate over the map to
+          set the attributes of the {{GeolocationCoordinates}}.
         </aside>
         <p>
-          <dfn>A new `GeolocationPosition`</dfn> is constructed with a <ins>{{double}} |latitude:double|,
-            {{double}} |longitude:double|, {{double?}} |altitude:double?|,
-            {{double}} |accuracy:double|, {{double?}}
-            |altitudeAccuracy:double?|, {{double?}} |speed:double?|,
-            {{double?}} |heading:double?|, {{EpochTimeStamp}}
-            |timestamp:EpochTimeStamp|, {{boolean}}
-            |isHighAccuracy:boolean|</ins> by performing the following steps:
-        </p>
+          <dfn>A new `GeolocationPosition`</dfn> is constructed with [=map=]
+          |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp| and
+          boolean |isHighAccuracy| by performing the following steps:
+        </p><ins cite="#c4">
         <ol class="algorithm">
           <li>Let |coords:GeolocationCoordinates| be a newly created
-          {{GeolocationCoordinates}} instance:
-            <div class="correction" id="c4">
-              <span class="marker">Candidate Correction:</span> Enhanced the
-              constructor steps for {{GeolocationCoordinates}} to take
-              arguments from call site.
-              <ol>
-                <li>Initialize |coord|'s {{GeolocationCoordinates/latitude}}
-                attribute to <del>a geographic coordinate in decimal
-                degrees.</del> <ins>|latitude|.</ins>
-                </li>
-                <li>Initialize |coord|'s {{GeolocationCoordinates/longitude}}
-                attribute to <del>a geographic coordinate in decimal
-                degrees.</del> <ins>|longitude|.</ins>
-                </li>
-                <li>Initialize |coord|'s {{GeolocationCoordinates/altitude}}
-                <del>attribute in meters above the [[WGS84]] ellipsoid, or
-                `null` if the implementation cannot provide altitude
-                information.</del> <ins>attribute to |altitude|.</ins>
-                </li>
-                <li>Initialize |coord|'s {{GeolocationCoordinates/speed}}
-                attribute to <del>a non-negative real number, or as `null` if
-                the implementation cannot provide speed information.</del>
-                <ins>|speed|.</ins>
-                </li>
-                <li>Initialize |coord|'s {{GeolocationCoordinates/heading}}
-                <del>attribute in degrees, or `null` if the implementation
-                cannot provide heading information. If the hosting device is
-                stationary (i.e., the value of the
-                {{GeolocationCoordinates/speed}} attribute is 0), then
-                initialize the {{GeolocationCoordinates/heading}} to
-                `NaN`.</del> <ins>attribute to |heading|.</ins>
-                </li>
-                <li>Initialize |coord|'s {{GeolocationCoordinates/accuracy}}
-                attribute to <del>a non-negative real number. The value SHOULD
-                correspond to a 95% confidence level with respect to the
-                longitude and latitude values.</del> <ins>|accuracy|.</ins>
-                </li>
-                <li>Initialize |coord|'s
-                {{GeolocationCoordinates/altitudeAccuracy}} attribute <del>as
-                non-negative real number, or to `null` if the implementation
-                cannot provide altitude information. If the altitude accuracy
-                information is provided, it SHOULD correspond to a 95%
-                confidence level.</del> <ins>to |altitudeAccuracy|.</ins>
-                </li>
-              </ol>
-            </div>
+          {{GeolocationCoordinates}} instance
+          </li>
+          <li>[=map/For Each=] |key| in |positionData|:
+            <ol>
+              <li>Set |coords|'s |key| attribute to |positionData|[|key|].
+              </li>
+            </ol>
           </li>
           <li>Return a newly created {{GeolocationPosition}} instance with its
           {{GeolocationPosition/coords}} attribute initialized to |coords| and
@@ -1342,7 +1302,58 @@
           |timestamp|, and its {{GeolocationPosition/[[isHighAccuracy]]}}
           internal slot set to |isHighAccuracy|.
           </li>
-        </ol>
+        </ol></ins> <del cite="#c4">
+        <p>
+          <dfn>A new `GeolocationPosition`</dfn> is constructed with
+          {{EpochTimeStamp}} |timestamp:EpochTimeStamp| and boolean
+          |isHighAccuracy| by performing the following steps:
+        </p>
+        <ol class="algorithm">
+          <li>Let |coords:GeolocationCoordinates| be a newly created
+          {{GeolocationCoordinates}} instance:
+            <ol>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/latitude}}
+              attribute to a geographic coordinate in decimal degrees.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/longitude}}
+              attribute to a geographic coordinate in decimal degrees.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/accuracy}}
+              attribute to a non-negative real number. The value SHOULD
+              correspond to a 95% confidence level with respect to the
+              longitude and latitude values.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/altitude}}
+              attribute in meters above the [[WGS84]] ellipsoid, or `null` if
+              the implementation cannot provide altitude information.
+              </li>
+              <li>Initialize |coord|'s
+              {{GeolocationCoordinates/altitudeAccuracy}} attribute as
+              non-negative real number, or to `null` if the implementation
+              cannot provide altitude information. If the altitude accuracy
+              information is provided, it SHOULD correspond to a 95% confidence
+              level.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/speed}}
+              attribute to a non-negative real number, or as `null` if the
+              implementation cannot provide speed information.
+              </li>
+              <li>Initialize |coord|'s {{GeolocationCoordinates/heading}}
+              attribute in degrees, or `null` if the implementation cannot
+              provide heading information. If the hosting device is stationary
+              (i.e., the value of the {{GeolocationCoordinates/speed}}
+              attribute is 0), then initialize the
+              {{GeolocationCoordinates/heading}} to `NaN`.
+              </li>
+            </ol>
+          </li>
+          <li>Return a newly created {{GeolocationPosition}} instance with its
+          {{GeolocationPosition/coords}} attribute initialized to |coords| and
+          {{GeolocationPosition/timestamp}} attribute initialized to
+          |timestamp|, and its {{GeolocationPosition/[[isHighAccuracy]]}}
+          internal slot set to |isHighAccuracy|.
+          </li>
+        </ol></del>
       </section>
     </section>
     <section id="position_error_interface" data-dfn-for=
