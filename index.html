@@ -159,7 +159,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="a74c23e114c8e8c4def4dcacd013f9a3d1ead568">
+<meta name="revision" content="c2fdd742bd86489fdb426ea46306b31fd35ea747">
 <meta name="description" content="The Geolocation API provides access to geographical location
         information associated with the hosting device.">
 <style>
@@ -232,9 +232,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "implementationReportURI": "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation-api/errata.html",
-  "gitRevision": "a74c23e114c8e8c4def4dcacd013f9a3d1ead568",
-  "publishISODate": "2024-05-23T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 23 May 2024"
+  "gitRevision": "c2fdd742bd86489fdb426ea46306b31fd35ea747",
+  "publishISODate": "2024-06-04T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 04 June 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
 <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://www.w3.org/StyleSheets/TR/2021/dark.css"></head>
@@ -242,7 +242,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-05-23">23 May 2024</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-06-04">04 June 2024</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -318,7 +318,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         2022, the following substantive additions and/or corrections have been
         proposed:
       </p><rs-changelog from="REC-2022" filter="updateableRecFilter"><ul>
-      <li><a href="https://github.com/w3c/geolocation-api/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li>
+      <li><a href="https://github.com/w3c/geolocation-api/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation-api/pull/157">#157</a>)</li>
       </ul></rs-changelog>
       <p>
         A more detailed list of changes can be found in section
@@ -1320,6 +1320,22 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
               </li>
             </ol>
           </li>
+          <li>
+            <aside class="correction" id="c7">
+              <span class="marker">Candidate Correction:</span> Added missing
+              step to handle <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" id="ref-for-index-term-non-secure-contexts-1">non-secure contexts</a>.
+            </aside><ins cite="#c7">If <var data-type="Geolocation">geolocation</var>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-index-term-environment-settings-object-1">environment settings object</a> is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" id="ref-for-index-term-non-secure-contexts-2">non-secure context</a>:
+            <ol>
+              <li>If <var data-type="unsigned long">watchId</var> was passed, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list-remove" id="ref-for-index-term-remove-for-list-3">remove</a> <var data-type="unsigned long">watchId</var> from
+              <var data-type="List">watchIDs</var>.
+              </li>
+              <li><a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-4">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
+              <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-2"><code>PERMISSION_DENIED</code></a>.
+              </li>
+              <li>Terminate this algorithm.
+              </li>
+            </ol></ins>
+          </li>
           <li>If <var data-type="Document">document</var>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="ref-for-index-term-visibility-state-for-document-1">visibility state</a> is
           "hidden", wait for the following <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#page-visibility-change-steps" id="ref-for-index-term-page-visibility-change-steps-1">page visibility change steps</a> to
           run:
@@ -1342,11 +1358,11 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
               <li data-tests="getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
               If <var>permission</var> is "denied", then:
                 <ol>
-                  <li>If <var data-type="unsigned long">watchId</var> was passed, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list-remove" id="ref-for-index-term-remove-for-list-3">remove</a> <var data-type="unsigned long">watchId</var> from
+                  <li>If <var data-type="unsigned long">watchId</var> was passed, <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#list-remove" id="ref-for-index-term-remove-for-list-4">remove</a> <var data-type="unsigned long">watchId</var> from
                   <var data-type="List">watchIDs</var>.
                   </li>
-                  <li><a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-4">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
-                  <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-2"><code>PERMISSION_DENIED</code></a>.
+                  <li><a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-5">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
+                  <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-3"><code>PERMISSION_DENIED</code></a>.
                   </li>
                   <li>Terminate this algorithm.
                   </li>
@@ -1503,8 +1519,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                       </dt>
                       <dd>
                         <p>
-                          <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-5">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
-                          <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-3"><code>PERMISSION_DENIED</code></a>.
+                          <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-6">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
+                          <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-4"><code>PERMISSION_DENIED</code></a>.
                         </p>
                         <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span><span class="issue-label">: Browser permission VS OS permission</span></div><aside class="">
                           <p>
@@ -1520,14 +1536,14 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                         Timeout elapsed:
                       </dt>
                       <dd>
-                        <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-6">Call back with error</a> with <var data-type="PositionErrorCallback?">errorCallback</var> and
+                        <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-7">Call back with error</a> with <var data-type="PositionErrorCallback?">errorCallback</var> and
                         <a data-link-type="idl" href="#dom-geolocationpositionerror-timeout" class="internalDFN" id="ref-for-dom-geolocationpositionerror-timeout-1"><code>TIMEOUT</code></a>.
                       </dd>
                       <dt>
                         Data acquisition error or any other reason:
                       </dt>
                       <dd>
-                        <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-7">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
+                        <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-8">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
                         <a data-link-type="idl" href="#dom-geolocationpositionerror-position_unavailable" class="internalDFN" id="ref-for-dom-geolocationpositionerror-position_unavailable-3"><code>POSITION_UNAVAILABLE</code></a>.
                       </dd>
                     </dl>
@@ -2406,7 +2422,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       
       <pre class="idl def" id="webidl-1281871320"><span class="idlHeader"><a class="self-link" href="#webidl-1281871320">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocationpositionerror" data-title="GeolocationPositionError">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-4">Exposed</a>=Window</span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geolocationpositionerror" id="ref-for-dom-geolocationpositionerror-6"><code>GeolocationPositionError</code></a> {<span data-idl="" class="idlConst" id="idl-def-geolocationpositionerror-permission_denied" data-title="PERMISSION_DENIED" data-dfn-for="GeolocationPositionError">
-  const<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-2">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-permission_denied" id="ref-for-dom-geolocationpositionerror-permission_denied-4"><code>PERMISSION_DENIED</code></a> = 1;</span><span data-idl="" class="idlConst" id="idl-def-geolocationpositionerror-position_unavailable" data-title="POSITION_UNAVAILABLE" data-dfn-for="GeolocationPositionError">
+  const<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-2">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-permission_denied" id="ref-for-dom-geolocationpositionerror-permission_denied-5"><code>PERMISSION_DENIED</code></a> = 1;</span><span data-idl="" class="idlConst" id="idl-def-geolocationpositionerror-position_unavailable" data-title="POSITION_UNAVAILABLE" data-dfn-for="GeolocationPositionError">
   const<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-3">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-position_unavailable" id="ref-for-dom-geolocationpositionerror-position_unavailable-4"><code>POSITION_UNAVAILABLE</code></a> = 2;</span><span data-idl="" class="idlConst" id="idl-def-geolocationpositionerror-timeout" data-title="TIMEOUT" data-dfn-for="GeolocationPositionError">
   const<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-4">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-timeout" id="ref-for-dom-geolocationpositionerror-timeout-2"><code>TIMEOUT</code></a> = 3;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationpositionerror-code" data-title="code" data-dfn-for="GeolocationPositionError">
   readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-5">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationpositionerror-code" id="ref-for-dom-geolocationpositionerror-code-2"><code>code</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationpositionerror-message" data-title="message" data-dfn-for="GeolocationPositionError">
@@ -2421,8 +2437,14 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
             <dfn data-export="" data-dfn-type="const" id="dom-geolocationpositionerror-permission_denied" data-idl="const" data-title="PERMISSION_DENIED" data-dfn-for="GeolocationPositionError" tabindex="0" aria-haspopup="dialog"><code>PERMISSION_DENIED</code></dfn> (numeric value 1)
           </dt>
           <dd>
-            <a data-link-type="dfn|abstract-op" href="#dfn-request-a-position" class="internalDFN" id="ref-for-dfn-request-a-position-4">Request a position</a> failed because the user denied permission to
-            use the API.
+            <aside class="correction" id="c6">
+              <span class="marker">Candidate Correction:</span> Updated the
+              description of the <code>PERMISSION_DENIED</code> constant to clarify the
+              reasons for permission denial, including <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" id="ref-for-index-term-non-secure-contexts-3">non-secure context</a>
+              and user denials.
+            </aside><a data-link-type="dfn|abstract-op" href="#dfn-request-a-position" class="internalDFN" id="ref-for-dfn-request-a-position-4">Request a position</a> failed because the user denied
+            permission to use the API <ins cite="#c6">or the request was made
+            from an <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" id="ref-for-index-term-non-secure-contexts-4">non-secure context</a></ins>.
           </dd>
           <dt>
             <dfn data-export="" data-dfn-type="const" id="dom-geolocationpositionerror-position_unavailable" data-idl="const" data-title="POSITION_UNAVAILABLE" data-dfn-for="GeolocationPositionError" tabindex="0" aria-haspopup="dialog"><code>POSITION_UNAVAILABLE</code></dfn> (numeric value 2)
@@ -2488,7 +2510,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         </h3><a class="self-link" href="#code-attribute" aria-label="Permalink for Section 10.2"></a></div>
         
         <p>
-          The <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationpositionerror-code" data-idl="attribute" data-title="code" data-dfn-for="GeolocationPositionError" data-type="unsigned short" data-lt="code" data-local-lt="GeolocationPositionError.code" tabindex="0" aria-haspopup="dialog"><code>code</code></dfn> attribute returns the value it was <a data-link-type="dfn|abstract-op" data-lt="call back with error" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-8">initialized to</a> (see <a href="#constants" data-matched-text="[[[#constants]]]" class="sec-ref"><bdi class="secno">10.1 </bdi>
+          The <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationpositionerror-code" data-idl="attribute" data-title="code" data-dfn-for="GeolocationPositionError" data-type="unsigned short" data-lt="code" data-local-lt="GeolocationPositionError.code" tabindex="0" aria-haspopup="dialog"><code>code</code></dfn> attribute returns the value it was <a data-link-type="dfn|abstract-op" data-lt="call back with error" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-9">initialized to</a> (see <a href="#constants" data-matched-text="[[[#constants]]]" class="sec-ref"><bdi class="secno">10.1 </bdi>
           Constants</a> for possible
           values).
         </p>
@@ -2674,7 +2696,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
 
 <span data-idl="" class="idlInterface" data-title="GeolocationPositionError">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-8">Exposed</a>=Window</span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geolocationpositionerror" id="ref-for-dom-geolocationpositionerror-10"><code>GeolocationPositionError</code></a> {<span data-idl="" class="idlConst" data-title="PERMISSION_DENIED" data-dfn-for="GeolocationPositionError">
-  const<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-6">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-permission_denied" id="ref-for-dom-geolocationpositionerror-permission_denied-5"><code>PERMISSION_DENIED</code></a> = 1;</span><span data-idl="" class="idlConst" data-title="POSITION_UNAVAILABLE" data-dfn-for="GeolocationPositionError">
+  const<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-6">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-permission_denied" id="ref-for-dom-geolocationpositionerror-permission_denied-6"><code>PERMISSION_DENIED</code></a> = 1;</span><span data-idl="" class="idlConst" data-title="POSITION_UNAVAILABLE" data-dfn-for="GeolocationPositionError">
   const<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-7">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-position_unavailable" id="ref-for-dom-geolocationpositionerror-position_unavailable-5"><code>POSITION_UNAVAILABLE</code></a> = 2;</span><span data-idl="" class="idlConst" data-title="TIMEOUT" data-dfn-for="GeolocationPositionError">
   const<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-8">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="const" href="#dom-geolocationpositionerror-timeout" id="ref-for-dom-geolocationpositionerror-timeout-3"><code>TIMEOUT</code></a> = 3;</span><span data-idl="" class="idlAttribute" data-title="code" data-dfn-for="GeolocationPositionError">
   readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" id="ref-for-index-term-unsigned-short-type-9">unsigned short</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationpositionerror-code" id="ref-for-dom-geolocationpositionerror-code-5"><code>code</code></a>;</span><span data-idl="" class="idlAttribute" data-title="message" data-dfn-for="GeolocationPositionError">
@@ -2792,6 +2814,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="index-term-current-settings-object" tabindex="0" aria-haspopup="dialog">current settings object</span>
   </li><li>
+    <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="index-term-environment-settings-object" tabindex="0" aria-haspopup="dialog">environment settings object</span>
+  </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="index-term-fully-active-for-document" tabindex="0" aria-haspopup="dialog">fully active (for <code>Document</code>)</span>
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element" id="index-term-iframe-element" tabindex="0" aria-haspopup="dialog"><code>iframe</code> element</span>
@@ -2801,6 +2825,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigate" id="index-term-navigates" tabindex="0" aria-haspopup="dialog">navigates</span>
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/system-state.html#navigator" id="index-term-navigator-interface" tabindex="0" aria-haspopup="dialog"><code>Navigator</code> interface</span>
+  </li><li>
+    <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" id="index-term-non-secure-contexts" tabindex="0" aria-haspopup="dialog">non-secure contexts</span>
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin" id="index-term-origin" tabindex="0" aria-haspopup="dialog">origin</span>
   </li><li>
@@ -2938,7 +2964,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         API</cite> has received the following normative changes:
       </p>
        <rs-changelog from="FPWD" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation-api/commit/7082b4e">Fix references to "default allowlist"</a> (<a href="https://github.com/w3c/geolocation-api/pull/133">#133</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation-api/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation-api/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation-api/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation-api/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation-api/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation-api/pull/87">#87</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f8b930f">Added webapps as group</a> (<a href="https://github.com/w3c/geolocation-api/pull/144">#144</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li>
+      <li><a href="https://github.com/w3c/geolocation-api/commit/7082b4e">Fix references to "default allowlist"</a> (<a href="https://github.com/w3c/geolocation-api/pull/133">#133</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation-api/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation-api/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation-api/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation-api/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation-api/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation-api/pull/87">#87</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f8b930f">Added webapps as group</a> (<a href="https://github.com/w3c/geolocation-api/pull/144">#144</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation-api/pull/157">#157</a>)</li>
       </ul></rs-changelog>
       <p>
         Since publication of the Second Edition in 2016, this specification
@@ -3247,11 +3273,11 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </li><li>
       <a href="#ref-for-dfn-call-back-with-error-2" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> 
     </li><li>
-      <a href="#ref-for-dfn-call-back-with-error-3" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-dfn-call-back-with-error-4" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-call-back-with-error-3" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-dfn-call-back-with-error-4" title="Reference 2">(2)</a> <a href="#ref-for-dfn-call-back-with-error-5" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dfn-call-back-with-error-5" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-dfn-call-back-with-error-6" title="Reference 2">(2)</a> <a href="#ref-for-dfn-call-back-with-error-7" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dfn-call-back-with-error-6" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-dfn-call-back-with-error-7" title="Reference 2">(2)</a> <a href="#ref-for-dfn-call-back-with-error-8" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dfn-call-back-with-error-8" title="§ 10.2 code attribute">§ 10.2 code attribute</a> 
+      <a href="#ref-for-dfn-call-back-with-error-9" title="§ 10.2 code attribute">§ 10.2 code attribute</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-positionoptions" aria-label="Links in this document to definition: PositionOptions">
@@ -3629,13 +3655,13 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dom-geolocationpositionerror-permission_denied-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-dom-geolocationpositionerror-permission_denied-2" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dom-geolocationpositionerror-permission_denied-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-dom-geolocationpositionerror-permission_denied-2" title="Reference 2">(2)</a> <a href="#ref-for-dom-geolocationpositionerror-permission_denied-3" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationpositionerror-permission_denied-3" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
+      <a href="#ref-for-dom-geolocationpositionerror-permission_denied-4" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationpositionerror-permission_denied-4" title="§ 10. GeolocationPositionError interface">§ 10. GeolocationPositionError interface</a> 
+      <a href="#ref-for-dom-geolocationpositionerror-permission_denied-5" title="§ 10. GeolocationPositionError interface">§ 10. GeolocationPositionError interface</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationpositionerror-permission_denied-5" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-geolocationpositionerror-permission_denied-6" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationpositionerror-position_unavailable" aria-label="Links in this document to definition: POSITION_UNAVAILABLE">
@@ -3780,6 +3806,18 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="#ref-for-index-term-current-settings-object-2" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> 
     </li>
   </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-environment-settings-object" aria-label="Links in this document to definition: environment settings object">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" aria-label="Permalink for definition: environment settings object. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-index-term-environment-settings-object-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
+    </li>
+  </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-fully-active-for-document" aria-label="Links in this document to definition: fully active (for Document)">
       <span class="caret"></span>
       <div>
@@ -3846,6 +3884,20 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="#ref-for-index-term-navigator-interface-1" title="§ 5. Extensions to the Navigator interface">§ 5. Extensions to the Navigator interface</a> 
     </li><li>
       <a href="#ref-for-index-term-navigator-interface-2" title="§ A. IDL Index">§ A. IDL Index</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-non-secure-contexts" aria-label="Links in this document to definition: non-secure contexts">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" aria-label="Permalink for definition: non-secure contexts. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-index-term-non-secure-contexts-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-index-term-non-secure-contexts-2" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-index-term-non-secure-contexts-3" title="§ 10.1 Constants">§ 10.1 Constants</a> <a href="#ref-for-index-term-non-secure-contexts-4" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-origin" aria-label="Links in this document to definition: origin">
@@ -4011,7 +4063,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <li>
       <a href="#ref-for-index-term-remove-for-list-1" title="§ 6.4 clearWatch() method">§ 6.4 clearWatch() method</a> 
     </li><li>
-      <a href="#ref-for-index-term-remove-for-list-2" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-index-term-remove-for-list-3" title="Reference 2">(2)</a> 
+      <a href="#ref-for-index-term-remove-for-list-2" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-index-term-remove-for-list-3" title="Reference 2">(2)</a> <a href="#ref-for-index-term-remove-for-list-4" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-default-powerful-feature" aria-label="Links in this document to definition: default powerful feature">
