@@ -897,67 +897,62 @@
                       <li>Let |positionData| be a [=map=] with the following
                       name/value pairs based on the acquired the position data:
                         <dl>
+                          <dt>
+                            "longitude"
+                          </dt>
                           <dd>
-                            <dl>
-                              <dt>
-                                "longitude"
-                              </dt>
-                              <dd>
-                                A {{double}} that represents the longitude
-                                coordinates on the Earth's surface in degrees,
-                                using the [[WGS84]] coordinate system.
-                                Longitude measures how far east or west a point
-                                is from the Prime Meridian.
-                              </dd>
-                              <dt>
-                                "altitude"
-                              </dt>
-                              <dd>
-                                A {{double?}} that represents the altitude in
-                                meters above the [[WGS84]] ellipsoid, or `null`
-                                if not available. Altitude measures the height
-                                above sea level.
-                              </dd>
-                              <dt>
-                                "accuracy"
-                              </dt>
-                              <dd>
-                                A non-negative {{double}} that represents the
-                                accuracy value indicating the 95% confidence
-                                level in meters. Accuracy measures how close
-                                the measured coordinates are to the true
-                                position.
-                              </dd>
-                              <dt>
-                                "altitudeAccuracy"
-                              </dt>
-                              <dd>
-                                A non-negative {{double?}} that represents the
-                                altitude accuracy, or `null` if not available,
-                                indicating the 95% confidence level in meters.
-                                Altitude accuracy measures how close the
-                                measured altitude is to the true altitude.
-                              </dd>
-                              <dt>
-                                "speed"
-                              </dt>
-                              <dd>
-                                A non-negative {{double?}} that represents the
-                                speed in meters per second, or `null` if not
-                                available. Speed measures how fast the device
-                                is moving.
-                              </dd>
-                              <dt>
-                                "heading"
-                              </dt>
-                              <dd>
-                                A {{double?}} that represents the heading in
-                                degrees, or `null` if not available, or `NaN`
-                                if the device is stationary. Heading measures
-                                the direction in which the device is moving
-                                relative to true north.
-                              </dd>
-                            </dl>
+                            A {{double}} that represents the longitude
+                            coordinates on the Earth's surface in degrees,
+                            using the [[WGS84]] coordinate system. Longitude
+                            measures how far east or west a point is from the
+                            Prime Meridian.
+                          </dd>
+                          <dt>
+                            "altitude"
+                          </dt>
+                          <dd>
+                            A {{double?}} that represents the altitude in
+                            meters above the [[WGS84]] ellipsoid, or `null` if
+                            not available. Altitude measures the height above
+                            sea level.
+                          </dd>
+                          <dt>
+                            "accuracy"
+                          </dt>
+                          <dd>
+                            A non-negative {{double}} that represents the
+                            accuracy value indicating the 95% confidence level
+                            in meters. Accuracy measures how close the measured
+                            coordinates are to the true position.
+                          </dd>
+                          <dt>
+                            "altitudeAccuracy"
+                          </dt>
+                          <dd>
+                            A non-negative {{double?}} that represents the
+                            altitude accuracy, or `null` if not available,
+                            indicating the 95% confidence level in meters.
+                            Altitude accuracy measures how close the measured
+                            altitude is to the true altitude.
+                          </dd>
+                          <dt>
+                            "speed"
+                          </dt>
+                          <dd>
+                            A non-negative {{double?}} that represents the
+                            speed in meters per second, or `null` if not
+                            available. Speed measures how fast the device is
+                            moving.
+                          </dd>
+                          <dt>
+                            "heading"
+                          </dt>
+                          <dd>
+                            A {{double?}} that represents the heading in
+                            degrees, or `null` if not available, or `NaN` if
+                            the device is stationary. Heading measures the
+                            direction in which the device is moving relative to
+                            true north.
                           </dd>
                         </dl>
                       </li>
