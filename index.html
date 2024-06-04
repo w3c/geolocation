@@ -849,8 +849,8 @@
                         than |cacheTime|, and
                         |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
                         equals
-                        |options|.{{PositionOptions/enableHighAccuracy}}<del cite="#c8">, set
-                        |position| to |cachedPosition|.</del> <ins cite=
+                        |options|.{{PositionOptions/enableHighAccuracy}}<del cite="#c8">,
+                        set |position| to |cachedPosition|.</del> <ins cite=
                         "#c8">:
                         <ol>
                           <li>[=Queue a task=] on the [=geolocation task
@@ -894,43 +894,74 @@
                       enhancements to attribute accuracy and clarity.
                     </aside><ins cite="#c9">
                     <ol data-cite="infra">
-                      <li>Let |positionData| be a [=map=] that will hold the
-                      acquired position data.
+                      <li>Let |positionData| be a [=map=] with the following
+                      name/value pairs based on the acquired the position data:
+                        <dl>
+                          <dd>
+                            <dl>
+                              <dt>
+                                "longitude"
+                              </dt>
+                              <dd>
+                                A {{double}} that represents the longitude
+                                coordinates on the Earth's surface in degrees,
+                                using the [[WGS84]] coordinate system.
+                                Longitude measures how far east or west a point
+                                is from the Prime Meridian.
+                              </dd>
+                              <dt>
+                                "altitude"
+                              </dt>
+                              <dd>
+                                A {{double?}} that represents the altitude in
+                                meters above the [[WGS84]] ellipsoid, or `null`
+                                if not available. Altitude measures the height
+                                above sea level.
+                              </dd>
+                              <dt>
+                                "accuracy"
+                              </dt>
+                              <dd>
+                                A non-negative {{double}} that represents the
+                                accuracy value indicating the 95% confidence
+                                level in meters. Accuracy measures how close
+                                the measured coordinates are to the true
+                                position.
+                              </dd>
+                              <dt>
+                                "altitudeAccuracy"
+                              </dt>
+                              <dd>
+                                A non-negative {{double?}} that represents the
+                                altitude accuracy, or `null` if not available,
+                                indicating the 95% confidence level in meters.
+                                Altitude accuracy measures how close the
+                                measured altitude is to the true altitude.
+                              </dd>
+                              <dt>
+                                "speed"
+                              </dt>
+                              <dd>
+                                A non-negative {{double?}} that represents the
+                                speed in meters per second, or `null` if not
+                                available. Speed measures how fast the device
+                                is moving.
+                              </dd>
+                              <dt>
+                                "heading"
+                              </dt>
+                              <dd>
+                                A {{double?}} that represents the heading in
+                                degrees, or `null` if not available, or `NaN`
+                                if the device is stationary. Heading measures
+                                the direction in which the device is moving
+                                relative to true north.
+                              </dd>
+                            </dl>
+                          </dd>
+                        </dl>
                       </li>
-                      <li>Set |positionData|["longitude"] to represent the
-                      longitude coordinates on the Earth's surface as a
-                      {{double}} in degrees, using the [[WGS84]] coordinate
-                      system. Longitude measures how far east or west a point
-                      is from the Prime Meridian.
-                      </li>
-                      <li>Set |positionData|["altitude"] to represent the
-                      altitude as a {{double?}} in meters above the [[WGS84]]
-                      ellipsoid or `null` if not available. Altitude measures
-                      the height above sea level.
-                      </li>
-                      <li>Set |positionData|["accuracy"] to represent the
-                      accuracy as a non-negative {{double}} indicating the 95%
-                      confidence level in meters. Accuracy measures how close
-                      the measured coordinates are to the true position.
-                      </li>
-                      <li>Set |positionData|["altitudeAccuracy"] to represent
-                      the altitude accuracy as a non-negative {{double?}} or
-                      `null` if not available, indicating the 95% confidence
-                      level in meters. Altitude accuracy measures how close the
-                      measured altitude is to the true altitude.
-                      </li>
-                      <li>Set |positionData|["speed"] to represent the speed as
-                      a non-negative {{double?}} in meters per second or `null`
-                      if not available. Speed measures how fast the device is
-                      moving.
-                      </li>
-                      <li>Set |positionData|["heading"] to represent the
-                      heading as a {{double?}} in degrees or `null` if not
-                      available. If the device is stationary, set to NaN.
-                      Heading measures the direction in which the device is
-                      moving relative to true north.
-                      </li>
-                      <li>Set |position| be [=a new `GeolocationPosition`=]
+                      <li>Set |position| to [=a new `GeolocationPosition`=]
                       passing |positionData|, |acquisitionTime| and
                       |options|.{{PositionOptions/enableHighAccuracy}}.
                       </li>
@@ -939,7 +970,7 @@
                       </li>
                     </ol></ins> <del>
                     <ol>
-                      <li>Set |position| be [=a new `GeolocationPosition`=]
+                      <li>Set |position| to [=a new `GeolocationPosition`=]
                       passing |acquisitionTime| and
                       |options|.{{PositionOptions/enableHighAccuracy}}.
                       </li>
@@ -1278,8 +1309,8 @@
         <aside class="correction" id="c4">
           <span class="marker">Candidate Correction:</span> Constructor now
           takes a [=map=] of position data, a timestamp, and a boolean
-          indicating high accuracy as arguments. We iterate over the map to
-          set the attributes of the {{GeolocationCoordinates}}.
+          indicating high accuracy as arguments. We iterate over the map to set
+          the attributes of the {{GeolocationCoordinates}}.
         </aside>
         <p>
           <dfn>A new `GeolocationPosition`</dfn> is constructed with [=map=]
