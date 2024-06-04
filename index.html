@@ -848,11 +848,10 @@
                         {{GeolocationPosition/timestamp}}'s value is greater
                         than |cacheTime|, and
                         |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
-                        <del cite="#c8">equals
-                        |options|.{{PositionOptions/enableHighAccuracy}}, set
+                        equals
+                        |options|.{{PositionOptions/enableHighAccuracy}}<del cite="#c8">, set
                         |position| to |cachedPosition|.</del> <ins cite=
-                        "#c8">equals
-                        |options|.{{PositionOptions/enableHighAccuracy}}:
+                        "#c8">:
                         <ol>
                           <li>[=Queue a task=] on the [=geolocation task
                           source=] with a step that [=invokes=]
