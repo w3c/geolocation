@@ -882,7 +882,8 @@
                       </li>
                     </ol>
                   </li>
-                  <li>If acquiring the position data from the system succeeds:
+                  <li data-cite="infra">If acquiring the position data from the
+                  system succeeds:
                     <aside class="correction" id="c9">
                       <span class="marker">Candidate Correction:</span> We now
                       use a [=map=] to represent the position data. Clarified
@@ -1271,7 +1272,7 @@
           representation of the {{GeolocationCoordinates}} object.</ins>
         </p>
       </section>
-      <section>
+      <section data-cite="infra">
         <h2>
           Constructing a `GeolocationPosition`
         </h2>
@@ -1288,11 +1289,11 @@
         </p><ins cite="#c4">
         <ol class="algorithm">
           <li>Let |coords:GeolocationCoordinates| be a newly created
-          {{GeolocationCoordinates}} instance
+          {{GeolocationCoordinates}} instance.
           </li>
-          <li>[=map/For Each=] |key| in |positionData|:
+          <li>[=map/For Each=] |key| → |value| in |positionData|:
             <ol>
-              <li>Set |coords|'s |key| attribute to |positionData|[|key|].
+              <li>Set |coords|'s attribute named |key| to |value|.
               </li>
             </ol>
           </li>
@@ -1304,7 +1305,7 @@
           </li>
         </ol></ins> <del cite="#c4">
         <p>
-          <dfn>A new `GeolocationPosition`</dfn> is constructed with
+          <strong>A new `GeolocationPosition`</strong> is constructed with
           {{EpochTimeStamp}} |timestamp:EpochTimeStamp| and boolean
           |isHighAccuracy| by performing the following steps:
         </p>
