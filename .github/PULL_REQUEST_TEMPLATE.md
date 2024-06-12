@@ -12,6 +12,7 @@ Implementation commitment (and no objections):
 
 Documentation (new feature):
 
+ * [ ] Updated implementation report
  * [ ] Pinged MDN
  * [ ] Added example to README or spec
 
