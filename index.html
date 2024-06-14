@@ -895,7 +895,7 @@
                     </aside><ins cite="#c9">
                     <ol data-cite="infra">
                       <li>Let |positionData| be a [=map=] with the following
-                      name/value pairs based on the acquired the position data:
+                      name/value pairs based on the acquired position data:
                         <dl>
                           <dt>
                             "longitude"
@@ -1307,16 +1307,16 @@
           indicating high accuracy as arguments. We iterate over the map to set
           the attributes of the {{GeolocationCoordinates}}.
         </aside>
-        <p>
+        <ins cite="#c4"><p>
           <dfn>A new `GeolocationPosition`</dfn> is constructed with [=map=]
           |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp| and
           boolean |isHighAccuracy| by performing the following steps:
-        </p><ins cite="#c4">
+        </p>
         <ol class="algorithm">
           <li>Let |coords:GeolocationCoordinates| be a newly created
           {{GeolocationCoordinates}} instance.
           </li>
-          <li>[=map/For Each=] |key| → |value| in |positionData|:
+          <li>[=map/For each=] |key| → |value| in |positionData|:
             <ol>
               <li>Set |coords|'s attribute named |key| to |value|.
               </li>
