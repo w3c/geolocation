@@ -1,4 +1,4 @@
-Spec development happens via [issues in this repository](https://github.com/w3c/geolocation-api/issues) and [pull requests](https://github.com/w3c/geolocation-api/pulls). 
+Spec development happens via [issues in this repository](https://github.com/w3c/geolocation/issues) and [pull requests](https://github.com/w3c/geolocation/pulls).
 
 For normative changes, a corresponding [web-platform-tests](https://github.com/web-platform-tests/wpt) PR is highly appreciated. Typically, both PRs will be merged at the same time. If testing is not practical, please explain why and if appropriate [file an issue](https://github.com/web-platform-tests/wpt/issues/new) to follow up later.
 

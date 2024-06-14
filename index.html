@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="color-scheme" content="light dark">
     <title>
-      Geolocation API
+      Geolocation
     </title>
     <script src="https://www.w3.org/Tools/respec/respec-w3c" async class=
     "remove"></script>
@@ -39,12 +39,12 @@
       previousPublishDate: "2022-02-17",
       crEnd: "2022-03-18",
       previousMaturity: "CR",
-      github: "w3c/geolocation-api",
+      github: "w3c/geolocation",
       caniuse: "geolocation",
-      testSuiteURI: "https://wpt.live/geolocation-API/",
-      implementationReportURI: "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
+      testSuiteURI: "https://wpt.live/geolocation/",
+      implementationReportURI: "https://w3c.github.io/geolocation/reports/PR_imp_report.html",
       xref: "web-platform",
-      errata: "https://w3c.github.io/geolocation-api/errata.html",
+      errata: "https://w3c.github.io/geolocation/errata.html",
       latestVersion: "https://www.w3.org/TR/geolocation/",
     };
     </script>
@@ -53,8 +53,8 @@
   "secure-contexts permissions-policy permissions hr-time html">
     <section id="abstract">
       <p>
-        The Geolocation API provides access to geographical location
-        information associated with the hosting device.
+        Geolocation provides access to geographical location information
+        associated with the hosting device.
       </p>
     </section>
     <section id="sotd" class="updateable-rec">
@@ -83,18 +83,18 @@
         Introduction
       </h2>
       <p>
-        The <cite>Geolocation API</cite> defines a high-level interface to
-        location information associated only with the device hosting the
-        implementation. Common sources of location information include Global
-        Positioning System (GPS) and location inferred from network signals
-        such as IP address, RFID, WiFi and Bluetooth MAC addresses, and
-        GSM/CDMA cell IDs, as well as user input. The API itself is agnostic of
-        the underlying location information sources, and no guarantee is given
-        that the API returns the device's actual location.
+        <cite>Geolocation</cite> defines a high-level interface to location
+        information associated only with the device hosting the implementation.
+        Common sources of location information include Global Positioning
+        System (GPS) and location inferred from network signals such as IP
+        address, RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs,
+        as well as user input. The API itself is agnostic of the underlying
+        location information sources, and no guarantee is given that the API
+        returns the device's actual location.
       </p>
       <p>
-        If an end user [=check permission|grants permission=], the
-        <cite>Geolocation API</cite>:
+        If an end user [=check permission|grants permission=],
+        <cite>Geolocation</cite>:
       </p>
       <ul>
         <li>Provides location data as latitude, longitude, altitude, speed, and
@@ -325,15 +325,14 @@
         </h3>
         <p>
           The [=policy-controlled feature/default allowlist=] of `'self'`
-          allows Geolocation API usage in same-origin nested frames but
-          prevents third-party content from using the API.
+          allows API usage in same-origin nested frames but prevents
+          third-party content from using the API.
         </p>
         <p>
           Third-party usage can be selectively enabled by adding the
           [^iframe/allow^]`="geolocation"` attribute to an [^iframe^] element:
         </p>
-        <aside class="example" title=
-        "Enabling the Geolocation API in an iframe">
+        <aside class="example" title="Enabling Geolocation in an iframe">
           <pre class="html">
             &lt;iframe
               src="https://third-party.com"
@@ -371,10 +370,10 @@
           User consent
         </h3>
         <p>
-          The <cite>Geolocation API</cite> is a [=powerful feature=] that
-          requires [=express permission=] from an end-user before any location
-          data is shared with a web application. This requirement is
-          normatively enforced by the [=check permission=] steps on which the
+          <cite>Geolocation</cite> is a [=powerful feature=] that requires
+          [=express permission=] from an end-user before any location data is
+          shared with a web application. This requirement is normatively
+          enforced by the [=check permission=] steps on which the
           {{Geolocation/getCurrentPosition()}} and
           {{Geolocation/watchPosition()}} methods rely.
         </p>
@@ -405,7 +404,7 @@
         <p class="note" title=
         "Developers' responsibility with this sensitive data">
           This section applies to "recipients", which generally means
-          developers utilizing the <cite>Geolocation API</cite>. Although it's
+          developers utilizing <cite>Geolocation</cite>. Although it's
           impossible for the user agent, or this specification, to enforce
           these requirements, developers need to read this section carefully
           and do their best to adhere to the suggestions below. Developers need
@@ -465,8 +464,8 @@
           Checking permission to use the API
         </h2>
         <p>
-          The <cite>Geolocation API</cite> is a [=default powerful feature=]
-          identified by the [=powerful feature/name=] <code><dfn class=
+          <cite>Geolocation</cite> is a [=default powerful feature=] identified
+          by the [=powerful feature/name=] <code><dfn class=
           "permission">"geolocation"</dfn></code>.
         </p>
         <p>
@@ -487,8 +486,8 @@
         Security considerations
       </h2>
       <p>
-        There are no security considerations associated with Geolocation API at
-        the time of publication. However, readers are advised to read the
+        There are no security considerations associated with Geolocation at the
+        time of publication. However, readers are advised to read the
         [[[#privacy]]].
       </p>
     </section>
@@ -1140,8 +1139,8 @@
         </aside>
         <aside class="addition" id="a3">
           <span class="marker">Candidate Correction:</span> To improve clarity
-          and precision, a description of the accuracy attribute has been added,
-          defining it as meters of radius.
+          and precision, a description of the accuracy attribute has been
+          added, defining it as meters of radius.
         </aside>
         <p>
           <del cite="#c3">The <strong>latitude</strong> and
@@ -1407,8 +1406,8 @@
         Change log
       </h2>
       <p>
-        Since First Public Working Draft in 2021, the <cite>Geolocation
-        API</cite> has received the following normative changes:
+        Since First Public Working Draft in 2021, <cite>Geolocation</cite> has
+        received the following normative changes:
       </p>
       <script class="removeOnSave">
         function removeCommits(commit) {
@@ -1454,7 +1453,7 @@
       </ul>
       <p>
         See the <a href=
-        "https://github.com/w3c/geolocation-api/commits/gh-pages">commit
+        "https://github.com/w3c/geolocation/commits/gh-pages">commit
         history</a> for a complete list of changes.
       </p>
     </section>

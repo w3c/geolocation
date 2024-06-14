@@ -1,8 +1,8 @@
-# Geolocation API
+# Geolocation
 
-Once a user grants permission, the Geolocation API provides access to geographical location information from device.
+Once a user grants permission, Geolocation provides access to geographical location information from device.
 
-- [Editor's draft](http://w3c.github.io/geolocation-api/)
+- [Editor's draft](http://w3c.github.io/geolocation/)
 
 ## Examples of usage
 
@@ -80,4 +80,4 @@ sendPosition();
 
 ### More examples
 
-The specification provides [examples](https://w3c.github.io/geolocation-api/#examples) covering different use case.
+The specification provides [examples](https://w3c.github.io/geolocation/#examples) covering different use case.
