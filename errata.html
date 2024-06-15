@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Geolocation API Errata</title>
+    <title>Geolocation Errata</title>
     <script
       src="https://www.w3.org/Tools/respec/respec-w3c"
       class="remove"
@@ -36,11 +36,11 @@
                 height:"48"
             }
         ],
-        postProcess: [removeRedudantParts]
+        postProcess: [hideRedundantParts]
       };
-      function removeRedudantParts() {
+      function hideRedundantParts() {
         const details = document.querySelector("body > div.head > details");
-        details.classList.add("removeOnSave");
+        details.style = "display: none";
       }
     </script>
   </head>
@@ -52,10 +52,10 @@
 
     ## Process for submitting errata
 
-    Please [file an issue](https://github.com/w3c/geolocation-api/issues/new) on Github.
+    Please [file an issue](https://github.com/w3c/geolocation/issues/new) on Github.
 
     ## Unaddressed errata
-    [See issues on Github](https://github.com/w3c/geolocation-api/labels/errata)
+    [See issues on Github](https://github.com/w3c/geolocation/labels/errata)
 
     ## Errata approved by the Working Group
     <script class="removeOnSave">
