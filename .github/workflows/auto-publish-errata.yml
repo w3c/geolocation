@@ -6,17 +6,26 @@ on:
       - main
     paths:
       - errata.html
+      - reports/implementation.html
   pull_request: {}
 
 jobs:
   generate-errata:
-    name: Generate errata
+    name: Generate errata and implementation report
     runs-on: ubuntu-latest # only linux supported at present
+    permissions:
+      contents: write
+    strategy:
+      max-parallel: 1
+      matrix:
+        include:
+          - source: errata.html
+          - source: reports/implementation.html
     steps:
       - uses: actions/checkout@v4
       - uses: w3c/spec-prod@v2
         with:
-          SOURCE: errata.html
+          SOURCE: ${{ matrix.source }}
           TOOLCHAIN: respec
           VALIDATE_LINKS: false
           VALIDATE_PUBRULES: false
