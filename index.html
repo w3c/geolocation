@@ -1472,6 +1472,193 @@
         feature/default allowlist=] is [=default allowlist/'self'=].
       </p>
     </section>
+    <section data-cite="webdriver WebDriver-BiDi">
+      <h2>
+        Automation
+      </h2>
+      <p>
+        For the purposes of user-agent automation and application testing, this
+        document defines extensions to the [[[WebDriver]]] and
+        [[[WebDriver-BiDi]]] specifications. It is OPTIONAL for a user agent to
+        support them.
+      </p>
+      <pre class="idl">
+        dictionary GeolocationMockCoordinates {
+          double accuracy = 1;
+          required double latitude;
+          required double longitude;
+          double? altitude = null;
+          double? altitudeAccuracy = null;
+          double? heading = null;
+          double? speed = null;
+        };
+      </pre>
+      <p>
+        To <dfn>set the system coordinates</dfn> given an optional
+        {{GeolocationMockCoordinates}}
+        |coordinates:GeolocationMockCoordinates|, and an optional [=user
+        agent=] |agent|:
+      </p>
+      <ol class="algorithm">
+        <li>Let |targets| be a list containing all [=environment settings
+        object=] which belong to the |agent| if provided, or all [=user
+        agents=] otherwise.
+        </li>
+        <li>Let |tasks| be an [=list/empty=] [=list=].
+        </li>
+        <li>For each |target| in |targets|:
+          <ol>
+            <li>Queue a task |task| on the [=geolocation task source=] of
+            |target|'s [=relevant settings object=]'s [=global object=]'s
+            [=Window/browsing context=] to:
+              <ol>
+                <li>If |coordinates| is not given, clear the system location
+                and thus making the position unavailable.
+                </li>
+                <li>Otherwise, set the system coordinates to match the values
+                of |coordinates|.
+                </li>
+              </ol>
+            </li>
+            <li>Append |task| to |tasks|.
+            </li>
+          </ol>
+        </li>
+        <li>Wait for all |tasks| to finish and return.
+        </li>
+      </ol>
+      <h3>
+        Set System Coordinates Web Driver Extension
+      </h3>
+      <table class="data simple">
+        <thead>
+          <tr>
+            <th>
+              HTTP Method
+            </th>
+            <th>
+              [=Extension command URI template|URI template=]
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              POST
+            </td>
+            <td>
+              /session/{session id}/geolocation
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The <dfn class="export" data-for="extension command">set system
+        coordinates</dfn> [=extension command=] [=remote end steps=] are:
+      </p>
+      <ol class="algorithm">
+        <li>If the |parameters| argument is the empty string:
+          <ol>
+            <li>[=Set the system coordinates=].
+            </li>
+            <li>Return |success| with data `null`.
+            </li>
+          </ol>
+        </li>
+        <li>Let |coordinates| be the |parameters| argument [=converted to IDL
+        value=] of type {{GeolocationMockCoordinates}}.
+        </li>
+        <li>If the conversion [=exception/throws=], return an [=invalid
+        argument=] [=error=].
+        </li>
+        <li>[=Set the system coordinates=] to |coordinates|.
+        </li>
+        <li>Return |success| with data `null`.
+        </li>
+      </ol>
+      <h3>
+        The `geolocation` Web Driver BiDi Module
+      </h3>
+      <p>
+        This section defines the `geolocation` [=extension module=] for the
+        [[WebDriver-BiDi]] specification.
+      </p>
+      <p>
+        The `geolocation` module contains commands for setting the system's
+        geolocation coordinates and associated types.
+      </p>
+      <h4>
+        `GeolocationCommand` definition
+      </h4>
+      <p>
+        The `GeolocationCommand` [=remote end definition=] is as follows:
+      </p>
+      <pre class="cddl">
+        GeolocationCommand = (
+          geolocation.setSystemCoordinates
+        )
+      </pre>
+      <h4>
+        The `Coordinates` type
+      </h4>
+      <p>
+        The `Coordinates` of the geolocation module is defined as follows:
+      </p>
+      <pre class="cddl">
+        geolocation.Coordinates = {
+          accuracy: float .default 1.0,
+          latitude: float,
+          longitude: float,
+          altitude: float / null .default null,
+          altitudeAccuracy: float / null .default null,
+          heading: float / null .default null,
+          speed: float / null .default null
+        }
+      </pre>
+      <h4>
+        The `geolocation.setSystemCoordinates` command
+      </h4>
+      <pre class="cddl">
+        geolocation.setCoordinates = (
+          method: "geolocation.setCoordinates",
+          params: geolocation.SetCoordinates
+        )
+
+        geolocation.SetCoordinates = {
+          coordinates: geolocation.Coordinates,
+          ? userContext: text,
+        }
+      </pre>
+      <p>
+        The [=remote end steps=] with |session| and |command parameters| are:
+      </p>
+      <ol>
+        <li>Let |user context id| be the value of |command
+        parameters|["userContext"], if present, and default otherwise.
+        </li>
+        <li>Let |agent| be the [=user agent=] that represents the user context
+        with the id |user context id|.
+        </li>
+        <li>If the "coordinates" field of |command parameters| is missing:
+          <ol>
+            <li>[=Set the system coordinates=] to undefined and |agent|.
+            </li>
+            <li>Return [=success=] with data `null`.
+            </li>
+          </ol>
+        </li>
+        <li>Let |coordinates| be the |command parameters| argument [=converted
+        to IDL value=] of type {{GeolocationMockCoordinates}}.
+        </li>
+        <li>If the conversion [=exception/throws=], return an [=error=] with
+        [=error code=] [=invalid argument=].
+        </li>
+        <li>[=Set the system coordinates=] to |coordinates| and |agent|.
+        </li>
+        <li>Return [=success=] with data `null`.
+        </li>
+      </ol>
+    </section>
     <section id="conformance"></section>
     <section id="idl-index" class="appendix">
       <!-- All the Web IDL will magically appear here -->
