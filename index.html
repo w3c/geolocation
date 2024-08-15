@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 35.0.2">
+<meta name="generator" content="ReSpec 35.1.1">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -74,7 +74,7 @@ dfn{cursor:pointer}
     
 <meta name="color-scheme" content="light dark">
     
-<title>Geolocation API</title>
+<title>Geolocation</title>
     
     
   
@@ -159,9 +159,9 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="71242b674c8734f618d12cd6f58620bd8e0da351">
-<meta name="description" content="The Geolocation API provides access to geographical location
-        information associated with the hosting device.">
+<meta name="revision" content="9d5829e74ed1f6971452fb3b16fe1857e09ed20c">
+<meta name="description" content="Geolocation provides access to geographical location information
+        associated with the hosting device.">
 <style>
 .hljs{--base:#fafafa;--mono-1:#383a42;--mono-2:#686b77;--mono-3:#717277;--hue-1:#0b76c5;--hue-2:#336ae3;--hue-3:#a626a4;--hue-4:#42803c;--hue-5:#ca4706;--hue-5-2:#c91243;--hue-6:#986801;--hue-6-2:#9a6a01}
 @media (prefers-color-scheme:dark){
@@ -201,8 +201,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "editors": [
     {
       "name": "Marcos Cáceres",
-      "company": "W3C",
-      "companyURL": "https://w3.org",
+      "company": "Apple Inc.",
+      "companyURL": "https://apple.com",
       "w3cid": "39125"
     },
     {
@@ -226,47 +226,48 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "previousPublishDate": "2022-02-17",
   "crEnd": "2022-03-18",
   "previousMaturity": "CR",
-  "github": "w3c/geolocation-api",
+  "github": "w3c/geolocation",
   "caniuse": "geolocation",
-  "testSuiteURI": "https://wpt.live/geolocation-API/",
-  "implementationReportURI": "https://w3c.github.io/geolocation-api/reports/PR_imp_report.html",
+  "testSuiteURI": "https://wpt.live/geolocation/",
+  "implementationReportURI": "https://w3c.github.io/geolocation/reports/implementation.html",
   "xref": "web-platform",
-  "errata": "https://w3c.github.io/geolocation-api/errata.html",
-  "gitRevision": "71242b674c8734f618d12cd6f58620bd8e0da351",
-  "publishISODate": "2024-06-04T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 04 June 2024"
+  "errata": "https://w3c.github.io/geolocation/errata.html",
+  "latestVersion": "https://www.w3.org/TR/geolocation/",
+  "gitRevision": "9d5829e74ed1f6971452fb3b16fe1857e09ed20c",
+  "publishISODate": "2024-08-15T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 15 August 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
 <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://www.w3.org/StyleSheets/TR/2021/dark.css"></head>
   <body data-cite="WEBIDL secure-contexts permissions-policy permissions hr-time html HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
-    <h1 id="title" class="title">Geolocation API</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-06-04">04 June 2024</time></p>
+    <h1 id="title" class="title">Geolocation</h1> 
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-08-15">15 August 2024</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                <a class="u-url" href="https://w3c.github.io/geolocation-api/">https://w3c.github.io/geolocation-api/</a>
+                <a class="u-url" href="https://w3c.github.io/geolocation/">https://w3c.github.io/geolocation/</a>
               </dd>
         <dt>Latest published version:</dt><dd>
-                <a href="https://www.w3.org/geolocation/">https://www.w3.org/geolocation/</a>
+                <a href="https://www.w3.org/TR/geolocation/">https://www.w3.org/TR/geolocation/</a>
               </dd>
-        <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/geolocation-api/">https://w3c.github.io/geolocation-api/</a></dd>
+        <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/geolocation/">https://w3c.github.io/geolocation/</a></dd>
         <dt>History:</dt><dd>
                     <a href="https://www.w3.org/standards/history/geolocation/">https://www.w3.org/standards/history/geolocation/</a>
                   </dd><dd>
-                    <a href="https://github.com/w3c/geolocation-api/commits/">Commit history</a>
+                    <a href="https://github.com/w3c/geolocation/commits/">Commit history</a>
                   </dd>
-        <dt>Test suite:</dt><dd><a href="https://wpt.live/geolocation-API/">https://wpt.live/geolocation-API/</a></dd>
+        <dt>Test suite:</dt><dd><a href="https://wpt.live/geolocation/">https://wpt.live/geolocation/</a></dd>
         <dt>Implementation report:</dt><dd>
-                <a href="https://w3c.github.io/geolocation-api/reports/PR_imp_report.html">https://w3c.github.io/geolocation-api/reports/PR_imp_report.html</a>
+                <a href="https://w3c.github.io/geolocation/reports/implementation.html">https://w3c.github.io/geolocation/reports/implementation.html</a>
               </dd>
         
         
         
         <dt>Editors:</dt><dd class="editor p-author h-card vcard" data-editor-id="39125">
-    <span class="p-name fn">Marcos Cáceres</span> (<a class="p-org org h-org" href="https://w3.org">W3C</a>)
+    <span class="p-name fn">Marcos Cáceres</span> (<a class="p-org org h-org" href="https://apple.com">Apple Inc.</a>)
   </dd><dd class="editor p-author h-card vcard" data-editor-id="83788">
     <span class="p-name fn">Reilly Grant</span> (<a class="p-org org h-org" href="https://google.com">Google</a>)
   </dd>
@@ -277,12 +278,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   </dd>
         
         <dt>Feedback:</dt><dd>
-        <a href="https://github.com/w3c/geolocation-api/">GitHub w3c/geolocation-api</a>
-        (<a href="https://github.com/w3c/geolocation-api/pulls/">pull requests</a>,
-        <a href="https://github.com/w3c/geolocation-api/issues/new/choose">new issue</a>,
-        <a href="https://github.com/w3c/geolocation-api/issues/">open issues</a>)
+        <a href="https://github.com/w3c/geolocation/">GitHub w3c/geolocation</a>
+        (<a href="https://github.com/w3c/geolocation/pulls/">pull requests</a>,
+        <a href="https://github.com/w3c/geolocation/issues/new/choose">new issue</a>,
+        <a href="https://github.com/w3c/geolocation/issues/">open issues</a>)
       </dd>
-        <dt>Errata:</dt><dd><a href="https://w3c.github.io/geolocation-api/errata.html">Errata exists</a>.</dd>
+        <dt>Errata:</dt><dd><a href="https://w3c.github.io/geolocation/errata.html">Errata exists</a>.</dd>
         
       <dt class="caniuse-title">Browser support:</dt><dd class="caniuse-stats"><a href="https://caniuse.com/geolocation">caniuse.com</a></dd></dl>
     </details>
@@ -303,8 +304,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   </div>
     <section id="abstract" class="introductory"><h2>Abstract</h2>
       <p>
-        The Geolocation API provides access to geographical location
-        information associated with the hosting device.
+        Geolocation provides access to geographical location information
+        associated with the hosting device.
       </p>
     </section>
     <section id="sotd" class="updateable-rec introductory"><h2>Status of This Document</h2><p><em>This section describes the status of this
@@ -318,20 +319,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         2022, the following substantive additions and/or corrections have been
         proposed:
       </p><rs-changelog from="REC-2022" filter="updateableRecFilter"><ul>
-      <li><a href="https://github.com/w3c/geolocation-api/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation-api/pull/157">#157</a>)</li>
+      <li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li>
       </ul></rs-changelog>
       <p>
         A more detailed list of changes can be found in section
         <a href="#changelog" data-matched-text="[[[#changelog]]]" class="sec-ref"><bdi class="secno">D. </bdi>
         Change log</a>. Reviewers of the document can identify candidate
         additions and/or corrections by their distinctive styling in the
-        document:
-      </p>
-      <p class="correction">
-        Candidate corrections are marked like this.
-      </p>
-      <p class="addition">
-        Candidate additions are marked like this.
+        document.
       </p>
     <p>
     This document was published by the <a href="https://www.w3.org/groups/wg/das">Devices and Sensors Working Group</a> and the <a href="https://www.w3.org/groups/wg/webapps">Web Applications Working Group</a> as
@@ -342,12 +337,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     documents at any time. It is inappropriate to cite this document as other
     than work in progress.
     Future updates to this specification may incorporate
-          <a href="https://www.w3.org/2023/Process-20231103/#allow-new-features">new features</a>.
+          <a href="https://www.w3.org/policies/process/20231103/#allow-new-features">new features</a>.
   </p><p>
     
         This document was produced by groups
         operating under the
-        <a href="https://www.w3.org/Consortium/Patent-Policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent
+        <a href="https://www.w3.org/policies/patent-policy/"><abbr title="World Wide Web Consortium">W3C</abbr> Patent
           Policy</a>.
       
      <abbr title="World Wide Web Consortium">W3C</abbr> maintains a
@@ -357,13 +352,13 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           each group; these pages also include
           instructions for disclosing a patent. An individual who has actual
           knowledge of a patent which the individual believes contains
-          <a href="https://www.w3.org/Consortium/Patent-Policy/#def-essential">Essential Claim(s)</a>
+          <a href="https://www.w3.org/policies/patent-policy/#def-essential">Essential Claim(s)</a>
           must disclose the information in accordance with
-          <a href="https://www.w3.org/Consortium/Patent-Policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+          <a href="https://www.w3.org/policies/patent-policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
         
   </p><p>
                       This document is governed by the
-                      <a id="w3c_process_revision" href="https://www.w3.org/2023/Process-20231103/">03 November 2023 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+                      <a id="w3c_process_revision" href="https://www.w3.org/policies/process/20231103/">03 November 2023 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
                     </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>
         Introduction
       </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#scope"><bdi class="secno">1.1 </bdi>
@@ -468,18 +463,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       </h2><a class="self-link" href="#introduction" aria-label="Permalink for Section 1."></a></div><p><em>This section is non-normative.</em></p>
       
       <p>
-        The <cite>Geolocation API</cite> defines a high-level interface to
-        location information associated only with the device hosting the
-        implementation. Common sources of location information include Global
-        Positioning System (GPS) and location inferred from network signals
-        such as IP address, RFID, WiFi and Bluetooth MAC addresses, and
-        GSM/CDMA cell IDs, as well as user input. The API itself is agnostic of
-        the underlying location information sources, and no guarantee is given
-        that the API returns the device's actual location.
+        <cite>Geolocation</cite> defines a high-level interface to location
+        information associated only with the device hosting the implementation.
+        Common sources of location information include Global Positioning
+        System (GPS) and location inferred from network signals such as IP
+        address, RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs,
+        as well as user input. The API itself is agnostic of the underlying
+        location information sources, and no guarantee is given that the API
+        returns the device's actual location.
       </p>
       <p>
-        If an end user <a data-link-type="dfn|abstract-op" data-lt="check permission" href="#dfn-checking-permission" class="internalDFN" id="ref-for-dfn-checking-permission-1">grants permission</a>, the
-        <cite>Geolocation API</cite>:
+        If an end user <a data-link-type="dfn|abstract-op" data-lt="check permission" href="#dfn-checking-permission" class="internalDFN" id="ref-for-dfn-checking-permission-1">grants permission</a>,
+        <cite>Geolocation</cite>:
       </p>
       <ul>
         <li>Provides location data as latitude, longitude, altitude, speed, and
@@ -575,7 +570,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <a class="self-link" href="#example-using-clearwatch">Example<bdi> 3</bdi></a><span class="example-title">: Using clearWatch()</span>
   </div>
           <pre aria-busy="false"><code class="hljs js"><span class="hljs-keyword">const</span> watchId = navigator.geolocation.watchPosition(
-  <span class="hljs-function"><span class="hljs-params">position</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(position)
+  <span class="hljs-function"><span class="hljs-params">position</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(position);
 );
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">buttonClickHandler</span>(<span class="hljs-params"></span>) </span>{
@@ -657,9 +652,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
 }</code></pre>
         </aside>
       </section>
-      <section id="using-timeout"><div class="header-wrapper"><h3 id="x2-6-using-timeout"><bdi class="secno">2.6 </bdi>
+      <section class="informative" id="using-timeout"><div class="header-wrapper"><h3 id="x2-6-using-timeout"><bdi class="secno">2.6 </bdi>
           Using <code>timeout</code>
-        </h3><a class="self-link" href="#using-timeout" aria-label="Permalink for Section 2.6"></a></div>
+        </h3><a class="self-link" href="#using-timeout" aria-label="Permalink for Section 2.6"></a></div><p><em>This section is non-normative.</em></p>
         
         <p>
           If you require location information in a time sensitive manner, you
@@ -705,15 +700,15 @@ navigator.geolocation.getCurrentPosition(
         
         <p>
           The <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature-default-allowlist" id="ref-for-index-term-default-allowlist-for-policy-controlled-feature-1">default allowlist</a> of <code>'self'</code>
-          allows Geolocation API usage in same-origin nested frames but
-          prevents third-party content from using the API.
+          allows API usage in same-origin nested frames but prevents
+          third-party content from using the API.
         </p>
         <p>
           Third-party usage can be selectively enabled by adding the
           <code><a data-link-type="element-attr" data-type="element-attr" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-allow" id="ref-for-index-term-allow-attribute-for-iframe-element-1">allow</a></code><code>="geolocation"</code> attribute to an <code><a data-link-type="element" data-type="element" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element" id="ref-for-index-term-iframe-element-1">iframe</a></code> element:
         </p>
-        <aside class="example" id="example-enabling-the-geolocation-api-in-an-iframe"><div class="marker">
-    <a class="self-link" href="#example-enabling-the-geolocation-api-in-an-iframe">Example<bdi> 7</bdi></a><span class="example-title">: Enabling the Geolocation API in an iframe</span>
+        <aside class="example" id="example-enabling-geolocation-in-an-iframe"><div class="marker">
+    <a class="self-link" href="#example-enabling-geolocation-in-an-iframe">Example<bdi> 7</bdi></a><span class="example-title">: Enabling Geolocation in an iframe</span>
   </div>
           <pre aria-busy="false"><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span>
   <span class="hljs-attr">src</span>=<span class="hljs-string">"https://third-party.com"</span>
@@ -750,10 +745,10 @@ navigator.geolocation.getCurrentPosition(
         </h3><a class="self-link" href="#user-consent" aria-label="Permalink for Section 3.1"></a></div><p><em>This section is non-normative.</em></p>
         
         <p>
-          The <cite>Geolocation API</cite> is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-powerful-feature" id="ref-for-index-term-powerful-feature-1">powerful feature</a> that
-          requires <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-express-permission" id="ref-for-index-term-express-permission-1">express permission</a> from an end-user before any location
-          data is shared with a web application. This requirement is
-          normatively enforced by the <a data-link-type="dfn|abstract-op" href="#dfn-checking-permission" class="internalDFN" id="ref-for-dfn-checking-permission-2">check permission</a> steps on which the
+          <cite>Geolocation</cite> is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-powerful-feature" id="ref-for-index-term-powerful-feature-1">powerful feature</a> that requires
+          <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-express-permission" id="ref-for-index-term-express-permission-1">express permission</a> from an end-user before any location data is
+          shared with a web application. This requirement is normatively
+          enforced by the <a data-link-type="dfn|abstract-op" href="#dfn-checking-permission" class="internalDFN" id="ref-for-dfn-checking-permission-2">check permission</a> steps on which the
           <a data-link-type="idl" data-lt="getCurrentPosition()" href="#dom-geolocation-getcurrentposition" class="internalDFN" id="ref-for-dom-geolocation-getcurrentposition-3"><code>getCurrentPosition</code></a><code>()</code> and
           <a data-link-type="idl" data-lt="watchPosition()" href="#dom-geolocation-watchposition" class="internalDFN" id="ref-for-dom-geolocation-watchposition-3"><code>watchPosition</code></a><code>()</code> methods rely.
         </p>
@@ -783,7 +778,7 @@ navigator.geolocation.getCurrentPosition(
         
         <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>Note</span><span class="issue-label">: Developers' responsibility with this sensitive data</span></div><p class="">
           This section applies to "recipients", which generally means
-          developers utilizing the <cite>Geolocation API</cite>. Although it's
+          developers utilizing <cite>Geolocation</cite>. Although it's
           impossible for the user agent, or this specification, to enforce
           these requirements, developers need to read this section carefully
           and do their best to adhere to the suggestions below. Developers need
@@ -886,8 +881,8 @@ navigator.geolocation.getCurrentPosition(
         </h3><a class="self-link" href="#check-permission" aria-label="Permalink for Section 3.4"></a></div>
         
         <p>
-          The <cite>Geolocation API</cite> is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-default-powerful-feature" id="ref-for-index-term-default-powerful-feature-1">default powerful feature</a>
-          identified by the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-name" id="ref-for-index-term-name-for-powerful-feature-1">name</a> <code><dfn class="permission" data-dfn-type="permission" id="dfn-geolocation" tabindex="0" aria-haspopup="dialog" data-export="">"geolocation"</dfn></code>.
+          <cite>Geolocation</cite> is a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-default-powerful-feature" id="ref-for-index-term-default-powerful-feature-1">default powerful feature</a> identified
+          by the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-name" id="ref-for-index-term-name-for-powerful-feature-1">name</a> <code><dfn class="permission" data-dfn-type="permission" id="dfn-geolocation" tabindex="0" aria-haspopup="dialog" data-export="">"geolocation"</dfn></code>.
         </p>
         <p>
           When <dfn data-local-lt="check permission" data-lt="checking permission|check permission" id="dfn-checking-permission" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">checking permission</dfn>
@@ -907,8 +902,8 @@ navigator.geolocation.getCurrentPosition(
       </h2><a class="self-link" href="#security" aria-label="Permalink for Section 4."></a></div>
       
       <p>
-        There are no security considerations associated with Geolocation API at
-        the time of publication. However, readers are advised to read the
+        There are no security considerations associated with Geolocation at the
+        time of publication. However, readers are advised to read the
         <a href="#privacy" data-matched-text="[[[#privacy]]]" class="sec-ref"><bdi class="secno">3. </bdi>
         Privacy considerations</a>.
       </p>
@@ -1134,7 +1129,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
               error handling within geolocation retrieval.
             </aside><del cite="#c1">If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-1">current settings object</a>'s
             <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-1">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-1">associated <code>Document</code></a> is not
-            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-1">fully active</a>:</del> <ins cite="#c1">If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-2">this</a>'s
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-1">fully active</a>:</del> <ins cite="#c1">If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-2">this</a>'s
             <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-2">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-2">associated <code>Document</code></a> is not
             <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-2">fully active</a>:</ins>
             <ol>
@@ -1210,7 +1205,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
               document's activity status.
             </aside><del cite="#c2">If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#current-settings-object" id="ref-for-index-term-current-settings-object-2">current settings object</a>'s
             <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-3">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-3">associated <code>Document</code></a> is not
-            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-3">fully active</a>:</del> <ins cite="#c2">If the <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-4">this</a>'s
+            <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-3">fully active</a>:</del> <ins cite="#c2">If <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-4">this</a>'s
             <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-4">relevant global object</a>'s <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-4">associated <code>Document</code></a> is not
             <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-4">fully active</a>:</ins>
             <ol>
@@ -1459,12 +1454,26 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                       value of the <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-maximumage" class="internalDFN" id="ref-for-dom-positionoptions-maximumage-3"><code>maximumAge</code></a>
                       member.
                       </li>
-                      <li>If <var data-type="GeolocationPosition">cachedPosition</var>'s
-                      <a data-link-type="idl" href="#dom-geolocationposition-timestamp" class="internalDFN" id="ref-for-dom-geolocationposition-timestamp-1"><code>timestamp</code></a>'s value is greater than
-                      <var data-type="long">cacheTime</var>, and
-                      <var data-type="GeolocationPosition">cachedPosition</var>.<a data-link-type="attribute" data-lt="[[isHighAccuracy]]" href="#dfn-ishighaccuracy" class="internalDFN" id="ref-for-dfn-ishighaccuracy-1"><code>[[isHighAccuracy]]</code></a>
-                      equals <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-2"><code>enableHighAccuracy</code></a>,
-                      set <var>position</var> to <var data-type="GeolocationPosition">cachedPosition</var>.
+                      <li>
+                        <aside class="correction" id="c8">
+                          <span class="marker">Candidate Correction:</span>
+                          Updated to ensure that the algorithm terminates
+                          immediately if a valid cached position is used,
+                          avoiding unnecessary steps.
+                        </aside>If <var data-type="GeolocationPosition">cachedPosition</var>'s
+                        <a data-link-type="idl" href="#dom-geolocationposition-timestamp" class="internalDFN" id="ref-for-dom-geolocationposition-timestamp-1"><code>timestamp</code></a>'s value is greater
+                        than <var data-type="long">cacheTime</var>, and
+                        <var data-type="GeolocationPosition">cachedPosition</var>.<a data-link-type="attribute" data-lt="[[isHighAccuracy]]" href="#dfn-ishighaccuracy" class="internalDFN" id="ref-for-dfn-ishighaccuracy-1"><code>[[isHighAccuracy]]</code></a>
+                        equals
+                        <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-2"><code>enableHighAccuracy</code></a><del cite="#c8">,
+                        set <var>position</var> to <var data-type="GeolocationPosition">cachedPosition</var>.</del> <ins cite="#c8">:
+                        <ol>
+                          <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-index-term-queue-a-task-1">Queue a task</a> on the <a data-link-type="dfn|abstract-op" href="#dfn-geolocation-task-source" class="internalDFN" id="ref-for-dfn-geolocation-task-source-1">geolocation task source</a> with a step that <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#invoke-a-callback-function" id="ref-for-index-term-invokes-1">invokes</a>
+                          <var data-type="PositionCallback">successCallback</var> with « <var data-type="GeolocationPosition">cachedPosition</var> » and "<code>report</code>".
+                          </li>
+                          <li>Terminate this algorithm.
+                          </li>
+                        </ol></ins>
                       </li>
                     </ol>
                   </li>
@@ -1486,21 +1495,103 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                       </li>
                     </ol>
                   </li>
-                  <li>If acquiring the position data from the system succeeds:
-                    <ol>
-                      <li>Set <var>position</var> be <a data-link-type="dfn|abstract-op" href="#dfn-a-new-geolocationposition" class="internalDFN" id="ref-for-dfn-a-new-geolocationposition-1">a new <code>GeolocationPosition</code></a>
-                      passing <var data-type="EpochTimeStamp">acquisitionTime</var> and
+                  <li data-cite="infra">If acquiring the position data from the
+                  system succeeds:
+                    <aside class="correction" id="c9">
+                      <span class="marker">Candidate Correction:</span> We now
+                      use a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-index-term-map-1">map</a> to represent the position data. Clarified
+                      the units and reference systems for latitude, longitude,
+                      and altitude, ensuring consistency with the updated
+                      attribute definitions. Updated the descriptions of the
+                      speed and heading to specify measurement units and
+                      conditions for null values, aligning with the overall
+                      enhancements to attribute accuracy and clarity.
+                    </aside><ins cite="#c9">
+                    <ol data-cite="infra">
+                      <li>Let <var>positionData</var> be a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-index-term-map-2">map</a> with the following
+                      name/value pairs based on the acquired position data:
+                        <dl>
+                          <dt>
+                            "longitude"
+                          </dt>
+                          <dd>
+                            A <a data-link-type="idl" data-lt="double" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-1"><code>double</code></a> that represents the longitude
+                            coordinates on the Earth's surface in degrees,
+                            using the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] coordinate system. Longitude
+                            measures how far east or west a point is from the
+                            Prime Meridian.
+                          </dd>
+                          <dt>
+                            "altitude"
+                          </dt>
+                          <dd>
+                            A <a data-link-type="idl" data-lt="double" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-2"><code>double?</code></a> that represents the altitude in
+                            meters above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] ellipsoid, or <code>null</code> if
+                            not available. Altitude measures the height above
+                            sea level.
+                          </dd>
+                          <dt>
+                            "accuracy"
+                          </dt>
+                          <dd>
+                            A non-negative <a data-link-type="idl" data-lt="double" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-3"><code>double</code></a> that represents the
+                            accuracy value indicating the 95% confidence level
+                            in meters. Accuracy measures how close the measured
+                            coordinates are to the true position.
+                          </dd>
+                          <dt>
+                            "altitudeAccuracy"
+                          </dt>
+                          <dd>
+                            A non-negative <a data-link-type="idl" data-lt="double" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-4"><code>double?</code></a> that represents the
+                            altitude accuracy, or <code>null</code> if not available,
+                            indicating the 95% confidence level in meters.
+                            Altitude accuracy measures how close the measured
+                            altitude is to the true altitude.
+                          </dd>
+                          <dt>
+                            "speed"
+                          </dt>
+                          <dd>
+                            A non-negative <a data-link-type="idl" data-lt="double" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-5"><code>double?</code></a> that represents the
+                            speed in meters per second, or <code>null</code> if not
+                            available. Speed measures how fast the device is
+                            moving.
+                          </dd>
+                          <dt>
+                            "heading"
+                          </dt>
+                          <dd>
+                            A <a data-link-type="idl" data-lt="double" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-6"><code>double?</code></a> that represents the heading in
+                            degrees, or <code>null</code> if not available or the device
+                            is stationary. Heading measures the direction in
+                            which the device is moving relative to true north.
+                          </dd>
+                        </dl>
+                      </li>
+                      <li>Set <var>position</var> to <a data-link-type="dfn|abstract-op" href="#dfn-a-new-geolocationposition" class="internalDFN" id="ref-for-dfn-a-new-geolocationposition-1">a new <code>GeolocationPosition</code></a>
+                      passing <var>positionData</var>, <var data-type="EpochTimeStamp">acquisitionTime</var> and
                       <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-4"><code>enableHighAccuracy</code></a>.
                       </li>
                       <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-10">this</a>'s <a data-link-type="attribute" data-lt="[[cachedPosition]]" href="#dfn-cachedposition" class="internalDFN" id="ref-for-dfn-cachedposition-3"><code>[[cachedPosition]]</code></a> to
                       <var>position</var>.
                       </li>
-                    </ol>
+                    </ol></ins> <del cite="#c9">
+                    <ol>
+                      <li>Set <var>position</var> to <a data-link-type="dfn|abstract-op" href="#dfn-a-new-geolocationposition" class="internalDFN" id="ref-for-dfn-a-new-geolocationposition-2">a new <code>GeolocationPosition</code></a>
+                      passing <var data-type="EpochTimeStamp">acquisitionTime</var> and
+                      <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-5"><code>enableHighAccuracy</code></a>.
+                      </li>
+                      <li>Set <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-11">this</a>'s <a data-link-type="attribute" data-lt="[[cachedPosition]]" href="#dfn-cachedposition" class="internalDFN" id="ref-for-dfn-cachedposition-4"><code>[[cachedPosition]]</code></a> to
+                      <var>position</var>.
+                      </li>
+                    </ol></del>
                   </li>
                   <li>Stop the <var>timeout</var>.
                   </li>
-                  <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-index-term-queue-a-task-1">Queue a task</a> on the <a data-link-type="dfn|abstract-op" href="#dfn-geolocation-task-source" class="internalDFN" id="ref-for-dfn-geolocation-task-source-1">geolocation task source</a> with
-                  a step that <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#invoke-a-callback-function" id="ref-for-index-term-invokes-1">invokes</a> <var data-type="PositionCallback">successCallback</var> with <var>position</var>.
+                  <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-index-term-queue-a-task-2">Queue a task</a> on the <a data-link-type="dfn|abstract-op" href="#dfn-geolocation-task-source" class="internalDFN" id="ref-for-dfn-geolocation-task-source-2">geolocation task source</a> with
+                  a step that <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#invoke-a-callback-function" id="ref-for-index-term-invokes-2">invokes</a> <var data-type="PositionCallback">successCallback</var> with « <var>position</var> »
+                  and "<code>report</code>".
                   </li>
                 </ol>
               </li>
@@ -1570,8 +1661,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           <a data-link-type="idl" data-lt="GeolocationPositionError" href="#dom-geolocationpositionerror" class="internalDFN" id="ref-for-dom-geolocationpositionerror-4"><code>GeolocationPositionError</code></a> instance whose
           <a data-link-type="idl" href="#dom-geolocationpositionerror-code" class="internalDFN" id="ref-for-dom-geolocationpositionerror-code-1"><code>code</code></a> attribute is initialized to <var data-type="unsigned short">code</var>.
           </li>
-          <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-index-term-queue-a-task-2">Queue a task</a> on the <a data-link-type="dfn|abstract-op" href="#dfn-geolocation-task-source" class="internalDFN" id="ref-for-dfn-geolocation-task-source-2">geolocation task source</a> with a step
-          that <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#invoke-a-callback-function" id="ref-for-index-term-invokes-2">invokes</a> <var data-type="PositionErrorCallback?">callback</var> with <var data-type="GeolocationPositionError">error</var>.
+          <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-index-term-queue-a-task-3">Queue a task</a> on the <a data-link-type="dfn|abstract-op" href="#dfn-geolocation-task-source" class="internalDFN" id="ref-for-dfn-geolocation-task-source-3">geolocation task source</a> with a step
+          that <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://webidl.spec.whatwg.org/#invoke-a-callback-function" id="ref-for-index-term-invokes-3">invokes</a> <var data-type="PositionErrorCallback?">callback</var> with « <var data-type="GeolocationPositionError">error</var> » and "<code>report</code>".
           </li>
         </ol>
       </section>
@@ -1581,7 +1672,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
       </h2><a class="self-link" href="#position_options_interface" aria-label="Permalink for Section 7."></a></div>
       
       <pre class="idl def" id="webidl-1341144555"><span class="idlHeader"><a class="self-link" href="#webidl-1341144555">WebIDL</a></span><code><span data-idl="" class="idlDictionary" id="idl-def-positionoptions" data-title="PositionOptions">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-positionoptions" id="ref-for-dom-positionoptions-7"><code>PositionOptions</code></a> {<span data-idl="" class="idlMember" id="idl-def-positionoptions-enablehighaccuracy" data-title="enableHighAccuracy" data-dfn-for="PositionOptions"><span class="idlType">
-  <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-index-term-boolean-type-1">boolean</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-positionoptions-enablehighaccuracy" id="ref-for-dom-positionoptions-enablehighaccuracy-5"><code>enableHighAccuracy</code></a> = false;</span><span data-idl="" class="idlMember" id="idl-def-positionoptions-timeout" data-title="timeout" data-dfn-for="PositionOptions">
+  <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-index-term-boolean-type-1">boolean</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-positionoptions-enablehighaccuracy" id="ref-for-dom-positionoptions-enablehighaccuracy-6"><code>enableHighAccuracy</code></a> = false;</span><span data-idl="" class="idlMember" id="idl-def-positionoptions-timeout" data-title="timeout" data-dfn-for="PositionOptions">
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Clamp" id="ref-for-index-term-clamp-extended-attribute-1">Clamp</a></span>]<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-index-term-unsigned-long-type-3">unsigned long</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-positionoptions-timeout" id="ref-for-dom-positionoptions-timeout-3"><code>timeout</code></a> = 0xFFFFFFFF;</span><span data-idl="" class="idlMember" id="idl-def-positionoptions-maximumage" data-title="maximumAge" data-dfn-for="PositionOptions">
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Clamp" id="ref-for-index-term-clamp-extended-attribute-2">Clamp</a></span>]<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-index-term-unsigned-long-type-4">unsigned long</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-positionoptions-maximumage" id="ref-for-dom-positionoptions-maximumage-4"><code>maximumAge</code></a> = 0;</span>
 };</span></code></pre>
@@ -1834,8 +1925,8 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
             </td>
             <td>
               A <a data-link-type="idl" data-lt="boolean" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-index-term-boolean-type-2"><code>boolean</code></a> that records the value of the
-              <a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-6"><code>enableHighAccuracy</code></a> member when this
-              <a data-link-type="idl" data-lt="GeolocationPosition" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-6"><code>GeolocationPosition</code></a> is <a data-link-type="dfn|abstract-op" data-lt="a new GeolocationPosition" href="#dfn-a-new-geolocationposition" class="internalDFN" id="ref-for-dfn-a-new-geolocationposition-2">created</a>.
+              <a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-7"><code>enableHighAccuracy</code></a> member when this
+              <a data-link-type="idl" data-lt="GeolocationPosition" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-6"><code>GeolocationPosition</code></a> is <a data-link-type="dfn|abstract-op" data-lt="a new GeolocationPosition" href="#dfn-a-new-geolocationposition" class="internalDFN" id="ref-for-dfn-a-new-geolocationposition-3">created</a>.
             </td>
           </tr>
         </tbody></table>
@@ -1908,13 +1999,13 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
       
       <pre class="idl def" id="webidl-412902343"><span class="idlHeader"><a class="self-link" href="#webidl-412902343">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-geolocationcoordinates" data-title="GeolocationCoordinates">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-3">Exposed</a>=Window</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-2">SecureContext</a></span>]
 interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geolocationcoordinates" id="ref-for-dom-geolocationcoordinates-2"><code>GeolocationCoordinates</code></a> {<span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-accuracy" data-title="accuracy" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-1">double</a></span> <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationcoordinates-accuracy" data-idl="attribute" data-title="accuracy" data-dfn-for="GeolocationCoordinates" data-type="double" data-lt="accuracy" data-local-lt="GeolocationCoordinates.accuracy" class="idlName" tabindex="0" aria-haspopup="dialog"><code>accuracy</code></dfn>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-latitude" data-title="latitude" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-2">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-latitude" id="ref-for-dom-geolocationcoordinates-latitude-1"><code>latitude</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-longitude" data-title="longitude" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-3">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-longitude" id="ref-for-dom-geolocationcoordinates-longitude-1"><code>longitude</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-altitude" data-title="altitude" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-4">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitude" id="ref-for-dom-geolocationcoordinates-altitude-1"><code>altitude</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-altitudeaccuracy" data-title="altitudeAccuracy" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-5">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitudeaccuracy" id="ref-for-dom-geolocationcoordinates-altitudeaccuracy-1"><code>altitudeAccuracy</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-heading" data-title="heading" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-6">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-heading" id="ref-for-dom-geolocationcoordinates-heading-1"><code>heading</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-speed" data-title="speed" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-7">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-speed" id="ref-for-dom-geolocationcoordinates-speed-1"><code>speed</code></a>;</span><span data-idl="" class="idlMethod" id="idl-def-geolocationcoordinates-tojson" data-title="toJSON" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-7">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-accuracy" id="ref-for-dom-geolocationcoordinates-accuracy-1"><code>accuracy</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-latitude" data-title="latitude" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-8">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-latitude" id="ref-for-dom-geolocationcoordinates-latitude-1"><code>latitude</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-longitude" data-title="longitude" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-9">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-longitude" id="ref-for-dom-geolocationcoordinates-longitude-1"><code>longitude</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-altitude" data-title="altitude" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-10">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitude" id="ref-for-dom-geolocationcoordinates-altitude-1"><code>altitude</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-altitudeaccuracy" data-title="altitudeAccuracy" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-11">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitudeaccuracy" id="ref-for-dom-geolocationcoordinates-altitudeaccuracy-1"><code>altitudeAccuracy</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-heading" data-title="heading" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-12">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-heading" id="ref-for-dom-geolocationcoordinates-heading-1"><code>heading</code></a>;</span><span data-idl="" class="idlAttribute" id="idl-def-geolocationcoordinates-speed" data-title="speed" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-13">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-speed" id="ref-for-dom-geolocationcoordinates-speed-1"><code>speed</code></a>;</span><span data-idl="" class="idlMethod" id="idl-def-geolocationcoordinates-tojson" data-title="toJSON" data-dfn-for="GeolocationCoordinates">
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Default" id="ref-for-index-term-default-extended-attribute-2">Default</a></span>]<span class="idlType"> <a data-link-type="interface" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-object" id="ref-for-index-term-object-type-2">object</a></span> <a class="internalDFN idlName" data-link-type="method" href="#dom-geolocationcoordinates-tojson" id="ref-for-dom-geolocationcoordinates-tojson-1"><code>toJSON</code></a>();</span>
 };</span></code></pre>
       <aside class="mdn"><details>
@@ -2057,13 +2148,19 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           according to the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] geodetic system, instead of just stating
           "decimal degrees."
         </aside>
+        <aside class="addition" id="a3">
+          <span class="marker">Candidate Correction:</span> To improve clarity
+          and precision, a description of the accuracy attribute has been
+          added, defining it as meters of radius.
+        </aside>
         <p>
           <del cite="#c3">The <strong>latitude</strong> and
           <strong>longitude</strong> attributes are geographic coordinates
           specified in decimal degrees.</del> <ins cite="#c3">The
           <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationcoordinates-latitude" data-idl="attribute" data-title="latitude" data-dfn-for="GeolocationCoordinates" data-type="double" data-lt="latitude" data-local-lt="GeolocationCoordinates.latitude" tabindex="0" aria-haspopup="dialog"><code>latitude</code></dfn> and <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationcoordinates-longitude" data-idl="attribute" data-title="longitude" data-dfn-for="GeolocationCoordinates" data-type="double" data-lt="longitude" data-local-lt="GeolocationCoordinates.longitude" tabindex="0" aria-haspopup="dialog"><code>longitude</code></dfn> attributes denote the
           position, specified as a real number of degrees, in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>]
-          coordinate system.</ins>
+          coordinate system.</ins> <ins cite="#a3">The <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationcoordinates-accuracy" data-idl="attribute" data-title="accuracy" data-dfn-for="GeolocationCoordinates" data-type="double" data-lt="accuracy" data-local-lt="GeolocationCoordinates.accuracy" tabindex="0" aria-haspopup="dialog"><code>accuracy</code></dfn>
+          attribute denotes the position accuracy radius in meters.</ins>
         </p>
       </section>
       <aside class="mdn"><details>
@@ -2286,81 +2383,28 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           representation of the <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-4"><code>GeolocationCoordinates</code></a> object.</ins>
         </p>
       </section>
-      <section id="constructing-a-geolocationposition"><div class="header-wrapper"><h3 id="x9-6-constructing-a-geolocationposition"><bdi class="secno">9.6 </bdi>
+      <section data-cite="infra" id="constructing-a-geolocationposition"><div class="header-wrapper"><h3 id="x9-6-constructing-a-geolocationposition"><bdi class="secno">9.6 </bdi>
           Constructing a <code>GeolocationPosition</code>
         </h3><a class="self-link" href="#constructing-a-geolocationposition" aria-label="Permalink for Section 9.6"></a></div>
         
-        <p>
-          <dfn id="dfn-a-new-geolocationposition" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">A new <code>GeolocationPosition</code></dfn> is constructed with
-          <a data-link-type="idl" data-lt="EpochTimeStamp" data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-epochtimestamp" id="ref-for-index-term-epochtimestamp-3"><code>EpochTimeStamp</code></a> <var data-type="EpochTimeStamp">timestamp</var> and boolean
-          <var>isHighAccuracy</var> by performing the following steps:
-        </p>
         <aside class="correction" id="c4">
-          <span class="marker">Candidate Correction:</span> Enhanced the
-          constructor steps for <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-5"><code>GeolocationCoordinates</code></a> to clarify the units
-          and reference systems for latitude, longitude, and altitude, ensuring
-          consistency with the updated attribute definitions.
-        </aside>
-        <aside class="correction" id="c5">
-          <span class="marker">Candidate Correction:</span> Updates to the
-          descriptions of the speed and heading attributes to specify
-          measurement units and conditions for null values, aligning with the
-          overall enhancements to attribute accuracy and clarity.
-        </aside>
+          <span class="marker">Candidate Correction:</span> Constructor now
+          takes a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-index-term-map-3">map</a> of position data, a timestamp, and a boolean
+          indicating high accuracy as arguments. We iterate over the map to set
+          the attributes of the <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-5"><code>GeolocationCoordinates</code></a>.
+        </aside><ins cite="#c4">
+        <p>
+          <dfn id="dfn-a-new-geolocationposition" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">A new <code>GeolocationPosition</code></dfn> is constructed with <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-index-term-map-4">map</a>
+          <var>positionData</var>, <a data-link-type="idl" data-lt="EpochTimeStamp" data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-epochtimestamp" id="ref-for-index-term-epochtimestamp-3"><code>EpochTimeStamp</code></a> <var data-type="EpochTimeStamp">timestamp</var> and
+          boolean <var>isHighAccuracy</var> by performing the following steps:
+        </p>
         <ol class="algorithm">
           <li>Let <var data-type="GeolocationCoordinates">coords</var> be a newly created
-          <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-6"><code>GeolocationCoordinates</code></a> instance:
+          <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-6"><code>GeolocationCoordinates</code></a> instance.
+          </li>
+          <li><a data-link-type="dfn|abstract-op" data-type="dfn" href="https://infra.spec.whatwg.org/#map-iterate" id="ref-for-index-term-for-each-for-map-1">For each</a> <var>key</var> → <var>value</var> in <var>positionData</var>:
             <ol>
-              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-latitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-latitude-2"><code>latitude</code></a>
-              <del cite="#c4">attribute to a geographic coordinate in decimal
-              degrees.</del> <ins cite="#c4">attribute to a latitude, specified
-              as a real number of degrees, in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] coordinate
-              system.</ins>
-              </li>
-              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-longitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-longitude-2"><code>longitude</code></a>
-              <del cite="#c4">attribute to a geographic coordinate in decimal
-              degrees.</del> <ins cite="#c4">attribute to a longitude,
-              specified as a real number of degrees, in the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>]
-              coordinate system.</ins>
-              </li>
-              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-altitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-altitude-2"><code>altitude</code></a>
-              <del cite="#c4">attribute in meters above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>]
-              ellipsoid, or <code>null</code> if the implementation cannot provide
-              altitude information.</del> <ins cite="#c4">attribute to a
-              height, in meters, above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] ellipsoid, or <code>null</code> if
-              the implementation cannot provide altitude information.</ins>
-              </li>
-              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-2"><code>speed</code></a>
-              <del cite="#c5">attribute to a non-negative real number, or as
-              <code>null</code> if the implementation cannot provide speed
-              information.</del> <ins cite="#c5">attribute to a speed, as a
-              non-negative real number of meters per second, or as <code>null</code> if
-              the implementation cannot provide speed information.</ins>
-              </li>
-              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-2"><code>heading</code></a>
-              <del cite="#c5">attribute in degrees, or <code>null</code> if the
-              implementation cannot provide heading information. If the hosting
-              device is stationary (i.e., the value of the
-              <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-3"><code>speed</code></a> attribute is 0), then initialize
-              the <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-3"><code>heading</code></a> to <code>NaN</code>.</del>
-                <ins cite="#c5">attribute to a heading, in degrees, or <code>null</code>
-                if the implementation cannot provide heading information. If
-                the hosting device is stationary (i.e., the value of the
-                <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-4"><code>speed</code></a> attribute is 0), then
-                initialize the <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-4"><code>heading</code></a> to
-                <code>NaN</code>.</ins>
-              </li>
-              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-accuracy" class="internalDFN" id="ref-for-dom-geolocationcoordinates-accuracy-1"><code>accuracy</code></a>
-              attribute to a non-negative real number. The value <em class="rfc2119">SHOULD</em>
-              correspond to a 95% confidence level with respect to the
-              longitude and latitude values.
-              </li>
-              <li>Initialize <var>coord</var>'s
-              <a data-link-type="idl" href="#dom-geolocationcoordinates-altitudeaccuracy" class="internalDFN" id="ref-for-dom-geolocationcoordinates-altitudeaccuracy-2"><code>altitudeAccuracy</code></a> attribute as
-              non-negative real number, or to <code>null</code> if the implementation
-              cannot provide altitude information. If the altitude accuracy
-              information is provided, it <em class="rfc2119">SHOULD</em> correspond to a 95% confidence
-              level.
+              <li>Set <var data-type="GeolocationCoordinates">coords</var>'s attribute named <var>key</var> to <var>value</var>.
               </li>
             </ol>
           </li>
@@ -2370,7 +2414,58 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           <var data-type="EpochTimeStamp">timestamp</var>, and its <a data-link-type="attribute" data-lt="[[isHighAccuracy]]" href="#dfn-ishighaccuracy" class="internalDFN" id="ref-for-dfn-ishighaccuracy-2"><code>[[isHighAccuracy]]</code></a>
           internal slot set to <var>isHighAccuracy</var>.
           </li>
-        </ol>
+        </ol></ins> <del cite="#c4">
+        <p>
+          <strong>A new <code>GeolocationPosition</code></strong> is constructed with
+          <a data-link-type="idl" data-lt="EpochTimeStamp" data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-epochtimestamp" id="ref-for-index-term-epochtimestamp-4"><code>EpochTimeStamp</code></a> <var data-type="EpochTimeStamp">timestamp</var> and boolean
+          <var>isHighAccuracy</var> by performing the following steps:
+        </p>
+        <ol class="algorithm">
+          <li>Let <var data-type="GeolocationCoordinates">coords</var> be a newly created
+          <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-7"><code>GeolocationCoordinates</code></a> instance:
+            <ol>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-latitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-latitude-2"><code>latitude</code></a>
+              attribute to a geographic coordinate in decimal degrees.
+              </li>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-longitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-longitude-2"><code>longitude</code></a>
+              attribute to a geographic coordinate in decimal degrees.
+              </li>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-accuracy" class="internalDFN" id="ref-for-dom-geolocationcoordinates-accuracy-2"><code>accuracy</code></a>
+              attribute to a non-negative real number. The value <em class="rfc2119">SHOULD</em>
+              correspond to a 95% confidence level with respect to the
+              longitude and latitude values.
+              </li>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-altitude" class="internalDFN" id="ref-for-dom-geolocationcoordinates-altitude-2"><code>altitude</code></a>
+              attribute in meters above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] ellipsoid, or <code>null</code> if
+              the implementation cannot provide altitude information.
+              </li>
+              <li>Initialize <var>coord</var>'s
+              <a data-link-type="idl" href="#dom-geolocationcoordinates-altitudeaccuracy" class="internalDFN" id="ref-for-dom-geolocationcoordinates-altitudeaccuracy-2"><code>altitudeAccuracy</code></a> attribute as
+              non-negative real number, or to <code>null</code> if the implementation
+              cannot provide altitude information. If the altitude accuracy
+              information is provided, it <em class="rfc2119">SHOULD</em> correspond to a 95% confidence
+              level.
+              </li>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-2"><code>speed</code></a>
+              attribute to a non-negative real number, or as <code>null</code> if the
+              implementation cannot provide speed information.
+              </li>
+              <li>Initialize <var>coord</var>'s <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-2"><code>heading</code></a>
+              attribute in degrees, or <code>null</code> if the implementation cannot
+              provide heading information. If the hosting device is stationary
+              (i.e., the value of the <a data-link-type="idl" href="#dom-geolocationcoordinates-speed" class="internalDFN" id="ref-for-dom-geolocationcoordinates-speed-3"><code>speed</code></a>
+              attribute is 0), then initialize the
+              <a data-link-type="idl" href="#dom-geolocationcoordinates-heading" class="internalDFN" id="ref-for-dom-geolocationcoordinates-heading-3"><code>heading</code></a> to <code>NaN</code>.
+              </li>
+            </ol>
+          </li>
+          <li>Return a newly created <a data-link-type="idl" data-lt="GeolocationPosition" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-8"><code>GeolocationPosition</code></a> instance with its
+          <a data-link-type="idl" href="#dom-geolocationposition-coords" class="internalDFN" id="ref-for-dom-geolocationposition-coords-3"><code>coords</code></a> attribute initialized to <var data-type="GeolocationCoordinates">coords</var> and
+          <a data-link-type="idl" href="#dom-geolocationposition-timestamp" class="internalDFN" id="ref-for-dom-geolocationposition-timestamp-4"><code>timestamp</code></a> attribute initialized to
+          <var data-type="EpochTimeStamp">timestamp</var>, and its <a data-link-type="attribute" data-lt="[[isHighAccuracy]]" href="#dfn-ishighaccuracy" class="internalDFN" id="ref-for-dfn-ishighaccuracy-3"><code>[[isHighAccuracy]]</code></a>
+          internal slot set to <var>isHighAccuracy</var>.
+          </li>
+        </ol></del>
       </section>
     </section>
     <aside class="mdn"><details>
@@ -2627,8 +2722,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </h2><a class="self-link" href="#permissions-policy" aria-label="Permalink for Section 11."></a></div>
       
       <p>
-        The <cite>Geolocation API</cite> defines a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature" id="ref-for-index-term-policy-controlled-feature-1">policy-controlled feature</a> identified by the token string <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-3"><code>"geolocation"</code></a>. Its
-        <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature-default-allowlist" id="ref-for-index-term-default-allowlist-for-policy-controlled-feature-2">default allowlist</a> is <code>'self'</code>.
+        This specification defines a <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature" id="ref-for-index-term-policy-controlled-feature-1">policy-controlled feature</a> identified
+        by the token string <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-3"><code>"geolocation"</code></a>. Its <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature-default-allowlist" id="ref-for-index-term-default-allowlist-for-policy-controlled-feature-2">default allowlist</a> is <a data-link-type="dfn|abstract-op" data-type="dfn" href="https://www.w3.org/TR/permissions-policy-1/#default-allowlist-self" id="ref-for-index-term-self-for-default-allowlist-1">'self'</a>.
       </p>
     </section>
     <section id="conformance"><div class="header-wrapper"><h2 id="x12-conformance"><bdi class="secno">12. </bdi>Conformance</h2><a class="self-link" href="#conformance" aria-label="Permalink for Section 12."></a></div><p>As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.</p><p>
@@ -2662,7 +2757,7 @@ interface <dfn data-export="" data-dfn-type="interface" data-idl="interface" dat
 };</span><span data-idl="" class="idlCallback" data-title="PositionCallback">
 
 callback <dfn data-export="" data-dfn-type="callback" data-idl="callback" data-title="PositionCallback" data-dfn-for="" class="idlID"><code>PositionCallback</code></dfn> =<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-index-term-undefined-type-7">undefined</a></span> (<span class="idlType">
-  <a data-link-type="idl" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-8"><code>GeolocationPosition</code></a></span> <span class="idlParamName">position</span>
+  <a data-link-type="idl" href="#dom-geolocationposition" class="internalDFN" id="ref-for-dom-geolocationposition-9"><code>GeolocationPosition</code></a></span> <span class="idlParamName">position</span>
 );</span><span data-idl="" class="idlCallback" data-title="PositionErrorCallback">
 
 callback <dfn data-export="" data-dfn-type="callback" data-idl="callback" data-title="PositionErrorCallback" data-dfn-for="" class="idlID"><code>PositionErrorCallback</code></dfn> =<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-undefined" id="ref-for-index-term-undefined-type-8">undefined</a></span> (<span class="idlType">
@@ -2670,27 +2765,27 @@ callback <dfn data-export="" data-dfn-type="callback" data-idl="callback" data-t
 );</span>
 
 <span data-idl="" class="idlDictionary" data-title="PositionOptions">dictionary <a class="internalDFN idlID" data-link-type="dictionary" href="#dom-positionoptions" id="ref-for-dom-positionoptions-10"><code>PositionOptions</code></a> {<span data-idl="" class="idlMember" data-title="enableHighAccuracy" data-dfn-for="PositionOptions"><span class="idlType">
-  <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-index-term-boolean-type-3">boolean</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-positionoptions-enablehighaccuracy" id="ref-for-dom-positionoptions-enablehighaccuracy-7"><code>enableHighAccuracy</code></a> = false;</span><span data-idl="" class="idlMember" data-title="timeout" data-dfn-for="PositionOptions">
+  <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-index-term-boolean-type-3">boolean</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-positionoptions-enablehighaccuracy" id="ref-for-dom-positionoptions-enablehighaccuracy-8"><code>enableHighAccuracy</code></a> = false;</span><span data-idl="" class="idlMember" data-title="timeout" data-dfn-for="PositionOptions">
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Clamp" id="ref-for-index-term-clamp-extended-attribute-3">Clamp</a></span>]<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-index-term-unsigned-long-type-5">unsigned long</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-positionoptions-timeout" id="ref-for-dom-positionoptions-timeout-8"><code>timeout</code></a> = 0xFFFFFFFF;</span><span data-idl="" class="idlMember" data-title="maximumAge" data-dfn-for="PositionOptions">
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Clamp" id="ref-for-index-term-clamp-extended-attribute-4">Clamp</a></span>]<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" id="ref-for-index-term-unsigned-long-type-6">unsigned long</a></span> <a class="internalDFN idlName" data-link-type="dict-member" href="#dom-positionoptions-maximumage" id="ref-for-dom-positionoptions-maximumage-5"><code>maximumAge</code></a> = 0;</span>
 };</span>
 
 <span data-idl="" class="idlInterface" data-title="GeolocationPosition">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-6">Exposed</a>=Window</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-3">SecureContext</a></span>]
 interface <dfn data-export="" data-dfn-type="interface" data-idl="interface" data-title="GeolocationPosition" data-dfn-for="" class="idlID"><code>GeolocationPosition</code></dfn> {<span data-idl="" class="idlAttribute" data-title="coords" data-dfn-for="GeolocationPosition">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-7"><code>GeolocationCoordinates</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationposition-coords" id="ref-for-dom-geolocationposition-coords-3"><code>coords</code></a>;</span><span data-idl="" class="idlAttribute" data-title="timestamp" data-dfn-for="GeolocationPosition">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-epochtimestamp" id="ref-for-index-term-epochtimestamp-4">EpochTimeStamp</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationposition-timestamp" id="ref-for-dom-geolocationposition-timestamp-4"><code>timestamp</code></a>;</span><span data-idl="" class="idlMethod" data-title="toJSON" data-dfn-for="GeolocationPosition">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-8"><code>GeolocationCoordinates</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationposition-coords" id="ref-for-dom-geolocationposition-coords-4"><code>coords</code></a>;</span><span data-idl="" class="idlAttribute" data-title="timestamp" data-dfn-for="GeolocationPosition">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="typedef" href="https://www.w3.org/TR/hr-time-3/#dom-epochtimestamp" id="ref-for-index-term-epochtimestamp-5">EpochTimeStamp</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationposition-timestamp" id="ref-for-dom-geolocationposition-timestamp-5"><code>timestamp</code></a>;</span><span data-idl="" class="idlMethod" data-title="toJSON" data-dfn-for="GeolocationPosition">
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Default" id="ref-for-index-term-default-extended-attribute-3">Default</a></span>]<span class="idlType"> <a data-link-type="interface" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-object" id="ref-for-index-term-object-type-3">object</a></span> <a class="internalDFN idlName" data-link-type="method" href="#dom-geolocationposition-tojson" id="ref-for-dom-geolocationposition-tojson-2"><code>toJSON</code></a>();</span>
 };</span>
 
 <span data-idl="" class="idlInterface" data-title="GeolocationCoordinates">[<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-7">Exposed</a>=Window</span>, <span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-index-term-securecontext-extended-attribute-4">SecureContext</a></span>]
-interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geolocationcoordinates" id="ref-for-dom-geolocationcoordinates-8"><code>GeolocationCoordinates</code></a> {<span data-idl="" class="idlAttribute" data-title="accuracy" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-8">double</a></span> <dfn data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="accuracy" data-dfn-for="GeolocationCoordinates" data-type="double" data-lt="accuracy" data-local-lt="GeolocationCoordinates.accuracy" class="idlName"><code>accuracy</code></dfn>;</span><span data-idl="" class="idlAttribute" data-title="latitude" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-9">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-latitude" id="ref-for-dom-geolocationcoordinates-latitude-3"><code>latitude</code></a>;</span><span data-idl="" class="idlAttribute" data-title="longitude" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-10">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-longitude" id="ref-for-dom-geolocationcoordinates-longitude-3"><code>longitude</code></a>;</span><span data-idl="" class="idlAttribute" data-title="altitude" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-11">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitude" id="ref-for-dom-geolocationcoordinates-altitude-3"><code>altitude</code></a>;</span><span data-idl="" class="idlAttribute" data-title="altitudeAccuracy" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-12">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitudeaccuracy" id="ref-for-dom-geolocationcoordinates-altitudeaccuracy-3"><code>altitudeAccuracy</code></a>;</span><span data-idl="" class="idlAttribute" data-title="heading" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-13">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-heading" id="ref-for-dom-geolocationcoordinates-heading-5"><code>heading</code></a>;</span><span data-idl="" class="idlAttribute" data-title="speed" data-dfn-for="GeolocationCoordinates">
-  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-14">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-speed" id="ref-for-dom-geolocationcoordinates-speed-5"><code>speed</code></a>;</span><span data-idl="" class="idlMethod" data-title="toJSON" data-dfn-for="GeolocationCoordinates">
+interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geolocationcoordinates" id="ref-for-dom-geolocationcoordinates-9"><code>GeolocationCoordinates</code></a> {<span data-idl="" class="idlAttribute" data-title="accuracy" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-14">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-accuracy" id="ref-for-dom-geolocationcoordinates-accuracy-3"><code>accuracy</code></a>;</span><span data-idl="" class="idlAttribute" data-title="latitude" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-15">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-latitude" id="ref-for-dom-geolocationcoordinates-latitude-3"><code>latitude</code></a>;</span><span data-idl="" class="idlAttribute" data-title="longitude" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-16">double</a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-longitude" id="ref-for-dom-geolocationcoordinates-longitude-3"><code>longitude</code></a>;</span><span data-idl="" class="idlAttribute" data-title="altitude" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-17">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitude" id="ref-for-dom-geolocationcoordinates-altitude-3"><code>altitude</code></a>;</span><span data-idl="" class="idlAttribute" data-title="altitudeAccuracy" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-18">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-altitudeaccuracy" id="ref-for-dom-geolocationcoordinates-altitudeaccuracy-3"><code>altitudeAccuracy</code></a>;</span><span data-idl="" class="idlAttribute" data-title="heading" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-19">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-heading" id="ref-for-dom-geolocationcoordinates-heading-4"><code>heading</code></a>;</span><span data-idl="" class="idlAttribute" data-title="speed" data-dfn-for="GeolocationCoordinates">
+  readonly attribute<span class="idlType"> <a data-link-type="idl" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-20">double</a>?</span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-geolocationcoordinates-speed" id="ref-for-dom-geolocationcoordinates-speed-4"><code>speed</code></a>;</span><span data-idl="" class="idlMethod" data-title="toJSON" data-dfn-for="GeolocationCoordinates">
   [<span class="extAttr"><a data-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Default" id="ref-for-index-term-default-extended-attribute-4">Default</a></span>]<span class="idlType"> <a data-link-type="interface" data-type="interface" href="https://webidl.spec.whatwg.org/#idl-object" id="ref-for-index-term-object-type-4">object</a></span> <a class="internalDFN idlName" data-link-type="method" href="#dom-geolocationcoordinates-tojson" id="ref-for-dom-geolocationcoordinates-tojson-2"><code>toJSON</code></a>();</span>
 };</span>
 
@@ -2709,7 +2804,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a class="index-term" href="#dfn-a-new-geolocationposition">A new GeolocationPosition</a> 
     <span class="print-only">§9.6</span></li><li>
       <a class="index-term" href="#dom-geolocationcoordinates-accuracy"><code>accuracy</code></a> attribute for <code>GeolocationCoordinates</code>
-    <span class="print-only">§9.</span></li><li>
+    <span class="print-only">§9.1</span></li><li>
       <a class="index-term" href="#dfn-acquire-a-position">acquire a position</a> 
     <span class="print-only">§6.6</span></li><li>
       <a class="index-term" href="#dom-geolocationcoordinates-altitude"><code>altitude</code></a> attribute for <code>GeolocationCoordinates</code>
@@ -2851,11 +2946,15 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   </li><li>
     <span class="index-term" data-href="https://infra.spec.whatwg.org/#list-contain" id="index-term-contains-for-list" tabindex="0" aria-haspopup="dialog">contains (for <code>list</code>)</span>
   </li><li>
+    <span class="index-term" data-href="https://infra.spec.whatwg.org/#map-iterate" id="index-term-for-each-for-map" tabindex="0" aria-haspopup="dialog">For each (for <code>map</code>)</span>
+  </li><li>
     <span class="index-term" data-href="https://infra.spec.whatwg.org/#implementation-defined" id="index-term-implementation-defined" tabindex="0" aria-haspopup="dialog">implementation-defined</span>
   </li><li>
     <span class="index-term" data-href="https://infra.spec.whatwg.org/#list-item" id="index-term-item-for-list" tabindex="0" aria-haspopup="dialog">item (for <code>list</code>)</span>
   </li><li>
     <span class="index-term" data-href="https://infra.spec.whatwg.org/#list" id="index-term-list" tabindex="0" aria-haspopup="dialog">list</span>
+  </li><li>
+    <span class="index-term" data-href="https://infra.spec.whatwg.org/#ordered-map" id="index-term-map" tabindex="0" aria-haspopup="dialog">map</span>
   </li><li>
     <span class="index-term" data-href="https://infra.spec.whatwg.org/#list-remove" id="index-term-remove-for-list" tabindex="0" aria-haspopup="dialog">Remove (for <code>list</code>)</span>
   </li>
@@ -2893,6 +2992,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         [<cite><a class="bibref" data-link-type="biblio" href="#bib-permissions-policy">PERMISSIONS-POLICY</a></cite>] defines the following:
         <ul>
           <li>
+    <span class="index-term" data-href="https://www.w3.org/TR/permissions-policy-1/#default-allowlist-self" id="index-term-self-for-default-allowlist" tabindex="0" aria-haspopup="dialog">'self' (for default allowlist)</span>
+  </li><li>
     <span class="index-term" data-href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature-default-allowlist" id="index-term-default-allowlist-for-policy-controlled-feature" tabindex="0" aria-haspopup="dialog">default allowlist (for policy-controlled feature)</span>
   </li><li>
     <span class="index-term" data-href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature" id="index-term-policy-controlled-feature" tabindex="0" aria-haspopup="dialog">policy-controlled feature</span>
@@ -2960,11 +3061,11 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </h2><a class="self-link" href="#changelog" aria-label="Permalink for Section D."></a></div><p><em>This section is non-normative.</em></p>
       
       <p>
-        Since First Public Working Draft in 2021, the <cite>Geolocation
-        API</cite> has received the following normative changes:
+        Since First Public Working Draft in 2021, <cite>Geolocation</cite> has
+        received the following normative changes:
       </p>
        <rs-changelog from="FPWD" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation-api/commit/7082b4e">Fix references to "default allowlist"</a> (<a href="https://github.com/w3c/geolocation-api/pull/133">#133</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation-api/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation-api/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation-api/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation-api/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation-api/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation-api/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation-api/pull/87">#87</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/f8b930f">Added webapps as group</a> (<a href="https://github.com/w3c/geolocation-api/pull/144">#144</a>)</li><li><a href="https://github.com/w3c/geolocation-api/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation-api/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation-api/pull/157">#157</a>)</li>
+      <li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/f8b930f">Added webapps as group</a> (<a href="https://github.com/w3c/geolocation/pull/144">#144</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/7082b4e">Fix references to "default allowlist"</a> (<a href="https://github.com/w3c/geolocation/pull/133">#133</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation/pull/87">#87</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li>
       </ul></rs-changelog>
       <p>
         Since publication of the Second Edition in 2016, this specification
@@ -2999,7 +3100,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         </li>
       </ul>
       <p>
-        See the <a href="https://github.com/w3c/geolocation-api/commits/gh-pages">commit
+        See the <a href="https://github.com/w3c/geolocation/commits/gh-pages">commit
         history</a> for a complete list of changes.
       </p>
     </section>
@@ -3016,7 +3117,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </dd><dt id="bib-permissions">[Permissions]</dt><dd>
       <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 19 March 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
     </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 18 December 2023. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
+      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 24 July 2024. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
       <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
     </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
@@ -3141,7 +3242,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <li>
       <a href="#ref-for-dfn-cachedposition-1" title="§ 6.1 Internal slots">§ 6.1 Internal slots</a> 
     </li><li>
-      <a href="#ref-for-dfn-cachedposition-2" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-dfn-cachedposition-3" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dfn-cachedposition-2" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-dfn-cachedposition-3" title="Reference 2">(2)</a> <a href="#ref-for-dfn-cachedposition-4" title="Reference 3">(3)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-watchids" aria-label="Links in this document to definition: [[watchIDs]]">
@@ -3315,13 +3416,13 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <li>
       <a href="#ref-for-dom-positionoptions-enablehighaccuracy-1" title="§ 1. Introduction">§ 1. Introduction</a> 
     </li><li>
-      <a href="#ref-for-dom-positionoptions-enablehighaccuracy-2" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-dom-positionoptions-enablehighaccuracy-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-positionoptions-enablehighaccuracy-4" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dom-positionoptions-enablehighaccuracy-2" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-dom-positionoptions-enablehighaccuracy-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-positionoptions-enablehighaccuracy-4" title="Reference 3">(3)</a> <a href="#ref-for-dom-positionoptions-enablehighaccuracy-5" title="Reference 4">(4)</a> 
     </li><li>
-      <a href="#ref-for-dom-positionoptions-enablehighaccuracy-5" title="§ 7. PositionOptions dictionary">§ 7. PositionOptions dictionary</a> 
+      <a href="#ref-for-dom-positionoptions-enablehighaccuracy-6" title="§ 7. PositionOptions dictionary">§ 7. PositionOptions dictionary</a> 
     </li><li>
-      <a href="#ref-for-dom-positionoptions-enablehighaccuracy-6" title="§ 8.4 Internal slots">§ 8.4 Internal slots</a> 
+      <a href="#ref-for-dom-positionoptions-enablehighaccuracy-7" title="§ 8.4 Internal slots">§ 8.4 Internal slots</a> 
     </li><li>
-      <a href="#ref-for-dom-positionoptions-enablehighaccuracy-7" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-positionoptions-enablehighaccuracy-8" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-positionoptions-timeout" aria-label="Links in this document to definition: timeout">
@@ -3383,9 +3484,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </li><li>
       <a href="#ref-for-dom-geolocationposition-6" title="§ 8.4 Internal slots">§ 8.4 Internal slots</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationposition-7" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> 
+      <a href="#ref-for-dom-geolocationposition-7" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationposition-8" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationposition-8" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-geolocationposition-9" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationposition-coords" aria-label="Links in this document to definition: coords">
@@ -3399,9 +3500,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <li>
       <a href="#ref-for-dom-geolocationposition-coords-1" title="§ 8. GeolocationPosition interface">§ 8. GeolocationPosition interface</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationposition-coords-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> 
+      <a href="#ref-for-dom-geolocationposition-coords-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationposition-coords-3" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationposition-coords-3" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-geolocationposition-coords-4" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationposition-timestamp" aria-label="Links in this document to definition: timestamp">
@@ -3417,9 +3518,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </li><li>
       <a href="#ref-for-dom-geolocationposition-timestamp-2" title="§ 8. GeolocationPosition interface">§ 8. GeolocationPosition interface</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationposition-timestamp-3" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> 
+      <a href="#ref-for-dom-geolocationposition-timestamp-3" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationposition-timestamp-4" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationposition-timestamp-4" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-geolocationposition-timestamp-5" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationposition-tojson" aria-label="Links in this document to definition: toJSON()">
@@ -3447,7 +3548,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <li>
       <a href="#ref-for-dfn-ishighaccuracy-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
     </li><li>
-      <a href="#ref-for-dfn-ishighaccuracy-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> 
+      <a href="#ref-for-dfn-ishighaccuracy-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dfn-ishighaccuracy-3" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-geolocation-task-source" aria-label="Links in this document to definition: geolocation task source">
@@ -3459,9 +3560,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-geolocation-task-source-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
+      <a href="#ref-for-dfn-geolocation-task-source-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-dfn-geolocation-task-source-2" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-geolocation-task-source-2" title="§ 6.7 Call back with error">§ 6.7 Call back with error</a> 
+      <a href="#ref-for-dfn-geolocation-task-source-3" title="§ 6.7 Call back with error">§ 6.7 Call back with error</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationcoordinates" aria-label="Links in this document to definition: GeolocationCoordinates">
@@ -3479,21 +3580,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </li><li>
       <a href="#ref-for-dom-geolocationcoordinates-3" title="§ 9.5 toJSON() method">§ 9.5 toJSON() method</a> <a href="#ref-for-dom-geolocationcoordinates-4" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-5" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-6" title="Reference 2">(2)</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-5" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-6" title="Reference 2">(2)</a> <a href="#ref-for-dom-geolocationcoordinates-7" title="Reference 3">(3)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-7" title="§ A. IDL Index">§ A. IDL Index</a> <a href="#ref-for-dom-geolocationcoordinates-8" title="Reference 2">(2)</a> 
-    </li>
-  </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationcoordinates-accuracy" aria-label="Links in this document to definition: accuracy">
-      <span class="caret"></span>
-      <div>
-        <a class="self-link" href="#dom-geolocationcoordinates-accuracy" aria-label="Permalink for definition: accuracy. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> 
-      </div>
-      <p><b>Referenced in:</b></p>
-      <ul>
-    <li>
-      <a href="#ref-for-dom-geolocationcoordinates-accuracy-1" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-8" title="§ A. IDL Index">§ A. IDL Index</a> <a href="#ref-for-dom-geolocationcoordinates-9" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationcoordinates-latitude" aria-label="Links in this document to definition: latitude">
@@ -3526,6 +3615,22 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="#ref-for-dom-geolocationcoordinates-longitude-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> 
     </li><li>
       <a href="#ref-for-dom-geolocationcoordinates-longitude-3" title="§ A. IDL Index">§ A. IDL Index</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationcoordinates-accuracy" aria-label="Links in this document to definition: accuracy">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dom-geolocationcoordinates-accuracy" aria-label="Permalink for definition: accuracy. Activate to close this dialog.">Permalink</a>
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dom-geolocationcoordinates-accuracy-1" title="§ 9. GeolocationCoordinates interface">§ 9. GeolocationCoordinates interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-geolocationcoordinates-accuracy-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> 
+    </li><li>
+      <a href="#ref-for-dom-geolocationcoordinates-accuracy-3" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationcoordinates-altitude" aria-label="Links in this document to definition: altitude">
@@ -3571,9 +3676,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <li>
       <a href="#ref-for-dom-geolocationcoordinates-heading-1" title="§ 9. GeolocationCoordinates interface">§ 9. GeolocationCoordinates interface</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-heading-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-heading-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-geolocationcoordinates-heading-4" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-heading-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-heading-3" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-heading-5" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-heading-4" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationcoordinates-speed" aria-label="Links in this document to definition: speed">
@@ -3587,9 +3692,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <li>
       <a href="#ref-for-dom-geolocationcoordinates-speed-1" title="§ 9. GeolocationCoordinates interface">§ 9. GeolocationCoordinates interface</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-speed-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-speed-3" title="Reference 2">(2)</a> <a href="#ref-for-dom-geolocationcoordinates-speed-4" title="Reference 3">(3)</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-speed-2" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-dom-geolocationcoordinates-speed-3" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocationcoordinates-speed-5" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-geolocationcoordinates-speed-4" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationcoordinates-tojson" aria-label="Links in this document to definition: toJSON()">
@@ -3615,9 +3720,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-a-new-geolocationposition-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
+      <a href="#ref-for-dfn-a-new-geolocationposition-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-dfn-a-new-geolocationposition-2" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-dfn-a-new-geolocationposition-2" title="§ 8.4 Internal slots">§ 8.4 Internal slots</a> 
+      <a href="#ref-for-dfn-a-new-geolocationposition-3" title="§ 8.4 Internal slots">§ 8.4 Internal slots</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocationpositionerror" aria-label="Links in this document to definition: GeolocationPositionError">
@@ -3747,9 +3852,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </li><li>
       <a href="#ref-for-index-term-epochtimestamp-2" title="§ 8. GeolocationPosition interface">§ 8. GeolocationPosition interface</a> 
     </li><li>
-      <a href="#ref-for-index-term-epochtimestamp-3" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> 
+      <a href="#ref-for-index-term-epochtimestamp-3" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-index-term-epochtimestamp-4" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-index-term-epochtimestamp-4" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-index-term-epochtimestamp-5" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-allow-attribute-for-iframe-element" aria-label="Links in this document to definition: allow attribute (for iframe element)">
@@ -3933,9 +4038,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-index-term-queue-a-task-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
+      <a href="#ref-for-index-term-queue-a-task-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-index-term-queue-a-task-2" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-index-term-queue-a-task-2" title="§ 6.7 Call back with error">§ 6.7 Call back with error</a> 
+      <a href="#ref-for-index-term-queue-a-task-3" title="§ 6.7 Call back with error">§ 6.7 Call back with error</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-realm-for-environment-settings-object" aria-label="Links in this document to definition: realm (for environment settings object)">
@@ -4016,6 +4121,18 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="#ref-for-index-term-contains-for-list-2" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
     </li>
   </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-for-each-for-map" aria-label="Links in this document to definition: For each (for map)">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="https://infra.spec.whatwg.org/#map-iterate" aria-label="Permalink for definition: For each (for map). Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-index-term-for-each-for-map-1" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> 
+    </li>
+  </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-implementation-defined" aria-label="Links in this document to definition: implementation-defined">
       <span class="caret"></span>
       <div>
@@ -4050,6 +4167,20 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <ul>
     <li>
       <a href="#ref-for-index-term-list-1" title="§ 6.1 Internal slots">§ 6.1 Internal slots</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-map" aria-label="Links in this document to definition: map">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="https://infra.spec.whatwg.org/#ordered-map" aria-label="Permalink for definition: map. Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-index-term-map-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-index-term-map-2" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-index-term-map-3" title="§ 9.6 Constructing a GeolocationPosition">§ 9.6 Constructing a GeolocationPosition</a> <a href="#ref-for-index-term-map-4" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-remove-for-list" aria-label="Links in this document to definition: Remove (for list)">
@@ -4216,6 +4347,18 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="#ref-for-index-term-request-permission-to-use-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
     </li>
   </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-self-for-default-allowlist" aria-label="Links in this document to definition: 'self' (for default allowlist)">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="https://www.w3.org/TR/permissions-policy-1/#default-allowlist-self" aria-label="Permalink for definition: 'self' (for default allowlist). Activate to close this dialog.">Permalink</a>
+         
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-index-term-self-for-default-allowlist-1" title="§ 11. Permissions policy">§ 11. Permissions policy</a> 
+    </li>
+  </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-default-allowlist-for-policy-controlled-feature" aria-label="Links in this document to definition: default allowlist (for policy-controlled feature)">
       <span class="caret"></span>
       <div>
@@ -4311,9 +4454,11 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-index-term-double-type-1" title="§ 9. GeolocationCoordinates interface">§ 9. GeolocationCoordinates interface</a> <a href="#ref-for-index-term-double-type-2" title="Reference 2">(2)</a> <a href="#ref-for-index-term-double-type-3" title="Reference 3">(3)</a> <a href="#ref-for-index-term-double-type-4" title="Reference 4">(4)</a> <a href="#ref-for-index-term-double-type-5" title="Reference 5">(5)</a> <a href="#ref-for-index-term-double-type-6" title="Reference 6">(6)</a> <a href="#ref-for-index-term-double-type-7" title="Reference 7">(7)</a> 
+      <a href="#ref-for-index-term-double-type-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-index-term-double-type-2" title="Reference 2">(2)</a> <a href="#ref-for-index-term-double-type-3" title="Reference 3">(3)</a> <a href="#ref-for-index-term-double-type-4" title="Reference 4">(4)</a> <a href="#ref-for-index-term-double-type-5" title="Reference 5">(5)</a> <a href="#ref-for-index-term-double-type-6" title="Reference 6">(6)</a> 
     </li><li>
-      <a href="#ref-for-index-term-double-type-8" title="§ A. IDL Index">§ A. IDL Index</a> <a href="#ref-for-index-term-double-type-9" title="Reference 2">(2)</a> <a href="#ref-for-index-term-double-type-10" title="Reference 3">(3)</a> <a href="#ref-for-index-term-double-type-11" title="Reference 4">(4)</a> <a href="#ref-for-index-term-double-type-12" title="Reference 5">(5)</a> <a href="#ref-for-index-term-double-type-13" title="Reference 6">(6)</a> <a href="#ref-for-index-term-double-type-14" title="Reference 7">(7)</a> 
+      <a href="#ref-for-index-term-double-type-7" title="§ 9. GeolocationCoordinates interface">§ 9. GeolocationCoordinates interface</a> <a href="#ref-for-index-term-double-type-8" title="Reference 2">(2)</a> <a href="#ref-for-index-term-double-type-9" title="Reference 3">(3)</a> <a href="#ref-for-index-term-double-type-10" title="Reference 4">(4)</a> <a href="#ref-for-index-term-double-type-11" title="Reference 5">(5)</a> <a href="#ref-for-index-term-double-type-12" title="Reference 6">(6)</a> <a href="#ref-for-index-term-double-type-13" title="Reference 7">(7)</a> 
+    </li><li>
+      <a href="#ref-for-index-term-double-type-14" title="§ A. IDL Index">§ A. IDL Index</a> <a href="#ref-for-index-term-double-type-15" title="Reference 2">(2)</a> <a href="#ref-for-index-term-double-type-16" title="Reference 3">(3)</a> <a href="#ref-for-index-term-double-type-17" title="Reference 4">(4)</a> <a href="#ref-for-index-term-double-type-18" title="Reference 5">(5)</a> <a href="#ref-for-index-term-double-type-19" title="Reference 6">(6)</a> <a href="#ref-for-index-term-double-type-20" title="Reference 7">(7)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-exposed-extended-attribute" aria-label="Links in this document to definition: [Exposed] extended attribute">
@@ -4345,9 +4490,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-index-term-invokes-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
+      <a href="#ref-for-index-term-invokes-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-index-term-invokes-2" title="Reference 2">(2)</a> 
     </li><li>
-      <a href="#ref-for-index-term-invokes-2" title="§ 6.7 Call back with error">§ 6.7 Call back with error</a> 
+      <a href="#ref-for-index-term-invokes-3" title="§ 6.7 Call back with error">§ 6.7 Call back with error</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-long-type" aria-label="Links in this document to definition: long type">
@@ -4425,7 +4570,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </li><li>
       <a href="#ref-for-index-term-this-7" title="§ 6.4 clearWatch() method">§ 6.4 clearWatch() method</a> 
     </li><li>
-      <a href="#ref-for-index-term-this-8" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-index-term-this-9" title="Reference 2">(2)</a> <a href="#ref-for-index-term-this-10" title="Reference 3">(3)</a> 
+      <a href="#ref-for-index-term-this-8" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-index-term-this-9" title="Reference 2">(2)</a> <a href="#ref-for-index-term-this-10" title="Reference 3">(3)</a> <a href="#ref-for-index-term-this-11" title="Reference 4">(4)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-undefined-type" aria-label="Links in this document to definition: undefined type">
