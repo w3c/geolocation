@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script
+      src="https://www.w3.org/Tools/respec/respec-w3c"
+      async
+      class="remove"
+    ></script>
+    <script class="remove">
+      // All config options at https://respec.org/docs/
+      var respecConfig = {
+        // Working Groups ids at https://respec.org/w3c/groups/
+        specStatus: "base",
+        editors: [
+          {
+            name: "Marcos Cáceres",
+          },
+        ],
+        latestVersion: null,
+        // See https://respec.org/docs/#xref for usage.
+        xref: "web-platform",
+      };
+    </script>
+    <style>
+      .pass {
+        background-color: green;
+        color: white;
+      }
+      .fail {
+        background-color: red;
+        color: white;
+      }
+    </style>
+    <title>Geolocation - Implementation Report</title>
+  </head>
+  <body>
+    <section id="abstract">
+      <p>This is an implementation report for [[Geolocation]].</p>
+    </section>
+    <h2>Tested assertions</h2>
+    <p data-cite="permissions">
+      As Geolocation requires explicit permission grant to be used (via a
+      browser UI), the following assertions were tested manually to assure
+      interoperability across browser engines.
+    </p>
+    <p class="note" title="Why we are not using wpt.fyi">
+      As some of the tests rely on the [[Permissions]] specifications automation
+      API, which is only partially supported in Chrome, some the test were
+      modified locally to get them to pass across browser engines. However, the
+      working group expects that eventually all browser engines will support the
+      [[Permissions]]'s automation API and wpt.fyi will reflect
+      <a
+        href="https://wpt.fyi/results/geolocation?label=experimental&amp;label=master&amp;aligned"
+      >
+        accurate results</a
+      >
+      for [[Geolocation]].
+    </p>
+    <table class="simple data">
+      <tr>
+        <th>Test</th>
+        <th>Chromium</th>
+        <th>Gecko</th>
+        <th>WebKit</th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/PositionOptions.https.html"
+            >PositionOptions.https.html</a
+          >
+        </td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/clearWatch_TypeError.https.html"
+            >clearWatch_TypeError.https.html</a
+          >
+        </td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/disabled-by-permissions-policy.https.sub.html"
+            >disabled-by-permissions-policy.https.sub.html</a
+          >
+        </td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html"
+            >enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html</a
+          >
+        </td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute.https.sub.html"
+            >enabled-by-permission-policy-attribute.https.sub.html</a
+          >
+        </td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/enabled-by-permissions-policy.https.sub.html"
+            >enabled-by-permissions-policy.https.sub.html</a
+          >
+        </td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/enabled-on-self-origin-by-permissions-policy.https.sub.html"
+            >enabled-on-self-origin-by-permissions-policy.https.sub.html</a
+          >
+        </td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/getCurrentPosition_TypeError.https.html"
+            >getCurrentPosition_TypeError.https.html</a
+          >
+        </td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/getCurrentPosition_permission_allow.https.html"
+            >getCurrentPosition_permission_allow.https.html</a
+          >
+        </td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/getCurrentPosition_permission_deny.https.html"
+            >getCurrentPosition_permission_deny.https.html</a
+          >
+        </td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/idlharness.https.window.js"
+            >idlharness.https.window.js</a
+          >
+        </td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+        <td>UNTESTED</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/non-fully-active.https.html"
+            >non-fully-active.https.html</a
+          >
+        </td>
+        <td class="fail">FAIL</td>
+        <td class="pass">PASS</td>
+        <td class="fail">FAIL</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/non-secure-contexts.http.html"
+            >non-secure-contexts.http.html</a
+          >
+        </td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/permission.https.html"
+            >permission.https.html</a
+          >
+        </td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/watchPosition_TypeError.https.html"
+            >watchPosition_TypeError.https.html</a
+          >
+        </td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+      </tr>
+      <tr>
+        <td>
+          <a
+            href="https://wpt.live/geolocation/watchPosition_permission_deny.https.html"
+            >watchPosition_permission_deny.https.html</a
+          >
+        </td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+      </tr>
+    </table>
+    <h2>
+      Is each feature of the current specification implemented, and how is this
+      demonstrated?
+    </h2>
+    <p>
+      The current specification features are implemented across major browsers
+      like Chrome, Firefox, and Safari. This is demonstrated through the
+      aforementioned web platform tests (WPT), which verify the implementation
+      of the specification's features, such as obtaining the location, handling
+      permissions, and responding to errors.
+    </p>
+    <h2>
+      Are there independent interoperable implementations of the current
+      specification?
+    </h2>
+    <p>
+      Yes, there are independent interoperable implementations of the Major web
+      browsers such as Chrome, Firefox, and Safari provide their own
+      implementations, which have been tested to ensure they conform to the
+      W3C's specifications and work interoperability across different platforms
+      and operating systems.
+    </p>
+    <h2>
+      Are there implementations created by people other than the authors of the
+      specification?
+    </h2>
+    <p>
+      Yes, implementations of Geolocation have been created by various browser
+      vendors who are not necessarily the editors of the specification. This
+      includes engineers from Google, Mozilla, Microsoft, and Apple, among
+      others, ensuring a broad base of experience and design input is reflected
+      in the API.
+    </p>
+    <h2>Are implementations publicly deployed?</h2>
+    <p>
+      Yes, the implementations of Geolocation are publicly deployed and widely
+      used in web applications. These are accessible in consumer-level browsers,
+      allowing developers to incorporate geolocation features into their
+      websites and applications, enhancing user experience with location-based
+      services.
+    </p>
+    <h2>
+      Is there implementation experience at all levels of the specification's
+      ecosystem (authoring, consuming, publishing…)?
+    </h2>
+    <p>
+      There is substantial implementation experience at all levels of the
+      specification's ecosystem. Developers use the API to author location-based
+      services, consumers use these features in daily web interactions, and
+      publishers integrate these capabilities into various applications for
+      enhanced contextual experiences.
+    </p>
+    <h2>Are there reports of difficulties or problems with implementation?</h2>
+    <p>
+      While the core functionality of Geolocation is well-supported, developers
+      occasionally report difficulties related to privacy concerns, varying
+      accuracy levels, and handling user permissions across different browsers
+      and devices. These issues are typically addressed through updates to the
+      specification and improvements in browser implementations.
+    </p>
+  </body>
+</html>
