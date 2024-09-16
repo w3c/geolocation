@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 35.1.1">
+<meta name="generator" content="ReSpec 35.1.2">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -159,7 +159,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="9d5829e74ed1f6971452fb3b16fe1857e09ed20c">
+<meta name="revision" content="841f1c63b2739bbc828fe8323c169daa2c864bd5">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
@@ -233,9 +233,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "9d5829e74ed1f6971452fb3b16fe1857e09ed20c",
-  "publishISODate": "2024-08-15T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 15 August 2024"
+  "gitRevision": "841f1c63b2739bbc828fe8323c169daa2c864bd5",
+  "publishISODate": "2024-09-16T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 16 September 2024"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
 <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://www.w3.org/StyleSheets/TR/2021/dark.css"></head>
@@ -243,7 +243,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-08-15">15 August 2024</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2024-09-16">16 September 2024</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -319,7 +319,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         2022, the following substantive additions and/or corrections have been
         proposed:
       </p><rs-changelog from="REC-2022" filter="updateableRecFilter"><ul>
-      <li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li>
+      <li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li>
       </ul></rs-changelog>
       <p>
         A more detailed list of changes can be found in section
@@ -2149,7 +2149,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           "decimal degrees."
         </aside>
         <aside class="addition" id="a3">
-          <span class="marker">Candidate Correction:</span> To improve clarity
+          <span class="marker">Candidate Addition:</span> To improve clarity
           and precision, a description of the accuracy attribute has been
           added, defining it as meters of radius.
         </aside>
@@ -3065,7 +3065,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         received the following normative changes:
       </p>
        <rs-changelog from="FPWD" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/f8b930f">Added webapps as group</a> (<a href="https://github.com/w3c/geolocation/pull/144">#144</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/7082b4e">Fix references to "default allowlist"</a> (<a href="https://github.com/w3c/geolocation/pull/133">#133</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation/pull/87">#87</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li>
+      <li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/f8b930f">Added webapps as group</a> (<a href="https://github.com/w3c/geolocation/pull/144">#144</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/7082b4e">Fix references to "default allowlist"</a> (<a href="https://github.com/w3c/geolocation/pull/133">#133</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation/pull/87">#87</a>)</li>
       </ul></rs-changelog>
       <p>
         Since publication of the Second Edition in 2016, this specification
