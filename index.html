@@ -799,6 +799,23 @@
           <li>Let |acquisitionTime:EpochTimeStamp| be a new {{EpochTimeStamp}}
           that represents now.
           </li>
+          <li>Let |emulated position data| be [=get emulated position data=]
+          passing [=this=].
+          </li>
+          <li>If |emulated position data| is not null:
+            <ol>
+              <li>Let |position| be [=a new `GeolocationPosition`=] passing
+                |emulated position data|, |acquisitionTime| and
+                |options|.{{PositionOptions/enableHighAccuracy}}.
+              </li>
+              <li>[=Queue a task=] on the [=geolocation task source=] with a
+                step that [=invokes=] |successCallback| with « |position| » and
+                "`report`".
+              </li>
+              <li>Terminate this algorithm.
+              </li>
+            </ol>
+          </li>
           <li>Let |timeoutTime| be the sum of |acquisitionTime| and
           |options|.{{PositionOptions/timeout}}.
           </li>
@@ -1471,6 +1488,48 @@
         by the token string <a>"geolocation"</a>. Its [=policy-controlled
         feature/default allowlist=] is [=default allowlist/'self'=].
       </p>
+    </section>
+    <section data-cite="html">
+      <h2>
+        Emulation
+      </h2>
+      <p>
+        For the purposes of user-agent automation and application testing, this
+        document defines geolocation emulations.
+      </p>
+      <p>
+        Each [=top-level traversable=] has an associated
+        <code>"emulated position data"</code>, which is data representing
+        {{GeolocationCoordinates}} or null, initially null.
+      </p>
+      <p>
+        To <dfn class="export">set emulated position data</dfn>, given
+        [=navigable=] |navigable| and an optional |emulated position data|:
+      </p>
+      <ol class="algorithm">
+        <li>Let |traversable| be |navigable|’s [=navigable/top-level traversable=].
+        </li>
+        <li>If |traversable| is not null, set |traversable|'s associated
+          <code>"emulated position data"</code> to |emulated position data|.
+        </li>
+      </ol>
+      <p>
+        To <dfn>get emulated position data</dfn>, given {{Geolocation}}
+        |geolocation|:
+      </p>
+      <ol class="algorithm">
+        <li>Let |navigable| be |geolocation|'s [=relevant global object=]'s
+          [=associated `Document`=]'s [=node navigable=].
+        </li>
+        <li>If |navigable| is null, return null.
+        </li>
+        <li>Let |traversable| be |navigable|’s [=navigable/top-level traversable=].
+        </li>
+        <li>If |traversable| is null, return null.
+        </li>
+        <li>Return |traversable|'s associated <code>"emulated position data"</code>.
+        </li>
+      </ol>
     </section>
     <section id="conformance"></section>
     <section id="idl-index" class="appendix">
