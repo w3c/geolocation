@@ -802,24 +802,32 @@
           <li>Let |acquisitionTime:EpochTimeStamp| be a new {{EpochTimeStamp}}
           that represents now.
           </li>
-          <ins cite="#a4">
-            <li>Let |emulated position data| be [=get emulated position data=]
-            passing [=this=].
-            </li>
-            <li>If |emulated position data| is not null:
+          <li>
+            <ins cite="#a4"> Check if the emulated position data should be used by running
+              the following steps:
               <ol>
-                <li>Let |position| be [=a new `GeolocationPosition`=] passing
-                  |emulated position data|, |acquisitionTime| and
-                  |options|.{{PositionOptions/enableHighAccuracy}}.
+                <li>Let |emulated position data| be [=get emulated position
+                  data=]
+                  passing [=this=].
                 </li>
-                <li>[=Queue a task=] on the [=geolocation task source=] with a
-                  step that [=invokes=] |successCallback| with « |position| » and
-                  "`report`".
-                </li>
-                <li>Terminate this algorithm.
+                <li>If |emulated position data| is not null:
+                  <ol>
+                    <li>Let |position| be [=a new `GeolocationPosition`=]
+                      passing
+                      |emulated position data|, |acquisitionTime| and
+                      |options|.{{PositionOptions/enableHighAccuracy}}.
+                    </li>
+                    <li>[=Queue a task=] on the [=geolocation task source=] with
+                      a step that [=invokes=] |successCallback| with
+                      « |position| » and "`report`".
+                    </li>
+                    <li>Terminate this algorithm.
+                    </li>
+                  </ol>
                 </li>
               </ol>
-            </li></ins>
+            </ins>
+          </li>
           <li>Let |timeoutTime| be the sum of |acquisitionTime| and
           |options|.{{PositionOptions/timeout}}.
           </li>
