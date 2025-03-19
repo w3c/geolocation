@@ -752,10 +752,7 @@
                     change of geographic position is left to the
                     implementation. User agents MAY impose a rate limit on how
                     frequently position changes are reported.
-                    <aside class="addition" id="a4">
-                      <span class="marker">Candidate Addition:</span> Update
-                      position in watchers when emulated position data is set.
-                    </aside><ins cite="#a4"> User agents MUST consider
+                    <ins cite="#a4"> User agents MUST consider
                     invoking [=set emulated position data=] as a significant
                     change.</ins>
                   </li>
@@ -805,10 +802,7 @@
           <li>Let |acquisitionTime:EpochTimeStamp| be a new {{EpochTimeStamp}}
           that represents now.
           </li>
-          <aside class="addition" id="a4">
-            <span class="marker">Candidate Addition:</span> If emulated position
-            data is set, use it instead of the real position.
-          </aside><ins cite="#a4">
+          <ins cite="#a4">
             <li>Let |emulated position data| be [=get emulated position data=]
             passing [=this=].
             </li>
