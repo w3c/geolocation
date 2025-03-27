@@ -806,12 +806,22 @@
             <ins cite="#a4"> Check if the emulated position data should be used by running
               the following steps:
               <ol>
-                <li>Let |emulated position data| be [=get emulated position
-                  data=]
+                <li>Let |emulated position data| be [=get emulated position data=]
                   passing [=this=].
                 </li>
                 <li>If |emulated position data| is not null:
                   <ol>
+                    <li> if |emulated position data| is
+                      {{GeolocationPositionError}}:
+                      <ol>
+                        <li>[=Call back with error=] passing |errorCallback| and
+                          |emulated position data|.
+                        </li>
+                        <li>Terminate this algorithm.
+                          terminate this algorithm.
+                        </li>
+                      </ol>
+                    </li>
                     <li>Let |position| be [=a new `GeolocationPosition`=]
                       passing
                       |emulated position data|, |acquisitionTime| and
@@ -1516,13 +1526,17 @@
         <p>
           Each [=top-level traversable=] has an associated
           <code>"emulated position data"</code>, which is data representing
-          {{GeolocationCoordinates}} or null, initially null.
+          {{GeolocationCoordinates}}, {{GeolocationPositionError}} or null,
+          initially null.
         </p>
         <p>
           To <dfn class="export">set emulated position data</dfn>, given
           [=navigable=] |navigable| and an optional |emulated position data|:
         </p>
         <ol class="algorithm">
+          <li>Assert |emulated position data| is either null, a
+            {{GeolocationCoordinates}}, or a {{GeolocationPositionError}}.
+          </li>
           <li>Let |traversable| be |navigable|’s [=navigable/top-level traversable=].
           </li>
           <li>If |traversable| is not null:
