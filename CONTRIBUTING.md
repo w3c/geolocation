@@ -25,3 +25,5 @@ contributors in the pull request's body or in subsequent comments.
 
  If you are making a pull request on behalf of someone else but you had no part in designing the
  feature, you can remove yourself with the above syntax.
+
+To build a local copy of the specification, please refer to [respec documentation](https://respec.org/docs/#using-command-line).
