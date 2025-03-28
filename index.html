@@ -809,19 +809,18 @@
                 <li>Let |emulatedPositionData| be [=get emulated position data=]
                   passing [=this=].
                 </li>
-                <li>If |emulated position data| is not null:
+                <li>If |emulatedPositionData| is not null:
                   <ol>
                     <li>If |emulatedPositionData| is a {{GeolocationPositionError}}:
                       <ol>
                         <li>[=Call back with error=] passing |errorCallback| and
-                          |emulated position data|.
+                          |emulatedPositionData|.
                         </li>
                         <li>Terminate this algorithm.</li>
                       </ol>
                     </li>
                     <li>Let |position| be [=a new `GeolocationPosition`=]
-                      passing
-                      |emulated position data|, |acquisitionTime| and
+                      passing |emulatedPositionData|, |acquisitionTime| and
                       |options|.{{PositionOptions/enableHighAccuracy}}.
                     </li>
                     <li>[=Queue a task=] on the [=geolocation task source=] with
@@ -1528,10 +1527,10 @@
         </p>
         <p>
           To <dfn class="export">set emulated position data</dfn>, given
-          [=navigable=] |navigable| and an |emulated position data|:
+          [=navigable=] |navigable| and an |emulatedPositionData|:
         </p>
         <ol class="algorithm">
-          <li>Assert |emulated position data| is either null, a
+          <li>Assert |emulatedPositionData| is either null, a
             {{GeolocationCoordinates}}, or a {{GeolocationPositionError}}.
           </li>
           <li>Let |traversable| be |navigable|’s [=navigable/top-level traversable=].
@@ -1539,7 +1538,7 @@
           <li>If |traversable| is not null:
             <ol class="algorithm">
               <li>Set |traversable|'s associated
-                [=top-level traversable/emulated position data=] to |emulated position data|.
+                [=top-level traversable/emulated position data=] to |emulatedPositionData|.
               </li>
               <li>User agents MUST consider this as a "significant change" in the
                 <a href="#wait-for-change">wait for a significant change of
