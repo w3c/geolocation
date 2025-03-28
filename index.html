@@ -811,8 +811,7 @@
                 </li>
                 <li>If |emulated position data| is not null:
                   <ol>
-                    <li> if |emulated position data| is
-                      {{GeolocationPositionError}}:
+                    <li>If |emulatedPositionData| is a {{GeolocationPositionError}}:
                       <ol>
                         <li>[=Call back with error=] passing |errorCallback| and
                           |emulated position data|.
