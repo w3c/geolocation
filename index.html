@@ -802,38 +802,6 @@
           <li>Let |acquisitionTime:EpochTimeStamp| be a new {{EpochTimeStamp}}
           that represents now.
           </li>
-          <li>
-            <ins cite="#a4"> Check if the emulated position data should be used by running
-              the following steps:
-              <ol>
-                <li>Let |emulatedPositionData| be [=get emulated position data=]
-                  passing [=this=].
-                </li>
-                <li>If |emulatedPositionData| is not null:
-                  <ol>
-                    <li>If |emulatedPositionData| is a {{GeolocationPositionError}}:
-                      <ol>
-                        <li>[=Call back with error=] passing |errorCallback| and
-                          |emulatedPositionData|.
-                        </li>
-                        <li>Terminate this algorithm.</li>
-                      </ol>
-                    </li>
-                    <li>Let |position| be [=a new `GeolocationPosition`=]
-                      passing |emulatedPositionData|, |acquisitionTime| and
-                      |options|.{{PositionOptions/enableHighAccuracy}}.
-                    </li>
-                    <li>[=Queue a task=] on the [=geolocation task source=] with
-                      a step that [=invokes=] |successCallback| with
-                      « |position| » and "`report`".
-                    </li>
-                    <li>Terminate this algorithm.
-                    </li>
-                  </ol>
-                </li>
-              </ol>
-            </ins>
-          </li>
           <li>Let |timeoutTime| be the sum of |acquisitionTime| and
           |options|.{{PositionOptions/timeout}}.
           </li>
@@ -858,6 +826,38 @@
               </li>
               <li>If |permission| is "granted":
                 <ol>
+                  <li>
+                    <ins cite="#a4"> Check if the emulated position data should be used by running
+                      the following steps:
+                      <ol>
+                        <li>Let |emulatedPositionData| be [=get emulated position data=]
+                          passing [=this=].
+                        </li>
+                        <li>If |emulatedPositionData| is not null:
+                          <ol>
+                            <li>If |emulatedPositionData| is a {{GeolocationPositionError}}:
+                              <ol>
+                                <li>[=Call back with error=] passing |errorCallback| and
+                                  |emulatedPositionData|.
+                                </li>
+                                <li>Terminate this algorithm.</li>
+                              </ol>
+                            </li>
+                            <li>Let |position| be [=a new `GeolocationPosition`=]
+                              passing |emulatedPositionData|, |acquisitionTime| and
+                              |options|.{{PositionOptions/enableHighAccuracy}}.
+                            </li>
+                            <li>[=Queue a task=] on the [=geolocation task source=] with
+                              a step that [=invokes=] |successCallback| with
+                              « |position| » and "`report`".
+                            </li>
+                            <li>Terminate this algorithm.
+                            </li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </ins>
+                  </li>
                   <li>Let |position| be null.
                   </li>
                   <li>If |cachedPosition| is not null, and
