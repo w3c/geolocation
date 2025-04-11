@@ -752,6 +752,9 @@
                     change of geographic position is left to the
                     implementation. User agents MAY impose a rate limit on how
                     frequently position changes are reported.
+                    <ins cite="#a4"> User agents MUST consider
+                    invoking [=set emulated position data=] as a significant
+                    change.</ins>
                   </li>
                   <li>If |document| is not [=Document/fully active=] or
                   [=Document/visibility state=] is not "visible", go back to
@@ -823,6 +826,38 @@
               </li>
               <li>If |permission| is "granted":
                 <ol>
+                  <li>
+                    <ins cite="#a4">Check if an emulated position should be used by running
+                      the following steps:
+                      <ol>
+                        <li>Let |emulatedPositionData| be [=get emulated position data=]
+                          passing [=this=].
+                        </li>
+                        <li>If |emulatedPositionData| is not null:
+                          <ol>
+                            <li>If |emulatedPositionData| is a {{GeolocationPositionError}}:
+                              <ol>
+                                <li>[=Call back with error=] passing |errorCallback| and
+                                  |emulatedPositionData|.
+                                </li>
+                                <li>Terminate this algorithm.</li>
+                              </ol>
+                            </li>
+                            <li>Let |position| be [=a new `GeolocationPosition`=]
+                              passing |emulatedPositionData|, |acquisitionTime| and
+                              |options|.{{PositionOptions/enableHighAccuracy}}.
+                            </li>
+                            <li>[=Queue a task=] on the [=geolocation task source=] with
+                              a step that [=invokes=] |successCallback| with
+                              « |position| » and "`report`".
+                            </li>
+                            <li>Terminate this algorithm.
+                            </li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </ins>
+                  </li>
                   <li>Let |position| be null.
                   </li>
                   <li>If |cachedPosition| is not null, and
@@ -1472,6 +1507,65 @@
         feature/default allowlist=] is [=default allowlist/'self'=].
       </p>
     </section>
+      <section data-cite="html">
+        <h2>
+          Emulation
+        </h2>
+        <aside class="addition" id="a4">
+          <span class="marker">Candidate Addition:</span> Introduce emulated
+          position data to enable user-agent automation.
+        </aside><ins cite="#a4">
+        <p>
+          For the purposes of user-agent automation and application testing, this
+          document defines geolocation emulations.
+        </p>
+        <p>
+          Each [=top-level traversable=] has an associated
+          <dfn>emulated position data</dfn>, which is data representing
+          {{GeolocationCoordinates}}, {{GeolocationPositionError}} or null,
+          initially null.
+        </p>
+        <p>
+          To <dfn class="export">set emulated position data</dfn>, given
+          [=navigable=] |navigable| and an |emulatedPositionData|:
+        </p>
+        <ol class="algorithm">
+          <li>Assert |emulatedPositionData| is either null, a
+            {{GeolocationCoordinates}}, or a {{GeolocationPositionError}}.
+          </li>
+          <li>Let |traversable| be |navigable|’s [=navigable/top-level traversable=].
+          </li>
+          <li>If |traversable| is not null:
+            <ol class="algorithm">
+              <li>Set |traversable|'s associated [=emulated position data=] to
+                |emulatedPositionData|.
+              </li>
+              <li>User agents MUST consider this as a "significant change" in the
+                <a href="#wait-for-change">wait for a significant change of
+                geographic position</a> step.
+              </li>
+            </ol>
+          </li>
+        </ol>
+        <p>
+          To <dfn>get emulated position data</dfn>, given {{Geolocation}}
+          |geolocation|:
+        </p>
+        <ol class="algorithm">
+          <li>Let |navigable| be |geolocation|'s [=relevant global object=]'s
+            [=associated `Document`=]'s [=node navigable=].
+          </li>
+          <li>If |navigable| is null, return null.
+          </li>
+          <li>Let |traversable| be |navigable|’s [=navigable/top-level traversable=].
+          </li>
+          <li>If |traversable| is null, return null.
+          </li>
+          <li>Return |traversable|'s associated [=emulated position data=].
+          </li>
+        </ol>
+      </ins>
+      </section>
     <section id="conformance"></section>
     <section id="idl-index" class="appendix">
       <!-- All the Web IDL will magically appear here -->
