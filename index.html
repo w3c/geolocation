@@ -101,6 +101,9 @@
         revealing their exact whereabouts.
       </p>
       <p>
+        An approximate location is a less precise, privacy-preserving representation of the user's location. Instead of providing exact coordinates, the user agent might return a location that is intentionally coarsened to a larger area, such as the nearest city, postal code, or a predefined region. This allows users to receive locally relevant information without disclosing their precise position, giving them more control over their privacy.
+      </p>
+      <p>
         If an end user [=check permission|grants permission=],
         <cite>Geolocation</cite>:
       </p>
@@ -565,6 +568,14 @@
           [=origin=], or the relevant browser tab is closed.
         </p>
       </section>
+      <section>
+        <h3>
+          Preventing Precise Location Reconstruction
+        </h3>
+        <p>
+          A malicious actor could potentially infer a user's precise location by collecting and correlating multiple, distinct approximate locations. To mitigate this risk of a refinement attack, when a site receives an approximate location, any subsequent calls from that same site within a user-agent-defined time window SHOULD return the exact same, cached approximate location data. A user agent might, for example, use a time window of 15 minutes.
+        </p>
+      </section>
     </section>
     <section id="security">
       <h2>
@@ -840,17 +851,24 @@
               <li>Set |permission| to [=request permission to use=]
               |descriptor|.
               </li>
+              <li>
+                Let |handle permission denial| be the following steps:
+                <ol>
+                  <li>If |watchId| was passed, [=list/remove=] |watchId| from |watchIDs|.</li>
+                  <li>[=Call back with error=] passing |errorCallback| and {{GeolocationPositionError/PERMISSION_DENIED}}.</li>
+                  <li>Terminate this algorithm.</li>
+                </ol>
+              </li>
               <li data-tests=
               "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-              If |permission| is "denied", then:
+              If |permission| is "denied":
                 <ol>
-                  <li>If |watchId| was passed, [=list/remove=] |watchId| from
-                  |watchIDs|.
-                  </li>
-                  <li>[=Call back with error=] passing |errorCallback| and
-                  {{GeolocationPositionError/PERMISSION_DENIED}}.
-                  </li>
-                  <li>Terminate this algorithm.
+                  <li>If |options|.{{PositionOptions/accuracyMode}} is "approximate", then run |handle permission denial|.</li>
+                  <li>Else:
+                    <ol>
+                      <li>Let |approximatePermission| be [=get the current permission state=] of "geolocation-approximate".</li>
+                      <li>If |approximatePermission| is "denied", then run |handle permission denial|.</li>
+                    </ol>
                   </li>
                 </ol>
               </li>
