@@ -88,26 +88,38 @@
         System (GPS) and location inferred from network signals such as IP
         address, RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs,
         as well as user input. The API itself is agnostic of the underlying
-        location information sources, and no guarantee is given that the API
-        returns the device's actual location.
+        <dfn>location information source</dfn>s, and no guarantee is given that
+        the API returns the device's actual location.
       </p>
       <p>
-        To better protect user privacy, this specification also provides a way
-        for users to share an <em>approximate location</em> instead of a
-        precise one. This is often sufficient for applications that don't need
-        to know the user's exact location, for example, a weather application
-        just needs a city-level location. By sharing an approximate location,
-        users can still get the benefit of a location-aware application without
-        revealing their exact whereabouts.
+        This specification provides two ways for users to share their location:
+        a <em>precise position</em> and an <em>approximate position</em>.
       </p>
       <p>
-        An approximate location is a less precise, privacy-preserving
-        representation of the user's location. Instead of providing exact
-        coordinates, the user agent might return a location that is
-        intentionally coarsened to a larger area, such as the nearest city,
-        postal code, or a predefined region. This allows users to receive
-        locally relevant information without disclosing their precise position,
-        giving them more control over their privacy.
+        A <dfn>precise position</dfn> is a position returned by the underlying
+        [=location information source=]. By default, any location data is
+        considered precise, regardless of its accuracy estimate, unless it has
+        been explicitly coarsened by an [=approximate location information
+        source=] to be an [=approximate position=].
+      </p>
+      <p>
+        An <dfn>approximate position</dfn> is a less precise,
+        privacy-preserving representation of the user's location. Instead of
+        providing precise coordinates, the user agent might return a location
+        that is intentionally coarsened to a larger area, such as the nearest
+        city, postal code, or a predefined region. This is often sufficient for
+        applications that don't need to know the user's [=precise position=],
+        for example, a weather application that only needs a city-level
+        location. By sharing an [=approximate position=], users can still get
+        the benefit of a location-aware application without revealing their
+        [=precise position=].
+      </p>
+      <p>
+        An <dfn>approximate location information source</dfn> is a [=location
+        information source=] that provides an [=approximate position=]. For
+        example, the user agent itself can be an [=approximate location
+        information source=] by taking a [=precise position=] and coarsening
+        it.
       </p>
       <p>
         If an end user [=check permission|grants permission=],
@@ -424,13 +436,13 @@
       </p>
       <p>
         To mitigate this privacy risk, this specification introduces the
-        {{PositionOptions/accuracyMode}} option, which allows users to share an
-        approximate location. This allows applications to function without
-        needing the user's precise whereabouts, thus offering a more
-        privacy-friendly alternative. When an application requests an
-        approximate location, the user agent can provide a less precise
+        {{PositionOptions/accuracyMode}} option, which allows the application
+        to request an [=approximate position=]. This allows applications to
+        function without needing the user's [=precise position=], thus offering
+        a more privacy-friendly alternative. When an application requests an
+        [=approximate position=], the user agent can provide a less precise
         location that still meets the application's needs while protecting the
-        user's exact location.
+        user's [=precise position=].
       </p>
       <section class="informative">
         <h3>
@@ -446,11 +458,12 @@
         </p>
         <p>
           An end-user will generally give [=express permission=] through a user
-          interface. With the introduction of approximate location, this
-          interface SHOULD allow the user to choose between sharing a precise
-          or an approximate location. This choice gives users more control over
+          interface. With the introduction of [=approximate position=], [=User
+          agents=] with support for [=approximate position=] SHOULD allow the
+          user to choose between sharing a [=precise position=] or an
+          [=approximate position=]. This choice gives users more control over
           their privacy, allowing them to share a less precise location when
-          they are not comfortable sharing their exact whereabouts.
+          they are not comfortable sharing their [=precise position=].
         </p>
         <p>
           The user interface will usually present a range of permission
@@ -499,10 +512,12 @@
           In line with this principle, recipients are strongly encouraged to
           request the lowest level of location accuracy that is sufficient for
           their application's functionality. For instance, if an application
-          only needs to know the user's city, it should request an approximate
-          location using the `accuracyMode` option rather than a precise one.
-          This practice of data minimization is a key aspect of respecting user
-          privacy.
+          only needs to know the user's city, it should request an
+          [=approximate position=] by setting the `accuracyMode` option to
+          `"approximate"`. This is preferable to requesting a [=precise
+          position=], which is done by either setting `accuracyMode` to
+          `"precise"` or by leaving the option unset. This practice of data
+          minimization is a key aspect of respecting user privacy.
         </p>
         <p>
           The recipients of location information need to refrain from
@@ -548,10 +563,10 @@
         </h2>
         <p>
           <cite>Geolocation</cite> is a [=default powerful feature=] identified
-          by two permission names: <code><dfn class=
-          "permission">"geolocation"</dfn></code> for precise location and
+          by the [=powerful feature/name=]s <code><dfn class=
+          "permission">"geolocation"</dfn></code> for [=precise position=] and
           <code><dfn class="permission">"geolocation-approximate"</dfn></code>
-          for approximate location.
+          for [=approximate position=].
         </p>
         <p>
           When a website requests location access, the user agent [=check
@@ -563,15 +578,16 @@
         <p>
           When <dfn data-local-lt="check permission">checking permission</dfn>
           to use the API, a user agent SHOULD present the user with a choice to
-          grant access to their precise location, their approximate location,
-          or to deny the request. A user agent MAY also suggest time-based
-          [=permission=] [=permission/lifetimes=], such as "24 hours", "1
-          week", or choose to remember the permission [=permission/grant=]
-          indefinitely. However, it is RECOMMENDED that a user agent prioritize
-          restricting the [=permission=] [=permission/lifetime=] to a single
-          session: This can be, for example, until the [=environment settings
-          object/realm=] is destroyed, the end-user [=navigates=] away from the
-          [=origin=], or the relevant browser tab is closed.
+          grant access to their [=precise position=], their [=approximate
+          position=], or to deny the request. A user agent MAY also suggest
+          time-based [=permission=] [=permission/lifetimes=], such as "24
+          hours", "1 week", or choose to remember the permission
+          [=permission/grant=] indefinitely. However, it is RECOMMENDED that a
+          user agent prioritize restricting the [=permission=]
+          [=permission/lifetime=] to a single session: This can be, for
+          example, until the [=environment settings object/realm=] is
+          destroyed, the end-user [=navigates=] away from the [=origin=], or
+          the relevant browser tab is closed.
         </p>
       </section>
       <section>
@@ -579,13 +595,14 @@
           Preventing Precise Location Reconstruction
         </h3>
         <p>
-          A malicious actor could potentially infer a user's precise location
-          by collecting and correlating multiple, distinct approximate
-          locations. To mitigate this risk of a refinement attack, when a site
-          receives an approximate location, any subsequent calls from that same
-          site within a user-agent-defined time window SHOULD return the exact
-          same, cached approximate location data. A user agent might, for
-          example, use a time window of 15 minutes.
+          A malicious actor could potentially infer a user's [=precise
+          position=] by collecting and correlating multiple, distinct
+          [=approximate position=]s. To mitigate this risk of a refinement
+          attack, when a site receives an [=approximate position=], any
+          subsequent calls from that same site within a user-agent-defined time
+          window SHOULD return the exact same, cached [=approximate position=]
+          data. A user agent might, for example, use a time window of 15
+          minutes.
         </p>
       </section>
     </section>
@@ -662,9 +679,9 @@
             </td>
             <td>
               A {{GeolocationPosition}}, initialized to null. It's a reference
-              to the last acquired precise position and serves as a cache. A
-              user agent MAY evict {{Geolocation/[[cachedPrecisePosition]]}} by
-              resetting it to null at any time for any reason.
+              to the last acquired [=precise position=] and serves as a cache.
+              A user agent MAY evict {{Geolocation/[[cachedPrecisePosition]]}}
+              by resetting it to null at any time for any reason.
             </td>
           </tr>
           <tr>
@@ -674,8 +691,8 @@
             </td>
             <td>
               A {{GeolocationPosition}}, initialized to null. It's a reference
-              to the last acquired approximate position and serves as a cache.
-              A user agent MAY evict
+              to the last acquired [=approximate position=] and serves as a
+              cache. A user agent MAY evict
               {{Geolocation/[[cachedApproximatePosition]]}} by resetting it to
               null at any time for any reason.
             </td>
@@ -882,7 +899,7 @@
                   <li>If |options|.{{PositionOptions/accuracyMode}} is
                   "approximate", then run |handle permission denial|.
                   </li>
-                  <li>Else:
+                  <li>Otherwise:
                     <ol>
                       <li>Let |approximatePermission| be [=get the current
                       permission state=] of "geolocation-approximate".
@@ -985,7 +1002,7 @@
                   <li>If |precisePermission| is "granted", set
                   |effectiveAccuracy| to "precise".
                   </li>
-                  <li>Else if |approximatePermission| is "granted", set
+                  <li>Otherwise, if |approximatePermission| is "granted", set
                   |effectiveAccuracy| to "approximate".
                   </li>
                 </ol>
@@ -1713,8 +1730,8 @@
         feature/default allowlist=] is [=default allowlist/'self'=].
       </p>
       <p>
-        The "geolocation" policy controls access to precise location, while
-        "geolocation-approximate" controls access to approximate location.
+        The "geolocation" policy controls access to [=precise position=], while
+        "geolocation-approximate" controls access to [=approximate position=].
         Granting "geolocation" permission implicitly grants
         "geolocation-approximate" permission as well.
       </p>
