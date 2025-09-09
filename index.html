@@ -105,7 +105,7 @@
       <p>
         An <dfn>approximate position</dfn> is a less precise,
         privacy-preserving representation of the user's location. Instead of
-        providing precise coordinates, the user agent might return a location
+        providing precise coordinates, the user agent MUST return a location
         that is intentionally coarsened to a larger area, such as the nearest
         city, postal code, or a predefined region. This is often sufficient for
         applications that don't need to know the user's [=precise position=],
@@ -116,10 +116,9 @@
       </p>
       <p>
         An <dfn>approximate location information source</dfn> is a [=location
-        information source=] that provides an [=approximate position=]. For
-        example, the user agent itself can be an [=approximate location
-        information source=] by taking a [=precise position=] and coarsening
-        it.
+        information source=] that returns positions that have been
+        intentionally obfuscated to make it more difficult to recover the true
+        location.
       </p>
       <p>
         If an end user [=check permission|grants permission=],
@@ -458,12 +457,12 @@
         </p>
         <p>
           An end-user will generally give [=express permission=] through a user
-          interface. With the introduction of [=approximate position=], [=User
-          agents=] with support for [=approximate position=] SHOULD allow the
-          user to choose between sharing a [=precise position=] or an
-          [=approximate position=]. This choice gives users more control over
-          their privacy, allowing them to share a less precise location when
-          they are not comfortable sharing their [=precise position=].
+          interface. [=User agents=] with support for [=approximate position=]
+          SHOULD allow the user to choose between sharing a [=precise
+          position=] or an [=approximate position=]. This choice gives users
+          more control over their privacy, allowing them to share a less
+          precise location when they are not comfortable sharing their
+          [=precise position=].
         </p>
         <p>
           The user interface will usually present a range of permission
@@ -996,7 +995,7 @@
                   </li>
                 </ol>
               </li>
-              <li>Else if |options|.{{PositionOptions/accuracyMode}} is
+              <li>Otherwise, if |options|.{{PositionOptions/accuracyMode}} is
               "precise":
                 <ol>
                   <li>If |precisePermission| is "granted", set
@@ -1062,7 +1061,7 @@
                   </li>
                 </ol>
               </li>
-              <li>Else if |effectiveAccuracy| is "approximate":
+              <li>Otherwise, if |effectiveAccuracy| is "approximate":
                 <ol>
                   <li>Set |cachedPosition| to [=this=]'s
                   {{Geolocation/[[cachedApproximatePosition]]}}.
@@ -1215,7 +1214,7 @@
                       </li>
                     </ol>
                   </li>
-                  <li>Else if |effectiveAccuracy| is "approximate":
+                  <li>Otherwise, if |effectiveAccuracy| is "approximate":
                     <ol>
                       <li>Set [=this=]'s
                       {{Geolocation/[[cachedApproximatePosition]]}} to
