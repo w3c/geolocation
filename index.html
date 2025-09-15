@@ -35,9 +35,9 @@
         },
       ],
       group: [ "das", "webapps" ],
-      previousPublishDate: "2022-02-17",
-      crEnd: "2022-03-18",
-      previousMaturity: "CR",
+      previousPublishDate: "2025-12-12",
+      crEnd: "2026-03-18",
+      previousMaturity: "REC",
       github: "w3c/geolocation",
       caniuse: "geolocation",
       testSuiteURI: "https://wpt.live/geolocation/",
@@ -56,27 +56,7 @@
         associated with the hosting device.
       </p>
     </section>
-    <section id="sotd" class="updateable-rec">
-      <script class="removeOnSave">
-        function updateableRecFilter(commit) {
-          const { message } = commit;
-          // only show commits that start with Addition: or Correction:
-          return /^Addition:|^Correction:/.test(message);
-        }
-      </script>
-      <p>
-        Since this specification become a W3C Recommendation on 01 September
-        2022, the following substantive additions and/or corrections have been
-        proposed:
-      </p><rs-changelog from="REC-2022" filter=
-      "updateableRecFilter"></rs-changelog>
-      <p>
-        A more detailed list of changes can be found in section
-        [[[#changelog]]]. Reviewers of the document can identify candidate
-        additions and/or corrections by their distinctive styling in the
-        document.
-      </p>
-    </section>
+    <section id="sotd"></section>
     <section id="introduction" class="informative">
       <h2>
         Introduction
@@ -580,16 +560,8 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>
-            <aside class="correction" id="c1">
-              <span class="marker">Candidate Correction:</span> Updated
-              reference to the global object to use [=this=] for consistency in
-              error handling within geolocation retrieval.
-            </aside><del cite="#c1">If the [=current settings object=]'s
-            [=relevant global object=]'s [=associated `Document`=] is not
-            [=Document/fully active=]:</del> <ins cite="#c1">If [=this=]'s
-            [=relevant global object=]'s [=associated `Document`=] is not
-            [=Document/fully active=]:</ins>
+          <li>If [=this=]'s [=relevant global object=]'s [=associated
+          `Document`=] is not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
@@ -614,16 +586,8 @@
           method steps are:
         </p>
         <ol class="algorithm">
-          <li>
-            <aside class="correction" id="c2">
-              <span class="marker">Candidate Correction:</span> Simplified
-              reference to the global object in the method steps for checking
-              document's activity status.
-            </aside><del cite="#c2">If the [=current settings object=]'s
-            [=relevant global object=]'s [=associated `Document`=] is not
-            [=Document/fully active=]:</del> <ins cite="#c2">If [=this=]'s
-            [=relevant global object=]'s [=associated `Document`=] is not
-            [=Document/fully active=]:</ins>
+          <li>If [=this=]'s [=relevant global object=]'s [=associated
+          `Document`=] is not [=Document/fully active=]:
             <ol>
               <li>[=Call back with error=] passing |errorCallback| and
               {{GeolocationPositionError/POSITION_UNAVAILABLE}}.
@@ -689,12 +653,8 @@
               </li>
             </ol>
           </li>
-          <li>
-            <aside class="correction" id="c7">
-              <span class="marker">Candidate Correction:</span> Added missing
-              step to handle [=non-secure contexts=].
-            </aside><ins cite="#c7">If |geolocation|'s [=environment settings
-            object=] is a [=non-secure context=]:
+          <li>If |geolocation|'s [=environment settings object=] is a
+          [=non-secure context=]:
             <ol>
               <li>If |watchId| was passed, [=List/remove=] |watchId| from
               |watchIDs|.
@@ -704,7 +664,7 @@
               </li>
               <li>Terminate this algorithm.
               </li>
-            </ol></ins>
+            </ol>
           </li>
           <li>If |document:Document|'s [=Document/visibility state=] is
           "hidden", wait for the following [=page visibility change steps=] to
@@ -868,20 +828,11 @@
                       value of the |options|.{{PositionOptions/maximumAge}}
                       member.
                       </li>
-                      <li>
-                        <aside class="correction" id="c8">
-                          <span class="marker">Candidate Correction:</span>
-                          Updated to ensure that the algorithm terminates
-                          immediately if a valid cached position is used,
-                          avoiding unnecessary steps.
-                        </aside>If |cachedPosition|'s
-                        {{GeolocationPosition/timestamp}}'s value is greater
-                        than |cacheTime|, and
-                        |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
-                        equals
-                        |options|.{{PositionOptions/enableHighAccuracy}}<del cite="#c8">,
-                        set |position| to |cachedPosition|.</del> <ins cite=
-                        "#c8">:
+                      <li>If |cachedPosition|'s
+                      {{GeolocationPosition/timestamp}}'s value is greater than
+                      |cacheTime|, and
+                      |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
+                      equals |options|.{{PositionOptions/enableHighAccuracy}}:
                         <ol>
                           <li>[=Queue a task=] on the [=geolocation task
                           source=] with a step that [=invokes=]
@@ -890,7 +841,7 @@
                           </li>
                           <li>Terminate this algorithm.
                           </li>
-                        </ol></ins>
+                        </ol>
                       </li>
                     </ol>
                   </li>
@@ -914,16 +865,6 @@
                   </li>
                   <li data-cite="infra">If acquiring the position data from the
                   system succeeds:
-                    <aside class="correction" id="c9">
-                      <span class="marker">Candidate Correction:</span> We now
-                      use a [=map=] to represent the position data. Clarified
-                      the units and reference systems for latitude, longitude,
-                      and altitude, ensuring consistency with the updated
-                      attribute definitions. Updated the descriptions of the
-                      speed and heading to specify measurement units and
-                      conditions for null values, aligning with the overall
-                      enhancements to attribute accuracy and clarity.
-                    </aside><ins cite="#c9">
                     <ol data-cite="infra">
                       <li>Let |positionData| be a [=map=] with the following
                       name/value pairs based on the acquired position data:
@@ -993,16 +934,7 @@
                       <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
                       |position|.
                       </li>
-                    </ol></ins> <del cite="#c9">
-                    <ol>
-                      <li>Set |position| to [=a new `GeolocationPosition`=]
-                      passing |acquisitionTime| and
-                      |options|.{{PositionOptions/enableHighAccuracy}}.
-                      </li>
-                      <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
-                      |position|.
-                      </li>
-                    </ol></del>
+                    </ol>
                   </li>
                   <li>Stop the |timeout|.
                   </li>
@@ -1184,15 +1116,9 @@
         <h3>
           `toJSON()` method
         </h3>
-        <aside class="addition" id="a1">
-          <span class="marker">Candidate Addition:</span> Introduce a
-          `toJSON()` method to allow the {{GeolocationPosition}} object to be
-          easily converted into a JSON representation, facilitating
-          interoperability and ease of use in web applications.
-        </aside>
         <p>
-          <ins cite="#a1">The <dfn>toJSON()</dfn> method returns a JSON
-          representation of the {{GeolocationPosition}} object.</ins>
+          The <dfn>toJSON()</dfn> method returns a JSON representation of the
+          {{GeolocationPosition}} object.
         </p>
       </section>
       <section>
@@ -1264,26 +1190,11 @@
         <h4>
           `latitude`, `longitude`, and `accuracy` attributes
         </h4>
-        <aside class="correction" id="c3">
-          <span class="marker">Candidate Correction:</span> To improve clarity
-          and precision, the description of latitude and longitude attributes
-          has been updated to specify that these are real numbers in degrees
-          according to the [[WGS84]] geodetic system, instead of just stating
-          "decimal degrees."
-        </aside>
-        <aside class="addition" id="a3">
-          <span class="marker">Candidate Addition:</span> To improve clarity
-          and precision, a description of the accuracy attribute has been
-          added, defining it as meters of radius.
-        </aside>
         <p>
-          <del cite="#c3">The <strong>latitude</strong> and
-          <strong>longitude</strong> attributes are geographic coordinates
-          specified in decimal degrees.</del> <ins cite="#c3">The
-          <dfn>latitude</dfn> and <dfn>longitude</dfn> attributes denote the
-          position, specified as a real number of degrees, in the [[WGS84]]
-          coordinate system.</ins> <ins cite="#a3">The <dfn>accuracy</dfn>
-          attribute denotes the position accuracy radius in meters.</ins>
+          The <dfn>latitude</dfn> and <dfn>longitude</dfn> attributes denote
+          the position, specified as a real number of degrees, in the [[WGS84]]
+          coordinate system. The <dfn>accuracy</dfn> attribute denotes the
+          position accuracy radius in meters.
         </p>
       </section>
       <section>
@@ -1323,27 +1234,15 @@
         <h4>
           `toJSON()` method
         </h4>
-        <aside class="addition" id="a2">
-          <span class="marker">Candidate Addition:</span> Extend the `toJSON()`
-          method functionality to the {{GeolocationCoordinates}} object,
-          allowing it to be serialized into a JSON format which enhances data
-          handling and integration capabilities in web applications.
-        </aside>
         <p>
-          <ins cite="#a2">The <dfn>toJSON()</dfn> method returns a JSON
-          representation of the {{GeolocationCoordinates}} object.</ins>
+          The <dfn>toJSON()</dfn> method returns a JSON representation of the
+          {{GeolocationCoordinates}} object.
         </p>
       </section>
       <section data-cite="infra">
         <h2>
           Constructing a `GeolocationPosition`
         </h2>
-        <aside class="correction" id="c4">
-          <span class="marker">Candidate Correction:</span> Constructor now
-          takes a [=map=] of position data, a timestamp, and a boolean
-          indicating high accuracy as arguments. We iterate over the map to set
-          the attributes of the {{GeolocationCoordinates}}.
-        </aside><ins cite="#c4">
         <p>
           <dfn>A new `GeolocationPosition`</dfn> is constructed with [=map=]
           |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp| and
@@ -1365,58 +1264,7 @@
           |timestamp|, and its {{GeolocationPosition/[[isHighAccuracy]]}}
           internal slot set to |isHighAccuracy|.
           </li>
-        </ol></ins> <del cite="#c4">
-        <p>
-          <strong>A new `GeolocationPosition`</strong> is constructed with
-          {{EpochTimeStamp}} |timestamp:EpochTimeStamp| and boolean
-          |isHighAccuracy| by performing the following steps:
-        </p>
-        <ol class="algorithm">
-          <li>Let |coords:GeolocationCoordinates| be a newly created
-          {{GeolocationCoordinates}} instance:
-            <ol>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/latitude}}
-              attribute to a geographic coordinate in decimal degrees.
-              </li>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/longitude}}
-              attribute to a geographic coordinate in decimal degrees.
-              </li>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/accuracy}}
-              attribute to a non-negative real number. The value SHOULD
-              correspond to a 95% confidence level with respect to the
-              longitude and latitude values.
-              </li>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/altitude}}
-              attribute in meters above the [[WGS84]] ellipsoid, or `null` if
-              the implementation cannot provide altitude information.
-              </li>
-              <li>Initialize |coord|'s
-              {{GeolocationCoordinates/altitudeAccuracy}} attribute as
-              non-negative real number, or to `null` if the implementation
-              cannot provide altitude information. If the altitude accuracy
-              information is provided, it SHOULD correspond to a 95% confidence
-              level.
-              </li>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/speed}}
-              attribute to a non-negative real number, or as `null` if the
-              implementation cannot provide speed information.
-              </li>
-              <li>Initialize |coord|'s {{GeolocationCoordinates/heading}}
-              attribute in degrees, or `null` if the implementation cannot
-              provide heading information. If the hosting device is stationary
-              (i.e., the value of the {{GeolocationCoordinates/speed}}
-              attribute is 0), then initialize the
-              {{GeolocationCoordinates/heading}} to `NaN`.
-              </li>
-            </ol>
-          </li>
-          <li>Return a newly created {{GeolocationPosition}} instance with its
-          {{GeolocationPosition/coords}} attribute initialized to |coords| and
-          {{GeolocationPosition/timestamp}} attribute initialized to
-          |timestamp|, and its {{GeolocationPosition/[[isHighAccuracy]]}}
-          internal slot set to |isHighAccuracy|.
-          </li>
-        </ol></del>
+        </ol>
       </section>
     </section>
     <section id="position_error_interface" data-dfn-for=
@@ -1443,14 +1291,8 @@
             <dfn>PERMISSION_DENIED</dfn> (numeric value 1)
           </dt>
           <dd>
-            <aside class="correction" id="c6">
-              <span class="marker">Candidate Correction:</span> Updated the
-              description of the `PERMISSION_DENIED` constant to clarify the
-              reasons for permission denial, including [=non-secure context=]
-              and user denials.
-            </aside>[=Request a position=] failed because the user denied
-            permission to use the API <ins cite="#c6">or the request was made
-            from an [=non-secure context=]</ins>.
+            [=Request a position=] failed because the user denied permission to
+            use the API or the request was made from an [=non-secure context=].
           </dd>
           <dt>
             <dfn>POSITION_UNAVAILABLE</dfn> (numeric value 2)
@@ -1596,10 +1438,6 @@
       <h2>
         Change log
       </h2>
-      <p>
-        Since First Public Working Draft in 2021, <cite>Geolocation</cite> has
-        received the following normative changes:
-      </p>
       <script class="removeOnSave">
         function removeCommits(commit) {
           const { message, hash } = commit;
@@ -1608,7 +1446,16 @@
           }
           return !/^Clarify which FPWD|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
         }
-      </script> <rs-changelog from="FPWD" filter=
+      </script>
+      <p>
+        Since the previous publication of this specification as a
+        Recommendation in 2022, the following changes have been made:
+      </p><rs-changelog from="REC-2022" filter=
+      "updateableRecFilter"></rs-changelog>
+      <p>
+        Since First Public Working Draft in 2021, <cite>Geolocation</cite> has
+        received the following normative changes:
+      </p><rs-changelog from="FPWD" to="REC-2022" filter=
       "removeCommits"></rs-changelog>
       <p>
         Since publication of the Second Edition in 2016, this specification
