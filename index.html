@@ -410,11 +410,12 @@
         </aside>
         <p>
           Alternatively, the API can be disabled in a first-party context by
-          specifying an HTTP response header:
+          specifying an HTTP response header. Disabling
+          `geolocation-approximate` will also disable `geolocation`.
         </p>
         <aside class="example" title="Permissions Policy over HTTP">
           <pre class="http">
-            Permissions-Policy: geolocation=(), geolocation-approximate=()
+            Permissions-Policy: geolocation-approximate=()
           </pre>
         </aside>
         <p>
@@ -441,7 +442,10 @@
         a more privacy-friendly alternative. When an application requests an
         [=approximate position=], the user agent can provide a less precise
         location that still meets the application's needs while protecting the
-        user's [=precise position=].
+        user's [=precise position=]. Even when a [=precise position=] is
+        requested, the user agent can provide an [=approximate position=]
+        instead, for example, if the user has only granted permission for
+        approximate accuracy.
       </p>
       <section class="informative">
         <h3>
@@ -572,7 +576,8 @@
           permission|checks permission=] for the level of accuracy specified by
           the {{PositionOptions/accuracyMode}} option. A grant for the
           "geolocation" permission implies a grant for the
-          "geolocation-approximate" permission.
+          "geolocation-approximate" permission, while if the
+          "geolocation-approximate" is denied, then so is "geolocation".
         </p>
         <p>
           When <dfn data-local-lt="check permission">checking permission</dfn>
