@@ -562,7 +562,8 @@
       </section>
       <section id="check-permission">
         <h2>
-          Checking permission to use the API
+          <dfn data-local-lt="check permission">Checking permission to use the
+          API</dfn>
         </h2>
         <p>
           <cite>Geolocation</cite> is a [=default powerful feature=] identified
@@ -572,24 +573,87 @@
           for [=approximate position=].
         </p>
         <p>
-          When a website requests location access, the user agent [=check
-          permission|checks permission=] for the level of accuracy specified by
-          the {{PositionOptions/accuracyMode}} option. A grant for the
-          "geolocation" permission implies a grant for the
-          "geolocation-approximate" permission, while if the
-          "geolocation-approximate" is denied, then so is "geolocation".
+          To <dfn>request geolocation permission</dfn> for a given
+          {{PermissionDescriptor}} |descriptor|, the user agent MUST run the
+          following steps. These steps override the default behavior of
+          [=request permission to use=] for these features.
         </p>
+        <ol class="algorithm">
+          <li>If |descriptor|.{{PermissionDescriptor/name}} is "geolocation":
+            <ol>
+              <li>Prompt the user to choose between granting permission for
+              [=precise position=], granting permission for [=approximate
+              position=], or denying permission.
+              </li>
+              <li>If the user grants permission for [=precise position=]:
+                <ol>
+                  <li>Set the permission state of "geolocation" to "granted".
+                  </li>
+                  <li>Set the permission state of "geolocation-approximate" to
+                  "granted".
+                  </li>
+                  <li>Return "granted".
+                  </li>
+                </ol>
+              </li>
+              <li>If the user grants permission for [=approximate position=]:
+                <ol>
+                  <li>Set the permission state of "geolocation-approximate" to
+                  "granted".
+                  </li>
+                  <li>Return "prompt".
+                  </li>
+                </ol>
+              </li>
+              <li>If the user denies permission:
+                <ol>
+                  <li>Set the permission state of "geolocation" to "denied".
+                  </li>
+                  <li>Set the permission state of "geolocation-approximate" to
+                  "denied".
+                  </li>
+                  <li>Return "denied".
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>If |descriptor|.{{PermissionDescriptor/name}} is
+          "geolocation-approximate":
+            <ol>
+              <li>Prompt the user to choose between granting permission for
+              [=approximate position=] or denying permission.
+              </li>
+              <li>If the user grants permission for [=approximate position=]:
+                <ol>
+                  <li>Set the permission state of "geolocation-approximate" to
+                  "granted".
+                  </li>
+                  <li>Return "granted".
+                  </li>
+                </ol>
+              </li>
+              <li>If the user denies permission:
+                <ol>
+                  <li>Set the permission state of "geolocation" to "denied".
+                  </li>
+                  <li>Set the permission state of "geolocation-approximate" to
+                  "denied".
+                  </li>
+                  <li>Return "denied".
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
         <p>
-          When <dfn data-local-lt="check permission">checking permission</dfn>
-          to use the API, a user agent SHOULD present the user with a choice to
-          grant access to their [=precise position=], their [=approximate
-          position=], or to deny the request. A user agent MAY also suggest
-          time-based [=permission=] [=permission/lifetimes=], such as "24
-          hours", "1 week", or choose to remember the permission
-          [=permission/grant=] indefinitely. However, it is RECOMMENDED that a
-          user agent prioritize restricting the [=permission=]
-          [=permission/lifetime=] to a single session: This can be, for
-          example, until the [=environment settings object/realm=] is
+          A user agent MAY also suggest time-based [=permission=]
+          [=permission/lifetimes=], such as "24 hours", "1 week", or choose to
+          remember the permission [=permission/grant=] indefinitely. However,
+          it is RECOMMENDED that a user agent prioritize restricting the
+          [=permission=] [=permission/lifetime=] to a single session: This can
+          be, for example, until the [=environment settings object/realm=] is
           destroyed, the end-user [=navigates=] away from the [=origin=], or
           the relevant browser tab is closed.
         </p>
@@ -881,7 +945,7 @@
           </li>
           <li>[=In parallel=]:
             <ol>
-              <li>Set |permission| to [=request permission to use=]
+              <li>Set |permission| to [=request geolocation permission=] for
               |descriptor|.
               </li>
               <li>Let |handle permission denial| be the following steps:
