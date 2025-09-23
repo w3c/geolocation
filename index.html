@@ -159,7 +159,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="a4f1002bbe21f5868f7aec377ee669bddbf67d41">
+<meta name="revision" content="0567a531cac8358802494d0bba8fcb94ea3a3ceb">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
@@ -250,7 +250,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "a4f1002bbe21f5868f7aec377ee669bddbf67d41",
+  "gitRevision": "0567a531cac8358802494d0bba8fcb94ea3a3ceb",
   "publishISODate": "2025-09-23T00:00:00.000Z",
   "generatedSubtitle": "W3C Editor's Draft 23 September 2025"
 }</script>
@@ -2905,6 +2905,17 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           <var data-type="PositionErrorCallback?">errorCallback</var>, a <a data-link-type="idl" data-lt="PositionOptions" href="#dom-positionoptions" class="internalDFN" id="ref-for-dom-positionoptions-5"><code>PositionOptions</code></a>
           <var data-type="PositionOptions">options</var>, and an optional <var data-type="unsigned long">watchId</var>:
         </p>
+        <aside class="correction" id="c7">
+          <span class="marker">Candidate Correction:</span> Added missing step
+          to handle <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" id="ref-for-index-term-non-secure-contexts-1">non-secure contexts</a>.
+        </aside>
+        <aside class="correction" id="c10">
+          <span class="marker">Candidate Correction:</span> Clarifies when
+          steps are performed in parallel, specifically during the permissions
+          check and subsequent actions. The main change is to correct the
+          algorithm's structure to reflect the intended parallel execution,
+          improving clarity and aligning with implementation expectations.
+        </aside>
         <ol class="algorithm">
           <li>Let <var data-type="List">watchIDs</var> be <var data-type="Geolocation">geolocation</var>'s
           <a data-link-type="attribute" data-lt="[[watchIDs]]" href="#dfn-watchids" class="internalDFN" id="ref-for-dfn-watchids-3"><code>[[watchIDs]]</code></a>.
@@ -2925,10 +2936,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
             </ol>
           </li>
           <li>
-            <aside class="correction" id="c7">
-              <span class="marker">Candidate Correction:</span> Added missing
-              step to handle <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" id="ref-for-index-term-non-secure-contexts-1">non-secure contexts</a>.
-            </aside><ins cite="#c7">If <var data-type="Geolocation">geolocation</var>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-index-term-environment-settings-object-1">environment settings object</a> is a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" id="ref-for-index-term-non-secure-contexts-2">non-secure context</a>:
+            <ins cite="#c7">If <var data-type="Geolocation">geolocation</var>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" id="ref-for-index-term-environment-settings-object-1">environment settings object</a>
+            is a <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" id="ref-for-index-term-non-secure-contexts-2">non-secure context</a>:
             <ol>
               <li>If <var data-type="unsigned long">watchId</var> was passed, <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-remove" id="ref-for-index-term-remove-for-list-3">remove</a> <var data-type="unsigned long">watchId</var> from
               <var data-type="List">watchIDs</var>.
@@ -2954,7 +2963,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           <li>Let <var>descriptor</var> be a new <a data-link-type="dictionary" data-lt="PermissionDescriptor" href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor" id="ref-for-index-term-permissiondescriptor-1"><code>PermissionDescriptor</code></a> whose
           <a data-link-type="dict-member" href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor-name" id="ref-for-index-term-name-for-permissiondescriptor-1"><code>name</code></a> is <a href="#dfn-geolocation" class="internalDFN" data-link-type="dfn" id="ref-for-dfn-geolocation-1"><code>"geolocation"</code></a>.
           </li>
-          <li><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-index-term-in-parallel-1">In parallel</a>:
+          <li>
+            <ins cite="#c10"><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" id="ref-for-index-term-in-parallel-1">In parallel</a></ins>:
             <ol>
               <li>Set <var>permission</var> to <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-request-permission-to-use" id="ref-for-index-term-request-permission-to-use-1">request permission to use</a>
               <var>descriptor</var>.
