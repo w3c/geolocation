@@ -1602,18 +1602,23 @@
         Change log
       </h2>
       <p>
-        Since First Public Working Draft in 2021, <cite>Geolocation</cite> has
-        received the following normative changes:
+        Since publication of as a W3C Recommendation in 2022,
+        <cite>Geolocation</cite> has received the following normative changes:
+      </p><rs-changelog from="REC" filter="removeCommits"></rs-changelog>
+      <p>
+        Since First Public Working Draft in 2021, until it was published as a
+        W3C Recommendation in 2022, <cite>Geolocation</cite> received the
+        following normative changes:
       </p>
       <script class="removeOnSave">
         function removeCommits(commit) {
           const { message, hash } = commit;
-          if (["ef098b1"].includes(hash)) {
+          if (["ef098b1", "7082b4e", "f8b930f"].includes(hash)) {
             return false;
           }
           return !/^Clarify which FPWD|^Merge pull|^tidy|^editorial|^Editiorial|^edtiorial|^chore|^refactor|^tests?|^docs|^typo|^nit/i.test(message);
         }
-      </script> <rs-changelog from="FPWD" filter=
+      </script> <rs-changelog from="FPWD" to="REC" filter=
       "removeCommits"></rs-changelog>
       <p>
         Since publication of the Second Edition in 2016, this specification
@@ -1649,7 +1654,7 @@
       </ul>
       <p>
         See the <a href=
-        "https://github.com/w3c/geolocation/commits/gh-pages">commit
+        "https://github.com/w3c/geolocation/commits/main">commit
         history</a> for a complete list of changes.
       </p>
     </section>
