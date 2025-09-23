@@ -669,9 +669,16 @@
           |errorCallback:PositionErrorCallback?|, a {{PositionOptions}}
           |options:PositionOptions|, and an optional |watchId:unsigned long|:
         </p>
+        <aside class="correction" id="c7">
+          <span class="marker">Candidate Correction:</span> Added missing step
+          to handle [=non-secure contexts=].
+        </aside>
         <aside class="correction" id="c10">
-          <span class="marker">Candidate Correction:</span>
-Clarifies when steps are performed in parallel, specifically during the permissions check and subsequent actions. The main change is to correct the algorithm's structure to reflect the intended parallel execution, improving clarity and aligning with implementation expectations.
+          <span class="marker">Candidate Correction:</span> Clarifies when
+          steps are performed in parallel, specifically during the permissions
+          check and subsequent actions. The main change is to correct the
+          algorithm's structure to reflect the intended parallel execution,
+          improving clarity and aligning with implementation expectations.
         </aside>
         <ol class="algorithm">
           <li>Let |watchIDs:List| be |geolocation|'s
@@ -694,11 +701,8 @@ Clarifies when steps are performed in parallel, specifically during the permissi
             </ol>
           </li>
           <li>
-            <aside class="correction" id="c7">
-              <span class="marker">Candidate Correction:</span> Added missing
-              step to handle [=non-secure contexts=].
-            </aside><ins cite="#c7">If |geolocation|'s [=environment settings
-            object=] is a [=non-secure context=]:
+            <ins cite="#c7">If |geolocation|'s [=environment settings object=]
+            is a [=non-secure context=]:
             <ol>
               <li>If |watchId| was passed, [=List/remove=] |watchId| from
               |watchIDs|.
@@ -724,62 +728,8 @@ Clarifies when steps are performed in parallel, specifically during the permissi
           <li>Let |descriptor| be a new {{PermissionDescriptor}} whose
           {{PermissionDescriptor/name}} is <a>"geolocation"</a>.
           </li>
-          <del cite="#c10">
-          <li>Set |permission| to [=request permission to use=] |descriptor|.
-          </li>
-          <li data-tests=
-          "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-          If |permission| is "denied", then:
-            <ol>
-              <li>If |watchId| was passed, [=list/remove=] |watchId| from
-              |watchIDs|.
-              </li>
-              <li>[=Call back with error=] passing |errorCallback| and
-              {{GeolocationPositionError/PERMISSION_DENIED}}.
-              </li>
-              <li>Terminate this algorithm.
-              </li>
-            </ol>
-          </li>
-          <li>Wait to [=acquire a position=] passing |successCallback|,
-          |errorCallback|, |options|, and |watchId|.
-          </li>
-          <li>If |watchId| was not passed, terminate this algorithm.
-          </li>
-          <li>While |watchIDs| [=list/contains=] |watchId|:
-            <ol>
-              <li>
-                <span id="wait-for-change-del">Wait for a significant change of
-                geographic position</span>. What constitutes a significant
-                change of geographic position is left to the implementation.
-                User agents MAY impose a rate limit on how frequently position
-                changes are reported.
-              </li>
-              <li>If |document| is not [=Document/fully active=] or
-              [=Document/visibility state=] is not "visible", go back to the
-              previous step and again <a href="#wait-for-change-del">wait for a
-              significant change of geographic position</a>.
-                <aside class="note" title=
-                "Position updates are exclusively for fully-active visible documents">
-                  <p>
-                    The desired effect here being that position updates are
-                    exclusively delivered to fully active documents that are
-                    visible; Otherwise the updates get silently "dropped on the
-                    floor". Only once a document again becomes fully active and
-                    visible (e.g., an [^iframe^] gets reattached to a parent
-                    document), do the position updates once again start getting
-                    delivered.
-                  </p>
-                </aside>
-              </li>
-              <li>Wait to [=acquire a position=] passing |successCallback|,
-              |errorCallback|, |options|, and |watchId|.
-              </li>
-            </ol>
-          </li>
-          </del>
-          <ins cite="#c10">
-          <li>[=In parallel=]:
+          <li>
+            <ins cite="#c10">[=In parallel=]</ins>:
             <ol>
               <li>Set |permission| to [=request permission to use=]
               |descriptor|.
@@ -838,7 +788,6 @@ Clarifies when steps are performed in parallel, specifically during the permissi
               </li>
             </ol>
           </li>
-          </ins>
         </ol>
       </section>
       <section>
