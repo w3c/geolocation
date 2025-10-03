@@ -490,6 +490,49 @@
         [[[#privacy]]].
       </p>
     </section>
+    <section id="relationship-to-other-specifications" class="informative">
+      <h2>
+        Relationship to other specifications
+      </h2>
+      <p>
+        This specification provides location information (latitude, longitude,
+        altitude) and heading. For use cases requiring full orientation data,
+        including pitch and roll, the {{GeolocationCoordinates}} interface can
+        be combined with the <a href="https://w3c.github.io/orientation-sensor/">Generic Sensor API</a>'s
+        <a href="https://w3c.github.io/orientation-sensor/#absoluteorientationsensor">AbsoluteOrientationSensor</a>
+        interface to provide six degrees of freedom (6DoF) positioning data.
+      </p>
+      <p>
+        This approach is relevant to several related specifications and initiatives:
+      </p>
+      <ul>
+        <li>
+          <strong><a href="https://github.com/immersive-web/geo-alignment">Geo-alignment</a></strong> -
+          The W3C Immersive Web Community Group is developing support for geographically-aligned
+          orientation in Extended Reality (XR) contexts. For XR applications, implementers are advised
+          to obtain timing-coordinated positioning data through XR-specific APIs rather than
+          combining Geolocation and sensor data independently.
+        </li>
+        <li>
+          <strong><a href="https://github.com/opengeospatial/GeoPose/">GeoPose</a></strong> -
+          The Open Geospatial Consortium (OGC) is standardizing GeoPose, which represents both
+          location and orientation. The combination of this specification's coordinate data with
+          orientation information from Generic Sensor API provides data equivalent to GeoPose's
+          six degrees of freedom.
+        </li>
+        <li>
+          <strong><a href="https://w3c.github.io/sdw/proposals/geotagging/webvmt/">WebVMT</a></strong> -
+          For geotagged video use cases, this specification provides the necessary geographic
+          location data that can be combined with other APIs for comprehensive spatial-temporal
+          metadata.
+        </li>
+      </ul>
+      <p>
+        Implementers and web developers working on use cases requiring full 6DoF positioning
+        should consider these related specifications and choose the appropriate combination of
+        APIs for their specific context.
+      </p>
+    </section>
     <section id="navigator_interface" data-dfn-for="Navigator">
       <h2>
         Extensions to the `Navigator` interface
