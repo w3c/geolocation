@@ -159,7 +159,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="9d48e78a903792215402566954b381763790371d">
+<meta name="revision" content="7eaa7f11c12518ad4ea03e7402fb2ad7a721e077">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
@@ -250,7 +250,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "9d48e78a903792215402566954b381763790371d",
+  "gitRevision": "7eaa7f11c12518ad4ea03e7402fb2ad7a721e077",
   "publishISODate": "2025-10-07T00:00:00.000Z",
   "generatedSubtitle": "W3C Editor's Draft 07 October 2025"
 }</script>
@@ -366,12 +366,16 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       <span class="caret"></span>
       <div>
         <a class="self-link" href="#dom-navigator-geolocation" aria-label="Permalink for definition: geolocation. Activate to close this dialog.">Permalink</a>
-        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> 
+        <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1776506972">IDL</a>
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
-      <li>Not referenced in this document.</li>
-    </ul>
+    <li>
+      <a href="#ref-for-dom-navigator-geolocation-1" title="§ 5. Extensions to the Navigator interface">§ 5. Extensions to the Navigator interface</a> 
+    </li><li>
+      <a href="#ref-for-dom-navigator-geolocation-2" title="§ A. IDL Index">§ A. IDL Index</a> 
+    </li>
+  </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-geolocation" aria-label="Links in this document to definition: Geolocation">
       <span class="caret"></span>
       <div>
@@ -2000,7 +2004,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         Security considerations
       </a></li><li class="tocline"><a class="tocxref" href="#navigator_interface"><bdi class="secno">5. </bdi>
         Extensions to the <code>Navigator</code> interface
-      </a></li><li class="tocline"><a class="tocxref" href="#geolocation_interface"><bdi class="secno">6. </bdi>
+      </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#navigator-attribute"><bdi class="secno">5.1 </bdi><code>navigator</code> attribute</a></li></ol></li><li class="tocline"><a class="tocxref" href="#geolocation_interface"><bdi class="secno">6. </bdi>
         <code>Geolocation</code> interface and callbacks
       </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#internal-slots"><bdi class="secno">6.1 </bdi>
           Internal slots
@@ -2518,7 +2522,14 @@ navigator.<span class="hljs-property">geolocation</span>.<span class="hljs-title
         Privacy considerations</a>.
       </p>
     </section>
-    <aside class="mdn"><details>
+    <section id="navigator_interface" data-dfn-for="Navigator"><div class="header-wrapper"><h2 id="x5-extensions-to-the-navigator-interface"><bdi class="secno">5. </bdi>
+        Extensions to the <code>Navigator</code> interface
+      </h2><a class="self-link" href="#navigator_interface" aria-label="Permalink for Section 5."></a></div>
+      
+      <pre class="idl def" id="webidl-1776506972"><span class="idlHeader"><a class="self-link" href="#webidl-1776506972">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-navigator-partial-1" data-title="Navigator">partial interface <a data-idl="partial" data-link-type="interface" data-title="Navigator" class="idlID" data-dfn-for="Navigator" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator" id="ref-for-index-term-navigator-interface-1">Navigator</a> {<span data-idl="" class="idlAttribute" id="idl-def-navigator-geolocation" data-title="geolocation" data-dfn-for="Navigator">
+  [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-1">SameObject</a></span>] readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-1"><code>Geolocation</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-navigator-geolocation" id="ref-for-dom-navigator-geolocation-1"><code>geolocation</code></a>;</span>
+};</span></code></pre>
+      <aside class="mdn"><details>
     <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
     <a title="The Navigator.geolocation read-only property returns a Geolocation object that gives Web content access to the location of the device. This allows a website or app to offer customized results based on the user's location." href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/geolocation">Navigator/geolocation</a>
     <p class="engines-all">This feature is in all major engines.</p>
@@ -2561,14 +2572,12 @@ navigator.<span class="hljs-property">geolocation</span>.<span class="hljs-title
       <td>37+</td>
     </tr>
   </table>
-  </details></aside><section id="navigator_interface" data-dfn-for="Navigator"><div class="header-wrapper"><h2 id="x5-extensions-to-the-navigator-interface"><bdi class="secno">5. </bdi>
-        Extensions to the <code>Navigator</code> interface
-      </h2><a class="self-link" href="#navigator_interface" aria-label="Permalink for Section 5."></a></div>
-      
-      <pre class="idl def" id="webidl-1776506972"><span class="idlHeader"><a class="self-link" href="#webidl-1776506972">WebIDL</a></span><code><span data-idl="" class="idlInterface" id="idl-def-navigator-partial-1" data-title="Navigator">partial interface <a data-idl="partial" data-link-type="interface" data-title="Navigator" class="idlID" data-dfn-for="Navigator" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator" id="ref-for-index-term-navigator-interface-1">Navigator</a> {<span data-idl="" class="idlAttribute" id="idl-def-navigator-geolocation" data-title="geolocation" data-dfn-for="Navigator">
-  [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-1">SameObject</a></span>] readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-1"><code>Geolocation</code></a></span> <dfn data-export="" data-dfn-type="attribute" id="dom-navigator-geolocation" data-idl="attribute" data-title="geolocation" data-dfn-for="Navigator" data-type="Geolocation" data-lt="geolocation" data-local-lt="Navigator.geolocation" class="idlName" tabindex="0" aria-haspopup="dialog"><code>geolocation</code></dfn>;</span>
-};</span></code></pre>
-    </section>
+  </details></aside><section id="navigator-attribute"><div class="header-wrapper"><h3 id="x5-1-navigator-attribute"><bdi class="secno">5.1 </bdi><code>navigator</code> attribute</h3><a class="self-link" href="#navigator-attribute" aria-label="Permalink for Section 5.1"></a></div>
+      <p>
+        The <dfn data-export="" data-dfn-type="attribute" id="dom-navigator-geolocation" data-idl="attribute" data-title="geolocation" data-dfn-for="Navigator" data-type="Geolocation" data-lt="geolocation" data-local-lt="Navigator.geolocation" tabindex="0" aria-haspopup="dialog"><code>geolocation</code></dfn> attribute provides the entry point for
+        accessing the Geolocation API.
+      </p>
+    </section></section>
     <aside class="mdn"><details>
     <summary aria-label="Expand MDN details for Geolocation"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
     <a title="The Geolocation interface represents an object able to obtain the position of the device programmatically. It gives Web content access to the location of the device. This allows a website or app to offer customized results based on the user's location." href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation">Geolocation</a>
@@ -4452,7 +4461,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <section id="idl-index" class="appendix"><div class="header-wrapper"><h2 id="a-idl-index"><bdi class="secno">A. </bdi>IDL Index</h2><a class="self-link" href="#idl-index" aria-label="Permalink for Appendix A."></a></div>
       
     <pre class="idl def" id="actual-idl-index"><span class="idlHeader"><a class="self-link" href="#actual-idl-index">WebIDL</a></span><code><span data-idl="" class="idlInterface" data-title="Navigator">partial interface <a data-idl="partial" data-link-type="interface" data-title="Navigator" class="idlID" data-dfn-for="Navigator" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator" id="ref-for-index-term-navigator-interface-2">Navigator</a> {<span data-idl="" class="idlAttribute" data-title="geolocation" data-dfn-for="Navigator">
-  [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-2">SameObject</a></span>] readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-5"><code>Geolocation</code></a></span> <dfn data-export="" data-dfn-type="attribute" data-idl="attribute" data-title="geolocation" data-dfn-for="Navigator" data-type="Geolocation" data-lt="geolocation" data-local-lt="Navigator.geolocation" class="idlName"><code>geolocation</code></dfn>;</span>
+  [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-2">SameObject</a></span>] readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-5"><code>Geolocation</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-navigator-geolocation" id="ref-for-dom-navigator-geolocation-2"><code>geolocation</code></a>;</span>
 };</span>
 
 <span data-idl="" class="idlInterface" data-title="Geolocation">[<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-5">Exposed</a>=Window</span>]
@@ -4544,7 +4553,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a class="index-term" href="#dom-positionoptions-enablehighaccuracy"><code>enableHighAccuracy</code></a> member for <code>PositionOptions</code>
     <span class="print-only">§7.1</span></li><li>
       <a class="index-term" href="#dom-navigator-geolocation"><code>geolocation</code></a> attribute for <code>Navigator</code>
-    <span class="print-only">§5.</span></li><li>
+    <span class="print-only">§5.1</span></li><li>
       <a class="index-term" href="#dom-geolocation"><code>Geolocation</code></a> interface
     <span class="print-only">§6.</span></li><li>
       <a class="index-term" href="#dfn-geolocation-task-source">geolocation task source</a> 
