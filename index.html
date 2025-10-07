@@ -159,7 +159,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="0567a531cac8358802494d0bba8fcb94ea3a3ceb">
+<meta name="revision" content="9d48e78a903792215402566954b381763790371d">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
@@ -250,9 +250,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "0567a531cac8358802494d0bba8fcb94ea3a3ceb",
-  "publishISODate": "2025-09-23T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 23 September 2025"
+  "gitRevision": "9d48e78a903792215402566954b381763790371d",
+  "publishISODate": "2025-10-07T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 07 October 2025"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
 <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://www.w3.org/StyleSheets/TR/2021/dark.css"></head>
@@ -260,7 +260,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2025-09-23">23 September 2025</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2025-10-07">07 October 2025</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -1532,20 +1532,20 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       <a href="#ref-for-index-term-get-the-current-permission-state-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
     </li>
   </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-grants-for-permission" aria-label="Links in this document to definition: grants (for permission)">
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-granted-for-permission" aria-label="Links in this document to definition: granted (for permission)">
       <span class="caret"></span>
       <div>
-        <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-granted" aria-label="Permalink for definition: grants (for permission). Activate to close this dialog.">Permalink</a>
+        <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-granted" aria-label="Permalink for definition: granted (for permission). Activate to close this dialog.">Permalink</a>
          
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-index-term-grants-for-permission-1" title="§ 3.1 User consent">§ 3.1 User consent</a> 
+      <a href="#ref-for-index-term-granted-for-permission-1" title="§ 3.1 User consent">§ 3.1 User consent</a> 
     </li><li>
-      <a href="#ref-for-index-term-grants-for-permission-2" title="§ 3.4 Checking permission to use the API">§ 3.4 Checking permission to use the API</a> 
+      <a href="#ref-for-index-term-granted-for-permission-2" title="§ 3.4 Checking permission to use the API">§ 3.4 Checking permission to use the API</a> 
     </li><li>
-      <a href="#ref-for-index-term-grants-for-permission-3" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
+      <a href="#ref-for-index-term-granted-for-permission-3" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-lifetimes-for-permission" aria-label="Links in this document to definition: lifetimes (for permission)">
@@ -2369,9 +2369,10 @@ navigator.<span class="hljs-property">geolocation</span>.<span class="hljs-title
           are typically time-based (e.g., "a day"), or until browser is closed,
           or the user might even be given the choice for the permission to be
           granted indefinitely. The permission <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-lifetime" id="ref-for-index-term-lifetimes-for-permission-3">lifetimes</a> dictate
-          how long a user agent <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-grants-for-permission-1">grants</a> a permission before that
-          permission is automatically reverted back to its default <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-permission-state" id="ref-for-index-term-permission-state-1">permission state</a>, prompting the end-user to make a new choice upon subsequent
-          use.
+          how long a user agent <a data-link-type="dfn" data-lt="granted" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-granted-for-permission-1">grants</a> a permission
+          before that permission is automatically reverted back to its default
+          <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-permission-state" id="ref-for-index-term-permission-state-1">permission state</a>, prompting the end-user to make a new choice
+          upon subsequent use.
         </p>
         <p>
           Although the granularity of the permission <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-lifetime" id="ref-for-index-term-lifetimes-for-permission-4">lifetime</a>
@@ -2497,7 +2498,7 @@ navigator.<span class="hljs-property">geolocation</span>.<span class="hljs-title
           When <dfn data-local-lt="check permission" id="dfn-checking-permission" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">checking permission</dfn>
           to use the API, a user agent <em class="rfc2119">MAY</em> suggest time-based <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-permission" id="ref-for-index-term-permission-1">permission</a>
           <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-lifetime" id="ref-for-index-term-lifetimes-for-permission-5">lifetimes</a>, such as "24 hours", "1 week", or choose to
-          remember the permission <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-grants-for-permission-2">grant</a> indefinitely. However,
+          remember the permission <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-granted-for-permission-2">grant</a> indefinitely. However,
           it is <em class="rfc2119">RECOMMENDED</em> that a user agent prioritize restricting the
           <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-permission" id="ref-for-index-term-permission-2">permission</a> <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-lifetime" id="ref-for-index-term-lifetimes-for-permission-6">lifetime</a> to a single session: This can
           be, for example, until the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object's-realm" id="ref-for-index-term-realm-for-environment-settings-object-1">realm</a> is
@@ -3268,7 +3269,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                         <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span><span class="issue-label">: Browser permission VS OS permission</span></div><aside class="">
                           <p>
                             On certain platforms, there can be a circumstance
-                            where the user has <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-grants-for-permission-3">granted</a> the user
+                            where the user has <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-granted-for-permission-3">granted</a> the user
                             agent permission to use Geolocation at the
                             browser-level, but the permission to access
                             location services has been denied at the OS level.
@@ -4698,7 +4699,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   </li><li>
     <span class="index-term" data-href="https://www.w3.org/TR/permissions/#dfn-getting-the-current-permission-state" id="index-term-get-the-current-permission-state" tabindex="0" aria-haspopup="dialog">get the current permission state</span>
   </li><li>
-    <span class="index-term" data-href="https://www.w3.org/TR/permissions/#dfn-granted" id="index-term-grants-for-permission" tabindex="0" aria-haspopup="dialog">grants (for <code>permission</code>)</span>
+    <span class="index-term" data-href="https://www.w3.org/TR/permissions/#dfn-granted" id="index-term-granted-for-permission" tabindex="0" aria-haspopup="dialog">granted (for <code>permission</code>)</span>
   </li><li>
     <span class="index-term" data-href="https://www.w3.org/TR/permissions/#dfn-lifetime" id="index-term-lifetimes-for-permission" tabindex="0" aria-haspopup="dialog">lifetimes (for <code>permission</code>)</span>
   </li><li>
@@ -4790,11 +4791,18 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </h2><a class="self-link" href="#changelog" aria-label="Permalink for Section D."></a></div><p><em>This section is non-normative.</em></p>
       
       <p>
-        Since First Public Working Draft in 2021, <cite>Geolocation</cite> has
-        received the following normative changes:
+        Since publication as a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation in 2022,
+        <cite>Geolocation</cite> has received the following normative changes:
+      </p><rs-changelog from="REC" filter="removeCommits"><ul>
+      <li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li>
+      </ul></rs-changelog>
+      <p>
+        Since First Public Working Draft in 2021, until it was published as a
+        <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation in 2022, <cite>Geolocation</cite> received the
+        following normative changes:
       </p>
-       <rs-changelog from="FPWD" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/f8b930f">Added webapps as group</a> (<a href="https://github.com/w3c/geolocation/pull/144">#144</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/7082b4e">Fix references to "default allowlist"</a> (<a href="https://github.com/w3c/geolocation/pull/133">#133</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation/pull/87">#87</a>)</li>
+       <rs-changelog from="FPWD" to="REC" filter="removeCommits"><ul>
+      <li><a href="https://github.com/w3c/geolocation/commit/514f15b">fix "Queue a task" / "in parallel" usage</a> (<a href="https://github.com/w3c/geolocation/pull/118">#118</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/a1531cb">Suggest permission lifetime</a> (<a href="https://github.com/w3c/geolocation/pull/108">#108</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0c378d9">Handle OS-level permission change</a> (<a href="https://github.com/w3c/geolocation/pull/109">#109</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2a116d7">Switch DOMTimeStamp to EpochTimeStamp</a> (<a href="https://github.com/w3c/geolocation/pull/104">#104</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2c0c516">Return 0 when watchPosition() errors</a> (<a href="https://github.com/w3c/geolocation/pull/100">#100</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/de05002">Callback with error if doc is not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/97">#97</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/f4605e5">Gracefully handle documents that are not fully active</a> (<a href="https://github.com/w3c/geolocation/pull/90">#90</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/41d7945">Add "geolocation task queue"</a> (<a href="https://github.com/w3c/geolocation/pull/87">#87</a>)</li>
       </ul></rs-changelog>
       <p>
         Since publication of the Second Edition in 2016, this specification
@@ -4829,8 +4837,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         </li>
       </ul>
       <p>
-        See the <a href="https://github.com/w3c/geolocation/commits/gh-pages">commit
-        history</a> for a complete list of changes.
+        See the <a href="https://github.com/w3c/geolocation/commits/main">commit history</a>
+        for a complete list of changes.
       </p>
     </section>
   
@@ -4844,7 +4852,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </dd><dt id="bib-infra">[infra]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-permissions">[Permissions]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 24 June 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
+      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 26 September 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
     </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
       <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 6 August 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
