@@ -65,7 +65,7 @@
         }
       </script>
       <p>
-        Since this specification become a W3C Recommendation on 01 September
+        Since this specification became a W3C Recommendation on 01 September
         2022, the following substantive additions and/or corrections have been
         proposed:
       </p><rs-changelog from="REC-2022" filter=
@@ -128,7 +128,7 @@
           retrieving geographic position information associated with a hosting
           device. The geographic position information is provided in terms of
           World Geodetic System coordinates [[WGS84]]. It does not include
-          providing a markup language of any kind, nor does not include
+          providing a markup language of any kind, nor does it include
           defining a new URL scheme for building URLs that identify geographic
           locations.
         </p>
@@ -190,7 +190,7 @@
         <aside class="example" title="Using clearWatch()">
           <pre class="js">
             const watchId = navigator.geolocation.watchPosition(
-              position =&gt; console.log(position);
+              position =&gt; console.log(position)
             );
 
             function buttonClickHandler() {
@@ -213,7 +213,7 @@
           Handling errors
         </h3>
         <p>
-          When an error occur, the second argument of the
+          When an error occurs, the second argument of the
           {{Geolocation/watchPosition()}} or
           {{Geolocation/getCurrentPosition()}} method gets called with a
           {{GeolocationPositionError}} error, which can help you figure out
@@ -378,7 +378,7 @@
         </p>
         <p>
           An end-user will generally give [=express permission=] through a user
-          interface, which usually present a range of permission
+          interface, which usually presents a range of permission
           [=permission/lifetimes=] that the end-user can choose from. The
           choice of [=permission/lifetimes=] vary across user agents, but they
           are typically time-based (e.g., "a day"), or until browser is closed,
@@ -1216,7 +1216,7 @@
           Internal slots
         </h2>
         <p>
-          Instances of {{GeolocationPositionError}} are created with the
+          Instances of {{GeolocationPosition}} are created with the
           internal slots in the following table:
         </p>
         <table class="data">
@@ -1245,7 +1245,7 @@
           Task sources
         </h2>
         <p>
-          The following [=task source=] is defined by this specifications.
+          The following [=task source=] is defined by this specification.
         </p>
         <dl>
           <dt>
