@@ -276,9 +276,9 @@
         </aside>
       </section>
       <section class="informative">
-        <h2>
+        <h3>
           Using `timeout`
-        </h2>
+        </h3>
         <p>
           If you require location information in a time sensitive manner, you
           can use the {{PositionOptions}} {{PositionOptions/timeout}} member to
@@ -459,9 +459,9 @@
         </p>
       </section>
       <section id="check-permission">
-        <h2>
+        <h3>
           Checking permission to use the API
-        </h2>
+        </h3>
         <p>
           <cite>Geolocation</cite> is a [=default powerful feature=] identified
           by the [=powerful feature/name=] <code><dfn class=
@@ -538,9 +538,9 @@
         );
       </pre>
       <section>
-        <h2>
+        <h3>
           Internal slots
-        </h2>
+        </h3>
         <p>
           Instances of {{Geolocation}} are created with the internal slots in
           the following table:
@@ -577,9 +577,9 @@
         </table>
       </section>
       <section>
-        <h2>
+        <h3>
           `getCurrentPosition()` method
-        </h2>
+        </h3>
         <p data-tests=
         "getCurrentPosition_IDL.https.html, getCurrentPosition_TypeError.html">
           The <dfn>getCurrentPosition</dfn>(|successCallback:PositionCallback|,
@@ -611,9 +611,9 @@
         </ol>
       </section>
       <section>
-        <h2>
+        <h3>
           `watchPosition()` method
-        </h2>
+        </h3>
         <p data-tests=
         "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
           The <dfn>watchPosition</dfn>(|successCallback:PositionCallback|,
@@ -653,9 +653,9 @@
         </ol>
       </section>
       <section>
-        <h2>
+        <h3>
           `clearWatch()` method
-        </h2>
+        </h3>
         <p data-tests="clearWatch_TypeError.html">
           When <dfn>clearWatch()</dfn> is invoked, the user agent MUST:
         </p>
@@ -666,9 +666,9 @@
         </ol>
       </section>
       <section>
-        <h2>
+        <h3>
           Request a position
-        </h2>
+        </h3>
         <p>
           To <dfn>request a position</dfn>, pass a {{Geolocation}}
           |geolocation:Geolocation|, a {{PositionCallback}}
@@ -798,9 +798,9 @@
         </ol>
       </section>
       <section>
-        <h2>
+        <h3>
           Acquire a position
-        </h2>
+        </h3>
         <p>
           To <dfn data-local-lt=
           "acquiring a position|acquire a position">acquire a position</dfn>,
@@ -1080,9 +1080,9 @@
         </ol>
       </section>
       <section>
-        <h2>
+        <h3>
           Call back with error
-        </h2>
+        </h3>
         <p>
           When instructed to <dfn>call back with error</dfn>, given an
           {{PositionErrorCallback?}} |callback:PositionErrorCallback?| and an
@@ -1113,9 +1113,9 @@
         };
         </pre>
       <section>
-        <h2>
+        <h3>
           `enableHighAccuracy` member
-        </h2>
+        </h3>
         <p data-tests="PositionOptions.https.html">
           The <dfn>enableHighAccuracy</dfn> member provides a hint that the
           application would like to receive the most accurate location data.
@@ -1135,9 +1135,9 @@
         </aside>
       </section>
       <section>
-        <h2>
+        <h3>
           `timeout` member
-        </h2>
+        </h3>
         <p data-tests="PositionOptions.https.html">
           The <dfn>timeout</dfn> member denotes the maximum length of time,
           expressed in milliseconds, before [=acquiring a position=] expires.
@@ -1157,9 +1157,9 @@
         </aside>
       </section>
       <section>
-        <h2>
+        <h3>
           `maximumAge` member
-        </h2>
+        </h3>
         <p data-tests="PositionOptions.https.html">
           The <dfn>maximumAge</dfn> member indicates that the web application
           is willing to accept a cached position whose age is no greater than
@@ -1212,9 +1212,9 @@
         </p>
       </section>
       <section>
-        <h2>
+        <h3>
           Internal slots
-        </h2>
+        </h3>
         <p>
           Instances of {{GeolocationPosition}} are created with the
           internal slots in the following table:
@@ -1241,9 +1241,9 @@
         </table>
       </section>
       <section>
-        <h2>
+        <h3>
           Task sources
-        </h2>
+        </h3>
         <p>
           The following [=task source=] is defined by this specification.
         </p>
@@ -1277,9 +1277,9 @@
         };
       </pre>
       <section>
-        <h4>
+        <h3>
           `latitude`, `longitude`, and `accuracy` attributes
-        </h4>
+        </h3>
         <aside class="correction" id="c3">
           <span class="marker">Candidate Correction:</span> To improve clarity
           and precision, the description of latitude and longitude attributes
@@ -1308,9 +1308,9 @@
         </p>
       </section>
       <section>
-        <h4>
+        <h3>
           `altitude` and `altitudeAccuracy` attributes
-        </h4>
+        </h3>
         <p>
           The <dfn>altitude</dfn> attribute denotes the height of the position,
           specified in meters above the [[WGS84]] ellipsoid.
@@ -1321,9 +1321,9 @@
         </p>
       </section>
       <section>
-        <h4>
+        <h3>
           `heading` attribute
-        </h4>
+        </h3>
         <p>
           The <dfn>heading</dfn> attribute denotes the direction of travel of
           the hosting device and is specified in degrees, where 0° ≤ heading
@@ -1331,9 +1331,9 @@
         </p>
       </section>
       <section>
-        <h4>
+        <h3>
           `speed` attribute
-        </h4>
+        </h3>
         <p>
           The <dfn>speed</dfn> attribute denotes the magnitude of the
           horizontal component of the hosting device's current velocity in
@@ -1341,9 +1341,9 @@
         </p>
       </section>
       <section>
-        <h4>
+        <h3>
           `toJSON()` method
-        </h4>
+        </h3>
         <aside class="addition" id="a2">
           <span class="marker">Candidate Addition:</span> Extend the `toJSON()`
           method functionality to the {{GeolocationCoordinates}} object,
@@ -1356,9 +1356,9 @@
         </p>
       </section>
       <section data-cite="infra">
-        <h2>
+        <h3>
           Constructing a `GeolocationPosition`
-        </h2>
+        </h3>
         <aside class="correction" id="c4">
           <span class="marker">Candidate Correction:</span> Constructor now
           takes a [=map=] of position data, a timestamp, and a boolean
@@ -1490,9 +1490,9 @@
         </dl>
       </section>
       <section>
-        <h4>
+        <h3>
           `code` attribute
-        </h4>
+        </h3>
         <p>
           The <dfn>code</dfn> attribute returns the value it was [=call back
           with error|initialized to=] (see [[[#constants]]] for possible
@@ -1500,9 +1500,9 @@
         </p>
       </section>
       <section>
-        <h4>
+        <h3>
           `message` attribute
-        </h4>
+        </h3>
         <p>
           The <dfn>message</dfn> attribute is a developer-friendly textual
           description of the {{GeolocationPositionError/code}} attribute.
