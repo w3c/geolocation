@@ -60,15 +60,17 @@
     <section id="introduction" class="informative">
       <h2>
         Introduction
-      </h2><cite>Geolocation</cite> defines a high-level interface to location
-      information associated only with the device hosting the implementation.
-      Common sources of location information include Global Positioning System
-      (GPS) and location inferred from network signals such as IP address,
-      RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs, as well as
-      user input. The API itself is agnostic of the underlying <dfn>location
-      information source</dfn>s, and no guarantee is given that the API returns
-      the device's actual location.<br>
-      <br>
+      </h2>
+      <p>
+        <cite>Geolocation</cite> defines a high-level interface to location
+        information associated only with the device hosting the implementation.
+        Common sources of location information include Global Positioning
+        System (GPS) and location inferred from network signals such as IP
+        address, RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs,
+        as well as user input. The API itself is agnostic of the underlying
+        <dfn>location information source</dfn>s, and no guarantee is given that
+        the API returns the device's actual location.
+      </p>
       <p>
         This specification provides two ways for users to share their location:
         a <em>precise position</em> and an <em>approximate position</em>.
@@ -83,14 +85,15 @@
       <p>
         An <dfn>approximate position</dfn> is a less precise,
         privacy-preserving representation of the user's location. Instead of
-        providing precise coordinates, the user agent MUST return a location
-        that is intentionally coarsened to a larger area, such as the nearest
-        city, postal code, or a predefined region. This is often sufficient for
-        applications that don't need to know the user's [=precise position=],
-        for example, a weather application that only needs a city-level
-        location. By sharing an [=approximate position=], users can still get
-        the benefit of a location-aware application without revealing their
-        [=precise position=].
+        providing precise coordinates, an [=approximate location information
+        source=] can returns a location that is intentionally coarsened to a
+        larger area, such as the nearest city, postal code, or a predefined
+        region. This is often sufficient for applications that don't need to
+        know the user's [=precise position=], for example, a weather
+        application that only needs a city-level location. By sharing an
+        [=approximate position=], users can still get the benefit of a
+        location-aware application without revealing their [=precise
+        position=].
       </p>
       <p>
         An <dfn>approximate location information source</dfn> is a [=location
@@ -99,8 +102,7 @@
         location.
       </p>
       <p>
-        If an end user [=check permission|grants permission=],
-        <cite>Geolocation</cite>:
+        If an end user grants permission, <cite>Geolocation</cite>:
       </p>
       <ul>
         <li>Provides location data as latitude, longitude, altitude, speed, and
@@ -153,12 +155,17 @@
       <section class="informative">
         <h3>
           Get current position
-        </h3>Request the user's current location. If the user allows it, you
-        will get back a position object. The website can influence the
-        position's accuracy by using the `accuracyMode` option. By default, the
-        user agent will provide a `"precise"` location, but a website can
-        request an `"approximate"` location if it doesn't require high
-        accuracy, which helps protect user privacy.
+        </h3>
+        <p>
+          Request the user's current location. If the user grants permission,
+          the API will return a position object. The website can influence the
+          position's accuracy by using the {{PositionOptions}} dictionary's
+          {{PositionOptions/accuracyMode}} member. By default, the user agent
+          will provide a {{AccuracyMode/"precise"}} location. However, a
+          website can request an [=approximate position=] by setting
+          {{PositionOptions/accuracyMode}} to {{AccuracyMode/"approximate"}},
+          which helps protect user privacy if high accuracy is not required.
+        </p>
         <aside class="example" title="A one-shot position request">
           <pre class="js">
             navigator.geolocation.getCurrentPosition(position =&gt; {
@@ -274,10 +281,10 @@
         <p>
           By default, the API always attempts to return a cached position so
           long as it has a previously acquired position that matches the
-          requested `accuracyMode`. In this example, we accept a precise
-          position whose age is no greater than 10 minutes. If the user agent
-          does not have a fresh enough cached position object of the correct
-          accuracy, it automatically acquires a new position.
+          requested {{PositionOptions/accuracyMode}}. In this example, we
+          accept a precise position whose age is no greater than 10 minutes. If
+          the user agent does not have a fresh enough cached position object of
+          the correct accuracy, it automatically acquires a new position.
         </p>
         <aside class="example" title="Getting a cached precise position">
           <pre class="js">
@@ -425,17 +432,20 @@
           User consent
         </h3>
         <p>
-          <cite>Geolocation</cite> is a [=powerful feature=] that requires
-          [=express permission=] from an end-user before any location data is
-          shared with a web application. This requirement is normatively
-          enforced by the [=check permission=] steps on which the
+          <cite>Geolocation</cite> uses the [=powerful feature=]s
+          <a>"geolocation-approximate"</a> and <a>"geolocation"</a>, which
+          require [=express permission=] from an end-user before any location
+          data is shared with a web application. This requirement is
+          normatively enforced by the [=request permission to use=] algorithm,
+          which is customized for precise location by the [=request precise
+          geolocation permission=] steps, on which the
           {{Geolocation/getCurrentPosition()}} and
-          {{Geolocation/watchPosition()}} methods rely [=User agents=] with
-          support for [=approximate position=] SHOULD allow the user to choose
-          between sharing a [=precise position=] or an [=approximate
-          position=]. This choice gives users more control over their privacy,
-          allowing them to share a less precise location when they are not
-          comfortable sharing their [=precise position=].
+          {{Geolocation/watchPosition()}} methods rely. [=User agents=] with
+          support for [=approximate position=] are strongly encouraged to allow
+          the user to choose between sharing a [=precise position=] or an
+          [=approximate position=]. This choice gives users more control over
+          their privacy, allowing them to share a less precise location when
+          they are not comfortable sharing their [=precise position=].
         </p>
         <p>
           An end-user will generally give [=express permission=] through a user
@@ -454,7 +464,7 @@
           Although the granularity of the permission [=permission/lifetime=]
           varies across user-agents, this specification urges user agents to
           limit the lifetime to a single browsing session by default (see
-          [[[#check-permission]]] for normative requirements).
+          [[[#permission]]] for normative requirements).
         </p>
       </section>
       <section id="privacy_for_recipients" class="informative">
@@ -485,10 +495,10 @@
           In line with this principle, recipients are strongly encouraged to
           request the lowest level of location accuracy that is sufficient for
           their application's functionality. For instance, if an application
-          only needs to know the user's city, it should request an
-          [=approximate position=] by setting the `accuracyMode` option to
-          `"approximate"`. This practice of data minimization is a key aspect
-          of respecting user privacy.
+          only needs to know the user's city, it can respect user privacy by
+          requesting an [=approximate position=] by setting the `accuracyMode`
+          option to `"approximate"`. This practice of data minimization is a
+          key aspect of respecting user privacy.
         </p>
         <p>
           The recipients of location information need to refrain from
@@ -528,100 +538,101 @@
           interfaces that enable revocation of permissions.
         </p>
       </section>
-      <section id="check-permission">
-        <h3>
-          Checking permission to use the API
-        </h3><cite>Geolocation</cite> is a [=default powerful feature=]
-        identified by the [=powerful feature/name=]s <code><dfn class=
-        "permission">"geolocation"</dfn></code> for [=precise position=] and
-        <code><dfn class="permission">"geolocation-approximate"</dfn></code>
-        for [=approximate position=].
+      <section id="permission">
+        <h2>
+          Geolocation permissions
+        </h2>
         <p>
-          To <dfn>request geolocation permission</dfn> for a given
-          {{PermissionDescriptor}} |descriptor|, the user agent MUST run the
-          following steps. These steps override the default behavior of
-          [=request permission to use=] for these features.
+          <cite>Geolocation</cite> defines two [=powerful features=] identified
+          by the [=powerful feature/name=]s <code><dfn class=
+          "permission">"geolocation"</dfn></code> (for precise location) and
+          <code><dfn class="permission">"geolocation-approximate"</dfn></code>
+          (for approximate location).
+        </p>
+        <p>
+          <code><a>"geolocation-approximate"</a></code> is a [=default powerful
+          feature=], while <code><a>"geolocation"</a></code> is a [=powerful
+          feature=] with:
+        </p>
+        <ul>
+          <li>A custom [=powerful feature/permission result type=]
+          {{GeolocationPermissionStatus}}:
+            <pre class="idl">
+                [Exposed=(Window,Worker)]
+                interface GeolocationPermissionStatus : PermissionStatus {
+                  readonly attribute AccuracyMode? accuracyMode;
+                };
+              </pre>
+          </li>
+          <li>A custom <dfn dfn-for="geolocation">precise permission query
+          algorithm</dfn>, which, given a {{PermissionDescriptor}}
+          |permissionDesc| and a {{GeolocationPermissionStatus}} |status|, runs
+          the following steps:
+            <ol class="algorithm">
+              <li>Let |approximatePermissionDesc| be a {{PermissionDescriptor}}
+              with {{PermissionDescriptor/name}} set to
+              <a>"geolocation-approximate"</a>.
+              </li>
+              <li>Let |approximatePermissionState| be
+              |approximatePermissionDesc|'s [=permission state=].
+              </li>
+              <li>If |approximatePermissionState| is [=permission/granted=] and
+              |permissionDesc|'s [=permission state=] is [=permission/prompt=],
+              set |status|'s to [=permission/prompt=]. Otherwise, set
+              |status|'s {{PermissionStatus/state}} to
+              |appxorimatePermissionState|.
+              </li>
+              <li>If |status|'s {{PermissionStatus/state}} is equal to
+              [=permission/granted=], set |status|'s
+              {{GeolocationPermissionStatus/accuracyMode}} to "precise" if also
+              |permissionDesc|'s [=permission state=] is [=permission/granted=]
+              or to "approximate" otherwise.
+              </li>
+            </ol>
+          </li>
+        </ul>
+        <p>
+          To <dfn>request precise geolocation permission</dfn>, the user agent
+          MUST run the following steps.
         </p>
         <ol class="algorithm">
-          <li>If |descriptor|.{{PermissionDescriptor/name}} is "geolocation":
-            <ol>
-              <li>Prompt the user to choose between granting permission for
-              [=precise position=], granting permission for [=approximate
-              position=], or denying permission.
-              </li>
-              <li>If the user grants permission for [=precise position=]:
-                <ol>
-                  <li>Set the permission state of "geolocation" to "granted".
-                  </li>
-                  <li>Set the permission state of "geolocation-approximate" to
-                  "granted".
-                  </li>
-                  <li>Return "granted".
-                  </li>
-                </ol>
-              </li>
-              <li>If the user grants permission for [=approximate position=]:
-                <ol>
-                  <li>Set the permission state of "geolocation-approximate" to
-                  "granted".
-                  </li>
-                  <li>Return "prompt".
-                  </li>
-                </ol>
-              </li>
-              <li>If the user denies permission:
-                <ol>
-                  <li>Set the permission state of "geolocation" to "denied".
-                  </li>
-                  <li>Set the permission state of "geolocation-approximate" to
-                  "denied".
-                  </li>
-                  <li>Return "denied".
-                  </li>
-                </ol>
-              </li>
-            </ol>
+          <li>Let |preciseLocationDescriptor| be a new {{PermissionDescriptor}}
+          with {{PermissionDescriptor/name}} set to <a>"geolocation"</a>.
           </li>
-          <li>If |descriptor|.{{PermissionDescriptor/name}} is
-          "geolocation-approximate":
-            <ol>
-              <li>Prompt the user to choose between granting permission for
-              [=approximate position=] or denying permission.
-              </li>
-              <li>If the user grants permission for [=approximate position=]:
-                <ol>
-                  <li>Set the permission state of "geolocation-approximate" to
-                  "granted".
-                  </li>
-                  <li>Return "granted".
-                  </li>
-                </ol>
-              </li>
-              <li>If the user denies permission:
-                <ol>
-                  <li>Set the permission state of "geolocation" to "denied".
-                  </li>
-                  <li>Set the permission state of "geolocation-approximate" to
-                  "denied".
-                  </li>
-                  <li>Return "denied".
-                  </li>
-                </ol>
-              </li>
-            </ol>
+          <li>Run the [=geolocation/precise permission query algorithm=] given
+          |preciseLocationDescriptor| and a new {{GeolocationPermissionStatus}}
+          |status|.
+          </li>
+          <li>If |status|'s {{PermissionStatus/state}} is not
+          [=permission/prompt=], return |status|.
+          </li>
+          <li>Let |approximateLocationDescriptor| be a new
+          {{PermissionDescriptor}} with {{PermissionDescriptor/name}} set to
+          <a>"geolocation-approximate"</a>.
+          </li>
+          <li>Run the [=powerful feature/permission query algorithm=] given
+          |approximateLocationDescriptor| and a new {{PermissionStatus}}
+          |approximateStatus|.
+          </li>
+          <li>If |approximateStatus| is [=permission/granted=], [=request
+          permission to use=] |preciseLocationDescriptor|. Otherwise, [=request
+          permission to use=] |approximateLocationDescriptor| and [=request
+          permission to use=] |preciseLocationDescriptor|. NOTE: The user agent
+          is free to group the two resulting questions for the user into a
+          single permission prompt, asking the user whether they want to
+          expression permission to grant either approximate or precise
+          geolocation (or none).
+          </li>
+          <li>Run the [=geolocation/precise permission query algorithm=] given
+          |preciseLocationDescriptor| and a new {{GeolocationPermissionStatus}}
+          |newGeolocationStatus|.
+          </li>
+          <li>Assert: |newGeolocationStatus|'s state is not
+          [=permission/prompt=].
+          </li>
+          <li>Return |newGeolocationStatus|.
           </li>
         </ol>
-        <p>
-          When <dfn data-local-lt="check permission">checking permission</dfn>
-          to use the API, a user agent MAY suggest time-based [=permission=]
-          [=permission/lifetimes=], such as "24 hours", "1 week", or choose to
-          remember the permission [=permission/grant=] indefinitely. However,
-          it is RECOMMENDED that a user agent prioritize restricting the
-          [=permission=] [=permission/lifetime=] to a single session: This can
-          be, for example, until the [=environment settings object/realm=] is
-          destroyed, the end-user [=navigates=] away from the [=origin=], or
-          the relevant browser tab is closed.
-        </p>
       </section>
       <section>
         <h3>
@@ -630,7 +641,7 @@
         <p>
           A malicious actor could potentially infer a user's [=precise
           position=] by collecting and correlating multiple, distinct
-          [=approximate position=]s. To mitigate this risk of a refinement
+          [=approximate positions=]. To mitigate this risk of a refinement
           attack, when a site receives an [=approximate position=], any
           subsequent calls from that same site within a user-agent-defined time
           window SHOULD return the exact same, cached [=approximate position=]
@@ -872,10 +883,28 @@
           </li>
           <li>[=In parallel=]:
             <ol>
-              <li>Set |permission| to [=request geolocation permission=] for
-              |descriptor|.
+              <li>Let |resolvedPermissionState| be null.
               </li>
-              <li>Let |handle permission denial| be the following steps:
+              <li>If |permissionName| is <a>"geolocation-approximate"</a>:
+                <ol>
+                  <li>Set |resolvedPermissionState| to the result of running
+                  [=request permission to use=] |descriptor|.
+                  </li>
+                </ol>
+              </li>
+              <li>Otherwise (|permissionName| is <a>"geolocation"</a>):
+                <ol>
+                  <li>Let |precisePermissionStatus:GeolocationPermissionStatus|
+                  be [=request precise geolocation permission=].
+                  </li>
+                  <li>Set |resolvedPermissionState| to
+                  |precisePermissionStatus|.state.
+                  </li>
+                </ol>
+              </li>
+              <li data-tests=
+              "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
+              If |resolvedPermissionState| is "denied":
                 <ol>
                   <li>If |watchId| was passed, [=list/remove=] |watchId| from
                   |watchIDs|.
@@ -884,25 +913,6 @@
                   {{GeolocationPositionError/PERMISSION_DENIED}}.
                   </li>
                   <li>Terminate this algorithm.
-                  </li>
-                </ol>
-              </li>
-              <li data-tests=
-              "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-              If |permission| is "denied":
-                <ol>
-                  <li>If |options|.{{PositionOptions/accuracyMode}} is
-                  "approximate", then run |handle permission denial|.
-                  </li>
-                  <li>Otherwise:
-                    <ol>
-                      <li>Let |approximatePermission| be [=get the current
-                      permission state=] of "geolocation-approximate".
-                      </li>
-                      <li>If |approximatePermission| is "denied", then run
-                      |handle permission denial|.
-                      </li>
-                    </ol>
                   </li>
                 </ol>
               </li>
@@ -978,30 +988,29 @@
           |timeoutTime|, during which it tries to acquire the device's position
           by running the following steps:
             <ol>
-              <li>Let |precisePermission| be [=get the current permission
-              state=] of "geolocation".
-              </li>
-              <li>Let |approximatePermission| be [=get the current permission
-              state=] of "geolocation-approximate".
+              <li>Let |permissionStatus:GeolocationPermissionStatus| be the
+              result of running the [=geolocation/precise permission query
+              algorithm=] given a new {{PermissionDescriptor}} with its
+              {{PermissionDescriptor/name}} set to "geolocation".
               </li>
               <li>Let |effectiveAccuracy| be null.
               </li>
-              <li>If |options|.{{PositionOptions/accuracyMode}} is
-              "approximate":
+              <li>If |permissionStatus|.state is "granted":
                 <ol>
-                  <li>If |approximatePermission| is "granted", set
-                  |effectiveAccuracy| to "approximate".
+                  <li>If |options|.{{PositionOptions/accuracyMode}} is
+                  "approximate":
+                    <ol>
+                      <li>Set |effectiveAccuracy| to "approximate".
+                      </li>
+                    </ol>
                   </li>
-                </ol>
-              </li>
-              <li>Otherwise, if |options|.{{PositionOptions/accuracyMode}} is
-              "precise":
-                <ol>
-                  <li>If |precisePermission| is "granted", set
-                  |effectiveAccuracy| to "precise".
-                  </li>
-                  <li>Otherwise, if |approximatePermission| is "granted", set
-                  |effectiveAccuracy| to "approximate".
+                  <li>Otherwise (|options|.{{PositionOptions/accuracyMode}} is
+                  "precise"):
+                    <ol>
+                      <li>Set |effectiveAccuracy| to
+                      |permissionStatus|.accuracyMode.
+                      </li>
+                    </ol>
                   </li>
                 </ol>
               </li>
@@ -1337,10 +1346,10 @@
         </p>
         <p class="note" title="When is the timeout calculated?">
           The time spent waiting for the document to become visible and for
-          [=check permission|obtaining permission to use the API=] is not
-          included in the period covered by the {{PositionOptions/timeout}}
-          member. The {{PositionOptions/timeout}} member only applies when
-          [=acquiring a position=] begins.
+          [=request precise geolocation permission|obtaining permission to use
+          the API=] is not included in the period covered by the
+          {{PositionOptions/timeout}} member. The {{PositionOptions/timeout}}
+          member only applies when [=acquiring a position=] begins.
         </p>
         <aside class="note" title="Immediate cancellation">
           <p>
