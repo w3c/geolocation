@@ -564,10 +564,9 @@
                 };
               </pre>
           </li>
-          <li>A custom <dfn dfn-for="geolocation">precise permission query
-          algorithm</dfn>, which, given a {{PermissionDescriptor}}
-          |permissionDesc| and a {{GeolocationPermissionStatus}} |status|, runs
-          the following steps:
+          <li>A custom <dfn>precise permission query algorithm</dfn>, which,
+          given a {{PermissionDescriptor}} |permissionDesc| and a
+          {{GeolocationPermissionStatus}} |status|, runs the following steps:
             <ol class="algorithm">
               <li>Let |approximatePermissionDesc| be a {{PermissionDescriptor}}
               with {{PermissionDescriptor/name}} set to
@@ -600,7 +599,7 @@
           <li>Let |preciseLocationDescriptor| be a new {{PermissionDescriptor}}
           with {{PermissionDescriptor/name}} set to <a>"geolocation"</a>.
           </li>
-          <li>Run the [=geolocation/precise permission query algorithm=] given
+          <li>Run the [=precise permission query algorithm=] given
           |preciseLocationDescriptor| and a new {{GeolocationPermissionStatus}}
           |status|.
           </li>
@@ -624,7 +623,7 @@
           prompt, asking the user whether they want to expression permission to
           grant either approximate or precise geolocation (or none).
           </li>
-          <li>Run the [=geolocation/precise permission query algorithm=] given
+          <li>Run the [=precise permission query algorithm=] given
           |preciseLocationDescriptor| and a new {{GeolocationPermissionStatus}}
           |newGeolocationStatus|.
           </li>
