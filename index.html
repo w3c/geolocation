@@ -86,7 +86,7 @@
         An <dfn>approximate position</dfn> is a less precise,
         privacy-preserving representation of the user's location. Instead of
         providing precise coordinates, an [=approximate location information
-        source=] can returns a location that is intentionally coarsened to a
+        source=] can return a location that is intentionally coarsened to a
         larger area, such as the nearest city, postal code, or a predefined
         region. This is often sufficient for applications that don't need to
         know the user's [=precise position=], for example, a weather
@@ -164,7 +164,10 @@
           will provide a {{AccuracyMode/"precise"}} location. However, a
           website can request an [=approximate position=] by setting
           {{PositionOptions/accuracyMode}} to {{AccuracyMode/"approximate"}},
-          which helps protect user privacy if high accuracy is not required.
+          which helps protect user privacy if high accuracy is not required. In
+          addition, the user can instruct the user agent to only provide an
+          approximate position, even if the website requested a precise
+          position.
         </p>
         <aside class="example" title="A one-shot position request">
           <pre class="js">
@@ -368,34 +371,26 @@
           The [=policy-controlled feature/default allowlist=] of `'self'`
           allows API usage in same-origin nested frames but prevents
           third-party content from using the API.
-        </p>Third-party usage can be selectively enabled by adding the
-        [^iframe/allow^]`="geolocation"` or
-        [^iframe/allow^]`="geolocation-approximate"` attribute to an [^iframe^]
-        element. Note that if `geolocation` is allowed,
-        `geolocation-approximate` is also implicitly allowed.
+        </p>
+        <p>
+          Third-party usage can be selectively enabled by adding the
+          [^iframe/allow^]`="geolocation"` attribute to an [^iframe^] element:
+        </p>
         <aside class="example" title="Enabling Geolocation in an iframe">
           <pre class="html">
-            &lt;!-- This allows both precise and approximate geolocation --&gt;
             &lt;iframe
               src="https://third-party.com"
               allow="geolocation"&gt;
-            &lt;/iframe&gt;
-
-            &lt;!-- This allows only approximate geolocation --&gt;
-            &lt;iframe
-              src="https://another-third-party.com"
-              allow="geolocation-approximate"&gt;
             &lt;/iframe&gt;
           </pre>
         </aside>
         <p>
           Alternatively, the API can be disabled in a first-party context by
-          specifying an HTTP response header. Disabling
-          `geolocation-approximate` will also disable `geolocation`.
+          specifying an HTTP response header:
         </p>
         <aside class="example" title="Permissions Policy over HTTP">
           <pre class="http">
-            Permissions-Policy: geolocation-approximate=()
+            Permissions-Policy: geolocation=()
           </pre>
         </aside>
         <p>
@@ -560,7 +555,7 @@
             <pre class="idl">
                 [Exposed=(Window,Worker)]
                 interface GeolocationPermissionStatus : PermissionStatus {
-                  readonly attribute AccuracyMode? accuracyMode;
+                  readonly attribute AccuracyMode accuracyMode;
                 };
               </pre>
           </li>
@@ -618,10 +613,15 @@
           [=permission/"granted"=], [=request permission to use=]
           |preciseLocationDescriptor|. Otherwise, [=request permission to use=]
           |approximateLocationDescriptor| and [=request permission to use=]
-          |preciseLocationDescriptor|. NOTE: The user agent is free to group
-          the two resulting questions for the user into a single permission
-          prompt, asking the user whether they want to expression permission to
-          grant either approximate or precise geolocation (or none).
+          |preciseLocationDescriptor|.
+            <aside class="note">
+              <p>
+                The user agent is free to group the two resulting questions for
+                the user into a single permission prompt, asking the user
+                whether they want to expression permission to grant either
+                approximate or precise geolocation (or none).
+              </p>
+            </aside>
           </li>
           <li>Run the [=precise permission query algorithm=] given
           |preciseLocationDescriptor| and a new {{GeolocationPermissionStatus}}
@@ -837,12 +837,7 @@
           <li>Let |document:Document| be the |geolocation|'s [=relevant global
           object=]'s [=associated `Document`=].
           </li>
-          <li>Let |permissionName| be "geolocation-approximate" if
-          |options|.{{PositionOptions/accuracyMode}} is "approximate",
-          otherwise let it be "geolocation".
-          </li>
-          <li data-tests="">If |document| is not [=allowed to use=] the
-          |permissionName| feature:
+          <li>If |document| is not [=allowed to use=] <a>"geolocation"</a>:
             <ol>
               <li>If |watchId| was passed, [=List/remove=] |watchId| from
               |watchIDs|.
@@ -879,11 +874,13 @@
             </ol>
           </li>
           <li>Let |descriptor| be a new {{PermissionDescriptor}} whose
-          {{PermissionDescriptor/name}} is |permissionName|.
+          {{PermissionDescriptor/name}} is <a>"geolocation-approximate"</a> if
+          |options|.{{PositionOptions/accuracyMode}} is
+          {{AccuracyMode/"approximate"}}, otherwise <a>"geolocation"</a>.
           </li>
           <li>[=In parallel=]:
             <ol>
-              <li>Let |resolvedPermissionState| be null.
+              <li>Let |resolvedPermissionState| be `null`.
               </li>
               <li>If |permissionName| is <a>"geolocation-approximate"</a>:
                 <ol>
@@ -993,7 +990,7 @@
               algorithm=] given a new {{PermissionDescriptor}} with its
               {{PermissionDescriptor/name}} set to "geolocation".
               </li>
-              <li>Let |effectiveAccuracy| be null.
+              <li>Let |effectiveAccuracy:AccuracyMode?| be `null`.
               </li>
               <li>If |permissionStatus|.{{PermissionStatus/state}} is
               [=permission/granted=]:
@@ -1015,7 +1012,7 @@
                   </li>
                 </ol>
               </li>
-              <li>If |effectiveAccuracy| is null:
+              <li>If |effectiveAccuracy| is `null`:
                 <ol>
                   <li>Stop |timeout|.
                   </li>
@@ -1646,17 +1643,10 @@
     <section>
       <h2>
         Permissions policy
-      </h2>This specification defines two [=policy-controlled features=]
-      identified by the token strings <a>"geolocation"</a> and
-      <a>"geolocation-approximate"</a>. Their [=policy-controlled
-      feature/default allowlist=] is [=default allowlist/'self'=].
-      <p>
-        The "geolocation" policy controls access to [=precise position=], while
-        "geolocation-approximate" controls access to [=approximate position=].
-        Granting "geolocation" permission implicitly grants
-        "geolocation-approximate" permission as well, while restricting
-        "geolocation-approximate" also restricts "geolocation".
-      </p>
+      </h2>This specification defines a [=policy-controlled feature=]
+      identified by the token string <a>"geolocation"</a>. Its
+      [=policy-controlled feature/default allowlist=] is [=default
+      allowlist/'self'=].
     </section>
     <section data-cite="html">
       <h2>
