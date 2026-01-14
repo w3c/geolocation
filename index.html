@@ -576,17 +576,18 @@
               <li>Let |approximatePermissionState| be
               |approximatePermissionDesc|'s [=permission state=].
               </li>
-              <li>If |approximatePermissionState| is [=permission/granted=] and
-              |permissionDesc|'s [=permission state=] is [=permission/prompt=],
-              set |status|'s to [=permission/prompt=]. Otherwise, set
-              |status|'s {{PermissionStatus/state}} to
-              |appxorimatePermissionState|.
+              <li>If |approximatePermissionState| is [=permission/"granted"=]
+              and |permissionDesc|'s [=permission state=] is
+              [=permission/"prompt"=], set |status|'s to
+              [=permission/"prompt"=]. Otherwise, set |status|'s
+              {{PermissionStatus/state}} to |appxorimatePermissionState|.
               </li>
               <li>If |status|'s {{PermissionStatus/state}} is equal to
-              [=permission/granted=], set |status|'s
-              {{GeolocationPermissionStatus/accuracyMode}} to "precise" if also
-              |permissionDesc|'s [=permission state=] is [=permission/granted=]
-              or to "approximate" otherwise.
+              [=permission/"granted"=], set |status|'s
+              {{GeolocationPermissionStatus/accuracyMode}} to
+              {{AccuracyMode/"precise"}} if also |permissionDesc|'s
+              [=permission state=] is [=permission/"granted"=] or to
+              {{AccuracyMode/"approximate"}} otherwise.
               </li>
             </ol>
           </li>
@@ -604,7 +605,7 @@
           |status|.
           </li>
           <li>If |status|'s {{PermissionStatus/state}} is not
-          [=permission/prompt=], return |status|.
+          [=permission/"prompt"=], return |status|.
           </li>
           <li>Let |approximateLocationDescriptor| be a new
           {{PermissionDescriptor}} with {{PermissionDescriptor/name}} set to
@@ -614,21 +615,21 @@
           |approximateLocationDescriptor| and a new {{PermissionStatus}}
           |approximateStatus|.
           </li>
-          <li>If |approximateStatus| is [=permission/granted=], [=request
-          permission to use=] |preciseLocationDescriptor|. Otherwise, [=request
-          permission to use=] |approximateLocationDescriptor| and [=request
-          permission to use=] |preciseLocationDescriptor|. NOTE: The user agent
-          is free to group the two resulting questions for the user into a
-          single permission prompt, asking the user whether they want to
-          expression permission to grant either approximate or precise
-          geolocation (or none).
+          <li>If |approximateStatus|.{{PermissionStatus/state}} is
+          [=permission/"granted"=], [=request permission to use=]
+          |preciseLocationDescriptor|. Otherwise, [=request permission to use=]
+          |approximateLocationDescriptor| and [=request permission to use=]
+          |preciseLocationDescriptor|. NOTE: The user agent is free to group
+          the two resulting questions for the user into a single permission
+          prompt, asking the user whether they want to expression permission to
+          grant either approximate or precise geolocation (or none).
           </li>
           <li>Run the [=geolocation/precise permission query algorithm=] given
           |preciseLocationDescriptor| and a new {{GeolocationPermissionStatus}}
           |newGeolocationStatus|.
           </li>
           <li>Assert: |newGeolocationStatus|'s state is not
-          [=permission/prompt=].
+          [=permission/"prompt"=].
           </li>
           <li>Return |newGeolocationStatus|.
           </li>
@@ -995,7 +996,8 @@
               </li>
               <li>Let |effectiveAccuracy| be null.
               </li>
-              <li>If |permissionStatus|.state is "granted":
+              <li>If |permissionStatus|.{{PermissionStatus/state}} is
+              [=permission/granted=]:
                 <ol>
                   <li>If |options|.{{PositionOptions/accuracyMode}} is
                   "approximate":
@@ -1008,7 +1010,7 @@
                   "precise"):
                     <ol>
                       <li>Set |effectiveAccuracy| to
-                      |permissionStatus|.accuracyMode.
+                      |permissionStatus|.{{GeolocationPermissionStatus/accuracyMode}}.
                       </li>
                     </ol>
                   </li>
