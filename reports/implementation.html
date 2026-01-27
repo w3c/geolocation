@@ -1,28 +1,46 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <script
-      src="https://www.w3.org/Tools/respec/respec-w3c"
-      async
-      class="remove"
-    ></script>
-    <script class="remove">
-      // All config options at https://respec.org/docs/
-      var respecConfig = {
-        // Working Groups ids at https://respec.org/w3c/groups/
-        specStatus: "base",
-        editors: [
-          {
-            name: "Marcos Cáceres",
-          },
-        ],
-        latestVersion: null,
-        // See https://respec.org/docs/#xref for usage.
-        xref: "web-platform",
-      };
-    </script>
-    <style>
+<!DOCTYPE html><html lang="en" dir="ltr"><head>
+<meta charset="utf-8">
+<meta name="generator" content="ReSpec 35.6.1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+.issue-label{text-transform:initial}
+.warning>p:first-child{margin-top:0}
+.warning{padding:.5em;border-left-width:.5em;border-left-style:solid}
+span.warning{padding:.1em .5em .15em}
+.issue.closed span.issue-number{text-decoration:line-through}
+.issue.closed span.issue-number::after{content:" (Closed)";font-size:smaller}
+.warning{border-color:#f11;border-color:var(--warning-border,#f11);border-width:.2em;border-style:solid;background:#fbe9e9;background:var(--warning-bg,#fbe9e9);color:#000;color:var(--text,#000)}
+.warning-title:before{content:"⚠";font-size:1.3em;float:left;padding-right:.3em;margin-top:-.3em}
+li.task-list-item{list-style:none}
+input.task-list-item-checkbox{margin:0 .35em .25em -1.6em;vertical-align:middle}
+.issue a.respec-gh-label{padding:5px;margin:0 2px 0 2px;font-size:10px;text-transform:none;text-decoration:none;font-weight:700;border-radius:4px;position:relative;bottom:2px;border:none;display:inline-block}
+</style>
+<style>
+dfn{cursor:pointer}
+.dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font-family:"Helvetica Neue",sans-serif;font-size:small;background:#fff;background:var(--indextable-hover-bg,#fff);color:#000;color:var(--text,#000);box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);box-shadow:0 1em 3em -.4em var(--tocsidebar-shadow,rgba(0,0,0,.3)),0 0 1px 1px var(--tocsidebar-shadow,rgba(0,0,0,.05));border-radius:2px}
+.dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
+.dfn-panel:not(.docked)>.caret::after,.dfn-panel:not(.docked)>.caret::before{content:"";position:absolute;border:10px solid transparent;border-top:0;border-bottom:10px solid #fff;border-bottom-color:var(--indextable-hover-bg,#fff);top:0}
+.dfn-panel:not(.docked)>.caret::before{border-bottom:9px solid #a2a9b1;border-bottom-color:var(--indextable-hover-bg,#a2a9b1)}
+.dfn-panel *{margin:0}
+.dfn-panel b{display:block;color:#000;color:var(--text,#000);margin-top:.25em}
+.dfn-panel ul a[href]{color:#333;color:var(--text,#333)}
+.dfn-panel>div{display:flex}
+.dfn-panel a.self-link{font-weight:700;margin-right:auto}
+.dfn-panel .marker{padding:.1em;margin-left:.5em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;color:#040b1c}
+.dfn-panel .marker.dfn-exported{background:#d1edfd;box-shadow:0 0 0 .125em #1ca5f940}
+.dfn-panel .marker.idl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
+.dfn-panel a:not(:hover){text-decoration:none!important;border-bottom:none!important}
+.dfn-panel a[href]:hover{border-bottom-width:1px}
+.dfn-panel ul{padding:0}
+.dfn-panel li{margin-left:1em}
+.dfn-panel.docked{position:fixed;left:.5em;top:unset;bottom:2em;margin:0 auto;max-width:calc(100vw - .75em * 2 - .5em - .2em * 2);max-height:30vh;overflow:auto}
+</style>
+    
+    
+    
+    
+<style>
+
       .pass {
         background-color: green;
         color: white;
@@ -31,34 +49,170 @@
         background-color: red;
         color: white;
       }
-    </style>
-    <title>Geolocation - Implementation Report</title>
-  </head>
-  <body>
-    <section id="abstract">
-      <p>This is an implementation report for [[Geolocation]].</p>
-    </section>
-    <h2>Tested assertions</h2>
+    
+</style>
+    
+<title>Geolocation - Implementation Report</title>
+  
+<style id="respec-mainstyle">
+@keyframes pop{
+0%{transform:scale(1,1)}
+25%{transform:scale(1.25,1.25);opacity:.75}
+100%{transform:scale(1,1)}
+}
+a.internalDFN{color:inherit;border-bottom:1px solid #99c;text-decoration:none}
+a.externalDFN{color:inherit;border-bottom:1px dotted #ccc;text-decoration:none}
+a.bibref{text-decoration:none}
+.respec-offending-element:target{animation:pop .25s ease-in-out 0s 1}
+.respec-offending-element,a[href].respec-offending-element{text-decoration:red wavy underline}
+@supports not (text-decoration:red wavy underline){
+.respec-offending-element:not(pre){display:inline-block}
+.respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
+}
+#references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
+cite .bibref{font-style:italic}
+a[href].orcid{padding-left:4px;padding-right:4px}
+a[href].orcid>svg{margin-bottom:-2px}
+ol.tof,ul.tof{list-style:none outside none}
+.caption{margin-top:.5em;font-style:italic}
+#issue-summary>ul{column-count:2}
+#issue-summary li{list-style:none;display:inline-block}
+details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}
+details.respec-tests-details>*{padding-right:2em}
+details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}
+details.respec-tests-details[open]>summary{border-bottom:thin solid #cad3e2;padding-left:1em;margin-bottom:1em;line-height:2em}
+details.respec-tests-details>ul{width:100%;margin-top:-.3em}
+details.respec-tests-details>li{padding-left:1em}
+.self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
+aside.example .marker>a.self-link{color:inherit}
+.header-wrapper{display:flex;align-items:baseline}
+:is(h2,h3,h4,h5,h6):not(#toc>h2,#abstract>h2,#sotd>h2,.head>h2){position:relative;left:-.5em}
+:is(h2,h3,h4,h5,h6):not(#toch2)+a.self-link{color:inherit;order:-1;position:relative;left:-1.1em;font-size:1rem;opacity:.5}
+:is(h2,h3,h4,h5,h6)+a.self-link::before{content:"§";text-decoration:none;color:var(--heading-text)}
+:is(h2,h3)+a.self-link{top:-.2em}
+:is(h4,h5,h6)+a.self-link::before{color:#000}
+@media (max-width:767px){
+dd{margin-left:0}
+}
+@media print{
+.removeOnSave{display:none}
+}
+</style>
+<meta name="color-scheme" content="light">
+<meta name="description" content="This is an implementation report for [Geolocation].">
+<style>
+var:hover{text-decoration:underline;cursor:pointer}
+var.respec-hl{color:var(--color,#000);background-color:var(--bg-color);box-shadow:0 0 0 2px var(--bg-color)}
+@media (prefers-color-scheme:dark){
+var.respec-hl{filter:saturate(.9) brightness(.9)}
+}
+var.respec-hl-c1{--bg-color:#f4d200}
+var.respec-hl-c2{--bg-color:#ff87a2}
+var.respec-hl-c3{--bg-color:#96e885}
+var.respec-hl-c4{--bg-color:#3eeed2}
+var.respec-hl-c5{--bg-color:#eacfb6}
+var.respec-hl-c6{--bg-color:#82ddff}
+var.respec-hl-c7{--bg-color:#ffbcf2}
+@media print{
+var.respec-hl{background:0 0;color:#000;box-shadow:unset}
+}
+</style>
+<style>
+var{position:relative;cursor:pointer}
+var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}
+var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#222}
+var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#222;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}
+var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
+</style>
+<script id="initialUserConfig" type="application/json">{
+  "specStatus": "base",
+  "editors": [
+    {
+      "name": "Marcos Cáceres"
+    }
+  ],
+  "latestVersion": null,
+  "xref": "web-platform",
+  "publishISODate": "2026-01-27T00:00:00.000Z",
+  "generatedSubtitle": "27 January 2026"
+}</script>
+<link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/base.css"></head>
+  <body class="h-entry informative" data-cite="HTML INFRA URL WEBIDL DOM FETCH"><div class="head">
+    
+    <h1 id="title" class="title">Geolocation - Implementation Report</h1> 
+    <p id="w3c-state"> <time class="dt-published" datetime="2026-01-27">27 January 2026</time></p>
+    <details open="">
+      <summary>More details about this document</summary>
+      <dl>
+        
+        <dt>Latest published version:</dt><dd>
+                none
+              </dd>
+        
+        
+        
+        
+        
+        
+        
+        <dt>Editor:</dt><dd class="editor p-author h-card vcard">
+    <span class="p-name fn">Marcos Cáceres</span>
+  </dd>
+        
+        
+        
+        
+        
+      </dl>
+    </details>
+    
+    
+    <p class="copyright">
+    <a href="https://www.w3.org/policies/#copyright">Copyright</a>
+    ©
+    2026
+    
+    <a href="https://www.w3.org/">World Wide Web Consortium</a>.
+    <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup>
+    <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>,
+    <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and
+    <a rel="license" href="https://www.w3.org/copyright/software-license-2023/" title="W3C Software and Document Notice and License">permissive document license</a> rules apply.
+  </p>
+    <hr title="Separator for header">
+  </div>
+    <section id="abstract" class="introductory"><h2>Abstract</h2>
+      <p>This is an implementation report for [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].</p>
+    </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#tested-assertions"><bdi class="secno">1. </bdi>Tested assertions</a></li><li class="tocline"><a class="tocxref" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
+      Is each feature of the current specification implemented, and how is this
+      demonstrated?
+    </a></li><li class="tocline"><a class="tocxref" href="#are-there-independent-interoperable-implementations-of-the-current-specification"><bdi class="secno">3. </bdi>
+      Are there independent interoperable implementations of the current
+      specification?
+    </a></li><li class="tocline"><a class="tocxref" href="#are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><bdi class="secno">4. </bdi>
+      Are there implementations created by people other than the authors of the
+      specification?
+    </a></li><li class="tocline"><a class="tocxref" href="#are-implementations-publicly-deployed"><bdi class="secno">5. </bdi>Are implementations publicly deployed?</a></li><li class="tocline"><a class="tocxref" href="#is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><bdi class="secno">6. </bdi>
+      Is there implementation experience at all levels of the specification's
+      ecosystem (authoring, consuming, publishing…)?
+    </a></li><li class="tocline"><a class="tocxref" href="#are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">7. </bdi>Are there reports of difficulties or problems with implementation?</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.1 </bdi>Informative references</a></li></ol></li></ol></nav>
+    <section id="tested-assertions"><div class="header-wrapper"><h2 id="x1-tested-assertions"><bdi class="secno">1. </bdi>Tested assertions</h2><a class="self-link" href="#tested-assertions" aria-label="Permalink for Section 1."></a></div>
     <p data-cite="permissions">
       As Geolocation requires explicit permission grant to be used (via a
       browser UI), the following assertions were tested manually to assure
       interoperability across browser engines.
     </p>
-    <p class="note" title="Why we are not using wpt.fyi">
-      As some of the tests rely on the [[Permissions]] specifications automation
+    <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="2"><span>Note</span><span class="issue-label">: Why we are not using wpt.fyi</span></div><p class="">
+      As some of the tests rely on the [<cite><a class="bibref" data-link-type="biblio" href="#bib-permissions" title="Permissions">Permissions</a></cite>] specifications automation
       API, which is only partially supported in Chrome, some the test were
       modified locally to get them to pass across browser engines. However, the
       working group expects that eventually all browser engines will support the
-      [[Permissions]]'s automation API and wpt.fyi will reflect
-      <a
-        href="https://wpt.fyi/results/geolocation?label=experimental&amp;label=master&amp;aligned"
-      >
-        accurate results</a
-      >
-      for [[Geolocation]].
-    </p>
+      [<cite><a class="bibref" data-link-type="biblio" href="#bib-permissions" title="Permissions">Permissions</a></cite>]'s automation API and wpt.fyi will reflect
+      <a href="https://wpt.fyi/results/geolocation?label=experimental&amp;label=master&amp;aligned">
+        accurate results</a>
+      for [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].
+    </p></div>
     <table class="simple data">
-      <tr>
+      <tbody><tr>
         <th>Test</th>
         <th>Chromium</th>
         <th>Gecko</th>
@@ -66,9 +220,7 @@
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/PositionOptions.https.html"
-            >PositionOptions.https.html</a
-          >
+          <a href="https://wpt.live/geolocation/PositionOptions.https.html">PositionOptions.https.html</a>
         </td>
         <td>UNTESTED</td>
         <td>UNTESTED</td>
@@ -76,9 +228,7 @@
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/clearWatch_TypeError.https.html"
-            >clearWatch_TypeError.https.html</a
-          >
+          <a href="https://wpt.live/geolocation/clearWatch_TypeError.https.html">clearWatch_TypeError.https.html</a>
         </td>
         <td class="pass">PASS</td>
         <td class="pass">PASS</td>
@@ -86,10 +236,7 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/disabled-by-permissions-policy.https.sub.html"
-            >disabled-by-permissions-policy.https.sub.html</a
-          >
+          <a href="https://wpt.live/geolocation/disabled-by-permissions-policy.https.sub.html">disabled-by-permissions-policy.https.sub.html</a>
         </td>
         <td>UNTESTED</td>
         <td>UNTESTED</td>
@@ -97,10 +244,7 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html"
-            >enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html</a
-          >
+          <a href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html">enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html</a>
         </td>
         <td>UNTESTED</td>
         <td>UNTESTED</td>
@@ -108,10 +252,7 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute.https.sub.html"
-            >enabled-by-permission-policy-attribute.https.sub.html</a
-          >
+          <a href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute.https.sub.html">enabled-by-permission-policy-attribute.https.sub.html</a>
         </td>
         <td>UNTESTED</td>
         <td>UNTESTED</td>
@@ -119,10 +260,7 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/enabled-by-permissions-policy.https.sub.html"
-            >enabled-by-permissions-policy.https.sub.html</a
-          >
+          <a href="https://wpt.live/geolocation/enabled-by-permissions-policy.https.sub.html">enabled-by-permissions-policy.https.sub.html</a>
         </td>
         <td>UNTESTED</td>
         <td>UNTESTED</td>
@@ -130,10 +268,7 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/enabled-on-self-origin-by-permissions-policy.https.sub.html"
-            >enabled-on-self-origin-by-permissions-policy.https.sub.html</a
-          >
+          <a href="https://wpt.live/geolocation/enabled-on-self-origin-by-permissions-policy.https.sub.html">enabled-on-self-origin-by-permissions-policy.https.sub.html</a>
         </td>
         <td>UNTESTED</td>
         <td>UNTESTED</td>
@@ -141,10 +276,7 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/getCurrentPosition_TypeError.https.html"
-            >getCurrentPosition_TypeError.https.html</a
-          >
+          <a href="https://wpt.live/geolocation/getCurrentPosition_TypeError.https.html">getCurrentPosition_TypeError.https.html</a>
         </td>
         <td class="pass">PASS</td>
         <td class="pass">PASS</td>
@@ -152,10 +284,7 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/getCurrentPosition_permission_allow.https.html"
-            >getCurrentPosition_permission_allow.https.html</a
-          >
+          <a href="https://wpt.live/geolocation/getCurrentPosition_permission_allow.https.html">getCurrentPosition_permission_allow.https.html</a>
         </td>
         <td>UNTESTED</td>
         <td>UNTESTED</td>
@@ -163,10 +292,7 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/getCurrentPosition_permission_deny.https.html"
-            >getCurrentPosition_permission_deny.https.html</a
-          >
+          <a href="https://wpt.live/geolocation/getCurrentPosition_permission_deny.https.html">getCurrentPosition_permission_deny.https.html</a>
         </td>
         <td>UNTESTED</td>
         <td>UNTESTED</td>
@@ -174,19 +300,15 @@
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/idlharness.https.window.js"
-            >idlharness.https.window.js</a
-          >
+          <a href="https://wpt.live/geolocation/idlharness.https.window.js">idlharness.https.window.js</a>
         </td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
+        <td class="pass">PASS</td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/non-fully-active.https.html"
-            >non-fully-active.https.html</a
-          >
+          <a href="https://wpt.live/geolocation/non-fully-active.https.html">non-fully-active.https.html</a>
         </td>
         <td class="fail">FAIL</td>
         <td class="pass">PASS</td>
@@ -194,9 +316,7 @@
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/non-secure-contexts.http.html"
-            >non-secure-contexts.http.html</a
-          >
+          <a href="https://wpt.live/geolocation/non-secure-contexts.http.html">non-secure-contexts.http.html</a>
         </td>
         <td class="pass">PASS</td>
         <td class="pass">PASS</td>
@@ -204,9 +324,7 @@
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/permission.https.html"
-            >permission.https.html</a
-          >
+          <a href="https://wpt.live/geolocation/permission.https.html">permission.https.html</a>
         </td>
         <td class="pass">PASS</td>
         <td class="pass">PASS</td>
@@ -214,10 +332,7 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/watchPosition_TypeError.https.html"
-            >watchPosition_TypeError.https.html</a
-          >
+          <a href="https://wpt.live/geolocation/watchPosition_TypeError.https.html">watchPosition_TypeError.https.html</a>
         </td>
         <td class="pass">PASS</td>
         <td class="pass">PASS</td>
@@ -225,20 +340,17 @@
       </tr>
       <tr>
         <td>
-          <a
-            href="https://wpt.live/geolocation/watchPosition_permission_deny.https.html"
-            >watchPosition_permission_deny.https.html</a
-          >
+          <a href="https://wpt.live/geolocation/watchPosition_permission_deny.https.html">watchPosition_permission_deny.https.html</a>
         </td>
         <td class="pass">PASS</td>
         <td class="pass">PASS</td>
         <td class="pass">PASS</td>
       </tr>
-    </table>
-    <h2>
+    </tbody></table>
+    </section><section id="is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><div class="header-wrapper"><h2 id="x2-is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
       Is each feature of the current specification implemented, and how is this
       demonstrated?
-    </h2>
+    </h2><a class="self-link" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated" aria-label="Permalink for Section 2."></a></div>
     <p>
       The current specification features are implemented across major browsers
       like Chrome, Firefox, and Safari. This is demonstrated through the
@@ -246,21 +358,21 @@
       of the specification's features, such as obtaining the location, handling
       permissions, and responding to errors.
     </p>
-    <h2>
+    </section><section id="are-there-independent-interoperable-implementations-of-the-current-specification"><div class="header-wrapper"><h2 id="x3-are-there-independent-interoperable-implementations-of-the-current-specification"><bdi class="secno">3. </bdi>
       Are there independent interoperable implementations of the current
       specification?
-    </h2>
+    </h2><a class="self-link" href="#are-there-independent-interoperable-implementations-of-the-current-specification" aria-label="Permalink for Section 3."></a></div>
     <p>
       Yes, there are independent interoperable implementations of the Major web
       browsers such as Chrome, Firefox, and Safari provide their own
       implementations, which have been tested to ensure they conform to the
-      W3C's specifications and work interoperability across different platforms
+      <abbr title="World Wide Web Consortium">W3C</abbr>'s specifications and work interoperability across different platforms
       and operating systems.
     </p>
-    <h2>
+    </section><section id="are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><div class="header-wrapper"><h2 id="x4-are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><bdi class="secno">4. </bdi>
       Are there implementations created by people other than the authors of the
       specification?
-    </h2>
+    </h2><a class="self-link" href="#are-there-implementations-created-by-people-other-than-the-authors-of-the-specification" aria-label="Permalink for Section 4."></a></div>
     <p>
       Yes, implementations of Geolocation have been created by various browser
       vendors who are not necessarily the editors of the specification. This
@@ -268,7 +380,7 @@
       others, ensuring a broad base of experience and design input is reflected
       in the API.
     </p>
-    <h2>Are implementations publicly deployed?</h2>
+    </section><section id="are-implementations-publicly-deployed"><div class="header-wrapper"><h2 id="x5-are-implementations-publicly-deployed"><bdi class="secno">5. </bdi>Are implementations publicly deployed?</h2><a class="self-link" href="#are-implementations-publicly-deployed" aria-label="Permalink for Section 5."></a></div>
     <p>
       Yes, the implementations of Geolocation are publicly deployed and widely
       used in web applications. These are accessible in consumer-level browsers,
@@ -276,10 +388,10 @@
       websites and applications, enhancing user experience with location-based
       services.
     </p>
-    <h2>
+    </section><section id="is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><div class="header-wrapper"><h2 id="x6-is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><bdi class="secno">6. </bdi>
       Is there implementation experience at all levels of the specification's
       ecosystem (authoring, consuming, publishing…)?
-    </h2>
+    </h2><a class="self-link" href="#is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing" aria-label="Permalink for Section 6."></a></div>
     <p>
       There is substantial implementation experience at all levels of the
       specification's ecosystem. Developers use the API to author location-based
@@ -287,7 +399,7 @@
       publishers integrate these capabilities into various applications for
       enhanced contextual experiences.
     </p>
-    <h2>Are there reports of difficulties or problems with implementation?</h2>
+    </section><section id="are-there-reports-of-difficulties-or-problems-with-implementation"><div class="header-wrapper"><h2 id="x7-are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">7. </bdi>Are there reports of difficulties or problems with implementation?</h2><a class="self-link" href="#are-there-reports-of-difficulties-or-problems-with-implementation" aria-label="Permalink for Section 7."></a></div>
     <p>
       While the core functionality of Geolocation is well-supported, developers
       occasionally report difficulties related to privacy concerns, varying
@@ -295,5 +407,334 @@
       and devices. These issues are typically addressed through updates to the
       specification and improvements in browser implementations.
     </p>
-  </body>
-</html>
+  
+
+</section><section id="references" class="appendix"><div class="header-wrapper"><h2 id="a-references"><bdi class="secno">A. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix A."></a></div><section id="informative-references"><div class="header-wrapper"><h3 id="a-1-informative-references"><bdi class="secno">A.1 </bdi>Informative references</h3><a class="self-link" href="#informative-references" aria-label="Permalink for Appendix A.1"></a></div>
+    
+    <dl class="bibliography"><dt id="bib-geolocation">[Geolocation]</dt><dd>
+      <a href="https://www.w3.org/TR/geolocation/"><cite>Geolocation</cite></a>. Marcos Caceres; Reilly Grant.  W3C. 29 October 2025. W3C Recommendation. URL: <a href="https://www.w3.org/TR/geolocation/">https://www.w3.org/TR/geolocation/</a>
+    </dd><dt id="bib-permissions">[Permissions]</dt><dd>
+      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 6 October 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
+    </dd></dl>
+  </section></section><p role="navigation" id="back-to-top">
+    <a href="#title"><abbr title="Back to Top">↑</abbr></a>
+  </p><script id="respec-highlight-vars">(() => {
+// @ts-check
+
+if (document.respec) {
+  document.respec.ready.then(setupVarHighlighter);
+} else {
+  setupVarHighlighter();
+}
+
+function setupVarHighlighter() {
+  document
+    .querySelectorAll("var")
+    .forEach(varElem => varElem.addEventListener("click", highlightListener));
+}
+
+function highlightListener(ev) {
+  ev.stopPropagation();
+  const { target: varElem } = ev;
+  const hightligtedElems = highlightVars(varElem);
+  const resetListener = () => {
+    const hlColor = getHighlightColor(varElem);
+    hightligtedElems.forEach(el => removeHighlight(el, hlColor));
+    [...HL_COLORS.keys()].forEach(key => HL_COLORS.set(key, true));
+  };
+  if (hightligtedElems.length) {
+    document.body.addEventListener("click", resetListener, { once: true });
+  }
+}
+
+// availability of highlight colors. colors from var.css
+const HL_COLORS = new Map([
+  ["respec-hl-c1", true],
+  ["respec-hl-c2", true],
+  ["respec-hl-c3", true],
+  ["respec-hl-c4", true],
+  ["respec-hl-c5", true],
+  ["respec-hl-c6", true],
+  ["respec-hl-c7", true],
+]);
+
+function getHighlightColor(target) {
+  // return current colors if applicable
+  const { value } = target.classList;
+  const re = /respec-hl-\w+/;
+  const activeClass = re.test(value) && value.match(re);
+  if (activeClass) return activeClass[0];
+
+  // first color preference
+  if (HL_COLORS.get("respec-hl-c1") === true) return "respec-hl-c1";
+
+  // otherwise get some other available color
+  return [...HL_COLORS.keys()].find(c => HL_COLORS.get(c)) || "respec-hl-c1";
+}
+
+function highlightVars(varElem) {
+  const textContent = norm(varElem.textContent);
+  const parent = varElem.closest(".algorithm, section");
+  const highlightColor = getHighlightColor(varElem);
+
+  const varsToHighlight = [...parent.querySelectorAll("var")].filter(
+    el =>
+      norm(el.textContent) === textContent &&
+      el.closest(".algorithm, section") === parent
+  );
+
+  // update availability of highlight color
+  const colorStatus = varsToHighlight[0].classList.contains("respec-hl");
+  HL_COLORS.set(highlightColor, colorStatus);
+
+  // highlight vars
+  if (colorStatus) {
+    varsToHighlight.forEach(el => removeHighlight(el, highlightColor));
+    return [];
+  } else {
+    varsToHighlight.forEach(el => addHighlight(el, highlightColor));
+  }
+  return varsToHighlight;
+}
+
+function removeHighlight(el, highlightColor) {
+  el.classList.remove("respec-hl", highlightColor);
+  // clean up empty class attributes so they don't come in export
+  if (!el.classList.length) el.removeAttribute("class");
+}
+
+function addHighlight(elem, highlightColor) {
+  elem.classList.add("respec-hl", highlightColor);
+}
+
+/**
+ * Same as `norm` from src/core/utils, but our build process doesn't allow
+ * imports in runtime scripts, so duplicated here.
+ * @param {string} str
+ */
+function norm(str) {
+  return str.trim().replace(/\s+/g, " ");
+}
+})()</script><script id="respec-dfn-panel">(() => {
+// @ts-check
+if (document.respec) {
+  document.respec.ready.then(setupPanel);
+} else {
+  setupPanel();
+}
+
+function setupPanel() {
+  const listener = panelListener();
+  document.body.addEventListener("keydown", listener);
+  document.body.addEventListener("click", listener);
+}
+
+function panelListener() {
+  /** @type {HTMLElement} */
+  let panel = null;
+  return event => {
+    const { target, type } = event;
+
+    if (!(target instanceof HTMLElement)) return;
+
+    // For keys, we only care about Enter key to activate the panel
+    // otherwise it's activated via a click.
+    if (type === "keydown" && event.key !== "Enter") return;
+
+    const action = deriveAction(event);
+
+    switch (action) {
+      case "show": {
+        hidePanel(panel);
+        /** @type {HTMLElement} */
+        const dfn = target.closest("dfn, .index-term");
+        panel = document.getElementById(`dfn-panel-for-${dfn.id}`);
+        const coords = deriveCoordinates(event);
+        displayPanel(dfn, panel, coords);
+        break;
+      }
+      case "dock": {
+        panel.style.left = null;
+        panel.style.top = null;
+        panel.classList.add("docked");
+        break;
+      }
+      case "hide": {
+        hidePanel(panel);
+        panel = null;
+        break;
+      }
+    }
+  };
+}
+
+/**
+ * @param {MouseEvent|KeyboardEvent} event
+ */
+function deriveCoordinates(event) {
+  const target = /** @type HTMLElement */ (event.target);
+
+  // We prevent synthetic AT clicks from putting
+  // the dialog in a weird place. The AT events sometimes
+  // lack coordinates, so they have clientX/Y = 0
+  const rect = target.getBoundingClientRect();
+  if (
+    event instanceof MouseEvent &&
+    event.clientX >= rect.left &&
+    event.clientY >= rect.top
+  ) {
+    // The event probably happened inside the bounding rect...
+    return { x: event.clientX, y: event.clientY };
+  }
+
+  // Offset to the middle of the element
+  const x = rect.x + rect.width / 2;
+  // Placed at the bottom of the element
+  const y = rect.y + rect.height;
+  return { x, y };
+}
+
+/**
+ * @param {Event} event
+ */
+function deriveAction(event) {
+  const target = /** @type {HTMLElement} */ (event.target);
+  const hitALink = !!target.closest("a");
+  if (target.closest("dfn:not([data-cite]), .index-term")) {
+    return hitALink ? "none" : "show";
+  }
+  if (target.closest(".dfn-panel")) {
+    if (hitALink) {
+      return target.classList.contains("self-link") ? "hide" : "dock";
+    }
+    const panel = target.closest(".dfn-panel");
+    return panel.classList.contains("docked") ? "hide" : "none";
+  }
+  if (document.querySelector(".dfn-panel:not([hidden])")) {
+    return "hide";
+  }
+  return "none";
+}
+
+/**
+ * @param {HTMLElement} dfn
+ * @param {HTMLElement} panel
+ * @param {{ x: number, y: number }} clickPosition
+ */
+function displayPanel(dfn, panel, { x, y }) {
+  panel.hidden = false;
+  // distance (px) between edge of panel and the pointing triangle (caret)
+  const MARGIN = 20;
+
+  const dfnRects = dfn.getClientRects();
+  // Find the `top` offset when the `dfn` can be spread across multiple lines
+  let closestTop = 0;
+  let minDiff = Infinity;
+  for (const rect of dfnRects) {
+    const { top, bottom } = rect;
+    const diffFromClickY = Math.abs((top + bottom) / 2 - y);
+    if (diffFromClickY < minDiff) {
+      minDiff = diffFromClickY;
+      closestTop = top;
+    }
+  }
+
+  const top = window.scrollY + closestTop + dfnRects[0].height;
+  const left = x - MARGIN;
+  panel.style.left = `${left}px`;
+  panel.style.top = `${top}px`;
+
+  // Find if the panel is flowing out of the window
+  const panelRect = panel.getBoundingClientRect();
+  const SCREEN_WIDTH = Math.min(window.innerWidth, window.screen.width);
+  if (panelRect.right > SCREEN_WIDTH) {
+    const newLeft = Math.max(MARGIN, x + MARGIN - panelRect.width);
+    const newCaretOffset = left - newLeft;
+    panel.style.left = `${newLeft}px`;
+    /** @type {HTMLElement} */
+    const caret = panel.querySelector(".caret");
+    caret.style.left = `${newCaretOffset}px`;
+  }
+
+  // As it's a dialog, we trap focus.
+  // TODO: when <dialog> becomes a implemented, we should really
+  // use that.
+  trapFocus(panel, dfn);
+}
+
+/**
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function trapFocus(panel, dfn) {
+  /** @type NodeListOf<HTMLAnchorElement> elements */
+  const anchors = panel.querySelectorAll("a[href]");
+  // No need to trap focus
+  if (!anchors.length) return;
+
+  // Move focus to first anchor element
+  const first = anchors.item(0);
+  first.focus();
+
+  const trapListener = createTrapListener(anchors, panel, dfn);
+  panel.addEventListener("keydown", trapListener);
+
+  // Hiding the panel releases the trap
+  const mo = new MutationObserver(records => {
+    const [record] = records;
+    const target = /** @type HTMLElement */ (record.target);
+    if (target.hidden) {
+      panel.removeEventListener("keydown", trapListener);
+      mo.disconnect();
+    }
+  });
+  mo.observe(panel, { attributes: true, attributeFilter: ["hidden"] });
+}
+
+/**
+ *
+ * @param {NodeListOf<HTMLAnchorElement>} anchors
+ * @param {HTMLElement} panel
+ * @param {HTMLElement} dfn
+ * @returns
+ */
+function createTrapListener(anchors, panel, dfn) {
+  const lastIndex = anchors.length - 1;
+  let currentIndex = 0;
+  return event => {
+    switch (event.key) {
+      // Hitting "Tab" traps us in a nice loop around elements.
+      case "Tab": {
+        event.preventDefault();
+        currentIndex += event.shiftKey ? -1 : +1;
+        if (currentIndex < 0) {
+          currentIndex = lastIndex;
+        } else if (currentIndex > lastIndex) {
+          currentIndex = 0;
+        }
+        anchors.item(currentIndex).focus();
+        break;
+      }
+
+      // Hitting "Enter" on an anchor releases the trap.
+      case "Enter":
+        hidePanel(panel);
+        break;
+
+      // Hitting "Escape" returns focus to dfn.
+      case "Escape":
+        hidePanel(panel);
+        dfn.focus();
+        return;
+    }
+  };
+}
+
+/** @param {HTMLElement} panel */
+function hidePanel(panel) {
+  if (!panel) return;
+  panel.hidden = true;
+  panel.classList.remove("docked");
+}
+})()</script><script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script></body></html>
