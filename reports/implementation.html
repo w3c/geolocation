@@ -3,19 +3,6 @@
 <meta name="generator" content="ReSpec 35.6.1">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
-.issue-label{text-transform:initial}
-.warning>p:first-child{margin-top:0}
-.warning{padding:.5em;border-left-width:.5em;border-left-style:solid}
-span.warning{padding:.1em .5em .15em}
-.issue.closed span.issue-number{text-decoration:line-through}
-.issue.closed span.issue-number::after{content:" (Closed)";font-size:smaller}
-.warning{border-color:#f11;border-color:var(--warning-border,#f11);border-width:.2em;border-style:solid;background:#fbe9e9;background:var(--warning-bg,#fbe9e9);color:#000;color:var(--text,#000)}
-.warning-title:before{content:"⚠";font-size:1.3em;float:left;padding-right:.3em;margin-top:-.3em}
-li.task-list-item{list-style:none}
-input.task-list-item-checkbox{margin:0 .35em .25em -1.6em;vertical-align:middle}
-.issue a.respec-gh-label{padding:5px;margin:0 2px 0 2px;font-size:10px;text-transform:none;text-decoration:none;font-weight:700;border-radius:4px;position:relative;bottom:2px;border:none;display:inline-block}
-</style>
-<style>
 dfn{cursor:pointer}
 .dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font-family:"Helvetica Neue",sans-serif;font-size:small;background:#fff;background:var(--indextable-hover-bg,#fff);color:#000;color:var(--text,#000);box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);box-shadow:0 1em 3em -.4em var(--tocsidebar-shadow,rgba(0,0,0,.3)),0 0 1px 1px var(--tocsidebar-shadow,rgba(0,0,0,.05));border-radius:2px}
 .dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
@@ -133,14 +120,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   ],
   "latestVersion": null,
   "xref": "web-platform",
-  "publishISODate": "2026-01-27T00:00:00.000Z",
-  "generatedSubtitle": "27 January 2026"
+  "publishISODate": "2026-02-19T00:00:00.000Z",
+  "generatedSubtitle": "19 February 2026"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/base.css"></head>
   <body class="h-entry informative" data-cite="HTML INFRA URL WEBIDL DOM FETCH"><div class="head">
     
     <h1 id="title" class="title">Geolocation - Implementation Report</h1> 
-    <p id="w3c-state"> <time class="dt-published" datetime="2026-01-27">27 January 2026</time></p>
+    <p id="w3c-state"> <time class="dt-published" datetime="2026-02-19">19 February 2026</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -181,8 +168,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <hr title="Separator for header">
   </div>
     <section id="abstract" class="introductory"><h2>Abstract</h2>
-      <p>This is an implementation report for [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].</p>
-    </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#tested-assertions"><bdi class="secno">1. </bdi>Tested assertions</a></li><li class="tocline"><a class="tocxref" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
+      <p>
+        This is an implementation report for [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].
+      </p>
+    </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#tested-assertions"><bdi class="secno">1. </bdi>
+      Tested assertions
+    </a></li><li class="tocline"><a class="tocxref" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
       Is each feature of the current specification implemented, and how is this
       demonstrated?
     </a></li><li class="tocline"><a class="tocxref" href="#are-there-independent-interoperable-implementations-of-the-current-specification"><bdi class="secno">3. </bdi>
@@ -191,160 +182,326 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </a></li><li class="tocline"><a class="tocxref" href="#are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><bdi class="secno">4. </bdi>
       Are there implementations created by people other than the authors of the
       specification?
-    </a></li><li class="tocline"><a class="tocxref" href="#are-implementations-publicly-deployed"><bdi class="secno">5. </bdi>Are implementations publicly deployed?</a></li><li class="tocline"><a class="tocxref" href="#is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><bdi class="secno">6. </bdi>
+    </a></li><li class="tocline"><a class="tocxref" href="#are-implementations-publicly-deployed"><bdi class="secno">5. </bdi>
+      Are implementations publicly deployed?
+    </a></li><li class="tocline"><a class="tocxref" href="#is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><bdi class="secno">6. </bdi>
       Is there implementation experience at all levels of the specification's
       ecosystem (authoring, consuming, publishing…)?
-    </a></li><li class="tocline"><a class="tocxref" href="#are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">7. </bdi>Are there reports of difficulties or problems with implementation?</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.1 </bdi>Informative references</a></li></ol></li></ol></nav>
-    <section id="tested-assertions"><div class="header-wrapper"><h2 id="x1-tested-assertions"><bdi class="secno">1. </bdi>Tested assertions</h2><a class="self-link" href="#tested-assertions" aria-label="Permalink for Section 1."></a></div>
+    </a></li><li class="tocline"><a class="tocxref" href="#are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">7. </bdi>
+      Are there reports of difficulties or problems with implementation?
+    </a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.1 </bdi>Informative references</a></li></ol></li></ol></nav>
+    <section id="tested-assertions"><div class="header-wrapper"><h2 id="x1-tested-assertions"><bdi class="secno">1. </bdi>
+      Tested assertions
+    </h2><a class="self-link" href="#tested-assertions" aria-label="Permalink for Section 1."></a></div>
     <p data-cite="permissions">
       As Geolocation requires explicit permission grant to be used (via a
       browser UI), the following assertions were tested manually to assure
       interoperability across browser engines.
     </p>
-    <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="2"><span>Note</span><span class="issue-label">: Why we are not using wpt.fyi</span></div><p class="">
-      As some of the tests rely on the [<cite><a class="bibref" data-link-type="biblio" href="#bib-permissions" title="Permissions">Permissions</a></cite>] specifications automation
-      API, which is only partially supported in Chrome, some the test were
-      modified locally to get them to pass across browser engines. However, the
-      working group expects that eventually all browser engines will support the
-      [<cite><a class="bibref" data-link-type="biblio" href="#bib-permissions" title="Permissions">Permissions</a></cite>]'s automation API and wpt.fyi will reflect
-      <a href="https://wpt.fyi/results/geolocation?label=experimental&amp;label=master&amp;aligned">
-        accurate results</a>
-      for [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].
-    </p></div>
     <table class="simple data">
       <tbody><tr>
-        <th>Test</th>
-        <th>Chromium</th>
-        <th>Gecko</th>
-        <th>WebKit</th>
-      </tr>
-      <tr>
-        <td>
-          <a href="https://wpt.live/geolocation/PositionOptions.https.html">PositionOptions.https.html</a>
-        </td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
+        <th>
+          Test
+        </th>
+        <th>
+          Chromium
+        </th>
+        <th>
+          Gecko
+        </th>
+        <th>
+          WebKit
+        </th>
       </tr>
       <tr>
         <td>
           <a href="https://wpt.live/geolocation/clearWatch_TypeError.https.html">clearWatch_TypeError.https.html</a>
         </td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/disabled-by-permissions-policy.https.sub.html">disabled-by-permissions-policy.https.sub.html</a>
+          <a href="https://wpt.live/geolocation/disabled-by-permissions-policy.https.sub.html">
+          disabled-by-permissions-policy.https.sub.html</a>
         </td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="fail">
+          FAIL
+        </td>
+        <td class="fail">
+          FAIL
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html">enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html</a>
+          <a href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html">
+          enabled-by-permission-policy-attribute-redirect-on-load.https.sub.html</a>
         </td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute.https.sub.html">enabled-by-permission-policy-attribute.https.sub.html</a>
+          <a href="https://wpt.live/geolocation/enabled-by-permission-policy-attribute.https.sub.html">
+          enabled-by-permission-policy-attribute.https.sub.html</a>
         </td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td>
+          UNTESTED
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/enabled-by-permissions-policy.https.sub.html">enabled-by-permissions-policy.https.sub.html</a>
+          <a href="https://wpt.live/geolocation/enabled-by-permissions-policy.https.sub.html">
+          enabled-by-permissions-policy.https.sub.html</a>
         </td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/enabled-on-self-origin-by-permissions-policy.https.sub.html">enabled-on-self-origin-by-permissions-policy.https.sub.html</a>
+          <a href="https://wpt.live/geolocation/enabled-on-self-origin-by-permissions-policy.https.sub.html">
+          enabled-on-self-origin-by-permissions-policy.https.sub.html</a>
         </td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/getCurrentPosition_TypeError.https.html">getCurrentPosition_TypeError.https.html</a>
+          <a href="https://wpt.live/geolocation/getCurrentPosition_permission_allow.https.html">
+          getCurrentPosition_permission_allow.https.html</a>
         </td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/getCurrentPosition_permission_allow.https.html">getCurrentPosition_permission_allow.https.html</a>
+          <a href="https://wpt.live/geolocation/getCurrentPosition_permission_deny.https.html">
+          getCurrentPosition_permission_deny.https.html</a>
         </td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td>
+          UNTESTED
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/getCurrentPosition_permission_deny.https.html">getCurrentPosition_permission_deny.https.html</a>
+          <a href="https://wpt.live/geolocation/getCurrentPosition_TypeError.https.html">
+          getCurrentPosition_TypeError.https.html</a>
         </td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
-        <td>UNTESTED</td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/idlharness.https.window.js">idlharness.https.window.js</a>
+          <a href="https://wpt.live/geolocation/getCurrentPosition-error.https.html">getCurrentPosition-error.https.html</a>
         </td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/getCurrentPosition-success.https.html">getCurrentPosition-success.https.html</a>
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/idlharness.https.window.html">idlharness.https.window.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
       </tr>
       <tr>
         <td>
           <a href="https://wpt.live/geolocation/non-fully-active.https.html">non-fully-active.https.html</a>
         </td>
-        <td class="fail">FAIL</td>
-        <td class="pass">PASS</td>
-        <td class="fail">FAIL</td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/non-secure-contexts.http.html">non-secure-contexts.http.html</a>
+          <a href="http://wpt.live/geolocation/non-secure-contexts.http.html">non-secure-contexts.http.html</a>
         </td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
       </tr>
       <tr>
         <td>
           <a href="https://wpt.live/geolocation/permission.https.html">permission.https.html</a>
         </td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/PositionOptions.https.html">PositionOptions.https.html</a>
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/tojson.https.window.html">tojson.https.window.html</a>
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          UNTESTED
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://wpt.live/geolocation/watchPosition_permission_deny.https.html">
+          watchPosition_permission_deny.https.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td>
+          UNTESTED
+        </td>
       </tr>
       <tr>
         <td>
           <a href="https://wpt.live/geolocation/watchPosition_TypeError.https.html">watchPosition_TypeError.https.html</a>
         </td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
       </tr>
       <tr>
         <td>
-          <a href="https://wpt.live/geolocation/watchPosition_permission_deny.https.html">watchPosition_permission_deny.https.html</a>
+          <a href="https://wpt.live/geolocation/watchposition-timeout.https.window.html">
+          watchposition-timeout.https.window.html</a>
         </td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
-        <td class="pass">PASS</td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td>
+          UNTESTED
+        </td>
       </tr>
     </tbody></table>
     </section><section id="is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><div class="header-wrapper"><h2 id="x2-is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
@@ -353,9 +510,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </h2><a class="self-link" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated" aria-label="Permalink for Section 2."></a></div>
     <p>
       The current specification features are implemented across major browsers
-      like Chrome, Firefox, and Safari. This is demonstrated through the
-      aforementioned web platform tests (WPT), which verify the implementation
-      of the specification's features, such as obtaining the location, handling
+      including Chrome, Firefox, and Safari. This is demonstrated through the
+      aforementioned Web Platform Tests <abbr title="Web Platform Tests">WPT</abbr>, which verify the implementation of the
+      specification's features, such as obtaining the location, handling
       permissions, and responding to errors.
     </p>
     </section><section id="are-there-independent-interoperable-implementations-of-the-current-specification"><div class="header-wrapper"><h2 id="x3-are-there-independent-interoperable-implementations-of-the-current-specification"><bdi class="secno">3. </bdi>
@@ -363,11 +520,11 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       specification?
     </h2><a class="self-link" href="#are-there-independent-interoperable-implementations-of-the-current-specification" aria-label="Permalink for Section 3."></a></div>
     <p>
-      Yes, there are independent interoperable implementations of the Major web
-      browsers such as Chrome, Firefox, and Safari provide their own
-      implementations, which have been tested to ensure they conform to the
-      <abbr title="World Wide Web Consortium">W3C</abbr>'s specifications and work interoperability across different platforms
-      and operating systems.
+      Yes, there are independent interoperable implementations of the major web
+      browsers. Chrome, Firefox, and Safari provide their own implementations,
+      which have been tested to ensure they conform to the [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>]
+      specifications and work interoperability across different platforms and
+      operating systems.
     </p>
     </section><section id="are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><div class="header-wrapper"><h2 id="x4-are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><bdi class="secno">4. </bdi>
       Are there implementations created by people other than the authors of the
@@ -375,18 +532,20 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </h2><a class="self-link" href="#are-there-implementations-created-by-people-other-than-the-authors-of-the-specification" aria-label="Permalink for Section 4."></a></div>
     <p>
       Yes, implementations of Geolocation have been created by various browser
-      vendors who are not necessarily the editors of the specification. This
+      vendors who are not necessarily the authors of the specification. This
       includes engineers from Google, Mozilla, Microsoft, and Apple, among
       others, ensuring a broad base of experience and design input is reflected
       in the API.
     </p>
-    </section><section id="are-implementations-publicly-deployed"><div class="header-wrapper"><h2 id="x5-are-implementations-publicly-deployed"><bdi class="secno">5. </bdi>Are implementations publicly deployed?</h2><a class="self-link" href="#are-implementations-publicly-deployed" aria-label="Permalink for Section 5."></a></div>
+    </section><section id="are-implementations-publicly-deployed"><div class="header-wrapper"><h2 id="x5-are-implementations-publicly-deployed"><bdi class="secno">5. </bdi>
+      Are implementations publicly deployed?
+    </h2><a class="self-link" href="#are-implementations-publicly-deployed" aria-label="Permalink for Section 5."></a></div>
     <p>
       Yes, the implementations of Geolocation are publicly deployed and widely
-      used in web applications. These are accessible in consumer-level browsers,
-      allowing developers to incorporate geolocation features into their
-      websites and applications, enhancing user experience with location-based
-      services.
+      used in web applications. These are accessible in consumer-level
+      browsers, allowing developers to incorporate geolocation features into
+      their websites and applications, enhancing user experience with
+      location-based services.
     </p>
     </section><section id="is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><div class="header-wrapper"><h2 id="x6-is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><bdi class="secno">6. </bdi>
       Is there implementation experience at all levels of the specification's
@@ -394,18 +553,21 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </h2><a class="self-link" href="#is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing" aria-label="Permalink for Section 6."></a></div>
     <p>
       There is substantial implementation experience at all levels of the
-      specification's ecosystem. Developers use the API to author location-based
-      services, consumers use these features in daily web interactions, and
-      publishers integrate these capabilities into various applications for
-      enhanced contextual experiences.
+      specification's ecosystem. Developers use the API to author
+      location-based services, consumers use these features in daily web
+      interactions, and publishers integrate these capabilities into various
+      applications for enhanced location-dependent experiences.
     </p>
-    </section><section id="are-there-reports-of-difficulties-or-problems-with-implementation"><div class="header-wrapper"><h2 id="x7-are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">7. </bdi>Are there reports of difficulties or problems with implementation?</h2><a class="self-link" href="#are-there-reports-of-difficulties-or-problems-with-implementation" aria-label="Permalink for Section 7."></a></div>
+    </section><section id="are-there-reports-of-difficulties-or-problems-with-implementation"><div class="header-wrapper"><h2 id="x7-are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">7. </bdi>
+      Are there reports of difficulties or problems with implementation?
+    </h2><a class="self-link" href="#are-there-reports-of-difficulties-or-problems-with-implementation" aria-label="Permalink for Section 7."></a></div>
     <p>
       While the core functionality of Geolocation is well-supported, developers
       occasionally report difficulties related to privacy concerns, varying
       accuracy levels, and handling user permissions across different browsers
       and devices. These issues are typically addressed through updates to the
-      specification and improvements in browser implementations.
+      specification (see <a href="https://github.com/w3c/geolocation/issues">open issues</a>) and
+      improvements in browser implementations.
     </p>
   
 
@@ -413,8 +575,6 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     
     <dl class="bibliography"><dt id="bib-geolocation">[Geolocation]</dt><dd>
       <a href="https://www.w3.org/TR/geolocation/"><cite>Geolocation</cite></a>. Marcos Caceres; Reilly Grant.  W3C. 29 October 2025. W3C Recommendation. URL: <a href="https://www.w3.org/TR/geolocation/">https://www.w3.org/TR/geolocation/</a>
-    </dd><dt id="bib-permissions">[Permissions]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 6 October 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
     </dd></dl>
   </section></section><p role="navigation" id="back-to-top">
     <a href="#title"><abbr title="Back to Top">↑</abbr></a>
