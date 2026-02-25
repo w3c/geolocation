@@ -113,6 +113,45 @@
       </dd>
     </dl>
     <h3>
+      Gecko testing limitations
+    </h3>
+    <p>
+      Some tests cannot be run in Gecko's (Firefox) wptrunner infrastructure due
+      to missing [[webdriver-bidi]] integration in wptrunner:
+    </p>
+    <dl>
+      <dt id="gecko-bidi">
+        wptrunner BiDi integration
+      </dt>
+      <dd>
+        <p>
+          Firefox 139+ has implemented [[webdriver-bidi]] commands at the browser
+          level, including `emulation.setGeolocationOverride` (<a href=
+          "https://bugzilla.mozilla.org/show_bug.cgi?id=1954992">Bug 1954992</a>)
+          and BrowsingContext geolocation override (<a href=
+          "https://bugzilla.mozilla.org/show_bug.cgi?id=1951962">Bug 1951962</a>).
+          However, wptrunner's Marionette executor does not yet wire up the BiDi
+          protocol for Firefox.
+        </p>
+        <p>
+          <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1984611">Bug
+          1984611</a> tracks adding WebDriver BiDi implementation for Firefox in
+          wptrunner. Until this is resolved, tests requiring the following
+          testdriver.bidi actions cannot run:
+        </p>
+        <ul>
+          <li>
+            `test_driver.bidi.permissions.set_permission` - required for tests
+            that need to grant geolocation permissions programmatically.
+          </li>
+          <li>
+            `test_driver.bidi.emulation.set_geolocation_override` - required for
+            tests that need to mock geolocation data.
+          </li>
+        </ul>
+      </dd>
+    </dl>
+    <h3>
       Results table
     </h3>
     <table class="simple data">
@@ -172,7 +211,7 @@
           PASS
         </td>
         <td>
-          UNTESTED
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
         <td>
           <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
@@ -204,7 +243,7 @@
           PASS
         </td>
         <td>
-          UNTESTED
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
         <td>
           <a href="#webkit-permissions-policy" title=
@@ -221,10 +260,7 @@
           PASS
         </td>
         <td>
-          UNTESTED
-        </td>
-        <td>
-          UNTESTED
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
         <td>
           <a href="#webkit-permissions-policy" title=
@@ -272,7 +308,7 @@
           PASS
         </td>
         <td>
-          UNTESTED
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
         <td>
           <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
@@ -287,7 +323,7 @@
           PASS
         </td>
         <td>
-          UNTESTED
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
         <td>
           <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
@@ -317,7 +353,7 @@
           FAIL
         </td>
         <td>
-          UNTESTED
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
         <td>
           <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
@@ -362,7 +398,7 @@
           PASS
         </td>
         <td>
-          UNTESTED
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
         <td class="pass">
           PASS
@@ -377,7 +413,7 @@
           PASS
         </td>
         <td>
-          UNTESTED
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
         <td>
           <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
