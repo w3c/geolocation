@@ -45,13 +45,38 @@
       </p>
     </section>
     <h2>
-      Tested assertions
+      Test results
     </h2>
-    <p data-cite="permissions">
-      As Geolocation requires an explicit permission grant to be used (via a
-      browser UI), the following assertions were tested manually to ensure
-      interoperability across browser engines.
+    <p>
+      The following tests verify conformance to [[Geolocation]].
     </p>
+    <h3>
+      Status legend
+    </h3>
+    <dl>
+      <dt>
+        PASS
+      </dt>
+      <dd>
+        The test ran successfully and the implementation conforms to the
+        specification.
+      </dd>
+      <dt>
+        FAIL
+      </dt>
+      <dd>
+        The test ran and the implementation does not conform to the
+        specification.
+      </dd>
+      <dt>
+        UNTESTED
+      </dt>
+      <dd>
+        The test could not be run due to test automation infrastructure
+        limitations (e.g., missing [[webdriver-bidi]] support). This does not
+        indicate an implementation failure.
+      </dd>
+    </dl>
     <h3>
       WebKit testing limitations
     </h3>
@@ -63,12 +88,12 @@
     </p>
     <dl>
       <dt id="webkit-bidi">
-        WebDriver BiDi API
+        WebDriver BiDi support
       </dt>
       <dd>
-        WebKit has not yet implemented the <a href=
-        "https://webkit.org/b/291197">WebDriver BiDi protocol</a>, which is
-        required to set permissions and mock geolocation data.
+        WebKit has not yet implemented the WebDriver BiDi support. This is
+        required to set permissions and mock geolocation data using
+        [[webdriver-bidi]] commands such as `emulation.setGeolocationOverride`.
       </dd>
       <dt id="webkit-permissions-policy">
         Permissions-Policy HTTP header
@@ -76,11 +101,20 @@
       <dd>
         WebKit has not yet implemented <a href=
         "https://webkit.org/b/253126">Permissions-Policy HTTP header
-        support</a>. Note that the iframe <code>allow</code> attribute (e.g.,
-        <code>&lt;iframe allow="geolocation"&gt;</code>) is supported and works
-        correctly.
+        support</a>.
+        <p class="note">
+          Support for the `Permissions-Policy` HTTP header is not a conformance
+          requirement for [[Geolocation]]; it simply declares geolocation as a
+          policy-controlled feature with a default allowlist of `'self'`. HTTP
+          header support is defined by [[permissions-policy]]. The [^iframe^]
+          [^iframe/allow^] attribute (e.g., `&lt;iframe
+          allow="geolocation"&gt;`) is supported and works correctly in WebKit.
+        </p>
       </dd>
     </dl>
+    <h3>
+      Results table
+    </h3>
     <table class="simple data">
       <tr>
         <th>
@@ -123,9 +157,9 @@
         <td class="fail">
           FAIL
         </td>
-        <td class="fail">
+        <td>
           <a href="#webkit-permissions-policy" title=
-          "no Permissions-Policy header">FAIL</a>
+          "no Permissions-Policy header">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -140,8 +174,8 @@
         <td>
           UNTESTED
         </td>
-        <td class="fail">
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">FAIL</a>
+        <td>
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -172,9 +206,9 @@
         <td>
           UNTESTED
         </td>
-        <td class="fail">
+        <td>
           <a href="#webkit-permissions-policy" title=
-          "no Permissions-Policy header">FAIL</a>
+          "no Permissions-Policy header">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -191,6 +225,10 @@
         </td>
         <td>
           UNTESTED
+        </td>
+        <td>
+          <a href="#webkit-permissions-policy" title=
+          "no Permissions-Policy header">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -236,8 +274,8 @@
         <td>
           UNTESTED
         </td>
-        <td class="fail">
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">FAIL</a>
+        <td>
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -251,8 +289,8 @@
         <td>
           UNTESTED
         </td>
-        <td class="fail">
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">FAIL</a>
+        <td>
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -281,8 +319,8 @@
         <td>
           UNTESTED
         </td>
-        <td class="fail">
-          <a href="#webkit-bidi" title="requires mock position data">FAIL</a>
+        <td>
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -341,8 +379,8 @@
         <td>
           UNTESTED
         </td>
-        <td class="fail">
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">FAIL</a>
+        <td>
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -400,8 +438,7 @@
     <p>
       The current specification features are implemented across major browsers
       including Chrome, Firefox, and Safari. This is demonstrated through the
-      aforementioned Web Platform Tests <abbr title=
-      "Web Platform Tests">WPT</abbr>, which verify the implementation of the
+      aforementioned WPT, which verify the implementation of the
       specification's features, such as obtaining the location, handling
       permissions, and responding to errors.
     </p>
@@ -413,7 +450,7 @@
       Yes, there are independent interoperable implementations in the major web
       browsers. Chrome, Firefox, and Safari provide their own implementations,
       which have been tested to ensure they conform to the [[Geolocation]]
-      specification and work interoperably across different platforms and
+      specification and are interoperable across different platforms and
       operating systems.
     </p>
     <h2>
