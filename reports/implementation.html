@@ -3,6 +3,19 @@
 <meta name="generator" content="ReSpec 35.6.1">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
+.issue-label{text-transform:initial}
+.warning>p:first-child{margin-top:0}
+.warning{padding:.5em;border-left-width:.5em;border-left-style:solid}
+span.warning{padding:.1em .5em .15em}
+.issue.closed span.issue-number{text-decoration:line-through}
+.issue.closed span.issue-number::after{content:" (Closed)";font-size:smaller}
+.warning{border-color:#f11;border-color:var(--warning-border,#f11);border-width:.2em;border-style:solid;background:#fbe9e9;background:var(--warning-bg,#fbe9e9);color:#000;color:var(--text,#000)}
+.warning-title:before{content:"⚠";font-size:1.3em;float:left;padding-right:.3em;margin-top:-.3em}
+li.task-list-item{list-style:none}
+input.task-list-item-checkbox{margin:0 .35em .25em -1.6em;vertical-align:middle}
+.issue a.respec-gh-label{padding:5px;margin:0 2px 0 2px;font-size:10px;text-transform:none;text-decoration:none;font-weight:700;border-radius:4px;position:relative;bottom:2px;border:none;display:inline-block}
+</style>
+<style>
 dfn{cursor:pointer}
 .dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font-family:"Helvetica Neue",sans-serif;font-size:small;background:#fff;background:var(--indextable-hover-bg,#fff);color:#000;color:var(--text,#000);box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);box-shadow:0 1em 3em -.4em var(--tocsidebar-shadow,rgba(0,0,0,.3)),0 0 1px 1px var(--tocsidebar-shadow,rgba(0,0,0,.05));border-radius:2px}
 .dfn-panel:not(.docked)>.caret{position:absolute;top:-9px}
@@ -35,6 +48,11 @@ dfn{cursor:pointer}
       .fail {
         background-color: red;
         color: white;
+      }
+      .fail a,
+      .fail a:link,
+      .fail a:visited {
+        color: white !important;
       }
     
 </style>
@@ -171,9 +189,15 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       <p>
         This is an implementation report for [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].
       </p>
-    </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#tested-assertions"><bdi class="secno">1. </bdi>
-      Tested assertions
-    </a></li><li class="tocline"><a class="tocxref" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
+    </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#test-results"><bdi class="secno">1. </bdi>
+      Test results
+    </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#status-legend"><bdi class="secno">1.1 </bdi>
+      Status legend
+    </a></li><li class="tocline"><a class="tocxref" href="#webkit-testing-limitations"><bdi class="secno">1.2 </bdi>
+      WebKit testing limitations
+    </a></li><li class="tocline"><a class="tocxref" href="#results-table"><bdi class="secno">1.3 </bdi>
+      Results table
+    </a></li></ol></li><li class="tocline"><a class="tocxref" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
       Is each feature of the current specification implemented, and how is this
       demonstrated?
     </a></li><li class="tocline"><a class="tocxref" href="#are-there-independent-interoperable-implementations-of-the-current-specification"><bdi class="secno">3. </bdi>
@@ -190,14 +214,76 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </a></li><li class="tocline"><a class="tocxref" href="#are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">7. </bdi>
       Are there reports of difficulties or problems with implementation?
     </a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.1 </bdi>Informative references</a></li></ol></li></ol></nav>
-    <section id="tested-assertions"><div class="header-wrapper"><h2 id="x1-tested-assertions"><bdi class="secno">1. </bdi>
-      Tested assertions
-    </h2><a class="self-link" href="#tested-assertions" aria-label="Permalink for Section 1."></a></div>
-    <p data-cite="permissions">
-      As Geolocation requires explicit permission grant to be used (via a
-      browser UI), the following assertions were tested manually to assure
-      interoperability across browser engines.
+    <section id="test-results"><div class="header-wrapper"><h2 id="x1-test-results"><bdi class="secno">1. </bdi>
+      Test results
+    </h2><a class="self-link" href="#test-results" aria-label="Permalink for Section 1."></a></div>
+    <p>
+      The following tests verify conformance to [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].
     </p>
+    <section id="status-legend"><div class="header-wrapper"><h3 id="x1-1-status-legend"><bdi class="secno">1.1 </bdi>
+      Status legend
+    </h3><a class="self-link" href="#status-legend" aria-label="Permalink for Section 1.1"></a></div>
+    <dl>
+      <dt>
+        PASS
+      </dt>
+      <dd>
+        The test ran successfully and the implementation conforms to the
+        specification.
+      </dd>
+      <dt>
+        FAIL
+      </dt>
+      <dd>
+        The test ran and the implementation does not conform to the
+        specification.
+      </dd>
+      <dt>
+        UNTESTED
+      </dt>
+      <dd>
+        The test could not be run due to test automation infrastructure
+        limitations (e.g., missing [<cite><a class="bibref" data-link-type="biblio" href="#bib-webdriver-bidi" title="WebDriver BiDi">webdriver-bidi</a></cite>] support). This does not
+        indicate an implementation failure.
+      </dd>
+    </dl>
+    </section><section id="webkit-testing-limitations"><div class="header-wrapper"><h3 id="x1-2-webkit-testing-limitations"><bdi class="secno">1.2 </bdi>
+      WebKit testing limitations
+    </h3><a class="self-link" href="#webkit-testing-limitations" aria-label="Permalink for Section 1.2"></a></div>
+    <p>
+      Some tests cannot be run in WebKit's automated test infrastructure due to
+      platform limitations. These do not indicate missing implementation
+      support in WebKit/Safari, but rather gaps in test automation
+      infrastructure:
+    </p>
+    <dl>
+      <dt id="webkit-bidi">
+        WebDriver BiDi support
+      </dt>
+      <dd>
+        WebKit has not yet implemented the WebDriver BiDi support. This is
+        required to set permissions and mock geolocation data using
+        [<cite><a class="bibref" data-link-type="biblio" href="#bib-webdriver-bidi" title="WebDriver BiDi">webdriver-bidi</a></cite>] commands such as <code>emulation.setGeolocationOverride</code>.
+      </dd>
+      <dt id="webkit-permissions-policy">
+        Permissions-Policy HTTP header
+      </dt>
+      <dd>
+        WebKit has not yet implemented <a href="https://webkit.org/b/253126">Permissions-Policy HTTP header
+        support</a>.
+        <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="2"><span>Note</span></div><p class="">
+          Support for the <code>Permissions-Policy</code> HTTP header is not a conformance
+          requirement for [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>]; it simply declares geolocation as a
+          policy-controlled feature with a default allowlist of <code>'self'</code>. HTTP
+          header support is defined by [<cite><a class="bibref" data-link-type="biblio" href="#bib-permissions-policy" title="Permissions Policy">permissions-policy</a></cite>]. The <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element">iframe</a></code>
+          <code><a data-link-type="element-attr" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-allow">allow</a></code> attribute (e.g., <code>&lt;iframe
+          allow="geolocation"&gt;</code>) is supported and works correctly in WebKit.
+        </p></div>
+      </dd>
+    </dl>
+    </section><section id="results-table"><div class="header-wrapper"><h3 id="x1-3-results-table"><bdi class="secno">1.3 </bdi>
+      Results table
+    </h3><a class="self-link" href="#results-table" aria-label="Permalink for Section 1.3"></a></div>
     <table class="simple data">
       <tbody><tr>
         <th>
@@ -238,8 +324,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="fail">
           FAIL
         </td>
-        <td class="fail">
-          FAIL
+        <td>
+          <a href="#webkit-permissions-policy" title="no Permissions-Policy header">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -254,7 +340,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           UNTESTED
         </td>
         <td>
-          UNTESTED
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -268,8 +354,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
       <tr>
@@ -284,7 +370,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           UNTESTED
         </td>
         <td>
-          UNTESTED
+          <a href="#webkit-permissions-policy" title="no Permissions-Policy header">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -301,6 +387,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td>
           UNTESTED
         </td>
+        <td>
+          <a href="#webkit-permissions-policy" title="no Permissions-Policy header">UNTESTED</a>
+        </td>
       </tr>
       <tr>
         <td>
@@ -313,8 +402,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
       <tr>
@@ -343,7 +432,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           UNTESTED
         </td>
         <td>
-          UNTESTED
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -357,7 +446,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           UNTESTED
         </td>
         <td>
-          UNTESTED
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -385,7 +474,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           UNTESTED
         </td>
         <td>
-          UNTESTED
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -426,8 +515,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td>
           UNTESTED
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
       <tr>
@@ -441,7 +530,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
           UNTESTED
         </td>
         <td>
-          UNTESTED
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
         </td>
       </tr>
       <tr>
@@ -455,8 +544,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
       <tr>
@@ -484,19 +573,19 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
     </tbody></table>
-    </section><section id="is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><div class="header-wrapper"><h2 id="x2-is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
+    </section></section><section id="is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><div class="header-wrapper"><h2 id="x2-is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
       Is each feature of the current specification implemented, and how is this
       demonstrated?
     </h2><a class="self-link" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated" aria-label="Permalink for Section 2."></a></div>
     <p>
       The current specification features are implemented across major browsers
       including Chrome, Firefox, and Safari. This is demonstrated through the
-      aforementioned Web Platform Tests <abbr title="Web Platform Tests">WPT</abbr>, which verify the implementation of the
+      aforementioned WPT, which verify the implementation of the
       specification's features, such as obtaining the location, handling
       permissions, and responding to errors.
     </p>
@@ -505,10 +594,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       specification?
     </h2><a class="self-link" href="#are-there-independent-interoperable-implementations-of-the-current-specification" aria-label="Permalink for Section 3."></a></div>
     <p>
-      Yes, there are independent interoperable implementations of the major web
+      Yes, there are independent interoperable implementations in the major web
       browsers. Chrome, Firefox, and Safari provide their own implementations,
       which have been tested to ensure they conform to the [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>]
-      specifications and work interoperability across different platforms and
+      specification and are interoperable across different platforms and
       operating systems.
     </p>
     </section><section id="are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><div class="header-wrapper"><h2 id="x4-are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><bdi class="secno">4. </bdi>
@@ -560,6 +649,12 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     
     <dl class="bibliography"><dt id="bib-geolocation">[Geolocation]</dt><dd>
       <a href="https://www.w3.org/TR/geolocation/"><cite>Geolocation</cite></a>. Marcos Caceres; Reilly Grant.  W3C. 29 October 2025. W3C Recommendation. URL: <a href="https://www.w3.org/TR/geolocation/">https://www.w3.org/TR/geolocation/</a>
+    </dd><dt id="bib-html">[html]</dt><dd>
+      <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Dominic Farolino; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+    </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
+      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 6 October 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
+    </dd><dt id="bib-webdriver-bidi">[webdriver-bidi]</dt><dd>
+      <a href="https://www.w3.org/TR/webdriver-bidi/"><cite>WebDriver BiDi</cite></a>. James Graham; Alex Rudenko; Maksim Sadym.  W3C. 25 February 2026. W3C Working Draft. URL: <a href="https://www.w3.org/TR/webdriver-bidi/">https://www.w3.org/TR/webdriver-bidi/</a>
     </dd></dl>
   </section></section><p role="navigation" id="back-to-top">
     <a href="#title"><abbr title="Back to Top">↑</abbr></a>
