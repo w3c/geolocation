@@ -28,6 +28,11 @@
         background-color: red;
         color: white;
       }
+      .fail a,
+      .fail a:link,
+      .fail a:visited {
+        color: white !important;
+      }
     </style>
     <title>
       Geolocation - Implementation Report
@@ -43,10 +48,39 @@
       Tested assertions
     </h2>
     <p data-cite="permissions">
-      As Geolocation requires explicit permission grant to be used (via a
-      browser UI), the following assertions were tested manually to assure
+      As Geolocation requires an explicit permission grant to be used (via a
+      browser UI), the following assertions were tested manually to ensure
       interoperability across browser engines.
     </p>
+    <h3>
+      WebKit testing limitations
+    </h3>
+    <p>
+      Some tests cannot be run in WebKit's automated test infrastructure due to
+      platform limitations. These do not indicate missing implementation
+      support in WebKit/Safari, but rather gaps in test automation
+      infrastructure:
+    </p>
+    <dl>
+      <dt id="webkit-bidi">
+        WebDriver BiDi API
+      </dt>
+      <dd>
+        WebKit has not yet implemented the <a href=
+        "https://webkit.org/b/291197">WebDriver BiDi protocol</a>, which is
+        required to set permissions and mock geolocation data.
+      </dd>
+      <dt id="webkit-permissions-policy">
+        Permissions-Policy HTTP header
+      </dt>
+      <dd>
+        WebKit has not yet implemented <a href=
+        "https://webkit.org/b/253126">Permissions-Policy HTTP header
+        support</a>. Note that the iframe <code>allow</code> attribute (e.g.,
+        <code>&lt;iframe allow="geolocation"&gt;</code>) is supported and works
+        correctly.
+      </dd>
+    </dl>
     <table class="simple data">
       <tr>
         <th>
@@ -90,7 +124,8 @@
           FAIL
         </td>
         <td class="fail">
-          FAIL
+          <a href="#webkit-permissions-policy" title=
+          "no Permissions-Policy header">FAIL</a>
         </td>
       </tr>
       <tr>
@@ -105,8 +140,8 @@
         <td>
           UNTESTED
         </td>
-        <td>
-          UNTESTED
+        <td class="fail">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">FAIL</a>
         </td>
       </tr>
       <tr>
@@ -121,8 +156,8 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
       <tr>
@@ -137,8 +172,9 @@
         <td>
           UNTESTED
         </td>
-        <td>
-          UNTESTED
+        <td class="fail">
+          <a href="#webkit-permissions-policy" title=
+          "no Permissions-Policy header">FAIL</a>
         </td>
       </tr>
       <tr>
@@ -169,8 +205,8 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
       <tr>
@@ -200,8 +236,8 @@
         <td>
           UNTESTED
         </td>
-        <td>
-          UNTESTED
+        <td class="fail">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">FAIL</a>
         </td>
       </tr>
       <tr>
@@ -215,8 +251,8 @@
         <td>
           UNTESTED
         </td>
-        <td>
-          UNTESTED
+        <td class="fail">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">FAIL</a>
         </td>
       </tr>
       <tr>
@@ -245,8 +281,8 @@
         <td>
           UNTESTED
         </td>
-        <td>
-          UNTESTED
+        <td class="fail">
+          <a href="#webkit-bidi" title="requires mock position data">FAIL</a>
         </td>
       </tr>
       <tr>
@@ -290,8 +326,8 @@
         <td>
           UNTESTED
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
       <tr>
@@ -305,8 +341,8 @@
         <td>
           UNTESTED
         </td>
-        <td>
-          UNTESTED
+        <td class="fail">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">FAIL</a>
         </td>
       </tr>
       <tr>
@@ -321,8 +357,8 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
       <tr>
@@ -352,8 +388,8 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="pass">
+          PASS
         </td>
       </tr>
     </table>
@@ -374,10 +410,10 @@
       specification?
     </h2>
     <p>
-      Yes, there are independent interoperable implementations of the major web
+      Yes, there are independent interoperable implementations in the major web
       browsers. Chrome, Firefox, and Safari provide their own implementations,
       which have been tested to ensure they conform to the [[Geolocation]]
-      specifications and work interoperability across different platforms and
+      specification and work interoperably across different platforms and
       operating systems.
     </p>
     <h2>
