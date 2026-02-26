@@ -332,6 +332,21 @@
       <tr>
         <td>
           <a href=
+          "https://wpt.live/geolocation/heading-stationary.https.html">heading-stationary.https.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td>
+          UNTESTED
+        </td>
+        <td>
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href=
           "https://wpt.live/geolocation/idlharness.https.window.html">idlharness.https.window.html</a>
         </td>
         <td class="pass">
@@ -464,6 +479,139 @@
         </td>
         <td class="pass">
           PASS
+        </td>
+      </tr>
+    </table>
+    <h2>
+      Candidate corrections and additions
+    </h2>
+    <p>
+      Since [[Geolocation]] became a W3C Recommendation on 01 September 2022,
+      the specification received candidate corrections and additions. This
+      section documents the substantive changes that resulted in implementation
+      updates. Where automated tests could not be run due to test infrastructure
+      limitations, conformance was verified manually.
+    </p>
+    <table class="simple data">
+      <tr>
+        <th>
+          Change
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Chromium
+        </th>
+        <th>
+          Gecko
+        </th>
+        <th>
+          WebKit
+        </th>
+        <th>
+          Test
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <a href=
+          "https://www.w3.org/TR/geolocation/#a1">a1</a>, <a href=
+          "https://www.w3.org/TR/geolocation/#a2">a2</a>
+        </td>
+        <td data-cite="geolocation">
+          {{GeolocationPosition}}'s {{GeolocationPosition/toJSON()}} and
+          {{GeolocationCoordinates}}'s {{GeolocationCoordinates/toJSON()}} methods
+        </td>
+        <td>
+          <a href=
+          "https://chromium-review.googlesource.com/c/chromium/src/+/5446324">Chrome
+          126+</a>
+        </td>
+        <td>
+          <a href=
+          "https://bugzilla.mozilla.org/show_bug.cgi?id=1890706">Firefox
+          129+</a>
+        </td>
+        <td>
+          <a href=
+          "https://github.com/WebKit/WebKit/pull/27063">Safari 18+</a>
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation/tojson.https.window.html">tojson.https.window.html</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href=
+          "https://www.w3.org/TR/geolocation/#a4">a4</a>
+        </td>
+        <td>
+          Emulated position data for automation ([[webdriver-bidi]]
+          <code>emulation.setGeolocationOverride</code> command)
+        </td>
+        <td>
+          <a href=
+          "https://issues.chromium.org/issues/407577194">Chromium</a>
+        </td>
+        <td>
+          <a href=
+          "https://bugzilla.mozilla.org/show_bug.cgi?id=1954992">Gecko</a>
+        </td>
+        <td>
+          <a href=
+          "https://webkit.org/b/291197">Not implemented</a>
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation/getCurrentPosition-success.https.html">getCurrentPosition-success.https.html</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href=
+          "https://www.w3.org/TR/geolocation/#c7">c7</a>
+        </td>
+        <td>
+          Added missing step to check for [=non-secure contexts=] and return
+          PERMISSION_DENIED
+        </td>
+        <td>
+          Already conforming
+        </td>
+        <td>
+          Already conforming
+        </td>
+        <td>
+          Already conforming
+        </td>
+        <td>
+          <a href=
+          "http://wpt.live/geolocation/non-secure-contexts.http.html">non-secure-contexts.http.html</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href=
+          "https://www.w3.org/TR/geolocation/#c9">c9</a>
+        </td>
+        <td data-cite="geolocation">
+          {{GeolocationCoordinates/heading}} is <code>null</code> when stationary
+          (previously <code>NaN</code>)
+        </td>
+        <td>
+          Already conforming
+        </td>
+        <td>
+          Already conforming
+        </td>
+        <td>
+          Already conforming
+        </td>
+        <td>
+          <a href=
+          "https://wpt.live/geolocation/heading-stationary.https.html">heading-stationary.https.html</a>
         </td>
       </tr>
     </table>
