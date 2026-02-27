@@ -33,6 +33,15 @@
       .fail a:visited {
         color: white !important;
       }
+      .manual {
+        background-color: #1976D2;
+        color: white;
+      }
+      .manual a,
+      .manual a:link,
+      .manual a:visited {
+        color: white !important;
+      }
     </style>
     <title>
       Geolocation - Implementation Report
@@ -75,13 +84,13 @@
         specification.
       </dd>
       <dt>
-        UNTESTED
+        MANUAL
       </dt>
       <dd>
-        The test could not be run due to test automation infrastructure
-        limitations (e.g., missing [[webdriver-bidi]] support). This does not
-        indicate an implementation failure. Features marked as UNTESTED have
-        been manually verified as implemented. See the <a href=
+        The test could not be run via automated test infrastructure due to
+        platform limitations (e.g., missing [[webdriver-bidi]] support).
+        Conformance was verified through manual testing. This does not
+        indicate an implementation failure. See the <a href=
         "#candidate-corrections-and-additions">Candidate corrections and
         additions</a> section for implementation evidence, including links to
         bug reports, pull requests, and browser release notes that demonstrate
@@ -207,9 +216,9 @@
         <td class="fail">
           FAIL
         </td>
-        <td>
+        <td class="manual">
           <a href="#webkit-permissions-policy" title=
-          "no Permissions-Policy header">UNTESTED</a>
+          "no Permissions-Policy header">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -221,11 +230,11 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -253,12 +262,12 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
+        <td class="manual">
           <a href="#webkit-permissions-policy" title=
-          "no Permissions-Policy header">UNTESTED</a>
+          "no Permissions-Policy header">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -270,12 +279,12 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
+        <td class="manual">
           <a href="#webkit-permissions-policy" title=
-          "no Permissions-Policy header">UNTESTED</a>
+          "no Permissions-Policy header">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -318,11 +327,11 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -333,11 +342,11 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -348,11 +357,11 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="manual">
+          MANUAL
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -378,11 +387,11 @@
         <td class="fail">
           FAIL
         </td>
-        <td>
-          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -423,8 +432,8 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
         <td class="pass">
           PASS
@@ -438,11 +447,11 @@
         <td class="pass">
           PASS
         </td>
-        <td>
-          <a href="#gecko-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
