@@ -20,27 +20,31 @@
       };
     </script>
     <style>
+      .pass,
+      .fail,
+      .manual {
+        color: white;
+      }
       .pass {
         background-color: green;
-        color: white;
       }
       .fail {
         background-color: red;
-        color: white;
-      }
-      .fail a,
-      .fail a:link,
-      .fail a:visited {
-        color: white !important;
       }
       .manual {
         background-color: #1976D2;
-        color: white;
       }
+      .pass a,
+      .pass a:link,
+      .pass a:visited,
+      .fail a,
+      .fail a:link,
+      .fail a:visited,
       .manual a,
       .manual a:link,
       .manual a:visited {
         color: white !important;
+        text-decoration: underline;
       }
     </style>
     <title>
@@ -175,6 +179,9 @@
       Results table
     </h3>
     <table class="simple data">
+      <caption>
+        Web Platform Tests results for Geolocation API
+      </caption>
       <tr>
         <th>
           Test
@@ -513,6 +520,9 @@
       infrastructure limitations, conformance was verified manually.
     </p>
     <table class="simple data">
+      <caption>
+        Implementation status of candidate corrections and additions
+      </caption>
       <tr>
         <th>
           Change
@@ -545,17 +555,17 @@
           {{GeolocationCoordinates}}'s {{GeolocationCoordinates/toJSON()}}
           methods
         </td>
-        <td>
+        <td class="pass">
           <a href=
           "https://chromium-review.googlesource.com/c/chromium/src/+/5446324">Chrome
           126+</a>
         </td>
-        <td>
+        <td class="pass">
           <a href=
           "https://bugzilla.mozilla.org/show_bug.cgi?id=1890706">Firefox
           129+</a>
         </td>
-        <td>
+        <td class="pass">
           <a href="https://github.com/WebKit/WebKit/pull/27063">Safari 18+</a>
         </td>
         <td>
@@ -572,14 +582,14 @@
           Emulated position data for automation ([[webdriver-bidi]]
           <code>emulation.setGeolocationOverride</code> command)
         </td>
-        <td>
+        <td class="pass">
           <a href="https://issues.chromium.org/issues/407577194">Chromium</a>
         </td>
-        <td>
+        <td class="pass">
           <a href=
           "https://bugzilla.mozilla.org/show_bug.cgi?id=1954992">Gecko</a>
         </td>
-        <td>
+        <td class="fail">
           <a href="https://webkit.org/b/291197">Not implemented</a>
         </td>
         <td>
@@ -596,13 +606,13 @@
           Added missing step to check for [=non-secure contexts=] and return
           PERMISSION_DENIED
         </td>
-        <td>
+        <td class="pass">
           Already conforming
         </td>
-        <td>
+        <td class="pass">
           Already conforming
         </td>
-        <td>
+        <td class="pass">
           Already conforming
         </td>
         <td>
@@ -619,13 +629,13 @@
           {{GeolocationCoordinates/heading}} is <code>null</code> when
           stationary (previously <code>NaN</code>)
         </td>
-        <td>
+        <td class="pass">
           Already conforming
         </td>
-        <td>
+        <td class="pass">
           Already conforming
         </td>
-        <td>
+        <td class="pass">
           Already conforming
         </td>
         <td>
