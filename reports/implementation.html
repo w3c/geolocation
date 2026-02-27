@@ -93,8 +93,8 @@
       <dd>
         The test could not be run via automated test infrastructure due to
         platform limitations (e.g., missing [[webdriver-bidi]] support).
-        Conformance was verified through manual testing. This does not
-        indicate an implementation failure. See the <a href=
+        Conformance was verified through manual testing. This does not indicate
+        an implementation failure. See the <a href=
         "#candidate-corrections-and-additions">Candidate corrections and
         additions</a> section for implementation evidence, including links to
         bug reports, pull requests, and browser release notes that demonstrate
@@ -140,8 +140,8 @@
       Gecko testing limitations
     </h3>
     <p>
-      Some tests cannot be run in Gecko's (Firefox) wptrunner infrastructure due
-      to missing [[webdriver-bidi]] integration in wptrunner:
+      Some tests cannot be run in Gecko's (Firefox) wptrunner infrastructure
+      due to missing [[webdriver-bidi]] integration in wptrunner:
     </p>
     <dl>
       <dt id="gecko-bidi">
@@ -149,28 +149,26 @@
       </dt>
       <dd>
         <p>
-          Firefox 139+ has implemented [[webdriver-bidi]] commands at the browser
-          level, including `emulation.setGeolocationOverride` (<a href=
-          "https://bugzilla.mozilla.org/show_bug.cgi?id=1954992">Bug 1954992</a>)
-          and BrowsingContext geolocation override (<a href=
-          "https://bugzilla.mozilla.org/show_bug.cgi?id=1951962">Bug 1951962</a>).
-          However, wptrunner's Marionette executor does not yet wire up the BiDi
-          protocol for Firefox.
+          Firefox 139+ has implemented [[webdriver-bidi]] commands at the
+          browser level, including `emulation.setGeolocationOverride` (<a href=
+          "https://bugzilla.mozilla.org/show_bug.cgi?id=1954992">Bug
+          1954992</a>) and BrowsingContext geolocation override (<a href=
+          "https://bugzilla.mozilla.org/show_bug.cgi?id=1951962">Bug
+          1951962</a>). However, wptrunner's Marionette executor does not yet
+          wire up the BiDi protocol for Firefox.
         </p>
         <p>
           <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1984611">Bug
-          1984611</a> tracks adding WebDriver BiDi implementation for Firefox in
-          wptrunner. Until this is resolved, tests requiring the following
+          1984611</a> tracks adding WebDriver BiDi implementation for Firefox
+          in wptrunner. Until this is resolved, tests requiring the following
           testdriver.bidi actions cannot run:
         </p>
         <ul>
-          <li>
-            `test_driver.bidi.permissions.set_permission` - required for tests
-            that need to grant geolocation permissions programmatically.
+          <li>`test_driver.bidi.permissions.set_permission` - required for
+          tests that need to grant geolocation permissions programmatically.
           </li>
-          <li>
-            `test_driver.bidi.emulation.set_geolocation_override` - required for
-            tests that need to mock geolocation data.
+          <li>`test_driver.bidi.emulation.set_geolocation_override` - required
+          for tests that need to mock geolocation data.
           </li>
         </ul>
       </dd>
