@@ -41,18 +41,31 @@ dfn{cursor:pointer}
     
 <style>
 
+      .pass,
+      .fail,
+      .manual {
+        color: white;
+      }
       .pass {
         background-color: green;
-        color: white;
       }
       .fail {
         background-color: red;
-        color: white;
       }
+      .manual {
+        background-color: #1976D2;
+      }
+      .pass a,
+      .pass a:link,
+      .pass a:visited,
       .fail a,
       .fail a:link,
-      .fail a:visited {
+      .fail a:visited,
+      .manual a,
+      .manual a:link,
+      .manual a:visited {
         color: white !important;
+        text-decoration: underline;
       }
     
 </style>
@@ -104,7 +117,8 @@ dd{margin-left:0}
 }
 </style>
 <meta name="color-scheme" content="light">
-<meta name="description" content="This is an implementation report for [Geolocation].">
+<meta name="description" content="This is an implementation report for the 29 October
+        2025 W3C Recommendation of [Geolocation].">
 <style>
 var:hover{text-decoration:underline;cursor:pointer}
 var.respec-hl{color:var(--color,#000);background-color:var(--bg-color);box-shadow:0 0 0 2px var(--bg-color)}
@@ -138,14 +152,14 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   ],
   "latestVersion": null,
   "xref": "web-platform",
-  "publishISODate": "2026-02-25T00:00:00.000Z",
-  "generatedSubtitle": "25 February 2026"
+  "publishISODate": "2026-02-27T00:00:00.000Z",
+  "generatedSubtitle": "27 February 2026"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/base.css"></head>
   <body class="h-entry informative" data-cite="HTML INFRA URL WEBIDL DOM FETCH"><div class="head">
     
     <h1 id="title" class="title">Geolocation - Implementation Report</h1> 
-    <p id="w3c-state"> <time class="dt-published" datetime="2026-02-25">25 February 2026</time></p>
+    <p id="w3c-state"> <time class="dt-published" datetime="2026-02-27">27 February 2026</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -187,7 +201,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   </div>
     <section id="abstract" class="introductory"><h2>Abstract</h2>
       <p>
-        This is an implementation report for [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].
+        This is an implementation report for the <a href="https://www.w3.org/TR/2025/REC-geolocation-20251029/">29 October
+        2025</a> <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation of [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].
       </p>
     </section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#test-results"><bdi class="secno">1. </bdi>
       Test results
@@ -195,23 +210,27 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       Status legend
     </a></li><li class="tocline"><a class="tocxref" href="#webkit-testing-limitations"><bdi class="secno">1.2 </bdi>
       WebKit testing limitations
-    </a></li><li class="tocline"><a class="tocxref" href="#results-table"><bdi class="secno">1.3 </bdi>
+    </a></li><li class="tocline"><a class="tocxref" href="#gecko-testing-limitations"><bdi class="secno">1.3 </bdi>
+      Gecko testing limitations
+    </a></li><li class="tocline"><a class="tocxref" href="#results-table"><bdi class="secno">1.4 </bdi>
       Results table
-    </a></li></ol></li><li class="tocline"><a class="tocxref" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
+    </a></li></ol></li><li class="tocline"><a class="tocxref" href="#candidate-corrections-and-additions"><bdi class="secno">2. </bdi>
+      Candidate corrections and additions
+    </a></li><li class="tocline"><a class="tocxref" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">3. </bdi>
       Is each feature of the current specification implemented, and how is this
       demonstrated?
-    </a></li><li class="tocline"><a class="tocxref" href="#are-there-independent-interoperable-implementations-of-the-current-specification"><bdi class="secno">3. </bdi>
+    </a></li><li class="tocline"><a class="tocxref" href="#are-there-independent-interoperable-implementations-of-the-current-specification"><bdi class="secno">4. </bdi>
       Are there independent interoperable implementations of the current
       specification?
-    </a></li><li class="tocline"><a class="tocxref" href="#are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><bdi class="secno">4. </bdi>
+    </a></li><li class="tocline"><a class="tocxref" href="#are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><bdi class="secno">5. </bdi>
       Are there implementations created by people other than the authors of the
       specification?
-    </a></li><li class="tocline"><a class="tocxref" href="#are-implementations-publicly-deployed"><bdi class="secno">5. </bdi>
+    </a></li><li class="tocline"><a class="tocxref" href="#are-implementations-publicly-deployed"><bdi class="secno">6. </bdi>
       Are implementations publicly deployed?
-    </a></li><li class="tocline"><a class="tocxref" href="#is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><bdi class="secno">6. </bdi>
+    </a></li><li class="tocline"><a class="tocxref" href="#is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><bdi class="secno">7. </bdi>
       Is there implementation experience at all levels of the specification's
       ecosystem (authoring, consuming, publishing…)?
-    </a></li><li class="tocline"><a class="tocxref" href="#are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">7. </bdi>
+    </a></li><li class="tocline"><a class="tocxref" href="#are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">8. </bdi>
       Are there reports of difficulties or problems with implementation?
     </a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informative-references"><bdi class="secno">A.1 </bdi>Informative references</a></li></ol></li></ol></nav>
     <section id="test-results"><div class="header-wrapper"><h2 id="x1-test-results"><bdi class="secno">1. </bdi>
@@ -220,6 +239,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p>
       The following tests verify conformance to [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>].
     </p>
+    <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="2"><span>Note</span></div><p class="">
+      For the latest and updated test results, visit <a href="https://wpt.fyi/results/geolocation">wpt.fyi/results/geolocation</a>.
+    </p></div>
     <section id="status-legend"><div class="header-wrapper"><h3 id="x1-1-status-legend"><bdi class="secno">1.1 </bdi>
       Status legend
     </h3><a class="self-link" href="#status-legend" aria-label="Permalink for Section 1.1"></a></div>
@@ -239,12 +261,16 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         specification.
       </dd>
       <dt>
-        UNTESTED
+        MANUAL
       </dt>
       <dd>
-        The test could not be run due to test automation infrastructure
-        limitations (e.g., missing [<cite><a class="bibref" data-link-type="biblio" href="#bib-webdriver-bidi" title="WebDriver BiDi">webdriver-bidi</a></cite>] support). This does not
-        indicate an implementation failure.
+        The test could not be run via automated test infrastructure due to
+        platform limitations (e.g., missing [<cite><a class="bibref" data-link-type="biblio" href="#bib-webdriver-bidi" title="WebDriver BiDi">webdriver-bidi</a></cite>] support).
+        Conformance was verified through manual testing. This does not indicate
+        an implementation failure. See the <a href="#candidate-corrections-and-additions">Candidate corrections and
+        additions</a> section for implementation evidence, including links to
+        bug reports, pull requests, and browser release notes that demonstrate
+        implementation.
       </dd>
     </dl>
     </section><section id="webkit-testing-limitations"><div class="header-wrapper"><h3 id="x1-2-webkit-testing-limitations"><bdi class="secno">1.2 </bdi>
@@ -271,7 +297,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       <dd>
         WebKit has not yet implemented <a href="https://webkit.org/b/253126">Permissions-Policy HTTP header
         support</a>.
-        <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="2"><span>Note</span></div><p class="">
+        <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="2"><span>Note</span></div><p class="">
           Support for the <code>Permissions-Policy</code> HTTP header is not a conformance
           requirement for [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>]; it simply declares geolocation as a
           policy-controlled feature with a default allowlist of <code>'self'</code>. HTTP
@@ -281,10 +307,48 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         </p></div>
       </dd>
     </dl>
-    </section><section id="results-table"><div class="header-wrapper"><h3 id="x1-3-results-table"><bdi class="secno">1.3 </bdi>
+    </section><section id="gecko-testing-limitations"><div class="header-wrapper"><h3 id="x1-3-gecko-testing-limitations"><bdi class="secno">1.3 </bdi>
+      Gecko testing limitations
+    </h3><a class="self-link" href="#gecko-testing-limitations" aria-label="Permalink for Section 1.3"></a></div>
+    <p>
+      Some tests cannot be run in Gecko's (Firefox) wptrunner infrastructure
+      due to missing [<cite><a class="bibref" data-link-type="biblio" href="#bib-webdriver-bidi" title="WebDriver BiDi">webdriver-bidi</a></cite>] integration in wptrunner:
+    </p>
+    <dl>
+      <dt id="gecko-bidi">
+        wptrunner BiDi integration
+      </dt>
+      <dd>
+        <p>
+          Firefox 139+ has implemented [<cite><a class="bibref" data-link-type="biblio" href="#bib-webdriver-bidi" title="WebDriver BiDi">webdriver-bidi</a></cite>] commands at the
+          browser level, including <code>emulation.setGeolocationOverride</code> (<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1954992">Bug
+          1954992</a>) and BrowsingContext geolocation override (<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1951962">Bug
+          1951962</a>). However, wptrunner's Marionette executor does not yet
+          wire up the BiDi protocol for Firefox.
+        </p>
+        <p>
+          <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1984611">Bug
+          1984611</a> tracks adding WebDriver BiDi implementation for Firefox
+          in wptrunner. Until this is resolved, tests requiring the following
+          testdriver.bidi actions cannot run:
+        </p>
+        <ul>
+          <li><code>test_driver.bidi.permissions.set_permission</code> - required for
+          tests that need to grant geolocation permissions programmatically.
+          </li>
+          <li><code>test_driver.bidi.emulation.set_geolocation_override</code> - required
+          for tests that need to mock geolocation data.
+          </li>
+        </ul>
+      </dd>
+    </dl>
+    </section><section id="results-table"><div class="header-wrapper"><h3 id="x1-4-results-table"><bdi class="secno">1.4 </bdi>
       Results table
-    </h3><a class="self-link" href="#results-table" aria-label="Permalink for Section 1.3"></a></div>
+    </h3><a class="self-link" href="#results-table" aria-label="Permalink for Section 1.4"></a></div>
     <table class="simple data">
+      <caption>
+        Web Platform Tests results for Geolocation API
+      </caption>
       <tbody><tr>
         <th>
           Test
@@ -324,8 +388,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="fail">
           FAIL
         </td>
-        <td>
-          <a href="#webkit-permissions-policy" title="no Permissions-Policy header">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-permissions-policy" title="no Permissions-Policy header">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -336,11 +400,11 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -366,11 +430,11 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-permissions-policy" title="no Permissions-Policy header">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-permissions-policy" title="no Permissions-Policy header">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -381,14 +445,11 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          UNTESTED
-        </td>
-        <td>
-          <a href="#webkit-permissions-policy" title="no Permissions-Policy header">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-permissions-policy" title="no Permissions-Policy header">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -428,11 +489,11 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -442,11 +503,25 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
+        </td>
+      </tr>
+      <tr>
         <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+          <a href="https://wpt.live/geolocation/heading-stationary.https.html">heading-stationary.https.html</a>
+        </td>
+        <td class="pass">
+          PASS
+        </td>
+        <td class="manual">
+          MANUAL
+        </td>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -470,11 +545,11 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="fail">
           FAIL
         </td>
-        <td>
-          UNTESTED
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -512,8 +587,8 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
         <td class="pass">
           PASS
@@ -526,11 +601,11 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         <td class="pass">
           PASS
         </td>
-        <td>
-          UNTESTED
+        <td class="manual">
+          <a href="#gecko-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
-        <td>
-          <a href="#webkit-bidi" title="requires WebDriver BiDi">UNTESTED</a>
+        <td class="manual">
+          <a href="#webkit-bidi" title="requires WebDriver BiDi">MANUAL</a>
         </td>
       </tr>
       <tr>
@@ -578,10 +653,133 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
         </td>
       </tr>
     </tbody></table>
-    </section></section><section id="is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><div class="header-wrapper"><h2 id="x2-is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">2. </bdi>
+    </section></section><section id="candidate-corrections-and-additions-0"><div class="header-wrapper"><h2 id="candidate-corrections-and-additions"><bdi class="secno">2. </bdi>
+      Candidate corrections and additions
+    </h2><a class="self-link" href="#candidate-corrections-and-additions" aria-label="Permalink for Section 2."></a></div>
+    <p>
+      Since [<cite><a class="bibref" data-link-type="biblio" href="#bib-geolocation" title="Geolocation">Geolocation</a></cite>] became a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation on 01 September 2022,
+      the specification received candidate corrections and additions. This
+      section documents the substantive changes that resulted in implementation
+      updates. Where automated tests could not be run due to test
+      infrastructure limitations, conformance was verified manually.
+    </p>
+    <table class="simple data">
+      <caption>
+        Implementation status of candidate corrections and additions
+      </caption>
+      <tbody><tr>
+        <th>
+          Change
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Chromium
+        </th>
+        <th>
+          Gecko
+        </th>
+        <th>
+          WebKit
+        </th>
+        <th>
+          Test
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://www.w3.org/TR/2025/REC-geolocation-20251029/#a1">a1</a>,
+          <a href="https://www.w3.org/TR/2025/REC-geolocation-20251029/#a2">a2</a>
+        </td>
+        <td data-cite="geolocation">
+          <a data-link-type="interface" data-lt="GeolocationPosition" href="https://www.w3.org/TR/geolocation/#dom-geolocationposition"><code>GeolocationPosition</code></a>'s <a data-link-type="method" data-lt="toJSON()" href="https://www.w3.org/TR/geolocation/#dom-geolocationposition-tojson"><code>toJSON</code></a><code>()</code> and
+          <a data-link-type="interface" data-lt="GeolocationCoordinates" href="https://www.w3.org/TR/geolocation/#dom-geolocationcoordinates"><code>GeolocationCoordinates</code></a>'s <a data-link-type="method" data-lt="toJSON()" href="https://www.w3.org/TR/geolocation/#dom-geolocationcoordinates-tojson"><code>toJSON</code></a><code>()</code>
+          methods
+        </td>
+        <td class="pass">
+          <a href="https://chromium-review.googlesource.com/c/chromium/src/+/5446324">Chrome
+          126+</a>
+        </td>
+        <td class="pass">
+          <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1890706">Firefox
+          129+</a>
+        </td>
+        <td class="pass">
+          <a href="https://github.com/WebKit/WebKit/pull/27063">Safari 18+</a>
+        </td>
+        <td>
+          <a href="https://wpt.live/geolocation/tojson.https.window.html">tojson.https.window.html</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://www.w3.org/TR/2025/REC-geolocation-20251029/#a4">a4</a>
+        </td>
+        <td>
+          Emulated position data for automation ([<cite><a class="bibref" data-link-type="biblio" href="#bib-webdriver-bidi" title="WebDriver BiDi">webdriver-bidi</a></cite>]
+          <code>emulation.setGeolocationOverride</code> command)
+        </td>
+        <td class="pass">
+          <a href="https://issues.chromium.org/issues/407577194">Chromium</a>
+        </td>
+        <td class="pass">
+          <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1954992">Gecko</a>
+        </td>
+        <td class="fail">
+          <a href="https://webkit.org/b/291197">Not implemented</a>
+        </td>
+        <td>
+          <a href="https://wpt.live/geolocation/getCurrentPosition-success.https.html">getCurrentPosition-success.https.html</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://www.w3.org/TR/2025/REC-geolocation-20251029/#c7">c7</a>
+        </td>
+        <td>
+          Added missing step to check for <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context">non-secure contexts</a> and return
+          PERMISSION_DENIED
+        </td>
+        <td class="pass">
+          Already conforming
+        </td>
+        <td class="pass">
+          Already conforming
+        </td>
+        <td class="pass">
+          Already conforming
+        </td>
+        <td>
+          <a href="http://wpt.live/geolocation/non-secure-contexts.http.html">non-secure-contexts.http.html</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="https://www.w3.org/TR/2025/REC-geolocation-20251029/#c9">c9</a>
+        </td>
+        <td data-cite="geolocation">
+          <a data-link-type="attribute" href="https://www.w3.org/TR/geolocation/#dom-geolocationcoordinates-heading"><code>heading</code></a> is <code>null</code> when
+          stationary (previously <code>NaN</code>)
+        </td>
+        <td class="pass">
+          Already conforming
+        </td>
+        <td class="pass">
+          Already conforming
+        </td>
+        <td class="pass">
+          Already conforming
+        </td>
+        <td>
+          <a href="https://wpt.live/geolocation/heading-stationary.https.html">heading-stationary.https.html</a>
+        </td>
+      </tr>
+    </tbody></table>
+    </section><section id="is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><div class="header-wrapper"><h2 id="x3-is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated"><bdi class="secno">3. </bdi>
       Is each feature of the current specification implemented, and how is this
       demonstrated?
-    </h2><a class="self-link" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated" aria-label="Permalink for Section 2."></a></div>
+    </h2><a class="self-link" href="#is-each-feature-of-the-current-specification-implemented-and-how-is-this-demonstrated" aria-label="Permalink for Section 3."></a></div>
     <p>
       The current specification features are implemented across major browsers
       including Chrome, Firefox, and Safari. This is demonstrated through the
@@ -589,10 +787,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       specification's features, such as obtaining the location, handling
       permissions, and responding to errors.
     </p>
-    </section><section id="are-there-independent-interoperable-implementations-of-the-current-specification"><div class="header-wrapper"><h2 id="x3-are-there-independent-interoperable-implementations-of-the-current-specification"><bdi class="secno">3. </bdi>
+    </section><section id="are-there-independent-interoperable-implementations-of-the-current-specification"><div class="header-wrapper"><h2 id="x4-are-there-independent-interoperable-implementations-of-the-current-specification"><bdi class="secno">4. </bdi>
       Are there independent interoperable implementations of the current
       specification?
-    </h2><a class="self-link" href="#are-there-independent-interoperable-implementations-of-the-current-specification" aria-label="Permalink for Section 3."></a></div>
+    </h2><a class="self-link" href="#are-there-independent-interoperable-implementations-of-the-current-specification" aria-label="Permalink for Section 4."></a></div>
     <p>
       Yes, there are independent interoperable implementations in the major web
       browsers. Chrome, Firefox, and Safari provide their own implementations,
@@ -600,10 +798,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       specification and are interoperable across different platforms and
       operating systems.
     </p>
-    </section><section id="are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><div class="header-wrapper"><h2 id="x4-are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><bdi class="secno">4. </bdi>
+    </section><section id="are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><div class="header-wrapper"><h2 id="x5-are-there-implementations-created-by-people-other-than-the-authors-of-the-specification"><bdi class="secno">5. </bdi>
       Are there implementations created by people other than the authors of the
       specification?
-    </h2><a class="self-link" href="#are-there-implementations-created-by-people-other-than-the-authors-of-the-specification" aria-label="Permalink for Section 4."></a></div>
+    </h2><a class="self-link" href="#are-there-implementations-created-by-people-other-than-the-authors-of-the-specification" aria-label="Permalink for Section 5."></a></div>
     <p>
       Yes, implementations of Geolocation have been created by various browser
       vendors who are not necessarily the authors of the specification. This
@@ -611,9 +809,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       others, ensuring a broad base of experience and design input is reflected
       in the API.
     </p>
-    </section><section id="are-implementations-publicly-deployed"><div class="header-wrapper"><h2 id="x5-are-implementations-publicly-deployed"><bdi class="secno">5. </bdi>
+    </section><section id="are-implementations-publicly-deployed"><div class="header-wrapper"><h2 id="x6-are-implementations-publicly-deployed"><bdi class="secno">6. </bdi>
       Are implementations publicly deployed?
-    </h2><a class="self-link" href="#are-implementations-publicly-deployed" aria-label="Permalink for Section 5."></a></div>
+    </h2><a class="self-link" href="#are-implementations-publicly-deployed" aria-label="Permalink for Section 6."></a></div>
     <p>
       Yes, the implementations of Geolocation are publicly deployed and widely
       used in web applications. These are accessible in consumer-level
@@ -621,10 +819,10 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       their websites and applications, enhancing user experience with
       location-based services.
     </p>
-    </section><section id="is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><div class="header-wrapper"><h2 id="x6-is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><bdi class="secno">6. </bdi>
+    </section><section id="is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><div class="header-wrapper"><h2 id="x7-is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing"><bdi class="secno">7. </bdi>
       Is there implementation experience at all levels of the specification's
       ecosystem (authoring, consuming, publishing…)?
-    </h2><a class="self-link" href="#is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing" aria-label="Permalink for Section 6."></a></div>
+    </h2><a class="self-link" href="#is-there-implementation-experience-at-all-levels-of-the-specification-s-ecosystem-authoring-consuming-publishing" aria-label="Permalink for Section 7."></a></div>
     <p>
       There is substantial implementation experience at all levels of the
       specification's ecosystem. Developers use the API to author
@@ -632,9 +830,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
       interactions, and publishers integrate these capabilities into various
       applications for enhanced location-dependent experiences.
     </p>
-    </section><section id="are-there-reports-of-difficulties-or-problems-with-implementation"><div class="header-wrapper"><h2 id="x7-are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">7. </bdi>
+    </section><section id="are-there-reports-of-difficulties-or-problems-with-implementation"><div class="header-wrapper"><h2 id="x8-are-there-reports-of-difficulties-or-problems-with-implementation"><bdi class="secno">8. </bdi>
       Are there reports of difficulties or problems with implementation?
-    </h2><a class="self-link" href="#are-there-reports-of-difficulties-or-problems-with-implementation" aria-label="Permalink for Section 7."></a></div>
+    </h2><a class="self-link" href="#are-there-reports-of-difficulties-or-problems-with-implementation" aria-label="Permalink for Section 8."></a></div>
     <p>
       While the core functionality of Geolocation is well-supported, developers
       occasionally report difficulties related to privacy concerns, varying
@@ -654,7 +852,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
       <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 6 October 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-webdriver-bidi">[webdriver-bidi]</dt><dd>
-      <a href="https://www.w3.org/TR/webdriver-bidi/"><cite>WebDriver BiDi</cite></a>. James Graham; Alex Rudenko; Maksim Sadym.  W3C. 25 February 2026. W3C Working Draft. URL: <a href="https://www.w3.org/TR/webdriver-bidi/">https://www.w3.org/TR/webdriver-bidi/</a>
+      <a href="https://www.w3.org/TR/webdriver-bidi/"><cite>WebDriver BiDi</cite></a>. James Graham; Alex Rudenko; Maksim Sadym.  W3C. 26 February 2026. W3C Working Draft. URL: <a href="https://www.w3.org/TR/webdriver-bidi/">https://www.w3.org/TR/webdriver-bidi/</a>
     </dd></dl>
   </section></section><p role="navigation" id="back-to-top">
     <a href="#title"><abbr title="Back to Top">↑</abbr></a>
