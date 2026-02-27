@@ -41,7 +41,9 @@
   <body>
     <section id="abstract">
       <p>
-        This is an implementation report for [[Geolocation]].
+        This is an implementation report for the <a href=
+        "https://www.w3.org/TR/2025/REC-geolocation-20251029/">29 October
+        2025</a> W3C Recommendation of [[Geolocation]].
       </p>
     </section>
     <h2>
@@ -49,6 +51,10 @@
     </h2>
     <p>
       The following tests verify conformance to [[Geolocation]].
+    </p>
+    <p class="note">
+      For the latest and updated test results, visit <a href=
+      "https://wpt.fyi/results/geolocation">wpt.fyi/results/geolocation</a>.
     </p>
     <h3>
       Status legend
@@ -489,8 +495,8 @@
       Since [[Geolocation]] became a W3C Recommendation on 01 September 2022,
       the specification received candidate corrections and additions. This
       section documents the substantive changes that resulted in implementation
-      updates. Where automated tests could not be run due to test infrastructure
-      limitations, conformance was verified manually.
+      updates. Where automated tests could not be run due to test
+      infrastructure limitations, conformance was verified manually.
     </p>
     <table class="simple data">
       <tr>
@@ -516,12 +522,14 @@
       <tr>
         <td>
           <a href=
-          "https://www.w3.org/TR/geolocation/#a1">a1</a>, <a href=
-          "https://www.w3.org/TR/geolocation/#a2">a2</a>
+          "https://www.w3.org/TR/2025/REC-geolocation-20251029/#a1">a1</a>,
+          <a href=
+          "https://www.w3.org/TR/2025/REC-geolocation-20251029/#a2">a2</a>
         </td>
         <td data-cite="geolocation">
           {{GeolocationPosition}}'s {{GeolocationPosition/toJSON()}} and
-          {{GeolocationCoordinates}}'s {{GeolocationCoordinates/toJSON()}} methods
+          {{GeolocationCoordinates}}'s {{GeolocationCoordinates/toJSON()}}
+          methods
         </td>
         <td>
           <a href=
@@ -534,8 +542,7 @@
           129+</a>
         </td>
         <td>
-          <a href=
-          "https://github.com/WebKit/WebKit/pull/27063">Safari 18+</a>
+          <a href="https://github.com/WebKit/WebKit/pull/27063">Safari 18+</a>
         </td>
         <td>
           <a href=
@@ -545,23 +552,21 @@
       <tr>
         <td>
           <a href=
-          "https://www.w3.org/TR/geolocation/#a4">a4</a>
+          "https://www.w3.org/TR/2025/REC-geolocation-20251029/#a4">a4</a>
         </td>
         <td>
           Emulated position data for automation ([[webdriver-bidi]]
           <code>emulation.setGeolocationOverride</code> command)
         </td>
         <td>
-          <a href=
-          "https://issues.chromium.org/issues/407577194">Chromium</a>
+          <a href="https://issues.chromium.org/issues/407577194">Chromium</a>
         </td>
         <td>
           <a href=
           "https://bugzilla.mozilla.org/show_bug.cgi?id=1954992">Gecko</a>
         </td>
         <td>
-          <a href=
-          "https://webkit.org/b/291197">Not implemented</a>
+          <a href="https://webkit.org/b/291197">Not implemented</a>
         </td>
         <td>
           <a href=
@@ -571,7 +576,7 @@
       <tr>
         <td>
           <a href=
-          "https://www.w3.org/TR/geolocation/#c7">c7</a>
+          "https://www.w3.org/TR/2025/REC-geolocation-20251029/#c7">c7</a>
         </td>
         <td>
           Added missing step to check for [=non-secure contexts=] and return
@@ -594,11 +599,11 @@
       <tr>
         <td>
           <a href=
-          "https://www.w3.org/TR/geolocation/#c9">c9</a>
+          "https://www.w3.org/TR/2025/REC-geolocation-20251029/#c9">c9</a>
         </td>
         <td data-cite="geolocation">
-          {{GeolocationCoordinates/heading}} is <code>null</code> when stationary
-          (previously <code>NaN</code>)
+          {{GeolocationCoordinates/heading}} is <code>null</code> when
+          stationary (previously <code>NaN</code>)
         </td>
         <td>
           Already conforming
