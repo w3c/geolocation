@@ -67,8 +67,8 @@
         System (GPS) and location inferred from network signals such as IP
         address, RFID, WiFi and Bluetooth MAC addresses, and GSM/CDMA cell IDs,
         as well as user input. The API itself is agnostic of the underlying
-        <dfn>location information source</dfn>s, and no guarantee is given that
-        the API returns the device's actual location.
+        location information sources, and no guarantee is given that the API
+        returns the device's actual location.
       </p>
       <p>
         This specification provides two ways for users to share their location:
@@ -76,16 +76,16 @@
       </p>
       <p>
         A <dfn>precise position</dfn> is a position returned by the underlying
-        [=location information source=]. By default, any location data is
+        location information source. By default, any location data is
         considered precise, regardless of its accuracy estimate, unless it has
-        been explicitly coarsened by an [=approximate location information
-        source=] to be an [=approximate position=].
+        been explicitly coarsened by an approximate location information source
+        to be an [=approximate position=].
       </p>
       <p>
         An <dfn>approximate position</dfn> is a less precise,
         privacy-preserving representation of the user's location. Instead of
-        providing precise coordinates, an [=approximate location information
-        source=] can return a location that is intentionally coarsened to a
+        providing precise coordinates, an approximate location information
+        source can return a location that is intentionally coarsened to a
         larger area, such as the nearest city, postal code, or a predefined
         region. This is often sufficient for applications that don't need to
         know the user's [=precise position=], for example, a weather
@@ -95,10 +95,9 @@
         position=].
       </p>
       <p>
-        An <dfn>approximate location information source</dfn> is a [=location
-        information source=] that returns positions that have been
-        intentionally obfuscated to make it more difficult to recover the true
-        location.
+        An approximate location information source is a location information
+        source that returns positions that have been intentionally obfuscated
+        to make it more difficult to recover the true location.
       </p>
       <p>
         If an end user grants permission, <cite>Geolocation</cite>:
@@ -542,6 +541,44 @@
           (for approximate location).
         </p>
         <p>
+          There is a strict dependency between the [=permission state=]s of
+          <a>"geolocation"</a> and <a>"geolocation-approximate"</a>.
+          Specifically, granting precise location implies granting approximate
+          location, and denying approximate location implies denying precise
+          location. This results in the following allowed combinations of
+          states:
+        </p>
+        <ul>
+          <li>Both are [=permission/"granted"=].
+          </li>
+          <li>Both are [=permission/"prompt"=].
+          </li>
+          <li>Both are [=permission/"denied"=].
+          </li>
+          <li>
+            <a>"geolocation-approximate"</a> is [=permission/"granted"=] and
+            <a>"geolocation"</a> is [=permission/"prompt"=].
+          </li>
+          <li>
+            <a>"geolocation-approximate"</a> is [=permission/"granted"=] and
+            <a>"geolocation"</a> is [=permission/"denied"=].
+          </li>
+          <li>
+            <a>"geolocation-approximate"</a> is [=permission/"prompt"=] and
+            <a>"geolocation"</a> is [=permission/"denied"=].
+          </li>
+        </ul>
+        <p>
+          Implementers MUST ensure that these states remain coherent. For
+          example, if a user changes the [=permission state=] of
+          <a>"geolocation-approximate"</a> to [=permission/"denied"=] via site
+          settings, the user agent MUST automatically update
+          <a>"geolocation"</a> to [=permission/"denied"=] as well. Similarly,
+          if <a>"geolocation"</a> is changed to [=permission/"granted"=],
+          <a>"geolocation-approximate"</a> MUST also become
+          [=permission/"granted"=].
+        </p>
+        <p>
           <code><a>"geolocation-approximate"</a></code> is a [=default powerful
           feature=], while <code><a>"geolocation"</a></code> is a [=powerful
           feature=] with:
@@ -569,9 +606,10 @@
               </li>
               <li>If |approximatePermissionState| is [=permission/"granted"=]
               and |permissionDesc|'s [=permission state=] is
-              [=permission/"prompt"=], set |status|'s to
-              [=permission/"prompt"=]. Otherwise, set |status|'s
-              {{PermissionStatus/state}} to |appxorimatePermissionState|.
+              [=permission/"prompt"=], set |status|'s
+              {{PermissionStatus/state}} to [=permission/"prompt"=]. Otherwise,
+              set |status|'s {{PermissionStatus/state}} to
+              |approximatePermissionState|.
               </li>
               <li>If |status|'s {{PermissionStatus/state}} is equal to
               [=permission/"granted"=], set |status|'s
@@ -579,6 +617,14 @@
               {{AccuracyMode/"precise"}} if also |permissionDesc|'s
               [=permission state=] is [=permission/"granted"=] or to
               {{AccuracyMode/"approximate"}} otherwise.
+                <aside class="note">
+                  <p>
+                    As noted above, there are only six valid combinations of
+                    [=permission state=]s for <a>"geolocation"</a> and
+                    <a>"geolocation-approximate"</a>. Implementers MUST ensure
+                    that these states remain coherent.
+                  </p>
+                </aside>
               </li>
             </ol>
           </li>
@@ -1030,21 +1076,31 @@
                       </li>
                       <li>If |emulatedPositionData| is not null:
                         <ol>
-                          <li>If |emulatedPositionData| is a
-                          {{GeolocationPositionError}}:
+                          <li>If |emulatedPositionData|["error"]
+                          [=map/exists=]:
                             <ol>
+                              <li>Let |error| be a newly created
+                              {{GeolocationPositionError}} instance with its
+                              {{GeolocationPositionError/code}} attribute
+                              initialized to
+                              |emulatedPositionData|["error"]["code"].
+                              </li>
                               <li>[=Call back with error=] passing
-                              |errorCallback| and
-                              |emulatedPositionData|.{{GeolocationPositionError/code}}.
+                              |errorCallback| and |error|.
                               </li>
                               <li>Terminate this algorithm.
                               </li>
                             </ol>
                           </li>
+                          <li>Let |emulatedAccuracyMode| be
+                          |emulatedPositionData|["accuracyMode"] if it
+                          [=map/exists=]; otherwise "precise".
+                          </li>
                           <li>Let |position| be [=a new `GeolocationPosition`=]
-                          passing |emulatedPositionData|, |acquisitionTime|,
+                          passing |emulatedPositionData|["coordinate"],
+                          |acquisitionTime|,
                           |options|.{{PositionOptions/enableHighAccuracy}}, and
-                          |effectiveAccuracy|.
+                          |emulatedAccuracyMode|.
                           </li>
                           <li>[=Queue a task=] on the [=geolocation task
                           source=] with a step that [=invokes=]
@@ -1539,8 +1595,8 @@
         <p>
           <dfn>A new `GeolocationPosition`</dfn> is constructed with [=map=]
           |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp|,
-          boolean |isHighAccuracy|, and string |effectiveAccuracy| by
-          performing the following steps:
+          boolean |isHighAccuracy|, and string |accuracyMode| by performing the
+          following steps:
         </p>
         <ol class="algorithm">
           <li>Let |coords:GeolocationCoordinates| be a newly created
@@ -1557,7 +1613,7 @@
           {{GeolocationPosition/timestamp}} attribute initialized to
           |timestamp|, {{GeolocationPosition/[[isHighAccuracy]]}} internal slot
           set to |isHighAccuracy| and {{GeolocationPosition/accuracyMode}}
-          attribute initialized to |effectiveAccuracy|.
+          attribute initialized to |accuracyMode|.
           </li>
         </ol>
       </section>
@@ -1656,16 +1712,14 @@
       </p>
       <p>
         Each [=top-level traversable=] has an associated <dfn>emulated position
-        data</dfn>, which is data representing {{GeolocationCoordinates}},
-        {{GeolocationPositionError}} or null, initially null.
+        data</dfn>, which is a [=map=] or null, initially null.
       </p>
       <p>
         To <dfn class="export">set emulated position data</dfn>, given
         [=navigable=] |navigable| and an |emulatedPositionData|:
       </p>
       <ol class="algorithm">
-        <li>Assert |emulatedPositionData| is either null, a
-        {{GeolocationCoordinates}}, or a {{GeolocationPositionError}}.
+        <li>Assert |emulatedPositionData| is either null or a [=map=].
         </li>
         <li>Let |traversable| be |navigable|’s [=navigable/top-level
         traversable=].
