@@ -1083,7 +1083,7 @@
                               {{GeolocationPositionError}} instance with its
                               {{GeolocationPositionError/code}} attribute
                               initialized to
-                              |emulatedPositionData|["error"]["code"].
+                              |emulatedPositionData|["error"]["type"].
                               </li>
                               <li>[=Call back with error=] passing
                               |errorCallback| and |error|.
@@ -1092,15 +1092,10 @@
                               </li>
                             </ol>
                           </li>
-                          <li>Let |emulatedAccuracyMode| be
-                          |emulatedPositionData|["accuracyMode"] if it
-                          [=map/exists=]; otherwise "precise".
-                          </li>
                           <li>Let |position| be [=a new `GeolocationPosition`=]
                           passing |emulatedPositionData|["coordinates"],
-                          |acquisitionTime|,
-                          |options|.{{PositionOptions/enableHighAccuracy}}, and
-                          |emulatedAccuracyMode|.
+                          |acquisitionTime|, and
+                          |options|.{{PositionOptions/enableHighAccuracy}}.
                           </li>
                           <li>[=Queue a task=] on the [=geolocation task
                           source=] with a step that [=invokes=]
@@ -1124,7 +1119,8 @@
                       <li>If |cachedPosition|'s
                       {{GeolocationPosition/timestamp}}'s value is greater than
                       |cacheTime|, and |effectiveAccuracy| equals
-                      |cachedPosition|'s {{GeolocationPosition/accuracyMode}}:
+                      |cachedPosition|'s {{GeolocationPosition/coords}}'s
+                      {{GeolocationCoordinates/accuracyMode}}:
                         <ol>
                           <li>[=Queue a task=] on the [=geolocation task
                           source=] with a step that [=invokes=]
@@ -1236,12 +1232,17 @@
                         Heading measures the direction in which the device is
                         moving relative to true north.
                       </dd>
+                      <dt>
+                        "accuracyMode"
+                      </dt>
+                      <dd>
+                        Set to |effectiveAccuracy|.
+                      </dd>
                     </dl>
                   </li>
                   <li>Set |position| to [=a new `GeolocationPosition`=] passing
-                  |positionData|, |acquisitionTime|,
-                  |options|.{{PositionOptions/enableHighAccuracy}} and
-                  |effectiveAccuracy|.
+                  |positionData|, |acquisitionTime|, and
+                  |options|.{{PositionOptions/enableHighAccuracy}}.
                   </li>
                   <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
                   |position|.
@@ -1426,7 +1427,6 @@
         interface GeolocationPosition {
           readonly attribute GeolocationCoordinates coords;
           readonly attribute EpochTimeStamp timestamp;
-          readonly attribute AccuracyMode accuracyMode;
           [Default] object toJSON();
         };
       </pre>
@@ -1445,17 +1445,6 @@
         <p>
           The <dfn>timestamp</dfn> attribute represents the time when the
           geographic position of the device was acquired.
-        </p>
-      </section>
-      <section>
-        <h3>
-          `accuracyMode` attribute
-        </h3>
-        <p>
-          The <dfn>accuracyMode</dfn> attribute indicates the accuracy level of
-          the position, which can be either `"precise"` or `"approximate"`.
-          This reflects the level of accuracy that was granted and used to
-          obtain the position.
         </p>
       </section>
       <section>
@@ -1529,6 +1518,7 @@
           readonly attribute double? altitudeAccuracy;
           readonly attribute double? heading;
           readonly attribute double? speed;
+          readonly attribute AccuracyMode accuracyMode;
           [Default] object toJSON();
         };
       </pre>
@@ -1581,6 +1571,17 @@
       </section>
       <section>
         <h3>
+          `accuracyMode` attribute
+        </h3>
+        <p>
+          The <dfn>accuracyMode</dfn> attribute indicates the accuracy level of
+          the position, which can be either `"precise"` or `"approximate"`.
+          This reflects the level of accuracy that was granted and used to
+          obtain the position.
+        </p>
+      </section>
+      <section>
+        <h3>
           `toJSON()` method
         </h3>
         <p>
@@ -1594,9 +1595,8 @@
         </h3>
         <p>
           <dfn>A new `GeolocationPosition`</dfn> is constructed with [=map=]
-          |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp|,
-          boolean |isHighAccuracy|, and string |accuracyMode| by performing the
-          following steps:
+          |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp|, and
+          boolean |isHighAccuracy| by performing the following steps:
         </p>
         <ol class="algorithm">
           <li>Let |coords:GeolocationCoordinates| be a newly created
@@ -1611,9 +1611,8 @@
           <li>Return a newly created {{GeolocationPosition}} instance with its
           {{GeolocationPosition/coords}} attribute initialized to |coords|,
           {{GeolocationPosition/timestamp}} attribute initialized to
-          |timestamp|, {{GeolocationPosition/[[isHighAccuracy]]}} internal slot
-          set to |isHighAccuracy| and {{GeolocationPosition/accuracyMode}}
-          attribute initialized to |accuracyMode|.
+          |timestamp|, and {{GeolocationPosition/[[isHighAccuracy]]}} internal
+          slot set to |isHighAccuracy|.
           </li>
         </ol>
       </section>
