@@ -1060,7 +1060,9 @@
                       </li>
                       <li>If |cachedPosition|'s
                       {{GeolocationPosition/timestamp}}'s value is greater than
-                      |cacheTime|:
+                      |cacheTime|, and
+                      |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
+                      equals |options|.{{PositionOptions/enableHighAccuracy}}:
                         <ol>
                           <li>[=Queue a task=] on the [=geolocation task
                           source=] with a step that [=invokes=]
@@ -1520,7 +1522,7 @@
         </h3>
         <p>
           <dfn>A new `GeolocationPosition`</dfn> is constructed with [=map=]
-          |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp|, and
+          |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp| and
           boolean |isHighAccuracy| by performing the following steps:
         </p>
         <ol class="algorithm">
@@ -1534,10 +1536,10 @@
             </ol>
           </li>
           <li>Return a newly created {{GeolocationPosition}} instance with its
-          {{GeolocationPosition/coords}} attribute initialized to |coords|,
+          {{GeolocationPosition/coords}} attribute initialized to |coords| and
           {{GeolocationPosition/timestamp}} attribute initialized to
-          |timestamp|, and {{GeolocationPosition/[[isHighAccuracy]]}} internal
-          slot set to |isHighAccuracy|.
+          |timestamp|, and its {{GeolocationPosition/[[isHighAccuracy]]}}
+          internal slot set to |isHighAccuracy|.
           </li>
         </ol>
       </section>
