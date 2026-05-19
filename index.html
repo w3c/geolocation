@@ -72,29 +72,35 @@
       </p>
       <p>
         This specification provides two ways for users to share their location:
-        a [=precise position=] and an [=approximate position=].
       </p>
-      <p>
-        A <dfn>precise position</dfn> is a position returned by the underlying
-        location information source. By default, any location data is
-        considered precise, regardless of its accuracy estimate, unless it has
-        been explicitly coarsened by an approximate location information source
-        to be an [=approximate position=].
-      </p>
-      <p>
-        An <dfn>approximate position</dfn> is a less precise,
-        privacy-preserving representation of the user's location. Instead of
-        providing precise coordinates, an approximate location information
-        source can return a location that is intentionally coarsened to a
-        larger area, such as the nearest city, postal code, or a predefined
-        region. What constitutes a coarsened area is left to the underlying
-        system. This is often sufficient for applications that don't need to
-        know the user's [=precise position=], for example, a weather
-        application that only needs a city-level location. By sharing an
-        [=approximate position=], users can still get the benefit of a
-        location-aware application without revealing their [=precise
-        position=].
-      </p>
+      <dl>
+        <dt>
+          <dfn>precise position</dfn>
+        </dt>
+        <dd>
+          A position returned by the underlying location information source. By
+          default, any location data is considered precise, regardless of its
+          accuracy estimate, unless it has been explicitly coarsened by an
+          approximate location information source to be an [=approximate
+          position=].
+        </dd>
+        <dt>
+          <dfn>approximate position</dfn>
+        </dt>
+        <dd>
+          A less precise, privacy-preserving representation of the user's
+          location. Instead of providing precise coordinates, an approximate
+          location information source can return a location that is coarsened
+          to a larger area, such as the nearest city, postal code, or a
+          predefined region. What constitutes a coarsened area is left to the
+          underlying system. This is often sufficient for applications that
+          don't need to know the user's [=precise position=], for example, a
+          weather application that only needs a city-level location. By sharing
+          an [=approximate position=], users can still get the benefit of a
+          location-aware application without revealing their [=precise
+          position=].
+        </dd>
+      </dl>
       <p>
         An approximate location information source is a location information
         source that returns positions that have been intentionally obfuscated
@@ -161,8 +167,8 @@
           position=] or an [=approximate position=] via the
           {{PositionOptions/accuracyMode}} member. During the permission
           request process, the end-user determines the actual level of accuracy
-          to grant, which the user agent then uses to provide the geographic
-          position accordingly.
+          to grant, which the [=user agent=] then uses to provide the
+          geographic position accordingly.
         </p>
         <aside class="example" title="A one-shot position request">
           <pre class="js">
@@ -403,8 +409,8 @@
         position=]. This allows applications to function without needing the
         user's [=precise position=], thus offering a more privacy-preserving
         alternative. When an application requests an [=approximate position=],
-        a supporting user agent MUST provide a less precise location, obscuring
-        the user's [=precise position=]. Even when a [=precise position=] is
+        a supporting [=user agent=], or underlying platform, attempts to
+        provides a less precise location. Even when a [=precise position=] is
         requested, the user agent MAY provide an [=approximate position=]
         instead (as defined in the [=acquire a position=] algorithm), for
         example, if the user has only granted permission for approximate
@@ -425,8 +431,7 @@
           support for [=approximate position=] MUST provide users with the
           option to grant access to either a [=precise position=] or an
           [=approximate position=]. This choice gives users more control over
-          their privacy, allowing them to share a less precise location when
-          they are not comfortable sharing their [=precise position=].
+          their privacy, allowing them to share an [=approximate position=].
         </p>
         <p>
           An end-user will generally give [=express permission=] through a user
@@ -445,7 +450,7 @@
           Although the granularity of the permission [=permission/lifetime=]
           varies across user-agents, this specification urges user agents to
           limit the lifetime to a single browsing session by default (see
-          [[[#permission]]] for normative requirements).
+          [=checking permission=] for normative requirements).
         </p>
       </section>
       <section id="privacy_for_recipients" class="informative">
@@ -613,11 +618,22 @@
           of <a>"geolocation"</a> to [=permission/"denied"=].
           </li>
         </ol>
-        <p class="note" title="Querying 'geolocation-approximate'">
+        <p title="Querying 'geolocation-approximate'">
           When [=query a permission|querying a permission=] via the
-          [[[Permissions]]] API, implementations might mask the returned states
-          of <a>"geolocation"</a> and <a>"geolocation-approximate"</a> in order
-          to hide the user choice from websites.
+          [[[Permissions]]] API, a user agent MAY mask the returned states of
+          <a>"geolocation"</a> and <a>"geolocation-approximate"</a> in order to
+          hide the user choice from websites.
+        </p>
+        <p>
+          When <dfn>checking permission</dfn> to use the API, a user agent MAY
+          suggest time-based [=permission=] [=permission/lifetimes=], such as
+          "24 hours", "1 week", or choose to remember the permission
+          [=permission/grant=] indefinitely. However, it is RECOMMENDED that a
+          user agent prioritize restricting the [=permission=]
+          [=permission/lifetime=] to a single session: This can be, for
+          example, until the [=environment settings object/realm=] is
+          destroyed, the end-user [=navigates=] away from the [=origin=], or
+          the relevant browser tab is closed.
         </p>
       </section>
       <section>
@@ -1085,15 +1101,14 @@
                   underlying system, with the following considerations:
                     <ol>
                       <li>If |effectiveAccuracy| is
-                      {{AccuracyMode/"approximate"}}, the user agent SHOULD
-                      acquire an [=approximate position=] with a level of
-                      accuracy that is sufficient to protect user privacy
-                      (e.g., city-level accuracy). The
+                      {{AccuracyMode/"approximate"}}, acquire an [=approximate
+                      position=] with a level of accuracy that is sufficient to
+                      protect user privacy (e.g., city-level accuracy). The
                       {{PositionOptions/enableHighAccuracy}} member is ignored.
                       </li>
                       <li>If |effectiveAccuracy| is {{AccuracyMode/"precise"}},
-                      the user agent SHOULD acquire a [=precise position=],
-                      optionally taking into consideration the value of
+                      acquire a [=precise position=], optionally taking into
+                      consideration the value of
                       |options|.{{PositionOptions/enableHighAccuracy}}.
                       </li>
                     </ol>
@@ -1105,8 +1120,7 @@
                 <ol>
                   <li>Stop the |timeout|.
                   </li>
-                  <li>Go to <a href="#errors-reasons">dealing with
-                  failures</a>.
+                  <li>[=Deal with failure=].
                   </li>
                   <li>Terminate this algorithm.
                   </li>
@@ -1114,7 +1128,7 @@
               </li>
               <li data-cite="infra">If acquiring the position data from the
               system succeeds:
-                <ol data-cite="infra">
+                <ol>
                   <li>Let |positionData| be a [=map=] with the following
                   name/value pairs based on the acquired position data:
                     <dl data-sort="">
@@ -1203,7 +1217,7 @@
         </ol>
         <dl class="switch">
           <dt id="errors-reasons">
-            Dealing with failures:
+            <dfn>Deal with failure</dfn>:
           </dt>
           <dd>
             <ul>
@@ -1294,17 +1308,13 @@
         </h3>
         <p>
           The <dfn>accuracyMode</dfn> member is used to request a specific
-          level of accuracy. It can be set to {{AccuracyMode/"precise"}} to
-          request the most accurate location data available, or
-          {{AccuracyMode/"approximate"}} to receive a less accurate location
-          that protects user privacy. The default value is
-          {{AccuracyMode/"precise"}}.
+          level of accuracy.
         </p>
         <aside class="note" title="Interaction with enableHighAccuracy">
           <p>
             If {{PositionOptions/accuracyMode}} is set to
-            {{AccuracyMode/"approximate"}}, the `enableHighAccuracy` member has
-            no effect.
+            {{AccuracyMode/"approximate"}}, the [=user agent=] ignores the
+            {{PositionOptions/enableHighAccuracy}} member.
           </p>
         </aside>
       </section>
