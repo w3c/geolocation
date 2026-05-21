@@ -603,21 +603,7 @@
             </tr>
           </tbody>
         </table>
-        <p>
-          To maintain coherence, user agents MUST run the following steps when
-          the [=permission state=] of either <a>"geolocation"</a> or
-          <a>"geolocation-approximate"</a> changes:
-        </p>
-        <ol class="algorithm">
-          <li>If the [=permission state=] of <a>"geolocation"</a> is changed to
-          [=permission/"granted"=], set the [=permission state=] of
-          <a>"geolocation-approximate"</a> to [=permission/"granted"=].
-          </li>
-          <li>If the [=permission state=] of <a>"geolocation-approximate"</a>
-          is changed to [=permission/"denied"=], set the [=permission state=]
-          of <a>"geolocation"</a> to [=permission/"denied"=].
-          </li>
-        </ol>
+        <aside class="issue" data-number="231"></aside>
         <p title="Querying 'geolocation-approximate'">
           When [=query a permission|querying a permission=] via the
           [[[Permissions]]] API, a user agent MAY mask the returned states of
