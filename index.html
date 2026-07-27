@@ -417,7 +417,7 @@
         The {{PositionOptions}}'s {{PositionOptions/accuracyMode}} member allows
         websites to declare that they have no need for the user's [=precise
         position=] and can function with only an [=approximate position=]. When
-        an application requests an [=approximate position=] an [=approximate
+        an application requests an [=approximate position=], an [=approximate
         location information source=] is used. Even when a [=precise position=]
         is requested, the user agent MAY provide an [=approximate position=]
         instead (as defined in the [=acquire a position=] algorithm), for
@@ -555,12 +555,19 @@
         </h3>
         <p>
           The [=approximate location information source=] used by the user agent
-          should take into account that a site, by keeping using the API, can
-          receive multiple [=approximate positions=]. Hence it SHOULD, when
+          should take into account that a site, by repeatedly using the API, can
+          receive multiple [=approximate positions=]. Therefore it SHOULD, when
           returning an [=approximate position=], implement measures that
-          mitigate the risk of a refinement attack, preventing the site to
-          potentially infer a user's [=precise position=] by collecting and
+          mitigate the risk of a refinement attack, preventing the site from
+          potentially inferring a user's [=precise position=] by collecting and
           correlating multiple, distinct [=approximate positions=].
+        </p>
+        <p class="note">
+          The chosen accuracy is per request. A user agent that internally
+          shares one acquired position across concurrent requests coarsens it
+          for each {{AccuracyMode/"approximate"}} request when the position is
+          delivered, so an approximate request never receives a precise
+          position acquired for a concurrent request.
         </p>
       </section>
     </section>
@@ -799,6 +806,7 @@
               <li>Let |permission| be the result of [=prompting the user to
               choose=] from |promptOptions| associated with
               <a>"geolocation"</a>.
+              </li>
               <li data-tests=
               "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
               If |permission| is "denied", then:
@@ -902,6 +910,7 @@
                   position=].
                 </p>
               </aside>
+              </li>
               <li>If |permission| is "denied":
                 <ol>
                   <li>Stop |timeout|.
@@ -934,7 +943,8 @@
                           </li>
                           <li>Let |position| be [=a new `GeolocationPosition`=]
                           passing |emulatedPositionData|, |acquisitionTime| and
-                          |options|.{{PositionOptions/enableHighAccuracy}}.
+                          |options|.{{PositionOptions/enableHighAccuracy}}, and
+                          |permission|.
                           </li>
                           <li>[=Queue a task=] on the [=geolocation task
                           source=] with a step that [=invokes=]
@@ -1194,6 +1204,16 @@
             {{PositionOptions/enableHighAccuracy}} member.
           </p>
         </aside>
+        <aside class="note" title="Granted accuracy is not observable">
+          <p>
+            The granted {{AccuracyMode}} is not exposed to the page:
+            `navigator.permissions.query({name: "geolocation"})` reports the
+            same {{PermissionState}} whether the grant is
+            {{AccuracyMode/"approximate"}} or {{AccuracyMode/"precise"}}, and a
+            delivered {{GeolocationPosition}} carries no attribute indicating
+            which accuracy was granted.
+          </p>
+        </aside>
       </section>
       <section>
         <h3>
@@ -1314,6 +1334,8 @@
               {{PositionOptions/enableHighAccuracy}} member when this
               {{GeolocationPosition}} is [=a new GeolocationPosition|created=].
             </td>
+          </tr>
+          <tr>
             <td>
               <dfn data-dfn-for="GeolocationPosition">[[\accuracyMode]]</dfn>
             </td>
@@ -1423,8 +1445,9 @@
         </h3>
         <p>
           <dfn>A new `GeolocationPosition`</dfn> is constructed with [=map=]
-          |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp| and
-          boolean |isHighAccuracy| by performing the following steps:
+          |positionData|, {{EpochTimeStamp}} |timestamp:EpochTimeStamp|,
+          boolean |isHighAccuracy|, and {{AccuracyMode}} |accuracyMode| by
+          performing the following steps:
         </p>
         <ol class="algorithm">
           <li>Let |coords:GeolocationCoordinates| be a newly created
@@ -1439,8 +1462,10 @@
           <li>Return a newly created {{GeolocationPosition}} instance with its
           {{GeolocationPosition/coords}} attribute initialized to |coords| and
           {{GeolocationPosition/timestamp}} attribute initialized to
-          |timestamp|, and its {{GeolocationPosition/[[isHighAccuracy]]}}
-          internal slot set to |isHighAccuracy|.
+          |timestamp|, its {{GeolocationPosition/[[isHighAccuracy]]}}
+          internal slot set to |isHighAccuracy|, and its
+          {{GeolocationPosition/[[accuracyMode]]}} internal slot set to
+          |accuracyMode|.
           </li>
         </ol>
       </section>
