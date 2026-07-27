@@ -175,7 +175,7 @@
           A website can request a user's location, choosing either a [=precise
           position=] or an [=approximate position=] via the
           {{PositionOptions/accuracyMode}} member. During the [=prompt the user
-          to choose|permission request process, the end-user determines the
+          to choose|permission request process=], the end-user determines the
           actual level of accuracy to grant, which the [=user agent=] then uses
           to provide the geographic position accordingly.
         </p>
@@ -924,6 +924,8 @@
                   </li>
                   <li>Do the <a href="#permission-denied">user or system denied
                   permission</a> failure case step.
+                  </li>
+                  <li>Terminate this algorithm.
                   </li>
                 </ol>
               </li>
