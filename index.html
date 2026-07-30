@@ -803,13 +803,13 @@
               "precise" » if |options| {{PositionOptions/accuracyMode}} is
               {{AccuracyMode/"precise"}}.
               </li>
-              <li>Let |permission| be the result of [=prompting the user to
+              <li>Let |choice| be the result of [=prompting the user to
               choose=] from |promptOptions| associated with
               <a>"geolocation"</a>.
               </li>
               <li data-tests=
               "getCurrentPosition_permission_allow.https.html, getCurrentPosition_permission_deny.https.html">
-              If |permission| is "denied", then:
+              If |choice| is "denied", then:
                 <ol>
                   <li>If |watchId| was passed, [=list/remove=] |watchId| from
                   |watchIDs|.
@@ -897,7 +897,7 @@
               |options| {{PositionOptions/accuracyMode}} is
               {{AccuracyMode/"approximate"}}, or the [=set=] « "approximate",
               "precise" » if |options| {{PositionOptions/accuracyMode}} is
-              {{AccuracyMode/"precise"}}, and let |permission| be the result
+              {{AccuracyMode/"precise"}}, and let |choice| be the result
               of [=prompting the user to choose=] from |promptOptions|
               associated with <a>"geolocation"</a>.
               <aside class="note">
@@ -911,7 +911,7 @@
                 </p>
               </aside>
               </li>
-              <li>If |permission| is "denied":
+              <li>If |choice| is "denied":
                 <ol>
                   <li>Stop |timeout|.
                   </li>
@@ -944,9 +944,9 @@
                             </ol>
                           </li>
                           <li>Let |position| be [=a new `GeolocationPosition`=]
-                          passing |emulatedPositionData|, |acquisitionTime| and
+                          passing |emulatedPositionData|, |acquisitionTime|,
                           |options|.{{PositionOptions/enableHighAccuracy}}, and
-                          |permission|.
+                          |choice|.
                           </li>
                           <li>[=Queue a task=] on the [=geolocation task
                           source=] with a step that [=invokes=]
@@ -971,7 +971,7 @@
                       {{GeolocationPosition/timestamp}}'s value is greater than
                       |cacheTime|,
                       |cachedPosition|.{{GeolocationPosition/[[accuracyMode]]}}
-                      equals |permission|, and either
+                      equals |choice|, and either
                       |cachedPosition|.{{GeolocationPosition/[[accuracyMode]]}}
                       is {{AccuracyMode/"approximate"}} or
                       |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
@@ -991,11 +991,11 @@
                   <li>Try to acquire position data from the underlying system,
                   with the following considerations:
                     <ol>
-                      <li>If |permission| is {{AccuracyMode/"approximate"}},
+                      <li>If |choice| is {{AccuracyMode/"approximate"}},
                       acquire an [=approximate position=]. The
                       {{PositionOptions/enableHighAccuracy}} member is ignored.
                       </li>
-                      <li>If |permission| is {{AccuracyMode/"precise"}},
+                      <li>If |choice| is {{AccuracyMode/"precise"}},
                       acquire a [=precise position=], optionally taking into
                       consideration the value of
                       |options|.{{PositionOptions/enableHighAccuracy}}.
@@ -1088,7 +1088,7 @@
                   <li>Set |position| to [=a new `GeolocationPosition`=] passing
                   |positionData|, |acquisitionTime|,
                   |options|.{{PositionOptions/enableHighAccuracy}}, and
-                  |permission|.
+                  |choice|.
                   </li>
                   <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
                   |position|.
@@ -1452,6 +1452,10 @@
           performing the following steps:
         </p>
         <ol class="algorithm">
+          <li>If |accuracyMode| is {{AccuracyMode/"approximate"}}, set
+          |positionData|["altitude"], |positionData|["altitudeAccuracy"],
+          |positionData|["speed"], and |positionData|["heading"] to null.
+          </li>
           <li>Let |coords:GeolocationCoordinates| be a newly created
           {{GeolocationCoordinates}} instance.
           </li>
