@@ -1051,20 +1051,17 @@
                         "accuracy"
                       </dt>
                       <dd>
-                        A non-negative {{double}} that represents the accuracy
-                        value indicating the 95% confidence level in meters.
-                        Accuracy measures how close the measured coordinates
-                        are to the true position.
+                        A non-negative {{double}} that represents the
+                        horizontal radius of uncertainty in meters, as
+                        reported by the platform.
                       </dd>
                       <dt>
                         "altitudeAccuracy"
                       </dt>
                       <dd>
-                        A non-negative {{double?}} that represents the altitude
-                        accuracy, or `null` if not available, indicating the
-                        95% confidence level in meters. Altitude accuracy
-                        measures how close the measured altitude is to the true
-                        altitude.
+                        A non-negative {{double?}} that represents the
+                        vertical uncertainty interval in meters as reported by
+                        the platform, or `null` if not available.
                       </dd>
                       <dt>
                         "speed"
