@@ -1206,14 +1206,16 @@
             {{PositionOptions/enableHighAccuracy}} member.
           </p>
         </aside>
-        <aside class="note" title="Granted accuracy is not observable">
+        <aside class="note" title=
+        "The permission state does not name the granted accuracy">
           <p>
-            The granted {{AccuracyMode}} is not exposed to the page:
             `navigator.permissions.query({name: "geolocation"})` reports the
             same {{PermissionState}} whether the grant is
             {{AccuracyMode/"approximate"}} or {{AccuracyMode/"precise"}}, and a
-            delivered {{GeolocationPosition}} carries no attribute indicating
-            which accuracy was granted.
+            delivered {{GeolocationPosition}} carries no attribute naming
+            which accuracy was granted. The two are not indistinguishable,
+            however: {{GeolocationCoordinates/accuracy}} reports a larger
+            radius for an [=approximate position=].
           </p>
         </aside>
       </section>
