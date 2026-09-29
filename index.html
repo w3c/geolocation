@@ -1210,9 +1210,11 @@
             same {{PermissionState}} whether the grant is
             {{AccuracyMode/"approximate"}} or {{AccuracyMode/"precise"}}, and a
             delivered {{GeolocationPosition}} carries no attribute naming
-            which accuracy was granted. The two are not indistinguishable,
-            however: {{GeolocationCoordinates/accuracy}} reports a larger
-            radius for an [=approximate position=].
+            which accuracy was granted. Even so, a page can often work out
+            which accuracy the user granted, because an [=approximate position=]
+            usually reports a larger {{GeolocationCoordinates/accuracy}} radius.
+            Nothing guarantees that, because a [=precise position=] can also
+            carry a large radius.
           </p>
         </aside>
       </section>
