@@ -724,8 +724,14 @@
                     change of geographic position is left to the
                     implementation. User agents MAY impose a rate limit on how
                     frequently position changes are reported. User agents MUST
-                    consider invoking [=set emulated position data=] as a
-                    significant change.
+                    consider an invocation of [=set emulated position data=] as
+                    a significant change if |document|'s [=node navigable=] is
+                    not null and the given [=navigable=]'s
+                    [=navigable/top-level traversable=] is the same as
+                    |document|'s [=node navigable=]'s [=navigable/top-level
+                    traversable=]. While [=get emulated position data=] passing
+                    |geolocation| returns a non-null value, nothing other than
+                    such an invocation constitutes a significant change.
                   </li>
                   <li>If |document| is not [=Document/fully active=] or
                   [=Document/visibility state=] is not "visible", go back to
@@ -1403,10 +1409,6 @@
           <ol class="algorithm">
             <li>Set |traversable|'s associated [=emulated position data=] to
             |emulatedPositionData|.
-            </li>
-            <li>User agents MUST consider this as a "significant change" in the
-            <a href="#wait-for-change">wait for a significant change of
-            geographic position</a> step.
             </li>
           </ol>
         </li>
