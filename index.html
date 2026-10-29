@@ -914,9 +914,10 @@
                           </dt>
                           <dd>
                             A non-negative {{double}} that represents the
-                            accuracy value indicating the 95% confidence level
-                            in meters. Accuracy measures how close the measured
-                            coordinates are to the true position.
+                            accuracy value indicating the 68% confidence level
+                            in meters (1 standard deviation). Accuracy measures
+                            how close the measured coordinates are to the true
+                            position.
                           </dd>
                           <dt>
                             "altitudeAccuracy"
@@ -924,9 +925,10 @@
                           <dd>
                             A non-negative {{double?}} that represents the
                             altitude accuracy, or `null` if not available,
-                            indicating the 95% confidence level in meters.
-                            Altitude accuracy measures how close the measured
-                            altitude is to the true altitude.
+                            indicating the 68% confidence level in meters
+                            (1 standard deviation). Altitude accuracy measures
+                            how close the measured altitude is to the true
+                            altitude.
                           </dd>
                           <dt>
                             "speed"
