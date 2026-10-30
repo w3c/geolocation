@@ -856,6 +856,41 @@
                       </li>
                     </ol>
                   </li>
+                  <li>If |cachedPosition| is not null, [=this=]'s
+                  {{Geolocation/[[watchIDs]]}} is not [=list/is empty|empty=],
+                  and
+                  |cachedPosition|.{{GeolocationPosition/[[isHighAccuracy]]}}
+                  equals |options|.{{PositionOptions/enableHighAccuracy}}, the
+                  user agent MAY:
+                    <ol>
+                      <li>Let |position| be a copy of |cachedPosition| with its
+                      {{GeolocationPosition/timestamp}} attribute initialized
+                      to |acquisitionTime|.
+                      </li>
+                      <li>[=Queue a task=] on the [=geolocation task source=]
+                      with a step that [=invokes=] |successCallback| with «
+                      |position| » and "`report`".
+                      </li>
+                      <li>Terminate this algorithm.
+                      </li>
+                    </ol>
+                    <aside class="note" title=
+                    "Reusing a cached position with an active watchPosition">
+                      <p>
+                        When there is an ongoing
+                        {{Geolocation/watchPosition()}}, the user agent may
+                        already be subscribed to the underlying system for
+                        position changes, which might only report updates when
+                        the device moves significantly. Treating
+                        |cachedPosition| as freshly acquired while such a
+                        subscription is active allows new requests to be
+                        satisfied without blocking. To prevent ongoing
+                        {{Geolocation/watchPosition()}} callers from observing
+                        other calls, the timestamp-adjusted position is only
+                        delivered to the new caller.
+                      </p>
+                    </aside>
+                  </li>
                   <li>Otherwise, if |position| is not |cachedPosition|, try to
                   acquire position data from the underlying system, optionally
                   taking into consideration the value of
