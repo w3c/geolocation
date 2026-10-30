@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en" dir="ltr"><head>
 <meta charset="utf-8">
-<meta name="generator" content="ReSpec 35.9.0">
+<meta name="generator" content="ReSpec 37.4.1">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style>
 span.example-title{text-transform:none}
@@ -64,6 +64,7 @@ dfn{cursor:pointer}
 .dfn-panel .marker{padding:.1em;margin-left:.5em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;color:#040b1c}
 .dfn-panel .marker.dfn-exported{background:#d1edfd;box-shadow:0 0 0 .125em #1ca5f940}
 .dfn-panel .marker.idl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
+.dfn-panel .marker.cddl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
 .dfn-panel a:not(:hover){text-decoration:none!important;border-bottom:none!important}
 .dfn-panel a[href]:hover{border-bottom-width:1px}
 .dfn-panel ul{padding:0}
@@ -94,13 +95,17 @@ a.bibref{text-decoration:none}
 .respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
 }
 #references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
+@media (prefers-color-scheme:dark){
+#references :target{background:color-mix(in srgb, #eaf3ff 15%, transparent)}
+}
+body:has(input[name=color-scheme][value=dark]:checked) #references :target{background:color-mix(in srgb, #eaf3ff 15%, transparent)}
 cite .bibref{font-style:italic}
 a[href].orcid{padding-left:4px;padding-right:4px}
 a[href].orcid>svg{margin-bottom:-2px}
 ol.tof,ul.tof{list-style:none outside none}
 .caption{margin-top:.5em;font-style:italic}
 #issue-summary>ul{column-count:2}
-#issue-summary li{list-style:none;display:inline-block}
+#issue-summary li{list-style:none}
 details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}
 details.respec-tests-details>*{padding-right:2em}
 details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}
@@ -110,16 +115,25 @@ details.respec-tests-details>li{padding-left:1em}
 .self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
 aside.example .marker>a.self-link{color:inherit}
 .header-wrapper{display:flex;align-items:baseline}
-:is(h2,h3,h4,h5,h6):not(#toc>h2,#abstract>h2,#sotd>h2,.head>h2){position:relative;left:-.5em}
-:is(h2,h3,h4,h5,h6):not(#toch2)+a.self-link{color:inherit;order:-1;position:relative;left:-1.1em;font-size:1rem;opacity:.5}
-:is(h2,h3,h4,h5,h6)+a.self-link::before{content:"§";text-decoration:none;color:var(--heading-text)}
+:is(h2,h3,h4,h5,h6):not(:where(#toc>h2,#abstract>h2,#sotd>h2,.head>h2)):has(+a.self-link){position:relative;left:-.5em}
+:is(h2,h3,h4,h5,h6):not(:where(#toch2))+a.self-link{color:inherit;order:-1;position:relative;left:-1.1em;font-size:1rem;opacity:.8;text-decoration:none}
+:is(h2,h3,h4,h5,h6)+a.self-link::before{content:"§"}
 :is(h2,h3)+a.self-link{top:-.2em}
-:is(h4,h5,h6)+a.self-link::before{color:#000}
+:is(h2,h3)+a.self-link::before{color:var(--heading-text)}
 @media (max-width:767px){
 dd{margin-left:0}
 }
 @media print{
 .removeOnSave{display:none}
+}
+body:has(input[name=color-scheme][value=light]:checked),head:not(:has(meta[name=color-scheme][content~=dark]))+body{color-scheme:light}
+body:has(input[name=color-scheme][value=dark]:checked){color-scheme:dark}
+</style>
+<style>
+:root{--assertion-border:#aaa;--assertion-bg:#eee;--assertion-text:black}
+.assert{border-left:.5em solid #aaa;padding:.3em;border-color:#aaa;border-color:var(--assertion-border);background:#eee;background:var(--assertion-bg);color:#000;color:var(--assertion-text)}
+@media (prefers-color-scheme:dark){
+:root{--assertion-border:#444;--assertion-bg:var(--borderedblock-bg);--assertion-text:var(--text)}
 }
 </style>
 <style>
@@ -159,13 +173,40 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="ae006b3fabba62b63c4a5f33d4f6f9f3fc85be62">
+<meta name="revision" content="fceec2a49ea28bc46702f18d151e9b3962bcf66e">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
-.hljs{--base:#fafafa;--mono-1:#383a42;--mono-2:#686b77;--mono-3:#717277;--hue-1:#0b76c5;--hue-2:#336ae3;--hue-3:#a626a4;--hue-4:#42803c;--hue-5:#ca4706;--hue-5-2:#c91243;--hue-6:#986801;--hue-6-2:#9a6a01}
+.hljs,body:has(input[name=color-scheme][value=light]:checked) .hljs,head:not(:has(meta[name=color-scheme][content~=dark]))+body .hljs{--base:#fafafa;--mono-1:#383a42;--mono-2:#686b77;--mono-3:#717277;--hue-1:#0b76c5;--hue-2:#336ae3;--hue-3:#a626a4;--hue-4:#42803c;--hue-5:#ca4706;--hue-5-2:#c91243;--hue-6:#986801;--hue-6-2:#9a6a01}
 @media (prefers-color-scheme:dark){
-.hljs{--base:#282c34;--mono-1:#abb2bf;--mono-2:#818896;--mono-3:#5c6370;--hue-1:#56b6c2;--hue-2:#61aeee;--hue-3:#c678dd;--hue-4:#98c379;--hue-5:#e06c75;--hue-5-2:#be5046;--hue-6:#d19a66;--hue-6-2:#e6c07b}
+.hljs{
+  --base: #282c34;
+  --mono-1: #abb2bf;
+  --mono-2: #818896;
+  --mono-3: #5c6370;
+  --hue-1: #56b6c2;
+  --hue-2: #61aeee;
+  --hue-3: #c678dd;
+  --hue-4: #98c379;
+  --hue-5: #e06c75;
+  --hue-5-2: #be5046;
+  --hue-6: #d19a66;
+  --hue-6-2: #e6c07b;
+}
+}
+body:has(input[name=color-scheme][value=dark]:checked) .hljs{
+  --base: #282c34;
+  --mono-1: #abb2bf;
+  --mono-2: #818896;
+  --mono-3: #5c6370;
+  --hue-1: #56b6c2;
+  --hue-2: #61aeee;
+  --hue-3: #c678dd;
+  --hue-4: #98c379;
+  --hue-5: #e06c75;
+  --hue-5-2: #be5046;
+  --hue-6: #d19a66;
+  --hue-6-2: #e6c07b;
 }
 .hljs{display:block;overflow-x:auto;padding:.5em;color:#383a42;color:var(--mono-1,#383a42);background:#fafafa;background:var(--base,#fafafa)}
 .hljs-comment,.hljs-quote{color:#717277;color:var(--mono-3,#717277);font-style:italic}
@@ -198,18 +239,11 @@ var.respec-hl{background:0 0;color:#000;box-shadow:unset}
 }
 </style>
 <style>
-var{position:relative;cursor:pointer}
+var[data-type]{position:relative}
 var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}
 var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#222}
 var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#222;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}
 var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
-</style>
-<style>
-:root{--assertion-border:#aaa;--assertion-bg:#eee;--assertion-text:black}
-.assert{border-left:.5em solid #aaa;padding:.3em;border-color:#aaa;border-color:var(--assertion-border);background:#eee;background:var(--assertion-bg);color:#000;color:var(--assertion-text)}
-@media (prefers-color-scheme:dark){
-:root{--assertion-border:#444;--assertion-bg:var(--borderedblock-bg);--assertion-text:var(--text)}
-}
 </style>
 <script id="initialUserConfig" type="application/json">{
   "shortName": "geolocation",
@@ -249,47 +283,49 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "ae006b3fabba62b63c4a5f33d4f6f9f3fc85be62",
-  "publishISODate": "2026-04-07T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 07 April 2026"
+  "gitRevision": "fceec2a49ea28bc46702f18d151e9b3962bcf66e",
+  "publishISODate": "2026-10-30T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 30 October 2026"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
-<link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://www.w3.org/StyleSheets/TR/2021/dark.css"></head>
+<link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)"></head>
   <body data-cite="WEBIDL secure-contexts permissions-policy permissions hr-time html HTML INFRA URL WEBIDL DOM FETCH" class="h-entry"><div class="head">
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2026-04-07">07 April 2026</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2026-10-30">30 October 2026</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
         <dt>This version:</dt><dd>
-                <a class="u-url" href="https://w3c.github.io/geolocation/">https://w3c.github.io/geolocation/</a>
-              </dd>
+                  <a class="u-url" href="https://w3c.github.io/geolocation/">https://w3c.github.io/geolocation/</a>
+                </dd>
         <dt>Latest published version:</dt><dd>
-                <a href="https://www.w3.org/TR/geolocation/">https://www.w3.org/TR/geolocation/</a>
-              </dd>
+                  <a href="https://www.w3.org/TR/geolocation/">https://www.w3.org/TR/geolocation/</a>
+                </dd>
         <dt>Latest editor's draft:</dt><dd><a href="https://w3c.github.io/geolocation/">https://w3c.github.io/geolocation/</a></dd>
         <dt>History:</dt><dd>
-                    <a href="https://www.w3.org/standards/history/geolocation/">https://www.w3.org/standards/history/geolocation/</a>
-                  </dd><dd>
-                    <a href="https://github.com/w3c/geolocation/commits/">Commit history</a>
-                  </dd>
+                        <a href="https://www.w3.org/standards/history/geolocation/">https://www.w3.org/standards/history/geolocation/</a>
+                      </dd><dd>
+                        <a href="https://github.com/w3c/geolocation/commits/">Commit history</a>
+                      </dd>
         <dt>Test suite:</dt><dd><a href="https://wpt.live/geolocation/">https://wpt.live/geolocation/</a></dd>
         <dt>Implementation report:</dt><dd>
-                <a href="https://w3c.github.io/geolocation/reports/implementation.html">https://w3c.github.io/geolocation/reports/implementation.html</a>
-              </dd>
+                  <a href="https://w3c.github.io/geolocation/reports/implementation.html">https://w3c.github.io/geolocation/reports/implementation.html</a>
+                </dd>
         
         
         
-        <dt>Editors:</dt><dd class="editor p-author h-card vcard" data-editor-id="39125">
+        <dt>
+                  Editors:
+                </dt><dd class="editor p-author h-card vcard" data-editor-id="39125">
     <span class="p-name fn">Marcos Cáceres</span> (<a class="p-org org h-org" href="https://apple.com">Apple Inc.</a>)
   </dd><dd class="editor p-author h-card vcard" data-editor-id="83788">
     <span class="p-name fn">Reilly Grant</span> (<a class="p-org org h-org" href="https://google.com">Google</a>)
   </dd>
         <dt>
-                Former editor:
-              </dt><dd class="editor p-author h-card vcard">
+                  Former editor:
+                </dt><dd class="editor p-author h-card vcard">
     <span class="p-name fn">Andrei Popescu</span> (<a class="p-org org h-org" href="https://google.com/">Google Inc.</a>)
   </dd>
         
@@ -337,8 +373,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p>
     This document was published by the <a href="https://www.w3.org/groups/wg/das">Devices and Sensors Working Group</a> and the <a href="https://www.w3.org/groups/wg/webapps">Web Applications Working Group</a> as
     an Editor's Draft. 
-  </p><p>Publication as an Editor's Draft does not
-  imply endorsement by <abbr title="World Wide Web Consortium">W3C</abbr> and its Members. </p><p>
+  </p><p>Publication as
+  an Editor's Draft does not imply endorsement
+  by <abbr title="World Wide Web Consortium">W3C</abbr> and its Members. </p><p>
     This is a draft document and may be updated, replaced, or obsoleted by other
     documents at any time. It is inappropriate to cite this document as other
     than a work in progress.
@@ -353,18 +390,18 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
      <abbr title="World Wide Web Consortium">W3C</abbr> maintains a
         <a rel="disclosure" href="https://www.w3.org/groups/wg/das/ipr">public list of any patent disclosures (Devices and Sensors Working Group)</a> and a
         <a rel="disclosure" href="https://www.w3.org/groups/wg/webapps/ipr">public list of any patent disclosures (Web Applications Working Group)</a>
-          made in connection with the deliverables of
-          each group; these pages also include
-          instructions for disclosing a patent. An individual who has actual
-          knowledge of a patent that the individual believes contains
-          <a href="https://www.w3.org/policies/patent-policy/#def-essential">Essential Claim(s)</a>
-          must disclose the information in accordance with
-          <a href="https://www.w3.org/policies/patent-policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
-        
+            made in connection with the deliverables of
+            each group; these pages also include
+            instructions for disclosing a patent. An individual who has actual
+            knowledge of a patent that the individual believes contains
+            <a href="https://www.w3.org/policies/patent-policy/#def-essential">Essential Claim(s)</a>
+            must disclose the information in accordance with
+            <a href="https://www.w3.org/policies/patent-policy/#sec-Disclosure">section 6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+          
   </p><p>
-                      This document is governed by the
-                      <a id="w3c_process_revision" href="https://www.w3.org/policies/process/20250818/">18 August 2025 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
-                    </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>
+                          This document is governed by the
+                          <a id="w3c_process_revision" href="https://www.w3.org/policies/process/20250818/">18 August 2025 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+                        </p></section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Abstract</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status of This Document</a></li><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>
         Introduction
       </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#scope"><bdi class="secno">1.1 </bdi>
           Scope
@@ -786,7 +823,7 @@ navigator.<span class="hljs-property">geolocation</span>.<span class="hljs-title
           Privacy considerations for recipients of location information
         </h3><a class="self-link" href="#privacy_for_recipients" aria-label="Permalink for Section 3.2"></a></div><p><em>This section is non-normative.</em></p>
         
-        <div class="note" role="note" id="issue-container-generatedID"><div role="heading" class="note-title marker" id="h-note" aria-level="4"><span>Note</span><span class="issue-label">: Developers' responsibility with this sensitive data</span></div><p class="">
+        <div class="note" role="note" id="issue-container-generatedID"><div class="note-title marker" id="h-note"><span>Note</span><span class="issue-label">: Developers' responsibility with this sensitive data</span></div><p class="">
           This section applies to "recipients", which generally means
           developers utilizing <cite>Geolocation</cite>. Although it's
           impossible for the user agent, or this specification, to enforce
@@ -844,7 +881,7 @@ navigator.<span class="hljs-property">geolocation</span>.<span class="hljs-title
         </p>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span title="This feature has limited support.">🚫</span></summary>
+    <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span role="img" aria-label="This feature has limited support.">🚫</span></summary>
     <a title="The HTTP Permissions-Policy header geolocation directive controls whether the current document is allowed to use the Geolocation Interface." href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy/geolocation">Headers/Feature-Policy/geolocation</a>
     <p class="engines-some">This feature has limited support.</p>
     <table>
@@ -892,10 +929,10 @@ navigator.<span class="hljs-property">geolocation</span>.<span class="hljs-title
         
         <p>
           <cite>Geolocation</cite> is a <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-default-powerful-feature" id="ref-for-index-term-default-powerful-feature-1">default powerful feature</a> identified
-          by the <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-name" id="ref-for-index-term-name-for-powerful-feature-1">name</a> <code><dfn class="permission" data-dfn-type="permission" id="dfn-geolocation" tabindex="0" aria-haspopup="dialog" data-export="">"geolocation"</dfn></code>.
+          by the <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-name" id="ref-for-index-term-name-for-powerful-feature-1">name</a> <code><dfn class="permission" data-dfn-type="permission" data-noexport="" id="dfn-geolocation" tabindex="0" aria-haspopup="dialog">"geolocation"</dfn></code>.
         </p>
         <p>
-          When <dfn data-local-lt="check permission" id="dfn-checking-permission" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">checking permission</dfn>
+          When <dfn data-local-lt="check permission" data-noexport="" id="dfn-checking-permission" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">checking permission</dfn>
           to use the API, a user agent <em class="rfc2119">MAY</em> suggest time-based <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-permission" id="ref-for-index-term-permission-1">permission</a>
           <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-lifetime" id="ref-for-index-term-lifetimes-for-permission-5">lifetimes</a>, such as "24 hours", "1 week", or choose to
           remember the permission <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-granted-for-permission-2">grant</a> indefinitely. However,
@@ -926,7 +963,7 @@ navigator.<span class="hljs-property">geolocation</span>.<span class="hljs-title
   [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-1">SameObject</a></span>] readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-1"><code>Geolocation</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-navigator-geolocation" id="ref-for-dom-navigator-geolocation-1"><code>geolocation</code></a>;</span>
 };</span></code></pre>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The Navigator.geolocation read-only property returns a Geolocation object that gives Web content access to the location of the device. This allows a website or app to offer customized results based on the user's location." href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/geolocation">Navigator/geolocation</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -977,7 +1014,7 @@ navigator.<span class="hljs-property">geolocation</span>.<span class="hljs-title
       </p>
     </section></section>
     <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for Geolocation"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for Geolocation"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The Geolocation interface represents an object able to obtain the position of the device programmatically. It gives Web content access to the location of the device. This allows a website or app to offer customized results based on the user's location." href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation">Geolocation</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -1087,7 +1124,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
         </tbody></table>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for getCurrentPosition"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for getCurrentPosition"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The Geolocation.getCurrentPosition() method is used to get the current position of the device." href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition">Geolocation/getCurrentPosition</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -1154,7 +1191,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
         </ol>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for watchPosition"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for watchPosition"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The Geolocation method watchPosition() method is used to register a handler function that will be called automatically each time the position of the device changes. You can also, optionally, specify an error handling callback function." href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/watchPosition">Geolocation/watchPosition</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -1229,7 +1266,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
         </ol>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for clearWatch"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for clearWatch"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The Geolocation.clearWatch() method is used to unregister location/error monitoring handlers previously installed using Geolocation.watchPosition()." href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/clearWatch">Geolocation/clearWatch</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -1331,7 +1368,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           "hidden", wait for the following <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#page-visibility-change-steps" id="ref-for-index-term-page-visibility-change-steps-1">page visibility change steps</a> to
           run:
             <ol>
-              <li class="assert"><a href="https://infra.spec.whatwg.org/#assert">Assert</a>: <var data-type="Document">document</var>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="ref-for-index-term-visibility-state-for-document-2">visibility state</a> is
+              <li class="assert"><a href="https://infra.spec.whatwg.org/#assert" id="ref-for-index-term-assert-1">Assert</a>: <var data-type="Document">document</var>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="ref-for-index-term-visibility-state-for-document-2">visibility state</a> is
               "visible".
               </li>
               <li>Continue to the next steps below.
@@ -1379,7 +1416,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                   <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="ref-for-index-term-visibility-state-for-document-3">visibility state</a> is not "visible", go back to
                   the previous step and again <a href="#wait-for-change">wait
                   for a significant change of geographic position</a>.
-                    <div class="note" role="note" id="issue-container-generatedID-0"><div role="heading" class="note-title marker" id="h-note-0" aria-level="4"><span>Note</span><span class="issue-label">: Position updates are exclusively for fully-active visible documents</span></div><aside class="">
+                    <div class="note" role="note" id="issue-container-generatedID-0"><div class="note-title marker" id="h-note-0"><span>Note</span><span class="issue-label">: Position updates are exclusively for fully-active visible documents</span></div><aside class="">
                       <p>
                         The desired effect here being that position updates are
                         exclusively delivered to fully active documents that
@@ -1537,8 +1574,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                           <dd>
                             A <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-2"><code>double?</code></a> that represents the altitude in
                             meters above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] ellipsoid, or <code>null</code> if
-                            not available. Altitude measures the height above
-                            sea level.
+                            not available.
                           </dd>
                           <dt>
                             "altitudeAccuracy"
@@ -1624,7 +1660,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                           <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-7">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
                           <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-4"><code>PERMISSION_DENIED</code></a>.
                         </p>
-                        <div class="note" role="note" id="issue-container-generatedID-1"><div role="heading" class="note-title marker" id="h-note-1" aria-level="4"><span>Note</span><span class="issue-label">: Browser permission VS OS permission</span></div><aside class="">
+                        <div class="note" role="note" id="issue-container-generatedID-1"><div class="note-title marker" id="h-note-1"><span>Note</span><span class="issue-label">: Browser permission VS OS permission</span></div><aside class="">
                           <p>
                             On certain platforms, there can be a circumstance
                             where the user has <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-granted-for-permission-3">granted</a> the user
@@ -1700,7 +1736,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           geolocation providers that consume a significant amount of power
           (e.g., GPS).
         </p>
-        <div class="note" role="note" id="issue-container-generatedID-2"><div role="heading" class="note-title marker" id="h-note-2" aria-level="4"><span>Note</span><span class="issue-label">: A word of warning about enableHighAccuracy</span></div><aside class="">
+        <div class="note" role="note" id="issue-container-generatedID-2"><div class="note-title marker" id="h-note-2"><span>Note</span><span class="issue-label">: A word of warning about enableHighAccuracy</span></div><aside class="">
           <p>
             The <code>enableHighAccuracy</code> member can result in slower response times
             or increased power consumption. The user might also disable this
@@ -1717,14 +1753,14 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           The <dfn data-export="" data-dfn-type="dict-member" id="dom-positionoptions-timeout" data-idl="field" data-title="timeout" data-dfn-for="PositionOptions" data-type="unsigned long" tabindex="0" aria-haspopup="dialog"><code>timeout</code></dfn> member denotes the maximum length of time,
           expressed in milliseconds, before <a data-link-type="dfn|abstract-op" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-5">acquiring a position</a> expires.
         </p>
-        <div class="note" role="note" id="issue-container-generatedID-3"><div role="heading" class="note-title marker" id="h-note-3" aria-level="4"><span>Note</span><span class="issue-label">: When is the timeout calculated?</span></div><p class="">
+        <div class="note" role="note" id="issue-container-generatedID-3"><div class="note-title marker" id="h-note-3"><span>Note</span><span class="issue-label">: When is the timeout calculated?</span></div><p class="">
           The time spent waiting for the document to become visible and for
           <a data-link-type="dfn|abstract-op" data-lt="check permission" href="#dfn-checking-permission" class="internalDFN" id="ref-for-dfn-checking-permission-3">obtaining permission to use the API</a> is not
           included in the period covered by the <a data-link-type="idl" href="#dom-positionoptions-timeout" class="internalDFN" id="ref-for-dom-positionoptions-timeout-4"><code>timeout</code></a>
           member. The <a data-link-type="idl" href="#dom-positionoptions-timeout" class="internalDFN" id="ref-for-dom-positionoptions-timeout-5"><code>timeout</code></a> member only applies when
           <a data-link-type="dfn|abstract-op" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-6">acquiring a position</a> begins.
         </p></div>
-        <div class="note" role="note" id="issue-container-generatedID-4"><div role="heading" class="note-title marker" id="h-note-4" aria-level="4"><span>Note</span><span class="issue-label">: Immediate cancellation</span></div><aside class="">
+        <div class="note" role="note" id="issue-container-generatedID-4"><div class="note-title marker" id="h-note-4"><span>Note</span><span class="issue-label">: Immediate cancellation</span></div><aside class="">
           <p>
             An <var>options</var>.<a data-link-type="idl" href="#dom-positionoptions-timeout" class="internalDFN" id="ref-for-dom-positionoptions-timeout-6"><code>timeout</code></a> value 0 can cause
             immediate failures.
@@ -1743,7 +1779,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
       </section>
     </section>
     <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for GeolocationPosition"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for GeolocationPosition"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationPosition interface represents the position of the concerned device at a given time. The position, represented by a GeolocationCoordinates object, comprehends the 2D position of the device, on a spheroid representing the Earth, but also its altitude and its speed." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition">GeolocationPosition</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -1796,7 +1832,7 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
   [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Default" id="ref-for-index-term-default-extended-attribute-1">Default</a></span>]<span class="idlType"> <a data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-object" id="ref-for-index-term-object-type-1">object</a></span> <a class="internalDFN idlName" data-link-type="method" href="#dom-geolocationposition-tojson" id="ref-for-dom-geolocationposition-tojson-1"><code>toJSON</code></a>();</span>
 };</span></code></pre>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for coords"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for coords"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationPosition.coords read-only property returns a GeolocationCoordinates object representing a geographic position. It contains the location, that is longitude and latitude on the Earth, the altitude, and the speed of the object concerned, regrouped inside the returned value. It also contains accuracy information about these values." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition/coords">GeolocationPosition/coords</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -1847,7 +1883,7 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
         </p>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for timestamp"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for timestamp"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationPosition.timestamp read-only property represents the date and time that the position was acquired by the device." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition/timestamp">GeolocationPosition/timestamp</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -1956,7 +1992,7 @@ interface <dfn data-export="" data-dfn-type="interface" id="dom-geolocationposit
       </section>
     </section>
     <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for GeolocationCoordinates"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for GeolocationCoordinates"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationCoordinates interface represents the position and altitude of the device on Earth, as well as the accuracy with which these properties are calculated." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates">GeolocationCoordinates</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2014,7 +2050,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Default" id="ref-for-index-term-default-extended-attribute-2">Default</a></span>]<span class="idlType"> <a data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-object" id="ref-for-index-term-object-type-2">object</a></span> <a class="internalDFN idlName" data-link-type="method" href="#dom-geolocationcoordinates-tojson" id="ref-for-dom-geolocationcoordinates-tojson-1"><code>toJSON</code></a>();</span>
 };</span></code></pre>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for accuracy"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for accuracy"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationCoordinates.accuracy read-only property is a strictly positive double representing the accuracy, with a 95% confidence level, of the GeolocationCoordinates.latitude and GeolocationCoordinates.longitude properties expressed in meters." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates/accuracy">GeolocationCoordinates/accuracy</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2057,7 +2093,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr>
   </table>
   </details><details>
-    <summary aria-label="Expand MDN details for latitude"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for latitude"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationCoordinates.latitude read-only property is a double representing the latitude of the position in decimal degrees." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates/latitude">GeolocationCoordinates/latitude</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2100,7 +2136,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr>
   </table>
   </details><details>
-    <summary aria-label="Expand MDN details for longitude"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for longitude"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationCoordinates interface's read-only longitude property is a number which represents the longitude of a geographical position, specified in decimal degrees. Together with a timestamp, given as Unix time in milliseconds, indicating a time of measurement, the GeolocationCoordinates object is part of the GeolocationPosition interface, which is the object type returned by Geolocation API functions that obtain and return a geographical position." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates/longitude">GeolocationCoordinates/longitude</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2157,7 +2193,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         </p>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for altitude"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for altitude"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationCoordinates.altitude read-only property is a double representing the altitude of the position in meters above the WGS84 ellipsoid (which defines the nominal sea level surface). This value is null if the implementation cannot provide this data." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates/altitude">GeolocationCoordinates/altitude</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2200,7 +2236,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </tr>
   </table>
   </details><details>
-    <summary aria-label="Expand MDN details for altitudeAccuracy"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for altitudeAccuracy"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationCoordinates.altitudeAccuracy read-only property is a strictly positive double representing the accuracy, with a 95% confidence level, of the altitude expressed in meters. This value is null if the implementation doesn't support measuring altitude." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates/altitudeAccuracy">GeolocationCoordinates/altitudeAccuracy</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2256,7 +2292,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         </p>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for heading"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for heading"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationCoordinates.heading read-only property is a double representing the direction in which the device is traveling. This value, specified in degrees, indicates how far off from heading due north the device is. 0 degrees represents true north, and the direction is determined clockwise (which means that east is 90 degrees and west is 270 degrees). If GeolocationCoordinates.speed is 0, heading is NaN. If the device is not able to provide heading information, this value is null." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates/heading">GeolocationCoordinates/heading</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2309,7 +2345,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         </p>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for speed"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for speed"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationCoordinates.speed read-only property is a double representing the velocity of the device in meters per second. This value is null if the implementation is not able to measure it." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationCoordinates/speed">GeolocationCoordinates/speed</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2399,7 +2435,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </section>
     </section>
     <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for GeolocationPositionError"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for GeolocationPositionError"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationPositionError interface represents the reason of an error occurring when using the geolocating device." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError">GeolocationPositionError</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2482,7 +2518,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         </dl>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for code"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for code"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationPositionError.code read-only property is an unsigned short representing the error code." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError/code">GeolocationPositionError/code</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2535,7 +2571,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         </p>
       </section>
       <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for message"><span>MDN</span><span title="This feature is in all major engines.">✅</span></summary>
+    <summary aria-label="Expand MDN details for message"><span>MDN</span><span role="img" aria-label="This feature is in all major engines.">✅</span></summary>
     <a title="The GeolocationPositionError.message read-only property returns a human-readable string describing the details of the error." href="https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPositionError/message">GeolocationPositionError/message</a>
     <p class="engines-all">This feature is in all major engines.</p>
     <table>
@@ -2585,7 +2621,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           The <dfn data-export="" data-dfn-type="attribute" id="dom-geolocationpositionerror-message" data-idl="attribute" data-title="message" data-dfn-for="GeolocationPositionError" data-type="DOMString" data-lt="message" data-local-lt="GeolocationPositionError.message" tabindex="0" aria-haspopup="dialog"><code>message</code></dfn> attribute is a developer-friendly textual
           description of the <a data-link-type="idl" href="#dom-geolocationpositionerror-code" class="internalDFN" id="ref-for-dom-geolocationpositionerror-code-4"><code>code</code></a> attribute.
         </p>
-        <div class="note" role="note" id="issue-container-generatedID-5"><div role="heading" class="note-title marker" id="h-note-5" aria-level="4"><span>Note</span><span class="issue-label">: Don't show .message to users!</span></div><aside class="">
+        <div class="note" role="note" id="issue-container-generatedID-5"><div class="note-title marker" id="h-note-5"><span>Note</span><span class="issue-label">: Don't show .message to users!</span></div><aside class="">
           <p>
             The purpose of <a data-link-type="idl" data-lt="GeolocationPositionError" href="#dom-geolocationpositionerror" class="internalDFN" id="ref-for-dom-geolocationpositionerror-7"><code>GeolocationPositionError</code></a>'s
             <a data-link-type="idl" href="#dom-geolocationpositionerror-message" class="internalDFN" id="ref-for-dom-geolocationpositionerror-message-2"><code>message</code></a> attribute is to assist
@@ -2599,7 +2635,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </section>
     </section>
     <aside class="mdn"><details>
-    <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span title="This feature has limited support.">🚫</span></summary>
+    <summary aria-label="Expand MDN details for geolocation"><span>MDN</span><span role="img" aria-label="This feature has limited support.">🚫</span></summary>
     <a title="The HTTP Permissions-Policy header geolocation directive controls whether the current document is allowed to use the Geolocation Interface." href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy/geolocation">Headers/Permissions-Policy/geolocation</a>
     <p class="engines-some">This feature has limited support.</p>
     <table>
@@ -2934,6 +2970,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
           <li>
     <span class="index-term" data-href="https://infra.spec.whatwg.org/#list-append" id="index-term-append-for-list" tabindex="0" aria-haspopup="dialog">Append (for <code>list</code>)</span>
   </li><li>
+    <span class="index-term" data-href="https://infra.spec.whatwg.org/#assert" id="index-term-assert" tabindex="0" aria-haspopup="dialog">Assert</span>
+  </li><li>
     <span class="index-term" data-href="https://infra.spec.whatwg.org/#list-contain" id="index-term-contains-for-list" tabindex="0" aria-haspopup="dialog">contains (for <code>list</code>)</span>
   </li><li>
     <span class="index-term" data-href="https://infra.spec.whatwg.org/#map-iterate" id="index-term-for-each-for-map" tabindex="0" aria-haspopup="dialog">For each (for <code>map</code>)</span>
@@ -3054,7 +3092,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         Since publication as a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation in 2022,
         <cite>Geolocation</cite> has received the following normative changes:
       </p><rs-changelog from="REC" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation/commit/229574b">Add missing latitude definition</a> (<a href="https://github.com/w3c/geolocation/pull/208">#208</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li>
+      <li><a href="https://github.com/w3c/geolocation/commit/229574b">Add missing latitude definition</a> (<a href="https://github.com/w3c/geolocation/pull/208">#208</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/fceec2a">Remove outdated reference to sea level</a> (<a href="https://github.com/w3c/geolocation/pull/238">#238</a>)</li>
       </ul></rs-changelog>
       <p>
         Since First Public Working Draft in 2021, until it was published as a
@@ -3066,6 +3104,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-geolocation" aria-label="Permalink for definition: &quot;geolocation&quot;. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3082,6 +3121,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-checking-permission" aria-label="Permalink for definition: checking permission. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3098,6 +3138,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-navigator-geolocation" aria-label="Permalink for definition: geolocation. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1776506972">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3112,6 +3153,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocation" aria-label="Permalink for definition: Geolocation. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> 
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3132,6 +3174,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-positioncallback" aria-label="Permalink for definition: PositionCallback. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> 
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3152,6 +3195,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-positionerrorcallback" aria-label="Permalink for definition: PositionErrorCallback. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> 
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3174,6 +3218,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-cachedposition" aria-label="Permalink for definition: [[cachedPosition]]. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3188,6 +3233,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-watchids" aria-label="Permalink for definition: [[watchIDs]]. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3206,6 +3252,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocation-getcurrentposition" aria-label="Permalink for definition: getCurrentPosition. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-212590439">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3226,6 +3273,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocation-watchposition" aria-label="Permalink for definition: watchPosition. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-212590439">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3246,6 +3294,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocation-clearwatch" aria-label="Permalink for definition: clearWatch(). Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-212590439">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3262,6 +3311,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-request-a-position" aria-label="Permalink for definition: request a position. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3282,6 +3332,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-acquire-a-position" aria-label="Permalink for definition: acquire a position. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3304,6 +3355,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-call-back-with-error" aria-label="Permalink for definition: call back with error. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3324,6 +3376,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-positionoptions" aria-label="Permalink for definition: PositionOptions. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1341144555">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3348,6 +3401,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-positionoptions-enablehighaccuracy" aria-label="Permalink for definition: enableHighAccuracy. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1341144555">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3368,6 +3422,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-positionoptions-timeout" aria-label="Permalink for definition: timeout. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1341144555">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3390,6 +3445,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-positionoptions-maximumage" aria-label="Permalink for definition: maximumAge. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1341144555">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3408,6 +3464,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationposition" aria-label="Permalink for definition: GeolocationPosition. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> 
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3432,6 +3489,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationposition-coords" aria-label="Permalink for definition: coords. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-876485373">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3448,6 +3506,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationposition-timestamp" aria-label="Permalink for definition: timestamp. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-876485373">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3466,6 +3525,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationposition-tojson" aria-label="Permalink for definition: toJSON(). Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-876485373">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3480,6 +3540,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-ishighaccuracy" aria-label="Permalink for definition: [[isHighAccuracy]]. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3494,6 +3555,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-geolocation-task-source" aria-label="Permalink for definition: geolocation task source. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3508,6 +3570,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationcoordinates" aria-label="Permalink for definition: GeolocationCoordinates. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3530,6 +3593,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationcoordinates-latitude" aria-label="Permalink for definition: latitude. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3544,6 +3608,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationcoordinates-longitude" aria-label="Permalink for definition: longitude. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3558,6 +3623,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationcoordinates-accuracy" aria-label="Permalink for definition: accuracy. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3572,6 +3638,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationcoordinates-altitude" aria-label="Permalink for definition: altitude. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3586,6 +3653,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationcoordinates-altitudeaccuracy" aria-label="Permalink for definition: altitudeAccuracy. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3600,6 +3668,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationcoordinates-heading" aria-label="Permalink for definition: heading. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3614,6 +3683,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationcoordinates-speed" aria-label="Permalink for definition: speed. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3628,6 +3698,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationcoordinates-tojson" aria-label="Permalink for definition: toJSON(). Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-412902343">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3642,6 +3713,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-a-new-geolocationposition" aria-label="Permalink for definition: A new GeolocationPosition. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3656,6 +3728,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationpositionerror" aria-label="Permalink for definition: GeolocationPositionError. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1281871320">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3684,6 +3757,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationpositionerror-permission_denied" aria-label="Permalink for definition: PERMISSION_DENIED. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1281871320">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3702,6 +3776,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationpositionerror-position_unavailable" aria-label="Permalink for definition: POSITION_UNAVAILABLE. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1281871320">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3722,6 +3797,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationpositionerror-timeout" aria-label="Permalink for definition: TIMEOUT. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1281871320">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3738,6 +3814,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationpositionerror-code" aria-label="Permalink for definition: code. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1281871320">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3758,6 +3835,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dom-geolocationpositionerror-message" aria-label="Permalink for definition: message. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> <a class="marker idl-block" title="Jump to IDL declaration" href="#webidl-1281871320">IDL</a>
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3774,6 +3852,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-emulated-position-data" aria-label="Permalink for definition: emulated position data. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3786,6 +3865,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-set-emulated-position-data" aria-label="Permalink for definition: set emulated position data. Activate to close this dialog.">Permalink</a>
         <span class="marker dfn-exported" title="Definition can be referenced by other specifications">exported</span> 
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3798,6 +3878,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="#dfn-get-emulated-position-data" aria-label="Permalink for definition: get emulated position data. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3810,6 +3891,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/hr-time-3/#typedefdef-epochtimestamp" aria-label="Permalink for definition: EpochTimeStamp. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3828,6 +3910,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-allow" aria-label="Permalink for definition: allow attribute (for iframe element). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3840,6 +3923,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#allowed-to-use" aria-label="Permalink for definition: allowed to use. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3852,6 +3936,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" aria-label="Permalink for definition: associated Document. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3870,6 +3955,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object" aria-label="Permalink for definition: environment settings object. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3882,6 +3968,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" aria-label="Permalink for definition: fully active (for Document). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3898,6 +3985,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element" aria-label="Permalink for definition: iframe element. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3912,6 +4000,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/infrastructure.html#in-parallel" aria-label="Permalink for definition: In parallel. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3924,6 +4013,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/document-sequences.html#navigable" aria-label="Permalink for definition: navigable. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3936,6 +4026,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/browsing-the-web.html#navigate" aria-label="Permalink for definition: navigates. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3948,6 +4039,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator" aria-label="Permalink for definition: Navigator interface. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3962,6 +4054,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/document-sequences.html#node-navigable" aria-label="Permalink for definition: node navigable. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3974,6 +4067,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#non-secure-context" aria-label="Permalink for definition: non-secure context. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -3988,6 +4082,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/browsers.html#concept-origin" aria-label="Permalink for definition: origin. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4000,6 +4095,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/interaction.html#page-visibility-change-steps" aria-label="Permalink for definition: page visibility change steps. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4012,6 +4108,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" aria-label="Permalink for definition: Queue a task. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4026,6 +4123,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#environment-settings-object's-realm" aria-label="Permalink for definition: realm (for environment settings object). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4038,6 +4136,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" aria-label="Permalink for definition: relevant global object. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4056,6 +4155,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/webappapis.html#task-source" aria-label="Permalink for definition: task source. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4068,6 +4168,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-traversable" aria-label="Permalink for definition: top-level traversable. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4080,6 +4181,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" aria-label="Permalink for definition: top-level traversable (for navigable). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4092,6 +4194,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" aria-label="Permalink for definition: visibility state (for Document). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4104,6 +4207,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://infra.spec.whatwg.org/#list-append" aria-label="Permalink for definition: Append (for list). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4111,11 +4215,25 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="#ref-for-index-term-append-for-list-1" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> 
     </li>
   </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-assert" aria-label="Links in this document to definition: Assert">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="https://infra.spec.whatwg.org/#assert" aria-label="Permalink for definition: Assert. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-index-term-assert-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
+    </li>
+  </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-contains-for-list" aria-label="Links in this document to definition: contains (for list)">
       <span class="caret"></span>
       <div>
         <a class="self-link" href="https://infra.spec.whatwg.org/#list-contain" aria-label="Permalink for definition: contains (for list). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4130,6 +4248,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://infra.spec.whatwg.org/#map-iterate" aria-label="Permalink for definition: For each (for map). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4142,6 +4261,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://infra.spec.whatwg.org/#implementation-defined" aria-label="Permalink for definition: implementation-defined. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4154,6 +4274,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://infra.spec.whatwg.org/#list-item" aria-label="Permalink for definition: item (for list). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4166,6 +4287,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://infra.spec.whatwg.org/#list" aria-label="Permalink for definition: list. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4178,6 +4300,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://infra.spec.whatwg.org/#ordered-map" aria-label="Permalink for definition: map. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4192,6 +4315,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://infra.spec.whatwg.org/#list-remove" aria-label="Permalink for definition: Remove (for list). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4206,6 +4330,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-default-powerful-feature" aria-label="Permalink for definition: default powerful feature. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4218,6 +4343,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-express-permission" aria-label="Permalink for definition: express permission. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4230,6 +4356,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-getting-the-current-permission-state" aria-label="Permalink for definition: get the current permission state. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4242,6 +4369,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-granted" aria-label="Permalink for definition: granted (for permission). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4258,6 +4386,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-lifetime" aria-label="Permalink for definition: lifetimes (for permission). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4272,6 +4401,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-name" aria-label="Permalink for definition: name (for powerful feature). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4284,6 +4414,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor-name" aria-label="Permalink for definition: name (for PermissionDescriptor). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4296,6 +4427,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-permission" aria-label="Permalink for definition: permission. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4308,6 +4440,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-permission-state" aria-label="Permalink for definition: permission state. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4320,6 +4453,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dom-permissiondescriptor" aria-label="Permalink for definition: PermissionDescriptor. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4332,6 +4466,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-powerful-feature" aria-label="Permalink for definition: powerful feature. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4344,6 +4479,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions/#dfn-request-permission-to-use" aria-label="Permalink for definition: request permission to use. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4356,6 +4492,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions-policy-1/#default-allowlist-self" aria-label="Permalink for definition: 'self' (for default allowlist). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4368,6 +4505,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature-default-allowlist" aria-label="Permalink for definition: default allowlist (for policy-controlled feature). Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4382,6 +4520,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://www.w3.org/TR/permissions-policy-1/#policy-controlled-feature" aria-label="Permalink for definition: policy-controlled feature. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4394,6 +4533,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#idl-boolean" aria-label="Permalink for definition: boolean type. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4410,6 +4550,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#Clamp" aria-label="Permalink for definition: [Clamp] extended attribute. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4424,6 +4565,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#Default" aria-label="Permalink for definition: [Default] extended attribute. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4440,6 +4582,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#idl-DOMString" aria-label="Permalink for definition: DOMString interface. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4454,6 +4597,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#idl-double" aria-label="Permalink for definition: double type. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4470,6 +4614,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#Exposed" aria-label="Permalink for definition: [Exposed] extended attribute. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4490,6 +4635,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#invoke-a-callback-function" aria-label="Permalink for definition: invokes. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4504,6 +4650,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#idl-long" aria-label="Permalink for definition: long type. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4518,6 +4665,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#idl-object" aria-label="Permalink for definition: object type. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4534,6 +4682,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#SameObject" aria-label="Permalink for definition: [SameObject] extended attribute. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4548,6 +4697,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#SecureContext" aria-label="Permalink for definition: [SecureContext] extended attribute. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4564,6 +4714,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#this" aria-label="Permalink for definition: this. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4582,6 +4733,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#idl-undefined" aria-label="Permalink for definition: undefined type. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4596,6 +4748,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#idl-unsigned-long" aria-label="Permalink for definition: unsigned long type. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4614,6 +4767,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <div>
         <a class="self-link" href="https://webidl.spec.whatwg.org/#idl-unsigned-short" aria-label="Permalink for definition: unsigned short type. Activate to close this dialog.">Permalink</a>
          
+        
       </div>
       <p><b>Referenced in:</b></p>
       <ul>
@@ -4667,22 +4821,33 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </section>
   
 
-<section id="references" class="appendix"><div class="header-wrapper"><h2 id="e-references"><bdi class="secno">E. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix E."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="e-1-normative-references"><bdi class="secno">E.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix E.1"></a></div>
+<script id="respec-copy-paste">
+    document.querySelectorAll(".respec-button-copy-paste").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        var pre = this.closest("pre");
+        if (!pre) return;
+        var sel = this.dataset.copyHeader;
+        var clone = pre.cloneNode(true);
+        if (sel) { var h = clone.querySelector(sel); if (h) h.remove(); }
+        navigator.clipboard.writeText(clone.textContent);
+      });
+    });
+  </script><section id="references" class="appendix"><div class="header-wrapper"><h2 id="e-references"><bdi class="secno">E. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix E."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="e-1-normative-references"><bdi class="secno">E.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix E.1"></a></div>
     
     <dl class="bibliography"><dt id="bib-hr-time">[hr-time]</dt><dd>
-      <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 24 March 2026. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
+      <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 1 September 2026. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
     </dd><dt id="bib-html">[html]</dt><dd>
       <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Dominic Farolino; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
-    </dd><dt id="bib-infra">[infra]</dt><dd>
+    </dd><dt id="bib-infra">[INFRA]</dt><dd>
       <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Anne van Kesteren; Domenic Denicola.  WHATWG. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
     </dd><dt id="bib-permissions">[Permissions]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 6 October 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
+      <a href="https://www.w3.org/TR/permissions/"><cite>Permissions</cite></a>. Marcos Caceres; Mike Taylor.  W3C. 26 October 2026. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
     </dd><dt id="bib-permissions-policy">[permissions-policy]</dt><dd>
-      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland.  W3C. 6 October 2025. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
+      <a href="https://www.w3.org/TR/permissions-policy-1/"><cite>Permissions Policy</cite></a>. Ian Clelland; Ari Chivukula.  W3C. 26 October 2026. W3C Working Draft. URL: <a href="https://www.w3.org/TR/permissions-policy-1/">https://www.w3.org/TR/permissions-policy-1/</a>
     </dd><dt id="bib-rfc2119">[RFC2119]</dt><dd>
-      <a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>
+      <a href="https://www.rfc-editor.org/info/rfc2119/"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/info/rfc2119/">https://www.rfc-editor.org/info/rfc2119/</a>
     </dd><dt id="bib-rfc8174">[RFC8174]</dt><dd>
-      <a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>
+      <a href="https://www.rfc-editor.org/info/rfc8174/"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/info/rfc8174/">https://www.rfc-editor.org/info/rfc8174/</a>
     </dd><dt id="bib-webidl">[webidl]</dt><dd>
       <a href="https://webidl.spec.whatwg.org/"><cite>Web IDL Standard</cite></a>. Edgar Chen; Timothy Gu.  WHATWG. Living Standard. URL: <a href="https://webidl.spec.whatwg.org/">https://webidl.spec.whatwg.org/</a>
     </dd><dt id="bib-wgs84">[WGS84]</dt><dd>
@@ -4705,9 +4870,12 @@ function setupVarHighlighter() {
     .forEach(varElem => varElem.addEventListener("click", highlightListener));
 }
 
+/**
+ * @param {MouseEvent} ev
+ */
 function highlightListener(ev) {
   ev.stopPropagation();
-  const { target: varElem } = ev;
+  const varElem = /** @type {HTMLElement} */ (ev.target);
   const hightligtedElems = highlightVars(varElem);
   const resetListener = () => {
     const hlColor = getHighlightColor(varElem);
@@ -4730,6 +4898,9 @@ const HL_COLORS = new Map([
   ["respec-hl-c7", true],
 ]);
 
+/**
+ * @param {HTMLElement} target
+ */
 function getHighlightColor(target) {
   // return current colors if applicable
   const { value } = target.classList;
@@ -4744,9 +4915,15 @@ function getHighlightColor(target) {
   return [...HL_COLORS.keys()].find(c => HL_COLORS.get(c)) || "respec-hl-c1";
 }
 
+/**
+ * @param {HTMLElement} varElem
+ */
 function highlightVars(varElem) {
   const textContent = norm(varElem.textContent);
-  const parent = varElem.closest(".algorithm, section");
+  const parent = /** @type {HTMLElement} */ (
+    varElem.closest(".algorithm, section")
+  );
+  if (!parent) return [];
   const highlightColor = getHighlightColor(varElem);
 
   const varsToHighlight = [...parent.querySelectorAll("var")].filter(
@@ -4769,12 +4946,20 @@ function highlightVars(varElem) {
   return varsToHighlight;
 }
 
+/**
+ * @param {HTMLElement} el
+ * @param {string} highlightColor
+ */
 function removeHighlight(el, highlightColor) {
   el.classList.remove("respec-hl", highlightColor);
   // clean up empty class attributes so they don't come in export
   if (!el.classList.length) el.removeAttribute("class");
 }
 
+/**
+ * @param {HTMLElement} elem
+ * @param {string} highlightColor
+ */
 function addHighlight(elem, highlightColor) {
   elem.classList.add("respec-hl", highlightColor);
 }
@@ -4802,8 +4987,11 @@ function setupPanel() {
 }
 
 function panelListener() {
-  /** @type {HTMLElement} */
+  /** @type {HTMLElement | null} */
   let panel = null;
+  /**
+   * @param {KeyboardEvent|MouseEvent} event
+   */
   return event => {
     const { target, type } = event;
 
@@ -4811,24 +4999,34 @@ function panelListener() {
 
     // For keys, we only care about Enter key to activate the panel
     // otherwise it's activated via a click.
-    if (type === "keydown" && event.key !== "Enter") return;
+    if (
+      type === "keydown" &&
+      /** @type {KeyboardEvent} */ (event).key !== "Enter"
+    )
+      return;
 
     const action = deriveAction(event);
 
     switch (action) {
       case "show": {
         hidePanel(panel);
-        /** @type {HTMLElement} */
+        /** @type {HTMLElement | null} */
         const dfn = target.closest("dfn, .index-term");
+        if (!dfn?.id) break;
         panel = document.getElementById(`dfn-panel-for-${dfn.id}`);
-        const coords = deriveCoordinates(event);
+        if (!panel) break;
+        const coords = deriveCoordinates(
+          /** @type {MouseEvent|KeyboardEvent} */ (event)
+        );
         displayPanel(dfn, panel, coords);
         break;
       }
       case "dock": {
-        panel.style.left = null;
-        panel.style.top = null;
-        panel.classList.add("docked");
+        if (panel) {
+          panel.style.left = "";
+          panel.style.top = "";
+          panel.classList.add("docked");
+        }
         break;
       }
       case "hide": {
@@ -4879,7 +5077,8 @@ function deriveAction(event) {
     if (hitALink) {
       return target.classList.contains("self-link") ? "hide" : "dock";
     }
-    const panel = target.closest(".dfn-panel");
+
+    const panel = /** @type {HTMLElement} */ (target.closest(".dfn-panel"));
     return panel.classList.contains("docked") ? "hide" : "none";
   }
   if (document.querySelector(".dfn-panel:not([hidden])")) {
@@ -4923,9 +5122,9 @@ function displayPanel(dfn, panel, { x, y }) {
     const newLeft = Math.max(MARGIN, x + MARGIN - panelRect.width);
     const newCaretOffset = left - newLeft;
     panel.style.left = `${newLeft}px`;
-    /** @type {HTMLElement} */
+    /** @type {HTMLElement | null} */
     const caret = panel.querySelector(".caret");
-    caret.style.left = `${newCaretOffset}px`;
+    if (caret) caret.style.left = `${newCaretOffset}px`;
   }
 
   // As it's a dialog, we trap focus.
@@ -4974,6 +5173,9 @@ function trapFocus(panel, dfn) {
 function createTrapListener(anchors, panel, dfn) {
   const lastIndex = anchors.length - 1;
   let currentIndex = 0;
+  /**
+   * @param {KeyboardEvent} event
+   */
   return event => {
     switch (event.key) {
       // Hitting "Tab" traps us in a nice loop around elements.
@@ -5003,7 +5205,7 @@ function createTrapListener(anchors, panel, dfn) {
   };
 }
 
-/** @param {HTMLElement} panel */
+/** @param {HTMLElement | null} panel */
 function hidePanel(panel) {
   if (!panel) return;
   panel.hidden = true;
