@@ -114,7 +114,7 @@
         <dd>
           A position returned by the underlying location information source. By
           default, any location data is considered precise, regardless of its
-          accuracy estimate, unless it has been explicitly coarsened by an
+          accuracy estimate, unless it has been explicitly post-processed by an
           [=approximate location information source=] to be an [=approximate
           position=].
         </dd>
@@ -122,26 +122,25 @@
           <dfn>approximate position</dfn>
         </dt>
         <dd>
-          A less [=precise position|precise=] representation of the user's
-          location. Instead of providing precise coordinates, an [=approximate
-          location information source=] returns a location that is coarsened
-          to a larger area, such as the nearest city, postal code, or a
-          predefined region. What constitutes a coarsened area is left to the
-          underlying system, which in turn can vary per jurisdiction.
-          <p class="note" title="Benefits of Approximate Position">
-            An [=approximate position=] is often sufficient for applications
-            that don't need to know the user's [=precise position=], for
-            example, a weather application that only needs a city-level
-            location. By sharing an [=approximate position=], users get the
-            benefit of a location-aware application without potentially
-            revealing their [=precise position=].
+          A [=precise position=] that has been post-processed by an
+          [=approximate location information source=] to have a lower accuracy
+          (that is, a larger accuracy radius). For example, the coordinates may
+          be adjusted to correspond to a larger area, such as the nearest city,
+          postal code, or a predefined region. How this post-processing is
+          performed, and the resulting accuracy, is left to the underlying
+          system or to the user agent.
+          <p class="note" title="Use cases for Approximate Position">
+            An [=approximate position=] is often sufficient for many use cases,
+            for example, a weather application that only needs a city-level
+            location.
           </p>
         </dd>
       </dl>
       <p>
         An <dfn>approximate location information source</dfn> is a location
-        information source that returns positions that have been intentionally
-        obfuscated to make it more difficult to recover the true location.
+        information source that returns positions that have been post-processed
+        to intentionally reduce their accuracy (that is, to have a larger
+        accuracy radius).
       </p>
       <section id="scope" class="informative">
         <h3>
@@ -175,7 +174,7 @@
           A website can request a user's location, choosing either a [=precise
           position=] or an [=approximate position=] via the
           {{PositionOptions/accuracyMode}} member. During the [=prompt the user
-          to choose|permission request process=], the end-user determines the
+          to choose|permission request process=], the end-user can change the
           actual level of accuracy to grant, which the [=user agent=] then uses
           to provide the geographic position accordingly.
         </p>
@@ -481,14 +480,13 @@
           information.
         </p>
         <p>
-          In line with this principle, recipients are strongly encouraged to
-          request the lowest level of location accuracy that is sufficient for
-          their application's functionality. For instance, if an application
-          only needs to know the user's city, it can indicate that to the user
-          by requesting an [=approximate position=], by setting the
+          In line with this principle, recipients are encouraged to request the
+          lowest level of location accuracy that is sufficient for their
+          application's functionality. For instance, if an application only
+          needs to know the user's city, it can indicate that to the user by
+          requesting an [=approximate position=], by setting the
           {{PositionOptions/accuracyMode}} option to
-          {{AccuracyMode/"approximate"}}. This practice of data minimization is
-          a key aspect of respecting user privacy.
+          {{AccuracyMode/"approximate"}}.
         </p>
         <p>
           The recipients of location information need to refrain from
