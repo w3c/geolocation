@@ -173,7 +173,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="ec43ad1327661d7a3bb51525ccf7f7bd9cd0d463">
+<meta name="revision" content="2b994d77f867c1bfcc18c10ace5cbd60fe27a324">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
@@ -283,7 +283,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "ec43ad1327661d7a3bb51525ccf7f7bd9cd0d463",
+  "gitRevision": "2b994d77f867c1bfcc18c10ace5cbd60fe27a324",
   "publishISODate": "2026-11-05T00:00:00.000Z",
   "generatedSubtitle": "W3C Editor's Draft 05 November 2026"
 }</script>
@@ -1583,9 +1583,9 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                           <dd>
                             A non-negative <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-3"><code>double?</code></a> that represents the
                             altitude accuracy, or <code>null</code> if not available,
-                            indicating the 68% confidence level in meters
-                            (1 standard deviation). Altitude accuracy measures
-                            how close the measured altitude is to the true
+                            indicating the 68% confidence level in meters (1
+                            standard deviation). Altitude accuracy measures how
+                            close the measured altitude is to the true
                             altitude.
                           </dd>
                           <dt>
@@ -3094,7 +3094,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         Since publication as a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation in 2022,
         <cite>Geolocation</cite> has received the following normative changes:
       </p><rs-changelog from="REC" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation/commit/229574b">Add missing latitude definition</a> (<a href="https://github.com/w3c/geolocation/pull/208">#208</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/fceec2a">Remove outdated reference to sea level</a> (<a href="https://github.com/w3c/geolocation/pull/238">#238</a>)</li>
+      <li><a href="https://github.com/w3c/geolocation/commit/229574b">Add missing latitude definition</a> (<a href="https://github.com/w3c/geolocation/pull/208">#208</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/fceec2a">Remove outdated reference to sea level</a> (<a href="https://github.com/w3c/geolocation/pull/238">#238</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/ec43ad1">Update accuracy confidence interval to 68%</a> (<a href="https://github.com/w3c/geolocation/pull/239">#239</a>)</li>
       </ul></rs-changelog>
       <p>
         Since First Public Working Draft in 2021, until it was published as a
