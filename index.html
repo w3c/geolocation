@@ -173,7 +173,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="fceec2a49ea28bc46702f18d151e9b3962bcf66e">
+<meta name="revision" content="ec43ad1327661d7a3bb51525ccf7f7bd9cd0d463">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
@@ -283,9 +283,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "fceec2a49ea28bc46702f18d151e9b3962bcf66e",
-  "publishISODate": "2026-10-30T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 30 October 2026"
+  "gitRevision": "ec43ad1327661d7a3bb51525ccf7f7bd9cd0d463",
+  "publishISODate": "2026-11-05T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 05 November 2026"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)"></head>
@@ -293,7 +293,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2026-10-30">30 October 2026</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2026-11-05">05 November 2026</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -1564,9 +1564,10 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                           </dt>
                           <dd>
                             A non-negative <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-1"><code>double</code></a> that represents the
-                            accuracy value indicating the 95% confidence level
-                            in meters. Accuracy measures how close the measured
-                            coordinates are to the true position.
+                            accuracy value indicating the 68% confidence level
+                            in meters (1 standard deviation). Accuracy measures
+                            how close the measured coordinates are to the true
+                            position.
                           </dd>
                           <dt>
                             "altitude"
@@ -1582,9 +1583,10 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                           <dd>
                             A non-negative <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-3"><code>double?</code></a> that represents the
                             altitude accuracy, or <code>null</code> if not available,
-                            indicating the 95% confidence level in meters.
-                            Altitude accuracy measures how close the measured
-                            altitude is to the true altitude.
+                            indicating the 68% confidence level in meters
+                            (1 standard deviation). Altitude accuracy measures
+                            how close the measured altitude is to the true
+                            altitude.
                           </dd>
                           <dt>
                             "heading"
@@ -4835,7 +4837,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   </script><section id="references" class="appendix"><div class="header-wrapper"><h2 id="e-references"><bdi class="secno">E. </bdi>References</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix E."></a></div><section id="normative-references"><div class="header-wrapper"><h3 id="e-1-normative-references"><bdi class="secno">E.1 </bdi>Normative references</h3><a class="self-link" href="#normative-references" aria-label="Permalink for Appendix E.1"></a></div>
     
     <dl class="bibliography"><dt id="bib-hr-time">[hr-time]</dt><dd>
-      <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 1 September 2026. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
+      <a href="https://www.w3.org/TR/hr-time-3/"><cite>High Resolution Time</cite></a>. Yoav Weiss.  W3C. 4 November 2026. W3C Working Draft. URL: <a href="https://www.w3.org/TR/hr-time-3/">https://www.w3.org/TR/hr-time-3/</a>
     </dd><dt id="bib-html">[html]</dt><dd>
       <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Dominic Farolino; Ian Hickson; Philip Jägenstedt; Simon Pieters.  WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
     </dd><dt id="bib-infra">[INFRA]</dt><dd>
