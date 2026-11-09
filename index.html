@@ -129,18 +129,11 @@
           postal code, or a predefined region. How this post-processing is
           performed, and the resulting accuracy, is left to the underlying
           system or to the user agent.
-          <p class="note" title="Use cases for Approximate Position">
-            An [=approximate position=] is often sufficient for many use cases,
-            for example, a weather application that only needs a city-level
-            location.
-          </p>
         </dd>
       </dl>
       <p>
         An <dfn>approximate location information source</dfn> is a location
-        information source that returns positions that have been post-processed
-        to intentionally reduce their accuracy (that is, to have a larger
-        accuracy radius).
+        information source that intentionally returns an imprecise position.
       </p>
       <section id="scope" class="informative">
         <h3>
@@ -413,15 +406,15 @@
         thereby potentially compromising the user's privacy.
       </p>
       <p>
-        The {{PositionOptions}}'s {{PositionOptions/accuracyMode}} member allows
-        websites to declare that they have no need for the user's [=precise
-        position=] and can function with only an [=approximate position=]. When
-        an application requests an [=approximate position=], an [=approximate
-        location information source=] is used. Even when a [=precise position=]
-        is requested, the user agent MAY provide an [=approximate position=]
-        instead (as defined in the [=acquire a position=] algorithm), for
-        example, if the user has only granted permission for approximate
-        accuracy.
+        The {{PositionOptions}}'s {{PositionOptions/accuracyMode}} member
+        allows websites to declare that they have no need for the user's
+        [=precise position=] and can function with only an [=approximate
+        position=]. When an application requests an [=approximate position=],
+        an [=approximate location information source=] is used. Even when a
+        [=precise position=] is requested, the user agent MAY provide an
+        [=approximate position=] instead (as defined in the [=acquire a
+        position=] algorithm), for example, if the user has only granted
+        permission for approximate accuracy.
       </p>
       <section class="informative">
         <h3>
@@ -533,10 +526,10 @@
         <p>
           <cite>Geolocation</cite> is a [=powerful feature=] identified by the
           [=powerful feature/name=] <code><dfn class=
-          "permission">"geolocation"</dfn></code>. Its
+          "permission">"geolocation"</dfn></code>. Its 
           <!-- TODO: use [=powerful feature/permission options=] once
           w3c/permissions#482 lands. -->
-          <a data-cite="permissions#dfn-permission-options">permission
+           <a data-cite="permissions#dfn-permission-options">permission
           options</a> are « "approximate", "precise" ».
         </p>
         <p>
@@ -556,13 +549,14 @@
           Preventing Precise Location Reconstruction
         </h3>
         <p>
-          The [=approximate location information source=] used by the user agent
-          should take into account that a site, by repeatedly using the API, can
-          receive multiple [=approximate positions=]. Therefore it SHOULD, when
-          returning an [=approximate position=], implement measures that
-          mitigate the risk of a refinement attack, preventing the site from
-          potentially inferring a user's [=precise position=] by collecting and
-          correlating multiple, distinct [=approximate positions=].
+          The [=approximate location information source=] used by the user
+          agent should take into account that a site, by repeatedly using the
+          API, can receive multiple [=approximate positions=]. Therefore it
+          SHOULD, when returning an [=approximate position=], implement
+          measures that mitigate the risk of a refinement attack, preventing
+          the site from potentially inferring a user's [=precise position=] by
+          collecting and correlating multiple, distinct [=approximate
+          positions=].
         </p>
         <p class="note">
           The chosen accuracy is per request. A user agent that internally
@@ -907,19 +901,19 @@
               |options| {{PositionOptions/accuracyMode}} is
               {{AccuracyMode/"approximate"}}, or the [=set=] « "approximate",
               "precise" » if |options| {{PositionOptions/accuracyMode}} is
-              {{AccuracyMode/"precise"}}, and let |choice| be the result
-              of [=prompting the user to choose=] from |promptOptions|
-              associated with <a>"geolocation"</a>.
-              <aside class="note">
-                <p>
-                  Despite the naming, the algorithm [=prompt the user to
-                  choose=] does not necessarily display a prompt to the user if
-                  it has already been called before with the same set of
-                  options. Here, in particular, [=prompt the user to choose=]
-                  has already been called when [=request a position|requesting a
-                  position=].
-                </p>
-              </aside>
+              {{AccuracyMode/"precise"}}, and let |choice| be the result of
+              [=prompting the user to choose=] from |promptOptions| associated
+              with <a>"geolocation"</a>.
+                <aside class="note">
+                  <p>
+                    Despite the naming, the algorithm [=prompt the user to
+                    choose=] does not necessarily display a prompt to the user
+                    if it has already been called before with the same set of
+                    options. Here, in particular, [=prompt the user to choose=]
+                    has already been called when [=request a
+                    position|requesting a position=].
+                  </p>
+                </aside>
               </li>
               <li>If |choice| is "denied":
                 <ol>
@@ -1005,8 +999,8 @@
                       acquire an [=approximate position=]. The
                       {{PositionOptions/enableHighAccuracy}} member is ignored.
                       </li>
-                      <li>If |choice| is {{AccuracyMode/"precise"}},
-                      acquire a [=precise position=], optionally taking into
+                      <li>If |choice| is {{AccuracyMode/"precise"}}, acquire a
+                      [=precise position=], optionally taking into
                       consideration the value of
                       |options|.{{PositionOptions/enableHighAccuracy}}.
                       </li>
@@ -1222,12 +1216,12 @@
             `navigator.permissions.query({name: "geolocation"})` reports the
             same {{PermissionState}} whether the grant is
             {{AccuracyMode/"approximate"}} or {{AccuracyMode/"precise"}}, and a
-            delivered {{GeolocationPosition}} carries no attribute naming
-            which accuracy was granted. Even so, a page can often work out
-            which accuracy the user granted, because an [=approximate position=]
-            usually reports a larger {{GeolocationCoordinates/accuracy}} radius.
-            Nothing guarantees that, because a [=precise position=] can also
-            carry a large radius.
+            delivered {{GeolocationPosition}} carries no attribute naming which
+            accuracy was granted. Even so, a page can often work out which
+            accuracy the user granted, because an [=approximate position=]
+            usually reports a larger {{GeolocationCoordinates/accuracy}}
+            radius. Nothing guarantees that, because a [=precise position=] can
+            also carry a large radius.
           </p>
         </aside>
       </section>
@@ -1356,8 +1350,8 @@
               <dfn data-dfn-for="GeolocationPosition">[[\accuracyMode]]</dfn>
             </td>
             <td>
-              An {{AccuracyMode}} that records the chosen {{AccuracyMode}}
-              when this {{GeolocationPosition}} is [=a new
+              An {{AccuracyMode}} that records the chosen {{AccuracyMode}} when
+              this {{GeolocationPosition}} is [=a new
               GeolocationPosition|created=].
             </td>
           </tr>
@@ -1482,8 +1476,8 @@
           <li>Return a newly created {{GeolocationPosition}} instance with its
           {{GeolocationPosition/coords}} attribute initialized to |coords| and
           {{GeolocationPosition/timestamp}} attribute initialized to
-          |timestamp|, its {{GeolocationPosition/[[isHighAccuracy]]}}
-          internal slot set to |isHighAccuracy|, and its
+          |timestamp|, its {{GeolocationPosition/[[isHighAccuracy]]}} internal
+          slot set to |isHighAccuracy|, and its
           {{GeolocationPosition/[[accuracyMode]]}} internal slot set to
           |accuracyMode|.
           </li>
