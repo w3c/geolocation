@@ -129,18 +129,11 @@
           postal code, or a predefined region. How this post-processing is
           performed, and the resulting accuracy, is left to the underlying
           system or to the user agent.
-          <p class="note" title="Use cases for Approximate Position">
-            An [=approximate position=] is often sufficient for many use cases,
-            for example, a weather application that only needs a city-level
-            location.
-          </p>
         </dd>
       </dl>
       <p>
         An <dfn>approximate location information source</dfn> is a location
-        information source that returns positions that have been post-processed
-        to intentionally reduce their accuracy (that is, to have a larger
-        accuracy radius).
+        information source that intentionally returns an imprecise position.
       </p>
       <section id="scope" class="informative">
         <h3>
