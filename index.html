@@ -711,8 +711,8 @@
                   </li>
                 </ol>
               </li>
-              <li>Wait to [=acquire a position=] passing |successCallback|,
-              |errorCallback|, |options|, and |watchId|.
+              <li>Wait to [=acquire a position=] passing |geolocation|,
+              |successCallback|, |errorCallback|, |options|, and |watchId|.
               </li>
               <li>If |watchId| was not passed, terminate this algorithm.
               </li>
@@ -744,8 +744,8 @@
                       </p>
                     </aside>
                   </li>
-                  <li>Wait to [=acquire a position=] passing |successCallback|,
-                  |errorCallback|, |options|, and |watchId|.
+                  <li>Wait to [=acquire a position=] passing |geolocation|,
+                  |successCallback|, |errorCallback|, |options|, and |watchId|.
                   </li>
                 </ol>
               </li>
@@ -760,13 +760,14 @@
         <p>
           To <dfn data-local-lt=
           "acquiring a position|acquire a position">acquire a position</dfn>,
-          passing {{PositionCallback}} |successCallback:PositionCallback|, a
+          passing a {{Geolocation}} |geolocation:Geolocation|, a
+          {{PositionCallback}} |successCallback:PositionCallback|, a
           {{PositionErrorCallback?}} |errorCallback:PositionErrorCallback?|,
           {{PositionOptions}} |options:PositionOptions|, and an optional
           |watchId:unsigned long|.
         </p>
         <ol class="algorithm">
-          <li>If |watchId| was passed and [=this=]'s
+          <li>If |watchId| was passed and |geolocation|'s
           {{Geolocation/[[watchIDs]]}} does not [=list/contain=] |watchId|,
           terminate this algorithm.
           </li>
@@ -776,7 +777,7 @@
           <li>Let |timeoutTime| be the sum of |acquisitionTime| and
           |options|.{{PositionOptions/timeout}}.
           </li>
-          <li>Let |cachedPosition:GeolocationPosition| be [=this=]'s
+          <li>Let |cachedPosition:GeolocationPosition| be |geolocation|'s
           {{Geolocation/[[cachedPosition]]}}.
           </li>
           <li>Create an implementation-specific |timeout| task that elapses at
@@ -801,7 +802,7 @@
                   the following steps:
                     <ol>
                       <li>Let |emulatedPositionData| be [=get emulated position
-                      data=] passing [=this=].
+                      data=] passing |geolocation|.
                       </li>
                       <li>If |emulatedPositionData| is not null:
                         <ol>
@@ -953,7 +954,7 @@
                       passing |positionData|, |acquisitionTime| and
                       |options|.{{PositionOptions/enableHighAccuracy}}.
                       </li>
-                      <li>Set [=this=]'s {{Geolocation/[[cachedPosition]]}} to
+                      <li>Set |geolocation|'s {{Geolocation/[[cachedPosition]]}} to
                       |position|.
                       </li>
                     </ol>
