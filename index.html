@@ -173,7 +173,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="20aa361620e6547733c55199934e14138cc0e77b">
+<meta name="revision" content="2a778a432e20b4fa16c4f0b0c2b57b860c5babc4">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
@@ -283,7 +283,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "20aa361620e6547733c55199934e14138cc0e77b",
+  "gitRevision": "2a778a432e20b4fa16c4f0b0c2b57b860c5babc4",
   "publishISODate": "2026-11-17T00:00:00.000Z",
   "generatedSubtitle": "W3C Editor's Draft 17 November 2026"
 }</script>
@@ -1396,8 +1396,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                   </li>
                 </ol>
               </li>
-              <li>Wait to <a data-link-type="dfn|abstract-op" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-3">acquire a position</a> passing <var data-type="PositionCallback">successCallback</var>,
-              <var data-type="PositionErrorCallback?">errorCallback</var>, <var data-type="PositionOptions">options</var>, and <var data-type="unsigned long">watchId</var>.
+              <li>Wait to <a data-link-type="dfn|abstract-op" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-3">acquire a position</a> passing <var data-type="Geolocation">geolocation</var>,
+              <var data-type="PositionCallback">successCallback</var>, <var data-type="PositionErrorCallback?">errorCallback</var>, <var data-type="PositionOptions">options</var>, and <var data-type="unsigned long">watchId</var>.
               </li>
               <li>If <var data-type="unsigned long">watchId</var> was not passed, terminate this algorithm.
               </li>
@@ -1428,8 +1428,8 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                       </p>
                     </aside></div>
                   </li>
-                  <li>Wait to <a data-link-type="dfn|abstract-op" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-4">acquire a position</a> passing <var data-type="PositionCallback">successCallback</var>,
-                  <var data-type="PositionErrorCallback?">errorCallback</var>, <var data-type="PositionOptions">options</var>, and <var data-type="unsigned long">watchId</var>.
+                  <li>Wait to <a data-link-type="dfn|abstract-op" href="#dfn-acquire-a-position" class="internalDFN" id="ref-for-dfn-acquire-a-position-4">acquire a position</a> passing <var data-type="Geolocation">geolocation</var>,
+                  <var data-type="PositionCallback">successCallback</var>, <var data-type="PositionErrorCallback?">errorCallback</var>, <var data-type="PositionOptions">options</var>, and <var data-type="unsigned long">watchId</var>.
                   </li>
                 </ol>
               </li>
@@ -1443,13 +1443,14 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
         
         <p>
           To <dfn data-local-lt="acquiring a position|acquire a position" id="dfn-acquire-a-position" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">acquire a position</dfn>,
-          passing <a data-link-type="idl" data-lt="PositionCallback" href="#dom-positioncallback" class="internalDFN" id="ref-for-dom-positioncallback-4"><code>PositionCallback</code></a> <var data-type="PositionCallback">successCallback</var>, a
+          passing a <a data-link-type="idl" data-lt="Geolocation" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-4"><code>Geolocation</code></a> <var data-type="Geolocation">geolocation</var>, a
+          <a data-link-type="idl" data-lt="PositionCallback" href="#dom-positioncallback" class="internalDFN" id="ref-for-dom-positioncallback-4"><code>PositionCallback</code></a> <var data-type="PositionCallback">successCallback</var>, a
           <a data-link-type="idl" data-lt="PositionErrorCallback" href="#dom-positionerrorcallback" class="internalDFN" id="ref-for-dom-positionerrorcallback-4"><code>PositionErrorCallback?</code></a> <var data-type="PositionErrorCallback?">errorCallback</var>,
           <a data-link-type="idl" data-lt="PositionOptions" href="#dom-positionoptions" class="internalDFN" id="ref-for-dom-positionoptions-6"><code>PositionOptions</code></a> <var data-type="PositionOptions">options</var>, and an optional
           <var data-type="unsigned long">watchId</var>.
         </p>
         <ol class="algorithm">
-          <li>If <var data-type="unsigned long">watchId</var> was passed and <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-7">this</a>'s
+          <li>If <var data-type="unsigned long">watchId</var> was passed and <var data-type="Geolocation">geolocation</var>'s
           <a data-link-type="attribute" data-lt="[[watchIDs]]" href="#dfn-watchids" class="internalDFN" id="ref-for-dfn-watchids-4"><code>[[watchIDs]]</code></a> does not <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#list-contain" id="ref-for-index-term-contains-for-list-2">contain</a> <var data-type="unsigned long">watchId</var>,
           terminate this algorithm.
           </li>
@@ -1459,7 +1460,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
           <li>Let <var>timeoutTime</var> be the sum of <var data-type="EpochTimeStamp">acquisitionTime</var> and
           <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-timeout" class="internalDFN" id="ref-for-dom-positionoptions-timeout-2"><code>timeout</code></a>.
           </li>
-          <li>Let <var data-type="GeolocationPosition">cachedPosition</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-8">this</a>'s
+          <li>Let <var data-type="GeolocationPosition">cachedPosition</var> be <var data-type="Geolocation">geolocation</var>'s
           <a data-link-type="attribute" data-lt="[[cachedPosition]]" href="#dfn-cachedposition" class="internalDFN" id="ref-for-dfn-cachedposition-2"><code>[[cachedPosition]]</code></a>.
           </li>
           <li>Create an implementation-specific <var>timeout</var> task that elapses at
@@ -1483,7 +1484,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                   <li>Check if an emulated position should be used by running
                   the following steps:
                     <ol>
-                      <li>Let <var>emulatedPositionData</var> be <a data-link-type="dfn|abstract-op" href="#dfn-get-emulated-position-data" class="internalDFN" id="ref-for-dfn-get-emulated-position-data-1">get emulated position data</a> passing <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-9">this</a>.
+                      <li>Let <var>emulatedPositionData</var> be <a data-link-type="dfn|abstract-op" href="#dfn-get-emulated-position-data" class="internalDFN" id="ref-for-dfn-get-emulated-position-data-1">get emulated position data</a> passing <var data-type="Geolocation">geolocation</var>.
                       </li>
                       <li>If <var>emulatedPositionData</var> is not null:
                         <ol>
@@ -1630,7 +1631,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                       passing <var>positionData</var>, <var data-type="EpochTimeStamp">acquisitionTime</var> and
                       <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-5"><code>enableHighAccuracy</code></a>.
                       </li>
-                      <li>Set <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-index-term-this-10">this</a>'s <a data-link-type="attribute" data-lt="[[cachedPosition]]" href="#dfn-cachedposition" class="internalDFN" id="ref-for-dfn-cachedposition-3"><code>[[cachedPosition]]</code></a> to
+                      <li>Set <var data-type="Geolocation">geolocation</var>'s <a data-link-type="attribute" data-lt="[[cachedPosition]]" href="#dfn-cachedposition" class="internalDFN" id="ref-for-dfn-cachedposition-3"><code>[[cachedPosition]]</code></a> to
                       <var>position</var>.
                       </li>
                     </ol>
@@ -2723,7 +2724,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         </li>
       </ol>
       <p>
-        To <dfn id="dfn-get-emulated-position-data" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">get emulated position data</dfn>, given <a data-link-type="idl" data-lt="Geolocation" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-4"><code>Geolocation</code></a>
+        To <dfn id="dfn-get-emulated-position-data" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">get emulated position data</dfn>, given <a data-link-type="idl" data-lt="Geolocation" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-5"><code>Geolocation</code></a>
         <var>geolocation</var>:
       </p>
       <ol class="algorithm">
@@ -2751,7 +2752,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <section id="idl-index" class="appendix"><div class="header-wrapper"><h2 id="a-idl-index"><bdi class="secno">A. </bdi>IDL Index</h2><a class="self-link" href="#idl-index" aria-label="Permalink for Appendix A."></a></div>
       
     <pre class="idl def" id="actual-idl-index"><span class="idlHeader"><a class="self-link" href="#actual-idl-index">WebIDL</a></span><code><span data-idl="" class="idlInterface" data-title="Navigator">partial interface <a data-idl="partial" data-link-type="interface" data-title="Navigator" class="idlID" data-dfn-for="Navigator" href="https://html.spec.whatwg.org/multipage/system-state.html#navigator" id="ref-for-index-term-navigator-interface-2">Navigator</a> {<span data-idl="" class="idlAttribute" data-title="geolocation" data-dfn-for="Navigator">
-  [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-2">SameObject</a></span>] readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-5"><code>Geolocation</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-navigator-geolocation" id="ref-for-dom-navigator-geolocation-2"><code>geolocation</code></a>;</span>
+  [<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SameObject" id="ref-for-index-term-sameobject-extended-attribute-2">SameObject</a></span>] readonly attribute<span class="idlType"> <a data-link-type="idl" href="#dom-geolocation" class="internalDFN" id="ref-for-dom-geolocation-6"><code>Geolocation</code></a></span> <a class="internalDFN idlName" data-link-type="attribute" href="#dom-navigator-geolocation" id="ref-for-dom-navigator-geolocation-2"><code>geolocation</code></a>;</span>
 };</span>
 
 <span data-idl="" class="idlInterface" data-title="Geolocation">[<span class="extAttr"><a data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-index-term-exposed-extended-attribute-5">Exposed</a>=Window</span>]
@@ -3093,7 +3094,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         Since publication as a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation in 2022,
         <cite>Geolocation</cite> has received the following normative changes:
       </p><rs-changelog from="REC" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation/commit/229574b">Add missing latitude definition</a> (<a href="https://github.com/w3c/geolocation/pull/208">#208</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/fceec2a">Remove outdated reference to sea level</a> (<a href="https://github.com/w3c/geolocation/pull/238">#238</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/ec43ad1">Update accuracy confidence interval to 68%</a> (<a href="https://github.com/w3c/geolocation/pull/239">#239</a>)</li>
+      <li><a href="https://github.com/w3c/geolocation/commit/229574b">Add missing latitude definition</a> (<a href="https://github.com/w3c/geolocation/pull/208">#208</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/fceec2a">Remove outdated reference to sea level</a> (<a href="https://github.com/w3c/geolocation/pull/238">#238</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/ec43ad1">Update accuracy confidence interval to 68%</a> (<a href="https://github.com/w3c/geolocation/pull/239">#239</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2a778a4">Pass the Geolocation instance to the position acquisition steps</a> (<a href="https://github.com/w3c/geolocation/pull/243">#243</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/b12f2cd">Acquire a fresh position after a cache miss</a> (<a href="https://github.com/w3c/geolocation/pull/241">#241</a>)</li>
       </ul></rs-changelog>
       <p>
         Since First Public Working Draft in 2021, until it was published as a
@@ -3165,9 +3166,11 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     </li><li>
       <a href="#ref-for-dom-geolocation-3" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocation-4" title="§ 12. Emulation">§ 12. Emulation</a> 
+      <a href="#ref-for-dom-geolocation-4" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
     </li><li>
-      <a href="#ref-for-dom-geolocation-5" title="§ A. IDL Index">§ A. IDL Index</a> 
+      <a href="#ref-for-dom-geolocation-5" title="§ 12. Emulation">§ 12. Emulation</a> 
+    </li><li>
+      <a href="#ref-for-dom-geolocation-6" title="§ A. IDL Index">§ A. IDL Index</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dom-positioncallback" aria-label="Links in this document to definition: PositionCallback">
@@ -4725,8 +4728,6 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="#ref-for-index-term-this-3" title="§ 6.3 watchPosition() method">§ 6.3 watchPosition() method</a> <a href="#ref-for-index-term-this-4" title="Reference 2">(2)</a> <a href="#ref-for-index-term-this-5" title="Reference 3">(3)</a> 
     </li><li>
       <a href="#ref-for-index-term-this-6" title="§ 6.4 clearWatch() method">§ 6.4 clearWatch() method</a> 
-    </li><li>
-      <a href="#ref-for-index-term-this-7" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> <a href="#ref-for-index-term-this-8" title="Reference 2">(2)</a> <a href="#ref-for-index-term-this-9" title="Reference 3">(3)</a> <a href="#ref-for-index-term-this-10" title="Reference 4">(4)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-undefined-type" aria-label="Links in this document to definition: undefined type">
