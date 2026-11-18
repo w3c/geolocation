@@ -173,7 +173,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="bde9955b05badb3c21130007647f93e6bd625c9f">
+<meta name="revision" content="4576e8fc21a57a931b240e475e7c0ed4fd3c1a7a">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
@@ -283,7 +283,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "bde9955b05badb3c21130007647f93e6bd625c9f",
+  "gitRevision": "4576e8fc21a57a931b240e475e7c0ed4fd3c1a7a",
   "publishISODate": "2026-11-18T00:00:00.000Z",
   "generatedSubtitle": "W3C Editor's Draft 18 November 2026"
 }</script>
@@ -1547,157 +1547,151 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                   <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-4"><code>enableHighAccuracy</code></a> during
                   acquisition.
                   </li>
-                  <li>If the <var>timeout</var> elapses during acquisition, or acquiring
-                  the device's position results in failure:
-                    <ol>
-                      <li>Stop the <var>timeout</var>.
-                      </li>
-                      <li>Go to <a href="#errors-reasons">dealing with
-                      failures</a>.
-                      </li>
-                      <li>Terminate this algorithm.
-                      </li>
-                    </ol>
-                  </li>
-                  <li data-cite="infra">If acquiring the position data from the
-                  system succeeds:
-                    <ol data-cite="infra">
-                      <li>Let <var>positionData</var> be a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-index-term-map-1">map</a> with the following
-                      name/value pairs based on the acquired position data:
-                        <dl data-sort=""><dt>
-                            "accuracy"
-                          </dt>
-                          <dd>
-                            A non-negative <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-1"><code>double</code></a> that represents the
-                            accuracy value indicating the 68% confidence level
-                            in meters (1 standard deviation). Accuracy measures
-                            how close the measured coordinates are to the true
-                            position.
-                          </dd>
-                          <dt>
-                            "altitude"
-                          </dt>
-                          <dd>
-                            A <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-2"><code>double?</code></a> that represents the altitude in
-                            meters above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] ellipsoid, or <code>null</code> if
-                            not available.
-                          </dd>
-                          <dt>
-                            "altitudeAccuracy"
-                          </dt>
-                          <dd>
-                            A non-negative <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-3"><code>double?</code></a> that represents the
-                            altitude accuracy, or <code>null</code> if not available,
-                            indicating the 68% confidence level in meters (1
-                            standard deviation). Altitude accuracy measures how
-                            close the measured altitude is to the true
-                            altitude.
-                          </dd>
-                          <dt>
-                            "heading"
-                          </dt>
-                          <dd>
-                            A <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-4"><code>double?</code></a> that represents the heading in
-                            degrees, or <code>null</code> if not available or the device
-                            is stationary. Heading measures the direction in
-                            which the device is moving relative to true north.
-                          </dd><dt>
-                            "latitude"
-                          </dt>
-                          <dd>
-                            A <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-5"><code>double</code></a> that represents the latitude
-                            coordinates on the Earth's surface in degrees,
-                            using the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] coordinate system. Latitude
-                            measures how far north or south a point is from the
-                            Equator.
-                          </dd>
-                          <dt>
-                            "longitude"
-                          </dt>
-                          <dd>
-                            A <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-6"><code>double</code></a> that represents the longitude
-                            coordinates on the Earth's surface in degrees,
-                            using the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] coordinate system. Longitude
-                            measures how far east or west a point is from the
-                            Prime Meridian.
-                          </dd>
-                          <dt>
-                            "speed"
-                          </dt>
-                          <dd>
-                            A non-negative <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-7"><code>double?</code></a> that represents the
-                            speed in meters per second, or <code>null</code> if not
-                            available. Speed measures how fast the device is
-                            moving.
-                          </dd>
-                          </dl>
-                      </li>
-                      <li>Set <var>position</var> to <a data-link-type="dfn|abstract-op" href="#dfn-a-new-geolocationposition" class="internalDFN" id="ref-for-dfn-a-new-geolocationposition-2">a new <code>GeolocationPosition</code></a>
-                      passing <var>positionData</var>, <var data-type="EpochTimeStamp">acquisitionTime</var> and
-                      <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-5"><code>enableHighAccuracy</code></a>.
-                      </li>
-                      <li>Set <var data-type="Geolocation">geolocation</var>'s
-                      <a data-link-type="attribute" data-lt="[[cachedPosition]]" href="#dfn-cachedposition" class="internalDFN" id="ref-for-dfn-cachedposition-3"><code>[[cachedPosition]]</code></a> to <var>position</var>.
-                      </li>
-                    </ol>
-                  </li>
+                </ol>
+              </li>
+              <li>If the <var>timeout</var> elapses during acquisition, or acquiring the
+              device's position results in failure:
+                <ol>
                   <li>Stop the <var>timeout</var>.
                   </li>
-                  <li><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-index-term-queue-a-task-3">Queue a task</a> on the <a data-link-type="dfn|abstract-op" href="#dfn-geolocation-task-source" class="internalDFN" id="ref-for-dfn-geolocation-task-source-3">geolocation task source</a> with
-                  a step that <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#invoke-a-callback-function" id="ref-for-index-term-invokes-3">invokes</a> <var data-type="PositionCallback">successCallback</var> with « <var>position</var> »
-                  and "<code>report</code>".
+                  <li><a data-link-type="dfn|abstract-op" href="#dfn-deal-with-failure" class="internalDFN" id="ref-for-dfn-deal-with-failure-1">Deal with failure</a>.
+                  </li>
+                  <li>Terminate this algorithm.
                   </li>
                 </ol>
               </li>
-            </ol>
-            <dl class="switch">
-              <dt id="errors-reasons">
-                Dealing with failures:
-              </dt>
-              <dd>
-                <ul>
-                  <li>If acquiring a position fails, do one of the following
-                  based on the condition that matches the failure:
-                    <dl class="switch">
-                      <dt id="permission-denied">
-                        User or system denied permission:
+              <li data-cite="infra">If acquiring the position data from the
+              system succeeds:
+                <ol>
+                  <li>Let <var>positionData</var> be a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ordered-map" id="ref-for-index-term-map-1">map</a> with the following
+                  name/value pairs based on the acquired position data:
+                    <dl data-sort=""><dt>
+                        "accuracy"
                       </dt>
                       <dd>
-                        <p>
-                          <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-7">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
-                          <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-4"><code>PERMISSION_DENIED</code></a>.
-                        </p>
-                        <div class="note" role="note" id="issue-container-generatedID-1"><div class="note-title marker" id="h-note-1"><span>Note</span><span class="issue-label">: Browser permission VS OS permission</span></div><aside class="">
-                          <p>
-                            On certain platforms, there can be a circumstance
-                            where the user has <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-granted-for-permission-3">granted</a> the user
-                            agent permission to use Geolocation at the
-                            browser-level, but the permission to access
-                            location services has been denied at the OS level.
-                          </p>
-                        </aside></div>
+                        A non-negative <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-1"><code>double</code></a> that represents the accuracy
+                        value indicating the 68% confidence level in meters (1
+                        standard deviation). Accuracy measures how close the
+                        measured coordinates are to the true position.
                       </dd>
                       <dt>
-                        Timeout elapsed:
+                        "altitude"
                       </dt>
                       <dd>
-                        <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-8">Call back with error</a> with <var data-type="PositionErrorCallback?">errorCallback</var> and
-                        <a data-link-type="idl" href="#dom-geolocationpositionerror-timeout" class="internalDFN" id="ref-for-dom-geolocationpositionerror-timeout-1"><code>TIMEOUT</code></a>.
+                        A <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-2"><code>double?</code></a> that represents the altitude in meters
+                        above the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>] ellipsoid, or <code>null</code> if not
+                        available.
                       </dd>
                       <dt>
-                        Data acquisition error or any other reason:
+                        "altitudeAccuracy"
                       </dt>
                       <dd>
-                        <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-9">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
-                        <a data-link-type="idl" href="#dom-geolocationpositionerror-position_unavailable" class="internalDFN" id="ref-for-dom-geolocationpositionerror-position_unavailable-3"><code>POSITION_UNAVAILABLE</code></a>.
+                        A non-negative <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-3"><code>double?</code></a> that represents the altitude
+                        accuracy, or <code>null</code> if not available, indicating the
+                        68% confidence level in meters (1 standard deviation).
+                        Altitude accuracy measures how close the measured
+                        altitude is to the true altitude.
                       </dd>
-                    </dl>
+                      <dt>
+                        "heading"
+                      </dt>
+                      <dd>
+                        A <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-4"><code>double?</code></a> that represents the heading in degrees,
+                        or <code>null</code> if not available or the device is stationary.
+                        Heading measures the direction in which the device is
+                        moving relative to true north.
+                      </dd><dt>
+                        "latitude"
+                      </dt>
+                      <dd>
+                        A <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-5"><code>double</code></a> that represents the latitude coordinates
+                        on the Earth's surface in degrees, using the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>]
+                        coordinate system. Latitude measures how far north or
+                        south a point is from the Equator.
+                      </dd>
+                      <dt>
+                        "longitude"
+                      </dt>
+                      <dd>
+                        A <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-6"><code>double</code></a> that represents the longitude coordinates
+                        on the Earth's surface in degrees, using the [<cite><a class="bibref" data-link-type="biblio" href="#bib-wgs84" title="World Geodetic System 1984 (WGS 84)">WGS84</a></cite>]
+                        coordinate system. Longitude measures how far east or
+                        west a point is from the Prime Meridian.
+                      </dd>
+                      <dt>
+                        "speed"
+                      </dt>
+                      <dd>
+                        A non-negative <a data-link-type="interface" data-lt="double" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-index-term-double-type-7"><code>double?</code></a> that represents the speed in
+                        meters per second, or <code>null</code> if not available. Speed
+                        measures how fast the device is moving.
+                      </dd>
+                      </dl>
                   </li>
-                </ul>
-              </dd>
-            </dl>
+                  <li>Set <var>position</var> to <a data-link-type="dfn|abstract-op" href="#dfn-a-new-geolocationposition" class="internalDFN" id="ref-for-dfn-a-new-geolocationposition-2">a new <code>GeolocationPosition</code></a> passing
+                  <var>positionData</var>, <var data-type="EpochTimeStamp">acquisitionTime</var>, and
+                  <var data-type="PositionOptions">options</var>.<a data-link-type="idl" href="#dom-positionoptions-enablehighaccuracy" class="internalDFN" id="ref-for-dom-positionoptions-enablehighaccuracy-5"><code>enableHighAccuracy</code></a>.
+                  </li>
+                  <li>Set <var data-type="Geolocation">geolocation</var>'s <a data-link-type="attribute" data-lt="[[cachedPosition]]" href="#dfn-cachedposition" class="internalDFN" id="ref-for-dfn-cachedposition-3"><code>[[cachedPosition]]</code></a> to
+                  <var>position</var>.
+                  </li>
+                </ol>
+              </li>
+              <li>Stop the <var>timeout</var>.
+              </li>
+              <li><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task" id="ref-for-index-term-queue-a-task-3">Queue a task</a> on the <a data-link-type="dfn|abstract-op" href="#dfn-geolocation-task-source" class="internalDFN" id="ref-for-dfn-geolocation-task-source-3">geolocation task source</a> with a
+              step that <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#invoke-a-callback-function" id="ref-for-index-term-invokes-3">invokes</a> <var data-type="PositionCallback">successCallback</var> with « <var>position</var> » and
+              "<code>report</code>".
+              </li>
+            </ol>
           </li>
         </ol>
+        <dl class="switch">
+          <dt id="errors-reasons">
+            <dfn id="dfn-deal-with-failure" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">Deal with failure</dfn>:
+          </dt>
+          <dd>
+            <ul>
+              <li>If acquiring a position fails, do one of the following based
+              on the condition that matches the failure:
+                <dl class="switch">
+                  <dt id="permission-denied">
+                    User or system denied permission:
+                  </dt>
+                  <dd>
+                    <p>
+                      <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-7">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
+                      <a data-link-type="idl" href="#dom-geolocationpositionerror-permission_denied" class="internalDFN" id="ref-for-dom-geolocationpositionerror-permission_denied-4"><code>PERMISSION_DENIED</code></a>.
+                    </p>
+                    <div class="note" role="note" id="issue-container-generatedID-1"><div class="note-title marker" id="h-note-1"><span>Note</span><span class="issue-label">: Browser permission VS OS permission</span></div><aside class="">
+                      <p>
+                        On certain platforms, there can be a circumstance where
+                        the user has <a data-link-type="dfn" href="https://www.w3.org/TR/permissions/#dfn-granted" id="ref-for-index-term-granted-for-permission-3">granted</a> the user agent
+                        permission to use Geolocation at the browser-level, but
+                        the permission to access location services has been
+                        denied at the OS level.
+                      </p>
+                    </aside></div>
+                  </dd>
+                  <dt>
+                    Timeout elapsed:
+                  </dt>
+                  <dd>
+                    <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-8">Call back with error</a> with <var data-type="PositionErrorCallback?">errorCallback</var> and
+                    <a data-link-type="idl" href="#dom-geolocationpositionerror-timeout" class="internalDFN" id="ref-for-dom-geolocationpositionerror-timeout-1"><code>TIMEOUT</code></a>.
+                  </dd>
+                  <dt>
+                    Data acquisition error or any other reason:
+                  </dt>
+                  <dd>
+                    <a data-link-type="dfn|abstract-op" href="#dfn-call-back-with-error" class="internalDFN" id="ref-for-dfn-call-back-with-error-9">Call back with error</a> passing <var data-type="PositionErrorCallback?">errorCallback</var> and
+                    <a data-link-type="idl" href="#dom-geolocationpositionerror-position_unavailable" class="internalDFN" id="ref-for-dom-geolocationpositionerror-position_unavailable-3"><code>POSITION_UNAVAILABLE</code></a>.
+                  </dd>
+                </dl>
+              </li>
+            </ul>
+          </dd>
+        </dl>
       </section>
       <section id="call-back-with-error"><div class="header-wrapper"><h3 id="x6-7-call-back-with-error"><bdi class="secno">6.7 </bdi>
           Call back with error
@@ -2840,6 +2834,8 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
     <span class="print-only">§10.2</span></li><li>
       <a class="index-term" href="#dom-geolocationposition-coords"><code>coords</code></a> attribute for <code>GeolocationPosition</code>
     <span class="print-only">§8.1</span></li><li>
+      <a class="index-term" href="#dfn-deal-with-failure">Deal with failure</a> 
+    <span class="print-only">§6.6</span></li><li>
       <a class="index-term" href="#dfn-emulated-position-data">emulated position data</a> 
     <span class="print-only">§12.</span></li><li>
       <a class="index-term" href="#dom-positionoptions-enablehighaccuracy"><code>enableHighAccuracy</code></a> member for <code>PositionOptions</code>
@@ -3353,6 +3349,19 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="#ref-for-dfn-acquire-a-position-7" title="§ 10.1 Constants">§ 10.1 Constants</a> <a href="#ref-for-dfn-acquire-a-position-8" title="Reference 2">(2)</a> 
     </li><li>
       <a href="#ref-for-dfn-acquire-a-position-9" title="§ D. Change log">§ D. Change log</a> 
+    </li>
+  </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-deal-with-failure" aria-label="Links in this document to definition: Deal with failure">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="#dfn-deal-with-failure" aria-label="Permalink for definition: Deal with failure. Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-dfn-deal-with-failure-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-dfn-call-back-with-error" aria-label="Links in this document to definition: call back with error">
