@@ -173,7 +173,7 @@ ul.index code{color:inherit}
 .mdn .samsunginternet_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/samsung-internet/samsung-internet.svg)}
 .mdn .webview_android::before{background-image:url(https://www.w3.org/assets/logos/browser-logos/android-webview/android-webview.png)}
 </style>
-<meta name="revision" content="b01fb96402669e0eff5a49da0c27ebbec8dbf661">
+<meta name="revision" content="bde9955b05badb3c21130007647f93e6bd625c9f">
 <meta name="description" content="Geolocation provides access to geographical location information
         associated with the hosting device.">
 <style>
@@ -283,9 +283,9 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
   "xref": "web-platform",
   "errata": "https://w3c.github.io/geolocation/errata.html",
   "latestVersion": "https://www.w3.org/TR/geolocation/",
-  "gitRevision": "b01fb96402669e0eff5a49da0c27ebbec8dbf661",
-  "publishISODate": "2026-11-17T00:00:00.000Z",
-  "generatedSubtitle": "W3C Editor's Draft 17 November 2026"
+  "gitRevision": "bde9955b05badb3c21130007647f93e6bd625c9f",
+  "publishISODate": "2026-11-18T00:00:00.000Z",
+  "generatedSubtitle": "W3C Editor's Draft 18 November 2026"
 }</script>
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED">
 <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)"></head>
@@ -293,7 +293,7 @@ var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}
     <p class="logos"><a class="logo" href="https://www.w3.org/"><img crossorigin="" alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72">
   </a></p>
     <h1 id="title" class="title">Geolocation</h1> 
-    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2026-11-17">17 November 2026</time></p>
+    <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">W3C Editor's Draft</a> <time class="dt-published" datetime="2026-11-18">18 November 2026</time></p>
     <details open="">
       <summary>More details about this document</summary>
       <dl>
@@ -1409,8 +1409,13 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                     change of geographic position is left to the
                     implementation. User agents <em class="rfc2119">MAY</em> impose a rate limit on how
                     frequently position changes are reported. User agents <em class="rfc2119">MUST</em>
-                    consider invoking <a data-link-type="dfn|abstract-op" href="#dfn-set-emulated-position-data" class="internalDFN" id="ref-for-dfn-set-emulated-position-data-1">set emulated position data</a> as a
-                    significant change.
+                    consider an invocation of <a data-link-type="dfn|abstract-op" href="#dfn-set-emulated-position-data" class="internalDFN" id="ref-for-dfn-set-emulated-position-data-1">set emulated position data</a> as
+                    a significant change if <var data-type="Document">document</var>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#node-navigable" id="ref-for-index-term-node-navigable-1">node navigable</a> is
+                    not null and the given <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#navigable" id="ref-for-index-term-navigable-1">navigable</a>'s
+                    <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" id="ref-for-index-term-top-level-traversable-for-navigable-1">top-level traversable</a> is the same as
+                    <var data-type="Document">document</var>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#node-navigable" id="ref-for-index-term-node-navigable-2">node navigable</a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" id="ref-for-index-term-top-level-traversable-for-navigable-2">top-level traversable</a>. While <a data-link-type="dfn|abstract-op" href="#dfn-get-emulated-position-data" class="internalDFN" id="ref-for-dfn-get-emulated-position-data-1">get emulated position data</a> passing
+                    <var data-type="Geolocation">geolocation</var> returns a non-null value, nothing other than
+                    such an invocation constitutes a significant change.
                   </li>
                   <li>If <var data-type="Document">document</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-index-term-fully-active-for-document-3">fully active</a> or
                   <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="ref-for-index-term-visibility-state-for-document-3">visibility state</a> is not "visible", go back to
@@ -1484,7 +1489,7 @@ callback <dfn data-export="" data-dfn-type="callback" id="dom-positionerrorcallb
                   <li>Check if an emulated position should be used by running
                   the following steps:
                     <ol>
-                      <li>Let <var>emulatedPositionData</var> be <a data-link-type="dfn|abstract-op" href="#dfn-get-emulated-position-data" class="internalDFN" id="ref-for-dfn-get-emulated-position-data-1">get emulated position data</a> passing <var data-type="Geolocation">geolocation</var>.
+                      <li>Let <var>emulatedPositionData</var> be <a data-link-type="dfn|abstract-op" href="#dfn-get-emulated-position-data" class="internalDFN" id="ref-for-dfn-get-emulated-position-data-2">get emulated position data</a> passing <var data-type="Geolocation">geolocation</var>.
                       </li>
                       <li>If <var>emulatedPositionData</var> is not null:
                         <ol>
@@ -2703,22 +2708,18 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </p>
       <p>
         To <dfn class="export" data-export="" id="dfn-set-emulated-position-data" tabindex="0" aria-haspopup="dialog" data-dfn-type="dfn">set emulated position data</dfn>, given
-        <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#navigable" id="ref-for-index-term-navigable-1">navigable</a> <var>navigable</var> and an <var>emulatedPositionData</var>:
+        <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#navigable" id="ref-for-index-term-navigable-2">navigable</a> <var>navigable</var> and an <var>emulatedPositionData</var>:
       </p>
       <ol class="algorithm">
         <li>Assert <var>emulatedPositionData</var> is either null, a
         <a data-link-type="idl" data-lt="GeolocationCoordinates" href="#dom-geolocationcoordinates" class="internalDFN" id="ref-for-dom-geolocationcoordinates-6"><code>GeolocationCoordinates</code></a>, or a <a data-link-type="idl" data-lt="GeolocationPositionError" href="#dom-geolocationpositionerror" class="internalDFN" id="ref-for-dom-geolocationpositionerror-10"><code>GeolocationPositionError</code></a>.
         </li>
-        <li>Let <var>traversable</var> be <var>navigable</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" id="ref-for-index-term-top-level-traversable-for-navigable-1">top-level traversable</a>.
+        <li>Let <var>traversable</var> be <var>navigable</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" id="ref-for-index-term-top-level-traversable-for-navigable-3">top-level traversable</a>.
         </li>
         <li>If <var>traversable</var> is not null:
           <ol class="algorithm">
             <li>Set <var>traversable</var>'s associated <a data-link-type="dfn|abstract-op" href="#dfn-emulated-position-data" class="internalDFN" id="ref-for-dfn-emulated-position-data-1">emulated position data</a> to
             <var>emulatedPositionData</var>.
-            </li>
-            <li>User agents <em class="rfc2119">MUST</em> consider this as a "significant change" in the
-            <a href="#wait-for-change">wait for a significant change of
-            geographic position</a> step.
             </li>
           </ol>
         </li>
@@ -2729,11 +2730,11 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       </p>
       <ol class="algorithm">
         <li>Let <var>navigable</var> be <var>geolocation</var>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-index-term-relevant-global-object-4">relevant global object</a>'s
-        <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-4">associated <code>Document</code></a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#node-navigable" id="ref-for-index-term-node-navigable-1">node navigable</a>.
+        <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-index-term-associated-document-4">associated <code>Document</code></a>'s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#node-navigable" id="ref-for-index-term-node-navigable-3">node navigable</a>.
         </li>
         <li>If <var>navigable</var> is null, return null.
         </li>
-        <li>Let <var>traversable</var> be <var>navigable</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" id="ref-for-index-term-top-level-traversable-for-navigable-2">top-level traversable</a>.
+        <li>Let <var>traversable</var> be <var>navigable</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" id="ref-for-index-term-top-level-traversable-for-navigable-4">top-level traversable</a>.
         </li>
         <li>If <var>traversable</var> is null, return null.
         </li>
@@ -2959,9 +2960,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/webappapis.html#task-source" id="index-term-task-source" tabindex="0" aria-haspopup="dialog">task source</span>
   </li><li>
-    <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-traversable" id="index-term-top-level-traversable" tabindex="0" aria-haspopup="dialog">top-level traversable</span>
-  </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" id="index-term-top-level-traversable-for-navigable" tabindex="0" aria-haspopup="dialog">top-level traversable (for <code>navigable</code>)</span>
+  </li><li>
+    <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/document-sequences.html#top-level-traversable" id="index-term-top-level-traversable" tabindex="0" aria-haspopup="dialog">top-level traversable</span>
   </li><li>
     <span class="index-term" data-href="https://html.spec.whatwg.org/multipage/interaction.html#visibility-state" id="index-term-visibility-state-for-document" tabindex="0" aria-haspopup="dialog">visibility state (for <code>Document</code>)</span>
   </li>
@@ -3094,7 +3095,7 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
         Since publication as a <abbr title="World Wide Web Consortium">W3C</abbr> Recommendation in 2022,
         <cite>Geolocation</cite> has received the following normative changes:
       </p><rs-changelog from="REC" filter="removeCommits"><ul>
-      <li><a href="https://github.com/w3c/geolocation/commit/229574b">Add missing latitude definition</a> (<a href="https://github.com/w3c/geolocation/pull/208">#208</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/fceec2a">Remove outdated reference to sea level</a> (<a href="https://github.com/w3c/geolocation/pull/238">#238</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/ec43ad1">Update accuracy confidence interval to 68%</a> (<a href="https://github.com/w3c/geolocation/pull/239">#239</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2a778a4">Pass the Geolocation instance to the position acquisition steps</a> (<a href="https://github.com/w3c/geolocation/pull/243">#243</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/b12f2cd">Acquire a fresh position after a cache miss</a> (<a href="https://github.com/w3c/geolocation/pull/241">#241</a>)</li>
+      <li><a href="https://github.com/w3c/geolocation/commit/229574b">Add missing latitude definition</a> (<a href="https://github.com/w3c/geolocation/pull/208">#208</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/0cc35fa">Correction: Clarify that only the emulated error code is used</a> (<a href="https://github.com/w3c/geolocation/pull/187">#187</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/69cc724">Addition: support geolocation emulation</a> (<a href="https://github.com/w3c/geolocation/pull/183">#183</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/9d5829e">Correction: Use null instead of NaN when stationary</a> (<a href="https://github.com/w3c/geolocation/pull/173">#173</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/22ed7a4">Correction: Update acquisition algorithm to define data types and han…</a></li><li><a href="https://github.com/w3c/geolocation/commit/a30d713">Addition: Define units for accuracy</a> (<a href="https://github.com/w3c/geolocation/pull/162">#162</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/c2fdd74">Correction: check for non-secure contexts</a> (<a href="https://github.com/w3c/geolocation/pull/157">#157</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/09b48e6">Addition: expose .toJSON() on GeolocationCoordinates + GeolocationPos…</a></li><li><a href="https://github.com/w3c/geolocation/commit/74b1dd0">Correction: Clarify units and reference geodetic system for latitude …</a></li><li><a href="https://github.com/w3c/geolocation/commit/fceec2a">Remove outdated reference to sea level</a> (<a href="https://github.com/w3c/geolocation/pull/238">#238</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/ec43ad1">Update accuracy confidence interval to 68%</a> (<a href="https://github.com/w3c/geolocation/pull/239">#239</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/2a778a4">Pass the Geolocation instance to the position acquisition steps</a> (<a href="https://github.com/w3c/geolocation/pull/243">#243</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/b12f2cd">Acquire a fresh position after a cache miss</a> (<a href="https://github.com/w3c/geolocation/pull/241">#241</a>)</li><li><a href="https://github.com/w3c/geolocation/commit/bde9955">Correction: while emulating, only set emulated position data wakes a …</a></li>
       </ul></rs-changelog>
       <p>
         Since First Public Working Draft in 2021, until it was published as a
@@ -3887,7 +3888,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-dfn-get-emulated-position-data-1" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
+      <a href="#ref-for-dfn-get-emulated-position-data-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
+    </li><li>
+      <a href="#ref-for-dfn-get-emulated-position-data-2" title="§ 6.6 Acquire a position">§ 6.6 Acquire a position</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-epochtimestamp" aria-label="Links in this document to definition: EpochTimeStamp">
@@ -4022,7 +4025,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-index-term-navigable-1" title="§ 12. Emulation">§ 12. Emulation</a> 
+      <a href="#ref-for-index-term-navigable-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> 
+    </li><li>
+      <a href="#ref-for-index-term-navigable-2" title="§ 12. Emulation">§ 12. Emulation</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-navigates" aria-label="Links in this document to definition: navigates">
@@ -4063,7 +4068,9 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <p><b>Referenced in:</b></p>
       <ul>
     <li>
-      <a href="#ref-for-index-term-node-navigable-1" title="§ 12. Emulation">§ 12. Emulation</a> 
+      <a href="#ref-for-index-term-node-navigable-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-index-term-node-navigable-2" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-index-term-node-navigable-3" title="§ 12. Emulation">§ 12. Emulation</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-non-secure-context" aria-label="Links in this document to definition: non-secure context">
@@ -4167,6 +4174,21 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <a href="#ref-for-index-term-task-source-1" title="§ 8.5 Task sources">§ 8.5 Task sources</a> 
     </li>
   </ul>
+    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-top-level-traversable-for-navigable" aria-label="Links in this document to definition: top-level traversable (for navigable)">
+      <span class="caret"></span>
+      <div>
+        <a class="self-link" href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" aria-label="Permalink for definition: top-level traversable (for navigable). Activate to close this dialog.">Permalink</a>
+         
+        
+      </div>
+      <p><b>Referenced in:</b></p>
+      <ul>
+    <li>
+      <a href="#ref-for-index-term-top-level-traversable-for-navigable-1" title="§ 6.5 Request a position">§ 6.5 Request a position</a> <a href="#ref-for-index-term-top-level-traversable-for-navigable-2" title="Reference 2">(2)</a> 
+    </li><li>
+      <a href="#ref-for-index-term-top-level-traversable-for-navigable-3" title="§ 12. Emulation">§ 12. Emulation</a> <a href="#ref-for-index-term-top-level-traversable-for-navigable-4" title="Reference 2">(2)</a> 
+    </li>
+  </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-top-level-traversable" aria-label="Links in this document to definition: top-level traversable">
       <span class="caret"></span>
       <div>
@@ -4178,19 +4200,6 @@ interface <a class="internalDFN idlID" data-link-type="interface" href="#dom-geo
       <ul>
     <li>
       <a href="#ref-for-index-term-top-level-traversable-1" title="§ 12. Emulation">§ 12. Emulation</a> 
-    </li>
-  </ul>
-    </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-top-level-traversable-for-navigable" aria-label="Links in this document to definition: top-level traversable (for navigable)">
-      <span class="caret"></span>
-      <div>
-        <a class="self-link" href="https://html.spec.whatwg.org/multipage/document-sequences.html#nav-top" aria-label="Permalink for definition: top-level traversable (for navigable). Activate to close this dialog.">Permalink</a>
-         
-        
-      </div>
-      <p><b>Referenced in:</b></p>
-      <ul>
-    <li>
-      <a href="#ref-for-index-term-top-level-traversable-for-navigable-1" title="§ 12. Emulation">§ 12. Emulation</a> <a href="#ref-for-index-term-top-level-traversable-for-navigable-2" title="Reference 2">(2)</a> 
     </li>
   </ul>
     </div><div class="dfn-panel" hidden="" role="dialog" aria-modal="true" id="dfn-panel-for-index-term-visibility-state-for-document" aria-label="Links in this document to definition: visibility state (for Document)">
